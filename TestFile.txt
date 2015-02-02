@@ -1,0 +1,2 @@
+This is the test file for CMPUT 301 project part 1.
+Everybody has to make a edit to it.
