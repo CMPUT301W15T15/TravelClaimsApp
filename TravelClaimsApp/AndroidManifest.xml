@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.CMPUT301W15T15.travelclaimsapp"
+    package="com.cmputw15t15.travelclaimsapp"
     android:versionCode="1"
     android:versionName="1.0" >
 
