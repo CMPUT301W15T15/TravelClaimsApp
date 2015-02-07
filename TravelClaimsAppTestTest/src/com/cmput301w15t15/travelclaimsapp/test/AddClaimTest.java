@@ -1,8 +1,11 @@
 package com.cmput301w15t15.travelclaimsapp.test;
+import java.io.IOException;
+
+import android.test.ActivityInstrumentationTestCase2;
 import junit.framework.TestCase;
 
 
-public class claimTest extends TestCase {
+public class claimTest extends TestCase{
 	private ClaimList claimList;
 	private Claim claim1;
 	private Claim claim2;
@@ -18,14 +21,15 @@ public class claimTest extends TestCase {
 		claimList.addClaim(claim2);
 	}
 	public void addClaimTest(){
-		assertTrue("The length of the claimList is not two", this.claimList.size() == 2);
+		claimList.addClaim(new Claim("Claim3"));
+		assertTrue("The length of the claimList is not two", this.claimList.size() == 3);
 		assertTrue("claim1 was not added", this.claimList.getClaim("Claim1") == this.claim1);
 	}
-	public void editClaimTest(){
-		claim1.setDescription("testing");
-		claim1.setStartDate(2015, 02, 05);
-	}
+	
 	public void deleteClaimTest(){
-		
+		claimList.removeClaim(claim1);
+		assertTrue("Claim was not removed from claimList", claimList.getClaim("Claim1")==null);
+		assertTrue("Claim was not removed from claimList", claimList.size() == 2); 
 	}
+	
 }
