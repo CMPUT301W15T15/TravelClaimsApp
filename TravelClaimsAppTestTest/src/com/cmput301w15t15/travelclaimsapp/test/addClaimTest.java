@@ -2,7 +2,7 @@ package com.cmput301w15t15.travelclaimsapp.test;
 import junit.framework.TestCase;
 
 
-public class claimTest extends TestCase {
+public class addClaimTest extends TestCase {
 	private ClaimList claimList;
 	private Claim claim1;
 	private Claim claim2;
@@ -17,8 +17,8 @@ public class claimTest extends TestCase {
 		claim2 = new Claim("Claim2");
 		claimList.addClaim(claim2);
 	}
-	public void addClaimTest(){
-		assertTrue("The length of the claimList is not two", this.claimList.size() == 2);
+	public addClaimTest(){
+		assertTrue("The length of the claimList is not two",  this.claimList.size()==2);
 		assertTrue("claim1 was not added", this.claimList.getClaim("Claim1") == this.claim1);
 	}
 	public void editClaimTest(){
