@@ -17,8 +17,8 @@ public class EditClaimTest extends TestCase {
 		claim1.setStartDate(2015, 2,5);
 	}
 	
-	
-	public void editClaimName(){
+	//test #
+	public void testEditClaimName(){
 		claim1.setDescription("testing");
 
 		try{
@@ -33,7 +33,8 @@ public class EditClaimTest extends TestCase {
 		}
 	}
 	
-	public void editClaimDate(){
+	// test #
+	public void testEditClaimDate(){
 		
 		try{
 			claim1.setEndDate(2015, 1, 5);

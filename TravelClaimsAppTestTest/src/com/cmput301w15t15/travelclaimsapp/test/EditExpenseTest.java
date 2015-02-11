@@ -19,7 +19,8 @@ public class EditExpenseTest extends TestCase {
 		claim1.addExpense(expense1);
 		claim1.addExpense(expense2);
 	}
-	public void editExpenseName(){
+	//test #
+	public void testEditExpenseName(){
 
 		try{
 			claim1.getExpense("E1").setName("");

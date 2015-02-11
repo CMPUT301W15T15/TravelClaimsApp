@@ -16,9 +16,8 @@ public class AddTagTest extends TestCase {
 		claim = new Claim("Claim1");
 		claimList.addClaim(claim);
 	}
-	
-	public void addTagTest(){
-		claim
+	//test #
+	public void testAddTagTest(){
 		claim.addTag("Test");
 		assertTrue("Tag 'Test' was not added to tags", claimList.getTagList().size() == 1);
 		

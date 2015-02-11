@@ -12,20 +12,20 @@ public class AddExpenseTest extends TestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 		claimList = ClaimListController.getClaimList();
-		
 		claim1 = new Claim("Claim1");
 		claimList.addClaim(claim1);
 		expense1 = new Expense("E1");
 		expense2 = new Expense("E2");
 	}
-	
-	public void addExpenseTest(){
+	//test #
+	public void testAddExpense(){
 		claim1.addExpense(expense1);
 		claim1.addExpense(expense2);
 		
 		assertTrue("Expenses not added", claim1.getExpenseList.size() == 2);
 	}
-	public void deleteExpenseTest(){
+	//test #
+	public void testDeleteExpense(){
 		claim1.removeExpense(expense1);
 		assertTrue("Expenses not added", claim1.getExpenseList.size() == 1);
 	}
