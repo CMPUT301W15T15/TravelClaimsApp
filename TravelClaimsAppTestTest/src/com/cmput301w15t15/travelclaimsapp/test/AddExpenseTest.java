@@ -1,5 +1,10 @@
 package com.cmput301w15t15.travelclaimsapp.test;
 
+import com.cmputw15t15.travelclaimsapp.Claim;
+import com.cmputw15t15.travelclaimsapp.ClaimList;
+import com.cmputw15t15.travelclaimsapp.ClaimListController;
+import com.cmputw15t15.travelclaimsapp.Expense;
+
 import junit.framework.TestCase;
 
 public class AddExpenseTest extends TestCase {

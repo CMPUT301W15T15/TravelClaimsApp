@@ -1,5 +1,8 @@
 package com.cmput301w15t15.travelclaimsapp.test;
 
+import com.cmputw15t15.travelclaimsapp.Claim;
+import com.cmputw15t15.travelclaimsapp.ClaimList;
+
 import android.test.ActivityInstrumentationTestCase2;
 import android.widget.ListView;
 

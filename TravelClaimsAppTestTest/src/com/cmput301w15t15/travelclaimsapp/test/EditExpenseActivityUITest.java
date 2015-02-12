@@ -1,5 +1,7 @@
 package com.cmput301w15t15.travelclaimsapp.test;
 
+import com.cmputw15t15.travelclaimsapp.EditExpenseActivity;
+
 import android.app.Activity;
 import android.app.Instrumentation;
 import android.test.ActivityInstrumentationTestCase2;

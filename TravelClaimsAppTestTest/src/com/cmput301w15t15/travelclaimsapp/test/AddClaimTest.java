@@ -1,6 +1,10 @@
 package com.cmput301w15t15.travelclaimsapp.test;
 import java.io.IOException;
 
+import com.cmputw15t15.travelclaimsapp.Claim;
+import com.cmputw15t15.travelclaimsapp.ClaimList;
+import com.cmputw15t15.travelclaimsapp.ClaimListController;
+
 import android.test.ActivityInstrumentationTestCase2;
 import junit.framework.TestCase;
 
