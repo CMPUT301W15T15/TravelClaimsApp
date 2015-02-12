@@ -57,11 +57,13 @@ public class AddClaimActivityUITest extends ActivityInstrumentationTestCase2<Add
 		adaptor.notifyDataSetChanged();
 		
 		instrumentation.invokeContextMenuAction(activity, 0, 0);
+		instrumentation.waitForIdleSync();
 		
 		AddExpenseActivity nextActivity = instrumentation.waitForMonitorWithTimeout(activityMonitor, 3000);
 		assertNotNull("The AddExpenseActivity is null", nextActivity);
 		
 	}
+
 	//test #
 	public void testContextMenuPopupSubmitClaim(){
 		IntentFilter intentFilter = new IntentFilter(Intent.ACTION_SEND);
@@ -74,6 +76,7 @@ public class AddClaimActivityUITest extends ActivityInstrumentationTestCase2<Add
 		adaptor.notifyDataSetChanged();
 		
 		instrumentation.invokeContextMenuAction(activity, 0, 0);
+		instrumentation.waitForIdleSync();
 		
 		AddExpenseActivity activity = instrumentation.waitForMonitorWithTimeout(activityMonitor, 3000);
 		assertNotNull(activity);

@@ -61,12 +61,12 @@ public class EditClaimActivityUITest extends
 	}
 	// test #
 	public void testAddExpenseButton(){
-		
+		//TODO
 	}
 	
 	
 	private void addDestination(String destination, String reason){
-		
+		//TODO
 	}
 	
 }
