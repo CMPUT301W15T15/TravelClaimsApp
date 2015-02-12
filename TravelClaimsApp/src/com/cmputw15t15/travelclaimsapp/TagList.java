@@ -4,15 +4,11 @@ package com.cmputw15t15.travelclaimsapp;
 
 public class TagList {
 
-	public void addTag(Tag tag1) {
+	public void addTag(String tag1) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	public Tag getTag(String string) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	public int size() {
 		// TODO Auto-generated method stub
@@ -20,6 +16,21 @@ public class TagList {
 	}
 
 	public void removeTag(String string) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public Object getTag(String string)
+	{
+
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	public void renameTag(String tag1, String string)
+	{
+
 		// TODO Auto-generated method stub
 		
 	}
