@@ -1,10 +1,12 @@
 package com.cmput301w15t15.travelclaimsapp.test;
 
+import com.cmput301w15t15.travelclaimsapp.AddClaimActivity;
+import com.cmput301w15t15.travelclaimsapp.Claim;
+import com.cmput301w15t15.travelclaimsapp.ClaimList;
 import com.cmput301w15t15.travelclaimsapp.ClaimListAdaptor;
-import com.cmputw15t15.travelclaimsapp.AddClaimActivity;
-import com.cmputw15t15.travelclaimsapp.Claim;
-import com.cmputw15t15.travelclaimsapp.ClaimList;
-import com.cmputw15t15.travelclaimsapp.ClaimListController;
+import com.cmput301w15t15.travelclaimsapp.ClaimListController;
+import com.cmput301w15t15.travelclaimsapp.EditClaimActivity;
+import com.cmput301w15t15.travelclaimsapp.R;
 
 import android.app.Activity;
 import android.app.Instrumentation;
@@ -25,8 +27,7 @@ public class AddClaimActivityUITest extends ActivityInstrumentationTestCase2<Add
 	private ClaimListAdaptor adaptor;
 	
 	public AddClaimActivityUITest() {
-		super(AddClaimActivity.claim);
-		
+		super(AddClaimActivity.class);
 		
 	}
 
@@ -35,9 +36,9 @@ public class AddClaimActivityUITest extends ActivityInstrumentationTestCase2<Add
 		activity = getActivity();
 		claimList = ClaimListController.getClaimList();
 		instrumentation = getInstrumentation();
-		listView = (ListView) activity.findViewById(id);
-		adaptor = new ClaimListAdaptor(activity.this, R.id, claimList);
-	
+		listView = (ListView) activity.findViewById(R.id.claim_list_listview);
+		adaptor = new ClaimListAdaptor(activity, R.id.claim_list_listview, claimList.getClaimList());
+	}
 	//test #
 	public void testContextMenuPopupDelete(){
 		Claim claim1 = new Claim("t1");
@@ -47,26 +48,29 @@ public class AddClaimActivityUITest extends ActivityInstrumentationTestCase2<Add
 		listView.setSelection(0);
 		listView.requestFocus();
 		
-		instrumentation.invokeContextMenuAction(activity, 0, 0);
+		boolean test = instrumentation.invokeContextMenuAction(activity, R.id.cmenu_delete_claim, 0);
 		instrumentation.waitForIdleSync();
-		
+	
+		assertTrue(test);
 		assertNull("claim 't1' was not deleted", claimList.getClaim("t1"));
 		
 	}
 	//test #
 	public void testContextMenuPopupAddExpense(){
 		//add a monitor that waits for AddExpenseActivity to start
-		ActivityMonitor activityMonitor = new ActivityMonitor(AddExpenseActivity.class, null, false);
+		ActivityMonitor activityMonitor = new ActivityMonitor("EditClaimActivity", null, false);
+
 		instrumentation.addMonitor(activityMonitor);
 		
 		Claim claim1 = new Claim("t1");
 		claimList.addClaim(claim1);
 		adaptor.notifyDataSetChanged();
 		
-		instrumentation.invokeContextMenuAction(activity, 0, 0);
+		boolean test = instrumentation.invokeContextMenuAction(activity, R.id.cmenu_addExpense, 0);
 		instrumentation.waitForIdleSync();
 		
-		AddExpenseActivity nextActivity = instrumentation.waitForMonitorWithTimeout(activityMonitor, 3000);
+		Activity nextActivity = instrumentation.waitForMonitorWithTimeout(activityMonitor, 3000);
+		assertTrue(test);
 		assertNotNull("The AddExpenseActivity is null", nextActivity);
 		
 	}
@@ -82,10 +86,12 @@ public class AddClaimActivityUITest extends ActivityInstrumentationTestCase2<Add
 		claimList.addClaim(claim1);
 		adaptor.notifyDataSetChanged();
 		
-		instrumentation.invokeContextMenuAction(activity, 0, 0);
+		boolean test = instrumentation.invokeContextMenuAction(activity, R.id.cmenu_submit_claim, 0);
 		instrumentation.waitForIdleSync();
 		
-		AddExpenseActivity activity = instrumentation.waitForMonitorWithTimeout(activityMonitor, 3000);
+		Activity activity = instrumentation.waitForMonitorWithTimeout(activityMonitor, 3000);
+		assertTrue(test);
+		
 		assertNotNull(activity);
 		
 	}
