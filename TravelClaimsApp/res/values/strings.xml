@@ -1,5 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
     <string name="app_name">TravelClaimsApp</string>
+    <string name="title_activity_main_menu">MainMenu</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_add_claim">AddClaimActivity</string>
+    <string name="title_activity_edit_claim">EditClaimActivity</string>
+    <string name="title_activity_edit_expense">EditExpenseActivity</string>
+    <string name="title_activity_approver">ApproverActivity</string>
 
 </resources>

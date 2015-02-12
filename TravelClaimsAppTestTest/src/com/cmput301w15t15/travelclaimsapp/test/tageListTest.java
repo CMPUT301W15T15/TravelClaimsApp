@@ -1,5 +1,9 @@
 package com.cmput301w15t15.travelclaimsapp.test;
 
+import com.cmputw15t15.travelclaimsapp.Tag;
+import com.cmputw15t15.travelclaimsapp.TagList;
+import com.cmputw15t15.travelclaimsapp.TagListController;
+
 import junit.framework.TestCase;
 
 public class tageListTest extends TestCase {

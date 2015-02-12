@@ -1,11 +1,18 @@
 package com.cmput301w15t15.travelclaimsapp.test;
 
+import com.cmput301w15t15.travelclaimsapp.ClaimListAdaptor;
+import com.cmputw15t15.travelclaimsapp.AddClaimActivity;
+import com.cmputw15t15.travelclaimsapp.Claim;
+import com.cmputw15t15.travelclaimsapp.ClaimList;
+import com.cmputw15t15.travelclaimsapp.ClaimListController;
+
 import android.app.Activity;
 import android.app.Instrumentation;
 import android.app.Instrumentation.ActivityMonitor;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.test.ActivityInstrumentationTestCase2;
+import android.widget.Button;
 import android.widget.ListView;
 
 public class AddClaimActivityUITest extends ActivityInstrumentationTestCase2<AddClaimActivity> {
