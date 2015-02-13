@@ -33,6 +33,10 @@
             android:name="com.cmput301w15t15.travelclaimsapp.ApproverActivity"
             android:label="@string/title_activity_approver" >
         </activity>
+        <activity
+            android:name="com.cmput301w15t15.travelclaimsapp.ExpenseListViewActivity"
+            android:label="@string/title_activity_expense_list_view" >
+        </activity>
     </application>
 
 </manifest>
