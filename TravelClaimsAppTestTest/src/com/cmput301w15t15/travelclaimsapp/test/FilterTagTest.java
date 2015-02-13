@@ -1,6 +1,9 @@
 package com.cmput301w15t15.travelclaimsapp.test;
 
-import com.cmputw15t15.travelclaimsapp.Claim;
+import com.cmput301w15t15.travelclaimsapp.Claim;
+import com.cmput301w15t15.travelclaimsapp.ClaimList;
+import com.cmput301w15t15.travelclaimsapp.ClaimListController;
+
 
 import junit.framework.TestCase;
 
@@ -26,13 +29,14 @@ public class FilterTagTest extends TestCase
 		claim1.addTag(tag1);
 		claim2.addTag(tag1);
 	}
+	//TestID:F
 	public void filterTagTest(){
 		assertTrue("the size is not correct!",this.claimList.filterTag(tag1).size()==2);
-		assertTrue("this is not corret",this.claimList.filterTag(Tag1).getClaim("Claim1")==this.claim1);
-		assertTrue("this is not corret",this.claimList.filterTag(Tag1).getClaim("Claim2")==this.claim2);
-		assertTrue("this is not corret",this.claimList.filterTag(Tag1).getClaim("Claim1").getTag()==this.tag1);
-		assertTrue("this is not corret",this.claimList.filterTag(Tag1).getClaim("Claim2").getTag()==this.tag1);
-		assertFalse("this is not corret",this.claimList.filterTag(Tag1).getClaim("Claim3")==this.claim3);
+		assertTrue("this is not corret",this.claimList.filterTag(tag1).getClaim("Claim1")==this.claim1);
+		assertTrue("this is not corret",this.claimList.filterTag(tag1).getClaim("Claim2")==this.claim2);
+		assertTrue("this is not corret",this.claimList.filterTag(tag1).getClaim("Claim1").getTag()==this.tag1);
+		assertTrue("this is not corret",this.claimList.filterTag(tag1).getClaim("Claim2").getTag()==this.tag1);
+		assertFalse("this is not corret",this.claimList.filterTag(tag1).getClaim("Claim3")==this.claim3);
 	}
 
 }

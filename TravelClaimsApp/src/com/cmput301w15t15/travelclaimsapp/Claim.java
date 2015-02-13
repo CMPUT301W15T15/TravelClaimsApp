@@ -56,5 +56,26 @@ public class Claim {
 		// TODO Auto-generated method stub
 		return null;
 	}
- 
+
+
+	public String getTag()
+	{
+
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void removeTag()
+	{
+
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void renameTag(String string)
+	{
+
+		// TODO Auto-generated method stub
+		
+	}
 }
