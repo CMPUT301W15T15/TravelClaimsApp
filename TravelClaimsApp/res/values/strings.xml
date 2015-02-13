@@ -9,5 +9,6 @@
     <string name="title_activity_edit_claim">EditClaimActivity</string>
     <string name="title_activity_edit_expense">EditExpenseActivity</string>
     <string name="title_activity_approver">ApproverActivity</string>
+    <string name="title_activity_expense_list_view">ExpenseListViewActivity</string>
 
 </resources>

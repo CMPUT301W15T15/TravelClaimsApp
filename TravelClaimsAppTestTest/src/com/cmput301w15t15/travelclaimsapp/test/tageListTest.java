@@ -2,8 +2,6 @@
 package com.cmput301w15t15.travelclaimsapp.test;
 
 
-
-
 import com.cmput301w15t15.travelclaimsapp.Claim;
 import com.cmput301w15t15.travelclaimsapp.Tag;
 import com.cmput301w15t15.travelclaimsapp.TagList;

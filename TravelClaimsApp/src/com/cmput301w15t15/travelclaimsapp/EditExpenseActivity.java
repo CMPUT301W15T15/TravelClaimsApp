@@ -7,6 +7,8 @@ import com.cmput301w15t15.travelclaimsapp.R.menu;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.AdapterView.AdapterContextMenuInfo;
 
 public class EditExpenseActivity extends Activity {
 
@@ -22,5 +24,14 @@ public class EditExpenseActivity extends Activity {
 		getMenuInflater().inflate(R.menu.edit_expense, menu);
 		return true;
 	}
-
+	
+	public boolean onContextItemSelected(MenuItem item) {
+		AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
+	
+		
+		
+	
+		//adapter.remove(adapter.getItem(info.position));
+		return true;
+	}
 }

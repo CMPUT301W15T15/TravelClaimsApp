@@ -6,4 +6,17 @@ public class Expense {
 		// TODO Auto-generated constructor stub
 	}
 
+	public boolean getFlag()
+	{
+
+		return true;
+	}
+
+	public boolean removeFlag()
+	{
+
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

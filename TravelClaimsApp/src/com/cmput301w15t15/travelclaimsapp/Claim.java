@@ -58,10 +58,8 @@ public class Claim {
 		return null;
 	}
 
-	public String getTag() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
+
 
 	public void removeTag() {
 		// TODO Auto-generated method stub
@@ -79,9 +77,19 @@ public class Claim {
 	}
 
 	public Map<String, String> getDestinationList() {
+		
+		return null;
+	}
+	public String getClaimStatus() {
+		return null;
+	}
+	public String getTag()
+	{
+
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 
 	public void deleteDestination(String string) {
 		// TODO Auto-generated method stub
@@ -97,5 +105,11 @@ public class Claim {
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+	public void setClaimStatus(String string) {
+		// TODO Auto-generated method stub
+
+	}
  
+
 }
