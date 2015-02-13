@@ -26,5 +26,28 @@ public class Expense {
 		return true;
 	}
 
+<<<<<<< HEAD
 	
+=======
+	public void setName(String string) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void takeAPhoto()
+	{
+
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void deleteAPhoto()
+	{
+
+		// TODO Auto-generated method stub
+		
+	}
+
+
+>>>>>>> 33169a18112c3c3187b048b2b5082bd7042b041b
 }
