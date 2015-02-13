@@ -12,15 +12,15 @@ public class ClaimSubmitTest extends TestCase {
 		super.setUp();
 	}
 	
-	public void testSubmitButton{
+	public void testSubmitButton(){
 		
 	}
 	
-	public void testSubmitedEditable{
+	public void testSubmitedEditable(){
 		
 	}
 	
-	public void testSubmitViewDisplay{
+	public void testSubmitViewDisplay(){
 		
 	}
 
