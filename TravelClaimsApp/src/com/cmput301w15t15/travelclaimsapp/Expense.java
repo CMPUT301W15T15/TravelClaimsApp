@@ -19,4 +19,9 @@ public class Expense {
 		return false;
 	}
 
+	public void setName(String string) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

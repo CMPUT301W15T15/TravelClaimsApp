@@ -10,12 +10,16 @@ import com.cmput301w15t15.travelclaimsapp.R;
 import android.app.Activity;
 import android.app.Instrumentation;
 import android.app.Instrumentation.ActivityMonitor;
+import android.content.Intent;
 import android.test.ActivityInstrumentationTestCase2;
+import android.test.suitebuilder.annotation.MediumTest;
+import android.webkit.WebView.FindListener;
 import android.widget.Button;
 import android.widget.EditText;
 
 public class EditClaimActivityUITest extends
 		ActivityInstrumentationTestCase2<EditClaimActivity> {
+	
 
 	private Instrumentation instrumentation;
 	private Activity activity;
@@ -28,7 +32,7 @@ public class EditClaimActivityUITest extends
 	private Button newExpenseButton;
 	private ClaimList claimList;
 	private Claim claim;
-	
+	private Intent intent;
 	
 	public EditClaimActivityUITest() {
 		super(EditClaimActivity.class);
@@ -37,6 +41,10 @@ public class EditClaimActivityUITest extends
 
 	protected void setUp() throws Exception {
 		super.setUp();
+		intent = new Intent();
+		intent.putExtra("claimName", "testClaim");
+		setActivityIntent(intent);
+		
 		activity = getActivity();
 		instrumentation = getInstrumentation();
 		
@@ -52,6 +60,7 @@ public class EditClaimActivityUITest extends
 		claimList = new ClaimList();
 		claim = new Claim("The Claim");
 		claimList.addClaim(claim);
+		claimList.addClaim(new Claim("testClaim"));
 	}
 	//test #
 	public void testSettingValues(){
@@ -75,6 +84,7 @@ public class EditClaimActivityUITest extends
 	}
 	// test #
 	public void testAddExpenseButton(){
+		
 		ActivityMonitor activityMonitor = new ActivityMonitor(EditExpenseActivity.class.getName(), null, false);
 		instrumentation.addMonitor(activityMonitor);
 		instrumentation.runOnMainSync(new Runnable() {
@@ -90,9 +100,7 @@ public class EditClaimActivityUITest extends
 	
 	}
 	
-	
-	
-	private void testAddDestination(String destination, String reason){
+	public void testAddDestination(String destination, String reason){
 		instrumentation.runOnMainSync(new Runnable() {
 				
 		@Override
@@ -104,8 +112,33 @@ public class EditClaimActivityUITest extends
 			}
 		});
 		instrumentation.waitForIdleSync();
+	}
+	public void testSubmittedStatus(){
+		String selectedClaimName = activity.getIntent().getExtras().getString("claimName");
+		Claim testClaim = claimList.getClaim(selectedClaimName);
+		testClaim.setStatus("Submitted");
 		
+		assertFalse(inputName.isFocusable());
+		assertFalse(inputDestination.isFocusable());
+		assertFalse(inputReason.isFocusable());
+		assertFalse(inputEndDate.isClickable());
+		assertFalse(inputStartDate.isClickable());
 		
 	}
+	
+	public void testDataPersistance(){
+		ClaimList claimL = ClaimListController.getClaimList();
+		String selectedClaimName = activity.getIntent().getExtras().getString("claimName");
+		Claim testClaim = claimL.getClaim(selectedClaimName);
+		testClaim.setStartDate(2015, 2, 1);
+		activity.finish();
+		activity = getActivity();
+		claimL = ClaimListController.getClaimList();
+		testClaim = claimL.getClaim(selectedClaimName);
+		assertEquals("2015-2-1", testClaim.getStartDate());
+		
+	}
+
+	
 	
 }
