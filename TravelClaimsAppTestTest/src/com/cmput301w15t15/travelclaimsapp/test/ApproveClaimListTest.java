@@ -74,7 +74,7 @@ public class ApproveClaimListTest extends TestCase {
 		String Country="Canada";
 		Map<String,String> testDestinationList = null ;
 		testDestinationList.put(Country, "Edmonton");
-		Claim1.addDestination(testDestinationList);
+		Claim1.addDestination(Country, "Edmonton");
 		assertTrue("destionation is true",ApproveClaimList.getClaimList().get(0).getDestinationList()
 				.equals(testDestinationList));
 	}

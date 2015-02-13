@@ -1,5 +1,6 @@
 package com.cmput301w15t15.travelclaimsapp;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -14,7 +15,7 @@ public class Expense {
 	public void addFlag(){
 		// TODO
 	}
-	public void setName() {
+	public void setName(String string) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -85,6 +86,16 @@ public class Expense {
 	public ArrayList<ExpenseItem> getItemList() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public Uri takeAPhoto() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void deleteAPhoto() {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

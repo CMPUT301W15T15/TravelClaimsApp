@@ -38,7 +38,7 @@ private Claim claim;
 		adaptor = new ExpenseListAdaptor(activity, R.id.expenseListView, claim.getExpenseList());
 	}
 
-	//test #
+	//Test Case: ExpenseListViewTest#1
 	public void testClaimListViewUpdate(){
 		Expense e = new Expense("stuff");
 		claim.addExpense(e);

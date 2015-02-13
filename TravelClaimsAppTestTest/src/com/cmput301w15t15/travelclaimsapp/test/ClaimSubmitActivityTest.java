@@ -22,8 +22,8 @@ public class ClaimSubmitActivityTest extends
         setActivityInitialTouchMode(true);
 
         ClaimSubmitActivity mClickFunActivity = getActivity();
-        Button mClickMeButton = (Button) 
-                mClickFunActivity.findViewById(R.id.launch_next_activity_button);
+        //Button mClickMeButton = (Button) 
+                //mClickFunActivity.findViewById(R.id.launch_next_activity_button);
     }
 
 	//TestNumber:7.1

@@ -22,8 +22,8 @@ public class ApproverActivityTest extends
         setActivityInitialTouchMode(true);
 
         ApproverActivity mClickFunActivity = getActivity();
-        Button mClickMeButton = (Button) 
-                mClickFunActivity.findViewById(R.id.launch_next_activity_button);
+        //Button mClickMeButton = (Button) 
+                //mClickFunActivity.findViewById(R.id.launch_next_activity_button);
     }
 
 	//TestNumber:8.6

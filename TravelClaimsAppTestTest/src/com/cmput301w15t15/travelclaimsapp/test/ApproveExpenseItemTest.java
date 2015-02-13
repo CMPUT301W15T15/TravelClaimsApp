@@ -35,7 +35,6 @@ public class ApproveExpenseItemTest extends TestCase {
 		Claim1.setStatus("Submitted");
 		Claim1.addExpense(Expense1);
 		
-
 		testClaimList.addClaim(Claim1);
 		testClaimList.addClaim(Claim2);
 		ArrayList<ExpenseItem> testItemList= new ArrayList<ExpenseItem>();

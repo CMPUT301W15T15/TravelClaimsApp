@@ -10,7 +10,6 @@ public class FlagExpenseTest extends TestCase
 {
 	private Expense expense1;
 	private Expense expense2;
-	private boolean 
 	protected void setUp() throws Exception
 	{
 		super.setUp();
@@ -18,7 +17,7 @@ public class FlagExpenseTest extends TestCase
 		expense2=new Expense("food");
 
 	}
-//TestId:FlagExpenseTest
+//TestCase: FlagExpenseTest#1
 	public void flagExpenseTest(){
 		expense2.addFlag();
 		expense1.addFlag();

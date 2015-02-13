@@ -62,7 +62,7 @@ public class EditClaimActivityUITest extends
 		claimList.addClaim(claim);
 		claimList.addClaim(new Claim("testClaim"));
 	}
-	//test #
+	//test case: EditClaimActivityUITest#1
 	public void testSettingValues(){
 		instrumentation.runOnMainSync(new Runnable() {
 			
@@ -82,7 +82,7 @@ public class EditClaimActivityUITest extends
 		assertEquals("2015-02-11", inputStartDate.getText().toString());
 		assertEquals("2015-03-11", inputEndDate.getText().toString());
 	}
-	// test #
+	//test case: EditClaimActivityUITest#2
 	public void testAddExpenseButton(){
 		
 		ActivityMonitor activityMonitor = new ActivityMonitor(EditExpenseActivity.class.getName(), null, false);
@@ -99,8 +99,12 @@ public class EditClaimActivityUITest extends
 		assertNotNull(nextActivity);	
 	
 	}
-	
+	//test case: EditClaimActivityUITest#3
 	public void testAddDestination(String destination, String reason){
+		ClaimList claimL = ClaimListController.getClaimList();
+		String selectedClaimName = activity.getIntent().getExtras().getString("claimName");
+		Claim testClaim = claimL.getClaim(selectedClaimName);
+		
 		instrumentation.runOnMainSync(new Runnable() {
 				
 		@Override
@@ -108,11 +112,15 @@ public class EditClaimActivityUITest extends
 			inputDestination.setText("test");
 			inputReason.setText("test1");
 			addDestination.performClick();
-				
 			}
 		});
 		instrumentation.waitForIdleSync();
+		
+		assertEquals("destination was not added to claim with button press", "test1", testClaim.getDestinationList().get("test"));
+		
+		
 	}
+	//test case: EditClaimActivityUITest#4
 	public void testSubmittedStatus(){
 		String selectedClaimName = activity.getIntent().getExtras().getString("claimName");
 		Claim testClaim = claimList.getClaim(selectedClaimName);
@@ -125,7 +133,7 @@ public class EditClaimActivityUITest extends
 		assertFalse(inputStartDate.isClickable());
 		
 	}
-	
+	//test case: EditClaimActivityUITest#5
 	public void testDataPersistance(){
 		ClaimList claimL = ClaimListController.getClaimList();
 		String selectedClaimName = activity.getIntent().getExtras().getString("claimName");

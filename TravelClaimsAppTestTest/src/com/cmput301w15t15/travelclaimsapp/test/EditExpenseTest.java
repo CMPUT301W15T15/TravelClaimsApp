@@ -24,7 +24,7 @@ public class EditExpenseTest extends TestCase {
 		claim1.addExpense(expense1);
 		claim1.addExpense(expense2);
 	}
-	//test #
+	//Test case: EditExpenseTest#1
 	public void testEditExpenseName(){
 
 		try{
