@@ -13,9 +13,7 @@ public class ClaimStatusTest extends TestCase {
 	private String preStatus;
 	private String afterStatus2;
 	private Activity myActivity;
-	private Activity nextActivity;
 	private Claim Claim1;
-	private Instrumentation instrumentation;
 	private Activity activity;
 	private ApproverActivity approve;
 	public ClaimStatusTest(String name) {
@@ -24,6 +22,7 @@ public class ClaimStatusTest extends TestCase {
 
 	protected void setUp() throws Exception {
 		super.setUp();
+		Claim1=new Claim("Claim1");
 	}
 
 	public void testSubmitStatus(){
