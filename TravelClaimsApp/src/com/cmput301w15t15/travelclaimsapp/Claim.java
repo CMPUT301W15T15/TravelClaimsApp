@@ -57,14 +57,24 @@ public class Claim {
 		return null;
 	}
 
+<<<<<<< HEAD
+	public String getClaimStatus() {
+=======
 
 	public String getTag()
 	{
 
+>>>>>>> 6984a8b3a1b13575a9f2e48cdf5c44af5816535e
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+<<<<<<< HEAD
+	public void setClaimStatus(String string) {
+		// TODO Auto-generated method stub
+	}
+ 
+=======
 	public void removeTag()
 	{
 
@@ -78,4 +88,5 @@ public class Claim {
 		// TODO Auto-generated method stub
 		
 	}
+>>>>>>> 6984a8b3a1b13575a9f2e48cdf5c44af5816535e
 }
