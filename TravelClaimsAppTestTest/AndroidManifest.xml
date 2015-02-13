@@ -8,7 +8,7 @@
 
     <instrumentation
         android:name="android.test.InstrumentationTestRunner"
-        android:targetPackage="com.CMPUT301W15T15.travelclaimsapp" />
+        android:targetPackage="com.cmput301w15t15.travelclaimsapp" />
 
     <application
         android:icon="@drawable/ic_launcher"
