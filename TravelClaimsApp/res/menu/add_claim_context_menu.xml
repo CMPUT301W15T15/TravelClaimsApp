@@ -3,6 +3,5 @@
     <item android:id="@+id/cmenu_delete_claim" android:title="Delete"></item>
     <item android:id="@+id/cmenu_addExpense" android:title="Add Expense"></item>
     <item android:id="@+id/cmenu_submit_claim" android:title="Submit Claim"></item>
-    
-
 </menu>
+

@@ -24,7 +24,7 @@ public class ApproveClaimListTest extends TestCase {
 		super.setUp();
 	}
 
-	//TestNumber:8.1
+	//TestNumber: ApproveViewTest #1
 	public void testViewSubmittedClaims() {
 		ClaimList ApproveClaimList = new ClaimList();
 		Claim1 = new Claim("Claim1");
@@ -46,7 +46,7 @@ public class ApproveClaimListTest extends TestCase {
 		
 	}
 	
-	//TestNumber:8.2
+	//TestNumber: ApproveViewTest #2
 	public void testViewSubmittedExpense() {
 		ClaimList ApproveClaimList = new ClaimList();
 		Claim1 = new Claim("Claim1");

@@ -23,7 +23,7 @@ public class ClaimStatusTest extends TestCase {
 		Claim1=new Claim("Claim1");
 	}
 
-	//TestNumber:7.2
+	//TestNumber:SubmitStatusTest #1
 	public void testSubmitStatus(){
 		Claim1.setApprover("MyBoss");
 		assertEquals("The approver is not matched",Claim1.getApprover(),"MyBoss");
@@ -31,7 +31,7 @@ public class ClaimStatusTest extends TestCase {
 	}
 	
 	
-	//TestNumber:7.3
+	//TestNumber:SubmitStatusTest #2
 	public void testSubmitClaimEditable(){
 		Claim2 = new Claim("Claim2");
 		if (Claim2.getStatus().equals("Submitted")) {
