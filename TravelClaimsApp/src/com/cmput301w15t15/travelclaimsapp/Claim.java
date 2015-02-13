@@ -56,5 +56,14 @@ public class Claim {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	public String getClaimStatus() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void setClaimStatus(String string) {
+		// TODO Auto-generated method stub
+	}
  
 }
