@@ -16,20 +16,20 @@ public class takePhotoTest extends TestCase
 	    expense = new Expense("Business");
 		super.setUp();
 	}
-	//TestID:takePhotoTest
+	//TestID:takePhotoTest-takePhotoTest
 	 protected void takePhotoTest() {
 		 Expense expense = new Expense("Business");
 		 expense.takeAPhoto();
 		 assertTrue("exist photo", expense.takeAPhoto() != null);
 		 }
-	//TestID:deletePhotoTest
+	//TestID:takePhotoTest-deletePhotoTest
 	 protected void deletePhotoTest(){
 		 expense.takeAPhoto();
 		 assertTrue("exist photo", expense.takeAPhoto()!=null);
 		 expense.deleteAPhoto();
 		 assertTrue("delete a photo", expense.takeAPhoto()==null);
 		 }
-	//TestID:viewPhotoTest
+	//TestID:takePhotoTest-viewPhotoTest
 	 protected void viewPhotoTest(){
 		 expense.takeAPhoto();
 		 assertTrue("view Receipt",expense.takeAPhoto().equals(imageFileUri));
