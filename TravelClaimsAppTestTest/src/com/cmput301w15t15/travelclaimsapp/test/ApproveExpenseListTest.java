@@ -27,6 +27,7 @@ public class ApproveExpenseListTest extends TestCase {
 		
 	}
 	
+	//TestNumber:8.4
 	public void testViewSubmittedExpense() {
 		ClaimList ApproveClaimList = new ClaimList();
 		Claim1 = new Claim("Claim1");
@@ -49,6 +50,7 @@ public class ApproveExpenseListTest extends TestCase {
 				.get(0).getExpenseList().get(0).getDescription().equals("Description"));
 	}
 	
+	//TestNumber:8.5
 	public void testViewExpenseReceipt(){
 		ClaimList testClaimList = new ClaimList();
 		Claim1 = new Claim("Claim1");

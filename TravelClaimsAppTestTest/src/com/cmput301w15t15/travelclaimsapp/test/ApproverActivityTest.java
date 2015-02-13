@@ -26,16 +26,19 @@ public class ApproverActivityTest extends
                 mClickFunActivity.findViewById(R.id.launch_next_activity_button);
     }
 
+	//TestNumber:8.6
     public void testApproveButtonClick() {
         View mClickMeButton = null;
 		TouchUtils.clickView(this, mClickMeButton);
         //Do some other testing afterward
     }
 
+    //TestNumber:8.7
     public void testReturnButtonClick() {
         View mClickMeButton = null;
 		TouchUtils.clickView(this, mClickMeButton);
         //Do some other testing afterward
+		//comment field is not null
     }
     
     

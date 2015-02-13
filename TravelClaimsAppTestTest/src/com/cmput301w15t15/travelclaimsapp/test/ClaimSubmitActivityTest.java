@@ -26,10 +26,12 @@ public class ClaimSubmitActivityTest extends
                 mClickFunActivity.findViewById(R.id.launch_next_activity_button);
     }
 
+	//TestNumber:7.1
     public void testSubmitButtonClick() {
         View mClickMeButton = null;
 		TouchUtils.clickView(this, mClickMeButton);
         //Do some other testing afterward
+		//all information valid
     }
 
 }
