@@ -31,11 +31,11 @@ public class ClaimListViewTest extends
 		view = (ListView) activity.findViewById(R.id.claim_list_listview);
 		adaptor = new ClaimListAdaptor(activity, R.id.claim_list_listview, claimList.getClaimList());
 	}
-	//test #
+	//test case: ClaimListViewTest#1
 	public void testListViewDisplay(){
 		ViewAsserts.assertOnScreen(activity.getWindow().getDecorView(), view);
 	}
-	//test #
+	//test case: ClaimListViewTest#2
 	public void testClaimListViewUpdate(){
 		Claim claim = new Claim("test");
 		claimList.addClaim(claim);
@@ -46,7 +46,7 @@ public class ClaimListViewTest extends
 		assertNull("Claim not removed from adaptor", adaptor.getItem(0));
 		
 	}
-	//test #
+	//test case: ClaimListViewTest#3
 	public void testClaimListViewSort(){
 		Claim claim1 = new Claim("t1");
 		Claim claim2 = new Claim("t2");

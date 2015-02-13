@@ -24,7 +24,7 @@ public class EditClaimTest extends TestCase {
 		claim1.setStartDate(2015, 2,5);
 	}
 	
-	//test #
+	//test case: EditClaimTest#1
 	public void testEditClaimName(){
 		claim1.setDescription("testing");
 
@@ -40,7 +40,7 @@ public class EditClaimTest extends TestCase {
 		}
 	}
 	
-	// test #
+	//test case: EditClaimTest#2
 	public void testEditClaimDate(){
 		
 		try{
@@ -62,7 +62,7 @@ public class EditClaimTest extends TestCase {
 		}
 		
 	}
-	//test #
+	//test case: EditClaimTest#3
 	public void testAddDestination(){
 		claim1.addDestination("Rome", "to work");
 		Set<String> dest = claim1.getDestinationList().keySet();
@@ -70,7 +70,7 @@ public class EditClaimTest extends TestCase {
 		assertTrue("Destination description not correct", claim1.getDestinationList().get("Rome") == "to work");
 	}
 	
-	//test #
+	//test case: EditClaimTest#4
 	public void testDeleteDestination(){
 		claim1.addDestination("Rome", "to work");
 		claim1.deleteDestination("Rome");
@@ -78,7 +78,7 @@ public class EditClaimTest extends TestCase {
 		Set<String> dest = claim1.getDestinationList().keySet();
 		assertTrue("Destination not added", dest.size() == 0);
 	}
-	//test #
+	//test case: EditClaimTest#5
 	public void testSubmittedStatus(){
 		claim1.setStatus("Submitted");
 		assertTrue(claim1.isEditable());

@@ -25,21 +25,20 @@ public class AddClaimTest extends TestCase{
 		claim2 = new Claim("Claim2");
 		claimList.addClaim(claim2);
 	}
-	//test #
+	//test: AddClaimTest#1
 	public void testAddClaim(){
 		claimList.addClaim(new Claim("Claim3"));
 		assertTrue("The length of the claimList is not two", this.claimList.size() == 3);
 		assertTrue("claim1 was not added", this.claimList.getClaim("Claim1") == this.claim1);
 	}
-	//test #
+	//test: AddClaimTest#2
 	public void testDeleteClaim(){
 		claimList.removeClaim(claim1);
 		assertTrue("Claim was not removed from claimList", claimList.getClaim("Claim1")==null);
 		assertTrue("Claim was not removed from claimList", claimList.size() == 2); 
 	}
-	//test #
+	//test: AddClaimTest#3
 	public void testAddClaimDuplicate(){
-		
 		
 		try{
 			claimList.addClaim(new Claim("Claim4"));

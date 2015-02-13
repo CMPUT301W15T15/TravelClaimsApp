@@ -31,7 +31,7 @@ public class FilterTagTest extends TestCase
 		claim1.addTag(tag1);
 		claim2.addTag(tag1);
 	}
-	//TestID:FilterTagTest
+	//TestCase: FilterTagTest#1
 	public void filterTagTest(){
 		assertTrue("the size is not correct!",this.claimList.filterTag(tag1).size()==2);
 		assertTrue("this is not corret",this.claimList.filterTag(tag1).getClaim("Claim1")==this.claim1);

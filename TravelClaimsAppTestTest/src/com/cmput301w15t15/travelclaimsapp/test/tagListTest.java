@@ -26,7 +26,7 @@ public class tagListTest extends TestCase {
 
 		
 	}
-	//Test number: # tagListTest-addTagTest 
+	//Test: tagListTest#1 
 	public void addClaimTag(){
 		claim1.addTag(tag1);
 		tagList.addTag(tag1);
@@ -37,7 +37,7 @@ public class tagListTest extends TestCase {
 		assertTrue("claim1 was not added", this.claim1.getTag() == tag1);
 	}
 
-	//TestID: tagListTest-removeTagTest 	
+	//Test: tagListTest#2	
 	public void removeTagTest(){
 		claim1.addTag(tag1);
 		tagList.addTag(tag1);
@@ -48,7 +48,7 @@ public class tagListTest extends TestCase {
 		assertTrue("claim1 was not added", this.tagList.getTag("Personal") == tag2);
 		assertTrue("claim1 was not added", this.claim1.getTag() == null);
 	}
-	//TestID: tagList-renameTagTest
+	//Test: tagListTest#3
 	public void renameTagTest(){
 		claim1.addTag(tag1);
 		tagList.addTag(tag1);
