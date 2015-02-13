@@ -9,12 +9,11 @@ public class Expense {
 	public void addFlag(){
 		// TODO
 	}
-	
-	public String getFlag()
-	{
-
-		return null;
+	public void setName() {
+		// TODO Auto-generated method stub
+		
 	}
+	
 
 	public void removeFlag()
 	{
@@ -27,4 +26,5 @@ public class Expense {
 		return true;
 	}
 
+	
 }

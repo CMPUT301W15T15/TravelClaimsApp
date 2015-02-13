@@ -5,6 +5,10 @@ import java.util.Map;
 
 public class Claim {
 
+	protected String Comment;
+	protected String Approver;
+	protected boolean Editable=true;
+
 	
 
 	public Claim(String string) {
@@ -110,6 +114,33 @@ public class Claim {
 		// TODO Auto-generated method stub
 
 	}
- 
+	
+	public void setComment(String string) {
+		// TODO Auto-generated method stub
+		}
+
+	public String getComment() {
+		// TODO Auto-generated method stub
+		return Comment;
+	}
+
+	public void setApprover(String approverName) {
+		// TODO Auto-generated method stub
+		this.Approver = approverName;
+	}
+
+	public String getApprover(){
+		return Approver;	
+	}
+
+	public String getStatus() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public boolean getEditable() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
 }

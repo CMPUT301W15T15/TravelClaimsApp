@@ -10,12 +10,10 @@ import com.cmput301w15t15.travelclaimsapp.Claim;
 import junit.framework.TestCase;
 
 public class ClaimStatusTest extends TestCase {
-	private String preStatus;
-	private String afterStatus2;
-	private Activity myActivity;
 	private Claim Claim1;
-	private Activity activity;
-	private ApproverActivity approve;
+	private Claim Claim2;
+
+	
 	public ClaimStatusTest(String name) {
 		super(name);
 	}
@@ -26,10 +24,53 @@ public class ClaimStatusTest extends TestCase {
 	}
 
 	public void testSubmitStatus(){
-		assertEquals("initial status process",Claim1.getClaimStatus(),"Process");
-		final Button button = (Button) myActivity.findViewById(com.cmput301w15t15.travelclaimsapp.R.id.SUBMIT);
-		assertEquals("changed to submited?",Claim1.getClaimStatus(),"Submitted");
+		Claim1.setApprover("Michael");
+		assertEquals("The approver is not matched",Claim1.getApprover(),"Jack");
+
+	}
+	
+	public void testSubmitClaimEditable(){
+		Claim2 = new Claim("Claim2");
+		if (Claim2.getStatus().equals("Submitted")) {
+			assertTrue("A claim in Submitted status should not be editable",Claim2.getEditable() == false);
+		}
+		
+		else if (Claim2.getStatus().equals("Process")) {
+			assertTrue("A claim in Process status should be editable", Claim2.getEditable() == true);
+		} 
+		
+		
+		else if (Claim2.getStatus().equals("Returned")) {
+			assertTrue("A claim in Return status should be editable", Claim2.getEditable() == true);
+		}
 	}
 	
 	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
