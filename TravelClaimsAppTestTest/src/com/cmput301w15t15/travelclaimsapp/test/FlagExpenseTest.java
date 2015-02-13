@@ -10,6 +10,7 @@ public class FlagExpenseTest extends TestCase
 {
 	private Expense expense1;
 	private Expense expense2;
+	private boolean 
 	protected void setUp() throws Exception
 	{
 		super.setUp();
@@ -19,9 +20,11 @@ public class FlagExpenseTest extends TestCase
 	}
 //TestId:FlagExpenseTest
 	public void flagExpenseTest(){
-		assertTrue("This is expense is unflag",expense1.getFlag());
-		expense2.getFlag();
-		assertTrue("This is expense still have fag",expense2.removeFlag());
+		expense2.addFlag();
+		expense1.addFlag();
+		assertFalse("This is expense is unflag",expense1.emptyFlag());
+		expense2.removeFlag();
+		assertTrue("This is expense still have flag",expense2.emptyFlag());
 	}
 
 }

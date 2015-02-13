@@ -10,7 +10,7 @@ import com.cmput301w15t15.travelclaimsapp.TagListController;
 
 import junit.framework.TestCase;
 
-public class tageListTest extends TestCase {
+public class tagListTest extends TestCase {
 	private TagList tagList;
 	private String tag1="Business";
 	private String tag2="Personal";
