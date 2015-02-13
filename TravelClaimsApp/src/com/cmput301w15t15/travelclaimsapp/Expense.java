@@ -1,5 +1,6 @@
 package com.cmput301w15t15.travelclaimsapp;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 import android.net.Uri;
@@ -72,6 +73,16 @@ public class Expense {
 	}
 
 	public String getDescription() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void addItem(ExpenseItem item) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public ArrayList<ExpenseItem> getItemList() {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -6,6 +6,7 @@ import java.util.Map;
 import com.cmput301w15t15.travelclaimsapp.Claim;
 import com.cmput301w15t15.travelclaimsapp.ClaimList;
 import com.cmput301w15t15.travelclaimsapp.Expense;
+import com.cmput301w15t15.travelclaimsapp.ExpenseItem;
 
 import junit.framework.TestCase;
 
@@ -13,7 +14,7 @@ public class ApproveExpenseListTest extends TestCase {
 	private Claim Claim1;
 	private Claim Claim2;
 	private Expense Expense1;
-
+	private Expense Expense2;
 	
 	public ApproveExpenseListTest(String name) {
 		super(name);
@@ -21,6 +22,9 @@ public class ApproveExpenseListTest extends TestCase {
 
 	protected void setUp() throws Exception {
 		super.setUp();
+		
+		
+		
 	}
 	
 	public void testViewSubmittedExpense() {
@@ -47,19 +51,27 @@ public class ApproveExpenseListTest extends TestCase {
 	
 	public void testViewExpenseReceipt(){
 		ClaimList testClaimList = new ClaimList();
-		Claim AClaim = new Claim("A");
-		Claim BClaim = new Claim("B");
-		Claim CClaim = new Claim("C");
-		testClaimList.addClaim(AClaim);
-		testClaimList.addClaim(BClaim);
-		Item itemA = new Item("food");
-		Item itemB = new Item("texi");
-		AClaim.addItem(itemA);
-		BClaim.addItem(itemB);
-		itemA.takeAPhoto();
-		itemB.takeAPhoto();
-		assertFalse("is photo", itemA.getPhoto().equals(null));
-		assertFalse("is photo", itemB.getPhoto().equals(null));
+		Claim1 = new Claim("Claim1");
+		Expense1 = new Expense("Expense1");
+		Expense2 = new Expense("Expense2");
+		
+		Claim1.setStatus("Submitted");
+		Claim1.addExpense(Expense1);
+		Claim1.addExpense(Expense2);
+		
+
+		testClaimList.addClaim(Claim1);
+		testClaimList.addClaim(Claim2);
+		ExpenseItem item1 = new ExpenseItem("food");
+		ExpenseItem item2 = new ExpenseItem("meat");
+		ExpenseItem item3 = new ExpenseItem("drink");
+		Expense1.addItem(item1);
+		Expense1.addItem(item2);
+		Expense2.addItem(item3);
+		
+		Expense1.takeReceipt();
+		assertFalse("Image yes?", Expense1.getReceipt().equals(null));
+		assertTrue("Image no", Expense2.getReceipt().equals(null));
 		}
 
 }

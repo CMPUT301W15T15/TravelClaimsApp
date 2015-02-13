@@ -1,15 +1,22 @@
 package com.cmput301w15t15.travelclaimsapp.test;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 import com.cmput301w15t15.travelclaimsapp.Claim;
 import com.cmput301w15t15.travelclaimsapp.ClaimList;
 import com.cmput301w15t15.travelclaimsapp.Expense;
+import com.cmput301w15t15.travelclaimsapp.ExpenseItem;
 
 import junit.framework.TestCase;
 
 public class ApproveExpenseItemTest extends TestCase {
 
+	private Claim Claim1;
+	private Claim Claim2;
+	private Expense Expense1;
+	private Expense Expense2;
+	
 	public ApproveExpenseItemTest(String name) {
 		super(name);
 	}
@@ -18,25 +25,33 @@ public class ApproveExpenseItemTest extends TestCase {
 		super.setUp();
 	}
 
-	public void testViewSubmittedExpense() {
-		ClaimList ApproveClaimList = new ClaimList();
+	@SuppressWarnings("null")
+	public void testViewExpenseItem(){
+		ClaimList testClaimList = new ClaimList();
 		Claim1 = new Claim("Claim1");
 		Expense1 = new Expense("Expense1");
 		
-		ApproveClaimList.addClaim(Claim1);
 		Claim1.setStatus("Submitted");
 		Claim1.addExpense(Expense1);
+		
 
-		assertTrue("name is equal", ApproveClaimList.getClaimList()
-				.get(0).getExpenseList().get(0).getName().toString().equals("Expense1"));
+		testClaimList.addClaim(Claim1);
+		testClaimList.addClaim(Claim2);
+		ArrayList<ExpenseItem> testItemList= new ArrayList<ExpenseItem>();
+		ExpenseItem item1 = new ExpenseItem("food");
+		ExpenseItem item2 = new ExpenseItem("meat");
+		ExpenseItem item3 = new ExpenseItem("drink");
+		testItemList.add(item1);
+		testItemList.add(item2);
+		testItemList.add(item3);
 		
-		Date date = new Date();
-		Expense1.setDate(date);
-		assertTrue("date is equal", ApproveClaimList.getClaimList()
-				.get(0).getExpenseList().get(0).getDate().equals(date));
+		Expense1.addItem(item1);
+		Expense1.addItem(item2);
+		Expense1.addItem(item3);
 		
-		Expense1.setDescription("Description");
-		assertTrue("Description is equal", ApproveClaimList.getClaimList()
-				.get(0).getExpenseList().get(0).getDescription().equals("Description"));
+		assertTrue("Image no", Expense1.getItemList().equals(testItemList));
+		
 	}
+	
+	
 }
