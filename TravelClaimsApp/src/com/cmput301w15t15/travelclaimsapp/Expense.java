@@ -19,4 +19,19 @@ public class Expense {
 		return false;
 	}
 
+	public void takeAPhoto()
+	{
+
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void deleteAPhoto()
+	{
+
+		// TODO Auto-generated method stub
+		
+	}
+
+
 }
