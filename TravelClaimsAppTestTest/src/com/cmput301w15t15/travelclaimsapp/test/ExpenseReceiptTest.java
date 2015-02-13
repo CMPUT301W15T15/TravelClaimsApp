@@ -1,15 +1,15 @@
 package com.cmput301w15t15.travelclaimsapp.test;
 
 import com.cmput301w15t15.travelclaimsapp.Expense;
+import com.cmput301w15t15.travelclaimsapp.ExpenseItem;
 
 import android.net.Uri;
 import junit.framework.TestCase;
 
 public class ExpenseReceiptTest extends TestCase {
 
-	private Uri imageFileUri;
-	private Expense Expense1;
-	
+	private Uri getImage;
+	private ExpenseItem ExpenseItem1;
 	
 
 	
@@ -22,9 +22,9 @@ public class ExpenseReceiptTest extends TestCase {
 	}
 
 	protected void viewReceiptTest(){
-		Expense1  = new Expense("test");
-		Expense1.takeReceipt();
-		assertTrue("view Receipt",item.getPhoto().equals(imageFileUri));
+		ExpenseItem1  = new ExpenseItem("ExpenseItem1");
+		ExpenseItem1.takeReceipt();
+		assertEquals("view Receipt",ExpenseItem1.getReceipt(),imageFileUri));
 	}
 	
 }

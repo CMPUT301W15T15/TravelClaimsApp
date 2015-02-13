@@ -1,5 +1,7 @@
 package com.cmput301w15t15.travelclaimsapp;
 
+import android.net.Uri;
+
 public class ExpenseItem {
 
 	public ExpenseItem(String itemName) {
@@ -13,29 +15,11 @@ public class ExpenseItem {
 		
 	}
 	
+	
 	public void getItemName() {
 		// TODO Auto-generated method stub
 		
 	}
 	
 	
-	
-	public void takeReceipt() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void getReceipt() {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	public void deleteReceipt() {
-		// TODO Auto-generated method stub
-		
-	}
-	public boolean emptyReceipt() {
-		// TODO Auto-generated method stub
-		return false;
-	}
 }

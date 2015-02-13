@@ -114,7 +114,6 @@ public class Claim {
 		// TODO Auto-generated method stub
 
 	}
-<<<<<<< HEAD
 	
 	public void setComment(String string) {
 		// TODO Auto-generated method stub
@@ -143,13 +142,11 @@ public class Claim {
 		// TODO Auto-generated method stub
 		return false;
 	}
-=======
 
 	public String getStartDate() {
 		// TODO Auto-generated method stub
 		return null;
 	}
  
->>>>>>> 33169a18112c3c3187b048b2b5082bd7042b041b
 
 }
