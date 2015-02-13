@@ -31,6 +31,13 @@ public class ClaimList {
 		return null;
 	}
 
+	public ClaimList filterTag(String tag1)
+	{
+
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 
 

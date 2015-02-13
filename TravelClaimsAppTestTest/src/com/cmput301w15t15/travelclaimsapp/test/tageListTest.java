@@ -1,16 +1,11 @@
 //add
 package com.cmput301w15t15.travelclaimsapp.test;
 
-<<<<<<< HEAD
-import com.cmputw15t15.travelclaimsapp.Claim;
-import com.cmputw15t15.travelclaimsapp.Tag;
-import com.cmputw15t15.travelclaimsapp.TagList;
-import com.cmputw15t15.travelclaimsapp.TagListController;
-=======
+import com.cmput301w15t15.travelclaimsapp.Claim;
 import com.cmput301w15t15.travelclaimsapp.Tag;
 import com.cmput301w15t15.travelclaimsapp.TagList;
 import com.cmput301w15t15.travelclaimsapp.TagListController;
->>>>>>> 55885cb12110a8eff19bb69fdd1f9d69708cb821
+
 
 import junit.framework.TestCase;
 
