@@ -1,4 +1,4 @@
-package ApproveTest;
+package com.cmput301w15t15.ApproveProcess.Test;
 
 import junit.framework.TestCase;
 
@@ -12,7 +12,7 @@ public class ClaimSubmitTest extends TestCase {
 		super.setUp();
 	}
 	
-	public void testSubmitButton{
+	public void testSubmitStatus{
 		
 	}
 	
