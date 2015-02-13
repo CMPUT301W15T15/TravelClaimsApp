@@ -1,9 +1,13 @@
 package com.cmput301w15t15.travelclaimsapp.test;
 
-import com.cmputw15t15.travelclaimsapp.Claim;
-import com.cmputw15t15.travelclaimsapp.ClaimList;
+import com.cmput301w15t15.travelclaimsapp.AddClaimActivity;
+import com.cmput301w15t15.travelclaimsapp.Claim;
+import com.cmput301w15t15.travelclaimsapp.ClaimList;
+import com.cmput301w15t15.travelclaimsapp.ClaimListAdaptor;
+import com.cmput301w15t15.travelclaimsapp.R;
 
 import android.test.ActivityInstrumentationTestCase2;
+import android.test.ViewAsserts;
 import android.widget.ListView;
 
 public class ClaimListViewTest extends
@@ -21,8 +25,10 @@ public class ClaimListViewTest extends
 	protected void setUp() throws Exception {
 		super.setUp();
 		activity = getActivity();
-		view = (ListView) activity.findViewById(R.id.some_id_for_listview);
-		adaptor = new ClaimListAdaptor(activity.this, R.id.some_id_for_listview, claimList);
+		
+	
+		view = (ListView) activity.findViewById(R.id.claim_list_listview);
+		adaptor = new ClaimListAdaptor(activity, R.id.claim_list_listview, claimList.getClaimList());
 	}
 	//test #
 	public void testListViewDisplay(){
@@ -30,7 +36,7 @@ public class ClaimListViewTest extends
 	}
 	//test #
 	public void testClaimListViewUpdate(){
-		Claim claim = new Claim("test")
+		Claim claim = new Claim("test");
 		claimList.addClaim(claim);
 		adaptor.notifyDataSetChanged();
 		assertEquals("Claim was not added to adaptor",1, adaptor.getCount());

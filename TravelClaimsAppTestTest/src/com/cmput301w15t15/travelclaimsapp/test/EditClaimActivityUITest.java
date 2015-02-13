@@ -1,9 +1,10 @@
 package com.cmput301w15t15.travelclaimsapp.test;
 
-import com.cmputw15t15.travelclaimsapp.Claim;
-import com.cmputw15t15.travelclaimsapp.ClaimList;
-import com.cmputw15t15.travelclaimsapp.ClaimListController;
-import com.cmputw15t15.travelclaimsapp.EditClaimActivity;
+import com.cmput301w15t15.travelclaimsapp.Claim;
+import com.cmput301w15t15.travelclaimsapp.ClaimList;
+import com.cmput301w15t15.travelclaimsapp.ClaimListController;
+import com.cmput301w15t15.travelclaimsapp.EditClaimActivity;
+import com.cmput301w15t15.travelclaimsapp.R;
 
 import android.app.Activity;
 import android.app.Instrumentation;
@@ -34,11 +35,12 @@ public class EditClaimActivityUITest extends
 		activity = getActivity();
 		instrumentation = getInstrumentation();
 		
-		inputName = (EditText) activity.findViewById(id);
-		inputDestination = (EditText) activity.findViewById(id);
-		inputReason = (EditText) activity.findViewById(id);
-		inputStartDate = (EditText) activity.findViewById(id);
-		inputEndDate = (EditText) activity.findViewById(id);
+		//Need to change the id's once UI has been made
+		inputName = (EditText) activity.findViewById(R.id.editText_test);
+		inputDestination = (EditText) activity.findViewById(R.id.editText_test);
+		inputReason = (EditText) activity.findViewById(R.id.editText_test);
+		inputStartDate = (EditText) activity.findViewById(R.id.editText_test);
+		inputEndDate = (EditText) activity.findViewById(R.id.editText_test);
 		
 		claimList = ClaimListController.getClaimList();
 		claim = new Claim("The Claim");

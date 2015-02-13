@@ -12,15 +12,19 @@ public class ClaimSubmitTest extends TestCase {
 		super.setUp();
 	}
 	
+<<<<<<< HEAD:TravelClaimsAppTestTest/src/com/cmput301w15t15/ApproveProcess/Test/ClaimSubmitTest.java
 	public void testSubmitStatus{
+=======
+	public void testSubmitButton(){
+>>>>>>> 55885cb12110a8eff19bb69fdd1f9d69708cb821:TravelClaimsAppTestTest/src/ApproveTest/ClaimSubmitTest.java
 		
 	}
 	
-	public void testSubmitedEditable{
+	public void testSubmitedEditable(){
 		
 	}
 	
-	public void testSubmitViewDisplay{
+	public void testSubmitViewDisplay(){
 		
 	}
 

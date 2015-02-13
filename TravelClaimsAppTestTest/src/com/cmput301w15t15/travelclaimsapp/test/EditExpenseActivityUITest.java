@@ -1,6 +1,7 @@
 package com.cmput301w15t15.travelclaimsapp.test;
 
-import com.cmputw15t15.travelclaimsapp.EditExpenseActivity;
+import com.cmput301w15t15.travelclaimsapp.EditExpenseActivity;
+import com.cmput301w15t15.travelclaimsapp.R;
 
 import android.app.Activity;
 import android.app.Instrumentation;
@@ -34,14 +35,15 @@ public class EditExpenseActivityUITest extends
 		instrumentation = getInstrumentation();
 		activity = getActivity();
 		
-		inputDate = (EditText) activity.findViewById(some_id);
-		inputDescription = (EditText) activity.findViewById(some_id);
-		inputAmount = (EditText) activity.findViewById(some_id);
+		//need to change ids once UI has been created 
+		inputDate = (EditText) activity.findViewById(R.id.editText_test);
+		inputDescription = (EditText) activity.findViewById(R.id.editText_test);
+		inputAmount = (EditText) activity.findViewById(R.id.editText_test);
 		
-		selectCategory = (Spinner) activity.findViewById(some_id);
+		selectCategory = (Spinner) activity.findViewById(R.id.editText_test);
 		categoryAdaptor = selectCategory.getAdapter();
 		
-		selectCurrency = (Spinner) activity.findViewById(some_id);
+		selectCurrency = (Spinner) activity.findViewById(R.id.editText_test);
 		currencyAdaptor = selectCurrency.getAdapter();
 		
 	}
