@@ -39,17 +39,17 @@ public class AddClaimActivity extends Activity {
     @Override
     public boolean onContextItemSelected(MenuItem item) {
         AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
-        
-        switch (item.getItemId()) {
-            case R.id.cmenu_delete_claim:
-              
-            case R.id.cmenu_submit_claim:
-            	
-            case R.id.cmenu_addExpense:
-           
-            default:
-                return super.onContextItemSelected(item);
-        }
+    	return super.onContextItemSelected(item);
+//        switch (item.getItemId()) {
+//            case R.id.cmenu_delete_claim:
+//            
+//            case R.id.cmenu_submit_claim:
+//            	
+//            case R.id.cmenu_addExpense:
+//            
+//            default:
+//                return super.onContextItemSelected(item);
+//        }
     }
 	
 }

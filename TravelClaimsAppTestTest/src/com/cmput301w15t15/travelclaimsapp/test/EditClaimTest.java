@@ -1,5 +1,8 @@
 package com.cmput301w15t15.travelclaimsapp.test;
 
+import java.util.Map;
+import java.util.Set;
+
 import com.cmput301w15t15.travelclaimsapp.Claim;
 import com.cmput301w15t15.travelclaimsapp.ClaimList;
 import com.cmput301w15t15.travelclaimsapp.ClaimListController;
@@ -59,5 +62,35 @@ public class EditClaimTest extends TestCase {
 		}
 		
 	}
+	//test #
+	public void testAddDestination(){
+		claim1.addDestination("Rome", "to work");
+		Set<String> dest = claim1.getDestinationList().keySet();
+		assertTrue("Destination not added", dest.size() == 1);
+		assertTrue("Destination description not correct", claim1.getDestinationList().get("Rome") == "to work");
+	}
+	
+	//test #
+	public void testDeleteDestination(){
+		claim1.addDestination("Rome", "to work");
+		claim1.deleteDestination("Rome");
+		
+		Set<String> dest = claim1.getDestinationList().keySet();
+		assertTrue("Destination not added", dest.size() == 0);
+	}
+	//test #
+	public void testSubmittedStatus(){
+		claim1.setStatus("Submitted");
+		assertTrue(claim1.isEditable());
+		claim1.setStatus("Returned");
+		assertFalse(claim1.isEditable());
+		claim1.setStatus("Approved");
+		assertTrue(claim1.isEditable());
+	}
+	
+	
+	
+	
+	
 
 }

@@ -1,5 +1,7 @@
 package com.cmput301w15t15.travelclaimsapp.test;
 
+import com.cmput301w15t15.travelclaimsapp.Claim;
+
 import junit.framework.TestCase;
 
 

@@ -1,6 +1,7 @@
 package com.cmput301w15t15.travelclaimsapp;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 public class Claim {
 
@@ -55,6 +56,46 @@ public class Claim {
 	public Claim getExpense(String string) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public String getTag() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void removeTag() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void renameTag(String string) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void addDestination(String string, String string2) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public Map<String, String> getDestinationList() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void deleteDestination(String string) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void setStatus(String string) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public boolean isEditable() {
+		// TODO Auto-generated method stub
+		return false;
 	}
  
 }

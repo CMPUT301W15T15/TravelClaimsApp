@@ -4,7 +4,6 @@ import com.cmput301w15t15.travelclaimsapp.AddClaimActivity;
 import com.cmput301w15t15.travelclaimsapp.Claim;
 import com.cmput301w15t15.travelclaimsapp.ClaimList;
 import com.cmput301w15t15.travelclaimsapp.ClaimListAdaptor;
-import com.cmput301w15t15.travelclaimsapp.ClaimListController;
 import com.cmput301w15t15.travelclaimsapp.EditClaimActivity;
 import com.cmput301w15t15.travelclaimsapp.R;
 
@@ -34,21 +33,26 @@ public class AddClaimActivityUITest extends ActivityInstrumentationTestCase2<Add
 	protected void setUp() throws Exception {
 		super.setUp();
 		activity = getActivity();
-		claimList = ClaimListController.getClaimList();
+		claimList = new ClaimList();
 		instrumentation = getInstrumentation();
 		listView = (ListView) activity.findViewById(R.id.claim_list_listview);
 		adaptor = new ClaimListAdaptor(activity, R.id.claim_list_listview, claimList.getClaimList());
+		newClaimButton = (Button) activity.findViewById(R.id.add_claim_button);
 	}
 	//test #
+
 	public void testContextMenuPopupDelete(){
 		Claim claim1 = new Claim("t1");
 		claimList.addClaim(claim1);
+
 		adaptor.notifyDataSetChanged();
 		
-		listView.setSelection(0);
+
 		listView.requestFocus();
-		
+		listView.setSelection(0);
+
 		boolean test = instrumentation.invokeContextMenuAction(activity, R.id.cmenu_delete_claim, 0);
+		
 		instrumentation.waitForIdleSync();
 	
 		assertTrue(test);
@@ -56,9 +60,10 @@ public class AddClaimActivityUITest extends ActivityInstrumentationTestCase2<Add
 		
 	}
 	//test #
+
 	public void testContextMenuPopupAddExpense(){
 		//add a monitor that waits for AddExpenseActivity to start
-		ActivityMonitor activityMonitor = new ActivityMonitor("EditClaimActivity", null, false);
+		ActivityMonitor activityMonitor = new ActivityMonitor("EditExpenseActivity", null, false);
 
 		instrumentation.addMonitor(activityMonitor);
 		
@@ -66,12 +71,17 @@ public class AddClaimActivityUITest extends ActivityInstrumentationTestCase2<Add
 		claimList.addClaim(claim1);
 		adaptor.notifyDataSetChanged();
 		
+
+		listView.requestFocus();
+		listView.setSelection(0);
+
+		
 		boolean test = instrumentation.invokeContextMenuAction(activity, R.id.cmenu_addExpense, 0);
 		instrumentation.waitForIdleSync();
-		
+	
 		Activity nextActivity = instrumentation.waitForMonitorWithTimeout(activityMonitor, 3000);
 		assertTrue(test);
-		assertNotNull("The AddExpenseActivity is null", nextActivity);
+		assertNotNull("The Activity is null", nextActivity);
 		
 	}
 
@@ -86,15 +96,32 @@ public class AddClaimActivityUITest extends ActivityInstrumentationTestCase2<Add
 		claimList.addClaim(claim1);
 		adaptor.notifyDataSetChanged();
 		
+		listView.requestFocus();
+		listView.setSelection(0);
+	
 		boolean test = instrumentation.invokeContextMenuAction(activity, R.id.cmenu_submit_claim, 0);
 		instrumentation.waitForIdleSync();
 		
 		Activity activity = instrumentation.waitForMonitorWithTimeout(activityMonitor, 3000);
 		assertTrue(test);
 		
-		assertNotNull(activity);
+		assertNotNull(activity);	
+	}
+	//test #
+	public void testNewClaimButtonPress(){
+		ActivityMonitor activityMonitor = new ActivityMonitor(EditClaimActivity.class.getName(), null, false);
+		instrumentation.addMonitor(activityMonitor);
+		instrumentation.runOnMainSync(new Runnable() {
+			@Override
+			public void run() {
+				newClaimButton.performClick();
+			}
+		});
+		instrumentation.waitForIdleSync();
+		
+		Activity nextActivity = instrumentation.waitForMonitorWithTimeout(activityMonitor, 3000);
+		assertNotNull(nextActivity);	
+		
 		
 	}
-	
-
 }

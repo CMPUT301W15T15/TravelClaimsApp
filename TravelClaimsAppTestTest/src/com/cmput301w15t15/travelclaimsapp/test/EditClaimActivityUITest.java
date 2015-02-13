@@ -4,11 +4,14 @@ import com.cmput301w15t15.travelclaimsapp.Claim;
 import com.cmput301w15t15.travelclaimsapp.ClaimList;
 import com.cmput301w15t15.travelclaimsapp.ClaimListController;
 import com.cmput301w15t15.travelclaimsapp.EditClaimActivity;
+import com.cmput301w15t15.travelclaimsapp.EditExpenseActivity;
 import com.cmput301w15t15.travelclaimsapp.R;
 
 import android.app.Activity;
 import android.app.Instrumentation;
+import android.app.Instrumentation.ActivityMonitor;
 import android.test.ActivityInstrumentationTestCase2;
+import android.widget.Button;
 import android.widget.EditText;
 
 public class EditClaimActivityUITest extends
@@ -21,6 +24,8 @@ public class EditClaimActivityUITest extends
 	private EditText inputReason;
 	private EditText inputStartDate;
 	private EditText inputEndDate;
+	private Button addDestination;
+	private Button newExpenseButton;
 	private ClaimList claimList;
 	private Claim claim;
 	
@@ -41,8 +46,10 @@ public class EditClaimActivityUITest extends
 		inputReason = (EditText) activity.findViewById(R.id.editText_test);
 		inputStartDate = (EditText) activity.findViewById(R.id.editText_test);
 		inputEndDate = (EditText) activity.findViewById(R.id.editText_test);
+		addDestination = (Button) activity.findViewById(R.id.button_test);
+		newExpenseButton = (Button) activity.findViewById(R.id.button_test);
 		
-		claimList = ClaimListController.getClaimList();
+		claimList = new ClaimList();
 		claim = new Claim("The Claim");
 		claimList.addClaim(claim);
 	}
@@ -68,12 +75,37 @@ public class EditClaimActivityUITest extends
 	}
 	// test #
 	public void testAddExpenseButton(){
-		//TODO
+		ActivityMonitor activityMonitor = new ActivityMonitor(EditExpenseActivity.class.getName(), null, false);
+		instrumentation.addMonitor(activityMonitor);
+		instrumentation.runOnMainSync(new Runnable() {
+			@Override
+			public void run() {
+				newExpenseButton.performClick();
+			}
+		});
+		instrumentation.waitForIdleSync();
+		
+		Activity nextActivity = instrumentation.waitForMonitorWithTimeout(activityMonitor, 3000);
+		assertNotNull(nextActivity);	
+	
 	}
 	
 	
-	private void addDestination(String destination, String reason){
-		//TODO
+	
+	private void testAddDestination(String destination, String reason){
+		instrumentation.runOnMainSync(new Runnable() {
+				
+		@Override
+		public void run() {
+			inputDestination.setText("test");
+			inputReason.setText("test1");
+			addDestination.performClick();
+				
+			}
+		});
+		instrumentation.waitForIdleSync();
+		
+		
 	}
 	
 }

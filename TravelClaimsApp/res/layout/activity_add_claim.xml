@@ -11,8 +11,18 @@
     <ListView
         android:id="@+id/claim_list_listview"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/add_claim_button" >
 
     </ListView>
+
+    <Button
+        android:id="@+id/add_claim_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/claim_list_listview"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:text="New Claim" />
 
 </RelativeLayout>

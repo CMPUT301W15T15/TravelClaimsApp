@@ -36,14 +36,14 @@ public class EditExpenseActivityUITest extends
 		activity = getActivity();
 		
 		//need to change ids once UI has been created 
-		inputDate = (EditText) activity.findViewById(R.id.editText_test);
-		inputDescription = (EditText) activity.findViewById(R.id.editText_test);
-		inputAmount = (EditText) activity.findViewById(R.id.editText_test);
+		inputDate = (EditText) activity.findViewById(R.id.editText_test2);
+		inputDescription = (EditText) activity.findViewById(R.id.editText_test2);
+		inputAmount = (EditText) activity.findViewById(R.id.editText_test2);
 		
-		selectCategory = (Spinner) activity.findViewById(R.id.editText_test);
+		selectCategory = (Spinner) activity.findViewById(R.id.spinner_test);
 		categoryAdaptor = selectCategory.getAdapter();
 		
-		selectCurrency = (Spinner) activity.findViewById(R.id.editText_test);
+		selectCurrency = (Spinner) activity.findViewById(R.id.spinner_test);
 		currencyAdaptor = selectCurrency.getAdapter();
 		
 	}

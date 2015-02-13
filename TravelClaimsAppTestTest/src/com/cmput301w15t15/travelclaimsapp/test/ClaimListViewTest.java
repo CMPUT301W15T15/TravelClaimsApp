@@ -4,6 +4,7 @@ import com.cmput301w15t15.travelclaimsapp.AddClaimActivity;
 import com.cmput301w15t15.travelclaimsapp.Claim;
 import com.cmput301w15t15.travelclaimsapp.ClaimList;
 import com.cmput301w15t15.travelclaimsapp.ClaimListAdaptor;
+import com.cmput301w15t15.travelclaimsapp.ClaimListController;
 import com.cmput301w15t15.travelclaimsapp.R;
 
 import android.test.ActivityInstrumentationTestCase2;
@@ -26,7 +27,7 @@ public class ClaimListViewTest extends
 		super.setUp();
 		activity = getActivity();
 		
-	
+		claimList = new ClaimList();
 		view = (ListView) activity.findViewById(R.id.claim_list_listview);
 		adaptor = new ClaimListAdaptor(activity, R.id.claim_list_listview, claimList.getClaimList());
 	}
@@ -43,6 +44,7 @@ public class ClaimListViewTest extends
 		claimList.removeClaim(claim);
 		adaptor.notifyDataSetChanged();
 		assertNull("Claim not removed from adaptor", adaptor.getItem(0));
+		
 	}
 	//test #
 	public void testClaimListViewSort(){
