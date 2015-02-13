@@ -33,6 +33,7 @@ public class ApproverActivityTest extends
         //Do some other testing afterward
     }
 
+    
     //TestNumber:8.7
     public void testReturnButtonClick() {
         View mClickMeButton = null;
