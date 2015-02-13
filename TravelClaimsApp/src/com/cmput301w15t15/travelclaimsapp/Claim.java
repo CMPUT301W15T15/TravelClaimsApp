@@ -53,7 +53,7 @@ public class Claim {
 		
 	}
 
-	public Claim getExpense(String string) {
+	public Expense getExpense(String string) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -109,6 +109,11 @@ public class Claim {
 	public void setClaimStatus(String string) {
 		// TODO Auto-generated method stub
 
+	}
+
+	public String getStartDate() {
+		// TODO Auto-generated method stub
+		return null;
 	}
  
 

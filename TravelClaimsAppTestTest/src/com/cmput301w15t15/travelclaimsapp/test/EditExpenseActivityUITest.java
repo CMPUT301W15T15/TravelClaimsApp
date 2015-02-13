@@ -1,6 +1,10 @@
 package com.cmput301w15t15.travelclaimsapp.test;
 
+import com.cmput301w15t15.travelclaimsapp.Claim;
+import com.cmput301w15t15.travelclaimsapp.ClaimList;
+import com.cmput301w15t15.travelclaimsapp.ClaimListController;
 import com.cmput301w15t15.travelclaimsapp.EditExpenseActivity;
+import com.cmput301w15t15.travelclaimsapp.Expense;
 import com.cmput301w15t15.travelclaimsapp.R;
 
 import android.app.Activity;
@@ -88,6 +92,42 @@ public class EditExpenseActivityUITest extends
 		
 		
 		assertEquals("Not selected", "Supplies", selectCategory.getItemAtPosition(selectCategory.getSelectedItemPosition()));
+	}
+	//test #
+	public void testCurrencySelect(){
+		instrumentation.runOnMainSync(new Runnable() {
+			@Override
+			public void run() {
+				selectCategory.requestFocus();
+				selectCategory.setSelection(0);
+				
+			}
+		});
+		//from http://developer.android.com/tools/testing/activity_test.html 2015-02-12
+		this.sendKeys(KeyEvent.KEYCODE_DPAD_CENTER);
+	    for (int i = 1; i <= 5; i++) {
+	    	this.sendKeys(KeyEvent.KEYCODE_DPAD_DOWN);
+		} 
+		this.sendKeys(KeyEvent.KEYCODE_DPAD_CENTER);
+		
+		
+		assertEquals("Not selected", "JPY", selectCurrency.getItemAtPosition(selectCurrency.getSelectedItemPosition()));
+	}
+	
+	public void testDataPersistance(){
+		ClaimList claimL = ClaimListController.getClaimList();
+		String selectedClaimName = activity.getIntent().getExtras().getString("claimName");
+		Claim testClaim = claimL.getClaim(selectedClaimName);
+		Expense testExpense = new Expense("test");
+		testClaim.addExpense(testExpense);
+		testExpense.setName("stuff");
+		activity.finish();
+		activity = getActivity();
+		claimL = ClaimListController.getClaimList();
+		testClaim = claimL.getClaim(selectedClaimName);
+		testExpense = testClaim.getExpense("stuff");
+		assertNotNull(testExpense);
+		
 	}
 
 }

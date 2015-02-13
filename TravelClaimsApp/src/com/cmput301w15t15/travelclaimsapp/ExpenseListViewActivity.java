@@ -38,7 +38,7 @@ public class ExpenseListViewActivity extends Activity
             	
             case R.id.expenseListViewMenuFlag:
             
-            case R.id.iexpenseListViewMenuUnflag:
+            case R.id.expenseListViewMenuUnflag:
             	
             default:
                 return super.onContextItemSelected(item);

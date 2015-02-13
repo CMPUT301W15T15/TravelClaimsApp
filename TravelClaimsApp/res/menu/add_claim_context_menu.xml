@@ -1,18 +1,8 @@
-public boolean onContextItemSelected(MenuItem item) {
-AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
-switch(item.getItemId()) {
-case com.example.claimit123.R.id.removeExpense:
-adapter.remove(adapter.getItem(info.position));
-return true;public boolean onContextItemSelected(MenuItem item) {
-AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
-switch(item.getItemId()) {
-case com.example.claimit123.R.id.removeExpense:
-adapter.remove(adapter.getItem(info.position));
-return true;expenseListViewMenuFlag<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
-    <item android:id="@+id/cmenu_delete_claim"></item>
-    <item android:id="@+id/cmenu_addExpense"></item>
-    <item android:id="@+id/cmenu_submit_claim"></item>
+    <item android:id="@+id/cmenu_delete_claim" android:title="Delete"></item>
+    <item android:id="@+id/cmenu_addExpense" android:title="Add Expense"></item>
+    <item android:id="@+id/cmenu_submit_claim" android:title="Submit Claim"></item>
     
 
 </menu>
