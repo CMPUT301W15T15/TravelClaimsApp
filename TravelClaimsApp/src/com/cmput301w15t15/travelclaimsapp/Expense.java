@@ -6,17 +6,25 @@ public class Expense {
 		// TODO Auto-generated constructor stub
 	}
 
-	public boolean getFlag()
+	public void addFlag(){
+		// TODO
+	}
+	
+	public String getFlag()
 	{
 
-		return true;
+		return null;
 	}
 
-	public boolean removeFlag()
+	public void removeFlag()
 	{
 
 		// TODO Auto-generated method stub
-		return false;
+		//return false;
+	}
+	
+	public boolean emptyFlag(){
+		return true;
 	}
 
 }
