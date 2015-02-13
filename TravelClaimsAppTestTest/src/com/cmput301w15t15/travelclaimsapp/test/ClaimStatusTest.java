@@ -24,8 +24,8 @@ public class ClaimStatusTest extends TestCase {
 	}
 
 	public void testSubmitStatus(){
-		Claim1.setApprover("Michael");
-		assertEquals("The approver is not matched",Claim1.getApprover(),"Jack");
+		Claim1.setApprover("MyBoss");
+		assertEquals("The approver is not matched",Claim1.getApprover(),"MyBoss");
 
 	}
 	

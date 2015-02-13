@@ -1,5 +1,7 @@
 package com.cmput301w15t15.travelclaimsapp;
 
+import java.util.Date;
+
 import android.net.Uri;
 
 public class Expense {
@@ -16,6 +18,10 @@ public class Expense {
 		
 	}
 	
+	public String getName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	public void removeFlag()
 	{
@@ -48,6 +54,26 @@ public class Expense {
 	public boolean emptyReceipt() {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	public Date getDate() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void setDate(Date date) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void setDescription(String string) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public String getDescription() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

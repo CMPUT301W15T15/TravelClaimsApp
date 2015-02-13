@@ -8,8 +8,8 @@ import junit.framework.TestCase;
 
 public class ExpenseReceiptTest extends TestCase {
 
-	private Uri getImage;
-	private ExpenseItem ExpenseItem1;
+	private Uri receiptImage;
+	private Expense Expense1;
 	
 
 	
@@ -21,10 +21,14 @@ public class ExpenseReceiptTest extends TestCase {
 		super.setUp();
 	}
 
-	protected void viewReceiptTest(){
-		ExpenseItem1  = new ExpenseItem("ExpenseItem1");
-		ExpenseItem1.takeReceipt();
-		assertEquals("view Receipt",ExpenseItem1.getReceipt(),imageFileUri));
+	public void viewReceiptTest(){
+		Expense1  = new Expense("Expense1");
+		Expense1.takeReceipt();
+		assertEquals("view Receipt",Expense1.getReceipt(),receiptImage);
 	}
+	
+	
+	
+	
 	
 }

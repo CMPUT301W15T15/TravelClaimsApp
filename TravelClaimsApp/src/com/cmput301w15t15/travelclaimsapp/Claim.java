@@ -1,6 +1,7 @@
 package com.cmput301w15t15.travelclaimsapp;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Map;
 
 public class Claim {
@@ -147,6 +148,33 @@ public class Claim {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	public String getName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void setStartDate(Date date) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void setEndDate(Date endDate) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public Date getEndDate() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String getDescription() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
  
 
 }
