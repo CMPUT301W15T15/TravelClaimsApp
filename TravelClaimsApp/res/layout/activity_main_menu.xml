@@ -25,6 +25,6 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/UserButton"
-        android:text="@string/Aprover" />
+        android:text="@string/Approver" />
 
 </RelativeLayout>
