@@ -8,29 +8,106 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".EditExpenseActivity" >
 
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
-
     <EditText
-        android:id="@+id/editText_test2"
+        android:id="@+id/Edit_Expense_Name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView1"
-        android:layout_below="@+id/textView1"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
         android:ems="10"
-        android:hint="Test" >
+        android:hint="@string/Name" >
 
         <requestFocus />
     </EditText>
 
-    <Spinner
-        android:id="@+id/spinner_test"
+    <EditText
+        android:id="@+id/Edit_Expense_Cat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/editText_test2"
-        android:layout_below="@+id/editText_test2" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/Edit_Expense_Name"
+        android:ems="10"
+        android:hint="@string/Category" />
+
+    <EditText
+        android:id="@+id/Edit_Expense_Cost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/Edit_Expense_Cat"
+        android:ems="10"
+        android:hint="@string/Cost"
+        android:inputType="numberDecimal" />
+
+    <Spinner
+        android:id="@+id/CategorySpinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/Edit_Expense_Currency"
+        android:layout_below="@+id/Edit_Expense_Currency"
+        android:entries="@array/CategoryArray" />
+
+    <EditText
+        android:id="@+id/Edit_Expense_Currency"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/Edit_Expense_Cost"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/Edit_Expense_Cat"
+        android:layout_toRightOf="@+id/Edit_Expense_Cost"
+        android:ems="10"
+        android:hint="@string/Currency" />
+
+    <Spinner
+        android:id="@+id/CurrencySpinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/CategorySpinner"
+        android:layout_below="@+id/CategorySpinner" 
+        android:entries="@array/CurrencyArray"
+        />
+
+    <Button
+        android:id="@+id/Edit_Expense_Ok"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:text="@string/Ok" />
+
+    <EditText
+        android:id="@+id/Edit_Expense_Date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignRight="@+id/CategorySpinner"
+        android:layout_below="@+id/Edit_Expense_Cost"
+        android:ems="10"
+        android:hint="@string/Date" />
+
+    <EditText
+        android:id="@+id/Edit_Expense_Description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/Edit_Expense_Date"
+        android:ems="10"
+        android:hint="@string/Description"
+        android:inputType="textMultiLine" />
+
+    <EditText
+        android:id="@+id/Edit_Expense_Tags"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/Edit_Expense_Description"
+        android:ems="10"
+        android:hint="@string/Tags"
+        android:inputType="textMultiLine" />
 
 </RelativeLayout>

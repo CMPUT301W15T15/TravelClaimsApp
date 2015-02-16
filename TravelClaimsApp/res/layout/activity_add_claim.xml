@@ -12,7 +12,8 @@
         android:id="@+id/claim_list_listview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/add_claim_button" >
+        android:layout_above="@+id/add_claim_button"
+        android:layout_below="@+id/ClaimTitle" >
 
     </ListView>
 
@@ -23,6 +24,15 @@
         android:layout_alignLeft="@+id/claim_list_listview"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:text="New Claim" />
+        android:text="@string/NewClaim" />
+
+    <TextView
+        android:id="@+id/ClaimTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/claim_list_listview"
+        android:layout_alignParentTop="true"
+        android:text="@string/Claim"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
 </RelativeLayout>

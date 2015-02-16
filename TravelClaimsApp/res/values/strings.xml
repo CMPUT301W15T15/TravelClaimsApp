@@ -10,5 +10,51 @@
     <string name="title_activity_edit_expense">EditExpenseActivity</string>
     <string name="title_activity_approver">ApproverActivity</string>
     <string name="title_activity_expense_list_view">ExpenseListViewActivity</string>
+    <string name="Delete">Delete</string>
+    <string name="Edit">Edit</string>
+    <string name="NewExpense">Add New Expense</string>
+    <string name="Expense">Expenses:</string>
+    <string name="Status">Status</string>
+    <string name="Description">Description</string>
+    <string name="Claim">Claims:</string>
+    <string name="NewClaim">Add New Claim</string>
+    <string name="User">User</string>
+    <string name="Aprover">Aprover</string>
+    <string name="StartDate">Start</string>
+    <string name="Name">Name</string>
+    <string name="Add">Add</string>
+    <string name="Date">Date</string>
+    <string name="Category">Category</string>
+    <string name="Cost">Cost</string>
+    <string name="Currency">Currency</string>
+    <string name="Ok">OK</string>
+    <string name="Tags">Tags</string>
+    <string name="Search">Search</string>
+    <string-array name="StatusArray">
+        <item >In Progress</item>
+        <item >Aproved</item>
+        <item >Returned</item>
+    </string-array>
+    <string-array name="CategoryArray">
+        <item >Air Fare</item>
+        <item >Ground Transport</item>
+        <item >Vehicle Rental</item>
+        <item >Private Vehicle</item>
+        <item >Fuel</item>
+        <item >Parking</item>
+        <item >Registration</item>
+        <item >Accommodation</item>
+        <item >Meal</item>
+        <item >Supplies</item>
+    </string-array>
+    <string-array name="CurrencyArray">
+        <item >CAD</item>
+        <item >USD</item>
+        <item >JPY</item>
+        <item >EUR</item>
+        <item >GBP</item>
+        <item >CNY</item>
+        <item >CHF</item>
+    </string-array>
 
 </resources>
