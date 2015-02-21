@@ -78,15 +78,6 @@ public class Expense {
 		return null;
 	}
 
-	public void addItem(ExpenseItem item) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public ArrayList<ExpenseItem> getItemList() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	public Uri takeAPhoto() {
 		// TODO Auto-generated method stub
