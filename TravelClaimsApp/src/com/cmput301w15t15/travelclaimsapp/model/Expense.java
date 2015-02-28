@@ -1,7 +1,6 @@
-package com.cmput301w15t15.travelclaimsapp;
+package com.cmput301w15t15.travelclaimsapp.model;
 
-import java.io.File;
-import java.util.ArrayList;
+
 import java.util.Date;
 
 import android.net.Uri;

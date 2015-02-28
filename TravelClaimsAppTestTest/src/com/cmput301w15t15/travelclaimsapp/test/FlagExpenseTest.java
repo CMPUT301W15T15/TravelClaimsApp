@@ -1,7 +1,7 @@
 package com.cmput301w15t15.travelclaimsapp.test;
 
-import com.cmput301w15t15.travelclaimsapp.Claim;
-import com.cmput301w15t15.travelclaimsapp.Expense;
+import com.cmput301w15t15.travelclaimsapp.model.Claim;
+import com.cmput301w15t15.travelclaimsapp.model.Expense;
 
 import junit.framework.TestCase;
 

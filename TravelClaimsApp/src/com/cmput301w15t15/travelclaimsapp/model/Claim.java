@@ -1,8 +1,9 @@
-package com.cmput301w15t15.travelclaimsapp;
+package com.cmput301w15t15.travelclaimsapp.model;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Map;
+
 
 public class Claim {
 

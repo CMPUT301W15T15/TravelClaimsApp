@@ -4,8 +4,8 @@ import android.app.Activity;
 import android.app.Instrumentation;
 import android.widget.Button;
 
-import com.cmput301w15t15.travelclaimsapp.ApproverActivity;
-import com.cmput301w15t15.travelclaimsapp.Claim;
+import com.cmput301w15t15.travelclaimsapp.activitys.ApproverActivity;
+import com.cmput301w15t15.travelclaimsapp.model.Claim;
 
 import junit.framework.TestCase;
 

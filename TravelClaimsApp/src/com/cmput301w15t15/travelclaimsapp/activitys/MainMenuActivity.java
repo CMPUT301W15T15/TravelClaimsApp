@@ -1,10 +1,11 @@
-package com.cmput301w15t15.travelclaimsapp;
+package com.cmput301w15t15.travelclaimsapp.activitys;
 
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 import com.cmput301w15t15.travelclaimsapp.R;
+import com.cmput301w15t15.travelclaimsapp.R.id;
 import com.cmput301w15t15.travelclaimsapp.R.layout;
 import com.cmput301w15t15.travelclaimsapp.R.menu;
 

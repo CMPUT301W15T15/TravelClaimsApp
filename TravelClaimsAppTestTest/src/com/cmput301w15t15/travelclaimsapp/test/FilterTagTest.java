@@ -1,9 +1,9 @@
 package com.cmput301w15t15.travelclaimsapp.test;
 
-import com.cmput301w15t15.travelclaimsapp.Claim;
 
-import com.cmput301w15t15.travelclaimsapp.ClaimList;
 import com.cmput301w15t15.travelclaimsapp.ClaimListController;
+import com.cmput301w15t15.travelclaimsapp.model.Claim;
+import com.cmput301w15t15.travelclaimsapp.model.ClaimList;
 
 
 
