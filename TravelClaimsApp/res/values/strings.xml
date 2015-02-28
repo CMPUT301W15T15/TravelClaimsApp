@@ -64,5 +64,6 @@
     <string name="CreateUser">Create User</string>
     <string name="PasswordAgain">Password Again</string>
     <string name="Approvers">Approvers</string>
+    <string name="title_activity_search_actvity">Search</string>
 
 </resources>
