@@ -15,8 +15,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.AdapterView.AdapterContextMenuInfo;
+import android.widget.Toast;
 
 public class AddClaimActivity extends Activity {
+
+	private static final int LENGTH_SHORT = 0;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +56,12 @@ public class AddClaimActivity extends Activity {
 //            default:
 //                return super.onContextItemSelected(item);
 //        }
+    }
+    
+    public void SearchOption (MenuItem menu)
+    {
+    	Toast.makeText(this, "Going to Search", LENGTH_SHORT).show();
+    	Intent intent = new Intent(AddClaimActivity.this, SearchActvity.class);
     }
 	
 }
