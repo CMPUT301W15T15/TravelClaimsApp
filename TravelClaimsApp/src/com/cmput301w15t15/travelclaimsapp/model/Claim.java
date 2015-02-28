@@ -4,9 +4,23 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Map;
 
+import com.cmput301w15t15.travelclaimsapp.Destination;
+
 
 
 public class Claim {
+	private Date startDate;
+	private Date endDate;
+	private Destination destination;
+	private String tag;
+	private String status;
+	private String comment;
+	private int totalValue;
+	private int approveId;
+	private int claimantId;
+	private ExpenseList expenseList;
+	
+	
 
 	protected boolean Editable=true;
 
@@ -20,10 +34,6 @@ public class Claim {
 		return null;
 	}
 	
-	public void setDescription(String string) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	public void setStartDate(int i, int j, int k) {
 		// TODO Auto-generated method stub
@@ -58,10 +68,6 @@ public class Claim {
 		
 	}
 
-	public void addDestination(String string, String string2) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	public Map<String, String> getDestinationList() {
 		
@@ -72,6 +78,8 @@ public class Claim {
 		return null;
 	}
 	
+	
+	
 	public String getTag()
 	{
 
@@ -80,11 +88,6 @@ public class Claim {
 	}
 
 
-	public void deleteDestination(String string) {
-		// TODO Auto-generated method stub
-		
-	}
-
 	public void setStatus(String string) {
 		// TODO Auto-generated method stub
 		
@@ -92,6 +95,7 @@ public class Claim {
 
 	public boolean isEditable() {
 		// TODO Auto-generated method stub
+		
 		return false;
 	}
 
@@ -153,10 +157,7 @@ public class Claim {
 		return null;
 	}
 
-	public String getDescription() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 
 	
 
