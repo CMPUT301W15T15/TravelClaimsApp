@@ -14,6 +14,10 @@ public class Claim {
 		// TODO Auto-generated constructor stub
 	}
 
+	public ExpenseList getExpenseList(){
+		return null;
+	}
+	
 	public void setDescription(String string) {
 		// TODO Auto-generated method stub
 		
@@ -23,21 +27,7 @@ public class Claim {
 		// TODO Auto-generated method stub
 		
 	}
-
-	public void addExpense(Expense expense1) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void removeExpense(Expense expense1) {
-		// TODO Auto-generated method stub
-		
-	}
 	
-	public ArrayList<Expense> getExpenseList(){
-		return null;
-		
-	}
 	public ArrayList<String> getTagList(){
 		return null;
 		
@@ -55,14 +45,6 @@ public class Claim {
 		// TODO Auto-generated method stub
 		
 	}
-
-	public Expense getExpense(String string) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-
 
 	public void removeTag() {
 		// TODO Auto-generated method stub
@@ -83,9 +65,11 @@ public class Claim {
 		
 		return null;
 	}
+	
 	public String getClaimStatus() {
 		return null;
 	}
+	
 	public String getTag()
 	{
 
@@ -173,6 +157,5 @@ public class Claim {
 	}
 
 	
- 
 
 }
