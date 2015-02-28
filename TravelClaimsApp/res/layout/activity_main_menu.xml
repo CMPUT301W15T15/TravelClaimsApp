@@ -9,22 +9,54 @@
     tools:context=".MainMenuActivity" >
 
     <Button
-        android:id="@+id/UserButton"
+        android:id="@+id/LoginButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:onClick="OnLoginClick"
+        android:text="@string/Login" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/LoginButton"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="124dp"
+        android:layout_alignRight="@+id/LoginButton"
         android:text="@string/User" />
 
-    <Button
-        android:id="@+id/ApproverButton"
+    <EditText
+        android:id="@+id/UsernameEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView1"
+        android:layout_below="@+id/textView1"
+        android:ems="10"
+        android:paddingBottom="5dp"
+        android:paddingTop="5dp" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/UsernameEditText"
+        android:layout_below="@+id/UsernameEditText"
+        android:text="@string/Password" />
+
+    <EditText
+        android:id="@+id/PasswordEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/UserButton"
-        android:text="@string/Approver" />
+        android:layout_below="@+id/textView3"
+        android:ems="10"
+        android:inputType="textPassword"
+        android:paddingBottom="5dp"
+        android:paddingTop="5dp" >
+
+        <requestFocus />
+    </EditText>
 
 </RelativeLayout>
