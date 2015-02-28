@@ -19,7 +19,6 @@ public class ExpenseListAdaptor extends ArrayAdapter<Expense> {
 		// TODO Auto-generated constructor stub
 	}
 
-	
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
