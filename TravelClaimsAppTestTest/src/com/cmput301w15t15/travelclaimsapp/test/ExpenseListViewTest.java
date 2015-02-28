@@ -4,13 +4,13 @@ import android.test.ActivityInstrumentationTestCase2;
 import android.test.ViewAsserts;
 import android.widget.ListView;
 
-import com.cmput301w15t15.travelclaimsapp.Claim;
-import com.cmput301w15t15.travelclaimsapp.ClaimList;
 import com.cmput301w15t15.travelclaimsapp.ClaimListController;
-import com.cmput301w15t15.travelclaimsapp.Expense;
 import com.cmput301w15t15.travelclaimsapp.ExpenseListAdaptor;
-import com.cmput301w15t15.travelclaimsapp.ExpenseListViewActivity;
 import com.cmput301w15t15.travelclaimsapp.R;
+import com.cmput301w15t15.travelclaimsapp.activitys.ExpenseListViewActivity;
+import com.cmput301w15t15.travelclaimsapp.model.Claim;
+import com.cmput301w15t15.travelclaimsapp.model.ClaimList;
+import com.cmput301w15t15.travelclaimsapp.model.Expense;
 
 
 

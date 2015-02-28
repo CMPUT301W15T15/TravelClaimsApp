@@ -1,11 +1,11 @@
 package com.cmput301w15t15.travelclaimsapp.test;
 
-import com.cmput301w15t15.travelclaimsapp.AddClaimActivity;
-import com.cmput301w15t15.travelclaimsapp.Claim;
-import com.cmput301w15t15.travelclaimsapp.ClaimList;
 import com.cmput301w15t15.travelclaimsapp.ClaimListAdaptor;
-import com.cmput301w15t15.travelclaimsapp.EditClaimActivity;
 import com.cmput301w15t15.travelclaimsapp.R;
+import com.cmput301w15t15.travelclaimsapp.activitys.AddClaimActivity;
+import com.cmput301w15t15.travelclaimsapp.activitys.EditClaimActivity;
+import com.cmput301w15t15.travelclaimsapp.model.Claim;
+import com.cmput301w15t15.travelclaimsapp.model.ClaimList;
 
 import android.app.Activity;
 import android.app.Instrumentation;

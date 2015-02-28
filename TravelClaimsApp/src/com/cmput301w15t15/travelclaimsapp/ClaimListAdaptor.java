@@ -2,6 +2,8 @@ package com.cmput301w15t15.travelclaimsapp;
 
 import java.util.ArrayList;
 
+import com.cmput301w15t15.travelclaimsapp.model.Claim;
+
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;

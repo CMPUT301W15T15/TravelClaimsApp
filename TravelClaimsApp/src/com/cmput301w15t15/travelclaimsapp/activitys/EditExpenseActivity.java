@@ -1,4 +1,4 @@
-package com.cmput301w15t15.travelclaimsapp;
+package com.cmput301w15t15.travelclaimsapp.activitys;
 
 import com.cmput301w15t15.travelclaimsapp.R;
 import com.cmput301w15t15.travelclaimsapp.R.layout;

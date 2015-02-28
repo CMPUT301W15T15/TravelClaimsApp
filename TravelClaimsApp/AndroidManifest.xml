@@ -14,31 +14,31 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.cmput301w15t15.travelclaimsapp.MainMenuActivity"
+            android:name="com.cmput301w15t15.travelclaimsapp.activitys.MainMenuActivity"
             android:label="@string/title_activity_main_menu" >
         </activity>
         <activity
-            android:name="com.cmput301w15t15.travelclaimsapp.AddClaimActivity"
+            android:name="com.cmput301w15t15.travelclaimsapp.activitys.AddClaimActivity"
             android:label="@string/title_activity_add_claim" >
         </activity>
         <activity
-            android:name="com.cmput301w15t15.travelclaimsapp.EditClaimActivity"
+            android:name="com.cmput301w15t15.travelclaimsapp.activitys.EditClaimActivity"
             android:label="@string/title_activity_edit_claim" >
         </activity>
         <activity
-            android:name="com.cmput301w15t15.travelclaimsapp.EditExpenseActivity"
+            android:name="com.cmput301w15t15.travelclaimsapp.activitys.EditExpenseActivity"
             android:label="@string/title_activity_edit_expense" >
         </activity>
         <activity
-            android:name="com.cmput301w15t15.travelclaimsapp.ApproverActivity"
+            android:name="com.cmput301w15t15.travelclaimsapp.activitys.ApproverActivity"
             android:label="@string/title_activity_approver" >
         </activity>
         <activity
-            android:name="com.cmput301w15t15.travelclaimsapp.ExpenseListViewActivity"
+            android:name="com.cmput301w15t15.travelclaimsapp.activitys.ExpenseListViewActivity"
             android:label="@string/title_activity_expense_list_view" >
         </activity>
         <activity
-            android:name="com.cmput301w15t15.travelclaimsapp.CreateUserActivity"
+            android:name="com.cmput301w15t15.travelclaimsapp.activitys.CreateUserActivity"
             android:label="@string/title_activity_create_user" >
         </activity>
     </application>

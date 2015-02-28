@@ -3,10 +3,10 @@ package com.cmput301w15t15.travelclaimsapp.test;
 import java.util.Date;
 import java.util.Map;
 
-import com.cmput301w15t15.travelclaimsapp.Claim;
-import com.cmput301w15t15.travelclaimsapp.ClaimList;
-import com.cmput301w15t15.travelclaimsapp.Expense;
-import com.cmput301w15t15.travelclaimsapp.ExpenseItem;
+import com.cmput301w15t15.travelclaimsapp.model.Claim;
+import com.cmput301w15t15.travelclaimsapp.model.ClaimList;
+import com.cmput301w15t15.travelclaimsapp.model.Expense;
+import com.cmput301w15t15.travelclaimsapp.model.ExpenseItem;
 
 import junit.framework.TestCase;
 

@@ -1,13 +1,13 @@
-package com.cmput301w15t15.travelclaimsapp;
+package com.cmput301w15t15.travelclaimsapp.model;
 
 import java.util.ArrayList;
 
 
 
-public class ClaimList {
 
-	public void addClaim(Claim claim1) {
-		// TODO Auto-generated method stub
+public abstract class ClaimList {
+
+	public void addClaim(Claim claim1){
 		
 	}
 
@@ -37,6 +37,8 @@ public class ClaimList {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	public abstract void sort();
 
 
 

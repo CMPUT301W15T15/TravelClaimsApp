@@ -1,12 +1,17 @@
 package com.cmput301w15t15.travelclaimsapp;
 
+import com.cmput301w15t15.travelclaimsapp.model.ApproverClaimList;
+import com.cmput301w15t15.travelclaimsapp.model.ClaimList;
+import com.cmput301w15t15.travelclaimsapp.model.ClaimantClaimList;
+
 
 
 
 
 public class ClaimListController {
 	
-	private static ClaimList claimList = null;
+	private static ClaimantClaimList claimainClaimList = null;
+	private static ApproverClaimList approverClaimList = null;
 
 	public static ClaimList getClaimList() {
 		// TODO Auto-generated method stub

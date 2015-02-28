@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Map;
 
-import com.cmput301w15t15.travelclaimsapp.Claim;
-import com.cmput301w15t15.travelclaimsapp.ClaimList;
+import com.cmput301w15t15.travelclaimsapp.model.Claim;
+import com.cmput301w15t15.travelclaimsapp.model.ClaimList;
 
 import junit.framework.TestCase;
 
