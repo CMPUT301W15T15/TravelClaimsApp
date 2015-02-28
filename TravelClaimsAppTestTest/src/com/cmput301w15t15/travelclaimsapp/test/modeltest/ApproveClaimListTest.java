@@ -66,8 +66,8 @@ public class ApproveClaimListTest extends TestCase {
 		claim1.setEndDate(endDate);
 		assertTrue("ending date is equal", approveClaimList.getClaimList().get(0).getEndDate().equals(endDate));
 		
-		claim1.setDescription("Description");
-		assertTrue("description is equal", approveClaimList.getClaimList().get(0).getDescription().equals("Description"));
+		//claim1.setDescription("Description");
+		//assertTrue("description is equal", approveClaimList.getClaimList().get(0).getDescription().equals("Description"));
 		
 		claim1.setStatus("Submitted");
 		assertTrue("status is equal", approveClaimList.getClaimList().get(0).getStatus().equals("Submitted"));
@@ -76,7 +76,7 @@ public class ApproveClaimListTest extends TestCase {
 		String Country="Canada";
 		Map<String,String> testDestinationList = null ;
 		testDestinationList.put(Country, "Edmonton");
-		claim1.addDestination(Country, "Edmonton");
+		//.addDestination(Country, "Edmonton");
 		assertTrue("destionation is true",approveClaimList.getClaimList().get(0).getDestinationList()
 				.equals(testDestinationList));
 	}

@@ -15,16 +15,11 @@ public class ExpenseListAdaptor extends ArrayAdapter<Expense> {
 
 	public ExpenseListAdaptor(Context context,
 			int resource, ExpenseList expenseList) {
-		super(context, resource, expenseList);
+		super(context, resource, expenseList.getExpenseList());
 		// TODO Auto-generated constructor stub
 	}
 
-	public ExpenseListAdaptor(ExpenseListViewActivity activity,
-			int expenselistview, ExpenseList expenseList)
-	{
-
-		// TODO Auto-generated constructor stub
-	}
+	
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
