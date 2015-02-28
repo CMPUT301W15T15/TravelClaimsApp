@@ -50,34 +50,34 @@ public class ApproveClaimListTest extends TestCase {
 	
 	//TestNumber: ApproveViewTest #2
 	public void testViewSubmittedExpense() {
-		ClaimList ApproveClaimList = new ClaimList();
-		Claim1 = new Claim("Claim1");
-		ApproveClaimList.addClaim(Claim1);
-		Claim1.setStatus("Submitted");
-		assertTrue("name is equal", ApproveClaimList.getClaimList()
+		ApproverClaimList approveClaimList = new ApproverClaimList();
+		claim1 = new Claim("Claim1");
+		approveClaimList.addClaim(claim1);
+		claim1.setStatus("Submitted");
+		assertTrue("name is equal", approveClaimList.getClaimList()
 				.get(0).getName().toString().equals("Claim1"));
 		
 		Date date = new Date();
-		Claim1.setStartDate(date);
-		assertTrue("starting date is equal", ApproveClaimList
+		claim1.setStartDate(date);
+		assertTrue("starting date is equal", approveClaimList
 				.getClaimList().get(0).getStartDate().equals(date));
 		
 		Date endDate = new Date();
-		Claim1.setEndDate(endDate);
-		assertTrue("ending date is equal", ApproveClaimList.getClaimList().get(0).getEndDate().equals(endDate));
+		claim1.setEndDate(endDate);
+		assertTrue("ending date is equal", approveClaimList.getClaimList().get(0).getEndDate().equals(endDate));
 		
-		Claim1.setDescription("Description");
-		assertTrue("description is equal", ApproveClaimList.getClaimList().get(0).getDescription().equals("Description"));
+		claim1.setDescription("Description");
+		assertTrue("description is equal", approveClaimList.getClaimList().get(0).getDescription().equals("Description"));
 		
-		Claim1.setStatus("Submitted");
-		assertTrue("status is equal", ApproveClaimList.getClaimList().get(0).getStatus().equals("Submitted"));
+		claim1.setStatus("Submitted");
+		assertTrue("status is equal", approveClaimList.getClaimList().get(0).getStatus().equals("Submitted"));
 		
 		// destination data structure need to be discussed
 		String Country="Canada";
 		Map<String,String> testDestinationList = null ;
 		testDestinationList.put(Country, "Edmonton");
-		Claim1.addDestination(Country, "Edmonton");
-		assertTrue("destionation is true",ApproveClaimList.getClaimList().get(0).getDestinationList()
+		claim1.addDestination(Country, "Edmonton");
+		assertTrue("destionation is true",approveClaimList.getClaimList().get(0).getDestinationList()
 				.equals(testDestinationList));
 	}
 	
