@@ -1,19 +1,21 @@
-package com.cmput301w15t15.travelclaimsapp.test;
+package com.cmput301w15t15.travelclaimsapp.test.modeltest;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Map;
 
+import com.cmput301w15t15.travelclaimsapp.model.ApproverClaimList;
 import com.cmput301w15t15.travelclaimsapp.model.Claim;
 import com.cmput301w15t15.travelclaimsapp.model.ClaimList;
 
 import junit.framework.TestCase;
 
 public class ApproveClaimListTest extends TestCase {
-	private Claim Claim1;
-	private Claim Claim2;
-	private Claim Claim3;
-	private Claim Claim4;
+	private Claim claim1;
+	private Claim claim2;
+	private Claim claim3;
+	private Claim claim4;
+	private ApproverClaimList claimList;
 	
 	
 	public ApproveClaimListTest(String name) {
@@ -26,23 +28,23 @@ public class ApproveClaimListTest extends TestCase {
 
 	//TestNumber: ApproveViewTest #1
 	public void testViewSubmittedClaims() {
-		ClaimList ApproveClaimList = new ClaimList();
-		Claim1 = new Claim("Claim1");
-		Claim2 = new Claim("Claim2");
-		Claim3 = new Claim("Claim3");
-		Claim4 = new Claim("Claim4");
-		ApproveClaimList.addClaim(Claim1);
-		ApproveClaimList.addClaim(Claim2);
-		ApproveClaimList.addClaim(Claim3);
-		ApproveClaimList.addClaim(Claim4);
-		Claim1.setStatus("Submitted");
-		Claim2.setStatus("Returned");
-		Claim3.setStatus("Process");
-		Claim4.setStatus("Approved");
+		claimList = new ApproverClaimList();
+		claim1 = new Claim("Claim1");
+		claim2 = new Claim("Claim2");
+		claim3 = new Claim("Claim3");
+		claim4 = new Claim("Claim4");
+		claimList.addClaim(claim1);
+		claimList.addClaim(claim2);
+		claimList.addClaim(claim3);
+		claimList.addClaim(claim4);
+		claim1.setStatus("Submitted");
+		claim2.setStatus("Returned");
+		claim3.setStatus("Process");
+		claim4.setStatus("Approved");
 		ArrayList<Claim> testList = new ArrayList<Claim>();
-		testList.add(Claim1);
-		testList.add(Claim2);
-		assertTrue("Submittedlist", ApproveClaimList.getClaimList().equals(testList));
+		testList.add(claim1);
+		testList.add(claim2);
+		assertTrue("Submittedlist", claimList.getClaimList().equals(testList));
 		
 	}
 	

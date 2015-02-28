@@ -1,4 +1,4 @@
-package com.cmput301w15t15.travelclaimsapp.test;
+package com.cmput301w15t15.travelclaimsapp.test.activitytest;
 
 import com.cmput301w15t15.travelclaimsapp.ClaimListController;
 import com.cmput301w15t15.travelclaimsapp.R;
@@ -6,6 +6,7 @@ import com.cmput301w15t15.travelclaimsapp.activitys.EditClaimActivity;
 import com.cmput301w15t15.travelclaimsapp.activitys.EditExpenseActivity;
 import com.cmput301w15t15.travelclaimsapp.model.Claim;
 import com.cmput301w15t15.travelclaimsapp.model.ClaimList;
+import com.cmput301w15t15.travelclaimsapp.model.ClaimantClaimList;
 
 import android.app.Activity;
 import android.app.Instrumentation;
@@ -30,7 +31,7 @@ public class EditClaimActivityUITest extends
 	private EditText inputEndDate;
 	private Button addDestination;
 	private Button newExpenseButton;
-	private ClaimList claimList;
+	private ClaimantClaimList claimList;
 	private Claim claim;
 	private Intent intent;
 	
@@ -49,15 +50,15 @@ public class EditClaimActivityUITest extends
 		instrumentation = getInstrumentation();
 		
 		//Need to change the id's once UI has been made
-		inputName = (EditText) activity.findViewById(R.id.editText_test);
-		inputDestination = (EditText) activity.findViewById(R.id.editText_test);
-		inputReason = (EditText) activity.findViewById(R.id.editText_test);
-		inputStartDate = (EditText) activity.findViewById(R.id.editText_test);
-		inputEndDate = (EditText) activity.findViewById(R.id.editText_test);
-		addDestination = (Button) activity.findViewById(R.id.button_test);
-		newExpenseButton = (Button) activity.findViewById(R.id.button_test);
+		inputName = (EditText) activity.findViewById(R.id.Edit_Claim_Name);
+		inputDestination = (EditText) activity.findViewById(R.id.Edit_Claim_Name);
+		inputReason = (EditText) activity.findViewById(R.id.Edit_Claim_Description);
+		inputStartDate = (EditText) activity.findViewById(R.id.Edit_Claim_Name);
+		inputEndDate = (EditText) activity.findViewById(R.id.Edit_Claim_Description);
+		addDestination = (Button) activity.findViewById(R.id.Edit_Claim_Description);
+		newExpenseButton = (Button) activity.findViewById(R.id.Edit_Claim_Description);
 		
-		claimList = new ClaimList();
+		claimList = new ClaimantClaimList();
 		claim = new Claim("The Claim");
 		claimList.addClaim(claim);
 		claimList.addClaim(new Claim("testClaim"));

@@ -1,4 +1,4 @@
-package com.cmput301w15t15.travelclaimsapp.test;
+package com.cmput301w15t15.travelclaimsapp.test.activitytest;
 
 import com.cmput301w15t15.travelclaimsapp.ClaimListController;
 import com.cmput301w15t15.travelclaimsapp.R;
@@ -6,6 +6,7 @@ import com.cmput301w15t15.travelclaimsapp.activitys.EditExpenseActivity;
 import com.cmput301w15t15.travelclaimsapp.model.Claim;
 import com.cmput301w15t15.travelclaimsapp.model.ClaimList;
 import com.cmput301w15t15.travelclaimsapp.model.Expense;
+import com.cmput301w15t15.travelclaimsapp.model.ExpenseList;
 
 import android.app.Activity;
 import android.app.Instrumentation;
@@ -40,14 +41,14 @@ public class EditExpenseActivityUITest extends
 		activity = getActivity();
 		
 		//need to change ids once UI has been created 
-		inputDate = (EditText) activity.findViewById(R.id.editText_test2);
-		inputDescription = (EditText) activity.findViewById(R.id.editText_test2);
-		inputAmount = (EditText) activity.findViewById(R.id.editText_test2);
+		inputDate = (EditText) activity.findViewById(R.id.Edit_Expense_Date);
+		inputDescription = (EditText) activity.findViewById(R.id.Edit_Expense_Description);
+		inputAmount = (EditText) activity.findViewById(R.id.Edit_Expense_Cost);
 		
-		selectCategory = (Spinner) activity.findViewById(R.id.spinner_test);
+		selectCategory = (Spinner) activity.findViewById(R.id.Edit_Expense_Cat);
 		categoryAdaptor = selectCategory.getAdapter();
 		
-		selectCurrency = (Spinner) activity.findViewById(R.id.spinner_test);
+		selectCurrency = (Spinner) activity.findViewById(R.id.Edit_Expense_Currency);
 		currencyAdaptor = selectCurrency.getAdapter();
 		
 	}
@@ -118,14 +119,15 @@ public class EditExpenseActivityUITest extends
 		ClaimList claimL = ClaimListController.getClaimList();
 		String selectedClaimName = activity.getIntent().getExtras().getString("claimName");
 		Claim testClaim = claimL.getClaim(selectedClaimName);
+		ExpenseList expenseList = new ExpenseList();
 		Expense testExpense = new Expense("test");
-		testClaim.addExpense(testExpense);
+		expenseList.addExpense(testExpense);
 		testExpense.setName("stuff");
 		activity.finish();
 		activity = getActivity();
 		claimL = ClaimListController.getClaimList();
 		testClaim = claimL.getClaim(selectedClaimName);
-		testExpense = testClaim.getExpense("stuff");
+		testExpense = expenseList.getExpense("stuff");
 		assertNotNull(testExpense);
 		
 	}
