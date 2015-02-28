@@ -60,8 +60,16 @@ public class AddClaimActivity extends Activity {
     
     public void SearchOption (MenuItem menu)
     {
-    	Toast.makeText(this, "Going to Search", LENGTH_SHORT).show();
+    	Toast.makeText(this, "Going to Search", Toast.LENGTH_SHORT).show();
     	Intent intent = new Intent(AddClaimActivity.this, SearchActvity.class);
+    	startActivity(intent);
     }
+
+    public void AddClaimButton(View view)
+    {
+    	Toast.makeText(this, "Creating a Claim", Toast.LENGTH_SHORT).show();
+    	Intent intent = new Intent(AddClaimActivity.this, EditClaimActivity.class);
+    	startActivity(intent);   
+    	}
 	
 }

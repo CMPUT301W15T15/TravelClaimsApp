@@ -11,9 +11,12 @@ import com.cmput301w15t15.travelclaimsapp.R.menu;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class MainMenuActivity extends Activity {
 
@@ -54,4 +57,17 @@ public class MainMenuActivity extends Activity {
 		
 	}
 	
+	public void SearchOption(MenuItem menu)
+    {
+    	Toast.makeText(this, "Going to Search", Toast.LENGTH_SHORT).show();
+    	Intent intent = new Intent(MainMenuActivity.this, SearchActvity.class);
+    	startActivity(intent);
+    }
+	
+	public void AddClaimMenu(MenuItem menu)
+    {
+    	Toast.makeText(this, "Going to Claims", Toast.LENGTH_SHORT).show();
+    	Intent intent = new Intent(MainMenuActivity.this, AddClaimActivity.class);
+    	startActivity(intent);
+    }
 }

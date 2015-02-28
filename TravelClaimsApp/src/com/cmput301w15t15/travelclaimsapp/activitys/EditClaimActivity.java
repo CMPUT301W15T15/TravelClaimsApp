@@ -6,7 +6,10 @@ import com.cmput301w15t15.travelclaimsapp.R.menu;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.Toast;
 
 public class EditClaimActivity extends Activity {
 
@@ -23,4 +26,10 @@ public class EditClaimActivity extends Activity {
 		return true;
 	}
 
+	public void SearchOption(MenuItem menu)
+    {
+    	Toast.makeText(this, "Going to Search", Toast.LENGTH_SHORT).show();
+    	Intent intent = new Intent(EditClaimActivity.this, SearchActvity.class);
+    	startActivity(intent);
+    }
 }

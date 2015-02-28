@@ -1,4 +1,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
     <item android:id="@+id/NewUser" android:title="New User"></item>
+    <item android:id="@+id/SearchMenuButton" android:title="Search" android:onClick="SearchOption"></item>
+    <item android:id="@+id/AddClaimMenuButton" android:title="Add Claims" android:onClick="AddClaimMenu"></item>
 
 </menu>

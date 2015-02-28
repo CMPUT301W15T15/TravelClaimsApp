@@ -6,8 +6,10 @@ import com.cmput301w15t15.travelclaimsapp.R.menu;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 
 public class EditExpenseActivity extends Activity {
@@ -34,4 +36,10 @@ public class EditExpenseActivity extends Activity {
 		//adapter.remove(adapter.getItem(info.position));
 		return true;
 	}
+	public void SearchOption(MenuItem menu)
+    {
+    	Toast.makeText(this, "Going to Search", Toast.LENGTH_SHORT).show();
+    	Intent intent = new Intent(EditExpenseActivity.this, SearchActvity.class);
+    	startActivity(intent);
+    }
 }
