@@ -27,7 +27,7 @@ public class ClaimListViewTest extends
 		super.setUp();
 		activity = getActivity();
 		
-		claimList = new ClaimaintClaimlist();
+		claimList = new ClaimantClaimList();
 		view = (ListView) activity.findViewById(R.id.claim_list_listview);
 		adaptor = new ClaimListAdaptor(activity, R.id.claim_list_listview, claimList.getClaimList());
 	}
