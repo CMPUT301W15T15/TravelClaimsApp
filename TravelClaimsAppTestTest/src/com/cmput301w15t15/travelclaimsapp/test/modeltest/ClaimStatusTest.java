@@ -1,4 +1,4 @@
-package com.cmput301w15t15.travelclaimsapp.test;
+package com.cmput301w15t15.travelclaimsapp.test.modeltest;
 
 import android.app.Activity;
 import android.app.Instrumentation;
