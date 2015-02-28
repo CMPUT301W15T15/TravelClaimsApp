@@ -1,4 +1,4 @@
-package com.cmput301w15t15.travelclaimsapp.test;
+package com.cmput301w15t15.travelclaimsapp.test.activitytest;
 
 import com.cmput301w15t15.travelclaimsapp.activitys.ClaimSubmitActivity;
 
