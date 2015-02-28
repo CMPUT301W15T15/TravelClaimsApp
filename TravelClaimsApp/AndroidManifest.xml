@@ -37,6 +37,10 @@
             android:name="com.cmput301w15t15.travelclaimsapp.ExpenseListViewActivity"
             android:label="@string/title_activity_expense_list_view" >
         </activity>
+        <activity
+            android:name="com.cmput301w15t15.travelclaimsapp.CreateUserActivity"
+            android:label="@string/title_activity_create_user" >
+        </activity>
     </application>
 
 </manifest>

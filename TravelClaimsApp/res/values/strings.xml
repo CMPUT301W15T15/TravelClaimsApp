@@ -30,33 +30,39 @@
     <string name="Ok">OK</string>
     <string name="Tags">Tags</string>
     <string name="Search">Search</string>
+
     <string-array name="StatusArray">
-        <item >In Progress</item>
-        <item >Aproved</item>
-        <item >Returned</item>
+        <item>In Progress</item>
+        <item>Aproved</item>
+        <item>Returned</item>
     </string-array>
     <string-array name="CategoryArray">
-        <item >Air Fare</item>
-        <item >Ground Transport</item>
-        <item >Vehicle Rental</item>
-        <item >Private Vehicle</item>
-        <item >Fuel</item>
-        <item >Parking</item>
-        <item >Registration</item>
-        <item >Accommodation</item>
-        <item >Meal</item>
-        <item >Supplies</item>
+        <item>Air Fare</item>
+        <item>Ground Transport</item>
+        <item>Vehicle Rental</item>
+        <item>Private Vehicle</item>
+        <item>Fuel</item>
+        <item>Parking</item>
+        <item>Registration</item>
+        <item>Accommodation</item>
+        <item>Meal</item>
+        <item>Supplies</item>
     </string-array>
     <string-array name="CurrencyArray">
-        <item >CAD</item>
-        <item >USD</item>
-        <item >JPY</item>
-        <item >EUR</item>
-        <item >GBP</item>
-        <item >CNY</item>
-        <item >CHF</item>
+        <item>CAD</item>
+        <item>USD</item>
+        <item>JPY</item>
+        <item>EUR</item>
+        <item>GBP</item>
+        <item>CNY</item>
+        <item>CHF</item>
     </string-array>
+
     <string name="Login">Login</string>
     <string name="Password">Password</string>
+    <string name="title_activity_create_user">CreateUserActivity</string>
+    <string name="CreateUser">Create User</string>
+    <string name="PasswordAgain">Password Again</string>
+    <string name="Approvers">Approvers</string>
 
 </resources>
