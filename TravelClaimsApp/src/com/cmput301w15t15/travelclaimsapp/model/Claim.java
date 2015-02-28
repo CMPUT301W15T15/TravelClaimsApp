@@ -158,6 +158,26 @@ public class Claim {
 		return null;
 	}
 
-	
+	public void addExpense(Expense e)
+	{
+
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void removeExpense(Expense e)
+	{
+
+		// TODO Auto-generated method stub
+		
+	}
+
+	public Claim getExpense(String string)
+	{
+
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 }

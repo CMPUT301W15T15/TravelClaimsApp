@@ -1,7 +1,6 @@
 package com.cmput301w15t15.travelclaimsapp.test.modeltest;
 
 import com.cmput301w15t15.travelclaimsapp.model.Expense;
-import com.cmput301w15t15.travelclaimsapp.model.ExpenseItem;
 
 import android.net.Uri;
 import junit.framework.TestCase;
