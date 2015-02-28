@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.Map;
 
 
+
 public class Claim {
 
 	protected boolean Editable=true;
