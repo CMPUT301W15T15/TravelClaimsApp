@@ -9,6 +9,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 public class EditClaimActivity extends Activity {
@@ -32,4 +33,11 @@ public class EditClaimActivity extends Activity {
     	Intent intent = new Intent(EditClaimActivity.this, SearchActvity.class);
     	startActivity(intent);
     }
+	
+	public void AddExpenseButton(View view)
+    {
+    	Toast.makeText(this, "Creating a Claim", Toast.LENGTH_SHORT).show();
+    	Intent intent = new Intent(EditClaimActivity.this, EditExpenseActivity.class);
+    	startActivity(intent);   
+    	}
 }
