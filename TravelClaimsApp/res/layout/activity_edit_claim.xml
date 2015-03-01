@@ -29,31 +29,31 @@
         android:entries="@array/StatusArray" />
 
     <Button
-        android:id="@+id/NewExpense"
+        android:id="@+id/ViewExpense"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:onClick="AddExpenseButton"
-        android:text="@string/NewExpense" />
+        android:text="@string/View" />
 
     <TextView
-        android:id="@+id/Edit_Claim_ExpenseTitle"
+        android:id="@+id/Edit_Claim_DestinationTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/ClaimEnd"
-        android:text="@string/Expense"
+        android:text="@string/Destination"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <ListView
-        android:id="@+id/ExpenseList"
+        android:id="@+id/DestinationList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/NewExpense"
+        android:layout_above="@+id/ViewExpense"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/Edit_Claim_ExpenseTitle" >
+        android:layout_below="@+id/Edit_Claim_DestinationTitle" >
 
     </ListView>
 

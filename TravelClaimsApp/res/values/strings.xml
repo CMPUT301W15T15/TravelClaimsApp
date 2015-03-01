@@ -32,6 +32,9 @@
     <string name="Search">Search</string>
     <string name="Start">Start</string>
     <string name="Finish">Finish</string>
+    <string name="Destination">Destination:</string>
+    <string name="View">View Expenses</string>
+    <string name="CurrentExpense">Current Expenses:</string>
 
     <string-array name="StatusArray">
         <item>In Progress</item>
@@ -67,5 +70,6 @@
     <string name="PasswordAgain">Password Again</string>
     <string name="Approvers">Approvers</string>
     <string name="title_activity_search_actvity">Search</string>
+    <string name="title_activity_expense_list">ExpenseListActivity</string>
 
 </resources>

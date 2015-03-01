@@ -117,8 +117,8 @@ public class EditClaimActivity extends FragmentActivity {
 	
 	public void AddExpenseButton(View view)
     {
-    	Toast.makeText(this, "Creating a Claim", Toast.LENGTH_SHORT).show();
-    	Intent intent = new Intent(EditClaimActivity.this, EditExpenseActivity.class);
+    	Toast.makeText(this, "Viewing Current Expenses", Toast.LENGTH_SHORT).show();
+    	Intent intent = new Intent(EditClaimActivity.this, ExpenseListActivity.class);
     	startActivity(intent);   
     	}
 }

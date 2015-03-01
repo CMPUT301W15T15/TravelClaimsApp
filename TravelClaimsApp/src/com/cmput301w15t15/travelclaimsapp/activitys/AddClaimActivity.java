@@ -70,6 +70,6 @@ public class AddClaimActivity extends Activity {
     	Toast.makeText(this, "Creating a Claim", Toast.LENGTH_SHORT).show();
     	Intent intent = new Intent(AddClaimActivity.this, EditClaimActivity.class);
     	startActivity(intent);   
-    	}
+    }
 	
 }
