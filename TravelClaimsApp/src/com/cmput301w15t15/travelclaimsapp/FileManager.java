@@ -155,7 +155,7 @@ public class FileManager {
 		return tags;
 	}
 	//from https://github.com/scheidemanS/lonelyTwitter/blob/master/src/ca/ualberta/cs/lonelytwitter/LonelyTwitterActivity.java on 2015-01-25
-	public void saveClaimLInFile(TagList tagList) {
+	public void saveTagLInFile(TagList tagList) {
 		Gson gson = new Gson();
 		
 		try {
