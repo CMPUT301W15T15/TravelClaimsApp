@@ -6,34 +6,36 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".AddClaimActivity" >
+    tools:context=".ExpenseListActivity" >
+
+    <Button
+        android:id="@+id/AddExpenseButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:onClick="AddExpenseButton"
+        android:text="@string/NewExpense" />
 
     <ListView
-        android:id="@+id/claim_list_listview"
+        android:id="@+id/CurrentExpenseList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/add_claim_button"
-        android:layout_below="@+id/ClaimTitle" >
+        android:layout_above="@+id/AddExpenseButton"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/CurrentExpenseTitle" >
 
     </ListView>
 
-    <Button
-        android:id="@+id/add_claim_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/claim_list_listview"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:onClick="AddClaimButton"
-        android:text="@string/NewClaim" />
-
     <TextView
-        android:id="@+id/ClaimTitle"
+        android:id="@+id/CurrentExpenseTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/claim_list_listview"
+        android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:text="@string/Claim"
+        android:text="@string/CurrentExpense"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
 </RelativeLayout>
