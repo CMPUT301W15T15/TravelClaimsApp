@@ -63,7 +63,7 @@ public class FileManager {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		if (claims.getSize()==0){
+		if (claims.size()==0){
 			return new ClaimList();
 		}
 		return claims;
@@ -106,7 +106,7 @@ public class FileManager {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		if (users.getSize()==0){
+		if (users.size()==0){
 			return new UserList();
 		}
 		return users;
@@ -149,7 +149,7 @@ public class FileManager {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		if (tags.getSize()==0){
+		if (tags.size()==0){
 			return new TagList();
 		}
 		return tags;
