@@ -49,7 +49,8 @@
         android:layout_alignParentRight="true"
         android:layout_below="@+id/Edit_Expense_Name"
         android:ems="10"
-        android:hint="@string/Date" />
+        android:hint="@string/Date"
+        android:inputType="date" />
 
     <EditText
         android:id="@+id/Edit_Expense_Description"

@@ -30,6 +30,8 @@
     <string name="Ok">OK</string>
     <string name="Tags">Tags</string>
     <string name="Search">Search</string>
+    <string name="Start">Start</string>
+    <string name="Finish">Finish</string>
 
     <string-array name="StatusArray">
         <item>In Progress</item>
