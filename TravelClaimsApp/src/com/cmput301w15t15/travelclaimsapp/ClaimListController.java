@@ -14,7 +14,7 @@ public class ClaimListController {
 	
 	public static ClaimList getClaimList() {
 		if(claimList == null){
-			claimList = new ClaimList();
+			claimList = FileManager.getSaver().loadClaimLFromFile();
 			
 		}
 		return claimList;
