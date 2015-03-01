@@ -6,28 +6,32 @@ import java.util.ArrayList;
 
 
 public class ClaimList {
-
+	protected ArrayList<Claim> claimList;
+	
+	public ClaimList(){
+		claimList = new ArrayList<Claim>();
+	}
+	
 	public void addClaim(Claim claim1){
-		
+		claimList.add(claim1);
 	}
 
-	public Claim getClaim(String string) {
-		// TODO Auto-generated method stub
-		return null;
+	public Claim getClaim(String name) {
+		int i= claimList.indexOf(name);
+		return claimList.get(i);
 	}
 
 	public void removeClaim(Claim claim1) {
-		// TODO Auto-generated method stub
+		claimList.remove(claim1);
 		
 	}
 
 	public int size() {
-		// TODO Auto-generated method stub
-		return 0;
+		return claimList.size();
 	}
 
 	public ArrayList<Claim> getClaimList() {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
