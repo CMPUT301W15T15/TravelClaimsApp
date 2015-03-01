@@ -31,7 +31,7 @@ public class ApproverActivity extends Activity {
     public void SearchOption (MenuItem menu)
     {
     	Toast.makeText(this, "Going to search", Toast.LENGTH_SHORT).show();
-    	Intent intent = new Intent(ApproverActivity.this, SearchActvity.class);
+    	Intent intent = new Intent(ApproverActivity.this, SearchActivity.class);
     	startActivity(intent);
     }
 }

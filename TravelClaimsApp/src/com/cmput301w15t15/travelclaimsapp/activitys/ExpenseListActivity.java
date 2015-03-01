@@ -35,7 +35,14 @@ public class ExpenseListActivity extends Activity
     public void SearchOption (MenuItem menu)
     {
     	Toast.makeText(this, "Going to Search", Toast.LENGTH_SHORT).show();
-    	Intent intent = new Intent(ExpenseListActivity.this, SearchActvity.class);
+    	Intent intent = new Intent(ExpenseListActivity.this, SearchActivity.class);
+    	startActivity(intent);
+    }
+    
+    public void SignOut(MenuItem menu)
+    {
+    	Toast.makeText(this, "Signing Out", Toast.LENGTH_SHORT).show();
+    	Intent intent = new Intent(ExpenseListActivity.this, MainMenuActivity.class);
     	startActivity(intent);
     }
 

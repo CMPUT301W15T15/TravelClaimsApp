@@ -47,7 +47,7 @@
             android:label="@string/title_activity_create_user" >
         </activity>
         <activity
-            android:name="com.cmput301w15t15.travelclaimsapp.activitys.SearchActvity"
+            android:name="com.cmput301w15t15.travelclaimsapp.activitys.SearchActivity"
             android:label="@string/title_activity_search_actvity" >
         </activity>
         <activity
