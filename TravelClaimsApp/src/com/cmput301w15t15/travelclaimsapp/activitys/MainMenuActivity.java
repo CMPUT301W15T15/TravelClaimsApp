@@ -60,7 +60,7 @@ public class MainMenuActivity extends Activity {
 	public void SearchOption(MenuItem menu)
     {
     	Toast.makeText(this, "Going to Search", Toast.LENGTH_SHORT).show();
-    	Intent intent = new Intent(MainMenuActivity.this, SearchActvity.class);
+    	Intent intent = new Intent(MainMenuActivity.this, SearchActivity.class);
     	startActivity(intent);
     }
 	

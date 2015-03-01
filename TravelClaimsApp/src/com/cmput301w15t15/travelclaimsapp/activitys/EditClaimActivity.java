@@ -111,14 +111,21 @@ public class EditClaimActivity extends FragmentActivity {
 	public void SearchOption(MenuItem menu)
     {
     	Toast.makeText(this, "Going to Search", Toast.LENGTH_SHORT).show();
-    	Intent intent = new Intent(EditClaimActivity.this, SearchActvity.class);
+    	Intent intent = new Intent(EditClaimActivity.this, SearchActivity.class);
+    	startActivity(intent);
+    }
+	
+	public void SignOut(MenuItem menu)
+    {
+    	Toast.makeText(this, "Signing Out", Toast.LENGTH_SHORT).show();
+    	Intent intent = new Intent(EditClaimActivity.this, MainMenuActivity.class);
     	startActivity(intent);
     }
 	
 	public void AddExpenseButton(View view)
     {
-    	Toast.makeText(this, "Creating a Claim", Toast.LENGTH_SHORT).show();
-    	Intent intent = new Intent(EditClaimActivity.this, EditExpenseActivity.class);
+    	Toast.makeText(this, "Viewing Current Expenses", Toast.LENGTH_SHORT).show();
+    	Intent intent = new Intent(EditClaimActivity.this, ExpenseListActivity.class);
     	startActivity(intent);   
     	}
 }

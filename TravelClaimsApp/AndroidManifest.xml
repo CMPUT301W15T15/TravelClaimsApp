@@ -16,7 +16,7 @@
         <activity
             android:name="com.cmput301w15t15.travelclaimsapp.activitys.MainMenuActivity"
             android:label="@string/title_activity_main_menu" >
-            <intent-filter >
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -47,8 +47,12 @@
             android:label="@string/title_activity_create_user" >
         </activity>
         <activity
-            android:name="com.cmput301w15t15.travelclaimsapp.activitys.SearchActvity"
+            android:name="com.cmput301w15t15.travelclaimsapp.activitys.SearchActivity"
             android:label="@string/title_activity_search_actvity" >
+        </activity>
+        <activity
+            android:name="com.cmput301w15t15.travelclaimsapp.activitys.ExpenseListActivity"
+            android:label="@string/title_activity_expense_list" >
         </activity>
     </application>
 

@@ -6,9 +6,12 @@ import com.cmput301w15t15.travelclaimsapp.R.menu;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.Toast;
 
-public class SearchActvity extends Activity
+public class SearchActivity extends Activity
 {
 
 	@Override
@@ -24,8 +27,15 @@ public class SearchActvity extends Activity
 	{
 
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.search_actvity, menu);
+		getMenuInflater().inflate(R.menu.search_activity, menu);
 		return true;
 	}
+	
+	public void SignOut(MenuItem menu)
+    {
+    	Toast.makeText(this, "Signing Out", Toast.LENGTH_SHORT).show();
+    	Intent intent = new Intent(SearchActivity.this, MainMenuActivity.class);
+    	startActivity(intent);
+    }
 
 }
