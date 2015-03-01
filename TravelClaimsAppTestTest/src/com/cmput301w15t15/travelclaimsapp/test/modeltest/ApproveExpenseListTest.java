@@ -3,7 +3,7 @@ package com.cmput301w15t15.travelclaimsapp.test.modeltest;
 import java.util.Date;
 import java.util.Map;
 
-import com.cmput301w15t15.travelclaimsapp.model.ApproverClaimList;
+
 import com.cmput301w15t15.travelclaimsapp.model.Claim;
 import com.cmput301w15t15.travelclaimsapp.model.ClaimList;
 import com.cmput301w15t15.travelclaimsapp.model.Expense;
@@ -31,7 +31,7 @@ public class ApproveExpenseListTest extends TestCase {
 	
 	//TestNumber:ApproveViewTest #4
 	public void testViewSubmittedExpense() {
-		ApproverClaimList approveClaimList = new ApproverClaimList();
+		ClaimList approveClaimList = new ClaimList();
 		claim1 = new Claim("Claim1");
 		expense1 = new Expense("Expense1");
 		
@@ -55,7 +55,7 @@ public class ApproveExpenseListTest extends TestCase {
 	
 	//TestNumber:ReceiptViewTest #1
 	public void testViewExpenseReceipt(){
-		ApproverClaimList testClaimList = new ApproverClaimList();
+		ClaimList testClaimList = new ClaimList();
 		claim1 = new Claim("Claim1");
 		expense1 = new Expense("Expense1");
 		expense2 = new Expense("Expense2");

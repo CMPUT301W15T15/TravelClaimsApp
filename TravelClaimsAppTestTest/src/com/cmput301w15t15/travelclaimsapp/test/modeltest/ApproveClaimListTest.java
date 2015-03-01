@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Map;
 
-import com.cmput301w15t15.travelclaimsapp.model.ApproverClaimList;
+
 import com.cmput301w15t15.travelclaimsapp.model.Claim;
 import com.cmput301w15t15.travelclaimsapp.model.ClaimList;
 
@@ -15,7 +15,7 @@ public class ApproveClaimListTest extends TestCase {
 	private Claim claim2;
 	private Claim claim3;
 	private Claim claim4;
-	private ApproverClaimList claimList;
+	private ClaimList claimList;
 	
 	
 	public ApproveClaimListTest(String name) {
@@ -28,7 +28,7 @@ public class ApproveClaimListTest extends TestCase {
 
 	//TestNumber: ApproveViewTest #1
 	public void testViewSubmittedClaims() {
-		claimList = new ApproverClaimList();
+		claimList = new ClaimList();
 		claim1 = new Claim("Claim1");
 		claim2 = new Claim("Claim2");
 		claim3 = new Claim("Claim3");
@@ -50,7 +50,7 @@ public class ApproveClaimListTest extends TestCase {
 	
 	//TestNumber: ApproveViewTest #2
 	public void testViewSubmittedExpense() {
-		ApproverClaimList approveClaimList = new ApproverClaimList();
+		ClaimList approveClaimList = new ClaimList();
 		claim1 = new Claim("Claim1");
 		approveClaimList.addClaim(claim1);
 		claim1.setStatus("Submitted");

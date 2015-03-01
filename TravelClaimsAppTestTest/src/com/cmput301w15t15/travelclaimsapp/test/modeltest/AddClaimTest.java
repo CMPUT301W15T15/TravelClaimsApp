@@ -19,7 +19,7 @@ public class AddClaimTest extends TestCase{
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		claimList = ClaimListController.getClaimantClaimList();
+		claimList = ClaimListController.getClaimList();
 		claim1 = new Claim("Claim1");
 		claimList.addClaim(claim1);
 		claim2 = new Claim("Claim2");

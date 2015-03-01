@@ -16,7 +16,7 @@ public class EditExpenseTest extends TestCase {
 
 	protected void setUp() throws Exception {
 		super.setUp();
-		claimList = ClaimListController.getClaimantClaimList();
+		claimList = ClaimListController.getClaimList();
 		claim1 = new Claim("Claim1");
 		claimList.addClaim(claim1);
 		expense1 = new Expense("E1");

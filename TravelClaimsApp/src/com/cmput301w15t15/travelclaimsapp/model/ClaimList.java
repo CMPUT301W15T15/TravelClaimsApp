@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 
 
-public abstract class ClaimList {
+public class ClaimList {
 
 	public void addClaim(Claim claim1){
 		
@@ -38,7 +38,7 @@ public abstract class ClaimList {
 		return null;
 	}
 	
-	public abstract void sort();
+	
 
 
 

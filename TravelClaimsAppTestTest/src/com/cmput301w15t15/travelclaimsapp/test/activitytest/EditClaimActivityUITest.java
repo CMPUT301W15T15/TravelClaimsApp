@@ -6,7 +6,7 @@ import com.cmput301w15t15.travelclaimsapp.activitys.EditClaimActivity;
 import com.cmput301w15t15.travelclaimsapp.activitys.EditExpenseActivity;
 import com.cmput301w15t15.travelclaimsapp.model.Claim;
 import com.cmput301w15t15.travelclaimsapp.model.ClaimList;
-import com.cmput301w15t15.travelclaimsapp.model.ClaimantClaimList;
+
 
 import android.app.Activity;
 import android.app.Instrumentation;
@@ -31,7 +31,7 @@ public class EditClaimActivityUITest extends
 	private EditText inputEndDate;
 	private Button addDestination;
 	private Button newExpenseButton;
-	private ClaimantClaimList claimList;
+	private ClaimList claimList;
 	private Claim claim;
 	private Intent intent;
 	
@@ -58,7 +58,7 @@ public class EditClaimActivityUITest extends
 		addDestination = (Button) activity.findViewById(R.id.Edit_Claim_Description);
 		newExpenseButton = (Button) activity.findViewById(R.id.Edit_Claim_Description);
 		
-		claimList = new ClaimantClaimList();
+		claimList = new ClaimList();
 		claim = new Claim("The Claim");
 		claimList.addClaim(claim);
 		claimList.addClaim(new Claim("testClaim"));
@@ -102,7 +102,7 @@ public class EditClaimActivityUITest extends
 	}
 	//test case: EditClaimActivityUITest#3
 	public void testAddDestination(String destination, String reason){
-		ClaimList claimL = ClaimListController.getClaimantClaimList();
+		ClaimList claimL = ClaimListController.getClaimList();
 		String selectedClaimName = activity.getIntent().getExtras().getString("claimName");
 		Claim testClaim = claimL.getClaim(selectedClaimName);
 		
@@ -136,13 +136,13 @@ public class EditClaimActivityUITest extends
 	}
 	//test case: EditClaimActivityUITest#5
 	public void testDataPersistance(){
-		ClaimList claimL = ClaimListController.getClaimantClaimList();
+		ClaimList claimL = ClaimListController.getClaimList();
 		String selectedClaimName = activity.getIntent().getExtras().getString("claimName");
 		Claim testClaim = claimL.getClaim(selectedClaimName);
 		testClaim.setStartDate(2015, 2, 1);
 		activity.finish();
 		activity = getActivity();
-		claimL = ClaimListController.getClaimantClaimList();
+		claimL = ClaimListController.getClaimList();
 		testClaim = claimL.getClaim(selectedClaimName);
 		assertEquals("2015-2-1", testClaim.getStartDate());
 		

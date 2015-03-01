@@ -116,7 +116,7 @@ public class EditExpenseActivityUITest extends
 	}
 	//Test Case: EditExpenseActivityUITest#5
 	public void testDataPersistance(){
-		ClaimList claimL = ClaimListController.getClaimantClaimList();
+		ClaimList claimL = ClaimListController.getClaimList();
 		String selectedClaimName = activity.getIntent().getExtras().getString("claimName");
 		Claim testClaim = claimL.getClaim(selectedClaimName);
 		ExpenseList expenseList = new ExpenseList();
@@ -125,7 +125,7 @@ public class EditExpenseActivityUITest extends
 		testExpense.setName("stuff");
 		activity.finish();
 		activity = getActivity();
-		claimL = ClaimListController.getClaimantClaimList();
+		claimL = ClaimListController.getClaimList();
 		testClaim = claimL.getClaim(selectedClaimName);
 		testExpense = expenseList.getExpense("stuff");
 		assertNotNull(testExpense);

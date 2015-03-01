@@ -5,7 +5,6 @@ import java.util.Date;
 
 import com.cmput301w15t15.travelclaimsapp.model.Claim;
 import com.cmput301w15t15.travelclaimsapp.model.ClaimList;
-import com.cmput301w15t15.travelclaimsapp.model.ClaimantClaimList;
 import com.cmput301w15t15.travelclaimsapp.model.Expense;
 
 import com.cmput301w15t15.travelclaimsapp.model.ExpenseList;
@@ -30,7 +29,7 @@ public class ApproveExpenseItemTest extends TestCase {
 	@SuppressWarnings("null")
 	//TestNumber:ApproveViewTest #3
 	public void testViewExpenseItem(){
-		ClaimantClaimList testClaimList = new ClaimantClaimList();
+		ClaimList testClaimList = new ClaimList();
 		claim1 = new Claim("Claim1");
 		expense1 = new Expense("Expense1");
 		

@@ -6,7 +6,7 @@ import com.cmput301w15t15.travelclaimsapp.activitys.AddClaimActivity;
 import com.cmput301w15t15.travelclaimsapp.activitys.EditClaimActivity;
 import com.cmput301w15t15.travelclaimsapp.model.Claim;
 import com.cmput301w15t15.travelclaimsapp.model.ClaimList;
-import com.cmput301w15t15.travelclaimsapp.model.ClaimantClaimList;
+
 
 import android.app.Activity;
 import android.app.Instrumentation;
@@ -22,7 +22,7 @@ public class AddClaimActivityUITest extends ActivityInstrumentationTestCase2<Add
 	private Activity activity;
 	private Instrumentation instrumentation;
 	private Button newClaimButton;
-	private ClaimantClaimList claimList;
+	private ClaimList claimList;
 	private ListView listView;
 	private ClaimListAdaptor adaptor;
 	
@@ -34,7 +34,7 @@ public class AddClaimActivityUITest extends ActivityInstrumentationTestCase2<Add
 	protected void setUp() throws Exception {
 		super.setUp();
 		activity = getActivity();
-		claimList = new ClaimantClaimList();
+		claimList = new ClaimList();
 		instrumentation = getInstrumentation();
 		listView = (ListView) activity.findViewById(R.id.claim_list_listview);
 		adaptor = new ClaimListAdaptor(activity, R.id.claim_list_listview, claimList.getClaimList());
