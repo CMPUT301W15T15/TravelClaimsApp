@@ -1,7 +1,7 @@
 package com.cmput301w15t15.travelclaimsapp.test.activitytest;
 
 import com.cmput301w15t15.travelclaimsapp.activitys.ApproverActivity;
-import com.cmput301w15t15.travelclaimsapp.activitys.ClaimSubmitActivity;
+
 
 import android.app.Activity;
 import android.app.Instrumentation;

@@ -18,4 +18,14 @@ public class ClaimListController {
 		return null;
 	}
 
+	public static ApproverClaimList getApproverClaimList() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public static ClaimantClaimList getClaimantClaimList() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
