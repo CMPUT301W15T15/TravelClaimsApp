@@ -1,4 +1,4 @@
-package com.cmput301w15t15.travelclaimsapp;
+package com.cmput301w15t15.travelclaimsapp.model;
 
 public class Destination {
 	
@@ -7,7 +7,7 @@ public class Destination {
 		return null;
 	}
 	
-	public void addDestination(String string1, String string2) {
+	public void addDestination(String string) {
 		// TODO Auto-generated method stub
 		
 	}
