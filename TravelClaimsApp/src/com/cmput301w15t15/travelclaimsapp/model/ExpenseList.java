@@ -3,6 +3,8 @@ package com.cmput301w15t15.travelclaimsapp.model;
 import java.util.ArrayList;
 
 public class ExpenseList {
+	private Expense expense;
+	
 	
 	private ArrayList<Expense> ExpenseList;
 	

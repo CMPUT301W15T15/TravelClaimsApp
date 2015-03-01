@@ -9,9 +9,10 @@ import com.cmput301w15t15.travelclaimsapp.Destination;
 
 
 public class Claim {
+	private String claimName;
 	private Date startDate;
 	private Date endDate;
-	private Destination destination;
+	private Destination destinationList;
 	private String tag;
 	private String status;
 	private String comment;
@@ -19,19 +20,18 @@ public class Claim {
 	private int approveId;
 	private int claimantId;
 	private ExpenseList expenseList;
-	
-	
-
 	protected boolean Editable=true;
 
 	
 
 	public Claim(String string) {
 		// TODO Auto-generated constructor stub
+		this.claimName=string;
+		
 	}
 
 	public ExpenseList getExpenseList(){
-		return null;
+		return expenseList;
 	}
 	
 
