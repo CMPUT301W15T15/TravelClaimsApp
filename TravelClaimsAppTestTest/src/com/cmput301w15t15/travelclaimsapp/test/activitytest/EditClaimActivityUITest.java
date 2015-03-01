@@ -102,7 +102,7 @@ public class EditClaimActivityUITest extends
 	}
 	//test case: EditClaimActivityUITest#3
 	public void testAddDestination(String destination, String reason){
-		ClaimList claimL = ClaimListController.getClaimList();
+		ClaimList claimL = ClaimListController.getClaimantClaimList();
 		String selectedClaimName = activity.getIntent().getExtras().getString("claimName");
 		Claim testClaim = claimL.getClaim(selectedClaimName);
 		
@@ -136,13 +136,13 @@ public class EditClaimActivityUITest extends
 	}
 	//test case: EditClaimActivityUITest#5
 	public void testDataPersistance(){
-		ClaimList claimL = ClaimListController.getClaimList();
+		ClaimList claimL = ClaimListController.getClaimantClaimList();
 		String selectedClaimName = activity.getIntent().getExtras().getString("claimName");
 		Claim testClaim = claimL.getClaim(selectedClaimName);
 		testClaim.setStartDate(2015, 2, 1);
 		activity.finish();
 		activity = getActivity();
-		claimL = ClaimListController.getClaimList();
+		claimL = ClaimListController.getClaimantClaimList();
 		testClaim = claimL.getClaim(selectedClaimName);
 		assertEquals("2015-2-1", testClaim.getStartDate());
 		

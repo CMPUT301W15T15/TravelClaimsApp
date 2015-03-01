@@ -45,10 +45,10 @@ public class EditExpenseActivityUITest extends
 		inputDescription = (EditText) activity.findViewById(R.id.Edit_Expense_Description);
 		inputAmount = (EditText) activity.findViewById(R.id.Edit_Expense_Cost);
 		
-		selectCategory = (Spinner) activity.findViewById(R.id.Edit_Expense_Cat);
+		selectCategory = (Spinner) activity.findViewById(R.id.Edit_Expense_Cost);
 		categoryAdaptor = selectCategory.getAdapter();
 		
-		selectCurrency = (Spinner) activity.findViewById(R.id.Edit_Expense_Currency);
+		selectCurrency = (Spinner) activity.findViewById(R.id.Edit_Expense_Date);
 		currencyAdaptor = selectCurrency.getAdapter();
 		
 	}
@@ -116,7 +116,7 @@ public class EditExpenseActivityUITest extends
 	}
 	//Test Case: EditExpenseActivityUITest#5
 	public void testDataPersistance(){
-		ClaimList claimL = ClaimListController.getClaimList();
+		ClaimList claimL = ClaimListController.getClaimantClaimList();
 		String selectedClaimName = activity.getIntent().getExtras().getString("claimName");
 		Claim testClaim = claimL.getClaim(selectedClaimName);
 		ExpenseList expenseList = new ExpenseList();
@@ -125,7 +125,7 @@ public class EditExpenseActivityUITest extends
 		testExpense.setName("stuff");
 		activity.finish();
 		activity = getActivity();
-		claimL = ClaimListController.getClaimList();
+		claimL = ClaimListController.getClaimantClaimList();
 		testClaim = claimL.getClaim(selectedClaimName);
 		testExpense = expenseList.getExpense("stuff");
 		assertNotNull(testExpense);

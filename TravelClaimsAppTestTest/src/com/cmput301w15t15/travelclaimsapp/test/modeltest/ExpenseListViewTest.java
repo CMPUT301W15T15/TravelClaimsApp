@@ -32,7 +32,7 @@ private Claim claim;
 		claim = new Claim("testClaim");
 		activity = getActivity();
 		
-		claimList = ClaimListController.getClaimList();
+		claimList = ClaimListController.getClaimantClaimList();
 		claimList.addClaim(claim);
 		view = (ListView) activity.findViewById(R.id.expenseListView);
 		adaptor = new ExpenseListAdaptor(activity, R.id.expenseListView, claim.getExpenseList());
