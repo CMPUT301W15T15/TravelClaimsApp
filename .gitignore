@@ -27,3 +27,7 @@ proguard/
 
 # DS_Store files
 .DS_Store
+
+
+#windows image file cache
+Thumbs.db
