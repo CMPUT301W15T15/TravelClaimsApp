@@ -19,51 +19,41 @@
         android:hint="@string/Description"
         android:inputType="textMultiLine" />
 
-    <EditText
-        android:id="@+id/Edit_Claim_Status"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/Edit_Claim_Description"
-        android:layout_below="@+id/Edit_Claim_Description"
-        android:ems="10"
-        android:hint="@string/Status" >
-
-        <requestFocus />
-    </EditText>
-
     <Spinner
         android:id="@+id/StatusSpinner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/Edit_Claim_Status"
+        android:layout_below="@+id/Edit_Claim_Description"
+        android:layout_toRightOf="@+id/ClaimStart"
         android:entries="@array/StatusArray" />
 
     <Button
-        android:id="@+id/NewExpense"
+        android:id="@+id/ViewExpense"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:text="@string/NewExpense" />
+        android:onClick="AddExpenseButton"
+        android:text="@string/View" />
 
     <TextView
-        android:id="@+id/Edit_Claim_ExpenseTitle"
+        android:id="@+id/Edit_Claim_DestinationTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/StatusSpinner"
-        android:layout_below="@+id/StatusSpinner"
-        android:text="@string/Expense"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/ClaimEnd"
+        android:text="@string/Destination"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <ListView
-        android:id="@+id/ExpenseList"
+        android:id="@+id/DestinationList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/NewExpense"
+        android:layout_above="@+id/ViewExpense"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/Edit_Claim_ExpenseTitle" >
+        android:layout_below="@+id/Edit_Claim_DestinationTitle" >
 
     </ListView>
 
@@ -77,5 +67,28 @@
         android:layout_alignRight="@+id/StatusSpinner"
         android:ems="10"
         android:hint="@string/Name" />
+
+    <EditText
+        android:id="@+id/ClaimStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignTop="@+id/StatusSpinner"
+        android:ems="10"
+        android:hint="@string/StartDate"
+        android:inputType="date" >
+
+        <requestFocus />
+    </EditText>
+
+    <EditText
+        android:id="@+id/ClaimEnd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/ClaimStart"
+        android:ems="10"
+        android:hint="@string/Finish"
+        android:inputType="date" />
 
 </RelativeLayout>

@@ -22,52 +22,14 @@
     </EditText>
 
     <EditText
-        android:id="@+id/Edit_Expense_Cat"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/Edit_Expense_Name"
-        android:ems="10"
-        android:hint="@string/Category" />
-
-    <EditText
         android:id="@+id/Edit_Expense_Cost"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/Edit_Expense_Cat"
+        android:layout_below="@+id/Edit_Expense_Date"
         android:ems="10"
         android:hint="@string/Cost"
         android:inputType="numberDecimal" />
-
-    <Spinner
-        android:id="@+id/CategorySpinner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/Edit_Expense_Currency"
-        android:layout_below="@+id/Edit_Expense_Currency"
-        android:entries="@array/CategoryArray" />
-
-    <EditText
-        android:id="@+id/Edit_Expense_Currency"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/Edit_Expense_Cost"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/Edit_Expense_Cat"
-        android:layout_toRightOf="@+id/Edit_Expense_Cost"
-        android:ems="10"
-        android:hint="@string/Currency" />
-
-    <Spinner
-        android:id="@+id/CurrencySpinner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/CategorySpinner"
-        android:layout_below="@+id/CategorySpinner" 
-        android:entries="@array/CurrencyArray"
-        />
 
     <Button
         android:id="@+id/Edit_Expense_Ok"
@@ -76,6 +38,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
+        android:onClick="CreateExpense"
         android:text="@string/Ok" />
 
     <EditText
@@ -83,10 +46,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_alignRight="@+id/CategorySpinner"
-        android:layout_below="@+id/Edit_Expense_Cost"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/Edit_Expense_Name"
         android:ems="10"
-        android:hint="@string/Date" />
+        android:hint="@string/Date"
+        android:inputType="date" />
 
     <EditText
         android:id="@+id/Edit_Expense_Description"
@@ -94,7 +58,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/Edit_Expense_Date"
+        android:layout_below="@+id/CategorySpinner"
         android:ems="10"
         android:hint="@string/Description"
         android:inputType="textMultiLine" />
@@ -109,5 +73,21 @@
         android:ems="10"
         android:hint="@string/Tags"
         android:inputType="textMultiLine" />
+
+    <Spinner
+        android:id="@+id/CurrencySpinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/Edit_Expense_Tags"
+        android:layout_below="@+id/Edit_Expense_Cost"
+        android:entries="@array/CurrencyArray" />
+
+    <Spinner
+        android:id="@+id/CategorySpinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/CurrencySpinner"
+        android:entries="@array/CategoryArray" />
 
 </RelativeLayout>

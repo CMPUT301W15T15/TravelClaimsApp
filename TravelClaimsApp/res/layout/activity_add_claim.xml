@@ -24,6 +24,7 @@
         android:layout_alignLeft="@+id/claim_list_listview"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
+        android:onClick="AddClaimButton"
         android:text="@string/NewClaim" />
 
     <TextView
