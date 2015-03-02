@@ -9,6 +9,7 @@ import java.io.OutputStreamWriter;
 import java.lang.reflect.Type;
 
 import com.cmput301w15t15.travelclaimsapp.model.ClaimList;
+import com.cmput301w15t15.travelclaimsapp.model.TagList;
 import com.cmput301w15t15.travelclaimsapp.model.UserList;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;

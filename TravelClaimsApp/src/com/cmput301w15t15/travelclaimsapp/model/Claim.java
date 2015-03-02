@@ -21,12 +21,13 @@ public class Claim {
 	private int claimantId;
 	private ExpenseList expenseList;
 	protected boolean Editable=true;
-
+	protected transient ArrayList<Listener> listeners;
 	
 
 	public Claim(String string) {
 		// TODO Auto-generated constructor stub
 		this.claimName=string;
+		this.listeners = new ArrayList<Listener>();
 		
 	}
 
@@ -50,21 +51,25 @@ public class Claim {
 
 	public void setName(String string) {
 		// TODO Auto-generated method stub
+		notifyListeners();
 		
 	}
 
 	public void setEndDate(int i, int j, int k) {
 		// TODO Auto-generated method stub
+		notifyListeners();
 		
 	}
 
 	public void removeTag() {
 		// TODO Auto-generated method stub
+		notifyListeners();
 		
 	}
 
 	public void renameTag(String string) {
 		// TODO Auto-generated method stub
+		notifyListeners();
 		
 	}
 
@@ -178,6 +183,20 @@ public class Claim {
 
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	public void notifyListeners() {
+		for (Listener listener : listeners) {
+			listener.update();
+		}
+	}
+	
+	public void addListener(Listener listener) {
+		listeners.add(listener);
+	}
+	
+	public void deleteListener(Listener listener){
+		listeners.remove(listener);
 	}
 
 

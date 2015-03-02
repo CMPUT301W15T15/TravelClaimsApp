@@ -2,11 +2,12 @@
 package com.cmput301w15t15.travelclaimsapp.test.modeltest;
 
 
-import com.cmput301w15t15.travelclaimsapp.Tag;
-import com.cmput301w15t15.travelclaimsapp.TagList;
-import com.cmput301w15t15.travelclaimsapp.TagListController;
 import com.cmput301w15t15.travelclaimsapp.model.Claim;
 
+
+
+import com.cmput301w15t15.travelclaimsapp.model.Tag;
+import com.cmput301w15t15.travelclaimsapp.model.TagList;
 
 import junit.framework.TestCase;
 
@@ -19,7 +20,7 @@ public class tagListTest extends TestCase {
 	protected void setUp() throws Exception {
 		// TODO Auto-generated method stub
 		super.setUp();
-		tagList=TagListController.getTagList();
+		tagList= new TagList();
 		tagList.addTag(tag1);
 		tagList.addTag(tag2);
 		claim1.addTag(tag1);

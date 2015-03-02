@@ -2,14 +2,13 @@ package com.cmput301w15t15.travelclaimsapp.model;
 
 import java.util.ArrayList;
 
-
-
-
 public class ClaimList {
 	protected ArrayList<Claim> claimList;
+	protected transient ArrayList<Listener> listeners;
 	
 	public ClaimList(){
 		claimList = new ArrayList<Claim>();
+		listeners = new ArrayList<Listener>();
 	}
 	
 	public void addClaim(Claim claim1){
@@ -41,11 +40,20 @@ public class ClaimList {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	public void notifyListeners() {
+		for (Listener listener : listeners) {
+			listener.update();
+		}
+	}
 	
+	public void addListener(Listener listener) {
+		listeners.add(listener);
+	}
 	
-
-
-
-
+	public void deleteListener(Listener listener){
+		listeners.remove(listener);
+	}
+	
 
 }

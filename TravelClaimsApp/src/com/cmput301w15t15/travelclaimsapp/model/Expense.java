@@ -1,12 +1,15 @@
 package com.cmput301w15t15.travelclaimsapp.model;
 
 
+import java.util.ArrayList;
 import java.util.Date;
 
 import android.net.Uri;
 
 public class Expense {
-
+	
+	protected transient ArrayList<Listener> listeners;
+	
 	public Expense(String string) {
 		// TODO Auto-generated constructor stub
 	}
@@ -87,5 +90,19 @@ public class Expense {
 		// TODO Auto-generated method stub
 		
 	}
+	public void notifyListeners() {
+		for (Listener listener : listeners) {
+			listener.update();
+		}
+	}
+	
+	public void addListener(Listener listener) {
+		listeners.add(listener);
+	}
+	
+	public void deleteListener(Listener listener){
+		listeners.remove(listener);
+	}
+	
 	
 }
