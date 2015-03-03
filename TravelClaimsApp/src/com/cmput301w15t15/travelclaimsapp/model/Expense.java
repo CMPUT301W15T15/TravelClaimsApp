@@ -11,7 +11,7 @@ public class Expense {
 	protected transient ArrayList<Listener> listeners;
 	
 	public Expense(String string) {
-		// TODO Auto-generated constructor stub
+		this.listeners = new ArrayList<Listener>();
 	}
 
 	public void addFlag(){

@@ -15,7 +15,7 @@ public class ExpenseListAdaptor extends ArrayAdapter<Expense> {
 
 	public ExpenseListAdaptor(Context context,
 			int resource, ExpenseList expenseList) {
-		super(context, resource, expenseList.getExpenseList());
+		super(context, resource, expenseList.toArrayList());
 		// TODO Auto-generated constructor stub
 	}
 

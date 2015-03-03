@@ -29,7 +29,7 @@ public class ClaimList {
 		return claimList.size();
 	}
 
-	public ArrayList<Claim> getClaimList() {
+	public ArrayList<Claim> toArrayList() {
 		
 		return null;
 	}

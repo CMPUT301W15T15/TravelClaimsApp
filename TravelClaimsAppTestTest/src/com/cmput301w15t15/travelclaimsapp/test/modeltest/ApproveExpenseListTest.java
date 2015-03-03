@@ -40,16 +40,16 @@ public class ApproveExpenseListTest extends TestCase {
 		ExpenseList expenseList = claim1.getExpenseList();
 		expenseList.addExpense(expense1);
 
-		assertTrue("name is equal", approveClaimList.getClaimList()
+		assertTrue("name is equal", approveClaimList.toArrayList()
 				.get(0).getExpenseList().getExpense("Expense1").getName().toString().equals("Expense1"));
 		
 		Date date = new Date();
 		expense1.setDate(date);
-		assertTrue("date is equal", approveClaimList.getClaimList()
+		assertTrue("date is equal", approveClaimList.toArrayList()
 				.get(0).getExpenseList().getExpense("Expense1").getDate().equals(date));
 		
 		expense1.setDescription("Description");
-		assertTrue("Description is equal", approveClaimList.getClaimList()
+		assertTrue("Description is equal", approveClaimList.toArrayList()
 				.get(0).getExpenseList().getExpense("Expense1").getDescription().equals("Description"));
 	}
 	

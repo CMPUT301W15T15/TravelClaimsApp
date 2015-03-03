@@ -28,6 +28,7 @@ public class Claim {
 		// TODO Auto-generated constructor stub
 		this.claimName=string;
 		this.listeners = new ArrayList<Listener>();
+		this.expenseList = new ExpenseList();
 		
 	}
 

@@ -3,11 +3,16 @@ package com.cmput301w15t15.travelclaimsapp.model;
 import java.util.ArrayList;
 
 public class ExpenseList {
-	private Expense expense;
+	
 	protected transient ArrayList<Listener> listeners;
 	
 	
-	private ArrayList<Expense> ExpenseList;
+	private ArrayList<Expense> expenseList;
+	
+	public ExpenseList(){
+		this.expenseList = new ArrayList<Expense>();
+		this.listeners = new ArrayList<Listener>();
+	}
 	
 	public void addExpense(Expense expense1) {
 		// TODO Auto-generated method stub
@@ -30,8 +35,8 @@ public class ExpenseList {
 	}
 	
 	
-	public ArrayList<Expense> getExpenseList(){
-		return null;
+	public ArrayList<Expense> toArrayList(){
+		return this.expenseList;
 		
 	}
 	

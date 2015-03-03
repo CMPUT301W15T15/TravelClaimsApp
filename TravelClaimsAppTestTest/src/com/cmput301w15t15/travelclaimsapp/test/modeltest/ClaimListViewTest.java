@@ -29,7 +29,7 @@ public class ClaimListViewTest extends
 		
 		claimList = new ClaimList();
 		view = (ListView) activity.findViewById(R.id.claim_list_listview);
-		adaptor = new ClaimListAdaptor(activity, R.id.claim_list_listview, claimList.getClaimList());
+		adaptor = new ClaimListAdaptor(activity, R.id.claim_list_listview, claimList.toArrayList());
 	}
 	//test case: ClaimListViewTest#1
 	public void testListViewDisplay(){
