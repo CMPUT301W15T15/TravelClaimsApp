@@ -20,7 +20,7 @@ public class TagList {
 		
 	}
 
-	public Object getTag(String string)
+	public Tag getTag(String string)
 	{
 
 		// TODO Auto-generated method stub

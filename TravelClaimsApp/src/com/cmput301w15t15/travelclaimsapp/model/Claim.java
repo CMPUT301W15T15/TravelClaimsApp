@@ -20,6 +20,7 @@ public class Claim {
 	private int approveId;
 	private int claimantId;
 	private ExpenseList expenseList;
+	private TagList tagList;
 	protected boolean Editable=true;
 	protected transient ArrayList<Listener> listeners;
 	
@@ -37,39 +38,44 @@ public class Claim {
 	}
 	
 
-	public void setStartDate(int i, int j, int k) {
+
+	public void setStartDate(Date startDate) {
 		// TODO Auto-generated method stub
+		
+		this.startDate = startDate;
+		
+		
 		
 	}
 	
-	public ArrayList<String> getTagList(){
-		return null;
+	public TagList getTagList(){
 		
-	}
-	public void addTag(String tag){
+		return tagList;
 		
 	}
 
-	public void setName(String string) {
+
+	public void setName(String name) {
 		// TODO Auto-generated method stub
+		this.claimName=name;
+		
 		notifyListeners();
 		
 	}
 
-	public void setEndDate(int i, int j, int k) {
+	public void setEndDate(Date endDate) {
 		// TODO Auto-generated method stub
+		this.endDate=endDate;
+		
 		notifyListeners();
 		
 	}
 
-	public void removeTag() {
-		// TODO Auto-generated method stub
-		notifyListeners();
-		
-	}
 
-	public void renameTag(String string) {
+	public void renameTag(String newName) {
 		// TODO Auto-generated method stub
+		this.tagList.getTag(newName).rename(newName);
+		
 		notifyListeners();
 		
 	}
@@ -148,42 +154,42 @@ public class Claim {
 		return null;
 	}
 
-	public void setStartDate(Date date) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	public void setEndDate(Date endDate) {
 		// TODO Auto-generated method stub
-		
+		this.endDate=endDate;
 	}
 
 	public Date getEndDate() {
 		// TODO Auto-generated method stub
-		return null;
+		return this.endDate;
 	}
 
 	
 
-	public void addExpense(Expense e)
+	public void addExpense(Expense expense)
 	{
 
 		// TODO Auto-generated method stub
+		this.expenseList.addExpense(expense);
+		
 		
 	}
 
-	public void removeExpense(Expense e)
+	public void removeExpense(Expense expense)
 	{
 
 		// TODO Auto-generated method stub
+		this.expenseList.removeExpense(expense);
 		
 	}
 
-	public Claim getExpense(String string)
+	public Expense getExpense(String string)
 	{
 
 		// TODO Auto-generated method stub
-		return null;
+		return this.expenseList.getExpense(string);
+			
 	}
 	
 	public void notifyListeners() {
