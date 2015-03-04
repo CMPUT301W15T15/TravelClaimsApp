@@ -9,6 +9,7 @@ import android.net.Uri;
 public class Expense {
 	
 	protected transient ArrayList<Listener> listeners;
+	private String description;
 	
 	public Expense(String string) {
 		this.listeners = new ArrayList<Listener>();
@@ -71,13 +72,13 @@ public class Expense {
 	}
 
 	public void setDescription(String string) {
-		// TODO Auto-generated method stub
+		this.description = string;
 		
 	}
 
 	public String getDescription() {
 		// TODO Auto-generated method stub
-		return null;
+		return this.description;
 	}
 
 

@@ -13,12 +13,13 @@ import android.test.AndroidTestCase;
 
 public class ClaimListControllerTest extends AndroidTestCase {
 
-	private Activity activity;
+
 	private ClaimList claimList;
 	private ClaimList claimList2;
 	private Claim claim;
+	private Claim claim3;
 	private Expense expense;
-	private FileManager fm;
+
 	
 	public ClaimListControllerTest() {
 		super();
@@ -29,6 +30,7 @@ public class ClaimListControllerTest extends AndroidTestCase {
 		FileManager.initializeSaver(getContext());
 		claimList = ClaimListController.getClaimList();
 		claim = new Claim("c1");
+		claim3 = new Claim("c3");
 		expense = new Expense("e1");
 		
 		
@@ -50,24 +52,33 @@ public class ClaimListControllerTest extends AndroidTestCase {
 		claim.setName("test");
 		claimList2 = ClaimListController.getClaimList();
 		Claim claim2 = claimList2.toArrayList().get(0);
-		assertEquals("test", claim.getName());
-		assertEquals("Claim loaded from file not the same as current", claim, claim2);
+		if(!claim.getName().equals("test")){
+			fail("claim name was not set");
+		}else{
+			assertEquals("not the same size", 2, claimList2.size());
+			assertEquals("Claim loaded from file not the same as current", claim.getName(), claim2.getName());
+		}
+		
 	}
 	//ClaimListControllerTest #3
 	public void testExpenseListeners(){
-		ClaimListController.addClaimToClaimList(claim);
+		ClaimListController.addClaimToClaimList(claim3);
 		ClaimListController.addExpense(expense, claim);
 		claimList2 = ClaimListController.getClaimList();
 		Claim claim2 = claimList2.toArrayList().get(0);
 	
-		assertEquals("Claim loaded from file not the same as current", claim, claim2);
+		assertEquals("Claim loaded from file not the same as current", claim3, claim2);
 		
 		expense.setDescription("Something");
-		assertEquals("Something", expense.getDescription());
+	
 		Expense expense2 = ClaimListController.getClaimList().toArrayList().get(0).getExpenseList().toArrayList().get(0);
-		
-		assertEquals("Expense loaded from file not the same as current", expense, expense2);
+		if(!expense.getDescription().equals("Something")){
+			fail("description was not set");
+		}else{
+			assertEquals("Expense loaded from file not the same as current", expense, expense2);
+		}
 	}
+		
 	
 	
 }

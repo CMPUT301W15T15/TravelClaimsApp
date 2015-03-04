@@ -1,19 +1,10 @@
 package com.cmput301w15t15.travelclaimsapp;
 
-
-
-
 import com.cmput301w15t15.travelclaimsapp.model.Claim;
 import com.cmput301w15t15.travelclaimsapp.model.ClaimList;
 import com.cmput301w15t15.travelclaimsapp.model.Expense;
 import com.cmput301w15t15.travelclaimsapp.model.ExpenseList;
 import com.cmput301w15t15.travelclaimsapp.model.Listener;
-
-
-
-
-
-
 
 public class ClaimListController {
 	
@@ -36,7 +27,6 @@ public class ClaimListController {
 	
 	//adds claim to claimlist, and adds a listener to claim
 	public static void addClaimToClaimList(Claim claim){
-		getClaimList().addClaim(claim);
 		claim.addListener(new Listener() {
 			@Override
 			public void update() {
@@ -44,8 +34,9 @@ public class ClaimListController {
 				
 			}
 		});
-		ExpenseList el = claim.getExpenseList();
-		el.addListener(new Listener() {
+		getClaimList().addClaim(claim);
+		ExpenseList el;
+		claim.getExpenseList().addListener(new Listener() {
 			
 			@Override
 			public void update() {
@@ -67,8 +58,8 @@ public class ClaimListController {
 		});
 	}
 	
-	private static void save(){
-		FileManager.getSaver().saveClaimLInFile(claimList);
+	public static void save(){
+		FileManager.getSaver().saveClaimLInFile(getClaimList());
 	}
 
 
