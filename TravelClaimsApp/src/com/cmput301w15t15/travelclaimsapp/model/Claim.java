@@ -92,11 +92,12 @@ public class Claim {
 	
 	
 	
-	public String getTag()
+	public Tag getTag(String tagName)
 	{
-
+		
 		// TODO Auto-generated method stub
-		return null;
+		
+		return this.tagList.getTag(tagName);
 	}
 
 
@@ -108,7 +109,7 @@ public class Claim {
 	public boolean isEditable() {
 		// TODO Auto-generated method stub
 		
-		return false;
+		return this.Editable;
 	}
 
 	public void setClaimStatus(String string) {
@@ -155,11 +156,8 @@ public class Claim {
 	}
 
 
-	public void setEndDate(Date endDate) {
-		// TODO Auto-generated method stub
-		this.endDate=endDate;
-	}
 
+	
 	public Date getEndDate() {
 		// TODO Auto-generated method stub
 		return this.endDate;
