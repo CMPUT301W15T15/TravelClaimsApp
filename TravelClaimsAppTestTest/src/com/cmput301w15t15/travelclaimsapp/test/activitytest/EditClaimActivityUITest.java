@@ -1,11 +1,21 @@
 package com.cmput301w15t15.travelclaimsapp.test.activitytest;
 
+
+
+import java.util.Date;
+import java.util.GregorianCalendar;
+
 import com.cmput301w15t15.travelclaimsapp.ClaimListController;
+import com.cmput301w15t15.travelclaimsapp.FileManager;
 import com.cmput301w15t15.travelclaimsapp.R;
 import com.cmput301w15t15.travelclaimsapp.activitys.EditClaimActivity;
 import com.cmput301w15t15.travelclaimsapp.activitys.EditExpenseActivity;
 import com.cmput301w15t15.travelclaimsapp.model.Claim;
 import com.cmput301w15t15.travelclaimsapp.model.ClaimList;
+
+
+
+
 
 
 import android.app.Activity;
@@ -45,7 +55,7 @@ public class EditClaimActivityUITest extends
 		intent = new Intent();
 		intent.putExtra("claimName", "testClaim");
 		setActivityIntent(intent);
-		
+		setActivityInitialTouchMode(true);
 		activity = getActivity();
 		instrumentation = getInstrumentation();
 		
@@ -55,8 +65,8 @@ public class EditClaimActivityUITest extends
 		inputReason = (EditText) activity.findViewById(R.id.Edit_Claim_Description);
 		inputStartDate = (EditText) activity.findViewById(R.id.Edit_Claim_Name);
 		inputEndDate = (EditText) activity.findViewById(R.id.Edit_Claim_Description);
-		addDestination = (Button) activity.findViewById(R.id.Edit_Claim_Description);
-		newExpenseButton = (Button) activity.findViewById(R.id.Edit_Claim_Description);
+		
+		FileManager.initializeSaver(activity);
 		
 		claimList = new ClaimList();
 		claim = new Claim("The Claim");
@@ -83,23 +93,7 @@ public class EditClaimActivityUITest extends
 		assertEquals("2015-02-11", inputStartDate.getText().toString());
 		assertEquals("2015-03-11", inputEndDate.getText().toString());
 	}
-	//test case: EditClaimActivityUITest#2
-	public void testAddExpenseButton(){
-		
-		ActivityMonitor activityMonitor = new ActivityMonitor(EditExpenseActivity.class.getName(), null, false);
-		instrumentation.addMonitor(activityMonitor);
-		instrumentation.runOnMainSync(new Runnable() {
-			@Override
-			public void run() {
-				newExpenseButton.performClick();
-			}
-		});
-		instrumentation.waitForIdleSync();
-		
-		Activity nextActivity = instrumentation.waitForMonitorWithTimeout(activityMonitor, 3000);
-		assertNotNull(nextActivity);	
-	
-	}
+
 	//test case: EditClaimActivityUITest#3
 	public void testAddDestination(String destination, String reason){
 		ClaimList claimL = ClaimListController.getClaimList();
@@ -139,7 +133,7 @@ public class EditClaimActivityUITest extends
 		ClaimList claimL = ClaimListController.getClaimList();
 		String selectedClaimName = activity.getIntent().getExtras().getString("claimName");
 		Claim testClaim = claimL.getClaim(selectedClaimName);
-		testClaim.setStartDate(2015, 2, 1);
+		testClaim.setStartDate(new Date());
 		activity.finish();
 		activity = getActivity();
 		claimL = ClaimListController.getClaimList();

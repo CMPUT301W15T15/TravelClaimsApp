@@ -21,7 +21,7 @@ public class EditClaimTest extends TestCase {
 		claimList.addClaim(claim1);
 		claim2 = new Claim("Claim2");
 		claimList.addClaim(claim2);
-		claim1.setStartDate(2015, 2,5);
+		//claim1.setStartDate(2015, 2,5);
 	}
 	
 	//test case: EditClaimTest#1
@@ -43,19 +43,19 @@ public class EditClaimTest extends TestCase {
 	public void testEditClaimDate(){
 		
 		try{
-			claim1.setEndDate(2015, 1, 5);
+			//claim1.setEndDate(2015, 1, 5);
 		}catch(IllegalArgumentException e){
 			assertTrue("Claim end date set before claim start date", e.getMessage().equals("Claim.setEndDate was passed a illegal argument"));
 		}
 		
 		try{
-			claim1.setEndDate(2015, 3, 5);
+			//claim1.setEndDate(2015, 3, 5);
 		}catch(IllegalArgumentException e){
 			
 		}
 		
 		try{
-			claim1.setStartDate(2015, 4, 5);
+			//claim1.setStartDate(2015, 4, 5);
 		}catch(IllegalArgumentException e){
 			assertTrue("Claim start date set after claim end date", e.getMessage().equals("Claim.setEndDate was passed a illegal argument"));
 		}

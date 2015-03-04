@@ -11,6 +11,9 @@ import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.AndroidTestCase;
 
+/**
+ * Tests class for testing {@link ClaimListController}
+ */
 public class ClaimListControllerTest extends AndroidTestCase {
 
 
@@ -31,13 +34,11 @@ public class ClaimListControllerTest extends AndroidTestCase {
 		claimList = ClaimListController.getClaimList();
 		claim = new Claim("c1");
 		claim3 = new Claim("c3");
-		expense = new Expense("e1");
-		
-		
-		
+		expense = new Expense("e1");	
 	}
-	
-	//ClaimListControllerTest #1
+	/**
+	 * ClaimListControllerTest #1
+	 */
 	public void testClaimListListeners(){
 
 		ClaimListController.addClaimToClaimList(claim);
