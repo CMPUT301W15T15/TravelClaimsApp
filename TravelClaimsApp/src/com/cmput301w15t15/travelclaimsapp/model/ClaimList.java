@@ -56,7 +56,7 @@ public class ClaimList {
 
 	public ArrayList<Claim> toArrayList() {
 		
-		return null;
+		return this.claimList;
 	}
 
 	public ClaimList filterTag(String tag1)

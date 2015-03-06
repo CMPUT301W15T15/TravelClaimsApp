@@ -152,7 +152,7 @@ public class Claim {
 
 	public String getName() {
 		// TODO Auto-generated method stub
-		return null;
+		return this.claimName;
 	}
 
 
