@@ -1,6 +1,8 @@
 package com.cmput301w15t15.travelclaimsapp.test.modeltest;
 
 
+import java.io.IOException;
+
 import com.cmput301w15t15.travelclaimsapp.ClaimListController;
 import com.cmput301w15t15.travelclaimsapp.model.Claim;
 import com.cmput301w15t15.travelclaimsapp.model.ClaimList;
@@ -26,7 +28,7 @@ public class AddClaimTest extends TestCase{
 		claimList.addClaim(claim2);
 	}
 	//test: AddClaimTest#1
-	public void testAddClaim(){
+	public void testAddClaim() throws IOException{
 		claimList.addClaim(claim1);
 		assertTrue("The length of the claimList is not two", this.claimList.size() == 3);
 		//assertTrue("claim1 was not added", claimList.getClaim("Claim1") == claim1);
@@ -38,7 +40,7 @@ public class AddClaimTest extends TestCase{
 		assertTrue("Claim was not removed from claimList", claimList.size() == 1); 
 	}
 	//test: AddClaimTest#3
-	public void testAddClaimDuplicate(){
+	public void testAddClaimDuplicate() throws IOException{
 		
 		try{
 			claimList.addClaim(new Claim("Claim4"));

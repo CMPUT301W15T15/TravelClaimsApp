@@ -39,7 +39,7 @@ public class Claim {
 	
 
 
-	public void setStartDate(Date startDate) {
+	public void setStartDate(int i, int j, int k) {
 		// TODO Auto-generated method stub
 		
 		this.startDate = startDate;
@@ -203,6 +203,28 @@ public class Claim {
 	public void deleteListener(Listener listener){
 		listeners.remove(listener);
 	}
+
+	
+	public int getClaimantId()
+	{
+	
+		return claimantId;
+	}
+
+	
+	public void setClaimantId(int claimantId)
+	{
+	
+		this.claimantId = claimantId;
+	}
+
+	public void addTag(String tag1)
+	{
+
+		// TODO Auto-generated method stub
+		
+	}
+
 
 
 }

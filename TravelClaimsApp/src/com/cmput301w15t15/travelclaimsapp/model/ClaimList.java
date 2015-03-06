@@ -1,6 +1,9 @@
 package com.cmput301w15t15.travelclaimsapp.model;
 
+import java.io.IOException;
 import java.util.ArrayList;
+
+import com.cmput301w15t15.travelclaimsapp.ClaimListController;
 
 public class ClaimList {
 	protected ArrayList<Claim> claimList;
@@ -11,14 +14,36 @@ public class ClaimList {
 		listeners = new ArrayList<Listener>();
 	}
 	
-	public void addClaim(Claim claim1){
-		claimList.add(claim1);
+	/**
+	 * @param claim1
+	 * @throws IOException
+	 */
+	public void addClaim(Claim claim1) throws IOException{
+		if (claimList.size() ==0){
+			claimList.add(claim1);
+		}
+		for (int i=0;i<claimList.size();i++){
+			if (claimList.get(i)!=claim1){
+				claimList.add(claim1);
+				}
+		}
 	}
 
 	public Claim getClaim(String name) {
-		int i= claimList.indexOf(name);
-		return claimList.get(i);
+		if (claimList==null){
+			return null;
+		}
+		else{
+			for (int i=0; i<claimList.size();i++){
+				if (claimList.get(i).toString().equals(name)){
+					return claimList.get(i);
+				}
+			}
+		}
+		return null;
 	}
+
+
 
 	public void removeClaim(Claim claim1) {
 		claimList.remove(claim1);
