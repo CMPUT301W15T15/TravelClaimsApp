@@ -1,5 +1,7 @@
 package com.cmput301w15t15.travelclaimsapp.test.activitytest;
 
+import java.io.IOException;
+
 import com.cmput301w15t15.travelclaimsapp.ClaimListAdaptor;
 import com.cmput301w15t15.travelclaimsapp.R;
 import com.cmput301w15t15.travelclaimsapp.activitys.AddClaimActivity;
@@ -45,7 +47,7 @@ public class AddClaimActivityUITest extends ActivityInstrumentationTestCase2<Add
 	}
 	//test #
 
-	public void testContextMenuPopupDelete(){
+	public void testContextMenuPopupDelete() throws IOException{
 		Claim claim1 = new Claim("t1");
 		claimList.addClaim(claim1);
 		boolean test;
@@ -74,7 +76,7 @@ public class AddClaimActivityUITest extends ActivityInstrumentationTestCase2<Add
 	}
 	//test #
 
-	public void testContextMenuPopupAddExpense(){
+	public void testContextMenuPopupAddExpense() throws IOException{
 		//add a monitor that waits for AddExpenseActivity to start
 		ActivityMonitor activityMonitor = new ActivityMonitor("ExpenseListActivity", null, false);
 
@@ -103,7 +105,7 @@ public class AddClaimActivityUITest extends ActivityInstrumentationTestCase2<Add
 	}
 
 	//test #
-	public void testContextMenuPopupSubmitClaim(){
+	public void testContextMenuPopupSubmitClaim() throws IOException{
 		IntentFilter intentFilter = new IntentFilter(Intent.ACTION_SEND);
 		//add a monitor that waits for a Intent.ACTION_SEND and blocks email attempt
 		ActivityMonitor activityMonitor = new ActivityMonitor(intentFilter, null, true);

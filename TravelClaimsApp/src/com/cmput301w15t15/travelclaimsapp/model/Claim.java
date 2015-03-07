@@ -39,7 +39,7 @@ public class Claim {
 	
 
 
-	public void setStartDate(int i, int j, int k) {
+	public void setStartDate(Date date) {
 		// TODO Auto-generated method stub
 		
 		this.startDate = startDate;

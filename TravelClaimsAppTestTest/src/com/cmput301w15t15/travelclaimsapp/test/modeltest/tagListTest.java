@@ -2,6 +2,8 @@
 package com.cmput301w15t15.travelclaimsapp.test.modeltest;
 
 
+import java.io.IOException;
+
 import com.cmput301w15t15.travelclaimsapp.model.Claim;
 
 
@@ -15,6 +17,7 @@ public class tagListTest extends TestCase {
 	private TagList tagList;
 	private String tag1="Business";
 	private String tag2="Personal";
+	private String tag3="school";
 	private Claim claim1;
 	@Override
 	protected void setUp() throws Exception {
@@ -28,18 +31,17 @@ public class tagListTest extends TestCase {
 		
 	}
 	//Test: tagListTest#1 
-	public void addClaimTag(){
-		//claim1.addTag(tag1);
-		tagList.addTag(tag1);
-		tagList.addTag(tag2);
-		assertTrue("The length of the claimList is not two",  this.tagList.size()==2);
+	public void addClaimTag() throws IOException{
+		tagList.addTag(tag3);
+		//tagList.addTag("school");
+		assertTrue("The length of the claimList is not two",  this.tagList.size()==3);
 		//assertTrue("claim1 was not added", this.tagList.getTag("Personal") == tag2);
 		//assertTrue("claim1 was not added", this.tagList.getTag("Business") == tag1);
 		//assertTrue("claim1 was not added", this.claim1.getTag() == tag1);
 	}
 
 	//Test: tagListTest#2	
-	public void removeTagTest(){
+	public void removeTagTest() throws IOException{
 		//claim1.addTag(tag1);
 		tagList.addTag(tag1);
 		tagList.addTag(tag2);
@@ -50,7 +52,7 @@ public class tagListTest extends TestCase {
 		//assertTrue("claim1 was not added", this.claim1.getTag() == null);
 	}
 	//Test: tagListTest#3
-	public void renameTagTest(){
+	public void renameTagTest() throws IOException{
 		//claim1.addTag(tag1);
 		tagList.addTag(tag1);
 		tagList.addTag(tag2);

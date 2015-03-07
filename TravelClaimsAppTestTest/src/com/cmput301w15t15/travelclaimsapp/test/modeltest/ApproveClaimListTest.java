@@ -1,5 +1,6 @@
 package com.cmput301w15t15.travelclaimsapp.test.modeltest;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Map;
@@ -27,7 +28,7 @@ public class ApproveClaimListTest extends TestCase {
 	}
 
 	//TestNumber: ApproveViewTest #1
-	public void testViewSubmittedClaims() {
+	public void testViewSubmittedClaims() throws IOException {
 		claimList = new ClaimList();
 		claim1 = new Claim("Claim1");
 		claim2 = new Claim("Claim2");
@@ -49,7 +50,7 @@ public class ApproveClaimListTest extends TestCase {
 	}
 	
 	//TestNumber: ApproveViewTest #2
-	public void testViewSubmittedExpense() {
+	public void testViewSubmittedExpense() throws IOException {
 		ClaimList approveClaimList = new ClaimList();
 		claim1 = new Claim("Claim1");
 		approveClaimList.addClaim(claim1);

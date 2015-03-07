@@ -1,5 +1,6 @@
 package com.cmput301w15t15.travelclaimsapp.test.modeltest;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -28,7 +29,7 @@ public class ApproveExpenseItemTest extends TestCase {
 
 	@SuppressWarnings("null")
 	//TestNumber:ApproveViewTest #3
-	public void testViewExpenseItem(){
+	public void testViewExpenseItem() throws IOException{
 		ClaimList testClaimList = new ClaimList();
 		claim1 = new Claim("Claim1");
 		expense1 = new Expense("Expense1");

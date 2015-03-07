@@ -1,37 +1,64 @@
 package com.cmput301w15t15.travelclaimsapp.model;
 
+import java.io.IOException;
+import java.util.ArrayList;
+
 
 
 public class TagList {
-
-	public void addTag(String tag1) {
-		// TODO Auto-generated method stub
+	protected ArrayList<String> tagList;
+	
+	public TagList(){
+		tagList=new ArrayList<String>();
+	}
+	
+	public void addTag(String tag) throws IOException{
+		if (tagList.size()==0){
+			tagList.add(tag);
+		}else{
+			for (int i=0;i<tagList.size();i++){
+				if (tagList.get(i)!=tag) {
+					tagList.add(tag);
+				}
+			}
+		}
 		
 	}
 
 
 	public int size() {
 		// TODO Auto-generated method stub
-		return 0;
+		return tagList.size();
 	}
 
 	public void removeTag(String string) {
-		// TODO Auto-generated method stub
+		tagList.remove(string);
 		
 	}
 
-	public Tag getTag(String string)
+	public String getTag(String string)
 	{
 
-		// TODO Auto-generated method stub
+		if (tagList==null){
+			return null;
+		}
+		else{
+			for (int i=0; i<tagList.size();i++){
+				if (tagList.get(i).equals(string)){
+					return tagList.get(i);
+				}
+			}
+		}
 		return null;
+
 	}
 
 
 	public void renameTag(String tag1, String string)
 	{
 
-		// TODO Auto-generated method stub
+		tagList.remove(string);
+		tagList.add(string);
 		
 	}
 

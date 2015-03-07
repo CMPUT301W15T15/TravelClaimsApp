@@ -1,5 +1,7 @@
 package com.cmput301w15t15.travelclaimsapp.test.modeltest;
 
+import java.io.IOException;
+
 import com.cmput301w15t15.travelclaimsapp.ClaimListController;
 import com.cmput301w15t15.travelclaimsapp.FileManager;
 import com.cmput301w15t15.travelclaimsapp.activitys.AddClaimActivity;
@@ -38,8 +40,9 @@ public class ClaimListControllerTest extends AndroidTestCase {
 	}
 	/**
 	 * ClaimListControllerTest #1
+	 * @throws IOException 
 	 */
-	public void testClaimListListeners(){
+	public void testClaimListListeners() throws IOException{
 
 		ClaimListController.addClaimToClaimList(claim);
 		claimList2 = ClaimListController.getClaimList();
@@ -48,7 +51,7 @@ public class ClaimListControllerTest extends AndroidTestCase {
 	}
 	
 	//ClaimListControllerTest #2
-	public void testClaimListeners(){
+	public void testClaimListeners() throws IOException{
 		ClaimListController.addClaimToClaimList(claim);
 		claim.setName("test");
 		claimList2 = ClaimListController.getClaimList();
@@ -62,7 +65,7 @@ public class ClaimListControllerTest extends AndroidTestCase {
 		
 	}
 	//ClaimListControllerTest #3
-	public void testExpenseListeners(){
+	public void testExpenseListeners() throws IOException{
 		ClaimListController.addClaimToClaimList(claim3);
 		ClaimListController.addExpense(expense, claim);
 		claimList2 = ClaimListController.getClaimList();

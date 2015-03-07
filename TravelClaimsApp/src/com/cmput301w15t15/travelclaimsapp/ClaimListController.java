@@ -1,5 +1,7 @@
 package com.cmput301w15t15.travelclaimsapp;
 
+import java.io.IOException;
+
 import com.cmput301w15t15.travelclaimsapp.model.Claim;
 import com.cmput301w15t15.travelclaimsapp.model.ClaimList;
 import com.cmput301w15t15.travelclaimsapp.model.Expense;
@@ -56,8 +58,9 @@ public class ClaimListController {
 	 * Also adds a listener to claims expenselist
 	 * 
 	 * @param claim claim to be added to claimlist 
+	 * @throws IOException 
 	 */
-	public static void addClaimToClaimList(Claim claim){
+	public static void addClaimToClaimList(Claim claim) throws IOException{
 		addClaimListeners(claim);
 		getClaimList().addClaim(claim);
 	
