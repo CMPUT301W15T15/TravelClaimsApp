@@ -39,8 +39,7 @@ public class ClaimListController {
 			});
 			//add a listener to each claim in loaded claimlist
 			for(Claim claim : claimList.toArrayList()){
-				claim.addListener(new Listener() {
-					
+				claim.addListener(new Listener() {	
 					@Override
 					public void update() {
 						save();

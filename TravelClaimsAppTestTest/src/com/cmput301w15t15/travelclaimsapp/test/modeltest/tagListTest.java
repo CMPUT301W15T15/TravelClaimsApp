@@ -57,7 +57,7 @@ public class tagListTest extends TestCase {
 		tagList.addTag(tag1);
 		tagList.addTag(tag2);
 		tagList.renameTag(tag1,"School");
-		claim1.renameTag("School");
+		//claim1.renameTag("School");
 		assertTrue("The length of the claimList is not two",  this.tagList.size()==2);
 		//assertTrue("claim1 was not added", this.tagList.getTag("Personal") == tag2);
 		//assertTrue("claim1 was not added", this.tagList.getTag("School") == "School");

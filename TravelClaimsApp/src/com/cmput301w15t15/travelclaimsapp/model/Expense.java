@@ -6,7 +6,7 @@ import java.util.Date;
 
 import android.net.Uri;
 
-public class Expense {
+public class Expense implements Listenable{
 	
 	protected transient ArrayList<Listener> listeners;
 	private String description;

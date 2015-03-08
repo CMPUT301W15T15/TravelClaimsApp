@@ -8,7 +8,7 @@ import java.util.Map;
 
 
 
-public class Claim {
+public class Claim implements Listenable{
 	private String claimName;
 	private Date startDate;
 	private Date endDate;
@@ -71,14 +71,14 @@ public class Claim {
 		
 	}
 
-
-	public void renameTag(String newName) {
-		// TODO Auto-generated method stub
-		this.tagList.getTag(newName).rename(newName);
-		
-		notifyListeners();
-		
-	}
+//commented this out as it had errors
+//	public void renameTag(String newName) {
+//		// TODO Auto-generated method stub
+//		this.tagList.getTag(newName).rename(newName);
+//		
+//		notifyListeners();
+//		
+//	}
 
 
 	public Map<String, String> getDestinationList() {
@@ -91,14 +91,14 @@ public class Claim {
 	}
 	
 	
-	
-	public Tag getTag(String tagName)
-	{
-		
-		// TODO Auto-generated method stub
-		
-		return this.tagList.getTag(tagName);
-	}
+//commented this out as it had errors	
+//	public Tag getTag(String tagName)
+//	{
+//		
+//		// TODO Auto-generated method stub
+//		
+//		return this.tagList.getTag(tagName);
+//	}
 
 
 	public void setStatus(String string) {
