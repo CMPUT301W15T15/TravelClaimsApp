@@ -15,9 +15,9 @@ import junit.framework.TestCase;
 
 public class tagListTest extends TestCase {
 	private TagList tagList;
-	private String tag1="Business";
-	private String tag2="Personal";
-	private String tag3="school";
+	private Tag tag1=new Tag("Business");
+	private Tag tag2=new Tag("Personal");
+	private Tag tag3=new Tag("school");
 	private Claim claim1;
 	@Override
 	protected void setUp() throws Exception {
@@ -35,32 +35,32 @@ public class tagListTest extends TestCase {
 		tagList.addTag(tag3);
 		//tagList.addTag("school");
 		assertTrue("The length of the claimList is not two",  this.tagList.size()==3);
-		//assertTrue("claim1 was not added", this.tagList.getTag("Personal") == tag2);
-		//assertTrue("claim1 was not added", this.tagList.getTag("Business") == tag1);
+		assertTrue("claim1 was not added", this.tagList.getTag("Personal") == tag2);
+		assertTrue("claim1 was not added", this.tagList.getTag("Business") == tag1);
 		//assertTrue("claim1 was not added", this.claim1.getTag() == tag1);
 	}
 
 	//Test: tagListTest#2	
 	public void removeTagTest() throws IOException{
 		//claim1.addTag(tag1);
-		tagList.addTag(tag1);
-		tagList.addTag(tag2);
-		tagList.removeTag("Business");
+		//tagList.addTag(tag1);
+		//tagList.addTag(tag2);
+		tagList.removeTag(tag1);
 		//claim1.removeTag();
 		assertTrue("The length of the claimList is not two",  this.tagList.size()==1);
-		//assertTrue("claim1 was not added", this.tagList.getTag("Personal") == tag2);
+		assertTrue("claim1 was not added", this.tagList.getTag("Personal") == tag2);
 		//assertTrue("claim1 was not added", this.claim1.getTag() == null);
 	}
 	//Test: tagListTest#3
 	public void renameTagTest() throws IOException{
 		//claim1.addTag(tag1);
-		tagList.addTag(tag1);
-		tagList.addTag(tag2);
-		tagList.renameTag(tag1,"School");
+		//tagList.addTag(tag1);
+		//tagList.addTag(tag2);
+		tagList.renameTag("Business","School");
 		//claim1.renameTag("School");
 		assertTrue("The length of the claimList is not two",  this.tagList.size()==2);
-		//assertTrue("claim1 was not added", this.tagList.getTag("Personal") == tag2);
-		//assertTrue("claim1 was not added", this.tagList.getTag("School") == "School");
+		assertTrue("claim1 was not added", this.tagList.getTag("Personal") == tag2);
+		assertTrue("claim1 was not added", this.tagList.getTag("School") ==tag1);
 		//assertTrue("claim1 was not added", this.claim1.getTag() =="School");
 		
 		

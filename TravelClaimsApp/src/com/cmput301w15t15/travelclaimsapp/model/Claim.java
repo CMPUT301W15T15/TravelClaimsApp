@@ -9,11 +9,12 @@ import java.util.Map;
 
 
 public class Claim implements Listenable{
+	private Claim claim;
 	private String claimName;
 	private Date startDate;
 	private Date endDate;
 	private Destination destinationList;
-	private String tag;
+	private Tag tag;
 	private String status;
 	private String comment;
 	private int totalValue;
@@ -217,13 +218,29 @@ public class Claim implements Listenable{
 	
 		this.claimantId = claimantId;
 	}
+	
 
-	public void addTag(String tag1)
+
+	
+	public Tag getTag()
 	{
-
-		// TODO Auto-generated method stub
-		
+	
+		return claim.tag;
 	}
+
+	
+	public void setTag(Tag tag)
+	{
+	
+		this.claim.tag = tag;
+	}
+
+//	public void addTag(Tag tag1)
+//	{
+
+		
+	//}
+	
 
 
 
