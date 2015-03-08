@@ -36,7 +36,7 @@ public class TagList {
 		
 	}
 
-	public Tag getTag(String string)
+	public String getTag(String string)
 	{
 
 		if (tagList==null){

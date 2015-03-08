@@ -1,36 +1,67 @@
 package com.cmput301w15t15.travelclaimsapp.model;
 
-public class Destination {
+import java.util.ArrayList;
+
+
+/**
+ * Destination object refers to a location and reason for travel
+ *
+ */
+public class Destination implements Listenable{
 	
+	private transient ArrayList<Listener> listeners;
+	private String location;
+	private String reason;
 	
-	public Destination getDestination(){
-		return null;
+	/**
+	 * Creates a Destination object with a location and reason
+	 * 
+	 * @param location location (city, country, place) of the destination
+	 * @param reason reason for traveling to destination 
+	 */
+	public Destination(String location, String reason) {
+		this.location = location;
+		this.reason = reason;
+		this.listeners = new ArrayList<Listener>();
+	}
+
+	public String getLocation() {
+		return location;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
+		notifyListeners();
 	}
 	
-	public void addDestination(String string) {
+	public void setReason(String string) {
+		this.reason = string;
+		notifyListeners();
+	}
+	
+	public String getReason() {
 		// TODO Auto-generated method stub
+		return this.reason;
+	}
+	
+	@Override
+	public void notifyListeners() {
+		for (Listener listener : listeners) {
+			listener.update();
+		}
 		
 	}
-	
-	
-	public void deleteDestination(String string) {
-		// TODO Auto-generated method stub
+
+	@Override
+	public void addListener(Listener listener) {
+		listeners.add(listener);
 		
 	}
-	
-	
-	public void setDescription(String string) {
-		// TODO Auto-generated method stub
+
+	@Override
+	public void deleteListener(Listener listener) {
+		listeners.remove(listener);
 		
-	}
-	
-	public void removeDescription(){
-		
-	}
-	
-	public String getDescription() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 	
 }

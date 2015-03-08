@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 import com.cmput301w15t15.travelclaimsapp.ClaimListController;
 
-public class ClaimList {
+public class ClaimList implements Listenable{
 	protected ArrayList<Claim> claimList;
 	protected transient ArrayList<Listener> listeners;
 	
@@ -19,14 +19,13 @@ public class ClaimList {
 	 * @throws IOException
 	 */
 	public void addClaim(Claim claim1) throws IOException{
-		if (claimList.size() ==0){
-			claimList.add(claim1);
+		for (Claim claim : claimList){
+			//if name already in claimlist return without adding claim
+			if (claim.getName().equals(claim1.getName())){
+				return;
+			}
 		}
-		for (int i=0;i<claimList.size();i++){
-			if (claimList.get(i)!=claim1){
-				claimList.add(claim1);
-				}
-		}
+		claimList.add(claim1);
 	}
 
 	public Claim getClaim(String name) {
