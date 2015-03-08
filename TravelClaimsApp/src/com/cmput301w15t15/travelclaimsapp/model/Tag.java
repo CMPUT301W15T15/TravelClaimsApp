@@ -7,7 +7,7 @@ public class Tag {
 		this.tagName=tagName1;
 	}
 
-	public Object getName() {
+	public String getName() {
 		// TODO Auto-generated method stub
 		return this.tagName;
 	}

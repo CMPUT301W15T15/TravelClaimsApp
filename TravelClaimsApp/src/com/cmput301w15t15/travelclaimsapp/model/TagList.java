@@ -6,22 +6,21 @@ import java.util.ArrayList;
 
 
 public class TagList {
-	protected ArrayList<String> tagList;
+	//private String tagListName;
+	protected ArrayList<Tag> tagList;
 	
 	public TagList(){
-		tagList=new ArrayList<String>();
+		tagList=new ArrayList<Tag>();
 	}
 	
-	public void addTag(String tag) throws IOException{
-		if (tagList.size()==0){
-			tagList.add(tag);
-		}else{
-			for (int i=0;i<tagList.size();i++){
-				if (tagList.get(i)!=tag) {
-					tagList.add(tag);
-				}
-			}
-		}
+	/*
+	public void setTagListName(String tagListName){
+		this.tagListName=tagListName;
+	}
+	*/
+	
+	public void addTag(Tag tag) {
+		this.tagList.add(tag);
 		
 	}
 
@@ -31,34 +30,54 @@ public class TagList {
 		return tagList.size();
 	}
 
-	public void removeTag(String string) {
-		tagList.remove(string);
+	public void removeTag(Tag tag) {
+		tagList.remove(tag);
 		
 	}
 
-	public String getTag(String string)
+	public boolean contains(String tagName){
+		if (tagList.size()==0){
+			return false;
+		}
+		else{
+			for (int i=0; i<tagList.size();i++){
+				if (tagList.get(i).getName() == tagName){
+					return true;
+				}
+			}
+			return false;
+		}
+		
+	}
+	
+	
+	public Tag getTag(String tagName)
 	{
 
-		if (tagList==null){
+		
+		if (tagList.size()==0){
 			return null;
 		}
 		else{
 			for (int i=0; i<tagList.size();i++){
-				if (tagList.get(i).equals(string)){
+				if (tagList.get(i).getName() == tagName){
 					return tagList.get(i);
 				}
 			}
+			return null;
 		}
-		return null;
 
 	}
 
 
-	public void renameTag(String tag1, String string)
+	public void renameTag(String tagName, String newTagName)
 	{
 
-		tagList.remove(string);
-		tagList.add(string);
+		for (int i=0; i<tagList.size();i++){
+			if (tagList.get(i).getName() == tagName){
+				tagList.get(i).rename(newTagName);
+			}
+		}
 		
 	}
 
