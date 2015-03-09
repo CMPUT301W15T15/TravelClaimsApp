@@ -63,22 +63,10 @@
         android:hint="@string/Description"
         android:inputType="textMultiLine" />
 
-    <EditText
-        android:id="@+id/Edit_Expense_Tags"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/Edit_Expense_Description"
-        android:ems="10"
-        android:hint="@string/Tags"
-        android:inputType="textMultiLine" />
-
     <Spinner
         android:id="@+id/CurrencySpinner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/Edit_Expense_Tags"
         android:layout_below="@+id/Edit_Expense_Cost"
         android:entries="@array/CurrencyArray" />
 

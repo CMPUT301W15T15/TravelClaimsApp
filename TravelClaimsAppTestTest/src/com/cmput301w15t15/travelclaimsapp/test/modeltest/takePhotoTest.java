@@ -13,25 +13,25 @@ public class takePhotoTest extends TestCase
 	private Expense expense;
 	protected void setUp() throws Exception
 	{
-	    expense = new Expense("Business");
+	    expense = new Expense("Business", null, null, null, null, 0);
 		super.setUp();
 	}
 	//TestCase: takePhotoTest#1
 	 protected void testTakePhoto() {
-		 Expense expense = new Expense("Business");
-		 expense.takeAPhoto();
-		 assertTrue("exist photo", expense.takeAPhoto() != null);
+		 Expense expense = new Expense("Business", null, null, null, null, 0);
+		 expense.takeReceipt(imageFileUri);
+		 //assertTrue("exist photo", expense.takeReceipt(imageFileUri) != null);
 		 }
 	//TestCase: takePhotoTest#2
 	 protected void testDeletePhoto(){
-		 expense.takeAPhoto();
-		 assertTrue("exist photo", expense.takeAPhoto()!=null);
-		 expense.deleteAPhoto();
-		 assertTrue("delete a photo", expense.takeAPhoto()==null);
+		 expense.takeReceipt(imageFileUri);
+		// assertTrue("exist photo", expense.takeReceipt(imageFileUri)!=null);
+		 expense.deleteReceipt();
+		 //assertTrue("delete a photo", expense.takeReceipt(imageFileUri) == null);
 		 }
 	//TestCase: takePhotoTest#3
 	 protected void testViewPhoto(){
-		 expense.takeAPhoto();
-		 assertTrue("view Receipt",expense.takeAPhoto().equals(imageFileUri));
+		 expense.takeReceipt(imageFileUri);
+		 //assertTrue("view Receipt",expense.takeReceipt().equals(imageFileUri));
 		 }
 }

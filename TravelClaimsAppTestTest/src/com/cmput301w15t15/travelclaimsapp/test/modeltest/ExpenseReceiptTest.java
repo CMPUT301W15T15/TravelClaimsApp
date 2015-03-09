@@ -21,8 +21,8 @@ public class ExpenseReceiptTest extends TestCase {
 	}
 
 	public void viewReceiptTest(){
-		Expense1  = new Expense("Expense1");
-		Expense1.takeReceipt();
+		Expense1  = new Expense("Expense1", null, null, null, null, 0);
+		Expense1.takeReceipt(null);
 		assertEquals("view Receipt",Expense1.getReceipt(),receiptImage);
 	}
 	

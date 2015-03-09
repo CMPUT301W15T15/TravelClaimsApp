@@ -13,8 +13,8 @@ public class FlagExpenseTest extends TestCase
 	protected void setUp() throws Exception
 	{
 		super.setUp();
-		expense1=new Expense("taxi");
-		expense2=new Expense("food");
+		expense1=new Expense("taxi", null, null, null, null, 0);
+		expense2=new Expense("food", null, null, null, null, 0);
 
 	}
 //TestCase: FlagExpenseTest#1

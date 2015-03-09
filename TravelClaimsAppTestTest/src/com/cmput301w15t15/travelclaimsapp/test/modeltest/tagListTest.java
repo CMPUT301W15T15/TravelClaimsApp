@@ -1,5 +1,5 @@
 //add
-package com.cmput301w15t15.travelclaimsapp.test.modeltest;
+/*package com.cmput301w15t15.travelclaimsapp.test.modeltest;
 
 
 import java.io.IOException;
@@ -67,3 +67,4 @@ public class tagListTest extends TestCase {
 	}
 	
 }
+*/
