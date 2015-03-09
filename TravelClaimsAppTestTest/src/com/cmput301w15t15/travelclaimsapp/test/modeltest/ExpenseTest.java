@@ -39,12 +39,12 @@ public class ExpenseTest extends TestCase
 		Expense expense = new Expense(null, null, null, expenseCat, null, null);
 		assertTrue("Expense curr is not equal", expenseCat.equals(expense.getCat()));
 	}
-/*	public void testExpenseDate() throws ParseException
+	public void testExpenseDate() throws ParseException
 	{
 		SimpleDateFormat fmt = new SimpleDateFormat("dd-MM-yyyy");
 		Date expenseDate = fmt.parse("03-10-2015");
 		Expense expense = new Expense(null, null, null, null, expenseDate, 0);
-		assertTrue("Expense date is not equal", expenseDate.equals(expenseDate.getDate()));
+		assertTrue("Expense date is not equal", expenseDate.equals(expense.getDate()));
 	}
-	*/
+	
 }
