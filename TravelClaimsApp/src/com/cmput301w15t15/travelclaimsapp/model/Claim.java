@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Map;
 
+import android.R;
+
 
 
 
@@ -32,6 +34,7 @@ public class Claim implements Listenable{
 		this.claimName=string;
 		this.listeners = new ArrayList<Listener>();
 		this.expenseList = new ExpenseList();
+		this.status = "In Progress";
 		
 	}
 
@@ -57,16 +60,15 @@ public class Claim implements Listenable{
 	public void setStartDate(Date date) {
 		// TODO Auto-generated method stub
 		
-		this.startDate = startDate;
-			
+		this.startDate = date;
+		notifyListeners();	
 		
 	}
 	
 
-	public void setEndDate(Date endDate) {
+	public void setEndDate(Date date) {
 		// TODO Auto-generated method stub
-		this.endDate=endDate;
-		
+		this.endDate=date;
 		notifyListeners();
 		
 	}
@@ -102,7 +104,7 @@ public class Claim implements Listenable{
 				this.tagList.addTag(tag);
 			}
 		}
-		
+		notifyListeners();
 	}
 
 	public void removeTag(String tagName){
@@ -110,6 +112,7 @@ public class Claim implements Listenable{
 		if (tagList.contains(tagName)){
 			tagList.removeTag(this.tag);
 		}
+		notifyListeners();
 	}
 	
 	
@@ -151,7 +154,7 @@ public class Claim implements Listenable{
 	public void setStatus(String status) {
 		this.status=status;
 		// TODO Auto-generated method stub
-		
+		notifyListeners();
 	}
 
 	public boolean isEditable() {
@@ -164,7 +167,7 @@ public class Claim implements Listenable{
 	public void setComment(String string) {
 		// TODO Auto-generated method stub
 		this.comment=string;
-		
+		notifyListeners();
 	}
 
 	public String getComment() {
@@ -197,7 +200,7 @@ public class Claim implements Listenable{
 
 		// TODO Auto-generated method stub
 		this.expenseList.addExpense(expense);
-		
+		notifyListeners();
 		
 	}
 
@@ -206,7 +209,7 @@ public class Claim implements Listenable{
 
 		// TODO Auto-generated method stub
 		this.expenseList.removeExpense(expense);
-		
+		notifyListeners();
 	}
 
 	public Expense getExpense(String string)
@@ -245,14 +248,18 @@ public class Claim implements Listenable{
 		this.claimantId = claimantId;
 	}
 
-
-
-	
 	public String toString(){
 		return this.claimName;
 	}
 
 
+	@Override
+	public void setListeners() {
+		this.listeners = new ArrayList<Listener>();
+		
+	}
+
+	
 
 
 }

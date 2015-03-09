@@ -41,7 +41,9 @@ public class ClaimListAdaptor extends ArrayAdapter<Claim> {
 	        rowView = inflater.inflate(resource, parent, false);
 			
 	        viewHolder.claimName = (TextView) rowView.findViewById(R.id.claimAdaptor_display_name);
-	       
+	        viewHolder.claimStatus = (TextView) rowView.findViewById(R.id.claimAdaptor_status);
+	        viewHolder.claimStartDate = (TextView) rowView.findViewById(R.id.claimAdaptor_startDate);
+	        
  	        rowView.setTag(viewHolder);
  	        
 		}else{
@@ -49,13 +51,23 @@ public class ClaimListAdaptor extends ArrayAdapter<Claim> {
 		}
 		
         viewHolder.claimName.setText(claim.getName());
-
+        viewHolder.claimStatus.setText(claim.getClaimStatus());
+        
+        SimpleDateFormat sdf = new SimpleDateFormat("mm/dd/yyyy",Locale.CANADA);
+        if(claim.getStartDate() == null){
+        	viewHolder.claimStartDate.setText("");
+        }else{
+        	viewHolder.claimStartDate.setText(sdf.format(claim.getStartDate()));
+        }
+        
 		return rowView;
 	}
 	
 
 	private static class ViewHolder {
         public TextView claimName;
+        public TextView claimStatus;
+        public TextView claimStartDate;
     
     }
 

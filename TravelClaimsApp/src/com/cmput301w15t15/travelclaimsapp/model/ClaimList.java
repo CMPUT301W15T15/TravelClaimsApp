@@ -47,7 +47,7 @@ public class ClaimList implements Listenable{
 
 	public void removeClaim(Claim claim1) {
 		claimList.remove(claim1);
-		
+		notifyListeners();
 	}
 
 	public int size() {
@@ -78,6 +78,12 @@ public class ClaimList implements Listenable{
 	
 	public void deleteListener(Listener listener){
 		listeners.remove(listener);
+	}
+
+	@Override
+	public void setListeners() {
+		this.listeners = new ArrayList<Listener>();
+		
 	}
 	
 

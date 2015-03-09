@@ -12,11 +12,13 @@ import com.cmput301w15t15.travelclaimsapp.R.layout;
 import com.cmput301w15t15.travelclaimsapp.R.menu;
 import com.cmput301w15t15.travelclaimsapp.model.Claim;
 import com.cmput301w15t15.travelclaimsapp.model.ClaimList;
+import com.cmput301w15t15.travelclaimsapp.model.Expense;
 
 
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Resources.Theme;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -26,6 +28,16 @@ import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ListView;
 import android.widget.Toast;
 
+/**
+ * Activity for the AddClaim/ClaimList view 
+ * 
+ * TODO:
+ *	-add tag button in content menu
+ *	-submit button in context menu
+ *	-Show currencies 
+ *	-show destinations 
+ *
+ */
 public class AddClaimActivity extends Activity {
 
 	private static final int LENGTH_SHORT = 0;
@@ -83,20 +95,41 @@ public class AddClaimActivity extends Activity {
     public boolean onContextItemSelected(MenuItem item) {
         AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
         //get the claim the user selected 
+        Intent intent;
         Claim claim = claimAdaptor.getItem(info.position);
     
         switch (item.getItemId()) {
             case R.id.cmenu_delete_claim:
-            	return super.onContextItemSelected(item);
+            	claimList.removeClaim(claim);
+            	claimAdaptor.notifyDataSetChanged();
+            	return true;
             case R.id.cmenu_submit_claim:
-            	return super.onContextItemSelected(item);
+            	////////////
+            	//DO something to upload to elasticsearch server
+            	///////////
+            	claim.setStatus("Submitted");
+            	claimAdaptor.notifyDataSetChanged();
+            	return true;
             case R.id.cmenu_addExpense:
-            	return super.onContextItemSelected(item);
+            	
+            	intent= new Intent(AddClaimActivity.this, EditExpenseActivity.class);
+            	
+            	//create new expense with default name and add to claimlist
+            	Expense expense = new Expense("Expense"+claim.getExpenseList().size());
+            	ClaimListController.addExpense(expense, claim);
+            	
+            	// attach claim name and expense name to intent 
+            	intent.putExtra("expenseName", expense.getName());
+            	intent.putExtra("claimName", claim.getName());
+            	
+            	startActivity(intent);  
+            	return true;
             case R.id.cmenu_editExpense:
             	//pass the claim selected to new activity 
-            	Intent intent = new Intent(AddClaimActivity.this, EditClaimActivity.class);
+            	intent = new Intent(AddClaimActivity.this, EditClaimActivity.class);
             	intent.putExtra("claimName", claim.getName());
             	startActivity(intent);   
+            	return true;
             default:
                 return super.onContextItemSelected(item);
         }
@@ -127,8 +160,11 @@ public class AddClaimActivity extends Activity {
 		}
     	Toast.makeText(this, "Creating a Claim", Toast.LENGTH_SHORT).show();
     	Intent intent = new Intent(AddClaimActivity.this, EditClaimActivity.class);
+    	//attach claim name to intent 
     	intent.putExtra("claimName", claim.getName());
     	startActivity(intent);   
     }
+ 
+    
 	
 }

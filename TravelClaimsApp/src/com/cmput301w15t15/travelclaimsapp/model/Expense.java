@@ -26,6 +26,11 @@ public class Expense implements Listenable{
 		this.expenseCat = expenseCat;
 		this.listeners = new ArrayList<Listener>();
 	}
+	
+	public Expense(String expenseName){
+		this.expenseName = expenseName;
+		this.listeners = new ArrayList<Listener>();
+	}
 
 	public int getValue(){
 		return price;
@@ -132,6 +137,12 @@ public class Expense implements Listenable{
 	
 	public void deleteListener(Listener listener){
 		listeners.remove(listener);
+	}
+
+	@Override
+	public void setListeners() {
+		this.listeners = new ArrayList<Listener>();
+		
 	}
 	
 	

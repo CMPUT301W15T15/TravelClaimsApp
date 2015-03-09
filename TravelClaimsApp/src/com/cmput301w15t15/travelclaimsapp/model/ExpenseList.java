@@ -75,5 +75,11 @@ public class ExpenseList implements Listenable{
 		}
 		return this.totalValue;
 	}
+
+	@Override
+	public void setListeners() {
+		this.listeners = new ArrayList<Listener>();
+		
+	}
 	
 }

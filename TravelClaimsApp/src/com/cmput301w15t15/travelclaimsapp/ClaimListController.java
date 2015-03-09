@@ -26,7 +26,7 @@ public class ClaimListController {
 	 * 
 	 * @return the application claimList
 	 */
-	public static ClaimList getClaimList() {
+	static public ClaimList getClaimList() {
 		if(claimList == null){
 			claimList = FileManager.getSaver().loadClaimLFromFile();
 			claimList.addListener(new Listener() {
@@ -38,15 +38,18 @@ public class ClaimListController {
 				}
 			});
 			//add a listener to each claim in loaded claimlist
-//			for(Claim claim : claimList.toArrayList()){
-//				claim.addListener(new Listener() {	
-//					@Override
-//					public void update() {
-//						save();
-//						
-//					}
-//				});
-//			}
+		
+			for(Claim claim : claimList.toArrayList()){
+				claim.setListeners(); 
+				claim.addListener(new Listener() {	
+					@Override
+					public void update() {
+						save();
+						
+					}
+				});
+			}
+			return claimList;
 		}
 		return claimList;
 	}
@@ -72,8 +75,7 @@ public class ClaimListController {
 	 */
 	public static void addExpense(Expense expense, Claim claim){
 		claim.addExpense(expense);
-		expense.addListener(new Listener() {
-			
+		expense.addListener(new Listener() { 
 			@Override
 			public void update() {
 				save();
