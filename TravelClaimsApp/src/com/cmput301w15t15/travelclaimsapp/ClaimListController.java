@@ -38,22 +38,22 @@ public class ClaimListController {
 				}
 			});
 			//add a listener to each claim in loaded claimlist
-			for(Claim claim : claimList.toArrayList()){
-				claim.addListener(new Listener() {	
-					@Override
-					public void update() {
-						save();
-						
-					}
-				});
-			}
+//			for(Claim claim : claimList.toArrayList()){
+//				claim.addListener(new Listener() {	
+//					@Override
+//					public void update() {
+//						save();
+//						
+//					}
+//				});
+//			}
 		}
 		return claimList;
 	}
 	
 	
 	/**
-	 * Uses ClaimList.addClaim() to add claim with listener to claimList. 
+	 * Uses ClaimList.addClaim to add claim with listener to claimList. 
 	 * Also adds a listener to claims expenselist
 	 * 
 	 * @param claim claim to be added to claimlist 
@@ -62,7 +62,6 @@ public class ClaimListController {
 	public static void addClaimToClaimList(Claim claim) throws IOException{
 		addClaimListeners(claim);
 		getClaimList().addClaim(claim);
-	
 	}
 	
 	/**

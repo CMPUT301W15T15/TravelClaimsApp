@@ -224,6 +224,10 @@ public class Claim implements Listenable{
 		// TODO Auto-generated method stub
 		
 	}
+	
+	public String toString(){
+		return this.claimName;
+	}
 
 
 

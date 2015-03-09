@@ -15,9 +15,9 @@ import junit.framework.TestCase;
 
 public class tagListTest extends TestCase {
 	private TagList tagList;
-	private String tag1="Business";
-	private String tag2="Personal";
-	private String tag3="school";
+	private Tag tag1;
+	private Tag tag2;
+	private Tag tag3;
 	private Claim claim1;
 	@Override
 	protected void setUp() throws Exception {
@@ -45,7 +45,7 @@ public class tagListTest extends TestCase {
 		//claim1.addTag(tag1);
 		tagList.addTag(tag1);
 		tagList.addTag(tag2);
-		tagList.removeTag("Business");
+		//tagList.removeTag("Business");
 		//claim1.removeTag();
 		assertTrue("The length of the claimList is not two",  this.tagList.size()==1);
 		//assertTrue("claim1 was not added", this.tagList.getTag("Personal") == tag2);
@@ -56,7 +56,7 @@ public class tagListTest extends TestCase {
 		//claim1.addTag(tag1);
 		tagList.addTag(tag1);
 		tagList.addTag(tag2);
-		tagList.renameTag(tag1,"School");
+		//tagList.renameTag(tag1,"School");
 		//claim1.renameTag("School");
 		assertTrue("The length of the claimList is not two",  this.tagList.size()==2);
 		//assertTrue("claim1 was not added", this.tagList.getTag("Personal") == tag2);
