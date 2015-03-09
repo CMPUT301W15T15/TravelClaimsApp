@@ -13,17 +13,20 @@ public class TagList {
 		tagList=new ArrayList<Tag>();
 	}
 	
-	/*
+	/*****************
 	public void setTagListName(String tagListName){
 		this.tagListName=tagListName;
 	}
-	*/
+	*******************/
 	
 	public void addTag(Tag tag) {
 		this.tagList.add(tag);
 		
 	}
 
+	public ArrayList<Tag> toArrayList(){
+		return this.tagList;
+	}
 
 	public int size() {
 		// TODO Auto-generated method stub
@@ -34,7 +37,8 @@ public class TagList {
 		tagList.remove(tag);
 		
 	}
-
+	
+	
 	public boolean contains(String tagName){
 		if (tagList.size()==0){
 			return false;
