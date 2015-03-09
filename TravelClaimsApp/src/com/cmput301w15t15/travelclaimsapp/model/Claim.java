@@ -9,10 +9,12 @@ import java.util.Map;
 
 
 public class Claim implements Listenable{
+	private Claim claim;
 	private String claimName;
 	private Date startDate;
 	private Date endDate;
 	private DestinationList destinationList;
+	private Destination destination;
 	private Tag tag;
 	private String status;
 	private String comment;
@@ -244,7 +246,6 @@ public class Claim implements Listenable{
 	
 		this.claimantId = claimantId;
 	}
-
 	
 
 
