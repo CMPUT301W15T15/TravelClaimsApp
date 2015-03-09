@@ -17,6 +17,7 @@ public class ExpenseList implements Listenable{
 	public void addExpense(Expense expense) {
 		this.expenseList.add(expense);
 		
+		
 	}
 	
 	public Expense getExpense(String string) {

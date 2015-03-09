@@ -2,10 +2,13 @@ package com.cmput301w15t15.travelclaimsapp.activitys;
 
 import java.util.Calendar;
 
+import com.cmput301w15t15.travelclaimsapp.ClaimListController;
 import com.cmput301w15t15.travelclaimsapp.R;
 import com.cmput301w15t15.travelclaimsapp.R.layout;
 import com.cmput301w15t15.travelclaimsapp.R.menu;
 import com.cmput301w15t15.travelclaimsapp.activitys.EditClaimActivity.DatePickerFragment;
+import com.cmput301w15t15.travelclaimsapp.model.Claim;
+import com.cmput301w15t15.travelclaimsapp.model.Expense;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -19,6 +22,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 
@@ -111,6 +116,10 @@ public class EditExpenseActivity extends FragmentActivity {
     {
     	Toast.makeText(this, "Creating an expense", Toast.LENGTH_SHORT).show();
     	Intent intent = new Intent(EditExpenseActivity.this, ExpenseListActivity.class);
+    	//ClaimListController clc= new ClaimListController();
+    	//ListView expenselistView=(ListView) findViewById(R.id.CurrentExpenseList);
+    	//ListView claimlistView=(ListView) findViewById(R.id.claim_list_listview);
+    	//clc.addExpense(new Expense(), new Claim(claimlistView.toString()));
     	startActivity(intent);   
     	
     	}
