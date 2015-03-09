@@ -26,6 +26,7 @@ public class ClaimList implements Listenable{
 			}
 		}
 		claimList.add(claim1);
+		notifyListeners();
 	}
 
 	public Claim getClaim(String name) {

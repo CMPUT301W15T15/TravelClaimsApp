@@ -43,9 +43,26 @@ public class AddClaimActivity extends Activity {
 		
 		//create a adaptor for claim list and set it
 		claimAdaptor = new ClaimListAdaptor(this,R.layout.claim_list_adaptor, claimList.toArrayList());
+		claimAdaptor.notifyDataSetChanged();
         claimListView.setAdapter(claimAdaptor);
         
 		registerForContextMenu(findViewById(R.id.claim_list_listview));
+	}
+	
+	@Override
+	protected void onStart() {
+		// TODO Auto-generated method stub
+		super.onStart();
+		claimAdaptor.notifyDataSetChanged();
+	}
+
+	
+
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		claimAdaptor.notifyDataSetChanged();
 	}
 
 	@Override
@@ -79,6 +96,7 @@ public class AddClaimActivity extends Activity {
             	//pass the claim selected to new activity 
             	Intent intent = new Intent(AddClaimActivity.this, EditClaimActivity.class);
             	intent.putExtra("claimName", claim.getName());
+            	startActivity(intent);   
             default:
                 return super.onContextItemSelected(item);
         }

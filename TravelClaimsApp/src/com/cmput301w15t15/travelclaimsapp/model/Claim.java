@@ -44,9 +44,7 @@ public class Claim implements Listenable{
 	public void setName(String name) {
 		// TODO Auto-generated method stub
 		this.claimName=name;
-		
 		notifyListeners();
-		
 	}
 
 	

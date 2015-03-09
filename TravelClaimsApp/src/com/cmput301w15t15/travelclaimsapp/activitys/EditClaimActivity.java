@@ -18,6 +18,8 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -25,7 +27,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class EditClaimActivity extends FragmentActivity {
+public class EditClaimActivity extends FragmentActivity implements TextWatcher {
 	
 	private static EditText claimStartDate;
 	private static EditText claimEndDate;
@@ -49,6 +51,7 @@ public class EditClaimActivity extends FragmentActivity {
 		String claimName = getIntent().getExtras().getString("claimName");
 		theClaim = claimList.getClaim(claimName);
 		
+		claimNameInput.addTextChangedListener(this);
 		
 		set_on_click();
 	}
@@ -160,4 +163,41 @@ public class EditClaimActivity extends FragmentActivity {
     	Intent intent = new Intent(EditClaimActivity.this, ExpenseListActivity.class);
     	startActivity(intent);   
     	}
+
+	@Override
+	public void afterTextChanged(Editable s) {
+		switch(getCurrentFocus().getId()){
+			case R.id.Edit_Claim_Name:
+				String newName = s.toString();
+				if(s.length() == 0 ){
+					claimNameInput.removeTextChangedListener(this);
+					claimNameInput.setText(theClaim.getName());
+					claimNameInput.addTextChangedListener(this);
+					Toast.makeText(this, "Claim name cannot be null", Toast.LENGTH_SHORT).show();
+				}else if(claimList.getClaim(newName)!=null){
+					claimNameInput.removeTextChangedListener(this);
+					claimNameInput.setText(theClaim.getName());
+					claimNameInput.addTextChangedListener(this);
+					Toast.makeText(this, "Claim name cannot be duplicate of another claim", Toast.LENGTH_SHORT).show();
+				}else{
+					theClaim.setName(claimNameInput.getText().toString());
+				}
+		
+		
+		}
+		
+	}
+
+	@Override
+	public void beforeTextChanged(CharSequence s, int start, int count,
+			int after) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onTextChanged(CharSequence s, int start, int before, int count) {
+		
+		
+	}
 }
