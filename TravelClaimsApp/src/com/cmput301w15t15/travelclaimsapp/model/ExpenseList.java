@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 public class ExpenseList {
 	
+	private int totalValue;
+	
 	protected transient ArrayList<Listener> listeners;
 	
 	
@@ -58,5 +60,12 @@ public class ExpenseList {
 		listeners.remove(listener);
 	}
 	
+	public int getTotalValue(){
+		this.totalValue=0;
+		for (int i=0;i<this.expenseList.size();i++){
+			this.totalValue=this.totalValue+expenseList.get(i).getValue();
+		}
+		return this.totalValue;
+	}
 	
 }

@@ -7,6 +7,12 @@ public class Tag {
 		this.tagName=tagName1;
 	}
 
+	public void setName(String tagName){
+		this.tagName=tagName;
+		
+	}
+	
+	
 	public String getName() {
 		// TODO Auto-generated method stub
 		return this.tagName;
