@@ -19,6 +19,7 @@ public class ExpenseList {
 	public void addExpense(Expense expense1) {
 		// TODO Auto-generated method stub
 		
+		
 	}
 	
 	public Expense getExpense(String string) {
