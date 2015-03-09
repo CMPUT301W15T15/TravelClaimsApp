@@ -41,8 +41,11 @@ public class ClaimListControllerTest extends AndroidTestCase {
 		currentSize = claimList.toArrayList().size();
 		claim = new Claim("c1");
 		claim3 = new Claim("c3");
+
 		claim4 = new Claim("c4");
-		expense = new Expense("e1");	
+
+		expense = new Expense("e1", null, null, null, null, 0);	
+
 	}
 	/**
 	 * ClaimListControllerTest #1
@@ -79,10 +82,11 @@ public class ClaimListControllerTest extends AndroidTestCase {
 	
 		assertEquals("Claim loaded from file not the same as current", claim4.getName(), claim2.getName());
 		
-		expense.setDescription("Something");
+		expense.setDes("Something");
 	
+
 		Expense expense2 = ClaimListController.getClaimList().getClaim("c4").getExpenseList().toArrayList().get(0);
-		if(!expense.getDescription().equals("Something")){
+		if(!expense.getDes().equals("Something")){
 			fail("description was not set");
 		}else{
 			assertEquals("Expense loaded from file not the same as current", expense, expense2);

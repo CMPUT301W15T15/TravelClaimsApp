@@ -124,7 +124,7 @@ public class EditExpenseActivityUITest extends
 		String selectedClaimName = activity.getIntent().getExtras().getString("claimName");
 		Claim testClaim = claimL.getClaim(selectedClaimName);
 		ExpenseList expenseList = new ExpenseList();
-		Expense testExpense = new Expense("test");
+		Expense testExpense = new Expense("test", selectedClaimName, selectedClaimName, selectedClaimName, null, 0);
 		expenseList.addExpense(testExpense);
 		testExpense.setName("stuff");
 		//activity.finish();

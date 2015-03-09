@@ -21,8 +21,8 @@ public class AddExpenseTest extends TestCase {
 		claimList = new ClaimList();
 		claim1 = new Claim("Claim1");
 		claimList.addClaim(claim1);
-		expense1 = new Expense("E1");
-		expense2 = new Expense("E2");
+		expense1 = new Expense("E1", null, null, null, null, 0);
+		expense2 = new Expense("E2", null, null, null, null, 0);
 		expenseList = claim1.getExpenseList();
 	}
 	//test AddExpenseTest#1

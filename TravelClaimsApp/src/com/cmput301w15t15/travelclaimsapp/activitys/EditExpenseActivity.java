@@ -31,6 +31,7 @@ public class EditExpenseActivity extends FragmentActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_edit_expense);
 		Date = (EditText) findViewById(R.id.Edit_Expense_Date);
+		
 		set_on_click();
 	}
 
@@ -109,7 +110,8 @@ public class EditExpenseActivity extends FragmentActivity {
 	public void CreateExpense(View view)
     {
     	Toast.makeText(this, "Creating an expense", Toast.LENGTH_SHORT).show();
-    	Intent intent = new Intent(EditExpenseActivity.this, EditClaimActivity.class);
+    	Intent intent = new Intent(EditExpenseActivity.this, ExpenseListActivity.class);
     	startActivity(intent);   
+    	
     	}
 }

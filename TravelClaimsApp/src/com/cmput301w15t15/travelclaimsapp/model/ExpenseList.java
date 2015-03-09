@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 public class ExpenseList implements Listenable{
 	
+	private int totalValue;
+	
 	protected transient ArrayList<Listener> listeners;
 	private ArrayList<Expense> expenseList;
 	
@@ -65,5 +67,12 @@ public class ExpenseList implements Listenable{
 		listeners.remove(listener);
 	}
 	
+	public int getTotalValue(){
+		this.totalValue=0;
+		for (int i=0;i<this.expenseList.size();i++){
+			this.totalValue=this.totalValue+expenseList.get(i).getValue();
+		}
+		return this.totalValue;
+	}
 	
 }
