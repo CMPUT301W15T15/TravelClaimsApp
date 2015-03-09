@@ -7,7 +7,7 @@ import java.util.Date;
 import android.net.Uri;
 
 public class Expense implements Listenable{
-	
+	private int price;
 	protected transient ArrayList<Listener> listeners;
 	private String description;
 	
@@ -15,6 +15,14 @@ public class Expense implements Listenable{
 		this.listeners = new ArrayList<Listener>();
 	}
 
+	public int getValue(){
+		return price;
+	}
+	
+	public void setValue(int value){
+		this.price=value;
+	}
+	
 	public void addFlag(){
 		// TODO
 	}

@@ -9,14 +9,16 @@ import java.util.Map;
 
 
 public class Claim implements Listenable{
+	private Claim claim;
 	private String claimName;
 	private Date startDate;
 	private Date endDate;
-	private Destination destinationList;
-	private String tag;
+	private DestinationList destinationList;
+	private Destination destination;
+	private Tag tag;
 	private String status;
 	private String comment;
-	private int totalValue;
+	private int totalValue=0;
 	private int approveId;
 	private int claimantId;
 	private ExpenseList expenseList;
@@ -33,6 +35,21 @@ public class Claim implements Listenable{
 		
 	}
 
+	
+	public String getName() {
+		// TODO Auto-generated method stub
+		return this.claimName;
+	}
+	
+	public void setName(String name) {
+		// TODO Auto-generated method stub
+		this.claimName=name;
+		
+		notifyListeners();
+		
+	}
+
+	
 	public ExpenseList getExpenseList(){
 		return expenseList;
 	}
@@ -43,25 +60,10 @@ public class Claim implements Listenable{
 		// TODO Auto-generated method stub
 		
 		this.startDate = startDate;
-		
-		
+			
 		
 	}
 	
-	public TagList getTagList(){
-		
-		return tagList;
-		
-	}
-
-
-	public void setName(String name) {
-		// TODO Auto-generated method stub
-		this.claimName=name;
-		
-		notifyListeners();
-		
-	}
 
 	public void setEndDate(Date endDate) {
 		// TODO Auto-generated method stub
@@ -70,24 +72,71 @@ public class Claim implements Listenable{
 		notifyListeners();
 		
 	}
-
-//commented this out as it had errors
-//	public void renameTag(String newName) {
-//		// TODO Auto-generated method stub
-//		this.tagList.getTag(newName).rename(newName);
-//		
-//		notifyListeners();
-//		
-//	}
+	
+	public Date getStartDate() {
+		// TODO Auto-generated method stub
+		return this.startDate;
+	}
 
 
-	public Map<String, String> getDestinationList() {
+
+
+
+	
+	public Date getEndDate() {
+		// TODO Auto-generated method stub
+		return this.endDate;
+	}
+
+	
+	
+	/**
+	 * @param tagName
+	 */
+	public void setTag(String tagName)
+	{
+		this.tag = new Tag(tagName);
+		if (this.tagList.size()==0){
+			this.tagList.addTag(tag);
+		}
+		else {
+			if (!(this.tagList.contains(tagName))){
+				this.tagList.addTag(tag);
+			}
+		}
 		
-		return null;
+	}
+
+	public void removeTag(String tagName){
+		this.tag=new Tag(tagName);
+		if (tagList.contains(tagName)){
+			tagList.removeTag(this.tag);
+		}
+	}
+	
+	
+	public TagList getTagList(){
+		
+		return tagList;
+		
+	}
+	
+	
+	public int getTotalValue(){
+		
+		return this.expenseList.getTotalValue();
+		
+	}
+
+
+
+	public DestinationList getDestinationList() {
+		
+		return this.destinationList;
 	}
 	
 	public String getClaimStatus() {
-		return null;
+		return this.status;
 	}
 	
 	
@@ -101,7 +150,8 @@ public class Claim implements Listenable{
 //	}
 
 
-	public void setStatus(String string) {
+	public void setStatus(String status) {
+		this.status=status;
 		// TODO Auto-generated method stub
 		
 	}
@@ -112,57 +162,36 @@ public class Claim implements Listenable{
 		return this.Editable;
 	}
 
-	public void setClaimStatus(String string) {
-		// TODO Auto-generated method stub
-
-	}
 	
 	public void setComment(String string) {
 		// TODO Auto-generated method stub
-		}
+		this.comment=string;
+		
+	}
 
 	public String getComment() {
 		// TODO Auto-generated method stub
-		return null;
+		
+		return this.comment;
 	}
 
-	public void setApprover(String approverName) {
+	public void setApprover(int approverId) {
 		// TODO Auto-generated method stub
+		this.approveId=approverId;
 	
 	}
 
-	public String getApprover(){
-		return null;	
+	public int getApprover(){
+		return this.approveId;	
 	}
 
 	public String getStatus() {
 		// TODO Auto-generated method stub
-		return null;
+		return this.status;
 	}
-
-	public boolean getEditable() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	public String getStartDate() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public String getName() {
-		// TODO Auto-generated method stub
-		return this.claimName;
-	}
-
 
 
 	
-	public Date getEndDate() {
-		// TODO Auto-generated method stub
-		return this.endDate;
-	}
-
 	
 
 	public void addExpense(Expense expense)
@@ -217,14 +246,7 @@ public class Claim implements Listenable{
 	
 		this.claimantId = claimantId;
 	}
-
-	public void addTag(String tag1)
-	{
-
-		// TODO Auto-generated method stub
-		
-	}
-
+	
 
 
 }

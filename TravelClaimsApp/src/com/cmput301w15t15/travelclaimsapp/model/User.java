@@ -9,6 +9,8 @@ package com.cmput301w15t15.travelclaimsapp.model;
 public class User {
 
 	private String username;
+	private ClaimList claimList;
+	
 	private byte[] pHash;
 	private boolean approver;
 	

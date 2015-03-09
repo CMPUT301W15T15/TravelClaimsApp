@@ -16,7 +16,7 @@ public class FilterTagTest extends TestCase
 	private Claim claim1;
 	private Claim claim2;
 	private Claim claim3;
-	private String tag1="Business";
+	private Tag tag1=new Tag("Business");
 	
 	protected void setUp() throws Exception
 	{

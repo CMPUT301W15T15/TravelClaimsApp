@@ -58,7 +58,7 @@ public class ClaimList implements Listenable{
 		return this.claimList;
 	}
 
-	public ClaimList filterTag(String tag1)
+	public ClaimList filterTag(Tag tag1)
 	{
 
 		// TODO Auto-generated method stub
