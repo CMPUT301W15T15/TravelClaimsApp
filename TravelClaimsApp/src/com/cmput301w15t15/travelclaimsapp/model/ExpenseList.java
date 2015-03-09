@@ -1,6 +1,7 @@
 package com.cmput301w15t15.travelclaimsapp.model;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 public class ExpenseList {
 	
@@ -22,7 +23,6 @@ public class ExpenseList {
 	}
 	
 	public Expense getExpense(String string) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
