@@ -1,10 +1,15 @@
 package com.cmput301w15t15.travelclaimsapp.activitys;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Locale;
 
+import com.cmput301w15t15.travelclaimsapp.ClaimListController;
 import com.cmput301w15t15.travelclaimsapp.R;
 import com.cmput301w15t15.travelclaimsapp.R.layout;
 import com.cmput301w15t15.travelclaimsapp.R.menu;
+import com.cmput301w15t15.travelclaimsapp.model.Claim;
+import com.cmput301w15t15.travelclaimsapp.model.ClaimList;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -22,20 +27,47 @@ import android.widget.Toast;
 
 public class EditClaimActivity extends FragmentActivity {
 	
-	private static EditText ClaimStartDate;
-	private static EditText ClaimEndDate;
+	private static EditText claimStartDate;
+	private static EditText claimEndDate;
+	private static EditText claimNameInput;
 	private static boolean Start;
+	private Claim theClaim; 
+	private ClaimList claimList;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_edit_claim);
 		
-		ClaimStartDate = (EditText) findViewById(R.id.ClaimStart);
-		ClaimEndDate = (EditText) findViewById(R.id.ClaimEnd);
+		claimStartDate = (EditText) findViewById(R.id.ClaimStart);
+		claimEndDate = (EditText) findViewById(R.id.ClaimEnd);
+		claimNameInput = (EditText) findViewById(R.id.Edit_Claim_Name);
+		
+		claimList = ClaimListController.getClaimList();
+		
+		//get the claim name passed with the intent 
+		String claimName = getIntent().getExtras().getString("claimName");
+		theClaim = claimList.getClaim(claimName);
+		
 		
 		set_on_click();
 	}
+
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		//set rest of EditTexts if values exist 
+		if(theClaim.getName() != null){
+			claimNameInput.setText(theClaim.getName());
+		}
+		
+		
+	}
+
+
+
+
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -46,7 +78,7 @@ public class EditClaimActivity extends FragmentActivity {
 	//Retrieved on February 28, 2015 from http://developer.android.com/guide/topics/ui/controls/pickers.html
 	public void showTruitonDatePickerDialog(View v)
 	{
-		if (v == ClaimStartDate)
+		if (v == claimStartDate)
 		{
 			Start = true;
 		}
@@ -81,25 +113,25 @@ public class EditClaimActivity extends FragmentActivity {
 			// Do something with the date chosen by the user
 			if (Start)
 			{
-				ClaimStartDate.setText((month + 1) + "/" + day + "/" + year);
+				claimStartDate.setText((month + 1) + "/" + day + "/" + year);
 			}
 			else
 			{
-				ClaimEndDate.setText((month + 1) + "/" + day + "/" + year);
+				claimEndDate.setText((month + 1) + "/" + day + "/" + year);
 			}
 		}	
 	}
 	
 	private void set_on_click()
 	{
-		ClaimStartDate.setOnClickListener(new View.OnClickListener() {
+		claimStartDate.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) 
 			{
 				showTruitonDatePickerDialog(v);
 			}
 		});
-		ClaimEndDate.setOnClickListener(new View.OnClickListener() {
+		claimEndDate.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) 
 			{

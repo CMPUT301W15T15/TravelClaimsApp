@@ -18,7 +18,7 @@ public class AddExpenseTest extends TestCase {
 	
 	protected void setUp() throws Exception {
 		super.setUp();
-		claimList = ClaimListController.getClaimList();
+		claimList = new ClaimList();
 		claim1 = new Claim("Claim1");
 		claimList.addClaim(claim1);
 		expense1 = new Expense("E1", null, null, null, null, 0);
@@ -30,12 +30,14 @@ public class AddExpenseTest extends TestCase {
 		expenseList.addExpense(expense1);
 		expenseList.addExpense(expense2);
 		
-		assertTrue("Expenses not added", claim1.getExpenseList().size() == 2);
+		assertEquals("Expenses not added", claim1.getExpenseList().size(),2);
 	}
 	//test AddExpenseTest#2
 	public void testDeleteExpense(){
+		expenseList.addExpense(expense1);
+		expenseList.addExpense(expense2);
 		expenseList.removeExpense(expense1);
-		assertTrue("Expenses not added", claim1.getExpenseList().size() == 1);
+		assertEquals("Expenses not removed", claim1.getExpenseList().size() ,1);
 	}
 	
 	

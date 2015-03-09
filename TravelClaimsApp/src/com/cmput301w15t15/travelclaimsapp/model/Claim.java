@@ -246,7 +246,15 @@ public class Claim implements Listenable{
 	
 		this.claimantId = claimantId;
 	}
+
+
+
 	
+	public String toString(){
+		return this.claimName;
+	}
+
+
 
 
 }

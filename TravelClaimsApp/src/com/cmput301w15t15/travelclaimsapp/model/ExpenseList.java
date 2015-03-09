@@ -2,13 +2,11 @@ package com.cmput301w15t15.travelclaimsapp.model;
 
 import java.util.ArrayList;
 
-public class ExpenseList {
+public class ExpenseList implements Listenable{
 	
 	private int totalValue;
 	
 	protected transient ArrayList<Listener> listeners;
-	
-	
 	private ArrayList<Expense> expenseList;
 	
 	public ExpenseList(){
@@ -16,25 +14,34 @@ public class ExpenseList {
 		this.listeners = new ArrayList<Listener>();
 	}
 	
-	public void addExpense(Expense expense1) {
-		// TODO Auto-generated method stub
+	public void addExpense(Expense expense) {
+		this.expenseList.add(expense);
 		
 		
 	}
 	
 	public Expense getExpense(String string) {
-		// TODO Auto-generated method stub
+		if (expenseList==null){
+			return null;
+		}
+		else{
+			for (int i=0; i<expenseList.size();i++){
+				if (expenseList.get(i).toString().equals(string)){
+					return expenseList.get(i);
+				}
+			}
+		}
 		return null;
 	}
 
-	public void removeExpense(Expense expense1) {
-		// TODO Auto-generated method stub
+	public void removeExpense(Expense expense) {
+		this.expenseList.remove(expense);
 		
 	}
 	
 	public int size() {
 		// TODO Auto-generated method stub
-		return 0;
+		return this.expenseList.size();
 	}
 	
 	
