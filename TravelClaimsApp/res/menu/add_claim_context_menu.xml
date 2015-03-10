@@ -4,6 +4,6 @@
     <item android:id="@+id/cmenu_addExpense" android:title="Add Expense"></item>
     <item android:id="@+id/cmenu_submit_claim" android:title="Submit Claim">
     </item>
-    <item android:id="@+id/cmenu_editExpense"></item>
+    <item android:id="@+id/cmenu_editExpense" android:title="Edit Claim"></item>
 </menu>
 

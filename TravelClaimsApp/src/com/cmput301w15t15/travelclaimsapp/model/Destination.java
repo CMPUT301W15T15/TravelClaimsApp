@@ -63,5 +63,11 @@ public class Destination implements Listenable{
 		listeners.remove(listener);
 		
 	}
+
+	@Override
+	public void setListeners() {
+		this.listeners = new ArrayList<Listener>();
+		
+	}
 	
 }

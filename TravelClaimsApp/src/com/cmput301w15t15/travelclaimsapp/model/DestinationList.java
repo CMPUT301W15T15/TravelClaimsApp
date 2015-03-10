@@ -53,4 +53,10 @@ public class DestinationList implements Listenable{
 		
 	}
 
+	@Override
+	public void setListeners() {
+		this.listeners = new ArrayList<Listener>();
+		
+	}
+
 }

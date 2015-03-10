@@ -20,6 +20,7 @@ public class ExpenseList {
 	public void addExpense(Expense expense1) {
 		// TODO Auto-generated method stub
 		
+		
 	}
 	
 	public Expense getExpense(String string) {
@@ -66,6 +67,12 @@ public class ExpenseList {
 			this.totalValue=this.totalValue+expenseList.get(i).getValue();
 		}
 		return this.totalValue;
+	}
+
+	@Override
+	public void setListeners() {
+		this.listeners = new ArrayList<Listener>();
+		
 	}
 	
 }

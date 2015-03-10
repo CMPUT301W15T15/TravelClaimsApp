@@ -19,5 +19,7 @@ public interface Listenable {
 	 */
 	public void addListener(Listener listener);
 	
+	public void setListeners();
+	
 	public void deleteListener(Listener listener);
 }
