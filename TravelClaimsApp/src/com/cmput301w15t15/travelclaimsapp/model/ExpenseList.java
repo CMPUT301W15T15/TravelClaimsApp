@@ -69,7 +69,7 @@ public class ExpenseList {
 		return this.totalValue;
 	}
 
-	@Override
+
 	public void setListeners() {
 		this.listeners = new ArrayList<Listener>();
 		

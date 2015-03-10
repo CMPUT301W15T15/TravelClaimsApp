@@ -35,6 +35,7 @@
     <string name="Destination">Destination:</string>
     <string name="View">View Expenses</string>
     <string name="CurrentExpense">Current Expenses:</string>
+    <string name="Des">Add Destination</string>
 
     <string-array name="StatusArray">
         <item>In Progress</item>
