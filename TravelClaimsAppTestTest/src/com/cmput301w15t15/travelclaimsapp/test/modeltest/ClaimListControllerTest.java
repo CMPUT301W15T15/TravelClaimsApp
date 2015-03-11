@@ -92,6 +92,15 @@ public class ClaimListControllerTest extends AndroidTestCase {
 			assertEquals("Expense loaded from file not the same as current", expense, expense2);
 		}
 	}
+
+	@Override
+	protected void tearDown() throws Exception {
+		// TODO Auto-generated method stub
+		super.tearDown();
+		for(Claim claim5 : claimList.toArrayList()){
+			claimList.removeClaim(claim5);
+		}
+	}
 		
 	
 	

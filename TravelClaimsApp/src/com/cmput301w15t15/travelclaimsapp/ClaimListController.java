@@ -4,6 +4,8 @@ import java.io.IOException;
 
 import com.cmput301w15t15.travelclaimsapp.model.Claim;
 import com.cmput301w15t15.travelclaimsapp.model.ClaimList;
+import com.cmput301w15t15.travelclaimsapp.model.Destination;
+import com.cmput301w15t15.travelclaimsapp.model.DestinationList;
 import com.cmput301w15t15.travelclaimsapp.model.Expense;
 import com.cmput301w15t15.travelclaimsapp.model.ExpenseList;
 import com.cmput301w15t15.travelclaimsapp.model.Listener;
@@ -38,16 +40,9 @@ public class ClaimListController {
 				}
 			});
 			//add a listener to each claim in loaded claimlist
-		
 			for(Claim claim : claimList.toArrayList()){
 				claim.setListeners(); 
-				claim.addListener(new Listener() {	
-					@Override
-					public void update() {
-						save();
-						
-					}
-				});
+				addClaimListeners(claim);
 			}
 			return claimList;
 		}
@@ -84,6 +79,22 @@ public class ClaimListController {
 		});
 	}
 	
+	public static void addDestination(Destination dest, Claim claim){
+		claim.getDestinationList().addDestination(dest);
+		dest.addListener(new Listener() {
+			
+			@Override
+			public void update() {
+				save();
+				
+			}
+		});
+	}
+	public static void deleteDestination(Destination dest, Claim claim){
+		claim.getDestinationList().deleteDestination(dest);
+		
+	}
+	
 	
 	/**
 	 * Saves claimlist to file using FileManager class 
@@ -108,6 +119,7 @@ public class ClaimListController {
 		});
 		//next add listener to expenselist
 		ExpenseList eList = claim.getExpenseList();
+		eList.setListeners();
 		eList.addListener(new Listener() {
 			
 			@Override
@@ -118,6 +130,7 @@ public class ClaimListController {
 		});
 		//next add a listener to each expense in the claim 
 		for(Expense expense : eList.toArrayList()){
+			expense.setListeners();
 			expense.addListener(new Listener() {
 				
 				@Override
@@ -126,6 +139,29 @@ public class ClaimListController {
 					
 				}
 			});
+		}
+		
+		DestinationList dList = claim.getDestinationList();
+		dList.setListeners();
+		dList.addListener(new Listener() {
+			
+			@Override
+			public void update() {
+				save();
+				
+			}
+		});
+		for(Destination dest : dList.toArrayList()){
+			dest.setListeners();
+			dest.addListener(new Listener() {
+				
+				@Override
+				public void update() {
+					save();
+					
+				}
+			});
+			
 		}
 		
 	}

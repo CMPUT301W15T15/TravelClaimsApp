@@ -118,22 +118,8 @@ public class EditExpenseActivityUITest extends
 		
 		assertEquals("Not selected", "JPY", selectCurrency.getItemAtPosition(selectCurrency.getSelectedItemPosition()));
 	}
-	//Test Case: EditExpenseActivityUITest#5
-	public void testDataPersistance(){
-		ClaimList claimL = ClaimListController.getClaimList();
-		String selectedClaimName = activity.getIntent().getExtras().getString("claimName");
-		Claim testClaim = claimL.getClaim(selectedClaimName);
-		ExpenseList expenseList = new ExpenseList();
-		Expense testExpense = new Expense("test", selectedClaimName, selectedClaimName, selectedClaimName, null, 0);
-		expenseList.addExpense(testExpense);
-		testExpense.setName("stuff");
-		//activity.finish();
-		//activity = getActivity();
-		claimL = ClaimListController.getClaimList();
-		testClaim = claimL.getClaim(selectedClaimName);
-		testExpense = expenseList.getExpense("stuff");
-		assertNotNull(testExpense);
-		
-	}
+	
+	
+
 
 }

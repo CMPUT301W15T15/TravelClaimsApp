@@ -25,15 +25,30 @@ public class Destination implements Listenable{
 		this.listeners = new ArrayList<Listener>();
 	}
 
+	/**
+	 * Returns Destinations location
+	 * 
+	 * @return location
+	 */
 	public String getLocation() {
 		return location;
 	}
 
+	/**
+	 * Set destination location attribute
+	 * 
+	 * @param location String to set location to 
+	 */
 	public void setLocation(String location) {
 		this.location = location;
 		notifyListeners();
 	}
 	
+	/**
+	 * Set the Destinations location attribute
+	 * 
+	 * @param string String to set Reason to 
+	 */
 	public void setReason(String string) {
 		this.reason = string;
 		notifyListeners();

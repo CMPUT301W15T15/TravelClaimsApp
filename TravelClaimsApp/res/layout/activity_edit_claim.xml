@@ -67,6 +67,7 @@
         android:layout_alignLeft="@+id/ViewExpense"
         android:layout_alignParentBottom="true"
         android:layout_alignRight="@+id/ViewExpense"
+        android:onClick="addDestinationButton"
         android:text="@string/Des" />
 
     <Button
@@ -76,7 +77,7 @@
         android:layout_above="@+id/AddDestinationButton"
         android:layout_alignLeft="@+id/DestinationList"
         android:layout_alignRight="@+id/DestinationList"
-        android:onClick="AddExpenseButton"
+        android:onClick="viewExpensesButton"
         android:text="@string/View" />
 
 </RelativeLayout>

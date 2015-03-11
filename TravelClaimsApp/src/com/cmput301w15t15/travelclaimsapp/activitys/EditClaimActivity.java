@@ -1,33 +1,46 @@
 package com.cmput301w15t15.travelclaimsapp.activitys;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
 import com.cmput301w15t15.travelclaimsapp.ClaimListController;
+import com.cmput301w15t15.travelclaimsapp.DestinationListAdaptor;
 import com.cmput301w15t15.travelclaimsapp.R;
 import com.cmput301w15t15.travelclaimsapp.R.layout;
 import com.cmput301w15t15.travelclaimsapp.R.menu;
 import com.cmput301w15t15.travelclaimsapp.model.Claim;
 import com.cmput301w15t15.travelclaimsapp.model.ClaimList;
+import com.cmput301w15t15.travelclaimsapp.model.Destination;
+import com.cmput301w15t15.travelclaimsapp.model.DestinationList;
+import com.cmput301w15t15.travelclaimsapp.model.Expense;
+
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources.Theme;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.Toast;
+import android.widget.AdapterView.AdapterContextMenuInfo;
 
 /**
  * Activity to handle editing claim 
@@ -39,6 +52,7 @@ import android.widget.Toast;
  */
 public class EditClaimActivity extends FragmentActivity implements TextWatcher {
 	
+	private static ListView destListView;
 	private static EditText claimStartDate;
 	private static EditText claimEndDate;
 	private static EditText claimNameInput;
@@ -46,27 +60,38 @@ public class EditClaimActivity extends FragmentActivity implements TextWatcher {
 	private Claim theClaim; 
 	private ClaimList claimList;
 	private SimpleDateFormat sdf; 
+	private DestinationListAdaptor destAdaptor;
+	private DestinationList dests;
+	private Destination privateDest;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_edit_claim);
+	
+		
 		
 		sdf = new SimpleDateFormat("mm/dd/yyyy",Locale.CANADA);
 		claimStartDate = (EditText) findViewById(R.id.ClaimStart);
 		claimEndDate = (EditText) findViewById(R.id.ClaimEnd);
 		claimNameInput = (EditText) findViewById(R.id.Edit_Claim_Name);
+		destListView = (ListView) findViewById(R.id.DestinationList);
 		
 		claimList = ClaimListController.getClaimList();
 		
 		//get the claim name passed with the intent 
 		String claimName = getIntent().getExtras().getString("claimName");
 		theClaim = claimList.getClaim(claimName);
+		dests = theClaim.getDestinationList(); 
 		
 		claimNameInput.addTextChangedListener(this);
 		claimStartDate.addTextChangedListener(this);
 		claimEndDate.addTextChangedListener(this);
 		
+		destAdaptor = new DestinationListAdaptor(this, R.layout.dest_list_adaptor, dests.toArrayList());
+		destListView.setAdapter(destAdaptor);
+		
+		registerForContextMenu(findViewById(R.id.DestinationList));
 		set_on_click();
 	}
 
@@ -83,6 +108,7 @@ public class EditClaimActivity extends FragmentActivity implements TextWatcher {
 			claimEndDate.setText(sdf.format(theClaim.getEndDate()));
 		}
 		
+		destAdaptor.notifyDataSetChanged();
 		setEditable();
 		
 	}
@@ -94,7 +120,7 @@ public class EditClaimActivity extends FragmentActivity implements TextWatcher {
 		// TODO Auto-generated method stub
 		super.onResume();
 		//set rest of EditTexts if values exist 
-		
+		destAdaptor.notifyDataSetChanged();
 		
 	}
 
@@ -108,6 +134,68 @@ public class EditClaimActivity extends FragmentActivity implements TextWatcher {
 		getMenuInflater().inflate(R.menu.edit_claim, menu);
 		return true;
 	}
+	
+	
+  @Override
+    public void onCreateContextMenu(ContextMenu menu, View v,ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        getMenuInflater().inflate(R.menu.destinations_context_menu, menu);
+    }
+   
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
+        
+        Intent intent;
+        final Destination dest = destAdaptor.getItem(info.position);
+    
+        switch (item.getItemId()) {
+            case R.id.cmenu_dlist_delete:
+            	dests.deleteDestination(dest);
+            	destAdaptor.notifyDataSetChanged();
+            	return true;
+            case R.id.cmenu_dlist_edit:
+            	
+            	final EditText enterLocation = new EditText(this);
+            	final EditText enterReason = new EditText(this);
+            	
+            	enterLocation.setText(dest.getLocation());
+            	enterReason.setText(dest.getReason());
+            
+            	enterLocation.setHint("Enter location");
+            	enterReason.setHint("Enter reason");
+          
+            	LinearLayout linearLayout = new LinearLayout(this);
+            	linearLayout.setOrientation(LinearLayout.VERTICAL);
+            	linearLayout.addView(enterLocation);
+            	linearLayout.addView(enterReason);
+            	
+            	AlertDialog.Builder alert = new AlertDialog.Builder(this);
+            	
+            	alert.setView(linearLayout);
+            
+            	alert.setPositiveButton("Add", new DialogInterface.OnClickListener() {
+        			public void onClick(DialogInterface dialog, int whichButton) {
+        				dest.setLocation(enterLocation.getText().toString());
+        				dest.setReason(enterReason.getText().toString());
+        				destAdaptor.notifyDataSetChanged();
+        			}
+        		});
+        		alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+        			public void onClick(DialogInterface dialog, int whichButton) {
+        				dialog.cancel();
+        			}
+        		});
+        	
+        		alert.show(); 
+            	
+            	return true;
+            default:
+                return super.onContextItemSelected(item);
+        }
+    }
+	
+	
 	//Retrieved on February 28, 2015 from http://developer.android.com/guide/topics/ui/controls/pickers.html
 	public void showTruitonDatePickerDialog(View v)
 	{
@@ -199,7 +287,7 @@ public class EditClaimActivity extends FragmentActivity implements TextWatcher {
     	startActivity(intent);
     }
 	
-	public void AddExpenseButton(View view)
+	public void viewExpensesButton(View view)
     {
 		//need to make a expense 
     	Toast.makeText(this, "Viewing Current Expenses", Toast.LENGTH_SHORT).show();
@@ -207,6 +295,16 @@ public class EditClaimActivity extends FragmentActivity implements TextWatcher {
     	startActivity(intent);   
     }
 
+	/**
+	 * Function that is called when you press the add destination
+	 * 
+	 * @param view
+	 */
+	public void addDestinationButton(View view){
+	
+		showDestinationAlert(new String(), new String());
+	}
+	
 	@Override
 	public void afterTextChanged(Editable s) {
 		
@@ -260,5 +358,48 @@ public class EditClaimActivity extends FragmentActivity implements TextWatcher {
    		if(theClaim.getClaimStatus() == "Submitted" || theClaim.getClaimStatus() == "Approved"){
    			claimNameInput.setFocusable(false);
    		}
+   	}
+   	/**
+   	 * Create a alert dialog for entering Destination values 
+   	 */
+   	private void showDestinationAlert(final String dlocation, final String dreason){
+    	final EditText enterLocation = new EditText(this);
+    	final EditText enterReason = new EditText(this);
+    	
+    	if(!dlocation.equals("")){
+    		enterLocation.setText(dlocation);
+    		
+    	}
+    	if(!dreason.equals("")){
+    		enterReason.setText(dreason);
+    	}
+    	
+  
+    	enterLocation.setHint("Enter location");
+    	enterReason.setHint("Enter reason");
+  
+    	LinearLayout linearLayout = new LinearLayout(this);
+    	linearLayout.setOrientation(LinearLayout.VERTICAL);
+    	linearLayout.addView(enterLocation);
+    	linearLayout.addView(enterReason);
+    	
+    	AlertDialog.Builder alert = new AlertDialog.Builder(this);
+    	
+    	alert.setView(linearLayout);
+    
+    	alert.setPositiveButton("Add", new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int whichButton) {
+				Destination dest = new Destination(enterLocation.getText().toString(), enterReason.getText().toString());
+				ClaimListController.addDestination(dest, theClaim);
+				destAdaptor.notifyDataSetChanged();
+			}
+		});
+		alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int whichButton) {
+				dialog.cancel();
+			}
+		});
+	
+		alert.show(); 
    	}
 }

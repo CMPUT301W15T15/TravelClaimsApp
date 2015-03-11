@@ -16,7 +16,6 @@ public class Claim implements Listenable{
 	private Date startDate;
 	private Date endDate;
 	private DestinationList destinationList;
-	private Destination destination;
 	private Tag tag;
 	private String status;
 	private String comment;
@@ -35,6 +34,8 @@ public class Claim implements Listenable{
 		this.listeners = new ArrayList<Listener>();
 		this.expenseList = new ExpenseList();
 		this.status = "In Progress";
+		this.destinationList = new DestinationList();
+		this.tagList = new TagList();
 		
 	}
 
