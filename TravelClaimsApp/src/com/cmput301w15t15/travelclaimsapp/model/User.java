@@ -16,7 +16,7 @@ public class User {
 	
 	
 	/**
-	 * To construct a user, username and a password hash needed, approver defualts to false.
+	 * To construct a user, username and a password hash needed, approver defaults to false.
 	 *
 	 * @param username
 	 * @param password
