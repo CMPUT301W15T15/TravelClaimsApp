@@ -61,51 +61,21 @@
         android:paddingTop="5dp"
         android:text="@string/PasswordAgain" />
 
-    <TextView
-        android:id="@+id/ApproversTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/NewPassAEditView"
-        android:layout_below="@+id/NewPassAEditView"
-        android:paddingTop="5dp"
-        android:text="@string/Approvers" />
-
-    <Spinner
-        android:id="@+id/ApproverSpinner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/ApproversTextView"
-        android:layout_alignRight="@+id/NewPassAEditView"
-        android:layout_below="@+id/ApproversTextView" />
-
-    <Button
-        android:id="@+id/AddApproverButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/ApproverSpinner"
-        android:layout_alignParentRight="true"
-        android:layout_alignTop="@+id/ApproverSpinner"
-        android:layout_toRightOf="@+id/ApproverSpinner"
-        android:text="@string/Add" />
-
     <Button
         android:id="@+id/CreateUserButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/ApproverSpinner"
+        android:layout_alignLeft="@+id/NewPassAEditView"
         android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/AddApproverButton"
+        android:layout_alignParentRight="true"
         android:paddingTop="5dp"
         android:text="@string/CreateUser" />
 
-    <ListView
-        android:id="@+id/ApproverListView"
-        android:layout_width="match_parent"
+    <CheckBox
+        android:id="@+id/checkBox1"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/CreateUserButton"
-        android:layout_alignLeft="@+id/CreateUserButton"
-        android:layout_below="@+id/ApproverSpinner" >
-
-    </ListView>
+        android:layout_below="@+id/NewPassAEditView"
+        android:text="@string/Approver" />
 
 </RelativeLayout>

@@ -3,20 +3,37 @@ package com.cmput301w15t15.travelclaimsapp.model;
 /**
  * @author machinsk
  *
- * User Class: intended to store usernames and hashed passwords. 
+ * User Class: intended to store usernames, hashed passwords, and approver boolean for a given user. 
  *
  */
 public class User {
 
 	private String username;
-	private ClaimList claimList;
 	
+	//private ClaimList claimList;
 	private byte[] pHash;
 	private boolean approver;
 	
+	
 	/**
-	 * To construct a user, both username and a password hash needed.
-	 * 
+	 * To construct a user, username and a password hash needed, approver defualts to false.
+	 *
+	 * @param username
+	 * @param password
+	 * @param approver
+	 */
+	public User(String username, byte[] password, boolean approver){
+		
+		this.username = username;
+		this.pHash = password;
+		this.approver = approver;
+		
+	}
+	
+	
+	/**
+	 * To construct a user, username and a password hash needed, approver defaults to false.
+	 *
 	 * @param username
 	 * @param password
 	 */
@@ -24,31 +41,39 @@ public class User {
 		
 		this.username = username;
 		this.pHash = password;
+		this.approver = false;
 		
 	}
 
+	
+	/**
+	 * Returns String of username. This attribute is read only from the constructor.
+	 * 
+	 * @return
+	 */
 	public String getUsername() {
 		return username;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
+	
+	/**
+	 * Returns byte array of the password hash. This hash is read only from the constructor.
+	 * 
+	 * @return
+	 */
 	public byte[] getpHash() {
 		return pHash;
 	}
 
-	public void setpHash(byte[] pHash) {
-		this.pHash = pHash;
-	}
 
+	/**
+	 * Returns if boolean whether user is an Approver. This attribute is read only from the constructor.
+	 * 
+	 * @return
+	 */
 	public boolean isApprover() {
 		return approver;
 	}
 
-	public void setApprover(boolean approver) {
-		this.approver = approver;
-	}
 	
 }
