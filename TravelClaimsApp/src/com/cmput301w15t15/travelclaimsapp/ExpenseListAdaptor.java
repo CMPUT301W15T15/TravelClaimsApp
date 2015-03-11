@@ -4,7 +4,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Locale;
 
-import com.cmput301w15t15.travelclaimsapp.ClaimListAdaptor.ViewHolder;
 import com.cmput301w15t15.travelclaimsapp.model.Claim;
 import com.cmput301w15t15.travelclaimsapp.model.Expense;
 import com.cmput301w15t15.travelclaimsapp.model.ExpenseList;
@@ -52,15 +51,15 @@ public class ExpenseListAdaptor extends ArrayAdapter<Expense> {
 			viewHolder = (ViewHolder) rowView.getTag();
 		}
 		
-        viewHolder.claimName.setText(claim.getName());
-        viewHolder.claimStatus.setText(claim.getClaimStatus());
-        
-        SimpleDateFormat sdf = new SimpleDateFormat("mm/dd/yyyy",Locale.CANADA);
-        if(claim.getStartDate() == null){
-        	viewHolder.claimStartDate.setText("");
-        }else{
-        	viewHolder.claimStartDate.setText(sdf.format(claim.getStartDate()));
-        }
+//        viewHolder.claimName.setText(claim.getName());
+//        viewHolder.claimStatus.setText(claim.getClaimStatus());
+//        
+//        SimpleDateFormat sdf = new SimpleDateFormat("mm/dd/yyyy",Locale.CANADA);
+//        if(claim.getStartDate() == null){
+//        	viewHolder.claimStartDate.setText("");
+//        }else{
+//        	viewHolder.claimStartDate.setText(sdf.format(claim.getStartDate()));
+//        }
         
 		return rowView;
 	}

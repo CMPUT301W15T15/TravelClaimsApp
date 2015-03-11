@@ -131,7 +131,7 @@ public class EditExpenseActivityUITest extends
 		//activity = getActivity();
 		claimL = ClaimListController.getClaimList();
 		testClaim = claimL.getClaim(selectedClaimName);
-		testExpense = expenseList.getExpense("stuff");
+		//testExpense = expenseList.getExpense("stuff");
 		assertNotNull(testExpense);
 		
 	}

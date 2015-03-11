@@ -332,7 +332,7 @@ public class EditClaimActivity extends FragmentActivity implements TextWatcher {
    	/**
    	 * Create a alert dialog for entering Destination values 
    	 */
-   	private void showDestinationAlert(String dlocation, String dreason){
+   	private void showDestinationAlert(final String dlocation, final String dreason){
     	final EditText enterLocation = new EditText(this);
     	final EditText enterReason = new EditText(this);
     	
@@ -366,9 +366,13 @@ public class EditClaimActivity extends FragmentActivity implements TextWatcher {
 		});
 		alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int whichButton) {
+				Destination dest = new Destination(dlocation, dreason);
+				ClaimListController.addDestination(dest, theClaim);
+				destAdaptor.notifyDataSetChanged();
 				dialog.cancel();
 			}
 		});
+	
 		alert.show(); 
    	}
 }
