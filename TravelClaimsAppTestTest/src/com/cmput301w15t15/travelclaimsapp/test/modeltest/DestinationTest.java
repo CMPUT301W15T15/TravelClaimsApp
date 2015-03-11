@@ -40,12 +40,12 @@ public class DestinationTest extends TestCase {
 	public void testDestinationList(){
 		dlist.addDestination(dest1);
 		
-		Destination d = dlist.getDestinations().get(0);
+		Destination d = dlist.toArrayList().get(0);
 		
 		assertEquals("Destination not added to list", dest1, d);
 		
 		dlist.deleteDestination(d);
 		
-		assertEquals("Destination was not removed", dlist.getDestinations().size(), 0);
+		assertEquals("Destination was not removed", dlist.toArrayList().size(), 0);
 	}
 }

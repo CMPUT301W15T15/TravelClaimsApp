@@ -39,8 +39,7 @@ public class EditClaimActivityUITest extends
 	private EditText inputReason;
 	private EditText inputStartDate;
 	private EditText inputEndDate;
-	private Button addDestination;
-	private Button newExpenseButton;
+
 	private ClaimList claimList;
 	private Claim claim;
 	private Intent intent;
@@ -61,10 +60,10 @@ public class EditClaimActivityUITest extends
 		
 		//Need to change the id's once UI has been made
 		inputName = (EditText) activity.findViewById(R.id.Edit_Claim_Name);
-		inputDestination = (EditText) activity.findViewById(R.id.Edit_Claim_Name);
-		inputReason = (EditText) activity.findViewById(R.id.Edit_Claim_Description);
-		inputStartDate = (EditText) activity.findViewById(R.id.Edit_Claim_Name);
-		inputEndDate = (EditText) activity.findViewById(R.id.Edit_Claim_Description);
+
+		
+		inputStartDate = (EditText) activity.findViewById(R.id.ClaimStart);
+		inputEndDate = (EditText) activity.findViewById(R.id.ClaimEnd);
 		
 		FileManager.initializeSaver(activity);
 		
@@ -80,16 +79,12 @@ public class EditClaimActivityUITest extends
 			@Override
 			public void run() {
 				inputName.setText("Claim1");
-				inputDestination.setText("Rome");
-				inputReason.setText("Work");
-				inputStartDate.setText("2015-02-11");
-				inputEndDate.setText("2015-03-11");
+				inputStartDate.setText("11/02/2014");
+				inputEndDate.setText("12/20/2014");
 			}
 		});
 		instrumentation.waitForIdleSync();
 		assertEquals("Claim1", inputName.getText().toString());
-		assertEquals("Rome", inputDestination.getText().toString());
-		assertEquals("Work", inputReason.getText().toString());
 		assertEquals("2015-02-11", inputStartDate.getText().toString());
 		assertEquals("2015-03-11", inputEndDate.getText().toString());
 	}
@@ -104,9 +99,7 @@ public class EditClaimActivityUITest extends
 				
 		@Override
 		public void run() {
-			inputDestination.setText("test");
-			inputReason.setText("test1");
-			addDestination.performClick();
+
 			}
 		});
 		instrumentation.waitForIdleSync();
@@ -128,19 +121,7 @@ public class EditClaimActivityUITest extends
 		assertFalse(inputStartDate.isClickable());
 		
 	}
-	//test case: EditClaimActivityUITest#5
-	public void testDataPersistance(){
-		ClaimList claimL = ClaimListController.getClaimList();
-		String selectedClaimName = activity.getIntent().getExtras().getString("claimName");
-		Claim testClaim = claimL.getClaim(selectedClaimName);
-		testClaim.setStartDate(new Date());
-		activity.finish();
-		activity = getActivity();
-		claimL = ClaimListController.getClaimList();
-		testClaim = claimL.getClaim(selectedClaimName);
-		assertEquals("2015-2-1", testClaim.getStartDate());
-		
-	}
+	
 
 	
 	
