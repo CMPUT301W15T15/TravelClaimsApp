@@ -35,6 +35,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ContextMenu.ContextMenuInfo;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -62,7 +63,7 @@ public class EditClaimActivity extends FragmentActivity implements TextWatcher {
 	private SimpleDateFormat sdf; 
 	private DestinationListAdaptor destAdaptor;
 	private DestinationList dests;
-	private Destination privateDest;
+	private Button addDestButton;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +77,7 @@ public class EditClaimActivity extends FragmentActivity implements TextWatcher {
 		claimEndDate = (EditText) findViewById(R.id.ClaimEnd);
 		claimNameInput = (EditText) findViewById(R.id.Edit_Claim_Name);
 		destListView = (ListView) findViewById(R.id.DestinationList);
+		addDestButton = (Button) findViewById(R.id.AddDestinationButton);
 		
 		claimList = ClaimListController.getClaimList();
 		
@@ -106,6 +108,14 @@ public class EditClaimActivity extends FragmentActivity implements TextWatcher {
 		}
 		if(theClaim.getEndDate()!=null){
 			claimEndDate.setText(sdf.format(theClaim.getEndDate()));
+		}
+		if(theClaim.getStatus().equals("Submitted") || theClaim.getStatus().equals("Approved")){
+			claimNameInput.setFocusable(false);
+			destListView.setClickable(false);
+			destListView.setLongClickable(false);
+			claimStartDate.setFocusable(false);
+			claimEndDate.setFocusable(false);
+			
 		}
 		
 		destAdaptor.notifyDataSetChanged();
@@ -146,8 +156,7 @@ public class EditClaimActivity extends FragmentActivity implements TextWatcher {
     public boolean onContextItemSelected(MenuItem item) {
         AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
         
-        Intent intent;
-        Destination dest = destAdaptor.getItem(info.position);
+        final Destination dest = destAdaptor.getItem(info.position);
     
         switch (item.getItemId()) {
             case R.id.cmenu_dlist_delete:
@@ -156,8 +165,38 @@ public class EditClaimActivity extends FragmentActivity implements TextWatcher {
             	return true;
             case R.id.cmenu_dlist_edit:
             	
-            	showDestinationAlert(dest.getLocation(), dest.getReason());
-            	ClaimListController.deleteDestination(dest, theClaim);
+            	final EditText enterLocation = new EditText(this);
+            	final EditText enterReason = new EditText(this);
+            	
+            	enterLocation.setText(dest.getLocation());
+            	enterReason.setText(dest.getReason());
+            
+            	enterLocation.setHint("Enter location");
+            	enterReason.setHint("Enter reason");
+          
+            	LinearLayout linearLayout = new LinearLayout(this);
+            	linearLayout.setOrientation(LinearLayout.VERTICAL);
+            	linearLayout.addView(enterLocation);
+            	linearLayout.addView(enterReason);
+            	
+            	AlertDialog.Builder alert = new AlertDialog.Builder(this);
+            	
+            	alert.setView(linearLayout);
+            
+            	alert.setPositiveButton("Add", new DialogInterface.OnClickListener() {
+        			public void onClick(DialogInterface dialog, int whichButton) {
+        				dest.setLocation(enterLocation.getText().toString());
+        				dest.setReason(enterReason.getText().toString());
+        				destAdaptor.notifyDataSetChanged();
+        			}
+        		});
+        		alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+        			public void onClick(DialogInterface dialog, int whichButton) {
+        				dialog.cancel();
+        			}
+        		});
+        	
+        		alert.show(); 
             	
             	return true;
             default:
@@ -356,7 +395,7 @@ public class EditClaimActivity extends FragmentActivity implements TextWatcher {
     	AlertDialog.Builder alert = new AlertDialog.Builder(this);
     	
     	alert.setView(linearLayout);
-    	
+    
     	alert.setPositiveButton("Add", new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int whichButton) {
 				Destination dest = new Destination(enterLocation.getText().toString(), enterReason.getText().toString());
@@ -366,9 +405,6 @@ public class EditClaimActivity extends FragmentActivity implements TextWatcher {
 		});
 		alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int whichButton) {
-				Destination dest = new Destination(dlocation, dreason);
-				ClaimListController.addDestination(dest, theClaim);
-				destAdaptor.notifyDataSetChanged();
 				dialog.cancel();
 			}
 		});

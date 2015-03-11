@@ -154,7 +154,6 @@ public class Claim implements Listenable{
 
 	public void setStatus(String status) {
 		this.status=status;
-		// TODO Auto-generated method stub
 		notifyListeners();
 	}
 

@@ -61,6 +61,16 @@ public class ClaimListController {
 		addClaimListeners(claim);
 		getClaimList().addClaim(claim);
 	}
+	/**
+	 * Uses ClaimList.removeClaim to remove a claim from claimList. 
+	 * 
+	 * @param claim claim to be removed from claimlist 
+	 */
+	public static void deleteClaim(Claim claim){
+		
+		getClaimList().removeClaim(claim);
+	}
+	
 	
 	/**
 	 * Uses Claim.addExpense() to add a expense with listener to claim
