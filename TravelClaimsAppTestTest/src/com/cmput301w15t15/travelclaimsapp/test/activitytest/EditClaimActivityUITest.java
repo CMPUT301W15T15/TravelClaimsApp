@@ -60,8 +60,12 @@ public class EditClaimActivityUITest extends
 
 	protected void setUp() throws Exception {
 		super.setUp();
-		claim = new Claim("Claim 1");
+
+		claim = new Claim("Claim1");
 		ClaimListController.addClaimToClaimList(claim);
+
+		
+
 		intent = new Intent();
 		intent.putExtra("claimName", "Claim1");
 		setActivityIntent(intent);
@@ -100,6 +104,7 @@ public class EditClaimActivityUITest extends
 	}
 
 
+
 	
 	/**
 	 * Test add destination dialog popup
@@ -126,6 +131,14 @@ public class EditClaimActivityUITest extends
 		
 	}
 	
+
+	
+	
+
+
+
+	
+
 	
 	
 

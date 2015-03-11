@@ -156,6 +156,7 @@ public class EditClaimActivity extends FragmentActivity implements TextWatcher {
     public boolean onContextItemSelected(MenuItem item) {
         AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
         
+
         final Destination dest = destAdaptor.getItem(info.position);
     
         switch (item.getItemId()) {
