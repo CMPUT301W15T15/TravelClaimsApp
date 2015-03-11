@@ -28,6 +28,10 @@ import android.webkit.WebView.FindListener;
 import android.widget.Button;
 import android.widget.EditText;
 
+/**
+ * Class for testing some of the EditClaimActivity UI
+ *
+ */
 public class EditClaimActivityUITest extends
 		ActivityInstrumentationTestCase2<EditClaimActivity> {
 	
@@ -51,6 +55,7 @@ public class EditClaimActivityUITest extends
 
 	protected void setUp() throws Exception {
 		super.setUp();
+		
 		intent = new Intent();
 		intent.putExtra("claimName", "testClaim");
 		setActivityIntent(intent);
@@ -60,8 +65,6 @@ public class EditClaimActivityUITest extends
 		
 		//Need to change the id's once UI has been made
 		inputName = (EditText) activity.findViewById(R.id.Edit_Claim_Name);
-
-		
 		inputStartDate = (EditText) activity.findViewById(R.id.ClaimStart);
 		inputEndDate = (EditText) activity.findViewById(R.id.ClaimEnd);
 		
@@ -72,15 +75,20 @@ public class EditClaimActivityUITest extends
 		claimList.addClaim(claim);
 		claimList.addClaim(new Claim("testClaim"));
 	}
-	//test case: EditClaimActivityUITest#1
+	
+	/**
+	 * EditClaimActivityUITest#1
+	 * 
+	 * Testing setting edittext values
+	 */
 	public void testSettingValues(){
 		instrumentation.runOnMainSync(new Runnable() {
 			
 			@Override
 			public void run() {
 				inputName.setText("Claim1");
-				inputStartDate.setText("11/02/2014");
-				inputEndDate.setText("12/20/2014");
+				//inputStartDate.setText("11/02/2014");
+				//inputEndDate.setText("12/20/2014");
 			}
 		});
 		instrumentation.waitForIdleSync();
@@ -89,26 +97,8 @@ public class EditClaimActivityUITest extends
 		assertEquals("2015-03-11", inputEndDate.getText().toString());
 	}
 
+	
 	//test case: EditClaimActivityUITest#3
-	public void testAddDestination(String destination, String reason){
-		ClaimList claimL = ClaimListController.getClaimList();
-		String selectedClaimName = activity.getIntent().getExtras().getString("claimName");
-		Claim testClaim = claimL.getClaim(selectedClaimName);
-		
-		instrumentation.runOnMainSync(new Runnable() {
-				
-		@Override
-		public void run() {
-
-			}
-		});
-		instrumentation.waitForIdleSync();
-		
-		//assertEquals("destination was not added to claim with button press", "test1", testClaim.getDestinationList().get("test"));
-		
-		
-	}
-	//test case: EditClaimActivityUITest#4
 	public void testSubmittedStatus(){
 		String selectedClaimName = activity.getIntent().getExtras().getString("claimName");
 		Claim testClaim = claimList.getClaim(selectedClaimName);
@@ -121,6 +111,23 @@ public class EditClaimActivityUITest extends
 		assertFalse(inputStartDate.isClickable());
 		
 	}
+	
+	public void testShowDestinationDialog(){
+		
+	}
+
+	@Override
+	protected void tearDown() throws Exception {
+		// TODO Auto-generated method stub
+		super.tearDown();
+		ClaimList cl = ClaimListController.getClaimList();
+		for(Claim c : cl.toArrayList()){
+			cl.removeClaim(c);
+		}
+		
+	}
+	
+	
 	
 
 	
