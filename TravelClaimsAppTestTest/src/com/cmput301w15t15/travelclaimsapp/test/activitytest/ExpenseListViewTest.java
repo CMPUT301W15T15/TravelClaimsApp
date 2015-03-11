@@ -39,7 +39,7 @@ private Claim claim;
 
 	//Test Case: ExpenseListViewTest#1
 	public void testClaimListViewUpdate(){
-		Expense e = new Expense("stuff");
+		Expense e = new Expense("stuff", null, null, null, null, 0);
 		claim.addExpense(e);
 		adaptor.notifyDataSetChanged();
 		assertEquals("expense was not added to adaptor",1, adaptor.getCount());

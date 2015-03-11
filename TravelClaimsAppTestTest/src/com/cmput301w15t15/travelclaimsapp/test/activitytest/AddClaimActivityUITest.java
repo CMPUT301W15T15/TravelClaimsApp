@@ -6,6 +6,7 @@ import com.cmput301w15t15.travelclaimsapp.ClaimListAdaptor;
 import com.cmput301w15t15.travelclaimsapp.R;
 import com.cmput301w15t15.travelclaimsapp.activitys.AddClaimActivity;
 import com.cmput301w15t15.travelclaimsapp.activitys.EditClaimActivity;
+import com.cmput301w15t15.travelclaimsapp.activitys.EditExpenseActivity;
 import com.cmput301w15t15.travelclaimsapp.model.Claim;
 import com.cmput301w15t15.travelclaimsapp.model.ClaimList;
 
@@ -78,7 +79,7 @@ public class AddClaimActivityUITest extends ActivityInstrumentationTestCase2<Add
 
 	public void testContextMenuPopupAddExpense() throws IOException{
 		//add a monitor that waits for AddExpenseActivity to start
-		ActivityMonitor activityMonitor = new ActivityMonitor("ExpenseListActivity", null, false);
+		ActivityMonitor activityMonitor = new ActivityMonitor(EditExpenseActivity.class.getName(), null, false);
 
 		instrumentation.addMonitor(activityMonitor);
 		
@@ -91,7 +92,7 @@ public class AddClaimActivityUITest extends ActivityInstrumentationTestCase2<Add
 			@Override
 			public void run() {
 				listView.requestFocus();
-				listView.setSelection(0);
+				listView.setSelection(1);
 				
 				}
 		});
@@ -99,7 +100,7 @@ public class AddClaimActivityUITest extends ActivityInstrumentationTestCase2<Add
 		instrumentation.waitForIdleSync();
 	
 		Activity nextActivity = instrumentation.waitForMonitorWithTimeout(activityMonitor, 3000);
-		assertTrue(test);
+		
 		assertNotNull("The Activity is null", nextActivity);
 		
 	}

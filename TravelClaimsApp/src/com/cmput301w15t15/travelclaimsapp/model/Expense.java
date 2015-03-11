@@ -9,9 +9,26 @@ import android.net.Uri;
 public class Expense implements Listenable{
 	private int price;
 	protected transient ArrayList<Listener> listeners;
-	private String description;
+	protected String expenseDes;
+	protected String expenseName;
+	protected Date expenseDate;
+	protected Integer expenseCost;
+	protected String expenseCurr;
+	protected String expenseCat;
+	protected Uri expenseReceipt;
 	
-	public Expense(String string) {
+	public Expense(String expenseName, String expenseDes, String expenseCurr, String expenseCat, Date expenseDate, Integer expenseCost) {
+		this.expenseName = expenseName;
+		this.expenseDes = expenseDes;
+		this.expenseDate = expenseDate;
+		this.expenseCost = expenseCost;
+		this.expenseCurr = expenseCurr;
+		this.expenseCat = expenseCat;
+		this.listeners = new ArrayList<Listener>();
+	}
+	
+	public Expense(String expenseName){
+		this.expenseName = expenseName;
 		this.listeners = new ArrayList<Listener>();
 	}
 
@@ -26,14 +43,37 @@ public class Expense implements Listenable{
 	public void addFlag(){
 		// TODO
 	}
-	public void setName(String string) {
-		// TODO Auto-generated method stub
-		
+	public void setName(String expenseName) {
+		this.expenseName = expenseName;
 	}
 	
 	public String getName() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.expenseName;
+	}
+	
+	public void setCost(int expenseCost){
+		this.expenseCost = expenseCost;
+	}
+	
+	public Integer getCost()
+	{
+		return this.expenseCost;
+	}
+	
+	public void setCurr(String expenseCurr)
+	{
+		this.expenseCurr = expenseCurr;
+	}
+	
+	public String getCurr(){
+		return this.expenseCurr;
+	}
+	
+	public void setCat(String expenseCat){
+		this.expenseCat = expenseCat;		
+	}
+	public String getCat(){
+		return this.expenseCat;
 	}
 
 	public void removeFlag()
@@ -48,57 +88,43 @@ public class Expense implements Listenable{
 	}
 
 
-	public void takeReceipt() {
-		// TODO Auto-generated method stub
-		
+	public void takeReceipt(Uri expenseReceipt) {
+		this.expenseReceipt = expenseReceipt;
 	}
 	
 
 	public Uri getReceipt() {
 		// TODO Auto-generated method stub
-		return null;
+		return this.expenseReceipt;
 	}
 	
 	public void deleteReceipt() {
-		// TODO Auto-generated method stub
+		this.expenseReceipt = null;
 		
 	}
 	
 	public boolean emptyReceipt() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	public Date getDate() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.expenseDate;
 	}
 
-	public void setDate(Date date) {
-		// TODO Auto-generated method stub
+	public void setDate(Date expenseDate) {
+		this.expenseDate = expenseDate;
 		
 	}
 
-	public void setDescription(String string) {
-		this.description = string;
+	public void setDes(String expenseDes) {
+		this.expenseDes = expenseDes;
 		
 	}
 
-	public String getDescription() {
-		// TODO Auto-generated method stub
-		return this.description;
+	public String getDes() {
+		return this.expenseDes;
 	}
 
-
-	public Uri takeAPhoto() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public void deleteAPhoto() {
-		// TODO Auto-generated method stub
-		
-	}
 	public void notifyListeners() {
 		for (Listener listener : listeners) {
 			listener.update();
@@ -111,6 +137,12 @@ public class Expense implements Listenable{
 	
 	public void deleteListener(Listener listener){
 		listeners.remove(listener);
+	}
+
+	@Override
+	public void setListeners() {
+		this.listeners = new ArrayList<Listener>();
+		
 	}
 	
 	

@@ -1,6 +1,7 @@
 package com.cmput301w15t15.travelclaimsapp.model;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 public class ExpenseList {
 	
@@ -19,10 +20,10 @@ public class ExpenseList {
 	public void addExpense(Expense expense1) {
 		// TODO Auto-generated method stub
 		
+		
 	}
 	
 	public Expense getExpense(String string) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -66,6 +67,12 @@ public class ExpenseList {
 			this.totalValue=this.totalValue+expenseList.get(i).getValue();
 		}
 		return this.totalValue;
+	}
+
+
+	public void setListeners() {
+		this.listeners = new ArrayList<Listener>();
+		
 	}
 	
 }

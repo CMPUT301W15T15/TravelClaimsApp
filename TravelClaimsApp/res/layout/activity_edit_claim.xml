@@ -8,36 +8,6 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".EditClaimActivity" >
 
-    <EditText
-        android:id="@+id/Edit_Claim_Description"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignRight="@+id/Edit_Claim_Name"
-        android:layout_below="@+id/Edit_Claim_Name"
-        android:ems="10"
-        android:hint="@string/Description"
-        android:inputType="textMultiLine" />
-
-    <Spinner
-        android:id="@+id/StatusSpinner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/Edit_Claim_Description"
-        android:layout_toRightOf="@+id/ClaimStart"
-        android:entries="@array/StatusArray" />
-
-    <Button
-        android:id="@+id/ViewExpense"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:onClick="AddExpenseButton"
-        android:text="@string/View" />
-
     <TextView
         android:id="@+id/Edit_Claim_DestinationTitle"
         android:layout_width="wrap_content"
@@ -64,7 +34,6 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:layout_alignRight="@+id/StatusSpinner"
         android:ems="10"
         android:hint="@string/Name" />
 
@@ -73,7 +42,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_alignTop="@+id/StatusSpinner"
+        android:layout_below="@+id/Edit_Claim_Name"
         android:ems="10"
         android:hint="@string/StartDate"
         android:inputType="date" >
@@ -90,5 +59,24 @@
         android:ems="10"
         android:hint="@string/Finish"
         android:inputType="date" />
+
+    <Button
+        android:id="@+id/AddDestinationButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/ViewExpense"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/ViewExpense"
+        android:text="@string/Des" />
+
+    <Button
+        android:id="@+id/ViewExpense"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/AddDestinationButton"
+        android:layout_alignLeft="@+id/DestinationList"
+        android:layout_alignRight="@+id/DestinationList"
+        android:onClick="AddExpenseButton"
+        android:text="@string/View" />
 
 </RelativeLayout>
