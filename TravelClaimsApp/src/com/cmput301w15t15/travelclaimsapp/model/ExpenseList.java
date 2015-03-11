@@ -23,8 +23,9 @@ public class ExpenseList {
 		
 	}
 	
-	public Expense getExpense(String string) {
-		return null;
+	public Expense getExpense(int position) {
+		return this.expenseList.get(position);
+	
 	}
 
 	public void removeExpense(Expense expense1) {
