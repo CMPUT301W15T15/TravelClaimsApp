@@ -7,6 +7,7 @@ import java.util.Map;
 
 import com.cmput301w15t15.travelclaimsapp.model.Claim;
 import com.cmput301w15t15.travelclaimsapp.model.Destination;
+import com.cmput301w15t15.travelclaimsapp.model.Tag;
 
 import android.app.Activity;
 import android.content.Context;
@@ -17,6 +18,10 @@ import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+/**
+ * 	Custom ArrayAdaptor for displaying the claimlist 
+ *  
+ */
 public class ClaimListAdaptor extends ArrayAdapter<Claim> {
 
 	private Context context;
@@ -46,6 +51,7 @@ public class ClaimListAdaptor extends ArrayAdapter<Claim> {
 	        viewHolder.claimStatus = (TextView) rowView.findViewById(R.id.claimAdaptor_status);
 	        viewHolder.claimStartDate = (TextView) rowView.findViewById(R.id.claimAdaptor_startDate);
 	        viewHolder.destinations = (LinearLayout) rowView.findViewById(R.id.linearLayout_destinations);
+	        viewHolder.tags = (LinearLayout) rowView.findViewById(R.id.LinearLayout_tags);
  	        rowView.setTag(viewHolder);
  	        
 		}else{
@@ -55,14 +61,27 @@ public class ClaimListAdaptor extends ArrayAdapter<Claim> {
         viewHolder.claimName.setText(claim.getName());
         viewHolder.claimStatus.setText(claim.getClaimStatus());
         ArrayList<Destination> dests = claim.getDestinationList().toArrayList();
+        viewHolder.destinations.removeAllViews();
         if(dests.size()>0){
         	TextView tv1 = new TextView(context);
         	tv1.setText("Destinations:");
         	viewHolder.destinations.addView(tv1);
         	for(Destination dest : dests){
             	TextView tv = new TextView(context);
-            	tv.setText(dest.getLocation());
+            	tv.setText(dest.getLocation()+": "+dest.getReason());
             	viewHolder.destinations.addView(tv);
+            }
+        }
+        ArrayList<Tag> taglist = claim.getTagList().toArrayList();
+        viewHolder.tags.removeAllViews();
+        if(taglist.size()>0){
+        	TextView tv1 = new TextView(context);
+        	tv1.setText("Tags:");
+        	viewHolder.tags.addView(tv1);
+        	for(Tag t : taglist){
+            	TextView tv = new TextView(context);
+            	tv.setText(" "+t.getName());
+            	viewHolder.tags.addView(tv);
             }
         }
         

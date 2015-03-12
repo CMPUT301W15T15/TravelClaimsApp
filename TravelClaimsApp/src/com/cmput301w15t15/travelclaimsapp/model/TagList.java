@@ -5,12 +5,14 @@ import java.util.ArrayList;
 
 
 
-public class TagList {
+public class TagList implements Listenable{
 	//private String tagListName;
 	protected ArrayList<Tag> tagList;
+	private transient ArrayList<Listener> listeners;
 	
 	public TagList(){
 		tagList=new ArrayList<Tag>();
+		this.listeners = new ArrayList<Listener>();
 	}
 	
 	/*****************
@@ -21,7 +23,7 @@ public class TagList {
 	
 	public void addTag(Tag tag) {
 		this.tagList.add(tag);
-		
+		notifyListeners();
 	}
 
 	public ArrayList<Tag> toArrayList(){
@@ -35,6 +37,7 @@ public class TagList {
 
 	public void removeTag(Tag tag) {
 		tagList.remove(tag);
+		notifyListeners();
 		
 	}
 	
@@ -82,6 +85,32 @@ public class TagList {
 				tagList.get(i).rename(newTagName);
 			}
 		}
+		notifyListeners();
+		
+	}
+	@Override
+	public void notifyListeners() {
+		for(Listener listener : listeners){
+			listener.update();
+		}
+		
+	}
+
+	@Override
+	public void addListener(Listener listener) {
+		this.listeners.add(listener);
+		
+	}
+
+	@Override
+	public void setListeners() {
+		this.listeners = new ArrayList<Listener>();
+		
+	}
+
+	@Override
+	public void deleteListener(Listener listener) {
+		this.listeners.remove(listener);
 		
 	}
 

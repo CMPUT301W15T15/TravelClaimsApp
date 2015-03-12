@@ -9,6 +9,8 @@ import com.cmput301w15t15.travelclaimsapp.model.DestinationList;
 import com.cmput301w15t15.travelclaimsapp.model.Expense;
 import com.cmput301w15t15.travelclaimsapp.model.ExpenseList;
 import com.cmput301w15t15.travelclaimsapp.model.Listener;
+import com.cmput301w15t15.travelclaimsapp.model.Tag;
+import com.cmput301w15t15.travelclaimsapp.model.TagList;
 
 
 /**
@@ -89,6 +91,12 @@ public class ClaimListController {
 		});
 	}
 	
+	/**
+	 * Adds a destination to a claim
+	 * 
+	 * @param dest 	destination to add to claim
+	 * @param claim claim to add destination to 
+	 */
 	public static void addDestination(Destination dest, Claim claim){
 		claim.getDestinationList().addDestination(dest);
 		dest.addListener(new Listener() {
@@ -100,9 +108,31 @@ public class ClaimListController {
 			}
 		});
 	}
+	/**
+	 * Deletes a destination from a claim
+	 * 
+	 * @param dest	destination to delete
+	 * @param claim removes destination from this claim
+	 */
 	public static void deleteDestination(Destination dest, Claim claim){
 		claim.getDestinationList().deleteDestination(dest);
 		
+	}
+	/**
+	 * Adds a tag to a given claim
+	 * 
+	 * @param claim claim to add tag to 
+	 * @param tag   tag to add to claim
+	 */
+	public static void addTag(Claim claim, Tag tag) {
+		tag.addListener(new Listener() {
+			@Override
+			public void update() {
+				save();
+				
+			}
+		});
+		claim.getTagList().addTag(tag);
 	}
 	
 	
@@ -173,8 +203,33 @@ public class ClaimListController {
 			});
 			
 		}
+		TagList tList = claim.getTagList();
+		tList.setListeners();
+		tList.addListener(new Listener() {
+			
+			@Override
+			public void update() {
+				save();
+				
+			}
+		});
+		for(Tag tag : tList.toArrayList()){
+			tag.setListeners();
+			tag.addListener(new Listener() {
+				
+				@Override
+				public void update() {
+					save();
+					
+				}
+			});
+			
+		}
 		
 	}
+
+
+
 
 
 }
