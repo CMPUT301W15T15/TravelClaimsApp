@@ -8,8 +8,6 @@ public class ExpenseList {
 	private int totalValue;
 	
 	protected transient ArrayList<Listener> listeners;
-	
-	
 	private ArrayList<Expense> expenseList;
 	
 	public ExpenseList(){
@@ -18,9 +16,7 @@ public class ExpenseList {
 	}
 	
 	public void addExpense(Expense expense1) {
-		// TODO Auto-generated method stub
-		
-		
+		this.expenseList.add(expense1);
 	}
 	
 	public Expense getExpense(int position) {

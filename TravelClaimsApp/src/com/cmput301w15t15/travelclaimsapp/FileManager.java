@@ -10,7 +10,6 @@ import java.lang.reflect.Type;
 
 import com.cmput301w15t15.travelclaimsapp.model.ClaimList;
 import com.cmput301w15t15.travelclaimsapp.model.TagList;
-import com.cmput301w15t15.travelclaimsapp.model.UserList;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -104,52 +103,55 @@ public class FileManager {
 	
 	
 	
-	
-	public UserList loadUserLFromFile() {
-		UserList users = new UserList();
-		Gson gson = new Gson();
-		try {
-			//openFileInput only takes a a filename
-			FileInputStream fis = context.openFileInput(USERFILENAME);
-			InputStreamReader in = new InputStreamReader(fis);
-			//Taken from http://google-gson.googlecode.com/svn/trunk/gson/docs/javadocs/index.html 2015-19-01
-			Type typeOfT = new TypeToken<UserList>(){}.getType();
-			users = gson.fromJson(in, typeOfT);
-			fis.close();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		if (users.size()==0){
-			return new UserList();
-		}
-		return users;
-	}
-	
-	
-	
-	//from https://github.com/scheidemanS/lonelyTwitter/blob/master/src/ca/ualberta/cs/lonelytwitter/LonelyTwitterActivity.java on 2015-01-25
-	public void saveUserLInFile(UserList userList) {
-		Gson gson = new Gson();
-		
-		try {
-			//openFileOutput is a Activity method
-			FileOutputStream fos = context.openFileOutput(USERFILENAME,0);
-			OutputStreamWriter osw = new OutputStreamWriter(fos);
-			gson.toJson(userList, osw);
-			osw.flush();
-			fos.close();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+	/**
+	 * TODO: Do we need these methods anymore ?
+	 * commented out as they were causing errors
+	 */
+//	public UserList loadUserLFromFile() {
+//		UserList users = new UserList();
+//		Gson gson = new Gson();
+//		try {
+//			//openFileInput only takes a a filename
+//			FileInputStream fis = context.openFileInput(USERFILENAME);
+//			InputStreamReader in = new InputStreamReader(fis);
+//			//Taken from http://google-gson.googlecode.com/svn/trunk/gson/docs/javadocs/index.html 2015-19-01
+//			Type typeOfT = new TypeToken<UserList>(){}.getType();
+//			users = gson.fromJson(in, typeOfT);
+//			fis.close();
+//		} catch (FileNotFoundException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		if (users.size()==0){
+//			return new UserList();
+//		}
+//		return users;
+//	}
+//	
+//	
+//	
+//	//from https://github.com/scheidemanS/lonelyTwitter/blob/master/src/ca/ualberta/cs/lonelytwitter/LonelyTwitterActivity.java on 2015-01-25
+//	public void saveUserLInFile(UserList userList) {
+//		Gson gson = new Gson();
+//		
+//		try {
+//			//openFileOutput is a Activity method
+//			FileOutputStream fos = context.openFileOutput(USERFILENAME,0);
+//			OutputStreamWriter osw = new OutputStreamWriter(fos);
+//			gson.toJson(userList, osw);
+//			osw.flush();
+//			fos.close();
+//		} catch (FileNotFoundException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//	}
 	
 	
 	

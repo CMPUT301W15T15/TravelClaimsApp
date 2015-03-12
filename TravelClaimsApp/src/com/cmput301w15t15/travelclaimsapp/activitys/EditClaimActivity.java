@@ -47,8 +47,7 @@ import android.widget.AdapterView.AdapterContextMenuInfo;
  * Activity to handle editing claim 
  *
  * TODO:
- *	-Add destinations 
- *	-Show destination list
+ *  -Add tags?
  *
  */
 public class EditClaimActivity extends FragmentActivity implements TextWatcher {
@@ -70,8 +69,6 @@ public class EditClaimActivity extends FragmentActivity implements TextWatcher {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_edit_claim);
 	
-		
-		
 		sdf = new SimpleDateFormat("mm/dd/yyyy",Locale.CANADA);
 		claimStartDate = (EditText) findViewById(R.id.ClaimStart);
 		claimEndDate = (EditText) findViewById(R.id.ClaimEnd);

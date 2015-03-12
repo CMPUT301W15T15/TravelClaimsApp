@@ -5,6 +5,12 @@ import java.util.ArrayList;
 
 import com.cmput301w15t15.travelclaimsapp.ClaimListController;
 
+/**
+ * 
+ * TODO: SHould we change addClaim from throwing IOException to just return true or false?
+ * 		 Or Create custom exception 
+ *
+ */
 public class ClaimList implements Listenable{
 	protected ArrayList<Claim> claimList;
 	protected transient ArrayList<Listener> listeners;
