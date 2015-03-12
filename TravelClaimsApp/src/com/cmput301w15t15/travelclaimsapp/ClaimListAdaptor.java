@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Map;
 
+import com.cmput301w15t15.travelclaimsapp.R.id;
 import com.cmput301w15t15.travelclaimsapp.model.Claim;
 import com.cmput301w15t15.travelclaimsapp.model.Destination;
 import com.cmput301w15t15.travelclaimsapp.model.Tag;
@@ -52,6 +53,7 @@ public class ClaimListAdaptor extends ArrayAdapter<Claim> {
 	        viewHolder.claimStartDate = (TextView) rowView.findViewById(R.id.claimAdaptor_startDate);
 	        viewHolder.destinations = (LinearLayout) rowView.findViewById(R.id.linearLayout_destinations);
 	        viewHolder.tags = (LinearLayout) rowView.findViewById(R.id.LinearLayout_tags);
+	        viewHolder.destinationTitle = (TextView) rowView.findViewById(id.claimAdaptor_destinations_title);
  	        rowView.setTag(viewHolder);
  	        
 		}else{
@@ -60,18 +62,20 @@ public class ClaimListAdaptor extends ArrayAdapter<Claim> {
 		
         viewHolder.claimName.setText(claim.getName());
         viewHolder.claimStatus.setText(claim.getClaimStatus());
+        //add destinations to viewholder
         ArrayList<Destination> dests = claim.getDestinationList().toArrayList();
         viewHolder.destinations.removeAllViews();
         if(dests.size()>0){
-        	TextView tv1 = new TextView(context);
-        	tv1.setText("Destinations:");
-        	viewHolder.destinations.addView(tv1);
+        	viewHolder.destinations.setVisibility(android.view.View.VISIBLE);
         	for(Destination dest : dests){
             	TextView tv = new TextView(context);
             	tv.setText(dest.getLocation()+": "+dest.getReason());
             	viewHolder.destinations.addView(tv);
             }
+        }else{
+        	viewHolder.destinations.setVisibility(android.view.View.INVISIBLE);	
         }
+        //add tags to viewholder
         ArrayList<Tag> taglist = claim.getTagList().toArrayList();
         viewHolder.tags.removeAllViews();
         if(taglist.size()>0){
@@ -104,6 +108,7 @@ public class ClaimListAdaptor extends ArrayAdapter<Claim> {
         public LinearLayout destinations;
         public LinearLayout amounts;
         public LinearLayout tags;
+        public TextView destinationTitle;
     
     }
 
