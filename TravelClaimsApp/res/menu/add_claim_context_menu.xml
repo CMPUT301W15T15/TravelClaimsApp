@@ -6,5 +6,6 @@
     </item><item android:id="@+id/cmenu_delete_claim" android:title="Delete">
     </item>
     <item android:id="@+id/cmenu_addTag" android:title="Add Tag"></item>
+    <item android:id="@+id/cmenu_dummyClaim" android:title="Add test claim"></item>
     </menu>
 

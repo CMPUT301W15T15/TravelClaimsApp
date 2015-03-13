@@ -43,10 +43,7 @@ import android.widget.Toast;
  * Activity for the AddClaim/ClaimList view 
  * 
  * TODO:
- *	-add tag button in content menu
- *	-submit button in context menu
- *	-Show currencies 
- *	-show destinations 
+ *	-
  *
  */
 public class AddClaimActivity extends Activity {
@@ -172,6 +169,16 @@ public class AddClaimActivity extends Activity {
             	tagAdaptor.notifyDataSetChanged();
             	
             	return true;
+            case R.id.cmenu_dummyClaim:
+            	Claim c = new Claim("Claim"+ClaimListController.getClaimList().size());
+            	c.addExpense(new Expense("t1", null, "EUR", null, null, 40));
+            	c.addExpense(new Expense("t2", null, "GBP", null, null, 100));
+            	c.addExpense(new Expense("t3", null, "CAD", null, null, 200));
+            	c.addExpense(new Expense("t4", null, "USD", null, null, 1000));
+            	c.addExpense(new Expense("t5", null, "EUR", null, null, 40));
+            	ClaimListController.addClaimToClaimList(c);
+            	claimAdaptor.notifyDataSetChanged();
+            	
             default:
                 return super.onContextItemSelected(item);
         }
@@ -193,13 +200,13 @@ public class AddClaimActivity extends Activity {
 
     public void AddClaimButton(View view)
     {	
-    	Claim claim = new Claim("Claim"+ClaimListController.getClaimList().size());
-    	try {
-			ClaimListController.addClaimToClaimList(claim);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			//e.printStackTrace();
-		}
+    	int i = claimList.size();
+    	while(ClaimListController.getClaimList().getClaim("Claim"+i)!=null){
+    		i++;
+    	}
+    	Claim claim = new Claim("Claim"+i);
+		ClaimListController.addClaimToClaimList(claim);
+		
     	Toast.makeText(this, "Creating a Claim", Toast.LENGTH_SHORT).show();
     	Intent intent = new Intent(AddClaimActivity.this, EditClaimActivity.class);
     	//attach claim name to intent 

@@ -33,11 +33,13 @@ public class ClaimListController {
 	static public ClaimList getClaimList() {
 		if(claimList == null){
 			claimList = FileManager.getSaver().loadClaimLFromFile();
+			claimList.sort();
 			claimList.addListener(new Listener() {
 				
 				@Override
 				public void update() {
 					save();
+					claimList.sort();
 					
 				}
 			});
@@ -59,9 +61,10 @@ public class ClaimListController {
 	 * @param claim claim to be added to claimlist 
 	 * @throws IOException 
 	 */
-	public static void addClaimToClaimList(Claim claim) throws IOException{
+	public static void addClaimToClaimList(Claim claim){
 		addClaimListeners(claim);
 		getClaimList().addClaim(claim);
+		getClaimList().sort();
 	}
 	/**
 	 * Uses ClaimList.removeClaim to remove a claim from claimList. 
@@ -153,6 +156,7 @@ public class ClaimListController {
 		claim.addListener(new Listener() {
 			@Override
 			public void update() {
+				getClaimList().sort();
 				save();
 				
 			}

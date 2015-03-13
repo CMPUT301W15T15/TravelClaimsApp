@@ -2,13 +2,13 @@ package com.cmput301w15t15.travelclaimsapp.model;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 
+import com.cmput301w15t15.travelclaimsapp.ClaimListComparator;
 import com.cmput301w15t15.travelclaimsapp.ClaimListController;
 
 /**
  * 
- * TODO: SHould we change addClaim from throwing IOException to just return true or false?
- * 		 Or Create custom exception 
  *
  */
 public class ClaimList implements Listenable{
@@ -22,9 +22,9 @@ public class ClaimList implements Listenable{
 	
 	/**
 	 * @param claim1
-	 * @throws IOException
+	 * 
 	 */
-	public void addClaim(Claim claim1) throws IOException{
+	public void addClaim(Claim claim1){
 		for (Claim claim : claimList){
 			//if name already in claimlist return without adding claim
 			if (claim.getName().equals(claim1.getName())){
@@ -71,7 +71,12 @@ public class ClaimList implements Listenable{
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	
+	public void sort() {
+		Collections.sort(claimList, new ClaimListComparator());
+		
+	}
+	
 	public void notifyListeners() {
 		for (Listener listener : listeners) {
 			listener.update();
@@ -91,6 +96,7 @@ public class ClaimList implements Listenable{
 		this.listeners = new ArrayList<Listener>();
 		
 	}
-	
+
+
 
 }
