@@ -1,6 +1,7 @@
 package com.cmput301w15t15.travelclaimsapp;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import com.cmput301w15t15.travelclaimsapp.model.Claim;
 import com.cmput301w15t15.travelclaimsapp.model.ClaimList;
@@ -54,9 +55,14 @@ public class ClaimListController {
 	}
 	
 	
+	public ArrayList<Tag> getClaimListTags(){
+		
+		return null;
+	}
+	
+	
 	/**
-	 * Uses ClaimList.addClaim to add claim with listener to claimList. 
-	 * Also adds a listener to claims expenselist
+	 * Uses ClaimList.addClaim to add claim with listeners to claimList. 
 	 * 
 	 * @param claim claim to be added to claimlist 
 	 * @throws IOException 
@@ -137,6 +143,17 @@ public class ClaimListController {
 		});
 		claim.getTagList().addTag(tag);
 	}
+	
+	/**
+	 * Removes a {@link Tag} from a given {@link Claim}
+	 * 
+	 * @param claim claim to delete tag from 
+	 * @param tag   tag to delete
+	 */
+	public static void removeTag(Claim claim, Tag tag) {
+		claim.getTagList().removeTag(tag);
+	}
+	
 	
 	
 	/**

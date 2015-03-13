@@ -48,7 +48,7 @@ public class TagList implements Listenable{
 		}
 		else{
 			for (int i=0; i<tagList.size();i++){
-				if (tagList.get(i).getName() == tagName){
+				if (tagList.get(i).getName().equals(tagName)){
 					return true;
 				}
 			}
@@ -67,7 +67,7 @@ public class TagList implements Listenable{
 		}
 		else{
 			for (int i=0; i<tagList.size();i++){
-				if (tagList.get(i).getName() == tagName){
+				if (tagList.get(i).getName().equals(tagName)){
 					return tagList.get(i);
 				}
 			}

@@ -136,8 +136,9 @@ public class ClaimListAdaptor extends ArrayAdapter<Claim> {
         
         SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy",Locale.CANADA);
         if(claim.getStartDate() == null){
-        	viewHolder.claimStartDate.setText("");
+        	viewHolder.claimStartDate.setVisibility(View.INVISIBLE);
         }else{
+        	viewHolder.claimStartDate.setVisibility(View.VISIBLE);
         	viewHolder.claimStartDate.setText(sdf.format(claim.getStartDate()));
         }
         

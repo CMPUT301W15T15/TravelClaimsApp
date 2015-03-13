@@ -23,6 +23,7 @@ public class ClaimListControllerTest extends AndroidTestCase {
 	private ClaimList claimList;
 	private ClaimList claimList2;
 	private Claim claim;
+	private Claim claim2;
 	private Claim claim3;
 	private Claim claim4;
 	private Expense expense;
@@ -38,20 +39,32 @@ public class ClaimListControllerTest extends AndroidTestCase {
 		mContext = getContext();
 		FileManager.initializeSaver(mContext);
 		claimList = ClaimListController.getClaimList();
+		for(Claim claim : claimList.toArrayList()){
+			ClaimListController.deleteClaim(claim);
+		}
 		currentSize = claimList.toArrayList().size();
 		claim = new Claim("c1");
+		claim2 = new Claim("c2");
 		claim3 = new Claim("c3");
-
 		claim4 = new Claim("c4");
 
 		expense = new Expense("e1", null, null, null, null, 0);	
 
 	}
+	@Override
+	protected void tearDown() throws Exception {
+		// TODO Auto-generated method stub
+		super.tearDown();
+		for(Claim claim : claimList.toArrayList()){
+			ClaimListController.deleteClaim(claim);
+		}
+	}
+	
 	/**
 	 * ClaimListControllerTest #1
-	 * @throws IOException 
+	 * 
 	 */
-	public void testClaimListListeners() throws IOException{
+	public void testClaimListListeners(){
 
 		ClaimListController.addClaimToClaimList(claim);
 		claimList2 = ClaimListController.getClaimList();
@@ -59,8 +72,10 @@ public class ClaimListControllerTest extends AndroidTestCase {
 		assertEquals("ClaimList loaded from file not the same as current", claimList, claimList2);
 	}
 	
-	//ClaimListControllerTest #2
-	public void testClaimListeners() throws IOException{
+	/**
+	 * ClaimListControllerTest #2
+	 */
+	public void testClaimListeners(){
 		ClaimListController.addClaimToClaimList(claim3);
 		claim3.setName("test");
 		claimList2 = ClaimListController.getClaimList();
@@ -73,7 +88,9 @@ public class ClaimListControllerTest extends AndroidTestCase {
 		
 		
 	}
-	//ClaimListControllerTest #3
+	/**
+	 * ClaimListControllerTest #3
+	 */
 	public void testExpenseListeners() throws IOException{
 		ClaimListController.addClaimToClaimList(claim4);
 		ClaimListController.addExpense(expense, claim4);
@@ -92,16 +109,14 @@ public class ClaimListControllerTest extends AndroidTestCase {
 			assertEquals("Expense loaded from file not the same as current", expense, expense2);
 		}
 	}
-
-	@Override
-	protected void tearDown() throws Exception {
-		// TODO Auto-generated method stub
-		super.tearDown();
-		for(Claim claim5 : claimList.toArrayList()){
-			claimList.removeClaim(claim5);
-		}
-	}
+	
+	/**
+	 * ClaimListControllerTest #4
+	 */
+	public void testGetClaimListTagList(){
 		
+	}
+	
 	
 	
 }

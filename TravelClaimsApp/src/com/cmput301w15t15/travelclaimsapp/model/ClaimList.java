@@ -14,10 +14,12 @@ import com.cmput301w15t15.travelclaimsapp.ClaimListController;
 public class ClaimList implements Listenable{
 	protected ArrayList<Claim> claimList;
 	protected transient ArrayList<Listener> listeners;
+
 	
 	public ClaimList(){
 		claimList = new ArrayList<Claim>();
 		listeners = new ArrayList<Listener>();
+	
 	}
 	
 	/**
