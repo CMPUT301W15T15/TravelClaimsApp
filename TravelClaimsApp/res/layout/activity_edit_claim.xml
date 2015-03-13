@@ -54,7 +54,7 @@
         android:id="@+id/ViewExpense"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/AddDestinationButton"
+        android:layout_alignLeft="@+id/Edit_Claim_DestinationTitle"
         android:layout_alignParentBottom="true"
         android:layout_alignRight="@+id/Edit_Claim_Name"
         android:onClick="viewExpensesButton"
@@ -64,9 +64,8 @@
         android:id="@+id/DestinationList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/AddDestinationButton"
-        android:layout_alignLeft="@+id/AddDestinationButton"
-        android:layout_alignRight="@+id/edit_claim_expandablelist"
+        android:layout_above="@+id/tagListTitle"
+        android:layout_alignLeft="@+id/Edit_Claim_DestinationTitle"
         android:layout_below="@+id/Edit_Claim_DestinationTitle" >
 
     </ListView>
@@ -75,32 +74,41 @@
         android:id="@+id/edit_claim_taglist"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/AddTagbutton"
-        android:layout_alignLeft="@+id/AddDestinationButton"
-        android:layout_alignTop="@+id/AddDestinationButton"
-        android:layout_marginTop="48dp" >
+        android:layout_above="@+id/ViewExpense"
+        android:layout_below="@+id/AddTagbutton" >
 
     </ListView>
 
     <Button
-        android:id="@+id/AddTagbutton"
+        android:id="@+id/AddDestinationButton"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/Edit_Claim_DestinationTitle"
+        android:layout_alignBottom="@+id/Edit_Claim_DestinationTitle"
+        android:layout_alignRight="@+id/DestinationList"
+        android:onClick="addDestinationButton"
+        android:text="@string/Add" />
+
+    <TextView
+        android:id="@+id/tagListTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/ViewExpense"
-        android:layout_alignLeft="@+id/ViewExpense"
-        android:layout_alignRight="@+id/ViewExpense"
-        android:onClick="addTagButton"
-        android:text="Add Tag" />
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="102dp"
+        android:text="@string/TagListTitle"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <Button
-        android:id="@+id/AddDestinationButton"
+        android:id="@+id/AddTagbutton"
+        style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/AddTagbutton"
-        android:layout_alignLeft="@+id/Edit_Claim_DestinationTitle"
-        android:layout_alignRight="@+id/Edit_Claim_Name"
-        android:layout_marginBottom="67dp"
-        android:onClick="addDestinationButton"
-        android:text="@string/Des" />
+        android:layout_alignBaseline="@+id/tagListTitle"
+        android:layout_alignBottom="@+id/tagListTitle"
+        android:layout_alignRight="@+id/edit_claim_taglist"
+        android:onClick="addTagButton"
+        android:text="@string/Add" />
 
 </RelativeLayout>
