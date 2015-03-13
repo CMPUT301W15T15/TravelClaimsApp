@@ -1,31 +1,31 @@
 package com.cmput301w15t15.travelclaimsapp.activitys;
 
-import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import com.cmput301w15t15.travelclaimsapp.ClaimListController;
 import com.cmput301w15t15.travelclaimsapp.DestinationListAdaptor;
 import com.cmput301w15t15.travelclaimsapp.R;
-import com.cmput301w15t15.travelclaimsapp.R.layout;
-import com.cmput301w15t15.travelclaimsapp.R.menu;
+import com.cmput301w15t15.travelclaimsapp.TagListAdaptor;
 import com.cmput301w15t15.travelclaimsapp.model.Claim;
 import com.cmput301w15t15.travelclaimsapp.model.ClaimList;
 import com.cmput301w15t15.travelclaimsapp.model.Destination;
 import com.cmput301w15t15.travelclaimsapp.model.DestinationList;
-import com.cmput301w15t15.travelclaimsapp.model.Expense;
+import com.cmput301w15t15.travelclaimsapp.model.Tag;
+import com.cmput301w15t15.travelclaimsapp.model.TagList;
 
 
 import android.os.Bundle;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.res.Resources.Theme;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
 import android.text.Editable;
@@ -35,11 +35,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ContextMenu.ContextMenuInfo;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.SimpleExpandableListAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 
@@ -47,12 +51,14 @@ import android.widget.AdapterView.AdapterContextMenuInfo;
  * Activity to handle editing claim 
  *
  * TODO:
- *  -Add tags?
+ *  -Add tags
+ *  -Fix window 
  *
  */
 public class EditClaimActivity extends FragmentActivity implements TextWatcher {
 	
 	private static ListView destListView;
+	private static ListView tagListView;
 	private static EditText claimStartDate;
 	private static EditText claimEndDate;
 	private static EditText claimNameInput;
@@ -61,34 +67,40 @@ public class EditClaimActivity extends FragmentActivity implements TextWatcher {
 	private ClaimList claimList;
 	private SimpleDateFormat sdf; 
 	private DestinationListAdaptor destAdaptor;
+	private TagListAdaptor tagAdaptor;
 	private DestinationList dests;
+	private TagList tags;
 	private Button addDestButton;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_edit_claim);
-	
-		sdf = new SimpleDateFormat("mm/dd/yyyy",Locale.CANADA);
+		
+		sdf = new SimpleDateFormat("MM/dd/yyyy",Locale.CANADA);
 		claimStartDate = (EditText) findViewById(R.id.ClaimStart);
 		claimEndDate = (EditText) findViewById(R.id.ClaimEnd);
 		claimNameInput = (EditText) findViewById(R.id.Edit_Claim_Name);
 		destListView = (ListView) findViewById(R.id.DestinationList);
 		addDestButton = (Button) findViewById(R.id.AddDestinationButton);
-		
+		tagListView = (ListView) findViewById(R.id.edit_claim_taglist);
 		claimList = ClaimListController.getClaimList();
 		
 		//get the claim name passed with the intent 
 		String claimName = getIntent().getExtras().getString("claimName");
 		theClaim = claimList.getClaim(claimName);
 		dests = theClaim.getDestinationList(); 
+		tags = theClaim.getTagList();
 		
 		claimNameInput.addTextChangedListener(this);
 		claimStartDate.addTextChangedListener(this);
 		claimEndDate.addTextChangedListener(this);
 		
+		tagAdaptor = new TagListAdaptor(this, R.layout.tag_list_adaptor, tags.toArrayList());
 		destAdaptor = new DestinationListAdaptor(this, R.layout.dest_list_adaptor, dests.toArrayList());
 		destListView.setAdapter(destAdaptor);
+		tagListView.setAdapter(tagAdaptor);
+		
 		
 		registerForContextMenu(findViewById(R.id.DestinationList));
 		set_on_click();
@@ -116,6 +128,7 @@ public class EditClaimActivity extends FragmentActivity implements TextWatcher {
 		}
 		
 		destAdaptor.notifyDataSetChanged();
+		tagAdaptor.notifyDataSetChanged();
 		setEditable();
 		
 	}
@@ -312,6 +325,41 @@ public class EditClaimActivity extends FragmentActivity implements TextWatcher {
 		showDestinationAlert(new String(), new String());
 	}
 	
+	/**
+	 * Function that is called when you press the add tag
+	 * 
+	 * @param view
+	 */
+	public void addTagButton(View view){
+	  	final TextView enterTag = new AutoCompleteTextView(this);
+    	
+    	
+    	enterTag.setHint("Enter tag");
+    	
+    	AlertDialog.Builder alert = new AlertDialog.Builder(this);
+    	
+    			
+    	alert.setView(enterTag);
+    
+    	alert.setPositiveButton("Add", new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int whichButton) {
+				Tag tag = new Tag(enterTag.getText().toString());
+				ClaimListController.addTag(theClaim, tag);
+				tagAdaptor.notifyDataSetChanged();
+			}
+		});
+		alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int whichButton) {
+				dialog.cancel();
+			}
+		});
+	
+		alert.show(); 
+    	
+		
+	}
+	
+	
 	@Override
 	public void afterTextChanged(Editable s) {
 		
@@ -334,6 +382,7 @@ public class EditClaimActivity extends FragmentActivity implements TextWatcher {
 			case R.id.ClaimStart:
 				try{
 					theClaim.setStartDate(sdf.parse(claimStartDate.getText().toString()));
+					Toast.makeText(this, sdf.parse(claimStartDate.getText().toString()).toString(), Toast.LENGTH_LONG).show();
 				}catch(ParseException e){
 					//do nothing 
 				}

@@ -1,6 +1,7 @@
 package com.cmput301w15t15.travelclaimsapp.model;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 
 public class ExpenseList {
@@ -80,6 +81,8 @@ public class ExpenseList {
 		}
 		return this.totalValue;
 	}
+	
+
 
 
 	public void setListeners() {
