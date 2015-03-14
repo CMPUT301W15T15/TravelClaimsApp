@@ -1,15 +1,14 @@
 package com.cmput301w15t15.travelclaimsapp.model;
 
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.Map;
+
 
 public class ExpenseList {
 	
 	private int totalValue;
 	
 	protected transient ArrayList<Listener> listeners;
-	
-	
 	private ArrayList<Expense> expenseList;
 	
 	public ExpenseList(){
@@ -18,13 +17,26 @@ public class ExpenseList {
 	}
 	
 	public void addExpense(Expense expense1) {
-		// TODO Auto-generated method stub
-		
-		
+		this.expenseList.add(expense1);
 	}
 	
 	public Expense getExpense(int position) {
 		return this.expenseList.get(position);
+	
+	}
+	
+	public Expense getExpense(String expenseName) {
+		if (expenseList==null){
+			return null;
+		}
+		else{
+			for (int i=0; i<expenseList.size();i++){
+				if (expenseList.get(i).toString().equals(expenseName)){
+					return expenseList.get(i);
+				}
+			}
+		}
+		return null;
 	
 	}
 
@@ -69,6 +81,8 @@ public class ExpenseList {
 		}
 		return this.totalValue;
 	}
+	
+
 
 
 	public void setListeners() {

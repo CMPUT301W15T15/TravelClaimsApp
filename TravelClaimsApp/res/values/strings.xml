@@ -72,5 +72,7 @@
     <string name="Approvers">Approvers</string>
     <string name="title_activity_search_actvity">Search</string>
     <string name="title_activity_expense_list">ExpenseListActivity</string>
+    <string name="AddButton">Add</string>
+    <string name="TagListTitle">Tags:</string>
 
 </resources>

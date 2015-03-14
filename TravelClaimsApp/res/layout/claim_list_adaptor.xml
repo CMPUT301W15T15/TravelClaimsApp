@@ -8,8 +8,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:text="Medium Text"
+        android:background="#D1D0EA"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
@@ -29,5 +31,40 @@
         android:layout_below="@+id/claimAdaptor_status"
         android:text="Small Text"
         android:textAppearance="?android:attr/textAppearanceSmall" />
+
+   	<Space
+   	    android:layout_width="wrap_content"
+   	    android:layout_height="wrap_content"
+   	    android:layout_alignLeft="@+id/linearLayout_destinations"
+   	    android:layout_alignTop="@+id/claimAdaptor_status" />
+
+   	<LinearLayout
+   	    android:id="@+id/linearLayout_destinations"
+   	    android:layout_width="wrap_content"
+   	    android:layout_height="wrap_content"
+   	    android:layout_alignParentLeft="true"
+   	    android:layout_alignParentRight="true"
+   	    android:layout_below="@+id/claimAdaptor_startDate"
+   	    android:orientation="vertical" >
+
+   	</LinearLayout>
+
+   	<LinearLayout
+   	    android:id="@+id/LinearLayout_tags"
+   	    android:layout_width="wrap_content"
+   	    android:layout_height="wrap_content"
+   	    android:layout_alignParentLeft="true"
+   	    android:layout_below="@+id/linearLayout_destinations"
+   	    android:orientation="horizontal">
+   	</LinearLayout>
+
+   	<LinearLayout
+   	    android:id="@+id/LinearLayout_amounts"
+   	    android:layout_width="wrap_content"
+   	    android:layout_height="wrap_content"
+   	    android:layout_alignParentLeft="true"
+   	    android:layout_below="@+id/LinearLayout_tags"
+   	    android:orientation="vertical" >
+   	</LinearLayout>
 
 </RelativeLayout>

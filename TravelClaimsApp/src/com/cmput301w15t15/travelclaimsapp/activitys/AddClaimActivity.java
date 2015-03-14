@@ -12,11 +12,18 @@ import com.cmput301w15t15.travelclaimsapp.R.layout;
 import com.cmput301w15t15.travelclaimsapp.R.menu;
 import com.cmput301w15t15.travelclaimsapp.model.Claim;
 import com.cmput301w15t15.travelclaimsapp.model.ClaimList;
+import com.cmput301w15t15.travelclaimsapp.model.Destination;
 import com.cmput301w15t15.travelclaimsapp.model.Expense;
 
 
+
+
+import com.cmput301w15t15.travelclaimsapp.model.Tag;
+
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources.Theme;
 import android.view.ContextMenu;
@@ -25,6 +32,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.AdapterView.AdapterContextMenuInfo;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -32,10 +43,7 @@ import android.widget.Toast;
  * Activity for the AddClaim/ClaimList view 
  * 
  * TODO:
- *	-add tag button in content menu
- *	-submit button in context menu
- *	-Show currencies 
- *	-show destinations 
+ *	-
  *
  */
 public class AddClaimActivity extends Activity {
@@ -96,7 +104,7 @@ public class AddClaimActivity extends Activity {
         AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
         //get the claim the user selected 
         Intent intent;
-        Claim claim = claimAdaptor.getItem(info.position);
+        final Claim claim = claimAdaptor.getItem(info.position);
     
         switch (item.getItemId()) {
             case R.id.cmenu_delete_claim:
@@ -117,11 +125,9 @@ public class AddClaimActivity extends Activity {
             	//create new expense with default name and add to claimlist
             	Expense expense = new Expense("Expense"+claim.getExpenseList().size());
             	ClaimListController.addExpense(expense, claim);
-            	
             	// attach claim name and expense name to intent 
             	intent.putExtra("expenseName", expense.getName());
             	intent.putExtra("claimName", claim.getName());
-            	
             	startActivity(intent);  
             	return true;
             case R.id.cmenu_editExpense:
@@ -130,6 +136,49 @@ public class AddClaimActivity extends Activity {
             	intent.putExtra("claimName", claim.getName());
             	startActivity(intent);   
             	return true;
+            case R.id.cmenu_addTag:
+            	final AutoCompleteTextView enterTag = new AutoCompleteTextView(this);
+            	
+            	enterTag.showDropDown();
+            	enterTag.setHint("Enter tag");
+            	
+            	AlertDialog.Builder alert = new AlertDialog.Builder(this);
+            	
+            	ArrayList<Tag> tags = claim.getTagList().toArrayList();
+            	ArrayAdapter<Tag> tagAdaptor = new ArrayAdapter<Tag>(this, android.R.layout.simple_list_item_1, tags);
+            	enterTag.setAdapter(tagAdaptor);
+            			
+            	alert.setView(enterTag);
+            
+            	alert.setPositiveButton("Add", new DialogInterface.OnClickListener() {
+        			public void onClick(DialogInterface dialog, int whichButton) {
+        				Tag tag = new Tag(enterTag.getText().toString());
+        				ClaimListController.addTag(claim, tag);
+        				claimAdaptor.notifyDataSetChanged();
+        				
+        				
+        			}
+        		});
+        		alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+        			public void onClick(DialogInterface dialog, int whichButton) {
+        				dialog.cancel();
+        			}
+        		});
+        	
+        		alert.show(); 
+            	tagAdaptor.notifyDataSetChanged();
+            	
+            	return true;
+            case R.id.cmenu_dummyClaim:
+            	Claim c = new Claim("Claim"+ClaimListController.getClaimList().size());
+            	c.addExpense(new Expense("t1", null, "EUR", null, null, 40));
+            	c.addExpense(new Expense("t2", null, "GBP", null, null, 100));
+            	c.addExpense(new Expense("t3", null, "CAD", null, null, 200));
+            	c.addExpense(new Expense("t4", null, "USD", null, null, 1000));
+            	c.addExpense(new Expense("t5", null, "EUR", null, null, 40));
+            	ClaimListController.addClaim(c);
+            	claimAdaptor.notifyDataSetChanged();
+            	
             default:
                 return super.onContextItemSelected(item);
         }
@@ -151,13 +200,13 @@ public class AddClaimActivity extends Activity {
 
     public void AddClaimButton(View view)
     {	
-    	Claim claim = new Claim("Claim"+ClaimListController.getClaimList().size());
-    	try {
-			ClaimListController.addClaimToClaimList(claim);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			//e.printStackTrace();
-		}
+    	int i = claimList.size();
+    	while(ClaimListController.getClaimList().getClaim("Claim"+i)!=null){
+    		i++;
+    	}
+    	Claim claim = new Claim("Claim"+i);
+		ClaimListController.addClaim(claim);
+		
     	Toast.makeText(this, "Creating a Claim", Toast.LENGTH_SHORT).show();
     	Intent intent = new Intent(AddClaimActivity.this, EditClaimActivity.class);
     	//attach claim name to intent 

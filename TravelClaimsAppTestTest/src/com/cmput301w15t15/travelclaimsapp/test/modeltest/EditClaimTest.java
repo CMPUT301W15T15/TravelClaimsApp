@@ -62,15 +62,6 @@ public class EditClaimTest extends TestCase {
 		
 	}
 
-	//test case: EditClaimTest#3
-	public void testSubmittedStatus(){
-		claim1.setStatus("Submitted");
-		assertTrue(claim1.isEditable());
-		claim1.setStatus("Returned");
-		assertFalse(claim1.isEditable());
-		claim1.setStatus("Approved");
-		assertTrue(claim1.isEditable());
-	}
 	
 	
 	

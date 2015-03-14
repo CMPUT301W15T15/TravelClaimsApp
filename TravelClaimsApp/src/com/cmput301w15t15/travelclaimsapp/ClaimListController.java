@@ -1,6 +1,7 @@
 package com.cmput301w15t15.travelclaimsapp;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import com.cmput301w15t15.travelclaimsapp.model.Claim;
 import com.cmput301w15t15.travelclaimsapp.model.ClaimList;
@@ -9,6 +10,8 @@ import com.cmput301w15t15.travelclaimsapp.model.DestinationList;
 import com.cmput301w15t15.travelclaimsapp.model.Expense;
 import com.cmput301w15t15.travelclaimsapp.model.ExpenseList;
 import com.cmput301w15t15.travelclaimsapp.model.Listener;
+import com.cmput301w15t15.travelclaimsapp.model.Tag;
+import com.cmput301w15t15.travelclaimsapp.model.TagList;
 
 
 /**
@@ -31,11 +34,13 @@ public class ClaimListController {
 	static public ClaimList getClaimList() {
 		if(claimList == null){
 			claimList = FileManager.getSaver().loadClaimLFromFile();
+			claimList.sort();
 			claimList.addListener(new Listener() {
 				
 				@Override
 				public void update() {
 					save();
+					claimList.sort();
 					
 				}
 			});
@@ -49,18 +54,50 @@ public class ClaimListController {
 		return claimList;
 	}
 	
+	/**
+	 * Returns a ArrayList<Tag> containing all unique tags in claimlist
+	 * 
+	 * Searches through each claim in singleton claimlist and returns list
+	 * of unique tags.
+	 * 
+	 * @return all unique tags in the singleton claimlist
+	 */
+	public static ArrayList<Tag> getTagList(){
+		TagList tags = new TagList();
+		
+		for(Claim claim : claimList.toArrayList()){
+			TagList tmp = claim.getTagList();
+			for(Tag tag : tmp.toArrayList()){
+				if(!tags.contains(tag.getName())){
+					tags.addTag(tag);
+				}
+			}
+		}
+		return tags.toArrayList();
+	}
+	
 	
 	/**
-	 * Uses ClaimList.addClaim to add claim with listener to claimList. 
-	 * Also adds a listener to claims expenselist
+	 * Uses ClaimList.addClaim to add claim with listeners to claimList. 
 	 * 
 	 * @param claim claim to be added to claimlist 
 	 * @throws IOException 
 	 */
-	public static void addClaimToClaimList(Claim claim) throws IOException{
+	public static void addClaim(Claim claim){
 		addClaimListeners(claim);
 		getClaimList().addClaim(claim);
+		getClaimList().sort();
 	}
+	/**
+	 * Uses ClaimList.removeClaim to remove a claim from claimList. 
+	 * 
+	 * @param claim claim to be removed from claimlist 
+	 */
+	public static void removeClaim(Claim claim){
+		
+		getClaimList().removeClaim(claim);
+	}
+	
 	
 	/**
 	 * Uses Claim.addExpense() to add a expense with listener to claim
@@ -79,6 +116,19 @@ public class ClaimListController {
 		});
 	}
 	
+	/**
+	 * Removes expense from singleton Claimlist
+	 */
+	public static void removeExpense(Expense expense, Claim claim){
+		claim.removeExpense(expense);
+	}
+	
+	/**
+	 * Adds a destination to a claim
+	 * 
+	 * @param dest 	destination to add to claim
+	 * @param claim claim to add destination to 
+	 */
 	public static void addDestination(Destination dest, Claim claim){
 		claim.getDestinationList().addDestination(dest);
 		dest.addListener(new Listener() {
@@ -90,10 +140,43 @@ public class ClaimListController {
 			}
 		});
 	}
-	public static void deleteDestination(Destination dest, Claim claim){
+	/**
+	 * Deletes a destination from a claim
+	 * 
+	 * @param dest	destination to delete
+	 * @param claim removes destination from this claim
+	 */
+	public static void removeDestination(Destination dest, Claim claim){
 		claim.getDestinationList().deleteDestination(dest);
 		
 	}
+	/**
+	 * Adds a tag to a given claim
+	 * 
+	 * @param claim claim to add tag to 
+	 * @param tag   tag to add to claim
+	 */
+	public static void addTag(Claim claim, Tag tag) {
+		tag.addListener(new Listener() {
+			@Override
+			public void update() {
+				save();
+				
+			}
+		});
+		claim.getTagList().addTag(tag);
+	}
+	
+	/**
+	 * Removes a {@link Tag} from a given {@link Claim}
+	 * 
+	 * @param claim claim to delete tag from 
+	 * @param tag   tag to delete
+	 */
+	public static void removeTag(Claim claim, Tag tag) {
+		claim.getTagList().removeTag(tag);
+	}
+	
 	
 	
 	/**
@@ -113,6 +196,7 @@ public class ClaimListController {
 		claim.addListener(new Listener() {
 			@Override
 			public void update() {
+				getClaimList().sort();
 				save();
 				
 			}
@@ -163,8 +247,33 @@ public class ClaimListController {
 			});
 			
 		}
+		TagList tList = claim.getTagList();
+		tList.setListeners();
+		tList.addListener(new Listener() {
+			
+			@Override
+			public void update() {
+				save();
+				
+			}
+		});
+		for(Tag tag : tList.toArrayList()){
+			tag.setListeners();
+			tag.addListener(new Listener() {
+				
+				@Override
+				public void update() {
+					save();
+					
+				}
+			});
+			
+		}
 		
 	}
+
+
+
 
 
 }
