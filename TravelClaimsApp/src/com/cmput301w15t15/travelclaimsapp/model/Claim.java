@@ -216,7 +216,7 @@ public class Claim implements Listenable{
 	{
 
 		// TODO Auto-generated method stub
-		return this.expenseList.getExpense(position);
+		return this.expenseList.getExpenseByIndex(position);
 			
 	}
 	

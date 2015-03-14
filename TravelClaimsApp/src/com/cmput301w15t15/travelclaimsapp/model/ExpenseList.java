@@ -26,6 +26,10 @@ public class ExpenseList {
 	
 	}
 	
+	public Expense getExpenseByIndex(int index){
+		return this.expenseList.get(index);
+	}
+	
 	public Expense getExpense(String expenseName) {
 		if (expenseList==null){
 			return null;
