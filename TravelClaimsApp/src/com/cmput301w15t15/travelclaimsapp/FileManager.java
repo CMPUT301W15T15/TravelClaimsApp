@@ -19,6 +19,7 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 
 import com.cmput301w15t15.travelclaimsapp.model.ClaimList;
+import com.cmput301w15t15.travelclaimsapp.model.ExpenseList;
 import com.cmput301w15t15.travelclaimsapp.model.TagList;
 import com.cmput301w15t15.travelclaimsapp.model.User;
 import com.google.gson.Gson;
@@ -38,6 +39,9 @@ public class FileManager {
 	private static final String CLAIMLIST_TAG = "ClaimListSearch";
 	private static final String USERFILENAME = "user.sav";
 	private static final String CLAIMLISTFILENAME = "claimlist.sav";
+	private static final String EXPENSELIST_RESOURCE_URL = null;
+	private static final String EXPENSELISTFILENAME = "expenseList.sav";
+	private static final String EXPENSELIST_TAG = null;
 	
 	private Gson gson;
 	private Context context;
@@ -278,6 +282,5 @@ public class FileManager {
 
 		return result.toString();
 	}
-	
-	
+
 }

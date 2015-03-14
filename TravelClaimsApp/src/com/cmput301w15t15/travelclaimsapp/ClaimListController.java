@@ -21,7 +21,7 @@ import com.cmput301w15t15.travelclaimsapp.model.TagList;
 public class ClaimListController {
 	
 	private static ClaimList claimList = null;
-	
+	private static ExpenseList expenseList = null;
 
 	/**
 	 * Returns the global application claimList
@@ -62,6 +62,8 @@ public class ClaimListController {
 	 * 
 	 * @return all unique tags in the singleton claimlist
 	 */
+	
+	
 	public static ArrayList<Tag> getTagList(){
 		TagList tags = new TagList();
 		
