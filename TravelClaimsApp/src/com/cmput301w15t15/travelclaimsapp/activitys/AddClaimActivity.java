@@ -14,6 +14,7 @@ import com.cmput301w15t15.travelclaimsapp.model.Claim;
 import com.cmput301w15t15.travelclaimsapp.model.ClaimList;
 import com.cmput301w15t15.travelclaimsapp.model.Destination;
 import com.cmput301w15t15.travelclaimsapp.model.Expense;
+import com.cmput301w15t15.travelclaimsapp.model.Listener;
 
 
 
@@ -31,12 +32,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ContextMenu.ContextMenuInfo;
+import android.widget.AdapterView;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 /**
@@ -97,6 +101,7 @@ public class AddClaimActivity extends Activity {
     public void onCreateContextMenu(ContextMenu menu, View v,ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
         getMenuInflater().inflate(R.menu.add_claim_context_menu, menu);
+       
     }
    
     @Override
@@ -105,7 +110,6 @@ public class AddClaimActivity extends Activity {
         //get the claim the user selected 
         Intent intent;
         final Claim claim = claimAdaptor.getItem(info.position);
-    
         switch (item.getItemId()) {
             case R.id.cmenu_delete_claim:
             	claimList.removeClaim(claim);
@@ -136,39 +140,6 @@ public class AddClaimActivity extends Activity {
             	intent.putExtra("claimName", claim.getName());
             	startActivity(intent);   
             	return true;
-            case R.id.cmenu_addTag:
-            	final AutoCompleteTextView enterTag = new AutoCompleteTextView(this);
-            	
-            	enterTag.showDropDown();
-            	enterTag.setHint("Enter tag");
-            	
-            	AlertDialog.Builder alert = new AlertDialog.Builder(this);
-            	
-            	ArrayList<Tag> tags = claim.getTagList().toArrayList();
-            	ArrayAdapter<Tag> tagAdaptor = new ArrayAdapter<Tag>(this, android.R.layout.simple_list_item_1, tags);
-            	enterTag.setAdapter(tagAdaptor);
-            			
-            	alert.setView(enterTag);
-            
-            	alert.setPositiveButton("Add", new DialogInterface.OnClickListener() {
-        			public void onClick(DialogInterface dialog, int whichButton) {
-        				Tag tag = new Tag(enterTag.getText().toString());
-        				ClaimListController.addTag(claim, tag);
-        				claimAdaptor.notifyDataSetChanged();
-        				
-        				
-        			}
-        		});
-        		alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-        			public void onClick(DialogInterface dialog, int whichButton) {
-        				dialog.cancel();
-        			}
-        		});
-        	
-        		alert.show(); 
-            	tagAdaptor.notifyDataSetChanged();
-            	
-            	return true;
             case R.id.cmenu_dummyClaim:
             	Claim c = new Claim("Claim"+ClaimListController.getClaimList().size());
             	c.addExpense(new Expense("t1", null, "EUR", null, null, 40));
@@ -182,6 +153,7 @@ public class AddClaimActivity extends Activity {
             default:
                 return super.onContextItemSelected(item);
         }
+		
     }
     
     public void SearchOption (MenuItem menu)
