@@ -216,9 +216,11 @@ public class Claim implements Listenable{
 	{
 
 		// TODO Auto-generated method stub
+		
 		return this.expenseList.getExpense(string);
 			
 	}
+	
 	
 	public void notifyListeners() {
 		for (Listener listener : listeners) {

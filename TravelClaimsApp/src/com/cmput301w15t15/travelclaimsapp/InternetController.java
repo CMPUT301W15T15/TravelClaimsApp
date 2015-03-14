@@ -7,22 +7,22 @@ import android.net.ConnectivityManager;
 
 
 public class InternetController {
-	public static String isInternetAvailable() {
+	public static boolean isInternetAvailable() {
         try {
             InetAddress ipAddr = InetAddress.getByName("http://cmput301.softwareprocess.es:8080/cmput301w15t15/");
 //            InetAddress ipAddr = InetAddress.getByName("https://www.google.ca/webhp?hl=en");
 
             if (ipAddr.equals("")) {
-//                return false;
-            	return "no ip";
+                return false;
+//            	return "no ip";
             } else {
-//                return true;
-            	return "good";
+                return true;
+//            	return "good";
             }
 
         } catch (Exception e) {
-//            return false;
-        	return "else";
+            return false;
+//        	return "else";
         }
 
     }

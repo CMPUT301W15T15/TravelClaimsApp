@@ -1,14 +1,20 @@
 package com.cmput301w15t15.travelclaimsapp.activitys;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Locale;
 
 import com.cmput301w15t15.travelclaimsapp.ClaimListController;
+import com.cmput301w15t15.travelclaimsapp.ExpenseListAdaptor;
 import com.cmput301w15t15.travelclaimsapp.R;
+import com.cmput301w15t15.travelclaimsapp.R.id;
 import com.cmput301w15t15.travelclaimsapp.R.layout;
 import com.cmput301w15t15.travelclaimsapp.R.menu;
 import com.cmput301w15t15.travelclaimsapp.activitys.EditClaimActivity.DatePickerFragment;
 import com.cmput301w15t15.travelclaimsapp.model.Claim;
+import com.cmput301w15t15.travelclaimsapp.model.ClaimList;
 import com.cmput301w15t15.travelclaimsapp.model.Expense;
+import com.cmput301w15t15.travelclaimsapp.model.ExpenseList;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -23,21 +29,67 @@ import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 
 public class EditExpenseActivity extends FragmentActivity {
+	private Claim claim;
+	private ClaimList claimList;
+	private Expense expense;
+	private ExpenseList expenseList;
+	private ExpenseListAdaptor expenseListAdaptor;
+	private static EditText expenseNameInput;
+	private static EditText Date;
+	private static EditText expenseCost;
+	private static EditText expenseDescription;
+	private static Spinner currencySpinner;
+	private static Spinner categorySpinner;
+	private SimpleDateFormat sdf; 
+	private static boolean Start;
 	
-	static EditText Date;
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_edit_expense);
-		Date = (EditText) findViewById(R.id.Edit_Expense_Date);
+		sdf = new SimpleDateFormat("MM/dd/yyyy",Locale.CANADA);
 		
-		set_on_click();
+		Date = (EditText) findViewById(R.id.Edit_Expense_Date);
+		expenseNameInput=(EditText) findViewById(R.id.Edit_Expense_Name);
+		expenseCost=(EditText) findViewById(R.id.Edit_Expense_Cost);
+		expenseDescription=(EditText) findViewById(R.id.Edit_Expense_Description);
+		currencySpinner=(Spinner) findViewById(R.id.CurrencySpinner);
+		categorySpinner=(Spinner) findViewById(R.id.CategorySpinner);
+		String expenseName= getIntent().getExtras().getString("expenseName");
+		String claimName= getIntent().getExtras().getString("claimName");
+		claimList = ClaimListController.getClaimList();
+		expenseList=claimList.getClaim(claimName).getExpenseList();
+		expense=expenseList.getExpense(expenseName);
+		//set_on_click();
+	}
+	
+	@Override
+	protected void onStart()
+	{
+
+		// TODO Auto-generated method stub
+		//super.onStart();
+		//expenseNameInput.setText(expense.getName());
+		//if(expense.getDate()!=null){
+			//Date.setText(sdf.format(expense.getDate()));
+		//}
+		//setEditable();
+		expenseListAdaptor.notifyDataSetChanged();
+	}
+
+	@Override
+	protected void onResume()
+	{
+
+		// TODO Auto-generated method stub
+		super.onResume();
+		//expenseListAdaptor.notifyDataSetChanged();
 	}
 
 	@Override
@@ -58,7 +110,12 @@ public class EditExpenseActivity extends FragmentActivity {
 	}
 	
 	public void showTruitonDatePickerDialog(View v)
-	{
+	{	
+		if (v==Date){
+			Start=true;
+		}else{
+			Start=false;
+		}
 		DialogFragment newFragment = new DatePickerFragment();
 		newFragment.show(getSupportFragmentManager(), "datePicker");
 	}
@@ -116,10 +173,6 @@ public class EditExpenseActivity extends FragmentActivity {
     {
     	Toast.makeText(this, "Creating an expense", Toast.LENGTH_SHORT).show();
     	Intent intent = new Intent(EditExpenseActivity.this, ExpenseListActivity.class);
-    	//ClaimListController clc= new ClaimListController();
-    	//ListView expenselistView=(ListView) findViewById(R.id.CurrentExpenseList);
-    	//ListView claimlistView=(ListView) findViewById(R.id.claim_list_listview);
-    	//clc.addExpense(new Expense(), new Claim(claimlistView.toString()));
     	startActivity(intent);   
     	
     	}

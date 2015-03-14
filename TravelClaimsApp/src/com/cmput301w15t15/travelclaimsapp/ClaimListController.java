@@ -25,8 +25,40 @@ import com.cmput301w15t15.travelclaimsapp.model.TagList;
 public class ClaimListController {
 	
 	private static ClaimList claimList = null;
-	
+	private static ExpenseList expenseList = null;
 
+	/**
+	 * Returns the global application claimList
+	 * 
+	 * If claimList is null it will load the claimList from the android file system
+	 * and returns claimList
+	 * 
+	 * @return the application claimList
+	 */
+	static public ClaimList getClaimListWithInternet() {
+		if(claimList == null){
+			claimList = FileManager.getSaver().loadClaimLFromFile();
+			claimList.sort();
+			claimList.addListener(new Listener() {
+				
+				@Override
+				public void update() {
+					save();
+					claimList.sort();
+					
+				}
+			});
+			//add a listener to each claim in loaded claimlist
+			for(Claim claim : claimList.toArrayList()){
+				claim.setListeners(); 
+				addClaimListeners(claim);
+			}
+			return claimList;
+		}
+		return claimList;
+	}
+	
+	
 	/**
 	 * Returns the global application claimList
 	 * 
@@ -66,6 +98,8 @@ public class ClaimListController {
 	 * 
 	 * @return all unique tags in the singleton claimlist
 	 */
+	
+	
 	public static ArrayList<Tag> getTagList(){
 		TagList tags = new TagList();
 		
