@@ -21,7 +21,7 @@ public class ExpenseList {
 		this.expenseList.add(expense1);
 	}
 	
-	public Collection<Expense> getExpense() {
+	public Collection<Expense> getExpenseList() {
 		return this.expenseList;
 	
 	}
