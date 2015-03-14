@@ -157,6 +157,10 @@ public class ClaimListAdaptor extends ArrayAdapter<Claim> {
 			String cur = expense.getCurr();
 			Integer amount = expense.getCost();
 			
+			if(amount == null){
+				continue;
+			}
+			
 			if(totalAmounts.containsKey(cur)){
 				totalAmounts.put(cur, amount + totalAmounts.get(cur));
 			}else if(amount != 0){
