@@ -31,7 +31,7 @@ public class ApproveExpenseListTest extends TestCase {
 	}
 	
 	//TestNumber:ApproveViewTest #4
-	public void testViewSubmittedExpense() throws IOException {
+	/*public void testViewSubmittedExpense() throws IOException {
 		ClaimList approveClaimList = new ClaimList();
 		claim1 = new Claim("Claim1");
 		expense1 = new Expense("Expense1", null, null, null, null, 0);
@@ -53,7 +53,7 @@ public class ApproveExpenseListTest extends TestCase {
 		assertTrue("Description is equal", approveClaimList.toArrayList()
 				.get(0).getExpenseList().getExpense("Expense1").getDes().equals("Description"));
 	}
-	
+	*/
 	//TestNumber:ReceiptViewTest #1
 	public void testViewExpenseReceipt() throws IOException{
 		ClaimList testClaimList = new ClaimList();
