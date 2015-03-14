@@ -3,13 +3,12 @@ package com.cmput301w15t15.travelclaimsapp.activitys;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
 
 import com.cmput301w15t15.travelclaimsapp.FileManager;
 import com.cmput301w15t15.travelclaimsapp.InternetController;
 import com.cmput301w15t15.travelclaimsapp.R;
-import com.cmput301w15t15.travelclaimsapp.R.id;
-import com.cmput301w15t15.travelclaimsapp.R.layout;
-import com.cmput301w15t15.travelclaimsapp.R.menu;
+import com.cmput301w15t15.travelclaimsapp.model.User;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -21,6 +20,23 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class MainMenuActivity extends Activity {
+
+	// Thread that close the activity after finishing add
+	private Runnable launchAddClaims = new Runnable() {
+		public void run() {
+			Toast.makeText(MainMenuActivity.this, "Hozzah!", Toast.LENGTH_LONG).show();
+		}
+	};
+	
+	
+	/**
+	 * Wrong username or password
+	 */
+	private Runnable popToast = new Runnable() {
+		public void run() {
+			Toast.makeText(MainMenuActivity.this, "Wrong username or password.", Toast.LENGTH_LONG).show();
+		}
+	};
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -59,24 +75,19 @@ public class MainMenuActivity extends Activity {
 			md = MessageDigest.getInstance("SHA-256");
 		} catch (NoSuchAlgorithmException e1) {
 			// TODO Auto-generated catch block
-			e1.printStackTrace();
+			throw new RuntimeException();
 		}
 		
 		try {
 			passHash = md.digest(passText.getEditableText().toString().getBytes("UTF-8"));
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new RuntimeException();
 		}
 		
 		
-		//try to get user then try to compare hashes
-//		try{
-//			
-//		} catch () {
-//			
-//		}
-		
+		Thread thread = new loginThread(userText.getText().toString(), passHash);
+		thread.start();
 		
 		
 	}
@@ -97,14 +108,42 @@ public class MainMenuActivity extends Activity {
 	
 	public void ToNewUserActivity(MenuItem menu)
     {
-		String r = InternetController.isInternetAvailable();
 		
 		if(InternetController.isInternetAvailable2(this)){
 			Toast.makeText(this, "Create User", Toast.LENGTH_SHORT).show();
 			Intent intent = new Intent(MainMenuActivity.this, CreateUserActivity.class);
 			startActivity(intent);
 		} else {
-			Toast.makeText(this, "Cannot Create User without internet connection", Toast.LENGTH_SHORT).show();
+			Toast.makeText(this, "Cannot Create User offline", Toast.LENGTH_SHORT).show();
 		}
     }
+	
+
+	
+	class loginThread extends Thread {
+		
+		private String givenUsername;
+		private byte[] givenPassHash;
+		
+		public loginThread(String username, byte[] passHash){
+			this.givenUsername = username;
+			this.givenPassHash = passHash;
+		}
+		
+		public void run() {
+			User pulledUser = FileManager.getSaver().getUser(givenUsername);
+			
+			if(pulledUser.getUsername().equals(givenUsername)){
+				if(Arrays.equals(pulledUser.getpHash(), givenPassHash)){
+					runOnUiThread(launchAddClaims);
+				} else {
+					runOnUiThread(popToast);
+				}
+			} else {
+				runOnUiThread(popToast);
+			}
+			
+		}
+		
+	}
 }

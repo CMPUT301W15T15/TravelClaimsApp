@@ -10,17 +10,19 @@ import java.io.OutputStreamWriter;
 import java.lang.reflect.Type;
 
 import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 
+import com.cmput301w15t15.travelclaimapp.elasticsearch.SearchHit;
 import com.cmput301w15t15.travelclaimsapp.model.ClaimList;
+<<<<<<< HEAD
 import com.cmput301w15t15.travelclaimsapp.model.ExpenseList;
 import com.cmput301w15t15.travelclaimsapp.model.TagList;
+=======
+>>>>>>> d29bbd2c336448bef37ecf4c0934c6b6aa2a5c6b
 import com.cmput301w15t15.travelclaimsapp.model.User;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -31,9 +33,7 @@ import android.util.Log;
 public class FileManager {
 	
 
-	private static final String USER_SEARCH_URL = "http://cmput301.softwareprocess.es:8080/cmput301w15t15/user/_search";
 	private static final String USER_RESOURCE_URL = "http://cmput301.softwareprocess.es:8080/cmput301w15t15/user/";
-	private static final String CLAIMLIST_SEARCH_URL = "http://cmput301.softwareprocess.es:8080/cmput301w15t15/claimlist/_search";
 	private static final String CLAIMLIST_RESOURCE_URL = "http://cmput301.softwareprocess.es:8080/cmput301w15t15/claimlist/";
 	private static final String USER_TAG = "UserSearch";
 	private static final String CLAIMLIST_TAG = "ClaimListSearch";
@@ -77,21 +77,16 @@ public class FileManager {
 		HttpGet httpGet = new HttpGet(USER_RESOURCE_URL + Username);
 
 		HttpResponse response;
-		String json;
 
 		try {
 			response = httpClient.execute(httpGet);
-			json = getEntityContent(response);
-			Type searchResponseType = new TypeToken<User>(){}.getType();
-			
-			User esResponse = gson.fromJson(json, searchResponseType);
-			return esResponse;
+			SearchHit<User> sr = parseUserHit(response);
+			return sr.getSource();
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			return null;
 		} 
 
-		return null;
 	}
 	
 	
@@ -282,5 +277,26 @@ public class FileManager {
 
 		return result.toString();
 	}
+<<<<<<< HEAD
 
+=======
+	
+	private SearchHit<User> parseUserHit(HttpResponse response) {
+		
+		try {
+			String json = getEntityContent(response);
+			Type searchHitType = new TypeToken<SearchHit<User>>() {}.getType();
+			
+			SearchHit<User> sr = gson.fromJson(json, searchHitType);
+			return sr;
+		} 
+		catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+	
+	
+>>>>>>> d29bbd2c336448bef37ecf4c0934c6b6aa2a5c6b
 }

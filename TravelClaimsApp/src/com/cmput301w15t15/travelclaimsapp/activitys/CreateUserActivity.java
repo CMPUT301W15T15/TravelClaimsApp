@@ -4,15 +4,12 @@ import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+import com.cmput301w15t15.travelclaimsapp.FileManager;
 import com.cmput301w15t15.travelclaimsapp.R;
-import com.cmput301w15t15.travelclaimsapp.R.layout;
-import com.cmput301w15t15.travelclaimsapp.R.menu;
-import com.cmput301w15t15.travelclaimsapp.UserController;
 import com.cmput301w15t15.travelclaimsapp.model.User;
 
 import android.os.Bundle;
 import android.app.Activity;
-import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
 import android.widget.CheckBox;
@@ -21,6 +18,21 @@ import android.widget.Toast;
 
 public class CreateUserActivity extends Activity {
 
+	// Thread that close the activity after finishing add
+	private Runnable doFinishAdd = new Runnable() {
+		public void run() {
+			Toast.makeText(CreateUserActivity.this, "Try your new account", Toast.LENGTH_SHORT).show();
+			finish();
+		}
+	};
+	
+	//duplicate user
+	private Runnable popToast = new Runnable() {
+		public void run() {
+			Toast.makeText(CreateUserActivity.this, "Username Already Exists.", Toast.LENGTH_LONG).show();
+		}
+	};
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -70,15 +82,33 @@ public class CreateUserActivity extends Activity {
 		
 		
 		User newUser = new User(userText.getText().toString(), passHash, isApprover.isChecked());
-		if(UserController.pleaseAddUser(newUser)){
-			Toast.makeText(this, "Try your new account", Toast.LENGTH_SHORT).show();
-	    	Intent intent = new Intent(CreateUserActivity.this, MainMenuActivity.class);
-	    	startActivity(intent);
-		} else {
-			Toast.makeText(this, "Username Already Exists.", Toast.LENGTH_LONG).show();
-			return;
-		}
+		Thread thread = new tryToAddUserThread(newUser);
+		thread.start();
 		
 	}
+	
+
+	
+	class tryToAddUserThread extends Thread {
+		private User user;
+
+		public tryToAddUserThread(User newUser) {
+			this.user = newUser;
+		}
+
+		@Override
+		public void run() {
+			User checkUser = FileManager.getSaver().getUser(user.getUsername());
+			
+			if(checkUser.getUsername() == null){
+				FileManager.getSaver().addUser(user);
+				runOnUiThread(doFinishAdd);
+			} else {
+				runOnUiThread(popToast);
+			}
+			
+		}
+	}
+	
 	
 }

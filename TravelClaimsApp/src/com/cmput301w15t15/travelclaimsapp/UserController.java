@@ -25,6 +25,22 @@ public class UserController {
 		return user;
 	}
 	
+	static public User getUserWithInternet() {
+		if(user == null){
+			user = FileManager.getSaver().loadUserFromFile();
+			user.addListener(new Listener() {
+				
+				@Override
+				public void update() {
+					save();
+					
+				}
+			});
+			return user;
+		}
+		return user;
+	}
+	
 	
 	static public boolean pleaseAddUser(User newUser){
 		User checkUser = FileManager.getSaver().getUser(newUser.getUsername());
