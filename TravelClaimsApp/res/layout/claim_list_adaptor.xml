@@ -42,20 +42,20 @@
    	    android:id="@+id/linearLayout_destinations"
    	    android:layout_width="wrap_content"
    	    android:layout_height="wrap_content"
-   	    android:layout_below="@+id/claimAdaptor_display_name"
-   	    android:layout_marginLeft="36dp"
-   	    android:layout_toRightOf="@+id/claimAdaptor_status"
+   	    android:layout_alignParentLeft="true"
+   	    android:layout_alignParentRight="true"
+   	    android:layout_below="@+id/claimAdaptor_startDate"
    	    android:orientation="vertical" >
-   	    
+
    	</LinearLayout>
 
    	<LinearLayout
    	    android:id="@+id/LinearLayout_tags"
    	    android:layout_width="wrap_content"
    	    android:layout_height="wrap_content"
-   	    android:layout_below="@+id/LinearLayout_amounts"
    	    android:layout_alignParentLeft="true"
-   	    android:orientation="horizontal" >
+   	    android:layout_below="@+id/linearLayout_destinations"
+   	    android:orientation="horizontal">
    	</LinearLayout>
 
    	<LinearLayout
@@ -63,7 +63,7 @@
    	    android:layout_width="wrap_content"
    	    android:layout_height="wrap_content"
    	    android:layout_alignParentLeft="true"
-   	    android:layout_below="@+id/claimAdaptor_startDate"
+   	    android:layout_below="@+id/LinearLayout_tags"
    	    android:orientation="vertical" >
    	</LinearLayout>
 

@@ -62,7 +62,7 @@ public class AddClaimActivityUITest extends ActivityInstrumentationTestCase2<Add
 	protected void tearDown() throws Exception {
 		// TODO Auto-generated method stub
 		super.tearDown();
-		ClaimListController.deleteClaim(claim1);
+		ClaimListController.removeClaim(claim1);
 	}
 	/**
 	 * Tests the deleting claim from context menu
@@ -71,7 +71,7 @@ public class AddClaimActivityUITest extends ActivityInstrumentationTestCase2<Add
 	 */
 	public void testContextMenuPopupDelete() throws IOException{
 		claim1 = new Claim("t1");
-		ClaimListController.addClaimToClaimList(claim1);
+		ClaimListController.addClaim(claim1);
 		boolean test;
 		adaptor.notifyDataSetChanged();
 		
@@ -90,7 +90,7 @@ public class AddClaimActivityUITest extends ActivityInstrumentationTestCase2<Add
 
 		//assertTrue(test);
 		assertNull("claim 't1' was not deleted", claimList.getClaim("t1"));
-		ClaimListController.deleteClaim(claim1);
+		ClaimListController.removeClaim(claim1);
 	}
 	//test #
 	/**
@@ -105,7 +105,7 @@ public class AddClaimActivityUITest extends ActivityInstrumentationTestCase2<Add
 		instrumentation.addMonitor(activityMonitor);
 		
 		claim1 = new Claim("t1");
-		ClaimListController.addClaimToClaimList(claim1);
+		ClaimListController.addClaim(claim1);
 		adaptor.notifyDataSetChanged();
 		
 		instrumentation.runOnMainSync(new Runnable() {
@@ -122,7 +122,7 @@ public class AddClaimActivityUITest extends ActivityInstrumentationTestCase2<Add
 		Activity nextActivity = instrumentation.waitForMonitorWithTimeout(activityMonitor, 3000);
 		
 		assertNotNull("The Activity is null", nextActivity);
-		ClaimListController.deleteClaim(claim1);
+		ClaimListController.removeClaim(claim1);
 		
 	}
 
@@ -134,7 +134,7 @@ public class AddClaimActivityUITest extends ActivityInstrumentationTestCase2<Add
 	public void testContextMenuPopupSubmitClaim() throws IOException{
 
 		claim1 = new Claim("t1");
-		ClaimListController.addClaimToClaimList(claim1);
+		ClaimListController.addClaim(claim1);
 		adaptor.notifyDataSetChanged();
 		
 		instrumentation.runOnMainSync(new Runnable() {
@@ -150,7 +150,7 @@ public class AddClaimActivityUITest extends ActivityInstrumentationTestCase2<Add
 		instrumentation.waitForIdleSync();
 		assertEquals("Claim status did not change", "Submitted", claim1.getStatus());
 		
-		ClaimListController.deleteClaim(claim1);
+		ClaimListController.removeClaim(claim1);
 	}
 	//test #
 	public void testNewClaimButtonPress(){

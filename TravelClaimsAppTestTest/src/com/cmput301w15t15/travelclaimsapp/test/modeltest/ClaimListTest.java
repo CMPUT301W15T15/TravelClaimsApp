@@ -22,7 +22,7 @@ import junit.framework.TestCase;
  * Tests adding, deleting and sorting a {@link ClaimList}
  *
  */
-public class AddClaimTest extends AndroidTestCase{
+public class ClaimListTest extends AndroidTestCase{
 	private ClaimList claimList;
 	private Claim claim1;
 	private Claim claim2;

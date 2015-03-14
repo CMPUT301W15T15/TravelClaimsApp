@@ -51,8 +51,7 @@ import android.widget.AdapterView.AdapterContextMenuInfo;
  * Activity to handle editing claim 
  *
  * TODO:
- *  -Add tags
- *  -Fix window 
+ * 
  *
  */
 public class EditClaimActivity extends FragmentActivity implements TextWatcher {
@@ -103,11 +102,10 @@ public class EditClaimActivity extends FragmentActivity implements TextWatcher {
 		
 		
 		registerForContextMenu(findViewById(R.id.DestinationList));
+		registerForContextMenu(findViewById(R.id.edit_claim_taglist));
 		set_on_click();
 	}
 
-	
-		
 	@Override
 	protected void onStart() {
 		super.onStart();
@@ -133,8 +131,6 @@ public class EditClaimActivity extends FragmentActivity implements TextWatcher {
 		
 	}
 
-
-
 	@Override
 	protected void onResume() {
 		// TODO Auto-generated method stub
@@ -143,10 +139,6 @@ public class EditClaimActivity extends FragmentActivity implements TextWatcher {
 		destAdaptor.notifyDataSetChanged();
 		
 	}
-
-
-
-
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -159,19 +151,24 @@ public class EditClaimActivity extends FragmentActivity implements TextWatcher {
   @Override
     public void onCreateContextMenu(ContextMenu menu, View v,ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
-        getMenuInflater().inflate(R.menu.destinations_context_menu, menu);
+        if(v.getId() == R.id.DestinationList){
+        	getMenuInflater().inflate(R.menu.destinations_context_menu, menu);
+        }else{
+        	getMenuInflater().inflate(R.menu.edit_tag_contextmenu, menu);
+        }
+        
     }
    
     @Override
     public boolean onContextItemSelected(MenuItem item) {
-        AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
-        
-
-        final Destination dest = destAdaptor.getItem(info.position);
+        final AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
+   
+        //final Destination dest = destAdaptor.getItem(info.position);
+      
     
         switch (item.getItemId()) {
             case R.id.cmenu_dlist_delete:
-            	dests.deleteDestination(dest);
+            	ClaimListController.removeDestination(destAdaptor.getItem(info.position), theClaim);
             	destAdaptor.notifyDataSetChanged();
             	return true;
             case R.id.cmenu_dlist_edit:
@@ -179,8 +176,8 @@ public class EditClaimActivity extends FragmentActivity implements TextWatcher {
             	final EditText enterLocation = new EditText(this);
             	final EditText enterReason = new EditText(this);
             	
-            	enterLocation.setText(dest.getLocation());
-            	enterReason.setText(dest.getReason());
+            	enterLocation.setText(destAdaptor.getItem(info.position).getLocation());
+            	enterReason.setText(destAdaptor.getItem(info.position).getReason());
             
             	enterLocation.setHint("Enter location");
             	enterReason.setHint("Enter reason");
@@ -196,8 +193,8 @@ public class EditClaimActivity extends FragmentActivity implements TextWatcher {
             
             	alert.setPositiveButton("Add", new DialogInterface.OnClickListener() {
         			public void onClick(DialogInterface dialog, int whichButton) {
-        				dest.setLocation(enterLocation.getText().toString());
-        				dest.setReason(enterReason.getText().toString());
+        				destAdaptor.getItem(info.position).setLocation(enterLocation.getText().toString());
+        				destAdaptor.getItem(info.position).setReason(enterReason.getText().toString());
         				destAdaptor.notifyDataSetChanged();
         			}
         		});
@@ -207,7 +204,34 @@ public class EditClaimActivity extends FragmentActivity implements TextWatcher {
         			}
         		});
         	
-        		alert.show(); 
+        		alert.show();
+        		return true;
+            case R.id.cmenu_delete_tag:
+            	ClaimListController.removeTag(theClaim, tagAdaptor.getItem(info.position));
+            	tagAdaptor.notifyDataSetChanged();
+            	return true;
+            case R.id.cmenu_rename_tag:
+              	final TextView enterTag = new AutoCompleteTextView(this);
+            	
+            	enterTag.setHint("Enter tag");
+            	
+            	AlertDialog.Builder alertTag = new AlertDialog.Builder(this);
+            	
+            	alertTag.setView(enterTag);
+            
+            	alertTag.setPositiveButton("Add", new DialogInterface.OnClickListener() {
+        			public void onClick(DialogInterface dialog, int whichButton) {
+        				tagAdaptor.getItem(info.position).rename(enterTag.getText().toString());
+        				tagAdaptor.notifyDataSetChanged();
+        			}
+        		});
+        		alertTag.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+        			public void onClick(DialogInterface dialog, int whichButton) {
+        				dialog.cancel();
+        			}
+        		});
+        	
+        		alertTag.show(); 
             	
             	return true;
             default:
@@ -307,6 +331,11 @@ public class EditClaimActivity extends FragmentActivity implements TextWatcher {
     	startActivity(intent);
     }
 	
+	/**
+	 * Function that is called when user presses the view expenses button
+	 * 
+	 * @param view
+	 */
 	public void viewExpensesButton(View view)
     {
 		//need to make a expense 
@@ -344,6 +373,9 @@ public class EditClaimActivity extends FragmentActivity implements TextWatcher {
     	alert.setPositiveButton("Add", new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int whichButton) {
 				Tag tag = new Tag(enterTag.getText().toString());
+				if(theClaim.getTagList().getTag(enterTag.getText().toString())!=null){
+					return;
+				}
 				ClaimListController.addTag(theClaim, tag);
 				tagAdaptor.notifyDataSetChanged();
 			}
@@ -367,14 +399,8 @@ public class EditClaimActivity extends FragmentActivity implements TextWatcher {
 			case R.id.Edit_Claim_Name:
 				String newName = s.toString();
 				if(s.length() == 0 ){
-					//claimNameInput.removeTextChangedListener(this);
-					//claimNameInput.setText(theClaim.getName());
-					//claimNameInput.addTextChangedListener(this);
 					Toast.makeText(this, "Claim name cannot be null", Toast.LENGTH_LONG).show();
 				}else if(claimList.getClaim(newName)!=null){
-					//claimNameInput.removeTextChangedListener(this);
-					//claimNameInput.setText(theClaim.getName());
-					//claimNameInput.addTextChangedListener(this);
 					Toast.makeText(this, "Claim name cannot be duplicate of another claim", Toast.LENGTH_LONG).show();
 				}else{
 					theClaim.setName(claimNameInput.getText().toString());

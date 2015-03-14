@@ -1,6 +1,7 @@
 package com.cmput301w15t15.travelclaimsapp;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import com.cmput301w15t15.travelclaimsapp.model.Claim;
 import com.cmput301w15t15.travelclaimsapp.model.ClaimList;
@@ -53,15 +54,36 @@ public class ClaimListController {
 		return claimList;
 	}
 	
+	/**
+	 * Returns a ArrayList<Tag> containing all unique tags in claimlist
+	 * 
+	 * Searches through each claim in singleton claimlist and returns list
+	 * of unique tags.
+	 * 
+	 * @return all unique tags in the singleton claimlist
+	 */
+	public static ArrayList<Tag> getTagList(){
+		TagList tags = new TagList();
+		
+		for(Claim claim : claimList.toArrayList()){
+			TagList tmp = claim.getTagList();
+			for(Tag tag : tmp.toArrayList()){
+				if(!tags.contains(tag.getName())){
+					tags.addTag(tag);
+				}
+			}
+		}
+		return tags.toArrayList();
+	}
+	
 	
 	/**
-	 * Uses ClaimList.addClaim to add claim with listener to claimList. 
-	 * Also adds a listener to claims expenselist
+	 * Uses ClaimList.addClaim to add claim with listeners to claimList. 
 	 * 
 	 * @param claim claim to be added to claimlist 
 	 * @throws IOException 
 	 */
-	public static void addClaimToClaimList(Claim claim){
+	public static void addClaim(Claim claim){
 		addClaimListeners(claim);
 		getClaimList().addClaim(claim);
 		getClaimList().sort();
@@ -71,7 +93,7 @@ public class ClaimListController {
 	 * 
 	 * @param claim claim to be removed from claimlist 
 	 */
-	public static void deleteClaim(Claim claim){
+	public static void removeClaim(Claim claim){
 		
 		getClaimList().removeClaim(claim);
 	}
@@ -92,6 +114,13 @@ public class ClaimListController {
 				
 			}
 		});
+	}
+	
+	/**
+	 * Removes expense from singleton Claimlist
+	 */
+	public static void removeExpense(Expense expense, Claim claim){
+		claim.removeExpense(expense);
 	}
 	
 	/**
@@ -117,7 +146,7 @@ public class ClaimListController {
 	 * @param dest	destination to delete
 	 * @param claim removes destination from this claim
 	 */
-	public static void deleteDestination(Destination dest, Claim claim){
+	public static void removeDestination(Destination dest, Claim claim){
 		claim.getDestinationList().deleteDestination(dest);
 		
 	}
@@ -137,6 +166,17 @@ public class ClaimListController {
 		});
 		claim.getTagList().addTag(tag);
 	}
+	
+	/**
+	 * Removes a {@link Tag} from a given {@link Claim}
+	 * 
+	 * @param claim claim to delete tag from 
+	 * @param tag   tag to delete
+	 */
+	public static void removeTag(Claim claim, Tag tag) {
+		claim.getTagList().removeTag(tag);
+	}
+	
 	
 	
 	/**
