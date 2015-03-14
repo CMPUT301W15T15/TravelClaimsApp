@@ -31,9 +31,9 @@ public class FileManager {
 	
 
 	private static final String USER_SEARCH_URL = "http://cmput301.softwareprocess.es:8080/cmput301w15t15/user/_search";
-	private static final String USER_RESOURCE_URL = "http://cmput301.softwareprocess.es:8080/cmput301w15t15/user";
+	private static final String USER_RESOURCE_URL = "http://cmput301.softwareprocess.es:8080/cmput301w15t15/user/";
 	private static final String CLAIMLIST_SEARCH_URL = "http://cmput301.softwareprocess.es:8080/cmput301w15t15/claimlist/_search";
-	private static final String CLAIMLIST_RESOURCE_URL = "http://cmput301.softwareprocess.es:8080/cmput301w15t15/claimlist";
+	private static final String CLAIMLIST_RESOURCE_URL = "http://cmput301.softwareprocess.es:8080/cmput301w15t15/claimlist/";
 	private static final String USER_TAG = "UserSearch";
 	private static final String CLAIMLIST_TAG = "ClaimListSearch";
 	private static final String USERFILENAME = "user.sav";
@@ -77,7 +77,6 @@ public class FileManager {
 
 		try {
 			response = httpClient.execute(httpGet);
-			//SearchHit<Movie> sr = parseMovieHit(response);
 			json = getEntityContent(response);
 			Type searchResponseType = new TypeToken<User>(){}.getType();
 			

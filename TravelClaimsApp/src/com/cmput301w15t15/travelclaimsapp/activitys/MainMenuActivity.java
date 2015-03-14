@@ -5,6 +5,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 import com.cmput301w15t15.travelclaimsapp.FileManager;
+import com.cmput301w15t15.travelclaimsapp.InternetController;
 import com.cmput301w15t15.travelclaimsapp.R;
 import com.cmput301w15t15.travelclaimsapp.R.id;
 import com.cmput301w15t15.travelclaimsapp.R.layout;
@@ -25,6 +26,7 @@ public class MainMenuActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main_menu);
+		FileManager.initializeSaver(this);
 	}
 
 	@Override
@@ -91,5 +93,18 @@ public class MainMenuActivity extends Activity {
     	Toast.makeText(this, "Going to Claims", Toast.LENGTH_SHORT).show();
     	Intent intent = new Intent(MainMenuActivity.this, AddClaimActivity.class);
     	startActivity(intent);
+    }
+	
+	public void ToNewUserActivity(MenuItem menu)
+    {
+		String r = InternetController.isInternetAvailable();
+		
+		if(InternetController.isInternetAvailable2(this)){
+			Toast.makeText(this, "Create User", Toast.LENGTH_SHORT).show();
+			Intent intent = new Intent(MainMenuActivity.this, CreateUserActivity.class);
+			startActivity(intent);
+		} else {
+			Toast.makeText(this, "Cannot Create User without internet connection", Toast.LENGTH_SHORT).show();
+		}
     }
 }

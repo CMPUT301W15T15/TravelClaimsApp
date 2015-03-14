@@ -6,10 +6,6 @@ import java.util.Map;
 
 import android.R;
 
-
-
-
-
 public class Claim implements Listenable{
 	private Claim claim;
 	private String claimName;
@@ -24,9 +20,11 @@ public class Claim implements Listenable{
 	private int claimantId;
 	private ExpenseList expenseList;
 	private TagList tagList;
-	protected boolean Editable=true;
 	protected transient ArrayList<Listener> listeners;
-	
+	private final String INPROGRESS = "In Progress";
+	private final String SUBMITTED = "Submitted";
+	private final String RETURNED = "Returned";
+	private final String APPROVED = "Approved";
 
 	public Claim(String string) {
 		// TODO Auto-generated constructor stub
@@ -158,9 +156,11 @@ public class Claim implements Listenable{
 	}
 
 	public boolean isEditable() {
-		// TODO Auto-generated method stub
+		if(claim.getClaimStatus().equals(INPROGRESS) || claim.getStatus().equals(RETURNED)){
+			return true;
+		}
+		return false;
 		
-		return this.Editable;
 	}
 
 	

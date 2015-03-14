@@ -62,9 +62,7 @@ public class EditClaimActivityUITest extends
 		super.setUp();
 
 		claim = new Claim("Claim1");
-		ClaimListController.addClaimToClaimList(claim);
-
-		
+		ClaimListController.addClaim(claim);
 
 		intent = new Intent();
 		intent.putExtra("claimName", "Claim1");
@@ -127,7 +125,7 @@ public class EditClaimActivityUITest extends
 	protected void tearDown() throws Exception {
 		// TODO Auto-generated method stub
 		super.tearDown();
-		ClaimListController.deleteClaim(claim);
+		ClaimListController.removeClaim(claim);
 		
 	}
 	

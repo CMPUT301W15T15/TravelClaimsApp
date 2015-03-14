@@ -1,6 +1,7 @@
 package com.cmput301w15t15.travelclaimsapp.test.modeltest;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import com.cmput301w15t15.travelclaimsapp.ClaimListController;
 import com.cmput301w15t15.travelclaimsapp.FileManager;
@@ -8,6 +9,8 @@ import com.cmput301w15t15.travelclaimsapp.activitys.AddClaimActivity;
 import com.cmput301w15t15.travelclaimsapp.model.Claim;
 import com.cmput301w15t15.travelclaimsapp.model.ClaimList;
 import com.cmput301w15t15.travelclaimsapp.model.Expense;
+import com.cmput301w15t15.travelclaimsapp.model.Tag;
+import com.cmput301w15t15.travelclaimsapp.model.TagList;
 
 import android.app.Activity;
 import android.content.Context;
@@ -32,6 +35,8 @@ public class ClaimListControllerTest extends AndroidTestCase {
 	
 	public ClaimListControllerTest() {
 		super();
+		
+		
 	}
 
 	protected void setUp() throws Exception {
@@ -39,9 +44,11 @@ public class ClaimListControllerTest extends AndroidTestCase {
 		mContext = getContext();
 		FileManager.initializeSaver(mContext);
 		claimList = ClaimListController.getClaimList();
-		for(Claim claim : claimList.toArrayList()){
-			ClaimListController.deleteClaim(claim);
-		}
+		//ArrayList<Claim> cl = ClaimListController.getClaimList().toArrayList();
+		//for(Claim claim : cl){
+		//	ClaimListController.deleteClaim(claim);
+		//}
+		
 		currentSize = claimList.toArrayList().size();
 		claim = new Claim("c1");
 		claim2 = new Claim("c2");
@@ -55,9 +62,10 @@ public class ClaimListControllerTest extends AndroidTestCase {
 	protected void tearDown() throws Exception {
 		// TODO Auto-generated method stub
 		super.tearDown();
-		for(Claim claim : claimList.toArrayList()){
-			ClaimListController.deleteClaim(claim);
-		}
+		ClaimListController.removeClaim(claim);
+		ClaimListController.removeClaim(claim4);
+		ClaimListController.removeClaim(claim2);
+		ClaimListController.removeClaim(claim3);
 	}
 	
 	/**
@@ -66,7 +74,7 @@ public class ClaimListControllerTest extends AndroidTestCase {
 	 */
 	public void testClaimListListeners(){
 
-		ClaimListController.addClaimToClaimList(claim);
+		ClaimListController.addClaim(claim);
 		claimList2 = ClaimListController.getClaimList();
 		
 		assertEquals("ClaimList loaded from file not the same as current", claimList, claimList2);
@@ -76,7 +84,7 @@ public class ClaimListControllerTest extends AndroidTestCase {
 	 * ClaimListControllerTest #2
 	 */
 	public void testClaimListeners(){
-		ClaimListController.addClaimToClaimList(claim3);
+		ClaimListController.addClaim(claim3);
 		claim3.setName("test");
 		claimList2 = ClaimListController.getClaimList();
 		
@@ -92,7 +100,7 @@ public class ClaimListControllerTest extends AndroidTestCase {
 	 * ClaimListControllerTest #3
 	 */
 	public void testExpenseListeners() throws IOException{
-		ClaimListController.addClaimToClaimList(claim4);
+		ClaimListController.addClaim(claim4);
 		ClaimListController.addExpense(expense, claim4);
 		claimList2 = ClaimListController.getClaimList();
 		Claim claim2 = claimList2.getClaim("c4");
@@ -112,8 +120,37 @@ public class ClaimListControllerTest extends AndroidTestCase {
 	
 	/**
 	 * ClaimListControllerTest #4
+	 * 
+	 * Test getting a list of all unique tags in claimlist
 	 */
 	public void testGetClaimListTagList(){
+		ClaimListController.addClaim(claim);
+		ClaimListController.addClaim(claim2);
+		ClaimListController.addClaim(claim3);
+		ClaimListController.addClaim(claim4);
+		Tag tag1 = new Tag("a");
+		Tag tag2 = new Tag("b");
+		
+		ClaimListController.addTag(claim, tag1);
+		ClaimListController.addTag(claim, new Tag("c"));
+		ClaimListController.addTag(claim, tag2);
+		
+		ClaimListController.addTag(claim2, new Tag("a"));
+		ClaimListController.addTag(claim2, new Tag("e"));
+		
+		ClaimListController.addTag(claim3, new Tag("c"));
+		
+		ArrayList<Tag> tags = ClaimListController.getTagList();
+		
+		assertEquals("Number of tags returned not correct",4,tags.size());
+		
+		ClaimListController.removeTag(claim, tag1);
+		tags = ClaimListController.getTagList();
+		assertEquals("Number of tags returned not correct",4,tags.size());
+		
+		ClaimListController.removeTag(claim, tag2);
+		tags = ClaimListController.getTagList();
+		assertEquals("Number of tags returned not correct",3,tags.size());
 		
 	}
 	
