@@ -54,6 +54,11 @@ public class Destination implements Listenable{
 		notifyListeners();
 	}
 	
+	/**
+	 * Returns the reason for destination
+	 * 
+	 * @return reason string
+	 */
 	public String getReason() {
 		// TODO Auto-generated method stub
 		return this.reason;

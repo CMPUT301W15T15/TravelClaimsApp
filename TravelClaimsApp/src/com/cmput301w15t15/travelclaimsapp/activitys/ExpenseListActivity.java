@@ -1,8 +1,10 @@
 package com.cmput301w15t15.travelclaimsapp.activitys;
 
+import com.cmput301w15t15.travelclaimsapp.ExpenseListAdaptor;
 import com.cmput301w15t15.travelclaimsapp.R;
 import com.cmput301w15t15.travelclaimsapp.R.layout;
 import com.cmput301w15t15.travelclaimsapp.R.menu;
+import com.cmput301w15t15.travelclaimsapp.model.Expense;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -12,12 +14,18 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ContextMenu.ContextMenuInfo;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.Toast;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 
 public class ExpenseListActivity extends Activity
 {
-
+	private ExpenseListAdaptor expenseListAdaptor;
+	
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onCreate(android.os.Bundle)
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -25,6 +33,8 @@ public class ExpenseListActivity extends Activity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_expense_list);
 		registerForContextMenu(findViewById(R.id.CurrentExpenseList));
+		ListView listView = (ListView) findViewById(R.id.CurrentExpenseList);
+		ArrayAdapter<Expense> expenseAdapter = new ArrayAdapter<Expense>(this,android.R.layout.simple_expandable_list_item_1);
 	}
 
 	@Override

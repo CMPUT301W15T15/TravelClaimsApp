@@ -1,6 +1,7 @@
 package com.cmput301w15t15.travelclaimsapp;
 
 
+
 import com.cmput301w15t15.travelclaimsapp.model.Listener;
 import com.cmput301w15t15.travelclaimsapp.model.User;
 
@@ -8,7 +9,7 @@ public class UserController {
 	
 	private static User user = null;
 	
-	static public User getUserWithoutInternet() {
+	static public User getUser() {
 		if(user == null){
 			user = FileManager.getSaver().loadUserFromFile();
 			user.addListener(new Listener() {
@@ -53,8 +54,11 @@ public class UserController {
 	}
 	
 	public static void save(){
-		FileManager.getSaver().saveUserInFile(getUserWithoutInternet());
+		FileManager.getSaver().saveUserInFile(getUser());
 	}
+	
+	
+	
 	
 	
 }

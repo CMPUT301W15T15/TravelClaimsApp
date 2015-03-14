@@ -64,8 +64,6 @@ public class EditClaimActivityUITest extends
 		claim = new Claim("Claim1");
 		ClaimListController.addClaim(claim);
 
-		
-
 		intent = new Intent();
 		intent.putExtra("claimName", "Claim1");
 		setActivityIntent(intent);

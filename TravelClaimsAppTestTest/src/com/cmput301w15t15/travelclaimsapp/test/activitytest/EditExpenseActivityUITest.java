@@ -17,6 +17,10 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 
+/**
+ * Tests for EditExpenseActivity UI 
+ *
+ */
 public class EditExpenseActivityUITest extends
 		ActivityInstrumentationTestCase2<EditExpenseActivity> {
 
@@ -56,7 +60,9 @@ public class EditExpenseActivityUITest extends
 		currencyAdaptor = selectCurrency.getAdapter();
 		
 	}
-	//Test Case: EditExpenseActivityUITest#1
+	/**
+	 * Test Case: EditExpenseActivityUITest#1
+	 */
 	public void testEditTextInput(){
 		instrumentation.runOnMainSync(new Runnable() {
 			
@@ -73,19 +79,22 @@ public class EditExpenseActivityUITest extends
 		assertEquals("date EditText not set", "2015-02-12", inputDate.getText().toString());
 		assertEquals("description EditText not set", "test", inputDescription.getText().toString());
 	}
-	//Test Case: EditExpenseActivityUITest#2
+	/**
+	 * Test Case: EditExpenseActivityUITest#2
+	 */
 	public void testSpinners(){
-		assertEquals("number of Categories does not equal 9", 9, categoryAdaptor.getCount());
+		assertEquals("number of Categories does not equal 10", 10, categoryAdaptor.getCount());
 		assertEquals("number of Currencies does not equal 7", 7, currencyAdaptor.getCount());
 	}
-	//Test Case: EditExpenseActivityUITest#3
+	/**
+	 * Test Case: EditExpenseActivityUITest#3
+	 */
 	public void testCategorySelect(){
 		instrumentation.runOnMainSync(new Runnable() {
 			@Override
 			public void run() {
 				selectCategory.requestFocus();
 				selectCategory.setSelection(0);
-				
 			}
 		});
 		//from http://developer.android.com/tools/testing/activity_test.html 2015-02-12
@@ -98,7 +107,9 @@ public class EditExpenseActivityUITest extends
 		
 		assertEquals("Not selected", "Supplies", selectCategory.getItemAtPosition(selectCategory.getSelectedItemPosition()));
 	}
-	//Test Case: EditExpenseActivityUITest#4
+	/**
+	 * Test Case: EditExpenseActivityUITest#4
+	 */
 	public void testCurrencySelect(){
 		instrumentation.runOnMainSync(new Runnable() {
 			@Override
@@ -118,8 +129,4 @@ public class EditExpenseActivityUITest extends
 		
 		assertEquals("Not selected", "JPY", selectCurrency.getItemAtPosition(selectCurrency.getSelectedItemPosition()));
 	}
-	
-	
-
-
 }

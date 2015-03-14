@@ -39,7 +39,6 @@ public class AddClaimActivityUITest extends ActivityInstrumentationTestCase2<Add
 	
 	public AddClaimActivityUITest() {
 		super(AddClaimActivity.class);
-		
 	}
 
 	protected void setUp() throws Exception {
@@ -47,10 +46,10 @@ public class AddClaimActivityUITest extends ActivityInstrumentationTestCase2<Add
 		setActivityInitialTouchMode(true);
 		activity = getActivity();
 		claimList = ClaimListController.getClaimList();
+	
 		instrumentation = getInstrumentation();
 		listView = (ListView) activity.findViewById(R.id.claim_list_listview);
 		adaptor = new ClaimListAdaptor(activity, R.id.claim_list_listview, claimList.toArrayList());
-	
 		newClaimButton = (Button) activity.findViewById(R.id.add_claim_button);
 	}
 	
@@ -112,16 +111,14 @@ public class AddClaimActivityUITest extends ActivityInstrumentationTestCase2<Add
 			@Override
 			public void run() {
 				listView.requestFocus();
-				listView.setSelection(1);
-				
+				listView.setSelection(ClaimListController.getClaimList().size());	
 				}
 		});
 		boolean test = instrumentation.invokeContextMenuAction(activity, R.id.cmenu_addExpense, 0);
 		instrumentation.waitForIdleSync();
 	
-		Activity nextActivity = instrumentation.waitForMonitorWithTimeout(activityMonitor, 3000);
 		
-		assertNotNull("The Activity is null", nextActivity);
+		assertEquals("expense not added",1, claim1.getExpenseList().size());
 		ClaimListController.removeClaim(claim1);
 		
 	}
@@ -138,12 +135,10 @@ public class AddClaimActivityUITest extends ActivityInstrumentationTestCase2<Add
 		adaptor.notifyDataSetChanged();
 		
 		instrumentation.runOnMainSync(new Runnable() {
-			
 			@Override
 			public void run() {
 				listView.requestFocus();
-				listView.setSelection(ClaimListController.getClaimList().size()-1);
-				
+				listView.setSelection(ClaimListController.getClaimList().size()-1);	
 				}
 		});
 		boolean test = instrumentation.invokeContextMenuAction(activity, R.id.cmenu_submit_claim, 0);
