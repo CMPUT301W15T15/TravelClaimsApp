@@ -19,7 +19,17 @@ public interface Listenable {
 	 */
 	public void addListener(Listener listener);
 	
+	/**
+	 * Use for setting listener array in objects that implement 
+	 * this interface
+	 */
 	public void setListeners();
 	
+	/**
+	 * Use to delete listeners attached to object implementing 
+	 * interface 
+	 * 
+	 * @param listener
+	 */
 	public void deleteListener(Listener listener);
 }

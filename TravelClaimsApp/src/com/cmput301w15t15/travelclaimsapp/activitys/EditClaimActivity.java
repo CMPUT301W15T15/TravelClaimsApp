@@ -4,9 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 
 import com.cmput301w15t15.travelclaimsapp.ClaimListController;
 import com.cmput301w15t15.travelclaimsapp.DestinationListAdaptor;
@@ -18,7 +16,6 @@ import com.cmput301w15t15.travelclaimsapp.model.Destination;
 import com.cmput301w15t15.travelclaimsapp.model.DestinationList;
 import com.cmput301w15t15.travelclaimsapp.model.Tag;
 import com.cmput301w15t15.travelclaimsapp.model.TagList;
-
 
 import android.os.Bundle;
 import android.app.AlertDialog;
@@ -35,6 +32,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ContextMenu.ContextMenuInfo;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -42,7 +40,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.SimpleExpandableListAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.AdapterContextMenuInfo;
@@ -52,7 +50,6 @@ import android.widget.AdapterView.AdapterContextMenuInfo;
  *
  * TODO:
  * 
- *
  */
 public class EditClaimActivity extends FragmentActivity implements TextWatcher {
 	
@@ -70,45 +67,43 @@ public class EditClaimActivity extends FragmentActivity implements TextWatcher {
 	private DestinationList dests;
 	private TagList tags;
 	private Button addDestButton;
+	private Button addTagButton;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_edit_claim);
-		
 		sdf = new SimpleDateFormat("MM/dd/yyyy",Locale.CANADA);
+		
 		claimStartDate = (EditText) findViewById(R.id.ClaimStart);
 		claimEndDate = (EditText) findViewById(R.id.ClaimEnd);
 		claimNameInput = (EditText) findViewById(R.id.Edit_Claim_Name);
 		destListView = (ListView) findViewById(R.id.DestinationList);
 		addDestButton = (Button) findViewById(R.id.AddDestinationButton);
+		addTagButton = (Button) findViewById(R.id.AddTagbutton);
 		tagListView = (ListView) findViewById(R.id.edit_claim_taglist);
 		claimList = ClaimListController.getClaimList();
-		
+	
 		//get the claim name passed with the intent 
 		String claimName = getIntent().getExtras().getString("claimName");
 		theClaim = claimList.getClaim(claimName);
 		dests = theClaim.getDestinationList(); 
 		tags = theClaim.getTagList();
 		
-		claimNameInput.addTextChangedListener(this);
-		claimStartDate.addTextChangedListener(this);
-		claimEndDate.addTextChangedListener(this);
-		
 		tagAdaptor = new TagListAdaptor(this, R.layout.tag_list_adaptor, tags.toArrayList());
 		destAdaptor = new DestinationListAdaptor(this, R.layout.dest_list_adaptor, dests.toArrayList());
 		destListView.setAdapter(destAdaptor);
 		tagListView.setAdapter(tagAdaptor);
 		
-		
+		//register listviews for the context menu popup
 		registerForContextMenu(findViewById(R.id.DestinationList));
 		registerForContextMenu(findViewById(R.id.edit_claim_taglist));
-		set_on_click();
 	}
 
 	@Override
 	protected void onStart() {
 		super.onStart();
+		//initially set edittext values if they are not null
 		claimNameInput.setText(theClaim.getName());
 		if(theClaim.getStartDate()!=null){
 			claimStartDate.setText(sdf.format(theClaim.getStartDate()));
@@ -116,19 +111,10 @@ public class EditClaimActivity extends FragmentActivity implements TextWatcher {
 		if(theClaim.getEndDate()!=null){
 			claimEndDate.setText(sdf.format(theClaim.getEndDate()));
 		}
-		if(theClaim.getStatus().equals("Submitted") || theClaim.getStatus().equals("Approved")){
-			claimNameInput.setFocusable(false);
-			destListView.setClickable(false);
-			destListView.setLongClickable(false);
-			claimStartDate.setFocusable(false);
-			claimEndDate.setFocusable(false);
-			
-		}
-		
+		//if claim has been submitted or approved then don't allow any further edits 
+		setEditable();
 		destAdaptor.notifyDataSetChanged();
 		tagAdaptor.notifyDataSetChanged();
-		setEditable();
-		
 	}
 
 	@Override
@@ -137,7 +123,6 @@ public class EditClaimActivity extends FragmentActivity implements TextWatcher {
 		super.onResume();
 		//set rest of EditTexts if values exist 
 		destAdaptor.notifyDataSetChanged();
-		
 	}
 
 	@Override
@@ -147,7 +132,6 @@ public class EditClaimActivity extends FragmentActivity implements TextWatcher {
 		return true;
 	}
 	
-	
   @Override
     public void onCreateContextMenu(ContextMenu menu, View v,ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
@@ -156,23 +140,18 @@ public class EditClaimActivity extends FragmentActivity implements TextWatcher {
         }else{
         	getMenuInflater().inflate(R.menu.edit_tag_contextmenu, menu);
         }
-        
     }
    
     @Override
     public boolean onContextItemSelected(MenuItem item) {
         final AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
    
-        //final Destination dest = destAdaptor.getItem(info.position);
-      
-    
         switch (item.getItemId()) {
             case R.id.cmenu_dlist_delete:
             	ClaimListController.removeDestination(destAdaptor.getItem(info.position), theClaim);
             	destAdaptor.notifyDataSetChanged();
             	return true;
             case R.id.cmenu_dlist_edit:
-            	
             	final EditText enterLocation = new EditText(this);
             	final EditText enterReason = new EditText(this);
             	
@@ -190,7 +169,7 @@ public class EditClaimActivity extends FragmentActivity implements TextWatcher {
             	AlertDialog.Builder alert = new AlertDialog.Builder(this);
             	
             	alert.setView(linearLayout);
-            
+            	
             	alert.setPositiveButton("Add", new DialogInterface.OnClickListener() {
         			public void onClick(DialogInterface dialog, int whichButton) {
         				destAdaptor.getItem(info.position).setLocation(enterLocation.getText().toString());
@@ -239,7 +218,6 @@ public class EditClaimActivity extends FragmentActivity implements TextWatcher {
         }
     }
 	
-	
 	//Retrieved on February 28, 2015 from http://developer.android.com/guide/topics/ui/controls/pickers.html
 	public void showTruitonDatePickerDialog(View v)
 	{
@@ -272,15 +250,12 @@ public class EditClaimActivity extends FragmentActivity implements TextWatcher {
 		}
 
 		@Override
-
 		public void onDateSet(DatePicker view, int year, int month, int day) 
 		{
 			// Do something with the date chosen by the user
 			if (Start)
 			{
 				claimStartDate.setText((month + 1) + "/" + day + "/" + year);
-		
-			
 			}
 			else
 			{
@@ -289,41 +264,44 @@ public class EditClaimActivity extends FragmentActivity implements TextWatcher {
 		}	
 	}
 	
+	/**
+	 * sets onClickListeners for claimStartDate and claimEndDate edittexts 
+	 */
 	private void set_on_click()
 	{
-		
 		claimStartDate.setOnClickListener(new View.OnClickListener() {
-		@Override
-		public void onClick(View v) 
-		{
-			
-			showTruitonDatePickerDialog(v);
+			@Override
+			public void onClick(View v) 
+			{
+				showTruitonDatePickerDialog(v);
 		
-			
-		}
+			}
 		});
 		claimEndDate.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) 
 			{
-				
 				showTruitonDatePickerDialog(v);
-				
 			}
 		});
-		
-	
-	
-	
 	}
 	
+	/**
+	 * Function called when search button pressed in settings menu
+	 * 
+	 * @param menu
+	 */
 	public void SearchOption(MenuItem menu)
     {
     	Toast.makeText(this, "Going to Search", Toast.LENGTH_SHORT).show();
     	Intent intent = new Intent(EditClaimActivity.this, SearchActivity.class);
     	startActivity(intent);
     }
-	
+	/**
+	 * Function called when signout button pressed in settings menu 
+	 * 
+	 * @param menu
+	 */
 	public void SignOut(MenuItem menu)
     {
     	Toast.makeText(this, "Signing Out", Toast.LENGTH_SHORT).show();
@@ -350,25 +328,52 @@ public class EditClaimActivity extends FragmentActivity implements TextWatcher {
 	 * @param view
 	 */
 	public void addDestinationButton(View view){
-	
 		showDestinationAlert(new String(), new String());
 	}
 	
 	/**
 	 * Function that is called when you press the add tag
 	 * 
+	 * Creates a alert dialog that gives the user the option 
+	 * of adding a previously added tag or entering a new tag name
+	 * 
 	 * @param view
 	 */
 	public void addTagButton(View view){
-	  	final TextView enterTag = new AutoCompleteTextView(this);
-    	
+		final EditText enterTag = new EditText(this);
+    	final Spinner tagSpinner = new Spinner(this);
+    	//Linear layout that holds enterTag and tagSpinner views
+    	LinearLayout ll = new LinearLayout(this);
+    	ll.setOrientation(LinearLayout.VERTICAL);
+    	tagSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+    		@Override
+    		public void onItemSelected(AdapterView<?> parent,View arg1, int position, long id) {
+    			enterTag.setText(parent.getItemAtPosition(position).toString());
+    		}
+
+    		@Override
+    		public void onNothingSelected(AdapterView<?> arg0) {
+    			// TODO Auto-generated method stub		
+    		}
+    	});
     	
     	enterTag.setHint("Enter tag");
-    	
     	AlertDialog.Builder alert = new AlertDialog.Builder(this);
     	
-    			
-    	alert.setView(enterTag);
+    	//get all the tags currently added to claims in application claimlist
+    	ArrayList<Tag> tags = ClaimListController.getTagList();
+    	String t[] = new String[tags.size()];
+    	for(int i = 0; i<tags.size(); i++){
+    		t[i] = tags.get(i).getName();
+    	}
+    	//create a arrayadaptor for displaying the tagSpinner view, and set it
+    	ArrayAdapter<String> tagA = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, t);
+    	tagSpinner.setAdapter(tagA);
+    	//add views to linear layout and set the Linear layout view as the alert dialog view 
+    	ll.addView(tagSpinner);
+    	ll.addView(enterTag);
+    	alert.setView(ll);
     
     	alert.setPositiveButton("Add", new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int whichButton) {
@@ -387,10 +392,7 @@ public class EditClaimActivity extends FragmentActivity implements TextWatcher {
 		});
 	
 		alert.show(); 
-    	
-		
 	}
-	
 	
 	@Override
 	public void afterTextChanged(Editable s) {
@@ -398,6 +400,8 @@ public class EditClaimActivity extends FragmentActivity implements TextWatcher {
 		switch(getCurrentFocus().getId()){
 			case R.id.Edit_Claim_Name:
 				String newName = s.toString();
+				//if length of name in edittext is 0 or if claim name is already in claimlist
+				//then do not save changes. Otherwise update the claim name
 				if(s.length() == 0 ){
 					Toast.makeText(this, "Claim name cannot be null", Toast.LENGTH_LONG).show();
 				}else if(claimList.getClaim(newName)!=null){
@@ -408,7 +412,6 @@ public class EditClaimActivity extends FragmentActivity implements TextWatcher {
 			case R.id.ClaimStart:
 				try{
 					theClaim.setStartDate(sdf.parse(claimStartDate.getText().toString()));
-					Toast.makeText(this, sdf.parse(claimStartDate.getText().toString()).toString(), Toast.LENGTH_LONG).show();
 				}catch(ParseException e){
 					//do nothing 
 				}
@@ -417,49 +420,59 @@ public class EditClaimActivity extends FragmentActivity implements TextWatcher {
 					theClaim.setEndDate(sdf.parse(claimEndDate.getText().toString()));
 				}catch(ParseException e){
 					//do nothing
-				}
-			
-				
+				}		
 		}
 		
 	}
-
+	
 	@Override
 	public void beforeTextChanged(CharSequence s, int start, int count,
-			int after) {
-		// TODO Auto-generated method stub
-		
-	}
+			int after) {}
 
 	@Override
-	public void onTextChanged(CharSequence s, int start, int before, int count) {
-		
-		
-	}
+	public void onTextChanged(CharSequence s, int start, int before, int count) {}
+	
+   	/**
+   	 * Functions turns off editing if claim is Submitted or Approved
+   	 * otherwise it sets onClickListeners and text changed listeners
+   	 */
    	public void setEditable(){
-   		if(theClaim.getClaimStatus() == "Submitted" || theClaim.getClaimStatus() == "Approved"){
-   			claimNameInput.setFocusable(false);
-   		}
+   		if(theClaim.getStatus().equals("Submitted") || theClaim.getStatus().equals("Approved")){
+			claimNameInput.setFocusable(false);
+			destListView.setClickable(false);
+			destListView.setLongClickable(false);
+			tagListView.setClickable(false);
+			tagListView.setLongClickable(false);
+			claimStartDate.setFocusable(false);
+			claimEndDate.setFocusable(false);
+			addTagButton.setClickable(false);
+			addDestButton.setClickable(false);
+			
+		}else{
+			set_on_click();
+			//add text changed listeners 
+			claimNameInput.addTextChangedListener(this);
+			claimStartDate.addTextChangedListener(this);
+			claimEndDate.addTextChangedListener(this);
+		}
    	}
    	/**
    	 * Create a alert dialog for entering Destination values 
+   	 * 
    	 */
    	private void showDestinationAlert(final String dlocation, final String dreason){
     	final EditText enterLocation = new EditText(this);
     	final EditText enterReason = new EditText(this);
     	
     	if(!dlocation.equals("")){
-    		enterLocation.setText(dlocation);
-    		
+    		enterLocation.setText(dlocation);	
     	}
     	if(!dreason.equals("")){
     		enterReason.setText(dreason);
     	}
-    	
-  
     	enterLocation.setHint("Enter location");
     	enterReason.setHint("Enter reason");
-  
+    	
     	LinearLayout linearLayout = new LinearLayout(this);
     	linearLayout.setOrientation(LinearLayout.VERTICAL);
     	linearLayout.addView(enterLocation);

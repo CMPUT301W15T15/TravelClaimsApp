@@ -19,7 +19,7 @@ import com.cmput301w15t15.travelclaimsapp.model.DestinationList;
 
 /**
  * Custom list adaptor for {@link DestinationList}
- *
+ * 
  */
 public class DestinationListAdaptor extends ArrayAdapter<Destination>{
 

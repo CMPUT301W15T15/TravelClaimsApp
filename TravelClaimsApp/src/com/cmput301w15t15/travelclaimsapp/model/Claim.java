@@ -156,7 +156,7 @@ public class Claim implements Listenable{
 	}
 
 	public boolean isEditable() {
-		if(claim.getClaimStatus().equals(this.INPROGRESS) || claim.getStatus().equals(this.RETURNED)){
+		if(claim.getClaimStatus().equals(INPROGRESS) || claim.getStatus().equals(RETURNED)){
 			return true;
 		}
 		return false;

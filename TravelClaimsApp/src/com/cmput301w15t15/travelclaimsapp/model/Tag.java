@@ -29,6 +29,10 @@ public class Tag implements Listenable{
 		notifyListeners();
 	}
 
+	public String toString(){
+		return tagName;
+	}
+	
 	@Override
 	public void notifyListeners() {
 		for(Listener listener : listeners){

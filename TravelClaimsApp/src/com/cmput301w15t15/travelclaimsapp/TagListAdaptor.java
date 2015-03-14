@@ -14,8 +14,11 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+/**
+ * Custom ArrayAdaptor for displaying tag names in listview
+ *
+ */
 public class TagListAdaptor extends ArrayAdapter<Tag> {
-	
 
 	private Context context;
 	private int resource;
