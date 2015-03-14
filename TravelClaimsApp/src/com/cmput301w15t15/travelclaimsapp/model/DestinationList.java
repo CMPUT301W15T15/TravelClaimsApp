@@ -21,15 +21,32 @@ public class DestinationList implements Listenable{
 		this.listeners = new ArrayList<Listener>();
 	}
 	
+	/**
+	 * Adds a {@link Destination} to the DestinationList
+	 * 
+	 * @param dest Destination to add
+	 */
 	public void addDestination(Destination dest) {
 		this.destinations.add(dest); 
+		notifyListeners();
 	}
 	
+	/**
+	 * Delete a {@link Destination} from the DestinationList
+	 * 
+	 * @param dest Destination to add
+	 */
 	public void deleteDestination(Destination dest) {
 		this.destinations.remove(dest);
+		notifyListeners();
 	}
 	
-	public ArrayList<Destination> getDestinations() {
+	/**
+	 * Returns the DestinationList as a {@link ArrayList} of Destinations 
+	 * 
+	 * @return the ArrayList<Destination>
+	 */
+	public ArrayList<Destination> toArrayList() {
 		return destinations;
 	}
 	

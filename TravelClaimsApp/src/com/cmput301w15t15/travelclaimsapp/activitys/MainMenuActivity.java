@@ -4,6 +4,8 @@ import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+import com.cmput301w15t15.travelclaimsapp.FileManager;
+import com.cmput301w15t15.travelclaimsapp.InternetController;
 import com.cmput301w15t15.travelclaimsapp.R;
 import com.cmput301w15t15.travelclaimsapp.R.id;
 import com.cmput301w15t15.travelclaimsapp.R.layout;
@@ -24,6 +26,7 @@ public class MainMenuActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main_menu);
+		FileManager.initializeSaver(this);
 	}
 
 	@Override
@@ -36,8 +39,21 @@ public class MainMenuActivity extends Activity {
 	
 	public void OnLoginClick(View v){
 		EditText passText = (EditText) findViewById(R.id.PasswordEditText);
+		EditText userText = (EditText) findViewById(R.id.UsernameEditText);
 		MessageDigest md = null;
 		byte[] passHash = null;
+		
+		//some error handling
+		if(passText.getText().toString().equals("") && userText.getText().toString().equals("")){
+			Toast.makeText(this, "No username or password given.", Toast.LENGTH_LONG).show();
+			return;
+		}else if(passText.getText().toString().equals("")){
+			Toast.makeText(this, "No password given.", Toast.LENGTH_LONG).show();
+			return;
+		}else if(userText.getText().toString().equals("")){
+			Toast.makeText(this, "No username given.", Toast.LENGTH_LONG).show();
+			return;
+		}
 		
 		try {
 			md = MessageDigest.getInstance("SHA-256");
@@ -52,6 +68,14 @@ public class MainMenuActivity extends Activity {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		
+		//try to get user then try to compare hashes
+//		try{
+//			
+//		} catch () {
+//			
+//		}
 		
 		
 		
@@ -69,5 +93,18 @@ public class MainMenuActivity extends Activity {
     	Toast.makeText(this, "Going to Claims", Toast.LENGTH_SHORT).show();
     	Intent intent = new Intent(MainMenuActivity.this, AddClaimActivity.class);
     	startActivity(intent);
+    }
+	
+	public void ToNewUserActivity(MenuItem menu)
+    {
+		String r = InternetController.isInternetAvailable();
+		
+		if(InternetController.isInternetAvailable2(this)){
+			Toast.makeText(this, "Create User", Toast.LENGTH_SHORT).show();
+			Intent intent = new Intent(MainMenuActivity.this, CreateUserActivity.class);
+			startActivity(intent);
+		} else {
+			Toast.makeText(this, "Cannot Create User without internet connection", Toast.LENGTH_SHORT).show();
+		}
     }
 }

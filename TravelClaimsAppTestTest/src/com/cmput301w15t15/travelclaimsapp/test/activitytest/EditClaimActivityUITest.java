@@ -2,6 +2,7 @@ package com.cmput301w15t15.travelclaimsapp.test.activitytest;
 
 
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
@@ -19,6 +20,7 @@ import com.cmput301w15t15.travelclaimsapp.model.ClaimList;
 
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Instrumentation;
 import android.app.Instrumentation.ActivityMonitor;
 import android.content.Intent;
@@ -28,6 +30,10 @@ import android.webkit.WebView.FindListener;
 import android.widget.Button;
 import android.widget.EditText;
 
+/**
+ * Class for testing some of the EditClaimActivity UI
+ *
+ */
 public class EditClaimActivityUITest extends
 		ActivityInstrumentationTestCase2<EditClaimActivity> {
 	
@@ -39,108 +45,100 @@ public class EditClaimActivityUITest extends
 	private EditText inputReason;
 	private EditText inputStartDate;
 	private EditText inputEndDate;
-	private Button addDestination;
-	private Button newExpenseButton;
+	boolean bool1;
 	private ClaimList claimList;
 	private Claim claim;
 	private Intent intent;
+	private Button b;
+	private EditText destLocation;
+	private EditText destReason;
 	
 	public EditClaimActivityUITest() {
 		super(EditClaimActivity.class);
-		
+		//Need to change the id's once UI has been made
 	}
 
 	protected void setUp() throws Exception {
 		super.setUp();
+
+		claim = new Claim("Claim1");
+		ClaimListController.addClaim(claim);
+
 		intent = new Intent();
-		intent.putExtra("claimName", "testClaim");
+		intent.putExtra("claimName", "Claim1");
 		setActivityIntent(intent);
 		setActivityInitialTouchMode(true);
 		activity = getActivity();
+		
 		instrumentation = getInstrumentation();
-		
-		//Need to change the id's once UI has been made
+	
 		inputName = (EditText) activity.findViewById(R.id.Edit_Claim_Name);
-		inputDestination = (EditText) activity.findViewById(R.id.Edit_Claim_Name);
-		inputReason = (EditText) activity.findViewById(R.id.Edit_Claim_Description);
-		inputStartDate = (EditText) activity.findViewById(R.id.Edit_Claim_Name);
-		inputEndDate = (EditText) activity.findViewById(R.id.Edit_Claim_Description);
-		
-		FileManager.initializeSaver(activity);
-		
-		claimList = new ClaimList();
-		claim = new Claim("The Claim");
-		claimList.addClaim(claim);
-		claimList.addClaim(new Claim("testClaim"));
+		inputStartDate = (EditText) activity.findViewById(R.id.ClaimStart);
+		inputEndDate = (EditText) activity.findViewById(R.id.ClaimEnd);
+		b = (Button) activity.findViewById(R.id.AddDestinationButton);
 	}
-	//test case: EditClaimActivityUITest#1
+	
+	/**
+	 * EditClaimActivityUITest#1
+	 * 
+	 * Testing setting edittext values
+	 */
 	public void testSettingValues(){
 		instrumentation.runOnMainSync(new Runnable() {
 			
 			@Override
 			public void run() {
-				inputName.setText("Claim1");
-				inputDestination.setText("Rome");
-				inputReason.setText("Work");
-				inputStartDate.setText("2015-02-11");
-				inputEndDate.setText("2015-03-11");
+				inputName.setText("Claim2");
+				inputStartDate.setText("11/02/2014");
+				inputEndDate.setText("12/20/2014");
 			}
 		});
 		instrumentation.waitForIdleSync();
-		assertEquals("Claim1", inputName.getText().toString());
-		assertEquals("Rome", inputDestination.getText().toString());
-		assertEquals("Work", inputReason.getText().toString());
-		assertEquals("2015-02-11", inputStartDate.getText().toString());
-		assertEquals("2015-03-11", inputEndDate.getText().toString());
+		assertEquals("Claim2", inputName.getText().toString());
+		assertEquals("11/02/2014", inputStartDate.getText().toString());
+		assertEquals("12/20/2014", inputEndDate.getText().toString());
+		
+		
 	}
 
-	//test case: EditClaimActivityUITest#3
-	public void testAddDestination(String destination, String reason){
-		ClaimList claimL = ClaimListController.getClaimList();
-		String selectedClaimName = activity.getIntent().getExtras().getString("claimName");
-		Claim testClaim = claimL.getClaim(selectedClaimName);
-		
+
+
+	
+	/**
+	 * Test add destination dialog popup
+	 */
+	public void testShowDestinationDialog(){
 		instrumentation.runOnMainSync(new Runnable() {
+			
+			@Override
+			public void run() {
+				b.performClick();
 				
-		@Override
-		public void run() {
-			inputDestination.setText("test");
-			inputReason.setText("test1");
-			addDestination.performClick();
 			}
 		});
 		instrumentation.waitForIdleSync();
 		
-		//assertEquals("destination was not added to claim with button press", "test1", testClaim.getDestinationList().get("test"));
-		
 		
 	}
-	//test case: EditClaimActivityUITest#4
-	public void testSubmittedStatus(){
-		String selectedClaimName = activity.getIntent().getExtras().getString("claimName");
-		Claim testClaim = claimList.getClaim(selectedClaimName);
-		testClaim.setStatus("Submitted");
-		
-		assertFalse(inputName.isFocusable());
-		assertFalse(inputDestination.isFocusable());
-		assertFalse(inputReason.isFocusable());
-		assertFalse(inputEndDate.isClickable());
-		assertFalse(inputStartDate.isClickable());
+
+	@Override
+	protected void tearDown() throws Exception {
+		// TODO Auto-generated method stub
+		super.tearDown();
+		ClaimListController.removeClaim(claim);
 		
 	}
-	//test case: EditClaimActivityUITest#5
-	public void testDataPersistance(){
-		ClaimList claimL = ClaimListController.getClaimList();
-		String selectedClaimName = activity.getIntent().getExtras().getString("claimName");
-		Claim testClaim = claimL.getClaim(selectedClaimName);
-		testClaim.setStartDate(new Date());
-		activity.finish();
-		activity = getActivity();
-		claimL = ClaimListController.getClaimList();
-		testClaim = claimL.getClaim(selectedClaimName);
-		assertEquals("2015-2-1", testClaim.getStartDate());
-		
-	}
+	
+
+	
+	
+
+
+
+	
+
+	
+	
 
 	
 	

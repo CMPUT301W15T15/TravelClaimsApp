@@ -2,23 +2,31 @@ package com.cmput301w15t15.travelclaimsapp.model;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 
+import com.cmput301w15t15.travelclaimsapp.ClaimListComparator;
 import com.cmput301w15t15.travelclaimsapp.ClaimListController;
 
+/**
+ * 
+ *
+ */
 public class ClaimList implements Listenable{
 	protected ArrayList<Claim> claimList;
 	protected transient ArrayList<Listener> listeners;
+
 	
 	public ClaimList(){
 		claimList = new ArrayList<Claim>();
 		listeners = new ArrayList<Listener>();
+	
 	}
 	
 	/**
 	 * @param claim1
-	 * @throws IOException
+	 * 
 	 */
-	public void addClaim(Claim claim1) throws IOException{
+	public void addClaim(Claim claim1){
 		for (Claim claim : claimList){
 			//if name already in claimlist return without adding claim
 			if (claim.getName().equals(claim1.getName())){
@@ -65,7 +73,12 @@ public class ClaimList implements Listenable{
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	
+	public void sort() {
+		Collections.sort(claimList, new ClaimListComparator());
+		
+	}
+	
 	public void notifyListeners() {
 		for (Listener listener : listeners) {
 			listener.update();
@@ -85,6 +98,7 @@ public class ClaimList implements Listenable{
 		this.listeners = new ArrayList<Listener>();
 		
 	}
-	
+
+
 
 }

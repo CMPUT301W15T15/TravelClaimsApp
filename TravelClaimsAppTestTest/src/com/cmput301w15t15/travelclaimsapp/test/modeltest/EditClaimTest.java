@@ -1,5 +1,6 @@
 package com.cmput301w15t15.travelclaimsapp.test.modeltest;
 
+import java.sql.Date;
 import java.util.Map;
 import java.util.Set;
 
@@ -42,35 +43,17 @@ public class EditClaimTest extends TestCase {
 	//test case: EditClaimTest#2
 	public void testEditClaimDate(){
 		
-		try{
-			//claim1.setEndDate(2015, 1, 5);
-		}catch(IllegalArgumentException e){
-			assertTrue("Claim end date set before claim start date", e.getMessage().equals("Claim.setEndDate was passed a illegal argument"));
-		}
+	
+		//claim1.setEndDate(new Date());
+	
+		//assertTrue("Claim end date set before claim start date", e.getMessage().equals("Claim.setEndDate was passed a illegal argument"));
 		
-		try{
-			//claim1.setEndDate(2015, 3, 5);
-		}catch(IllegalArgumentException e){
-			
-		}
 		
-		try{
-			//claim1.setStartDate(2015, 4, 5);
-		}catch(IllegalArgumentException e){
-			assertTrue("Claim start date set after claim end date", e.getMessage().equals("Claim.setEndDate was passed a illegal argument"));
-		}
 		
+		//claim1.setEndDate(2015, 3, 5);
+		//claim1.setStartDate(2015, 4, 5);
 	}
 
-	//test case: EditClaimTest#3
-	public void testSubmittedStatus(){
-		claim1.setStatus("Submitted");
-		assertTrue(claim1.isEditable());
-		claim1.setStatus("Returned");
-		assertFalse(claim1.isEditable());
-		claim1.setStatus("Approved");
-		assertTrue(claim1.isEditable());
-	}
 	
 	
 	

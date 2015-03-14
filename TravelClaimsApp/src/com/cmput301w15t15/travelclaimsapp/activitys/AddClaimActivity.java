@@ -1,24 +1,15 @@
 package com.cmput301w15t15.travelclaimsapp.activitys;
 
-import java.io.IOException;
-import java.util.ArrayList;
-
 import com.cmput301w15t15.travelclaimsapp.ClaimListAdaptor;
 import com.cmput301w15t15.travelclaimsapp.ClaimListController;
 import com.cmput301w15t15.travelclaimsapp.FileManager;
 import com.cmput301w15t15.travelclaimsapp.R;
-import com.cmput301w15t15.travelclaimsapp.R.id;
-import com.cmput301w15t15.travelclaimsapp.R.layout;
-import com.cmput301w15t15.travelclaimsapp.R.menu;
 import com.cmput301w15t15.travelclaimsapp.model.Claim;
 import com.cmput301w15t15.travelclaimsapp.model.ClaimList;
 import com.cmput301w15t15.travelclaimsapp.model.Expense;
-
-
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
-import android.content.res.Resources.Theme;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -32,11 +23,6 @@ import android.widget.Toast;
  * Activity for the AddClaim/ClaimList view 
  * 
  * TODO:
- *	-add tag button in content menu
- *	-submit button in context menu
- *	-Show currencies 
- *	-show destinations 
- *
  */
 public class AddClaimActivity extends Activity {
 
@@ -67,9 +53,7 @@ public class AddClaimActivity extends Activity {
 		super.onStart();
 		claimAdaptor.notifyDataSetChanged();
 	}
-
 	
-
 	@Override
 	protected void onResume() {
 		// TODO Auto-generated method stub
@@ -89,6 +73,7 @@ public class AddClaimActivity extends Activity {
     public void onCreateContextMenu(ContextMenu menu, View v,ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
         getMenuInflater().inflate(R.menu.add_claim_context_menu, menu);
+       
     }
    
     @Override
@@ -96,8 +81,7 @@ public class AddClaimActivity extends Activity {
         AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
         //get the claim the user selected 
         Intent intent;
-        Claim claim = claimAdaptor.getItem(info.position);
-    
+        final Claim claim = claimAdaptor.getItem(info.position);
         switch (item.getItemId()) {
             case R.id.cmenu_delete_claim:
             	claimList.removeClaim(claim);
@@ -111,17 +95,13 @@ public class AddClaimActivity extends Activity {
             	claimAdaptor.notifyDataSetChanged();
             	return true;
             case R.id.cmenu_addExpense:
-            	
             	intent= new Intent(AddClaimActivity.this, EditExpenseActivity.class);
-            	
             	//create new expense with default name and add to claimlist
             	Expense expense = new Expense("Expense"+claim.getExpenseList().size());
             	ClaimListController.addExpense(expense, claim);
-            	
             	// attach claim name and expense name to intent 
             	intent.putExtra("expenseName", expense.getName());
             	intent.putExtra("claimName", claim.getName());
-            	
             	startActivity(intent);  
             	return true;
             case R.id.cmenu_editExpense:
@@ -130,6 +110,16 @@ public class AddClaimActivity extends Activity {
             	intent.putExtra("claimName", claim.getName());
             	startActivity(intent);   
             	return true;
+            case R.id.cmenu_dummyClaim:
+            	//adds a test claim for testing displaying amounts in listview
+            	Claim c = new Claim("Claim"+ClaimListController.getClaimList().size());
+            	c.addExpense(new Expense("t1", null, "EUR", null, null, 40));
+            	c.addExpense(new Expense("t2", null, "GBP", null, null, 100));
+            	c.addExpense(new Expense("t3", null, "CAD", null, null, 200));
+            	c.addExpense(new Expense("t4", null, "USD", null, null, 1000));
+            	c.addExpense(new Expense("t5", null, "EUR", null, null, 40));
+            	ClaimListController.addClaim(c);
+            	claimAdaptor.notifyDataSetChanged();
             default:
                 return super.onContextItemSelected(item);
         }
@@ -149,18 +139,24 @@ public class AddClaimActivity extends Activity {
     	startActivity(intent);
     }
 
+    /**
+     * Function called when add claim button is pressed 
+     * 
+     * @param view
+     */
     public void AddClaimButton(View view)
     {	
-    	Claim claim = new Claim("Claim"+ClaimListController.getClaimList().size());
-    	try {
-			ClaimListController.addClaimToClaimList(claim);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			//e.printStackTrace();
-		}
+    	//create a default claim name and add to claimlist
+    	int i = claimList.size();
+    	while(ClaimListController.getClaimList().getClaim("Claim"+i)!=null){
+    		i++;
+    	}
+    	Claim claim = new Claim("Claim"+i);
+		ClaimListController.addClaim(claim);
+		
     	Toast.makeText(this, "Creating a Claim", Toast.LENGTH_SHORT).show();
     	Intent intent = new Intent(AddClaimActivity.this, EditClaimActivity.class);
-    	//attach claim name to intent 
+    	//attach claim name to intent and start activity
     	intent.putExtra("claimName", claim.getName());
     	startActivity(intent);   
     }

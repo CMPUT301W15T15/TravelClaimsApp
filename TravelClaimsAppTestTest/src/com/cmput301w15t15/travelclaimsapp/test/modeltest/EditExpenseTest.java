@@ -26,16 +26,7 @@ public class EditExpenseTest extends TestCase {
 	}
 	//Test case: EditExpenseTest#1
 	public void testEditExpenseName(){
-
-		try{
-			claim1.getExpense("E1").setName("");
-		}catch(IllegalArgumentException e){
-			assertTrue("Expense name was set to equal empty string and not caught", e.getMessage().equals("Expense.setName was passed a illegal arguement"));
-		}
-		try{
-			claim1.getExpense("E2").setName("E1");
-		}catch(IllegalArgumentException e){
-			assertTrue("Expense name was set to expense1's name and not caught", e.getMessage().equals("Expense.setName was passed a illegal argument"));
-		}
+		//claim1.getExpense("E1").setName("");
+		assertEquals("",expense1.getName());
 	}
 }
