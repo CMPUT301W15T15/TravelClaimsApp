@@ -1,12 +1,23 @@
 package com.cmput301w15t15.travelclaimsapp.activitys;
 
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 import com.cmput301w15t15.travelclaimsapp.R;
 import com.cmput301w15t15.travelclaimsapp.R.layout;
 import com.cmput301w15t15.travelclaimsapp.R.menu;
+import com.cmput301w15t15.travelclaimsapp.UserController;
+import com.cmput301w15t15.travelclaimsapp.model.User;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.view.Menu;
+import android.view.View;
+import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.Toast;
 
 public class CreateUserActivity extends Activity {
 
@@ -23,4 +34,51 @@ public class CreateUserActivity extends Activity {
 		return true;
 	}
 
+	
+	public void OnClickCreateUser(View v){
+		EditText userText = (EditText) findViewById(R.id.NewUsernameEditText);
+		EditText passText = (EditText) findViewById(R.id.NewPasswordEditText);
+		EditText passAgainText = (EditText) findViewById(R.id.NewPassAEditText);
+		CheckBox isApprover = (CheckBox) findViewById(R.id.ApproverCheckBox);
+		MessageDigest md = null;
+		byte[] passHash = null;
+		
+		
+		//some error handling
+		if(passText.getText().toString().equals("") || userText.getText().toString().equals("") || passAgainText.getText().toString().equals("")){
+			Toast.makeText(this, "Invalid input fields.", Toast.LENGTH_LONG).show();
+			return;
+		}else if(!passText.getText().toString().equals(passAgainText.getText().toString())){
+			Toast.makeText(this, "Mismatch Password.", Toast.LENGTH_LONG).show();
+			return;
+		}
+		
+		
+		try {
+			md = MessageDigest.getInstance("SHA-256");
+		} catch (NoSuchAlgorithmException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		try {
+			passHash = md.digest(passText.getEditableText().toString().getBytes("UTF-8"));
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		User newUser = new User(userText.getText().toString(), passHash, isApprover.isChecked());
+		if(UserController.pleaseAddUser(newUser)){
+			Toast.makeText(this, "Try your new account", Toast.LENGTH_SHORT).show();
+	    	Intent intent = new Intent(CreateUserActivity.this, MainMenuActivity.class);
+	    	startActivity(intent);
+		} else {
+			Toast.makeText(this, "Username Already Exists.", Toast.LENGTH_LONG).show();
+			return;
+		}
+		
+	}
+	
 }

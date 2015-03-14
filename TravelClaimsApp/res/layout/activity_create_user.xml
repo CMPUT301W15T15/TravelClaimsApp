@@ -31,7 +31,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/NewPasswordTextView"
-        android:ems="10" />
+        android:ems="10"
+        android:inputType="textPassword" />
 
     <EditText
         android:id="@+id/NewPassAEditText"
@@ -39,7 +40,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/NewPassATextView"
-        android:ems="10" >
+        android:ems="10"
+        android:inputType="textPassword" >
 
         <requestFocus />
     </EditText>
@@ -68,6 +70,7 @@
         android:layout_alignLeft="@+id/NewPassAEditText"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
+        android:onClick="OnClickCreateUser"
         android:paddingTop="5dp"
         android:text="@string/CreateUser" />
 
