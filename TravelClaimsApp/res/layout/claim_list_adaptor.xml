@@ -37,7 +37,20 @@
    	    android:layout_height="wrap_content"
    	    android:layout_alignLeft="@+id/linearLayout_destinations"
    	    android:layout_alignTop="@+id/claimAdaptor_status" />
-
+	<View
+    android:layout_width="fill_parent"
+    android:layout_height="1dp"
+    android:layout_below="@+id/claimAdaptor_startDate"
+    android:background="@android:color/darker_gray"/>
+	<View
+    android:layout_width="fill_parent"
+    android:layout_height="1dp"
+    android:layout_below="@+id/claimAdaptor_display_name"
+    android:background="@android:color/darker_gray"/>
+	<View
+    android:layout_width="fill_parent"
+    android:layout_height="1dp"
+    android:background="@android:color/darker_gray"/>
    	<LinearLayout
    	    android:id="@+id/linearLayout_destinations"
    	    android:layout_width="wrap_content"
@@ -48,7 +61,11 @@
    	    android:orientation="vertical" >
 
    	</LinearLayout>
-
+	<View
+    android:layout_width="fill_parent"
+    android:layout_height="1dp"
+    android:layout_below="@+id/LinearLayout_tags"
+    android:background="@android:color/darker_gray"/>
    	<LinearLayout
    	    android:id="@+id/LinearLayout_tags"
    	    android:layout_width="wrap_content"
@@ -57,7 +74,11 @@
    	    android:layout_below="@+id/linearLayout_destinations"
    	    android:orientation="horizontal">
    	</LinearLayout>
-
+	<View
+    android:layout_width="fill_parent"
+    android:layout_height="1dp"
+    android:layout_below="@+id/linearLayout_destinations"
+    android:background="@android:color/darker_gray"/>
    	<LinearLayout
    	    android:id="@+id/LinearLayout_amounts"
    	    android:layout_width="wrap_content"

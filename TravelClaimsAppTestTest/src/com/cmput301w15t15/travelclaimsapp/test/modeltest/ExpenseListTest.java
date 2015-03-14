@@ -14,7 +14,7 @@ public class ExpenseListTest extends TestCase
 	public void testExpenseList()
 	{
 		ExpenseList expenseList = new ExpenseList();
-		Collection<Expense> expenses = (Collection<Expense>) expenseList.getExpense();
+		Collection<Expense> expenses = (Collection<Expense>) expenseList.getExpenseList();
 		assertTrue("Empty Expense List", expenses.size() == 0);
 	}
 	public void testAddExpense()
@@ -23,7 +23,7 @@ public class ExpenseListTest extends TestCase
 		String x = "New Expense" ;
 		Expense testexpense = new Expense(x);
 		expenseList.addExpense(testexpense);
-		Collection<Expense> expenses = (Collection<Expense>) expenseList.getExpense();
+		Collection<Expense> expenses = (Collection<Expense>) expenseList.getExpenseList();
 		assertTrue("expense List Size not big enough", expenses.size() == 1);
 		assertTrue("Test expense not contain", expenses.contains(testexpense));
 	}
@@ -33,11 +33,11 @@ public class ExpenseListTest extends TestCase
 		String x = "New Expense" ;
 		Expense testexpense = new Expense(x);
 		expenseList.addExpense(testexpense);
-		Collection<Expense> expenses = (Collection<Expense>) expenseList.getExpense();
+		Collection<Expense> expenses = (Collection<Expense>) expenseList.getExpenseList();
 		assertTrue("expense List Size isnt small enough", expenses.size() == 1);
 		assertTrue("", expenses.contains(testexpense));
 		expenseList.removeExpense(testexpense);
-		expenses = (Collection<Expense>) expenseList.getExpense();
+		expenses = (Collection<Expense>) expenseList.getExpenseList();
 		assertTrue("expense List Size", expenses.size() == 0);
 		assertFalse("Test expense contain", expenses.contains(testexpense));
 	}
