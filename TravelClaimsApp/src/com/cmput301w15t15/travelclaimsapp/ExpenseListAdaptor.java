@@ -42,7 +42,7 @@ public class ExpenseListAdaptor extends ArrayAdapter<Expense> {
 			LayoutInflater inflater = ((Activity)context).getLayoutInflater();
 	        rowView = inflater.inflate(resource, parent, false);
 			
-	        viewHolder.claimName = (TextView) rowView.findViewById(R.id.claimAdaptor_display_name);
+	        viewHolder.expenseName = (TextView) rowView.findViewById(R.id.claimAdaptor_display_name);
 	        viewHolder.claimStatus = (TextView) rowView.findViewById(R.id.claimAdaptor_status);
 	        viewHolder.claimStartDate = (TextView) rowView.findViewById(R.id.claimAdaptor_startDate);
 	        
