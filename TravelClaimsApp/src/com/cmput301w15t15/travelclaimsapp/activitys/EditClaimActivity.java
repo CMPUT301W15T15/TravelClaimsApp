@@ -168,7 +168,7 @@ public class EditClaimActivity extends FragmentActivity implements TextWatcher {
     
         switch (item.getItemId()) {
             case R.id.cmenu_dlist_delete:
-            	ClaimListController.deleteDestination(destAdaptor.getItem(info.position), theClaim);
+            	ClaimListController.removeDestination(destAdaptor.getItem(info.position), theClaim);
             	destAdaptor.notifyDataSetChanged();
             	return true;
             case R.id.cmenu_dlist_edit:

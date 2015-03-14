@@ -176,7 +176,7 @@ public class AddClaimActivity extends Activity {
             	c.addExpense(new Expense("t3", null, "CAD", null, null, 200));
             	c.addExpense(new Expense("t4", null, "USD", null, null, 1000));
             	c.addExpense(new Expense("t5", null, "EUR", null, null, 40));
-            	ClaimListController.addClaimToClaimList(c);
+            	ClaimListController.addClaim(c);
             	claimAdaptor.notifyDataSetChanged();
             	
             default:
@@ -205,7 +205,7 @@ public class AddClaimActivity extends Activity {
     		i++;
     	}
     	Claim claim = new Claim("Claim"+i);
-		ClaimListController.addClaimToClaimList(claim);
+		ClaimListController.addClaim(claim);
 		
     	Toast.makeText(this, "Creating a Claim", Toast.LENGTH_SHORT).show();
     	Intent intent = new Intent(AddClaimActivity.this, EditClaimActivity.class);

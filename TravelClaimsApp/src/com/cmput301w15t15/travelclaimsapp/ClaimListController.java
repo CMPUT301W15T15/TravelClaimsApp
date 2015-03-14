@@ -54,10 +54,26 @@ public class ClaimListController {
 		return claimList;
 	}
 	
-	
-	public ArrayList<Tag> getClaimListTags(){
+	/**
+	 * Returns a ArrayList<Tag> containing all unique tags in claimlist
+	 * 
+	 * Searches through each claim in singleton claimlist and returns list
+	 * of unique tags.
+	 * 
+	 * @return all unique tags in the singleton claimlist
+	 */
+	public static ArrayList<Tag> getTagList(){
+		TagList tags = new TagList();
 		
-		return null;
+		for(Claim claim : claimList.toArrayList()){
+			TagList tmp = claim.getTagList();
+			for(Tag tag : tmp.toArrayList()){
+				if(!tags.contains(tag.getName())){
+					tags.addTag(tag);
+				}
+			}
+		}
+		return tags.toArrayList();
 	}
 	
 	
@@ -67,7 +83,7 @@ public class ClaimListController {
 	 * @param claim claim to be added to claimlist 
 	 * @throws IOException 
 	 */
-	public static void addClaimToClaimList(Claim claim){
+	public static void addClaim(Claim claim){
 		addClaimListeners(claim);
 		getClaimList().addClaim(claim);
 		getClaimList().sort();
@@ -77,7 +93,7 @@ public class ClaimListController {
 	 * 
 	 * @param claim claim to be removed from claimlist 
 	 */
-	public static void deleteClaim(Claim claim){
+	public static void removeClaim(Claim claim){
 		
 		getClaimList().removeClaim(claim);
 	}
@@ -98,6 +114,13 @@ public class ClaimListController {
 				
 			}
 		});
+	}
+	
+	/**
+	 * Removes expense from singleton Claimlist
+	 */
+	public static void removeExpense(Expense expense, Claim claim){
+		claim.removeExpense(expense);
 	}
 	
 	/**
@@ -123,7 +146,7 @@ public class ClaimListController {
 	 * @param dest	destination to delete
 	 * @param claim removes destination from this claim
 	 */
-	public static void deleteDestination(Destination dest, Claim claim){
+	public static void removeDestination(Destination dest, Claim claim){
 		claim.getDestinationList().deleteDestination(dest);
 		
 	}
