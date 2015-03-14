@@ -25,7 +25,7 @@ import android.widget.TextView;
 /**
  * 	Custom ArrayAdaptor for displaying the claimlist 
  *  
- *  TODO:
+ *  
  *  	
  */
 public class ClaimListAdaptor extends ArrayAdapter<Claim> {
@@ -46,14 +46,12 @@ public class ClaimListAdaptor extends ArrayAdapter<Claim> {
 	public View getView(int position, View convertView, ViewGroup parent) {
 		View rowView = convertView;
 		
-		
 		Claim claim = claimList.get(position);
 		
 		if(rowView == null){
 			viewHolder = new ViewHolder();
 			LayoutInflater inflater = ((Activity)context).getLayoutInflater();
 	        rowView = inflater.inflate(resource, parent, false);
-			
 	        viewHolder.claimName = (TextView) rowView.findViewById(R.id.claimAdaptor_display_name);
 	        viewHolder.claimStatus = (TextView) rowView.findViewById(R.id.claimAdaptor_status);
 	        viewHolder.claimStartDate = (TextView) rowView.findViewById(R.id.claimAdaptor_startDate);
@@ -67,7 +65,7 @@ public class ClaimListAdaptor extends ArrayAdapter<Claim> {
 		}
 	
         viewHolder.claimName.setText(claim.getName());
-        
+        //change text color of of status edittext depending on status
         if(claim.getClaimStatus().equals("Submitted")){
         	viewHolder.claimStatus.setTextColor(context.getResources().getColor(color.holo_red_light));
         }else{
@@ -76,7 +74,6 @@ public class ClaimListAdaptor extends ArrayAdapter<Claim> {
         viewHolder.claimStatus.setText(claim.getClaimStatus());
         //add destinations to viewholder
         ArrayList<Destination> dests = claim.getDestinationList().toArrayList();
-     
         if(dests.size()>0){
         	viewHolder.destinations.removeAllViews();
         	viewHolder.destinations.setVisibility(android.view.View.VISIBLE);
@@ -111,28 +108,27 @@ public class ClaimListAdaptor extends ArrayAdapter<Claim> {
             	viewHolder.tags.addView(tv);
             }
         }else{
+        	//if tagList is empty then set LinearLayout for tags to invisible
         	viewHolder.tags.setVisibility(android.view.View.INVISIBLE);	
         }
-        //add amounts to viewholder
+        //Get amounts with currencies from expenselist
         ArrayList<Expense> expenseList = claim.getExpenseList().toArrayList();
         Map<String, Integer> totals = getAmountTotals(expenseList);
         
+        //add amounts to viewholder 
         if(expenseList.size()>0){
         	viewHolder.amounts.removeAllViews();
-        	//TextView tv1 = new TextView(context);
-        	//tv1.setText("Amounts:");
         	viewHolder.amounts.setVisibility(android.view.View.VISIBLE);
-        	//viewHolder.amounts.addView(tv1);
+        	//for each amount add a TextView to linearlayout with the currency 
+        	//concatenated with amount 
         	for(String s : totals.keySet()){
 				TextView tv = new TextView(context);
 				tv.setText(s +": "+totals.get(s));
 				viewHolder.amounts.addView(tv);
-        		
             }
         }else{
         	viewHolder.amounts.setVisibility(android.view.View.INVISIBLE);	
         }
-        
         
         SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy",Locale.CANADA);
         if(claim.getStartDate() == null){
@@ -145,8 +141,10 @@ public class ClaimListAdaptor extends ArrayAdapter<Claim> {
 		return rowView;
 	}
 	/**
-	 * Takes a arraylist of expenses and returns and map contain the total 
-	 * currency amounts for all expenses 
+	 * Takes a arraylist of expenses and returns a map containing the total 
+	 * currency amounts for all expenses
+	 * 
+	 * Only returns currencies with amounts greater than zero
 	 * 
 	 * @param expenses ArrayList<Expense> to get totals from
 	 * @return returns a map with key = currencies (String) and values = totals (Integer)
@@ -165,9 +163,7 @@ public class ClaimListAdaptor extends ArrayAdapter<Claim> {
 				totalAmounts.put(cur,amount);
 			}
 		}
-		
 		return totalAmounts;
-		
 	}
 	
 	private static class ViewHolder {

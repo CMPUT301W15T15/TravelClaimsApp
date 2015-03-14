@@ -26,9 +26,7 @@ public class EditExpenseTest extends TestCase {
 	}
 	//Test case: EditExpenseTest#1
 	public void testEditExpenseName(){
-
 		claim1.getExpense("E1").setName("");
 		assertEquals("",expense1.getName());
-		
 	}
 }

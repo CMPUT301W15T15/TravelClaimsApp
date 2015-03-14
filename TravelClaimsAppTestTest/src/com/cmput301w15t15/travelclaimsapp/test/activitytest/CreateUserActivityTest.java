@@ -40,7 +40,7 @@ public class CreateUserActivityTest extends
 		
 		//need to change ids once UI has been created 
 		create = (Button) activity.findViewById(R.id.CreateUserButton);
-		username = (EditText) activity.findViewById(R.id.UsernameEditText);
+		username = (EditText) activity.findViewById(R.id.NewUsernameEditText);
 		password = (EditText) activity.findViewById(R.id.NewPasswordEditText);
 		passwordAgain = (EditText) activity.findViewById(R.id.NewPassAEditText);
 		ifApprover = (CheckBox) activity.findViewById(R.id.ApproverCheckBox);
