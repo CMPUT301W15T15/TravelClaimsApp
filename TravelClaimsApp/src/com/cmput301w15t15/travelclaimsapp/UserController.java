@@ -1,6 +1,5 @@
 package com.cmput301w15t15.travelclaimsapp;
 
-import ca.ualberta.ssrg.movies.es.Movie;
 
 import com.cmput301w15t15.travelclaimsapp.model.Listener;
 import com.cmput301w15t15.travelclaimsapp.model.User;
@@ -9,7 +8,23 @@ public class UserController {
 	
 	private static User user = null;
 	
-	static public User getUser() {
+	static public User getUserWithoutInternet() {
+		if(user == null){
+			user = FileManager.getSaver().loadUserFromFile();
+			user.addListener(new Listener() {
+				
+				@Override
+				public void update() {
+					save();
+					
+				}
+			});
+			return user;
+		}
+		return user;
+	}
+	
+	static public User getUserWithInternet() {
 		if(user == null){
 			user = FileManager.getSaver().loadUserFromFile();
 			user.addListener(new Listener() {
@@ -38,46 +53,7 @@ public class UserController {
 	}
 	
 	public static void save(){
-		FileManager.getSaver().saveUserInFile(getUser());
-	}
-	
-	
-	class SearchThread extends Thread {
-		
-		private String search;
-		
-		public SearchThread(String search){
-			this.search = search;
-		}
-		
-		public void run() {
-			movies.addAll(movieManager.searchMovies("", null));
-			
-			runOnUiThread(doUpdateGUIList);
-		}
-		
-	}
-	
-	class AddThread extends Thread {
-		private Movie movie;
-
-		public AddThread(Movie movie) {
-			this.movie = movie;
-		}
-
-		@Override
-		public void run() {
-			movieManager.addMovie(movie);
-			
-			// Give some time to get updated info
-			try {
-				Thread.sleep(500);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-			
-			runOnUiThread(doFinishAdd);
-		}
+		FileManager.getSaver().saveUserInFile(getUserWithoutInternet());
 	}
 	
 	
