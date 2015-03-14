@@ -41,24 +41,24 @@ public class ExpenseListAdaptor extends ArrayAdapter<Expense> {
 			LayoutInflater inflater = ((Activity)context).getLayoutInflater();
 	        rowView = inflater.inflate(resource, parent, false);
 			
-	        viewHolder.expenseName = (TextView) rowView.findViewById(R.id.claimAdaptor_display_name);
-	        viewHolder.claimStatus = (TextView) rowView.findViewById(R.id.claimAdaptor_status);
-	        viewHolder.claimStartDate = (TextView) rowView.findViewById(R.id.claimAdaptor_startDate);
-	        
+	        viewHolder.expenseName = (TextView) rowView.findViewById(R.id.expenseAdaptor_currency);
+	        viewHolder.expenseCategory= (TextView) rowView.findViewById(R.id.expenseAdaptor_category);
+	        viewHolder.expenseAmount = (TextView) rowView.findViewById(R.id.expenseAdaptor_amount);
+	        viewHolder.expenseDate = (TextView) rowView.findViewById(R.id.expenseAdaptor_date);
  	        rowView.setTag(viewHolder);
  	        
 		}else{
 			viewHolder = (ViewHolder) rowView.getTag();
 		}
 		
-//        viewHolder.claimName.setText(claim.getName());
-//        viewHolder.claimStatus.setText(claim.getClaimStatus());
+//        viewHolder.expenseName.setText(expense.getName());
+//        viewHolder.expenseCategory.setText(claim.getCat());
 //        
-//        SimpleDateFormat sdf = new SimpleDateFormat("mm/dd/yyyy",Locale.CANADA);
-//        if(claim.getStartDate() == null){
-//        	viewHolder.claimStartDate.setText("");
+//        SimpleDateFormat defaultExpenseDate = new SimpleDateFormat("mm/dd/yyyy",Locale.CANADA);
+//        if(expense.getDate() == null){
+//        	viewHolder.gettDate.setText("");
 //        }else{
-//        	viewHolder.claimStartDate.setText(sdf.format(claim.getStartDate()));
+//        	viewHolder.expenseDate.setText(defaultExpenseDate.format(claim.getStartDate()));
 //        }
         
 		return rowView;
@@ -66,10 +66,10 @@ public class ExpenseListAdaptor extends ArrayAdapter<Expense> {
 	
 
 	private static class ViewHolder {
-        public TextView claimName;
-        public TextView claimStatus;
-        public TextView claimStartDate;
-    
+        public TextView expenseDate;
+		public TextView expenseAmount;
+		public TextView expenseCategory;
+		public TextView expenseName;
     }
 	
 	
