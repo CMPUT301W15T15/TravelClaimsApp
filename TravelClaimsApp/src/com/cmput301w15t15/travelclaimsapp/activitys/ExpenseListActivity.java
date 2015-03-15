@@ -38,9 +38,9 @@ public class ExpenseListActivity extends Activity
 	{
 		super.onCreate(savedInstanceState);
 		Intent intent=new Intent();
-		Bundle b=new Bundle();
-		b=this.getIntent().getExtras();
-		String claimName=b.getString("claimName");
+		//Bundle b=new Bundle();
+		//b=this.getIntent().getExtras();
+		String claimName=this.getIntent().getExtras().getString("claimName");
 		setContentView(R.layout.activity_expense_list);
 		FileManager.initializeSaver(this);
 		//registerForContextMenu(findViewById(R.id.CurrentExpenseList));

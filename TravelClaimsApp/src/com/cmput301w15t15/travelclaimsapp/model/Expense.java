@@ -12,7 +12,7 @@ public class Expense implements Listenable{
 	protected String expenseDes;
 	protected String expenseName;
 	protected Date expenseDate;
-	protected Integer expenseCost;
+	protected Integer expenseCost=0;
 	protected String expenseCurr;
 	protected String expenseCat;
 	protected Uri expenseReceipt;

@@ -21,6 +21,7 @@ public class UserController {
 	static public User getUser() {
 		if(user == null){
 			user = FileManager.getSaver().loadUserFromFile();
+			user.setListeners();
 			user.addListener(new Listener() {
 				
 				@Override
@@ -41,6 +42,7 @@ public class UserController {
 	static public void initUserController() {
 		if(user == null){
 			user = FileManager.getSaver().loadUserFromFile();
+			user.setListeners();
 			user.addListener(new Listener() {
 				
 				@Override
