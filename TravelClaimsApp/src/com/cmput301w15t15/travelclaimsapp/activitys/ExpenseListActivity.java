@@ -26,7 +26,7 @@ import android.widget.AdapterView.AdapterContextMenuInfo;
 public class ExpenseListActivity extends Activity
 {
 	private ExpenseListAdaptor expenseAdaptor;
-	private ExpenseListAdaptor expenseList;
+	private ExpenseList expenseList;
 	private ListView expenseListView;
 	
 	
@@ -36,26 +36,28 @@ public class ExpenseListActivity extends Activity
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
-
 		super.onCreate(savedInstanceState);
+		Intent intent=new Intent();
+		Bundle b=new Bundle();
+		b=this.getIntent().getExtras();
+		String claimName=b.getString("claimName");
 		setContentView(R.layout.activity_expense_list);
 		FileManager.initializeSaver(this);
 		//registerForContextMenu(findViewById(R.id.CurrentExpenseList));
 		expenseListView = (ListView) findViewById(R.id.CurrentExpenseList);
-		expenseList = 
+		expenseList = ClaimListController.getClaimList().getClaim(claimName).getExpenseList();
 		//ArrayAdapter<Expense> expenseAdapter = new ArrayAdapter<Expense>(this,android.R.layout.simple_expandable_list_item_1);
-		expenseAdaptor = new ExpenseListAdaptor(this,R.layout.expense_list_adaptor,expenseList.get);
+		
+		expenseAdaptor = new ExpenseListAdaptor(this,R.layout.expense_list_adaptor,expenseList.toArrayList());
 		expenseAdaptor.notifyDataSetChanged();
 		expenseListView.setAdapter(expenseAdaptor);
 		
 		registerForContextMenu(findViewById(R.id.CurrentExpenseList));
-<<<<<<< HEAD
-=======
-		ListView listView = (ListView) findViewById(R.id.CurrentExpenseList);
 
-		ArrayAdapter<Expense> expenseAdapter = new ArrayAdapter<Expense>(this,android.R.layout.simple_expandable_list_item_1);
+		//ListView listView = (ListView) findViewById(R.id.CurrentExpenseList);
 
->>>>>>> 5881783040c1fa1c2a5d6cbf9f303899961dfefa
+		//ArrayAdapter<Expense> expenseAdapter = new ArrayAdapter<Expense>(this,android.R.layout.simple_expandable_list_item_1);
+
 	}
 
 	@Override
@@ -117,7 +119,9 @@ public class ExpenseListActivity extends Activity
 		final Expense expense = expenseAdaptor.getItem(info.position);
         switch (item.getItemId()) {
             case R.id.expenseListViewMenuEdit:
-              
+            	expenseList.removeExpense(expense);
+            	expenseAdaptor.notifyDataSetChanged();
+                
             case R.id.expenseListViewMenuDelete:
             	
             case R.id.expenseListViewMenuFlag:

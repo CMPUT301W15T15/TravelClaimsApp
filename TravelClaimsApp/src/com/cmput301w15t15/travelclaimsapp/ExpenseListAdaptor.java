@@ -51,15 +51,17 @@ public class ExpenseListAdaptor extends ArrayAdapter<Expense> {
 			viewHolder = (ViewHolder) rowView.getTag();
 		}
 		
-//        viewHolder.expenseName.setText(expense.getName());
-//        viewHolder.expenseCategory.setText(claim.getCat());
-//        
-//        SimpleDateFormat defaultExpenseDate = new SimpleDateFormat("mm/dd/yyyy",Locale.CANADA);
-//        if(expense.getDate() == null){
-//        	viewHolder.gettDate.setText("");
-//        }else{
-//        	viewHolder.expenseDate.setText(defaultExpenseDate.format(claim.getStartDate()));
-//        }
+        viewHolder.expenseName.setText(expense.getName());
+        viewHolder.expenseCategory.setText(expense.getCat());
+        viewHolder.expenseAmount.setText(expense.getCost().toString());
+        
+        
+        SimpleDateFormat defaultExpenseDate = new SimpleDateFormat("mm/dd/yyyy",Locale.CANADA);
+        if(expense.getDate() == null){
+        	viewHolder.expenseDate.setText("Date Not Set");
+        }else{
+        	viewHolder.expenseDate.setText(defaultExpenseDate.format(expense.getDate()));
+        }
         
 		return rowView;
 	}

@@ -320,7 +320,9 @@ public class EditClaimActivity extends FragmentActivity implements TextWatcher {
     	Toast.makeText(this, "Viewing Current Expenses", Toast.LENGTH_SHORT).show();
     	Intent intent = new Intent(EditClaimActivity.this, ExpenseListActivity.class);
     	Bundle bundle=new Bundle();
-    	bundle.putString("cliamName", this.claimNameInput )
+    	String claimName= getIntent().getExtras().getString("claimName");
+    	bundle.putString("cliamName", claimName );
+    	intent.putExtras(bundle);
     	startActivity(intent);   
     }
 
