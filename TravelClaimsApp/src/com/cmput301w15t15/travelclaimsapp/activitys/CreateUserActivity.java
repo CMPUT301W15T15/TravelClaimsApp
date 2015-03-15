@@ -100,7 +100,7 @@ public class CreateUserActivity extends Activity {
 		public void run() {
 			User checkUser = FileManager.getSaver().getUser(user.getUsername());
 			
-			if(checkUser.getUsername() == null){
+			if(checkUser == null){
 				FileManager.getSaver().addUser(user);
 				runOnUiThread(doFinishAdd);
 			} else {
