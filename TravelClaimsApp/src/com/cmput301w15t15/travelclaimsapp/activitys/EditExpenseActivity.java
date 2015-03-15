@@ -86,9 +86,9 @@ public class EditExpenseActivity extends FragmentActivity {
 		// TODO Auto-generated method stub
 		super.onStart();
 		//expenseNameInput.setText(expense.getName());
-		if(expense.getDate()!=null){
+		/*if(expense.getDate()!=null){
 			Date.setText(sdf.format(expense.getDate()));
-		}
+		}*/
 		//setEditable();
 	}
 
