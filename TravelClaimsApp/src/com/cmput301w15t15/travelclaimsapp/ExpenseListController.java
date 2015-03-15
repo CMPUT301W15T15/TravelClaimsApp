@@ -96,8 +96,8 @@ public class ExpenseListController {
 	}
 	
 	public static void save() {
-		FileManager.getSaver().saveClaimLInFile(ClaimListController.getClaimList());
-		FileManager.getSaver().saveClaimLInFile(ClaimListController.getClaimList());
+//		FileManager.getSaver().saveClaimLInFile(ClaimListController.getClaimList());
+//		FileManager.getSaver().saveClaimLInFile(ClaimListController.getClaimList());
 	}
 	
 	
