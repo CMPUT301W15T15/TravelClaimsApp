@@ -123,7 +123,13 @@ public class ExpenseListActivity extends Activity
 		final Expense expense = expenseAdaptor.getItem(info.position);
         switch (item.getItemId()) {
             case R.id.expenseListViewMenuEdit:
-            	expenseList.removeExpense(expense);
+            	//expenseList.removeExpense(expense);
+            	Toast.makeText(this, "Viewing Current Expenses", Toast.LENGTH_SHORT).show();
+            	intent = new Intent(ExpenseListActivity.this, EditExpenseActivity.class);
+            	Bundle bundle=new Bundle();
+            	String expenseName= expense.getName();
+            	intent.putExtra("expenseName",expenseName);
+            	
             	expenseAdaptor.notifyDataSetChanged();
             	return true;
                 
