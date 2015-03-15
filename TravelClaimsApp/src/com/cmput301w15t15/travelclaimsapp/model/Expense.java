@@ -16,6 +16,7 @@ public class Expense implements Listenable{
 	protected String expenseCurr;
 	protected String expenseCat;
 	protected Uri expenseReceipt;
+	protected int flag=0;
 	
 	public Expense(String expenseName, String expenseDes, String expenseCurr, String expenseCat, Date expenseDate, Integer expenseCost) {
 		this.expenseName = expenseName;
@@ -41,8 +42,14 @@ public class Expense implements Listenable{
 	}
 	
 	public void addFlag(){
+		this.flag=1;
 		// TODO
 	}
+	
+	public int getFlag(){
+		return this.flag;
+	}
+	
 	public void setName(String expenseName) {
 		this.expenseName = expenseName;
 	}
@@ -78,14 +85,14 @@ public class Expense implements Listenable{
 
 	public void removeFlag()
 	{
-
+		this.flag=0;
 		// TODO Auto-generated method stub
 		//return false;
 	}
 	
-	public boolean emptyFlag(){
-		return true;
-	}
+//	public boolean emptyFlag(){
+//		return true;
+//	}
 
 
 	public void takeReceipt(Uri expenseReceipt) {
