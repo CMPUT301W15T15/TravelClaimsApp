@@ -6,6 +6,7 @@ import java.util.Locale;
 
 import com.cmput301w15t15.travelclaimsapp.ClaimListController;
 import com.cmput301w15t15.travelclaimsapp.ExpenseListAdaptor;
+import com.cmput301w15t15.travelclaimsapp.ExpenseListController;
 import com.cmput301w15t15.travelclaimsapp.R;
 import com.cmput301w15t15.travelclaimsapp.R.id;
 import com.cmput301w15t15.travelclaimsapp.R.layout;
@@ -26,6 +27,7 @@ import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.BounceInterpolator;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -40,10 +42,12 @@ public class EditExpenseActivity extends FragmentActivity {
 	private Expense expense;
 	private ExpenseList expenseList;
 	private ExpenseListAdaptor expenseListAdaptor;
+	private Integer expenseCost;
+	private String expenseDescription; 
 	private static EditText expenseNameInput;
 	private static EditText Date;
-	private static EditText expenseCost;
-	private static EditText expenseDescription;
+	private static EditText expenseCostInput;
+	private static EditText expenseDescriptionInput;
 	private static Spinner currencySpinner;
 	private static Spinner categorySpinner;
 	private SimpleDateFormat sdf; 
@@ -57,16 +61,18 @@ public class EditExpenseActivity extends FragmentActivity {
 		
 		Date = (EditText) findViewById(R.id.Edit_Expense_Date);
 		expenseNameInput=(EditText) findViewById(R.id.Edit_Expense_Name);
-		expenseCost=(EditText) findViewById(R.id.Edit_Expense_Cost);
-		expenseDescription=(EditText) findViewById(R.id.Edit_Expense_Description);
-		currencySpinner=(Spinner) findViewById(R.id.CurrencySpinner);
+		expenseCostInput=(EditText) findViewById(R.id.Edit_Expense_Cost);
+		expenseDescriptionInput=(EditText) findViewById(R.id.Edit_Expense_Description);
+		currencySpinner = (Spinner) findViewById(R.id.CurrencySpinner);
 		categorySpinner=(Spinner) findViewById(R.id.CategorySpinner);
 		String expenseName= getIntent().getExtras().getString("expenseName");
 		String claimName= getIntent().getExtras().getString("claimName");
 		claimList = ClaimListController.getClaimList();
-		expenseList=claimList.getClaim(claimName).getExpenseList();
+		expenseList=ExpenseListController.getExpenseList();
 		expense=expenseList.getExpense(expenseName);
-		//set_on_click();
+		expenseCost = expense.getCost();
+		expenseDescription = expense.getDes();
+		set_on_click();
 	}
 	
 	@Override
@@ -74,13 +80,12 @@ public class EditExpenseActivity extends FragmentActivity {
 	{
 
 		// TODO Auto-generated method stub
-		//super.onStart();
-		//expenseNameInput.setText(expense.getName());
-		//if(expense.getDate()!=null){
-			//Date.setText(sdf.format(expense.getDate()));
-		//}
+		super.onStart();
+		expenseNameInput.setText(expense.getName());
+		if(expense.getDate()!=null){
+			Date.setText(sdf.format(expense.getDate()));
+		}
 		//setEditable();
-		expenseListAdaptor.notifyDataSetChanged();
 	}
 
 	@Override
@@ -89,7 +94,6 @@ public class EditExpenseActivity extends FragmentActivity {
 
 		// TODO Auto-generated method stub
 		super.onResume();
-		//expenseListAdaptor.notifyDataSetChanged();
 	}
 
 	@Override
@@ -173,6 +177,10 @@ public class EditExpenseActivity extends FragmentActivity {
     {
     	Toast.makeText(this, "Creating an expense", Toast.LENGTH_SHORT).show();
     	Intent intent = new Intent(EditExpenseActivity.this, ExpenseListActivity.class);
+    	Bundle bundle=new Bundle();
+    	bundle.putString("expenseName", this.expenseNameInput);
+    	bundle.putInt(expenseCost, this.expenseCostInput);
+    	bundle.putString(expenseDescription, expenseDescriptionInput);
     	startActivity(intent);   
     	
     	}
