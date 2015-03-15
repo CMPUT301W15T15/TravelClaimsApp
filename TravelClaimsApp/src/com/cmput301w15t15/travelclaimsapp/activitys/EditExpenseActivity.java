@@ -178,9 +178,9 @@ public class EditExpenseActivity extends FragmentActivity {
     	Toast.makeText(this, "Creating an expense", Toast.LENGTH_SHORT).show();
     	Intent intent = new Intent(EditExpenseActivity.this, ExpenseListActivity.class);
     	Bundle bundle=new Bundle();
-    	bundle.putString("expenseName", this.expenseNameInput);
-    	bundle.putInt(expenseCost, this.expenseCostInput);
-    	bundle.putString(expenseDescription, expenseDescriptionInput);
+    	bundle.putString("expenseName", this.expense.getName());
+    	bundle.putInt("expenseCost", this.expenseCost);
+    	bundle.putString("expenseDescription", this.expenseDescription);
     	startActivity(intent);   
     	
     	}

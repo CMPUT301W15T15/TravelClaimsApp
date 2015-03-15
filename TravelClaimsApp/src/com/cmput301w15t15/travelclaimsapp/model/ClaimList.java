@@ -73,8 +73,9 @@ public class ClaimList implements Listenable{
 	}
 	
 	public void sort() {
-		Collections.sort(claimList, new ClaimListComparator());
-		
+		if (claimList.size()!=0){
+			Collections.sort(claimList, new ClaimListComparator());
+		}
 	}
 	
 	public void notifyListeners() {
