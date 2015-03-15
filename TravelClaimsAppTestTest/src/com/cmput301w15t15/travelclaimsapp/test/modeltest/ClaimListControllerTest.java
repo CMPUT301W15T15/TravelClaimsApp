@@ -20,6 +20,10 @@ import android.test.AndroidTestCase;
 /**
  * Tests class for testing {@link ClaimListController}
  */
+/**
+ * @author searn
+ *
+ */
 public class ClaimListControllerTest extends AndroidTestCase {
 
 
@@ -43,11 +47,8 @@ public class ClaimListControllerTest extends AndroidTestCase {
 		super.setUp();
 		mContext = getContext();
 		FileManager.initializeSaver(mContext);
+		ClaimListController.removeAllClaims();
 		claimList = ClaimListController.getClaimList();
-		//ArrayList<Claim> cl = ClaimListController.getClaimList().toArrayList();
-		//for(Claim claim : cl){
-		//	ClaimListController.deleteClaim(claim);
-		//}
 		
 		currentSize = claimList.toArrayList().size();
 		claim = new Claim("c1");
@@ -77,7 +78,7 @@ public class ClaimListControllerTest extends AndroidTestCase {
 		ClaimListController.addClaim(claim);
 		claimList2 = ClaimListController.getClaimList();
 		
-		assertEquals("ClaimList loaded from file not the same as current", claimList, claimList2);
+		assertEquals("ClaimList loaded from file not the same as current", claimList.getClaim("c1"), claimList2.getClaim("c1"));
 	}
 	
 	/**
@@ -154,6 +155,67 @@ public class ClaimListControllerTest extends AndroidTestCase {
 		
 	}
 	
+	/**
+	 * ClaimListControllerTest #5
+	 * 
+	 * Tests filtering claim list by a single tag or multiple tags 
+	 */
+	public void testFilterClaimList(){
+		String filterString;
+		ClaimListController.addClaim(claim);
+		ClaimListController.addClaim(claim2);
+		ClaimListController.addClaim(claim3);
+		ClaimListController.addClaim(claim4);
+		Tag tag1 = new Tag("a");
+		Tag tag2 = new Tag("b");
+		
+		ClaimListController.addTag(claim, tag1);			//a,c,v
+		ClaimListController.addTag(claim, new Tag("c"));
+		ClaimListController.addTag(claim, tag2);
+		
+		ClaimListController.addTag(claim2, new Tag("a"));	//a, e
+		ClaimListController.addTag(claim2, new Tag("e"));
+		
+		ClaimListController.addTag(claim3, new Tag("c"));	//c
+		
+		ClaimListController.addTag(claim4, new Tag("f"));	//f
+		
+		ArrayList<Tag> tags = ClaimListController.getTagList();
+		
+		//give a filter that has 2 matches 
+		filterString = new String("a");
+		
+		ArrayList<Claim> filtered = ClaimListController.getFilteredClaimList(filterString);
+		
+		assertEquals("ClaimList was not filtered", 2, filtered.size());
+		assertTrue("ClaimList was not filtered correctly", filtered.indexOf(claim)>-1);
+		assertTrue("ClaimList was not filtered correctly", filtered.indexOf(claim2)>-1);
+		
+		//give a filter that has three match
+		filterString = new String("a, c");
+		
+		filtered = ClaimListController.getFilteredClaimList(filterString);
+		
+		assertEquals("ClaimList was not filtered", 3, filtered.size());
+		assertTrue("ClaimList was not filtered correctly", filtered.indexOf(claim)>-1);
+		
+		//give a filter that has no matches
+		filterString = new String("g,h");
+		
+		filtered = ClaimListController.getFilteredClaimList(filterString);
+		
+		assertEquals("ClaimList was not filtered", 0, filtered.size());
+		assertTrue("ClaimList was not filtered correctly", filtered.indexOf(claim)==-1);
+		
+		//give a filter that has one matche
+		filterString = new String("f, z,  r, m,k  ");
+		
+		filtered = ClaimListController.getFilteredClaimList(filterString);
+		
+		assertEquals("ClaimList was not filtered", 1, filtered.size());
+		assertTrue("ClaimList was not filtered correctly", filtered.indexOf(claim4)>-1);
+		
+	}
 	
 	
 }

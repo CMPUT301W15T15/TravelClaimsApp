@@ -49,6 +49,13 @@ public class ExpenseListActivity extends Activity
 		expenseListView.setAdapter(expenseAdaptor);
 		
 		registerForContextMenu(findViewById(R.id.CurrentExpenseList));
+<<<<<<< HEAD
+=======
+		ListView listView = (ListView) findViewById(R.id.CurrentExpenseList);
+
+		ArrayAdapter<Expense> expenseAdapter = new ArrayAdapter<Expense>(this,android.R.layout.simple_expandable_list_item_1);
+
+>>>>>>> 5881783040c1fa1c2a5d6cbf9f303899961dfefa
 	}
 
 	@Override
