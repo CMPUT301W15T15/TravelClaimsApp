@@ -206,7 +206,7 @@ public class FileManager {
 			// TODO Auto-generated catch block
 			return null;
 		}
-		if (claims.size()==0){
+		if (claims == null){
 			return new ClaimList();
 		}
 		return claims;
