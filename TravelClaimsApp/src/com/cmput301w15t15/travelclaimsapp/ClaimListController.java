@@ -2,10 +2,8 @@ package com.cmput301w15t15.travelclaimsapp;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Locale;
 
-import android.content.Context;
-import android.widget.Toast;
+import java.util.Locale;
 
 import com.cmput301w15t15.travelclaimsapp.model.Claim;
 import com.cmput301w15t15.travelclaimsapp.model.ClaimList;
@@ -27,15 +25,11 @@ public class ClaimListController {
 	private static ClaimList claimList = null;
 	private static ExpenseList expenseList = null;
 
+	
 	/**
-	 * Returns the global application claimList
-	 * 
-	 * If claimList is null it will load the claimList from the android file system
-	 * and returns claimList
-	 * 
-	 * @return the application claimList
+	 * Load the claimList from the android file system
 	 */
-	static public ClaimList getClaimListWithInternet() {
+	static public void initClaimListController() {
 		if(claimList == null){
 			claimList = FileManager.getSaver().loadClaimLFromFile();
 			claimList.sort();
@@ -53,9 +47,7 @@ public class ClaimListController {
 				claim.setListeners(); 
 				addClaimListeners(claim);
 			}
-			return claimList;
 		}
-		return claimList;
 	}
 	
 	
@@ -223,7 +215,7 @@ public class ClaimListController {
 	 * Saves claimlist to file using FileManager class 
 	 */
 	public static void save(){
-		FileManager.getSaver().saveClaimLInFile(getClaimList());
+		FileManager.getSaver().saveClaimLInFile(getClaimList(), UserController.getUser().getUsername());
 	}
 	
 	/**
@@ -319,6 +311,7 @@ public class ClaimListController {
 		}
 		
 	}
+
 
 	/**
 	 * Returns the current ClaimList filtered as a ArrayList<Claim>
