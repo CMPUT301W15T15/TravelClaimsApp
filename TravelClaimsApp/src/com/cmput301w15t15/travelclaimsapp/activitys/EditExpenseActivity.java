@@ -73,7 +73,10 @@ public class EditExpenseActivity extends FragmentActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+		
 		setContentView(R.layout.activity_edit_expense);
+		String expenseName=this.getIntent().getExtras().getString("expenseName");
 		sdf = new SimpleDateFormat("MM/dd/yyyy",Locale.CANADA);
 		
 		Date = (EditText) findViewById(R.id.Edit_Expense_Date);
@@ -82,13 +85,14 @@ public class EditExpenseActivity extends FragmentActivity {
 		expenseDescriptionInput=(EditText) findViewById(R.id.Edit_Expense_Description);
 		currencySpinner = (Spinner) findViewById(R.id.CurrencySpinner);
 		categorySpinner=(Spinner) findViewById(R.id.CategorySpinner);
-		String expenseName= getIntent().getExtras().getString("expenseName");
+		//String expenseName= getIntent().getExtras().getString("expenseName");
 		String claimName= getIntent().getExtras().getString("claimName");
 		claimList = ClaimListController.getClaimList();
-		expenseList=ExpenseListController.getExpenseList();
+		claim=claimList.getClaim(claimName);
+		expenseList=claim.getExpenseList();
 		expense=expenseList.getExpense(expenseName);
-		expenseCost = expense.getCost();
-		expenseDescription = expense.getDes();
+		//expenseCost = expense.getCost();
+		//expenseDescription = expense.getDes();
 		set_on_click();
 	}
 	
@@ -98,7 +102,7 @@ public class EditExpenseActivity extends FragmentActivity {
 
 		// TODO Auto-generated method stub
 		super.onStart();
-		expenseNameInput.setText(expense.getName());
+		//expenseNameInput.setText(expense.getName());
 		if(expense.getDate()!=null){
 			Date.setText(sdf.format(expense.getDate()));
 		}

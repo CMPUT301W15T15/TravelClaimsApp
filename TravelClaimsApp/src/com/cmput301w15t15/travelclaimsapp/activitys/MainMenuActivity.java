@@ -41,7 +41,9 @@ import android.widget.Toast;
 
 public class MainMenuActivity extends Activity {
 
-	// Thread that close the activity after finishing add
+	/**
+	 * Thread that closes the activity after finishing addClaims.
+	 */
 	private Runnable launchAddClaims = new Runnable() {
 		public void run() {
 			ClaimListController.initClaimListController();
@@ -53,7 +55,7 @@ public class MainMenuActivity extends Activity {
 	
 	
 	/**
-	 * Wrong username or password
+	 * Wrong username or password.
 	 */
 	private Runnable popToast = new Runnable() {
 		public void run() {
@@ -76,6 +78,14 @@ public class MainMenuActivity extends Activity {
 	}
 
 	
+	/**
+	 * On clicking Login, checks are made for valid fields.
+	 * 
+	 * If connected to the internet, given info is compared with server info.
+	 * 
+	 * If not connect to the internet, given info is compared with user file on hand. This means you can only signin as the last used user.
+	 * @param v
+	 */
 	public void OnLoginClick(View v){
 		EditText passText = (EditText) findViewById(R.id.PasswordEditText);
 		EditText userText = (EditText) findViewById(R.id.UsernameEditText);
@@ -117,9 +127,13 @@ public class MainMenuActivity extends Activity {
 		} else {
 			User fileUser = UserController.getUser();
 			
-			if(fileUser.getUsername().equals(givenUsername)){
-				if(Arrays.equals(fileUser.getpHash(), passHash)){
-					runOnUiThread(launchAddClaims);
+			if(fileUser != null){
+				if(fileUser.getUsername().equals(givenUsername)){
+					if(Arrays.equals(fileUser.getpHash(), passHash)){
+						runOnUiThread(launchAddClaims);
+					} else {
+						runOnUiThread(popToast);
+					}
 				} else {
 					runOnUiThread(popToast);
 				}
@@ -130,6 +144,10 @@ public class MainMenuActivity extends Activity {
 		
 	}
 	
+	/**
+	 * Used to get to search activity when login was not working
+	 * @param menu
+	 */
 	public void SearchOption(MenuItem menu)
     {
     	Toast.makeText(this, "Going to Search", Toast.LENGTH_SHORT).show();
@@ -137,6 +155,10 @@ public class MainMenuActivity extends Activity {
     	startActivity(intent);
     }
 	
+	/**
+	 * Used to get to AddClaimActivity when login was not working
+	 * @param menu
+	 */
 	public void AddClaimMenu(MenuItem menu)
     {
     	Toast.makeText(this, "Going to Claims", Toast.LENGTH_SHORT).show();
@@ -144,6 +166,10 @@ public class MainMenuActivity extends Activity {
     	startActivity(intent);
     }
 	
+	/**
+	 * Launches CreateUserActivity if connected to the internet.
+	 * @param menu
+	 */
 	public void ToNewUserActivity(MenuItem menu)
     {
 		
@@ -158,6 +184,11 @@ public class MainMenuActivity extends Activity {
 	
 
 	
+	/**
+	 * When connected to the internet, given info is compared with server info.
+	 * 
+	 * When not connect to the internet, given info is compared with user file on hand.
+	 */
 	class loginThread extends Thread {
 		
 		private String givenUsername;
@@ -171,12 +202,16 @@ public class MainMenuActivity extends Activity {
 		public void run() {
 			User pulledUser = FileManager.getSaver().getUser(givenUsername);
 			
-			if(pulledUser.getUsername().equals(givenUsername)){
-				if(Arrays.equals(pulledUser.getpHash(), givenPassHash)){
-					FileManager.getSaver().saveUserInFile(pulledUser);
-					ClaimList claimlist = FileManager.getSaver().getClaimList(givenUsername);
-					FileManager.getSaver().saveClaimLInFile(claimlist, givenUsername);
-					runOnUiThread(launchAddClaims);
+			if(pulledUser != null){
+				if(pulledUser.getUsername().equals(givenUsername)){
+					if(Arrays.equals(pulledUser.getpHash(), givenPassHash)){
+						FileManager.getSaver().saveUserInFile(pulledUser);
+						ClaimList claimlist = FileManager.getSaver().getClaimList(givenUsername);
+						FileManager.getSaver().saveClaimLInFile(claimlist, givenUsername);
+						runOnUiThread(launchAddClaims);
+					} else {
+						runOnUiThread(popToast);
+					}
 				} else {
 					runOnUiThread(popToast);
 				}

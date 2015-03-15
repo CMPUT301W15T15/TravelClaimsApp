@@ -80,6 +80,7 @@ public class ClaimListController {
 		if(claimList == null){
 			claimList = FileManager.getSaver().loadClaimLFromFile();
 //			claimList.sort();
+			claimList.setListeners();
 			claimList.addListener(new Listener() {
 				
 				@Override

@@ -342,10 +342,10 @@ public class EditClaimActivity extends FragmentActivity implements TextWatcher {
     	intent.putExtra("claimName", claimName);
     
     	// making a expense to test
-    	Expense expense1=new Expense("expense1");
+    	//Expense expense1=new Expense("expense1");
     	////////////////////
     	
-    	theClaim.addExpense(expense1);
+    	//theClaim.addExpense(expense1);
     	//bundle.putString("cliamName", claimName );
     	//intent.putExtras(bundle);
     	startActivity(intent);   
