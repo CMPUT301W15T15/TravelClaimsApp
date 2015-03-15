@@ -53,11 +53,10 @@ public class ExpenseListActivity extends Activity
 		expenseListView.setAdapter(expenseAdaptor);
 		
 		registerForContextMenu(findViewById(R.id.CurrentExpenseList));
-<<<<<<< HEAD
-=======
+
 
 		ListView listView = (ListView) findViewById(R.id.CurrentExpenseList);
->>>>>>> 97c3505093c34fafdeeaf194759358229c041bf4
+
 
 		//ListView listView = (ListView) findViewById(R.id.CurrentExpenseList);
 
