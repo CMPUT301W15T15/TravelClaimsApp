@@ -1,3 +1,20 @@
+/*
+ *TravelClaimsApp
+ *Copyright (C) 2015 Jon Machinski, Bo Zhou, Henry Ha, Chris Wang, Sean Scheideman
+ *
+ *This program is free software: you can redistribute it and/or modify
+ *it under the terms of the GNU General Public License as published by
+ *the Free Software Foundation, either version 3 of the License, or
+ *(at your option) any later version.
+ *
+ *This program is distributed in the hope that it will be useful,
+ *but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ *GNU General Public License for more details.
+ *
+ *You should have received a copy of the GNU General Public License
+ *along with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
 package com.cmput301w15t15.travelclaimsapp.test.activitytest;
 
 import java.io.IOException;
@@ -24,7 +41,7 @@ import android.widget.Button;
 import android.widget.ListView;
 
 /**
- * Tests the AddClaimActivityTest
+ * Tests the AddClaimActivity
  *
  */
 public class AddClaimActivityUITest extends ActivityInstrumentationTestCase2<AddClaimActivity> {
@@ -64,6 +81,8 @@ public class AddClaimActivityUITest extends ActivityInstrumentationTestCase2<Add
 		ClaimListController.removeClaim(claim1);
 	}
 	/**
+	 * AddClaimActivityUITest#1
+	 * 
 	 * Tests the deleting claim from context menu
 	 * 
 	 * @throws IOException
@@ -93,6 +112,8 @@ public class AddClaimActivityUITest extends ActivityInstrumentationTestCase2<Add
 	}
 	//test #
 	/**
+	 * AddClaimActivityUITest#2
+	 * 
 	 * Tests adding expense functionality from context menu
 	 * 
 	 * @throws IOException
@@ -124,6 +145,8 @@ public class AddClaimActivityUITest extends ActivityInstrumentationTestCase2<Add
 	}
 
 	/**
+	 * AddClaimActivityUITest#3
+	 * 
 	 * Tests submit claim functionality from context memu
 	 * 
 	 * @throws IOException
@@ -147,7 +170,9 @@ public class AddClaimActivityUITest extends ActivityInstrumentationTestCase2<Add
 		
 		ClaimListController.removeClaim(claim1);
 	}
-	//test #
+	/**
+	 * AddClaimActivityUITest#4
+	 */
 	public void testNewClaimButtonPress(){
 		ActivityMonitor activityMonitor = new ActivityMonitor(EditClaimActivity.class.getName(), null, false);
 		instrumentation.addMonitor(activityMonitor);

@@ -1,3 +1,20 @@
+/*
+ *TravelClaimsApp
+ *Copyright (C) 2015 Jon Machinski, Bo Zhou, Henry Ha, Chris Wang, Sean Scheideman
+ *
+ *This program is free software: you can redistribute it and/or modify
+ *it under the terms of the GNU General Public License as published by
+ *the Free Software Foundation, either version 3 of the License, or
+ *(at your option) any later version.
+ *
+ *This program is distributed in the hope that it will be useful,
+ *but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ *GNU General Public License for more details.
+ *
+ *You should have received a copy of the GNU General Public License
+ *along with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
 package com.cmput301w15t15.travelclaimsapp.test.modeltest;
 
 import java.io.IOException;
@@ -50,91 +67,6 @@ public class UserTest extends AndroidTestCase {
 		assertTrue("user1 was added", user1.getUsername().equals(name1));
 		assertFalse("user2 was not added", user1 == user2);
 		assertTrue("user1 is not an Approver", user1.isApprover()==false);
-	}
-	
-	
-	//test: UserTest#2
-	public void testAddInvalidUser() throws IOException{
-		String name1 = null;
-		String name2 = "Jon";
-		String pass1 = "dog";
-		String pass2 = null;
-
-		
-		MessageDigest md = null;
-		byte[] passHash1 = null;
-		byte[] passHash2 = null;
-		
-		try {
-			md = MessageDigest.getInstance("SHA-256");
-		} catch (NoSuchAlgorithmException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		
-		try {
-			passHash1 = md.digest(pass1.getBytes("UTF-8"));
-			//passHash2 = md.digest(pass2.getBytes("UTF-8"));
-		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		
-		
-		try{
-			user1 = new User(name1, passHash1);
-			fail("Should have thrown a exception");
-		}catch(IllegalArgumentException e){
-			assertTrue("No username", e.getMessage().equals("User.setUsername was passed a illegal argument"));
-		}
-		try{
-			user2 = new User(name2, passHash2);
-			fail("Should have thrown a exception");
-		}catch(IllegalArgumentException e){
-			assertTrue("No username", e.getMessage().equals("User.setUsername was passed a illegal argument"));
-		}
-		
-	}
-	
-	
-	//test: UserTest#3
-	public void testAddUserDuplicate() throws IOException{
-		String name1 = "Jon";
-		String name2 = "Jon";
-		String pass1 = "dog";
-		String pass2 = "ELEPHANT";
-
-		
-		MessageDigest md = null;
-		byte[] passHash1 = null;
-		byte[] passHash2 = null;
-		
-		try {
-			md = MessageDigest.getInstance("SHA-256");
-		} catch (NoSuchAlgorithmException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		
-		try {
-			passHash1 = md.digest(pass1.getBytes("UTF-8"));
-			passHash2 = md.digest(pass2.getBytes("UTF-8"));
-		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		
-		
-		try{
-			user1 = new User(name1, passHash1);
-			user2 = new User(name2, passHash2);
-			fail("Should have thrown a exception");
-		}catch(IllegalArgumentException e){
-			assertTrue("Duplicate username", e.getMessage().equals("User.setUsername was passed a illegal argument"));
-		}
-		
 	}
 	
 
