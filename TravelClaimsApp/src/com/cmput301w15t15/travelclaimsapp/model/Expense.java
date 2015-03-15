@@ -24,12 +24,12 @@ import java.util.Date;
 import android.net.Uri;
 
 public class Expense implements Listenable{
-	private int price;
+	protected int price;
 	protected transient ArrayList<Listener> listeners;
 	protected String expenseDes;
 	protected String expenseName;
 	protected Date expenseDate;
-	protected Integer expenseCost;
+	protected int expenseCost=0;
 	protected String expenseCurr;
 	protected String expenseCat;
 	protected Uri expenseReceipt;
