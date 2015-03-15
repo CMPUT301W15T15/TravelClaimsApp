@@ -19,6 +19,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -28,12 +30,13 @@ import android.widget.TextView;
  *  
  *  	
  */
-public class ClaimListAdaptor extends ArrayAdapter<Claim> {
+public class ClaimListAdaptor extends ArrayAdapter<Claim>{
 
 	private Context context;
 	private int resource;
 	private ArrayList<Claim> claimList;
 	private ViewHolder viewHolder;
+	private Filter tagFilter;
 	
 	public ClaimListAdaptor(Context context, int resource, ArrayList<Claim> claims) {
 		super(context, resource, claims);
@@ -180,7 +183,9 @@ public class ClaimListAdaptor extends ArrayAdapter<Claim> {
     
     }
 	
-	
 
+	
+	
+	
 
 }

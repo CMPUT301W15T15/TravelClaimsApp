@@ -1,14 +1,19 @@
 package com.cmput301w15t15.travelclaimsapp.activitys;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Locale;
 
 import com.cmput301w15t15.travelclaimsapp.ClaimListController;
 import com.cmput301w15t15.travelclaimsapp.ExpenseListAdaptor;
+import com.cmput301w15t15.travelclaimsapp.ExpenseListController;
 import com.cmput301w15t15.travelclaimsapp.R;
+import com.cmput301w15t15.travelclaimsapp.R.id;
 import com.cmput301w15t15.travelclaimsapp.R.layout;
 import com.cmput301w15t15.travelclaimsapp.R.menu;
 import com.cmput301w15t15.travelclaimsapp.activitys.EditClaimActivity.DatePickerFragment;
 import com.cmput301w15t15.travelclaimsapp.model.Claim;
+import com.cmput301w15t15.travelclaimsapp.model.ClaimList;
 import com.cmput301w15t15.travelclaimsapp.model.Expense;
 import com.cmput301w15t15.travelclaimsapp.model.ExpenseList;
 
@@ -22,27 +27,51 @@ import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.BounceInterpolator;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 
 public class EditExpenseActivity extends FragmentActivity {
-	
-	static EditText Date;
+	private Claim claim;
+	private ClaimList claimList;
 	private Expense expense;
 	private ExpenseList expenseList;
 	private ExpenseListAdaptor expenseListAdaptor;
+	private Integer expenseCost;
+	private String expenseDescription; 
+	private static EditText expenseNameInput;
+	private static EditText Date;
+	private static EditText expenseCostInput;
+	private static EditText expenseDescriptionInput;
+	private static Spinner currencySpinner;
+	private static Spinner categorySpinner;
+	private SimpleDateFormat sdf; 
+	private static boolean Start;
 	
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_edit_expense);
-		Date = (EditText) findViewById(R.id.Edit_Expense_Date);
+		sdf = new SimpleDateFormat("MM/dd/yyyy",Locale.CANADA);
 		
+		Date = (EditText) findViewById(R.id.Edit_Expense_Date);
+		expenseNameInput=(EditText) findViewById(R.id.Edit_Expense_Name);
+		expenseCostInput=(EditText) findViewById(R.id.Edit_Expense_Cost);
+		expenseDescriptionInput=(EditText) findViewById(R.id.Edit_Expense_Description);
+		currencySpinner = (Spinner) findViewById(R.id.CurrencySpinner);
+		categorySpinner=(Spinner) findViewById(R.id.CategorySpinner);
+		String expenseName= getIntent().getExtras().getString("expenseName");
+		String claimName= getIntent().getExtras().getString("claimName");
+		claimList = ClaimListController.getClaimList();
+		expenseList=ExpenseListController.getExpenseList();
+		expense=expenseList.getExpense(expenseName);
+		expenseCost = expense.getCost();
+		expenseDescription = expense.getDes();
 		set_on_click();
 	}
 	
@@ -52,16 +81,19 @@ public class EditExpenseActivity extends FragmentActivity {
 
 		// TODO Auto-generated method stub
 		super.onStart();
-		expenseListAdaptor.notifyDataSetChanged();
+		expenseNameInput.setText(expense.getName());
+		if(expense.getDate()!=null){
+			Date.setText(sdf.format(expense.getDate()));
+		}
+		//setEditable();
 	}
-	
+
 	@Override
 	protected void onResume()
 	{
 
 		// TODO Auto-generated method stub
 		super.onResume();
-		expenseListAdaptor.notifyDataSetChanged();
 	}
 
 	@Override
@@ -73,9 +105,7 @@ public class EditExpenseActivity extends FragmentActivity {
 	
 	public boolean onContextItemSelected(MenuItem item) {
 		AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
-		Intent intent;
-		final Expense expense=expenseListAdaptor.getItem(info.position);
-		//switch(item.getItemId()
+	
 		
 		
 	
@@ -84,7 +114,12 @@ public class EditExpenseActivity extends FragmentActivity {
 	}
 	
 	public void showTruitonDatePickerDialog(View v)
-	{
+	{	
+		if (v==Date){
+			Start=true;
+		}else{
+			Start=false;
+		}
 		DialogFragment newFragment = new DatePickerFragment();
 		newFragment.show(getSupportFragmentManager(), "datePicker");
 	}
@@ -142,12 +177,11 @@ public class EditExpenseActivity extends FragmentActivity {
     {
     	Toast.makeText(this, "Creating an expense", Toast.LENGTH_SHORT).show();
     	Intent intent = new Intent(EditExpenseActivity.this, ExpenseListActivity.class);
-    	ClaimListController clc= new ClaimListController();
-    	ListView expenselistView=(ListView) findViewById(R.id.CurrentExpenseList);
-    	ListView claimlistView=(ListView) findViewById(R.id.claim_list_listview);
-    	//clc.addExpense(new Expense(), new Claim(claimlistView.toString()));
+    	Bundle bundle=new Bundle();
+    	bundle.putString("expenseName", this.expenseNameInput);
+    	bundle.putInt(expenseCost, this.expenseCostInput);
+    	bundle.putString(expenseDescription, expenseDescriptionInput);
     	startActivity(intent);   
-    	//expenselistView.
     	
     	}
 }

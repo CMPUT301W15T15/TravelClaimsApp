@@ -52,21 +52,11 @@
         android:hint="@string/Date"
         android:inputType="date" />
 
-    <EditText
-        android:id="@+id/Edit_Expense_Description"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/CategorySpinner"
-        android:ems="10"
-        android:hint="@string/Description"
-        android:inputType="textMultiLine" />
-
     <Spinner
         android:id="@+id/CurrencySpinner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/CategorySpinner"
         android:layout_below="@+id/Edit_Expense_Cost"
         android:entries="@array/CurrencyArray" />
 
@@ -74,8 +64,20 @@
         android:id="@+id/CategorySpinner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/Edit_Expense_Description"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/CurrencySpinner"
         android:entries="@array/CategoryArray" />
+
+    <EditText
+        android:id="@+id/Edit_Expense_Description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/Edit_Expense_Ok"
+        android:layout_alignLeft="@+id/Edit_Expense_Ok"
+        android:layout_alignRight="@+id/Edit_Expense_Ok"
+        android:layout_marginBottom="22dp"
+        android:ems="10"
+        android:hint="@string/Description"
+        android:inputType="textMultiLine" />
 
 </RelativeLayout>

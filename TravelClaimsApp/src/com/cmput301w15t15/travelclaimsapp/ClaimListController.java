@@ -2,6 +2,9 @@ package com.cmput301w15t15.travelclaimsapp;
 
 import java.io.IOException;
 import java.util.ArrayList;
+
+import java.util.Locale;
+
 import com.cmput301w15t15.travelclaimsapp.model.Claim;
 import com.cmput301w15t15.travelclaimsapp.model.ClaimList;
 import com.cmput301w15t15.travelclaimsapp.model.Destination;
@@ -20,7 +23,7 @@ import com.cmput301w15t15.travelclaimsapp.model.TagList;
 public class ClaimListController {
 	
 	private static ClaimList claimList = null;
-	
+	private static ExpenseList expenseList = null;
 
 	
 	/**
@@ -87,6 +90,8 @@ public class ClaimListController {
 	 * 
 	 * @return all unique tags in the singleton claimlist
 	 */
+	
+	
 	public static ArrayList<Tag> getTagList(){
 		TagList tags = new TagList();
 		
@@ -214,6 +219,14 @@ public class ClaimListController {
 	}
 	
 	/**
+	 * 
+	 */
+	public static void removeAllClaims(){
+		claimList = new ClaimList();
+		save();
+	}
+	
+	/**
 	 * Adds listeners to the claim as well as the claims expenselist and expenses 
 	 * 
 	 * @param claim 	the Claim to add listeners to
@@ -300,5 +313,49 @@ public class ClaimListController {
 	}
 
 
+	/**
+	 * Returns the current ClaimList filtered as a ArrayList<Claim>
+	 * 
+	 * Takes a string containing comma separated search words and 
+	 * returns a ArrayList of the claims that contain all search terms
+	 * 
+	 * @param filterString string to filter claimlist with
+	 * @return	ArrayList<Claim> containing claims that match filter
+	 */
+	public static ArrayList<Claim> getFilteredClaimList(String filterString) {
+		final ArrayList<Claim> claims = getClaimList().toArrayList();
+	    ArrayList<Claim> newClaims = new ArrayList<Claim>(claims.size());
+	    String[] searchWords = filterString.split(",");
+        int wordCount = searchWords.length;
+        boolean match;
+        for (Claim claim : claims) {
+        	match = false;
+            ArrayList<Tag> tagList = claim.getTagList().toArrayList();
+            
+	            for(Tag tag : tagList){
+	            	String tagName = tag.getName().toString().toLowerCase(Locale.CANADA);
+	            	// First match against string
+	                if (tagName.equals(filterString.toLowerCase(Locale.CANADA))){
+	                    newClaims.add(claim);
+	                    match = true;
+	                    break;
+	                //if whole does that match then split searchString by commas 
+	                //and check if all search word match
+	                }else{
+	                	for(String word : searchWords){
+	                		if(tagName.equals(word.trim().toLowerCase(Locale.CANADA))){
+	                			newClaims.add(claim);
+	                			match = true;
+	    	                    break;
+	                		}
+	                	}	
+	                }
+	                if(match == true){
+	                	break;
+	                }
+            	}
+            }         
+		return newClaims;
+	}
 
 }
