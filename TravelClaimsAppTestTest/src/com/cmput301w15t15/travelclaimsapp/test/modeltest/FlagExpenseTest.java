@@ -21,9 +21,9 @@ public class FlagExpenseTest extends TestCase
 	public void flagExpenseTest(){
 		expense2.addFlag();
 		expense1.addFlag();
-		assertFalse("This is expense is unflag",expense1.emptyFlag());
+		assertFalse("This is expense is unflag",expense1.getFlag()==1);
 		expense2.removeFlag();
-		assertTrue("This is expense still have flag",expense2.emptyFlag());
+		assertTrue("This is expense still have flag",expense2.getFlag()==0);
 	}
 
 }

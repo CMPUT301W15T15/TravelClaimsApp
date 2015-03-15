@@ -24,7 +24,7 @@ import android.widget.Button;
 import android.widget.ListView;
 
 /**
- * Tests the AddClaimActivityTest
+ * Tests the AddClaimActivity
  *
  */
 public class AddClaimActivityUITest extends ActivityInstrumentationTestCase2<AddClaimActivity> {
