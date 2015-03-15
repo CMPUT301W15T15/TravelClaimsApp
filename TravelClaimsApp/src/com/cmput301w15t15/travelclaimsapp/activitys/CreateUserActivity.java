@@ -18,7 +18,9 @@ import android.widget.Toast;
 
 public class CreateUserActivity extends Activity {
 
-	// Thread that close the activity after finishing add
+	/**
+	 * Thread that closes the activity after finishing addUser.
+	 */
 	private Runnable doFinishAdd = new Runnable() {
 		public void run() {
 			Toast.makeText(CreateUserActivity.this, "Try your new account", Toast.LENGTH_SHORT).show();
@@ -26,7 +28,9 @@ public class CreateUserActivity extends Activity {
 		}
 	};
 	
-	//duplicate user
+	/**
+	 * Duplicate user.
+	 */
 	private Runnable popToast = new Runnable() {
 		public void run() {
 			Toast.makeText(CreateUserActivity.this, "Username Already Exists.", Toast.LENGTH_LONG).show();
@@ -47,6 +51,12 @@ public class CreateUserActivity extends Activity {
 	}
 
 	
+	/**
+	 * On Clicking Create User, checks are made for empty fields, mismatching passwords and duplicate users on the server.
+	 * 
+	 * If all is successful a new user is stored to the server.
+	 * @param v
+	 */
 	public void OnClickCreateUser(View v){
 		EditText userText = (EditText) findViewById(R.id.NewUsernameEditText);
 		EditText passText = (EditText) findViewById(R.id.NewPasswordEditText);
@@ -65,7 +75,7 @@ public class CreateUserActivity extends Activity {
 			return;
 		}
 		
-		
+		//hashes password
 		try {
 			md = MessageDigest.getInstance("SHA-256");
 		} catch (NoSuchAlgorithmException e1) {
@@ -89,6 +99,12 @@ public class CreateUserActivity extends Activity {
 	
 
 	
+	/**
+	 * Thread talks to server to see if given user was on it.
+	 * 
+	 * If no user is found, the newUser is added
+	 *
+	 */
 	class tryToAddUserThread extends Thread {
 		private User user;
 
@@ -100,7 +116,7 @@ public class CreateUserActivity extends Activity {
 		public void run() {
 			User checkUser = FileManager.getSaver().getUser(user.getUsername());
 			
-			if(checkUser.getUsername() == null){
+			if(checkUser == null){
 				FileManager.getSaver().addUser(user);
 				runOnUiThread(doFinishAdd);
 			} else {
