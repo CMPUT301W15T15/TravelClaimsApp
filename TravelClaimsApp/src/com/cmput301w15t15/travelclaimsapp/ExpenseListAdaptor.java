@@ -11,6 +11,7 @@ import com.cmput301w15t15.travelclaimsapp.model.ExpenseList;
 import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.LayoutInflater.Filter;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -21,6 +22,9 @@ public class ExpenseListAdaptor extends ArrayAdapter<Expense> {
 	private Context context;
 	private int resource;
 	private ArrayList<Expense> expenseList;
+	private ViewHolder viewHolder;
+	private Filter tagFilter;
+	
 	
 	public ExpenseListAdaptor(Context context, int resource, ArrayList<Expense> expenses) {
 		super(context, resource, expenses);
@@ -33,7 +37,6 @@ public class ExpenseListAdaptor extends ArrayAdapter<Expense> {
 	public View getView(int position, View convertView, ViewGroup parent) {
 		View rowView = convertView;
 		
-		ViewHolder viewHolder;
 		Expense expense = expenseList.get(position);
 		
 		if(rowView == null){
@@ -58,7 +61,7 @@ public class ExpenseListAdaptor extends ArrayAdapter<Expense> {
         
         SimpleDateFormat defaultExpenseDate = new SimpleDateFormat("mm/dd/yyyy",Locale.CANADA);
         if(expense.getDate() == null){
-        	viewHolder.expenseDate.setText("Date Not Set");
+        	viewHolder.expenseDate.setText("No Date");
         }else{
         	viewHolder.expenseDate.setText(defaultExpenseDate.format(expense.getDate()));
         }

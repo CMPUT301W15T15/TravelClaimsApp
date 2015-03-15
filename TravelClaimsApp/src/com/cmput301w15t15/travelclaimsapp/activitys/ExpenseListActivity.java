@@ -38,9 +38,9 @@ public class ExpenseListActivity extends Activity
 	{
 		super.onCreate(savedInstanceState);
 		Intent intent=new Intent();
-		Bundle b=new Bundle();
-		b=this.getIntent().getExtras();
-		String claimName=b.getString("claimName");
+		//Bundle b=new Bundle();
+		//b=this.getIntent().getExtras();
+		String claimName=this.getIntent().getExtras().getString("claimName");
 		setContentView(R.layout.activity_expense_list);
 		FileManager.initializeSaver(this);
 		//registerForContextMenu(findViewById(R.id.CurrentExpenseList));
@@ -125,11 +125,23 @@ public class ExpenseListActivity extends Activity
             case R.id.expenseListViewMenuEdit:
             	expenseList.removeExpense(expense);
             	expenseAdaptor.notifyDataSetChanged();
+            	return true;
                 
             case R.id.expenseListViewMenuDelete:
+            	expenseList.removeExpense(expense);
+            	expenseAdaptor.notifyDataSetChanged();
+            	return true;
             	
             case R.id.expenseListViewMenuFlag:
-            
+            	int flagStatus=expense.getFlag();
+            	if (flagStatus==1){
+            		expense.removeFlag();
+            	}
+            	else{
+            		expense.addFlag();
+            		
+            	}
+            	return true;
             case R.id.expenseListViewMenuUnflag:
             	
             default:

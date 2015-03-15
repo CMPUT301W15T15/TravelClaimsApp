@@ -222,8 +222,8 @@ public class FileManager {
 	 * @param username
 	 */
 	public void saveClaimLInFile(ClaimList claimList, String username) {
-//		Thread thread = new onlineSaveClaimListThread(claimList, username);
-//		thread.start();
+		Thread thread = new onlineSaveClaimListThread(claimList, username);
+		thread.start();
 		
 		try {
 			//openFileOutput is a Activity method
@@ -275,8 +275,8 @@ public class FileManager {
 	 * @param user
 	 */
 	public void saveUserInFile(User user) {
-//		Thread thread = new onlineSaveUserThread(user);
-//		thread.start();
+		Thread thread = new onlineSaveUserThread(user);
+		thread.start();
 		
 		try {
 			//openFileOutput is a Activity method
