@@ -5,9 +5,12 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 
+import com.cmput301w15t15.travelclaimsapp.ClaimListController;
 import com.cmput301w15t15.travelclaimsapp.FileManager;
 import com.cmput301w15t15.travelclaimsapp.InternetController;
 import com.cmput301w15t15.travelclaimsapp.R;
+import com.cmput301w15t15.travelclaimsapp.UserController;
+import com.cmput301w15t15.travelclaimsapp.model.ClaimList;
 import com.cmput301w15t15.travelclaimsapp.model.User;
 
 import android.os.Bundle;
@@ -24,7 +27,10 @@ public class MainMenuActivity extends Activity {
 	// Thread that close the activity after finishing add
 	private Runnable launchAddClaims = new Runnable() {
 		public void run() {
-			Toast.makeText(MainMenuActivity.this, "Hozzah!", Toast.LENGTH_LONG).show();
+			ClaimListController.initClaimListController();
+	    	Toast.makeText(MainMenuActivity.this, "Claim List", Toast.LENGTH_SHORT).show();
+	    	Intent intent = new Intent(MainMenuActivity.this, AddClaimActivity.class);
+	    	startActivity(intent);
 		}
 	};
 	
@@ -58,6 +64,7 @@ public class MainMenuActivity extends Activity {
 		EditText userText = (EditText) findViewById(R.id.UsernameEditText);
 		MessageDigest md = null;
 		byte[] passHash = null;
+		String givenUsername = userText.getText().toString();
 		
 		//some error handling
 		if(passText.getText().toString().equals("") && userText.getText().toString().equals("")){
@@ -86,9 +93,23 @@ public class MainMenuActivity extends Activity {
 		}
 		
 		
-		Thread thread = new loginThread(userText.getText().toString(), passHash);
-		thread.start();
-		
+		if(InternetController.isInternetAvailable2(this)){
+			Thread thread = new loginThread(givenUsername, passHash);
+			thread.start();
+			
+		} else {
+			User fileUser = UserController.getUser();
+			
+			if(fileUser.getUsername().equals(givenUsername)){
+				if(Arrays.equals(fileUser.getpHash(), passHash)){
+					runOnUiThread(launchAddClaims);
+				} else {
+					runOnUiThread(popToast);
+				}
+			} else {
+				runOnUiThread(popToast);
+			}
+		}
 		
 	}
 	
@@ -135,6 +156,9 @@ public class MainMenuActivity extends Activity {
 			
 			if(pulledUser.getUsername().equals(givenUsername)){
 				if(Arrays.equals(pulledUser.getpHash(), givenPassHash)){
+					FileManager.getSaver().saveUserInFile(pulledUser);
+					ClaimList claimlist = FileManager.getSaver().getClaimList(givenUsername);
+					FileManager.getSaver().saveClaimLInFile(claimlist, givenUsername);
 					runOnUiThread(launchAddClaims);
 				} else {
 					runOnUiThread(popToast);

@@ -25,6 +25,12 @@ import com.google.gson.reflect.TypeToken;
 import android.content.Context;
 import android.util.Log;
 
+/**
+ * FileManager is used to manage both loads/saves to a local file and pushes/pulls to a server
+ * 
+ * Users and ClaimLists are being handled within.
+ *
+ */
 public class FileManager {
 	
 
@@ -39,12 +45,20 @@ public class FileManager {
 	private Context context;
 	private static FileManager fm = null;
 	
+	/**
+	 * Initial FileManager needs to be given context from where called.
+	 * @param context
+	 */
 	public FileManager(Context context) {
 		this.context = context;
 		gson = new Gson();
 	}
 	
 	//creates a FileManager if it does not already exist 
+	/**
+	 * Initializes FileManager with given context, if FileManager is null.
+	 * @param context
+	 */
 	public static void initializeSaver(Context context){
 		if(fm == null){
 			if(context == null){
@@ -55,6 +69,10 @@ public class FileManager {
 	}
 	
 	
+	/**
+	 * Gets FileManager for saving or loading functions.
+	 * @return
+	 */
 	public static FileManager getSaver(){
 		if(fm == null){
 			throw new RuntimeException("FileManager was not initialized");
@@ -63,6 +81,11 @@ public class FileManager {
 	}
 	
 	
+	/**
+	 * Gets user from server.
+	 * @param Username
+	 * @return
+	 */
 	public User getUser(String Username) {
 
 		HttpClient httpClient = new DefaultHttpClient();
@@ -84,7 +107,7 @@ public class FileManager {
 	
 	
 	/**
-	 * Adds a new user
+	 * Adds a new user to server.
 	 */
 	public void addUser(User newUser) {
 		HttpClient httpClient = new DefaultHttpClient();
@@ -106,22 +129,22 @@ public class FileManager {
 	}
 	
 	
+	/**
+	 * Gets claimlist from server.
+	 * @param Username
+	 * @return
+	 */
 	public ClaimList getClaimList(String Username) {
 
 		HttpClient httpClient = new DefaultHttpClient();
 		HttpGet httpGet = new HttpGet(CLAIMLIST_RESOURCE_URL + Username);
 
 		HttpResponse response;
-		String json;
 
 		try {
 			response = httpClient.execute(httpGet);
-			//SearchHit<Movie> sr = parseMovieHit(response);
-			json = getEntityContent(response);
-			Type searchResponseType = new TypeToken<ClaimList>(){}.getType();
-			
-			ClaimList esResponse = gson.fromJson(json, searchResponseType);
-			return esResponse;
+			SearchHit<ClaimList> sr = parseClaimListHit(response);
+			return sr.getSource();
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -133,7 +156,7 @@ public class FileManager {
 	
 	
 	/**
-	 * Adds a new ClaimList
+	 * Adds a new ClaimList to server.
 	 */
 	public void addClaimList(ClaimList newClaimList, String Username) {
 		HttpClient httpClient = new DefaultHttpClient();
@@ -157,9 +180,13 @@ public class FileManager {
 	
 	
 	//from https://github.com/scheidemanS/lonelyTwitter/blob/master/src/ca/ualberta/cs/lonelytwitter/LonelyTwitterActivity.java on 2015-01-25
+	/**
+	 * Gets a claimlist from local file.
+	 * @return
+	 */
 	public ClaimList loadClaimLFromFile() {
 		ClaimList claims = new ClaimList();
-		//Gson gson = new Gson();
+		
 		try {
 			//openFileInput only takes a a filename
 			FileInputStream fis = context.openFileInput(CLAIMLISTFILENAME);
@@ -170,10 +197,10 @@ public class FileManager {
 			fis.close();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			return null;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			return null;
 		}
 		if (claims.size()==0){
 			return new ClaimList();
@@ -185,8 +212,14 @@ public class FileManager {
 	
 	
 	//from https://github.com/scheidemanS/lonelyTwitter/blob/master/src/ca/ualberta/cs/lonelytwitter/LonelyTwitterActivity.java on 2015-01-25
-	public void saveClaimLInFile(ClaimList claimList) {
-		//Gson gson = new Gson();
+	/**
+	 * Saves claimlist to file and attempts to save online if there is an internet connection.
+	 * @param claimList
+	 * @param username
+	 */
+	public void saveClaimLInFile(ClaimList claimList, String username) {
+//		Thread thread = new onlineSaveClaimListThread(claimList, username);
+//		thread.start();
 		
 		try {
 			//openFileOutput is a Activity method
@@ -207,12 +240,11 @@ public class FileManager {
 	
 	
 	/**
-	 * TODO: Do we need these methods anymore ?
-	 * commented out as they were causing errors
+	 * Loads user from file.
 	 */
 	public User loadUserFromFile() {
 		User user;
-		Gson gson = new Gson();
+		
 		try {
 			//openFileInput only takes a a filename
 			FileInputStream fis = context.openFileInput(USERFILENAME);
@@ -224,19 +256,23 @@ public class FileManager {
 			return user;
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			return null;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			return null;
 		}
-		return null;
 	}
 	
 	
 	
 	//from https://github.com/scheidemanS/lonelyTwitter/blob/master/src/ca/ualberta/cs/lonelytwitter/LonelyTwitterActivity.java on 2015-01-25
+	/**
+	 * Saves user to file and attempts to save online if there is an internet connection.
+	 * @param user
+	 */
 	public void saveUserInFile(User user) {
-		Gson gson = new Gson();
+//		Thread thread = new onlineSaveUserThread(user);
+//		thread.start();
 		
 		try {
 			//openFileOutput is a Activity method
@@ -270,6 +306,32 @@ public class FileManager {
 		return result.toString();
 	}
 	
+	/**
+	 * Gets rid of elastic search header and returns saved claimlist.
+	 * @param response
+	 * @return
+	 */
+	private SearchHit<ClaimList> parseClaimListHit(HttpResponse response) {
+		
+		try {
+			String json = getEntityContent(response);
+			Type searchHitType = new TypeToken<SearchHit<ClaimList>>() {}.getType();
+			
+			SearchHit<ClaimList> sr = gson.fromJson(json, searchHitType);
+			return sr;
+		} 
+		catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+	
+	/**
+	 * Gets rid of elastic search header and returns saved user.
+	 * @param response
+	 * @return
+	 */
 	private SearchHit<User> parseUserHit(HttpResponse response) {
 		
 		try {
@@ -284,6 +346,54 @@ public class FileManager {
 		}
 		
 		return null;
+	}
+
+	/**
+	 * Thread for running http calls for claimlist when save() is called in controller
+	 *
+	 */
+	class onlineSaveClaimListThread extends Thread {
+		
+		private ClaimList claimlist;
+		private String username;
+		
+		public onlineSaveClaimListThread(ClaimList claimlist, String username){
+			this.claimlist = claimlist;
+			this.username = username;
+		}
+		
+		@Override
+		public void run() {
+			
+			if(InternetController.isInternetAvailable2(context)){
+				addClaimList(claimlist, username);
+			}
+			
+		}
+		
+	}
+
+	/**
+	 * Thread for running http calls for user when save() is called in controller
+	 *
+	 */
+	class onlineSaveUserThread extends Thread {
+		
+		private User user;
+		
+		public onlineSaveUserThread(User user){
+			this.user = user;
+		}
+		
+		@Override
+		public void run() {
+			
+			if(InternetController.isInternetAvailable2(context)){
+				addUser(user);
+			}
+			
+		}
+		
 	}
 	
 	
