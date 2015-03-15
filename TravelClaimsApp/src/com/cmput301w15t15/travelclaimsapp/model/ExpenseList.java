@@ -2,7 +2,10 @@ package com.cmput301w15t15.travelclaimsapp.model;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Map;
+
+import com.cmput301w15t15.travelclaimsapp.ExpenseListComparator;
 
 
 public class ExpenseList {
@@ -94,6 +97,11 @@ public class ExpenseList {
 	public void setListeners() {
 		this.listeners = new ArrayList<Listener>();
 		
+	}
+
+	public void sort() {
+		// TODO Auto-generated method stub
+		Collections.sort(expenseList, new ExpenseListComparator());
 	}
 	
 }

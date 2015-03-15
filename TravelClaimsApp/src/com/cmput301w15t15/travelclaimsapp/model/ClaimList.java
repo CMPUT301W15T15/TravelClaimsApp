@@ -100,5 +100,4 @@ public class ClaimList implements Listenable{
 	}
 
 
-
 }

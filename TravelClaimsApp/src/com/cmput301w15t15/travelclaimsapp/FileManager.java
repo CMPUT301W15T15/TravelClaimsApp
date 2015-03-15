@@ -18,11 +18,9 @@ import org.apache.http.impl.client.DefaultHttpClient;
 
 import com.cmput301w15t15.travelclaimapp.elasticsearch.SearchHit;
 import com.cmput301w15t15.travelclaimsapp.model.ClaimList;
-<<<<<<< HEAD
+
 import com.cmput301w15t15.travelclaimsapp.model.ExpenseList;
 import com.cmput301w15t15.travelclaimsapp.model.TagList;
-=======
->>>>>>> d29bbd2c336448bef37ecf4c0934c6b6aa2a5c6b
 import com.cmput301w15t15.travelclaimsapp.model.User;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -277,11 +275,9 @@ public class FileManager {
 
 		return result.toString();
 	}
-<<<<<<< HEAD
 
-=======
 	
-	private SearchHit<User> parseUserHit(HttpResponse response) {
+	private SearchHit<User> parseUserHit(HttpResponse response){
 		
 		try {
 			String json = getEntityContent(response);
@@ -297,6 +293,4 @@ public class FileManager {
 		return null;
 	}
 	
-	
->>>>>>> d29bbd2c336448bef37ecf4c0934c6b6aa2a5c6b
 }

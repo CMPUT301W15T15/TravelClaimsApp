@@ -22,11 +22,11 @@ public class ExpenseListAdaptor extends ArrayAdapter<Expense> {
 	private int resource;
 	private ArrayList<Expense> expenseList;
 	
-	public ExpenseListAdaptor(Context context, int resource, ExpenseList expenses) {
-		super(context, resource, expenses.toArrayList());
+	public ExpenseListAdaptor(Context context, int resource, ArrayList<Expense> expenses) {
+		super(context, resource, expenses);
 		this.context = context;
 		this.resource = resource;
-		this.expenseList = expenses.toArrayList();
+		this.expenseList = expenses;
 	}
 
 	@Override

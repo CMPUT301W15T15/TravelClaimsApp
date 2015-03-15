@@ -1,10 +1,14 @@
 package com.cmput301w15t15.travelclaimsapp.activitys;
 
+import com.cmput301w15t15.travelclaimsapp.ClaimListController;
 import com.cmput301w15t15.travelclaimsapp.ExpenseListAdaptor;
+import com.cmput301w15t15.travelclaimsapp.ExpenseListController;
+import com.cmput301w15t15.travelclaimsapp.FileManager;
 import com.cmput301w15t15.travelclaimsapp.R;
 import com.cmput301w15t15.travelclaimsapp.R.layout;
 import com.cmput301w15t15.travelclaimsapp.R.menu;
 import com.cmput301w15t15.travelclaimsapp.model.Expense;
+import com.cmput301w15t15.travelclaimsapp.model.ExpenseList;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -21,7 +25,10 @@ import android.widget.AdapterView.AdapterContextMenuInfo;
 
 public class ExpenseListActivity extends Activity
 {
-	private ExpenseListAdaptor expenseListAdaptor;
+	private ExpenseListAdaptor expenseAdaptor;
+	private ExpenseListAdaptor expenseList;
+	private ListView expenseListView;
+	
 	
 	/* (non-Javadoc)
 	 * @see android.app.Activity#onCreate(android.os.Bundle)
@@ -32,11 +39,33 @@ public class ExpenseListActivity extends Activity
 
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_expense_list);
+		FileManager.initializeSaver(this);
+		//registerForContextMenu(findViewById(R.id.CurrentExpenseList));
+		expenseListView = (ListView) findViewById(R.id.CurrentExpenseList);
+		expenseList = 
+		//ArrayAdapter<Expense> expenseAdapter = new ArrayAdapter<Expense>(this,android.R.layout.simple_expandable_list_item_1);
+		expenseAdaptor = new ExpenseListAdaptor(this,R.layout.expense_list_adaptor,expenseList.get);
+		expenseAdaptor.notifyDataSetChanged();
+		expenseListView.setAdapter(expenseAdaptor);
+		
 		registerForContextMenu(findViewById(R.id.CurrentExpenseList));
-		ListView listView = (ListView) findViewById(R.id.CurrentExpenseList);
-		ArrayAdapter<Expense> expenseAdapter = new ArrayAdapter<Expense>(this,android.R.layout.simple_expandable_list_item_1);
 	}
 
+	@Override
+	protected void onStart(){
+		super.onStart();
+		expenseAdaptor.notifyDataSetChanged();
+		
+	}
+	
+	@Override
+	protected void onResume(){
+		super.onResume();
+		expenseAdaptor.notifyDataSetChanged();
+		
+		
+	}
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu)
 	{
@@ -77,6 +106,8 @@ public class ExpenseListActivity extends Activity
 	{
 		AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
         
+		Intent intent;
+		final Expense expense = expenseAdaptor.getItem(info.position);
         switch (item.getItemId()) {
             case R.id.expenseListViewMenuEdit:
               
