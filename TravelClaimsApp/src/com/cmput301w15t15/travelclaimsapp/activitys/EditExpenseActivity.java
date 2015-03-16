@@ -98,22 +98,21 @@ public class EditExpenseActivity extends FragmentActivity{
 		claim=claimList.getClaim(claimName);
 		expenseList=claim.getExpenseList();
 		expense=expenseList.getExpense(expenseName);
-		//expenseCost = expense.getCost();
-<<<<<<< HEAD
-		/*if (expense.getDes()!=null){
+		/*expenseCost = expense.getCost();
+
+		if (expense.getDes()!=null){
+			expenseDescription = expense.getDes();
+		}
+		else{
+			expenseDescription="None";
+		}
+		if (expense.getDes()!=null){
 			expenseDescription = expense.getDes();
 		}
 		else{
 			expenseDescription="None";
 		}*/
-=======
-//		if (expense.getDes()!=null){
-//			expenseDescription = expense.getDes();
-//		}
-//		else{
-//			expenseDescription="None";
-//		}
->>>>>>> dac2e99035670a59efdcd00347a017b8ca26daa1
+
 		set_on_click();
 		//registerForContextMenu(findViewById(R.id.));
 		//registerForContextMenu(findViewById(R.id.edit_claim_taglist));
@@ -126,9 +125,9 @@ public class EditExpenseActivity extends FragmentActivity{
 		// TODO Auto-generated method stub
 		super.onStart();
 		expenseNameInput.setText(expenseName);
-		if(expense.getDate()!=null){
+		/*if(expense.getDate()!=null){
 			date.setText(sdf.format(expense.getDate()));
-		}
+		}*/
 		//setEditable();
 	}
 
