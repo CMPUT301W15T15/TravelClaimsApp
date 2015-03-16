@@ -28,6 +28,10 @@ import com.cmput301w15t15.travelclaimsapp.model.User;
 
 import android.test.AndroidTestCase;
 
+/**
+ * Tests for User class.
+ *
+ */
 public class UserTest extends AndroidTestCase {
 	private User user1;
 	private User user2;
@@ -39,11 +43,13 @@ public class UserTest extends AndroidTestCase {
 
 	}
 	//test: UserTest#1
+	/**
+	 * Ensures users can be added.
+	 * @throws IOException
+	 */
 	public void testAddUser() throws IOException{
 		String name1 = "Jon";
-		String name2 = null;
 		String pass1 = "dog";
-		String pass2 = null;
 		
 		MessageDigest md = null;
 		byte[] passHash = null;
@@ -71,6 +77,10 @@ public class UserTest extends AndroidTestCase {
 	
 
 	//test: UserTest#4
+	/**
+	 * Ensures approvers can be added.
+	 * @throws IOException
+	 */
 	public void testAddUserApprover() throws IOException{
 		String name1 = "Shelby";
 		String pass1 = "Sunshine";

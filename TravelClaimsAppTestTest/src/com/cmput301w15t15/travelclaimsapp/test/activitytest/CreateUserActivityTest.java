@@ -31,6 +31,10 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
+/**
+ * Tests for the CreateUserActivity
+ *
+ */
 public class CreateUserActivityTest extends
 		ActivityInstrumentationTestCase2<CreateUserActivity> {
 
@@ -67,6 +71,9 @@ public class CreateUserActivityTest extends
 	
 	//Test for valid inputs
 		//Test Case: CreateUserActivityTest#1
+			/**
+			 * Checks correct input works as intended.
+			 */
 			public void testCorrectInput(){
 				ActivityMonitor activityMonitor = new ActivityMonitor(MainMenuActivity.class.getName(), null, false);
 				instrumentation.addMonitor(activityMonitor);
@@ -88,6 +95,9 @@ public class CreateUserActivityTest extends
 			}
 			
 			//Test Case: CreateUserActivityTest#2
+			/**
+			 * Checks mismatch passwords do not create users.
+			 */
 			public void testMismatchPassInput(){
 				ActivityMonitor activityMonitor = new ActivityMonitor(MainMenuActivity.class.getName(), null, false);
 				instrumentation.addMonitor(activityMonitor);
@@ -109,6 +119,9 @@ public class CreateUserActivityTest extends
 			}
 			
 			//Test Case: CreateUserActivityTest#3
+			/**
+			 * Checks when no password given, do not create users.
+			 */
 			public void testNoPassInput(){
 				ActivityMonitor activityMonitor = new ActivityMonitor(MainMenuActivity.class.getName(), null, false);
 				instrumentation.addMonitor(activityMonitor);
@@ -130,6 +143,9 @@ public class CreateUserActivityTest extends
 			}
 			
 			//Test Case: CreateUserActivityTest#4
+			/**
+			 * Checks when no passwordAgain given, do not create users.
+			 */
 			public void testNoPass2Input(){
 				ActivityMonitor activityMonitor = new ActivityMonitor(MainMenuActivity.class.getName(), null, false);
 				instrumentation.addMonitor(activityMonitor);
@@ -151,6 +167,9 @@ public class CreateUserActivityTest extends
 			}
 			
 			//Test Case: CreateUserActivityTest#5
+			/**
+			 * Checks when no password fields given, do not create users.
+			 */
 			public void testNoPass3Input(){
 				ActivityMonitor activityMonitor = new ActivityMonitor(MainMenuActivity.class.getName(), null, false);
 				instrumentation.addMonitor(activityMonitor);
@@ -172,6 +191,9 @@ public class CreateUserActivityTest extends
 			}
 			
 			//Test Case: CreateUserActivityTest#6
+			/**
+			 * Checks when no username given, do not create users.
+			 */
 			public void testNoUserInput(){
 				ActivityMonitor activityMonitor = new ActivityMonitor(MainMenuActivity.class.getName(), null, false);
 				instrumentation.addMonitor(activityMonitor);
@@ -193,6 +215,9 @@ public class CreateUserActivityTest extends
 			}
 			
 			//Test Case: CreateUserActivityTest#7
+			/**
+			 * Checks when no no input fields are given, do not create users.
+			 */
 			public void testNoNothingInput(){
 				ActivityMonitor activityMonitor = new ActivityMonitor(MainMenuActivity.class.getName(), null, false);
 				instrumentation.addMonitor(activityMonitor);
@@ -214,6 +239,9 @@ public class CreateUserActivityTest extends
 			}
 			
 			//Test Case: CreateUserActivityTest#8
+			/**
+			 * Checks Approver users can be created.
+			 */
 			public void testApproverInput(){
 				ActivityMonitor activityMonitor = new ActivityMonitor(MainMenuActivity.class.getName(), null, false);
 				instrumentation.addMonitor(activityMonitor);
