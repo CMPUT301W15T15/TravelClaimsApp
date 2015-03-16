@@ -17,6 +17,7 @@
  */
 package com.cmput301w15t15.travelclaimsapp.activitys;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -126,18 +127,51 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 		// TODO Auto-generated method stub
 		super.onStart();
 		expenseNameInput.setText(expenseName);
+<<<<<<< HEAD
+=======
+
+		
+>>>>>>> 1bddf43c5708395354b2fa8cb205d52d967c8d29
 		//expense show test
 //		expense.setDate(expenseDate);
 //		Date date = new Date();
 //		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
 //		System.out.println(dateFormat.format(date));
+<<<<<<< HEAD
 
 		if(expense.getDate()!=null){
 			date.setText(sdf.format(expense.getDate()));
 		}
 		//setEditable();
 		expenseNameInput.addTextChangedListener(this);
+=======
+		////////////////////////////
+		
+		if(expense.getDate()!=null){
+			date.setText(sdf.format(expense.getDate()));
+		}
+
+		setEditable();
+		//expenseNameInput.addTextChangedListener(this);
+>>>>>>> 1bddf43c5708395354b2fa8cb205d52d967c8d29
 		//date.addTextChangedListener(this);
+	}
+
+	private void setEditable() {
+		// TODO Auto-generated method stub
+		if(claim.getStatus().equals("Submitted") || claim.getStatus().equals("Approved")){
+			expenseNameInput.setFocusable(false);
+			date.setFocusable(false);
+			expenseCostInput.setFocusable(false);
+			expenseDescriptionInput.setFocusable(false);
+			
+		}else{
+			set_on_click();
+			//add text changed listeners 
+			expenseNameInput.addTextChangedListener(this);
+			date.addTextChangedListener(this);
+			expenseCostInput.addTextChangedListener(this);
+		}
 	}
 
 	@Override
@@ -239,9 +273,17 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
     	Bundle bundle=new Bundle();
     	String claimName= claim.getName();
     	intent.putExtra("claimName", claimName);
+<<<<<<< HEAD
     	String expenseName=expense.getName();
     	intent.putExtra("expenseName", expenseName);
     	expenseAdaptor.notifyDataSetChanged();
+=======
+    	//ClaimListController.addExpense(expense, claim);
+    	Toast.makeText(this, expense.getCurr(), Toast.LENGTH_SHORT).show();///test////////
+    	
+    	
+    	
+>>>>>>> 1bddf43c5708395354b2fa8cb205d52d967c8d29
     	startActivity(intent);   
     	
     }
@@ -249,7 +291,31 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 	@Override
 	public void afterTextChanged(Editable s) {
 		// TODO Auto-generated method stub
-		
+		switch(getCurrentFocus().getId()){
+		case R.id.Edit_Expense_Name:
+			String newName = s.toString();
+			//if length of name in edittext is 0 or if claim name is already in claimlist
+			//then do not save changes. Otherwise update the claim name
+			if(s.length() == 0 ){
+				Toast.makeText(this, "Claim name cannot be null", Toast.LENGTH_LONG).show();
+//			}else if(expense.getName()!=null){
+//				Toast.makeText(this, "Claim name cannot be duplicate of another claim", Toast.LENGTH_LONG).show();
+			}else{
+				expense.setName(expenseNameInput.getText().toString());
+			}
+		case R.id.Edit_Expense_Date:
+			try{
+				expense.setDate(sdf.parse(date.getText().toString()));
+			}catch(ParseException e){
+				//do nothing 
+			}
+		case R.id.Edit_Expense_Cost:
+			try{
+				expense.setDate(sdf.parse(expenseCostInput.getText().toString()));
+			}catch(ParseException e){
+				//do nothing
+			}		
+		}
 	}
 
 	@Override
