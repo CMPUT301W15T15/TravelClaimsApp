@@ -22,8 +22,6 @@ import java.util.ArrayList;
 import com.cmput301w15t15.travelclaimsapp.ClaimListAdaptor;
 import com.cmput301w15t15.travelclaimsapp.ClaimListController;
 import com.cmput301w15t15.travelclaimsapp.R;
-import com.cmput301w15t15.travelclaimsapp.R.layout;
-import com.cmput301w15t15.travelclaimsapp.R.menu;
 import com.cmput301w15t15.travelclaimsapp.model.Claim;
 import com.cmput301w15t15.travelclaimsapp.model.ClaimList;
 import com.cmput301w15t15.travelclaimsapp.model.Expense;
@@ -42,6 +40,9 @@ import android.widget.ListView;
 import android.widget.Toast;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 
+/**
+ * Activity for searching by a specific tag or sequence of tags separated by commas
+ */
 public class SearchActivity extends Activity
 {
 	private Button searchButton;
@@ -102,13 +103,8 @@ public class SearchActivity extends Activity
     public void onCreateContextMenu(ContextMenu menu, View v,ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
         getMenuInflater().inflate(R.menu.add_claim_context_menu, menu);
-        //menu.findItem(3).setVisible(false);
-       
-        //menu.getItem(R.id.cmenu_delete_claim).setVisible(false);
-        //menu.getItem(R.id.cmenu_dummyClaim).setVisible(false);
         
         menu.getItem(3).setVisible(false);
-        menu.getItem(4).setVisible(false);
     }
    
     @Override

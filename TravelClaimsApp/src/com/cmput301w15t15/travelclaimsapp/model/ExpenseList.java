@@ -39,6 +39,7 @@ public class ExpenseList {
 	
 	public void addExpense(Expense expense1) {
 		this.expenseList.add(expense1);
+		notifyListeners();
 	}
 	
 	public Collection<Expense> getExpenseList() {
@@ -69,6 +70,7 @@ public class ExpenseList {
 	public void removeExpense(Expense expense1) {
 		// TODO Auto-generated method stub
 		this.expenseList.remove(expense1);
+		notifyListeners();
 	}
 	
 	public int size() {
