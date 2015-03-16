@@ -61,7 +61,7 @@ public class ExpenseListAdaptor extends ArrayAdapter<Expense> {
 			LayoutInflater inflater = ((Activity)context).getLayoutInflater();
 	        rowView = inflater.inflate(resource, parent, false);
 			
-	        viewHolder.expenseName = (TextView) rowView.findViewById(R.id.expenseAdaptor_currency);
+	        viewHolder.expenseCurrency = (TextView) rowView.findViewById(R.id.expenseAdaptor_currency);
 	        viewHolder.expenseCategory= (TextView) rowView.findViewById(R.id.expenseAdaptor_category);
 	        viewHolder.expenseAmount = (TextView) rowView.findViewById(R.id.expenseAdaptor_amount);
 	        viewHolder.expenseDate = (TextView) rowView.findViewById(R.id.expenseAdaptor_date);
@@ -71,7 +71,7 @@ public class ExpenseListAdaptor extends ArrayAdapter<Expense> {
 			viewHolder = (ViewHolder) rowView.getTag();
 		}
 		
-        viewHolder.expenseName.setText(expense.getName());
+        viewHolder.expenseCurrency.setText(expense.getCurr());
         viewHolder.expenseCategory.setText(expense.getCat());
         viewHolder.expenseAmount.setText(expense.getCost().toString());
         
@@ -91,7 +91,7 @@ public class ExpenseListAdaptor extends ArrayAdapter<Expense> {
         public TextView expenseDate;
 		public TextView expenseAmount;
 		public TextView expenseCategory;
-		public TextView expenseName;
+		public TextView expenseCurrency;
     }
 	
 	

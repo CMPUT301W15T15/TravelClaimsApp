@@ -17,6 +17,7 @@
  */
 package com.cmput301w15t15.travelclaimsapp.activitys;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -64,6 +65,7 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 	private ExpenseList expenseList;
 	private ExpenseListAdaptor expenseListAdaptor;
 	private int expenseCost=0;
+	private ExpenseListAdaptor expenseAdaptor;
 	private String expenseDescription; 
 	private static EditText expenseNameInput;
 	private static EditText date;
@@ -102,28 +104,17 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 		claim=claimList.getClaim(claimName);
 		expenseList=claim.getExpenseList();
 		expense=expenseList.getExpense(expenseName);
-<<<<<<< HEAD
+
 		expenseCost = expense.getCost();
-=======
-		/*expenseCost = expense.getCost();
 
->>>>>>> ae1e2fa861b8bdc5d43b6e006944a1ddab111797
 		if (expense.getDes()!=null){
 			expenseDescription = expense.getDes();
 		}
 		else{
 			expenseDescription="None";
 		}
-<<<<<<< HEAD
-=======
-		if (expense.getDes()!=null){
-			expenseDescription = expense.getDes();
-		}
-		else{
-			expenseDescription="None";
-		}*/
 
->>>>>>> ae1e2fa861b8bdc5d43b6e006944a1ddab111797
+
 		set_on_click();
 		//registerForContextMenu(findViewById(R.id.));
 		//registerForContextMenu(findViewById(R.id.edit_claim_taglist));
@@ -136,26 +127,48 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 		// TODO Auto-generated method stub
 		super.onStart();
 		expenseNameInput.setText(expenseName);
-<<<<<<< HEAD
+
 		
+
 		//expense show test
-		expense.setDate(expenseDate);
-		Date date = new Date();
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-		System.out.println(dateFormat.format(date));
-		////////////////////////////
-		
-//		if(expense.getDate()!=null){
-//			date.setText(sdf.format(expense.getDate()));
-//		}
-=======
-		/*if(expense.getDate()!=null){
+//		expense.setDate(expenseDate);
+//		Date date = new Date();
+//		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+//		System.out.println(dateFormat.format(date));
+
+
+		if(expense.getDate()!=null){
 			date.setText(sdf.format(expense.getDate()));
-		}*/
->>>>>>> ae1e2fa861b8bdc5d43b6e006944a1ddab111797
+		}
 		//setEditable();
 		expenseNameInput.addTextChangedListener(this);
+
+		////////////////////////////
+		
+		if(expense.getDate()!=null){
+			date.setText(sdf.format(expense.getDate()));
+		}
+
+		setEditable();
+		//expenseNameInput.addTextChangedListener(this);
 		//date.addTextChangedListener(this);
+	}
+
+	private void setEditable() {
+		// TODO Auto-generated method stub
+		if(claim.getStatus().equals("Submitted") || claim.getStatus().equals("Approved")){
+			expenseNameInput.setFocusable(false);
+			date.setFocusable(false);
+			expenseCostInput.setFocusable(false);
+			expenseDescriptionInput.setFocusable(false);
+			
+		}else{
+			set_on_click();
+			//add text changed listeners 
+			expenseNameInput.addTextChangedListener(this);
+			date.addTextChangedListener(this);
+			expenseCostInput.addTextChangedListener(this);
+		}
 	}
 
 	@Override
@@ -257,6 +270,16 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
     	Bundle bundle=new Bundle();
     	String claimName= claim.getName();
     	intent.putExtra("claimName", claimName);
+
+    	String expenseName=expense.getName();
+    	intent.putExtra("expenseName", expenseName);
+    	//expenseAdaptor.notifyDataSetChanged();
+
+    	//ClaimListController.addExpense(expense, claim);
+    	Toast.makeText(this, expense.getCurr(), Toast.LENGTH_SHORT).show();///test////////
+    	
+    	
+
     	startActivity(intent);   
     	
     }
@@ -264,7 +287,51 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 	@Override
 	public void afterTextChanged(Editable s) {
 		// TODO Auto-generated method stub
-		
+		switch(getCurrentFocus().getId()){
+		case R.id.Edit_Expense_Name:
+			String newName = s.toString();
+			//if length of name in edittext is 0 or if claim name is already in claimlist
+			//then do not save changes. Otherwise update the claim name
+			if(s.length() == 0 ){
+				Toast.makeText(this, "Claim name cannot be null", Toast.LENGTH_LONG).show();
+//			}else if(expense.getName()!=null){
+//				Toast.makeText(this, "Claim name cannot be duplicate of another claim", Toast.LENGTH_LONG).show();
+			}else{
+				expense.setName(expenseNameInput.getText().toString());
+			}
+		case R.id.Edit_Expense_Date:
+			try{
+				expense.setDate(sdf.parse(date.getText().toString()));
+			}catch(ParseException e){
+				//do nothing 
+			}
+<<<<<<< HEAD
+		case R.id.Edit_Expense_Cost:
+			try{
+				expense.setCost(sdf.parse(expenseCostInput.getText().toString()));
+			}catch(ParseException e){
+				//do nothing
+			}		
+		case R.id.CurrencySpinner:
+			try{
+				expense.setCurr(currencySpinner.getSelectedItemPosition());
+			}
+=======
+//		case R.id.Edit_Expense_Cost:
+//			//try{
+//				expense.setCost(Integer.parseInt(expenseCostInput.getText().toString()));
+//			//}catch(ParseException e){
+//				//do nothing
+//			//}
+		case R.id.CurrencySpinner:
+			//try{
+				expense.setCurr(currencySpinner.getSelectedItem().toString());
+			//}catch(ParseException e){
+		case R.id.CategorySpinner:
+			expense.setCat(categorySpinner.getSelectedItem().toString());
+			//}
+>>>>>>> 3ff5a1eaa0cb5afe6bb95b492a3a7bd02977ce4a
+		}
 	}
 
 	@Override
