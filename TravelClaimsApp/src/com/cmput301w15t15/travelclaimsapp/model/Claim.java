@@ -211,16 +211,6 @@ public class Claim implements Listenable{
 		return this.status;
 	}
 	
-	
-//commented this out as it had errors	
-//	public Tag getTag(String tagName)
-//	{
-//		
-//		// TODO Auto-generated method stub
-//		
-//		return this.tagList.getTag(tagName);
-//	}
-
 
 	/**
 	 * set claim status
