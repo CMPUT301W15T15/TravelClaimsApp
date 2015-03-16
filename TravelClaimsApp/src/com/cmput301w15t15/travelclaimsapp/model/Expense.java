@@ -40,19 +40,6 @@ public class Expense implements Listenable{
 	protected Uri expenseReceipt;
 	protected int flag=0;
 
-
-	/*public Expense(String expenseName, String expenseDes, String expenseCurr, String expenseCat, Date expenseDate, Integer expenseCost) {
-		this.expenseName = expenseName;
-		this.expenseDes = expenseDes;
-		this.expenseDate = expenseDate;
-		this.expenseCost = expenseCost;
-		this.expenseCurr = expenseCurr;
-		this.expenseCat = expenseCat;
-		this.listeners = new ArrayList<Listener>();
-	}*/
-	
-
-
 	/**
 	 * expense constructor
 	 * @param expenseName
@@ -151,7 +138,7 @@ public class Expense implements Listenable{
 	}
 	
 	/**
-	 * set expense catogary
+	 * set expense category
 	 * @param expenseCat
 	 */
 	public void setCat(String expenseCat){

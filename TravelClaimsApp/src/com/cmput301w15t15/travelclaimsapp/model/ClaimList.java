@@ -103,13 +103,6 @@ public class ClaimList implements Listenable{
 		return this.claimList;
 	}
 
-	public ClaimList filterTag(Tag tag1)
-	{
-
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
 	/**
 	 * Sorts claims in claimlist by starting date.
 	 */
