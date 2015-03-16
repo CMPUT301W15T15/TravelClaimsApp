@@ -30,12 +30,12 @@ public class takePhotoTest extends TestCase
 	private Expense expense;
 	protected void setUp() throws Exception
 	{
-	    expense = new Expense("Business", null, null, null, null, 0);
+	    expense = new Expense("Business");
 		super.setUp();
 	}
 	//TestCase: takePhotoTest#1
 	 protected void testTakePhoto() {
-		 Expense expense = new Expense("Business", null, null, null, null, 0);
+		 Expense expense = new Expense("Business");
 		 expense.takeReceipt(imageFileUri);
 		 //assertTrue("exist photo", expense.takeReceipt(imageFileUri) != null);
 		 }

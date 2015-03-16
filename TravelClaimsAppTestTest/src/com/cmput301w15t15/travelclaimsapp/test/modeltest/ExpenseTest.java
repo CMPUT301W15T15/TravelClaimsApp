@@ -28,39 +28,44 @@ public class ExpenseTest extends TestCase
 {
 	public void testExpenseName()
 	{
-		String expenseName = "Expense1";
-		Expense expense = new Expense(expenseName, null, null, null, null, 0);
+		String expenseName = "expense1";
+		Expense expense = new Expense(expenseName);
 		assertTrue("Expense name is not equal", expenseName.equals(expense.getName()));
 	}
 	public void testExpenseCost()
 	{
 		Integer expenseCost = 12;
-		Expense expense = new Expense(null, null, null, null, null, expenseCost);
+		Expense expense = new Expense("expense2");
+		expense.setCost(expenseCost);
 		assertTrue("Expense cost is not equal", expenseCost.equals(expense.getCost()));
 	}
 	public void testExpenseCurr()
 	{
 		String expenseCurr = "CAD";
-		Expense expense = new Expense(null, null, expenseCurr, null, null, null);
+		Expense expense = new Expense("expense3");
+		expense.setCurr(expenseCurr);
 		assertTrue("Expense curr is not equal", expenseCurr.equals(expense.getCurr()));
 	}
 	public void testExpenseDes()
 	{
 		String expenseDes = "hello";
-		Expense expense = new Expense(null, expenseDes, null, null, null, null);
+		Expense expense = new Expense("expense4");
+		expense.setDes(expenseDes);
 		assertTrue("Expense curr is not equal", expenseDes.equals(expense.getDes()));
 	}
 	public void testExpenseCat()
 	{
-		String expenseCat = "Airfare";
-		Expense expense = new Expense(null, null, null, expenseCat, null, null);
+		String expenseCat = "Air fare";
+		Expense expense = new Expense("expense5");
+		expense.setCat(expenseCat);
 		assertTrue("Expense curr is not equal", expenseCat.equals(expense.getCat()));
 	}
 	public void testExpenseDate() throws ParseException
 	{
 		SimpleDateFormat fmt = new SimpleDateFormat("dd-MM-yyyy");
 		Date expenseDate = fmt.parse("03-10-2015");
-		Expense expense = new Expense(null, null, null, null, expenseDate, 0);
+		Expense expense = new Expense("expense6");
+		expense.setDate(expenseDate);
 		assertTrue("Expense date is not equal", expenseDate.equals(expense.getDate()));
 	}
 	

@@ -75,8 +75,8 @@ public class ApproveExpenseListTest extends TestCase {
 	public void testViewExpenseReceipt() throws IOException{
 		ClaimList testClaimList = new ClaimList();
 		claim1 = new Claim("Claim1");
-		expense1 = new Expense("Expense1", null, null, null, null, 0);
-		expense2 = new Expense("Expense2", null, null, null, null, 0);
+		expense1 = new Expense("Expense1");
+		expense2 = new Expense("Expense2");
 		
 		claim1.setStatus("Submitted");
 		ExpenseList expenseList = claim1.getExpenseList();
@@ -86,9 +86,9 @@ public class ApproveExpenseListTest extends TestCase {
 
 		testClaimList.addClaim(claim1);
 		testClaimList.addClaim(claim2);
-		Expense item1 = new Expense("food", null, null, null, null, 0);
-		Expense item2 = new Expense("meat", null, null, null, null, 0);
-		Expense item3 = new Expense("drink", null, null, null, null, 0);
+		Expense item1 = new Expense("food");
+		Expense item2 = new Expense("meat");
+		Expense item3 = new Expense("drink");
 		
 		expense1.takeReceipt(null);
 		assertFalse("Image yes?", expense1.getReceipt().equals(null));

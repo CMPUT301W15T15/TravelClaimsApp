@@ -60,7 +60,7 @@ public class ClaimListControllerTest extends AndroidTestCase {
 		claim3 = new Claim("c3");
 		claim4 = new Claim("c4");
 
-		expense = new Expense("e1", null, null, null, null, 0);	
+		expense = new Expense("e1");	
 
 	}
 	@Override

@@ -44,12 +44,13 @@ public class ApproveExpenseItemTest extends TestCase {
 		super.setUp();
 	}
 
-	@SuppressWarnings("null")
+	
 	//TestNumber:ApproveViewTest #3
 	public void testViewExpenseItem() throws IOException{
 		ClaimList testClaimList = new ClaimList();
 		claim1 = new Claim("Claim1");
-		expense1 = new Expense("Expense1", null, null, null, null, 0);
+		expense1 = new Expense("Expense1");
+		expense2= new Expense("Expense2");
 		
 		claim1.setStatus("Submitted");
 		ExpenseList expenseList = claim1.getExpenseList();
@@ -58,9 +59,9 @@ public class ApproveExpenseItemTest extends TestCase {
 		testClaimList.addClaim(claim1);
 		testClaimList.addClaim(claim2);
 		
-		Expense item1 = new Expense("food", null, null, null, null, 0);
-		Expense item2 = new Expense("meat", null, null, null, null, 0);
-		Expense item3 = new Expense("drink", null, null, null, null, 0);
+		Expense item1 = new Expense("food");
+		Expense item2 = new Expense("meat");
+		Expense item3 = new Expense("drink");
 		expenseList.addExpense(item1);
 		expenseList.addExpense(item2);
 		expenseList.addExpense(item3);
