@@ -50,7 +50,7 @@ import android.widget.TextView;
  *  
  *  	
  */
-<<<<<<< HEAD
+
 /**
  * @author searn
  *
@@ -63,8 +63,7 @@ import android.widget.TextView;
  * @author searn
  *
  */
-=======
->>>>>>> d59c8e6b51aa4e9cec2b178ab08f82ef5b646e16
+
 
 public class ClaimListAdaptor extends ArrayAdapter<Claim>{
 

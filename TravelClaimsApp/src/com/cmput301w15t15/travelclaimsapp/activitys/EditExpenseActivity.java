@@ -149,7 +149,7 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 
 		super.onStart();
 		expenseNameInput.setText(expenseName);
-<<<<<<< HEAD
+
 		
 
 		
@@ -163,9 +163,7 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 		if (expense.getDes()!=null){
 			expenseDescriptionInput.setText(expense.getDes().toString());
 		}
-=======
 
->>>>>>> d59c8e6b51aa4e9cec2b178ab08f82ef5b646e16
 		if(expense.getCost()!=null){
 			expenseCostInput.setText(expense.getCost().toString());
 		}
@@ -174,10 +172,7 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 		}
 
 		expenseNameInput.addTextChangedListener(this);
-<<<<<<< HEAD
 
-=======
->>>>>>> d59c8e6b51aa4e9cec2b178ab08f82ef5b646e16
 		
 		if(expense.getDate()!=null){
 			date.setText(sdf.format(expense.getDate()));
@@ -191,18 +186,18 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 		categorySpinner.setAdapter(categoryAdaptor);
 
 		
-<<<<<<< HEAD
+
 		//int currPos=getIndex(currencySpinner,expense.getCurr());
 		
 		//currencySpinner.setSelection(getIndex(currencySpinner, expense.getCurr()));
 		
+		//currencySpinner.setSelection(currencyAdaptor.getPosition(expense.getCurr()));
+		
+		
+		
+
 		currencySpinner.setSelection(currencyAdaptor.getPosition(expense.getCurr()));
-		
-		
-		
-=======
-		currencySpinner.setSelection(currencyAdaptor.getPosition(expense.getCurr()));
->>>>>>> d59c8e6b51aa4e9cec2b178ab08f82ef5b646e16
+
 		categorySpinner.setSelection(categoryAdaptor.getPosition(expense.getCat()));
 		
 		setEditable();
