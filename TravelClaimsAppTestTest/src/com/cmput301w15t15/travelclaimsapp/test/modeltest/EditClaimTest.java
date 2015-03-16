@@ -17,32 +17,52 @@
  */
 package com.cmput301w15t15.travelclaimsapp.test.modeltest;
 
-import java.sql.Date;
-import java.util.Map;
-import java.util.Set;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import android.test.AndroidTestCase;
 
 import com.cmput301w15t15.travelclaimsapp.ClaimListController;
+import com.cmput301w15t15.travelclaimsapp.FileManager;
 import com.cmput301w15t15.travelclaimsapp.model.Claim;
 import com.cmput301w15t15.travelclaimsapp.model.ClaimList;
 
 import junit.framework.TestCase;
 
-public class EditClaimTest extends TestCase {
+/**
+ *	Tests for test editing {@link Claim}
+ *
+ */
+public class EditClaimTest extends AndroidTestCase {
+
+	
+
 	private ClaimList claimList;
 	private Claim claim1;
 	private Claim claim2;
 
 	protected void setUp() throws Exception {
 		super.setUp();
+		FileManager.initializeSaver(this.getContext());
 		claimList = ClaimListController.getClaimList();
 		claim1 = new Claim("Claim1");
 		claimList.addClaim(claim1);
 		claim2 = new Claim("Claim2");
 		claimList.addClaim(claim2);
-		//claim1.setStartDate(2015, 2,5);
+	}
+	@Override
+	protected void tearDown() throws Exception {
+		// TODO Auto-generated method stub
+		super.tearDown();
+		ClaimListController.removeClaim(claim1);
+		ClaimListController.removeClaim(claim2);
 	}
 	
-	//test case: EditClaimTest#1
+	/**
+	 * test case: EditClaimTest#1
+	 */
 	public void testEditClaimName(){
 
 		try{
@@ -57,24 +77,19 @@ public class EditClaimTest extends TestCase {
 		}
 	}
 	
-	//test case: EditClaimTest#2
-	public void testEditClaimDate(){
+	/**
+	 * test case: EditClaimTest#2
+	 * @throws ParseException 
+	 */
+	public void testEditClaimDate() throws ParseException{
 		
+		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+		
+		Date date = sdf.parse("01/16/2015");
+		Date date2 = sdf.parse("01/15/2015");
+		claim1.setEndDate(date);
 	
-		//claim1.setEndDate(new Date());
-	
-		//assertTrue("Claim end date set before claim start date", e.getMessage().equals("Claim.setEndDate was passed a illegal argument"));
-		
-		
-		
-		//claim1.setEndDate(2015, 3, 5);
-		//claim1.setStartDate(2015, 4, 5);
+		assertTrue("Claim end date set before claim start date", date.after(date2));
 	}
-
-	
-	
-	
-	
-	
 
 }

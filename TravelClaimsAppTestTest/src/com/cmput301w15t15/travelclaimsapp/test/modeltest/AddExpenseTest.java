@@ -25,6 +25,10 @@ import com.cmput301w15t15.travelclaimsapp.model.ExpenseList;
 
 import junit.framework.TestCase;
 
+/**
+ * Tests adding and removing expenses from expenselist
+ *
+ */
 public class AddExpenseTest extends TestCase {
 	private ClaimList claimList;
 	private Claim claim1;
@@ -42,14 +46,18 @@ public class AddExpenseTest extends TestCase {
 		expense2 = new Expense("E2", null, null, null, null, 0);
 		expenseList = claim1.getExpenseList();
 	}
-	//test AddExpenseTest#1
+	/**
+	 * test AddExpenseTest#1
+	 */
 	public void testAddExpense(){
 		expenseList.addExpense(expense1);
 		expenseList.addExpense(expense2);
 		
 		assertEquals("Expenses not added", claim1.getExpenseList().size(),2);
 	}
-	//test AddExpenseTest#2
+	/**
+	 * test AddExpenseTest#2
+	 */
 	public void testDeleteExpense(){
 		expenseList.addExpense(expense1);
 		expenseList.addExpense(expense2);

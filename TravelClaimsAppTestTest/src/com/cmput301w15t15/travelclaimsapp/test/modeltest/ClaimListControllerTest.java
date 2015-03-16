@@ -22,23 +22,16 @@ import java.util.ArrayList;
 
 import com.cmput301w15t15.travelclaimsapp.ClaimListController;
 import com.cmput301w15t15.travelclaimsapp.FileManager;
-import com.cmput301w15t15.travelclaimsapp.activitys.AddClaimActivity;
 import com.cmput301w15t15.travelclaimsapp.model.Claim;
 import com.cmput301w15t15.travelclaimsapp.model.ClaimList;
 import com.cmput301w15t15.travelclaimsapp.model.Expense;
 import com.cmput301w15t15.travelclaimsapp.model.Tag;
-import com.cmput301w15t15.travelclaimsapp.model.TagList;
-
-import android.app.Activity;
-import android.content.Context;
-import android.test.ActivityInstrumentationTestCase2;
 import android.test.AndroidTestCase;
 
 /**
  * Tests class for testing {@link ClaimListController}
  */
 public class ClaimListControllerTest extends AndroidTestCase {
-
 
 	private ClaimList claimList;
 	private ClaimList claimList2;
@@ -52,8 +45,6 @@ public class ClaimListControllerTest extends AndroidTestCase {
 	
 	public ClaimListControllerTest() {
 		super();
-		
-		
 	}
 
 	protected void setUp() throws Exception {
@@ -165,7 +156,6 @@ public class ClaimListControllerTest extends AndroidTestCase {
 		ClaimListController.removeTag(claim, tag2);
 		tags = ClaimListController.getTagList();
 		assertEquals("Number of tags returned not correct",3,tags.size());
-		
 	}
 	
 	/**
@@ -227,8 +217,5 @@ public class ClaimListControllerTest extends AndroidTestCase {
 		
 		assertEquals("ClaimList was not filtered", 1, filtered.size());
 		assertTrue("ClaimList was not filtered correctly", filtered.indexOf(claim4)>-1);
-		
 	}
-	
-	
 }

@@ -1,5 +1,21 @@
-//add
-/*package com.cmput301w15t15.travelclaimsapp.test.modeltest;
+/*
+ *TravelClaimsApp
+ *Copyright (C) 2015 Jon Machinski, Bo Zhou, Henry Ha, Chris Wang, Sean Scheideman
+ *
+ *This program is free software: you can redistribute it and/or modify
+ *it under the terms of the GNU General Public License as published by
+ *the Free Software Foundation, either version 3 of the License, or
+ *(at your option) any later version.
+ *
+ *This program is distributed in the hope that it will be useful,
+ *but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ *GNU General Public License for more details.
+ *
+ *You should have received a copy of the GNU General Public License
+ *along with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
+package com.cmput301w15t15.travelclaimsapp.test.modeltest;
 
 
 import java.io.IOException;
@@ -15,15 +31,11 @@ import junit.framework.TestCase;
 
 public class tagListTest extends TestCase {
 	private TagList tagList;
-<<<<<<< HEAD
-	private Tag tag1;
-	private Tag tag2;
-	private Tag tag3;
-=======
+
 	private Tag tag1=new Tag("Business");
 	private Tag tag2=new Tag("Personal");
 	private Tag tag3=new Tag("school");
->>>>>>> 41d2d10cc546c5261a299db416cd854539d01fb9
+
 	private Claim claim1;
 	@Override
 	protected void setUp() throws Exception {
@@ -32,49 +44,31 @@ public class tagListTest extends TestCase {
 		tagList= new TagList();
 		tagList.addTag(tag1);
 		tagList.addTag(tag2);
-		//claim1.addTag(tag1);
-
-		
+	
 	}
 	//Test: tagListTest#1 
-	public void addClaimTag() throws IOException{
+	public void testaddClaimTag() throws IOException{
 		tagList.addTag(tag3);
-		//tagList.addTag("school");
+	
 		assertTrue("The length of the claimList is not two",  this.tagList.size()==3);
 		assertTrue("claim1 was not added", this.tagList.getTag("Personal") == tag2);
 		assertTrue("claim1 was not added", this.tagList.getTag("Business") == tag1);
-		//assertTrue("claim1 was not added", this.claim1.getTag() == tag1);
 	}
 
 	//Test: tagListTest#2	
-	public void removeTagTest() throws IOException{
-		//claim1.addTag(tag1);
-<<<<<<< HEAD
-		tagList.addTag(tag1);
-		tagList.addTag(tag2);
-		//tagList.removeTag("Business");
-=======
-		//tagList.addTag(tag1);
-		//tagList.addTag(tag2);
+	public void testremoveTagTest() throws IOException{
+
 		tagList.removeTag(tag1);
->>>>>>> 41d2d10cc546c5261a299db416cd854539d01fb9
-		//claim1.removeTag();
+
 		assertTrue("The length of the claimList is not two",  this.tagList.size()==1);
 		assertTrue("claim1 was not added", this.tagList.getTag("Personal") == tag2);
-		//assertTrue("claim1 was not added", this.claim1.getTag() == null);
 	}
 	//Test: tagListTest#3
-	public void renameTagTest() throws IOException{
-		//claim1.addTag(tag1);
-<<<<<<< HEAD
-		tagList.addTag(tag1);
-		tagList.addTag(tag2);
-		//tagList.renameTag(tag1,"School");
-=======
-		//tagList.addTag(tag1);
-		//tagList.addTag(tag2);
-		tagList.renameTag("Business","School");
->>>>>>> 41d2d10cc546c5261a299db416cd854539d01fb9
+	public void testrenameTagTest() throws IOException{
+
+		tag2.setName("Personal");
+		tag1.setName("School");
+
 		//claim1.renameTag("School");
 		assertTrue("The length of the claimList is not two",  this.tagList.size()==2);
 		assertTrue("claim1 was not added", this.tagList.getTag("Personal") == tag2);
@@ -85,4 +79,3 @@ public class tagListTest extends TestCase {
 	}
 	
 }
-*/

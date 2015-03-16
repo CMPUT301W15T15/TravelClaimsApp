@@ -127,16 +127,6 @@ public class AddClaimActivity extends Activity {
             	intent.putExtra("claimName", claim.getName());
             	startActivity(intent);   
             	return true;
-            case R.id.cmenu_dummyClaim:
-            	//adds a test claim for testing displaying amounts in listview
-            	Claim c = new Claim("Claim"+ClaimListController.getClaimList().size());
-            	c.addExpense(new Expense("t1", null, "EUR", null, null, 40));
-            	c.addExpense(new Expense("t2", null, "GBP", null, null, 100));
-            	c.addExpense(new Expense("t3", null, "CAD", null, null, 200));
-            	c.addExpense(new Expense("t4", null, "USD", null, null, 1000));
-            	c.addExpense(new Expense("t5", null, "EUR", null, null, 40));
-            	ClaimListController.addClaim(c);
-            	claimAdaptor.notifyDataSetChanged();
             default:
                 return super.onContextItemSelected(item);
         }

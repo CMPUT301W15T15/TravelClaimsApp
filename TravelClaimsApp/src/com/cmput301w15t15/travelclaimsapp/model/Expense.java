@@ -60,6 +60,7 @@ public class Expense implements Listenable{
 	
 	public void addFlag(){
 		this.flag=1;
+		notifyListeners();
 		// TODO
 	}
 	
@@ -69,6 +70,7 @@ public class Expense implements Listenable{
 	
 	public void setName(String expenseName) {
 		this.expenseName = expenseName;
+		notifyListeners();
 	}
 	
 	public String getName() {
@@ -77,6 +79,7 @@ public class Expense implements Listenable{
 	
 	public void setCost(int expenseCost){
 		this.expenseCost = expenseCost;
+		notifyListeners();
 	}
 	
 	public Integer getCost()
@@ -87,6 +90,7 @@ public class Expense implements Listenable{
 	public void setCurr(String expenseCurr)
 	{
 		this.expenseCurr = expenseCurr;
+		notifyListeners();
 	}
 	
 	public String getCurr(){
@@ -94,7 +98,8 @@ public class Expense implements Listenable{
 	}
 	
 	public void setCat(String expenseCat){
-		this.expenseCat = expenseCat;		
+		this.expenseCat = expenseCat;
+		notifyListeners();
 	}
 	public String getCat(){
 		return this.expenseCat;
@@ -103,6 +108,7 @@ public class Expense implements Listenable{
 	public void removeFlag()
 	{
 		this.flag=0;
+		notifyListeners();
 		// TODO Auto-generated method stub
 		//return false;
 	}
@@ -137,12 +143,12 @@ public class Expense implements Listenable{
 
 	public void setDate(Date expenseDate) {
 		this.expenseDate = expenseDate;
-		
+		notifyListeners();
 	}
 
 	public void setDes(String expenseDes) {
 		this.expenseDes = expenseDes;
-		
+		notifyListeners();
 	}
 
 	public String getDes() {
