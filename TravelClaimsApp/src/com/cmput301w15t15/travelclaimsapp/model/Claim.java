@@ -384,9 +384,9 @@ public class Claim implements Listenable{
 //	 * 
 //	 * @see java.lang.Object#toString()
 //	 */
-//	public String toString(){
-//		return this.claimName;
-//	}
+	public String toString(){
+		return this.claimName;
+	}
 
 
 	/* (non-Javadoc)
