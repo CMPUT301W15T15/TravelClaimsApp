@@ -105,6 +105,7 @@ public class EditClaimActivity extends FragmentActivity implements TextWatcher {
 		theClaim = claimList.getClaim(claimName);
 		dests = theClaim.getDestinationList(); 
 		tags = theClaim.getTagList();
+		
 		//create adaptors and set them 
 		tagAdaptor = new TagListAdaptor(this, R.layout.tag_list_adaptor, tags.toArrayList());
 		destAdaptor = new DestinationListAdaptor(this, R.layout.dest_list_adaptor, dests.toArrayList());

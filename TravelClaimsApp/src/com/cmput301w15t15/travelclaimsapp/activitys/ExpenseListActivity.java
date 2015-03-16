@@ -56,29 +56,18 @@ public class ExpenseListActivity extends Activity
 	{
 		super.onCreate(savedInstanceState);
 		Intent intent=new Intent();
-		//Bundle b=new Bundle();
-		//b=this.getIntent().getExtras();
 		claimName=this.getIntent().getExtras().getString("claimName");
 		setContentView(R.layout.activity_expense_list);
 		FileManager.initializeSaver(this);
-		//registerForContextMenu(findViewById(R.id.CurrentExpenseList));
 		expenseListView = (ListView) findViewById(R.id.CurrentExpenseList);
 		expenseList = ClaimListController.getClaimList().getClaim(claimName).getExpenseList();
-		//ArrayAdapter<Expense> expenseAdapter = new ArrayAdapter<Expense>(this,android.R.layout.simple_expandable_list_item_1);
-		
+
 		expenseAdaptor = new ExpenseListAdaptor(this,R.layout.expense_list_adaptor,expenseList.toArrayList());
 		expenseAdaptor.notifyDataSetChanged();
 		expenseListView.setAdapter(expenseAdaptor);
 		
 		registerForContextMenu(findViewById(R.id.CurrentExpenseList));
-
-
 		ListView listView = (ListView) findViewById(R.id.CurrentExpenseList);
-
-
-		//ListView listView = (ListView) findViewById(R.id.CurrentExpenseList);
-
-		//ArrayAdapter<Expense> expenseAdapter = new ArrayAdapter<Expense>(this,android.R.layout.simple_expandable_list_item_1);
 
 	}
 
@@ -151,8 +140,7 @@ public class ExpenseListActivity extends Activity
 		
     	Toast.makeText(this, "Creating a Expense", Toast.LENGTH_SHORT).show();
     	Intent intent = new Intent(ExpenseListActivity.this, EditExpenseActivity.class);
-    	//Intent intent = new Intent(AddClaimActivity.this, EditClaimActivity.class);
-    	//attach claim name to intent and start activity
+
     	intent.putExtra("claimName",claimName );
     	intent.putExtra("expenseName", expense.getName());
     	startActivity(intent);   
@@ -167,23 +155,13 @@ public class ExpenseListActivity extends Activity
 		final Expense expense = expenseAdaptor.getItem(info.position);
         switch (item.getItemId()) {
             case R.id.expenseListViewMenuEdit:
-            	//expenseList.removeExpense(expense);
             	Toast.makeText(this, "Editing an expense", Toast.LENGTH_SHORT).show();
             	intent = new Intent(ExpenseListActivity.this, EditExpenseActivity.class);
-//            	Bundle bundle=new Bundle();
-//            	bundle.putString("expenseName", this.expense.getName());
-//            	bundle.putInt("expenseCost", this.expenseCost);
-//            	bundle.putString("expenseDescription", this.expenseDescription);
+
             	Bundle bundle=new Bundle();
             	intent.putExtra("claimName", claimName);
             	intent.putExtra("expenseName", expense.getName());
-//            	String expenseName=expense.getName();
-//            	intent.putExtra("expenseName", expenseName);
-//            	expenseAdaptor.notifyDataSetChanged();
 
-            	//ClaimListController.addExpense(expense, claim);
-            	//Toast.makeText(this, expense.getCurr(), Toast.LENGTH_SHORT).show();///test////////
-            	
             	startActivity(intent);   
             	
             	expenseAdaptor.notifyDataSetChanged();

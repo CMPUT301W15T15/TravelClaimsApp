@@ -172,7 +172,7 @@ public class ExpenseList {
 
 
 	/**
-	 * set linstener
+	 * set listener
 	 */
 	public void setListeners() {
 		this.listeners = new ArrayList<Listener>();
