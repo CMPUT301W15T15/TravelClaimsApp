@@ -23,6 +23,11 @@ import java.util.Date;
 
 import android.net.Uri;
 
+/**
+ * 
+ * @author Henry
+ *This is the expense model class that creates the expense object
+ */
 public class Expense implements Listenable{
 	protected int price;
 	protected transient ArrayList<Listener> listeners;
@@ -34,6 +39,7 @@ public class Expense implements Listenable{
 	protected String expenseCat;
 	protected Uri expenseReceipt;
 	protected int flag=0;
+
 
 	/*public Expense(String expenseName, String expenseDes, String expenseCurr, String expenseCat, Date expenseDate, Integer expenseCost) {
 		this.expenseName = expenseName;

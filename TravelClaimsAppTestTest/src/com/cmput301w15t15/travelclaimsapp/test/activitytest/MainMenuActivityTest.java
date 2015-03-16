@@ -39,6 +39,9 @@ public class MainMenuActivityTest extends
 	private EditText password;
 	private Activity activity;
 	
+	/**
+	 * Tests for the MainMenuActivity.
+	 */
 	public MainMenuActivityTest() {
 		super(MainMenuActivity.class);
 	}
@@ -62,6 +65,9 @@ public class MainMenuActivityTest extends
 	
 	//Test for valid inputs
 	//Test Case: MainMenuActivityTest#1
+		/**
+		 * Tests to see if real user can login.
+		 */
 		public void testRealUser(){
 			ActivityMonitor activityMonitor = new ActivityMonitor(AddClaimActivity.class.getName(), null, false);
 			instrumentation.addMonitor(activityMonitor);
@@ -83,6 +89,9 @@ public class MainMenuActivityTest extends
 		
 		//Test for valid inputs
 		//Test Case: MainMenuActivityTest#2
+			/**
+			 * Ensures fake user cannot login
+			 */
 			public void testFakeUser(){
 				ActivityMonitor activityMonitor = new ActivityMonitor(AddClaimActivity.class.getName(), null, false);
 				instrumentation.addMonitor(activityMonitor);
@@ -104,6 +113,9 @@ public class MainMenuActivityTest extends
 			
 			//Test for valid inputs
 			//Test Case: MainMenuActivityTest#3
+				/**
+				 * Ensure wrong passwords cannot login.
+				 */
 				public void testRealUserBadPass(){
 					ActivityMonitor activityMonitor = new ActivityMonitor(AddClaimActivity.class.getName(), null, false);
 					instrumentation.addMonitor(activityMonitor);
@@ -125,6 +137,9 @@ public class MainMenuActivityTest extends
 
 				//Test for valid inputs
 				//Test Case: MainMenuActivityTest#4
+					/**
+					 * Ensures no given password, will not login. 
+					 */
 					public void testRealUserNoPass(){
 						ActivityMonitor activityMonitor = new ActivityMonitor(AddClaimActivity.class.getName(), null, false);
 						instrumentation.addMonitor(activityMonitor);
@@ -146,6 +161,9 @@ public class MainMenuActivityTest extends
 
 					//Test for valid inputs
 					//Test Case: MainMenuActivityTest#5
+						/**
+						 * Ensures if a real password is given, there is no login without the username.
+						 */
 						public void testRealUserNoUsername(){
 							ActivityMonitor activityMonitor = new ActivityMonitor(AddClaimActivity.class.getName(), null, false);
 							instrumentation.addMonitor(activityMonitor);

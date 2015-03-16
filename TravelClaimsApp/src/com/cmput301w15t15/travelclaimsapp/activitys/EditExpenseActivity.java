@@ -131,12 +131,12 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 
 
 		
-
 		//expense show test
 //		expense.setDate(expenseDate);
 //		Date date = new Date();
 //		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
 //		System.out.println(dateFormat.format(date));
+
 
 		if(expense.getCost()!=null){
 			expenseCostInput.setText(expense.getCost().toString());
@@ -276,13 +276,20 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
     	String claimName= claim.getName();
     	intent.putExtra("claimName", claimName);
 
+
 //    	String expenseName=expense.getName();
 //    	intent.putExtra("expenseName", expenseName);
 //    	expenseAdaptor.notifyDataSetChanged();
 
+    	String expenseName=expense.getName();
+    	intent.putExtra("expenseName", expenseName);
+    	//expenseAdaptor.notifyDataSetChanged();
+
+
     	//ClaimListController.addExpense(expense, claim);
     	//Toast.makeText(this, expense.getCurr(), Toast.LENGTH_SHORT).show();///test////////
     	
+
     	startActivity(intent);   
     	
     }
@@ -308,6 +315,7 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 			}catch(ParseException e){
 				//do nothing 
 			}
+
 		case R.id.Edit_Expense_Cost:
 			try{
 				expense.setCost(Integer.parseInt(expenseCostInput.getText().toString()));
@@ -319,6 +327,8 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 			}
 		case R.id.Edit_Expense_Description:
 			expense.setDes(expenseDescriptionInput.getText().toString());
+
+
 		case R.id.CurrencySpinner:
 			//try{
 			expense.setCurr(currencySpinner.getSelectedItem().toString());
@@ -326,6 +336,7 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 		case R.id.CategorySpinner:
 			expense.setCat(categorySpinner.getSelectedItem().toString());
 			//}
+
 		}
 	}
 

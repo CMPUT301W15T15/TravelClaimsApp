@@ -23,7 +23,15 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 
 
+/**
+ * Used to check connectivity to the internet through different methods
+ *
+ */
 public class InternetController {
+	/**
+	 * Checks for internet connection by checking for IP Address. Needs to be run in its own thread.
+	 * @return
+	 */
 	public static boolean isInternetAvailable() {
         try {
             InetAddress ipAddr = InetAddress.getByName("http://cmput301.softwareprocess.es:8080/cmput301w15t15/");
@@ -45,6 +53,11 @@ public class InternetController {
     }
 
 
+	/**
+	 * Checks for internet connection by checking network activity. Needs activity context to be run.
+	 * @param context
+	 * @return
+	 */
 	public static boolean isInternetAvailable2(Context context) {
 		return ((ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE)).getActiveNetworkInfo() != null;
 	}

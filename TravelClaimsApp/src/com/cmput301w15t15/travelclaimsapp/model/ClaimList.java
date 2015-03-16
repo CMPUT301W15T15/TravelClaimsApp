@@ -23,7 +23,7 @@ import java.util.Collections;
 import com.cmput301w15t15.travelclaimsapp.ClaimListComparator;
 
 /**
- * 
+ * Used to store claims and listeners for a user. Expenses are also stored within.
  *
  */
 public class ClaimList implements Listenable{
@@ -31,6 +31,9 @@ public class ClaimList implements Listenable{
 	protected transient ArrayList<Listener> listeners;
 
 	
+	/**
+	 * Initializes new claim and listener arrays.
+	 */
 	public ClaimList(){
 		claimList = new ArrayList<Claim>();
 		listeners = new ArrayList<Listener>();
@@ -38,6 +41,7 @@ public class ClaimList implements Listenable{
 	}
 	
 	/**
+	 * Adds a claim to the list.
 	 * @param claim1
 	 * 
 	 */
@@ -52,6 +56,11 @@ public class ClaimList implements Listenable{
 		notifyListeners();
 	}
 
+	/**
+	 * Gets a claim from a given name.
+	 * @param name
+	 * @return
+	 */
 	public Claim getClaim(String name) {
 		if (claimList==null){
 			return null;
@@ -68,15 +77,27 @@ public class ClaimList implements Listenable{
 
 
 
+	/**
+	 * Removes given claim.
+	 * @param claim1
+	 */
 	public void removeClaim(Claim claim1) {
 		claimList.remove(claim1);
 		notifyListeners();
 	}
 
+	/**
+	 * Returns number of claims in the list.
+	 * @return
+	 */
 	public int size() {
 		return claimList.size();
 	}
 
+	/**
+	 * Returns an arraylist of claims.
+	 * @return
+	 */
 	public ArrayList<Claim> toArrayList() {
 		
 		return this.claimList;
@@ -89,6 +110,9 @@ public class ClaimList implements Listenable{
 		return null;
 	}
 	
+	/**
+	 * Sorts claims in claimlist by starting date.
+	 */
 	public void sort() {
 		if (claimList.size()!=0){
 			Collections.sort(claimList, new ClaimListComparator());

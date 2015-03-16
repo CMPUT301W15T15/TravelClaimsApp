@@ -49,7 +49,7 @@ public class ClaimListController {
 	static public void initClaimListController() {
 		if(claimList == null){
 			claimList = FileManager.getSaver().loadClaimLFromFile();
-//			claimList.sort();
+			claimList.sort();
 			claimList.addListener(new Listener() {
 				
 				@Override
@@ -79,7 +79,7 @@ public class ClaimListController {
 	static public ClaimList getClaimList() {
 		if(claimList == null){
 			claimList = FileManager.getSaver().loadClaimLFromFile();
-//			claimList.sort();
+			claimList.sort();
 			claimList.setListeners();
 			claimList.addListener(new Listener() {
 				
