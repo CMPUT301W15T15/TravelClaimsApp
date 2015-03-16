@@ -67,7 +67,7 @@ public class ClaimList implements Listenable{
 		}
 		else{
 			for (int i=0; i<claimList.size();i++){
-				if (claimList.get(i).toString().equals(name)){
+				if (claimList.get(i).getName().equals(name)){
 					return claimList.get(i);
 				}
 			}
