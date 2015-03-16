@@ -34,6 +34,11 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+/**
+ * ExpenseListAdaptor is used to show expense values in th
+ * @author bzhou2
+ *
+ */
 public class ExpenseListAdaptor extends ArrayAdapter<Expense> {
 	
 	private Context context;
@@ -43,6 +48,13 @@ public class ExpenseListAdaptor extends ArrayAdapter<Expense> {
 	private Filter tagFilter;
 	
 	
+	/**
+	 * class constructor
+	 * 
+	 * @param context
+	 * @param resource
+	 * @param expenses
+	 */
 	public ExpenseListAdaptor(Context context, int resource, ArrayList<Expense> expenses) {
 		super(context, resource, expenses);
 		this.context = context;
@@ -50,6 +62,11 @@ public class ExpenseListAdaptor extends ArrayAdapter<Expense> {
 		this.expenseList = expenses;
 	}
 
+	/**
+	 *  
+	 *  get format view for one row of expense list
+	 * @see android.widget.ArrayAdapter#getView(int, android.view.View, android.view.ViewGroup)
+	 */
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		View rowView = convertView;
@@ -88,6 +105,12 @@ public class ExpenseListAdaptor extends ArrayAdapter<Expense> {
 	}
 	
 
+	/**
+	 * 
+	 * all format view for expenselist view
+	 * @author bzhou2
+	 *
+	 */
 	private static class ViewHolder {
         public TextView expenseName;
 		public TextView expenseDate;

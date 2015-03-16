@@ -150,14 +150,29 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 		super.onStart();
 		expenseNameInput.setText(expenseName);
 
+		
+
+		
+		//expense show test
+//		expense.setDate(expenseDate);
+//		Date date = new Date();
+//		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+//		System.out.println(dateFormat.format(date));
+
+
+		if (expense.getDes()!=null){
+			expenseDescriptionInput.setText(expense.getDes().toString());
+		}
+
 		if(expense.getCost()!=null){
 			expenseCostInput.setText(expense.getCost().toString());
 		}
 		if(expense.getDate()!=null){
 			date.setText(sdf.format(expense.getDate()));
 		}
-		setEditable();
+
 		expenseNameInput.addTextChangedListener(this);
+
 		
 		if(expense.getDate()!=null){
 			date.setText(sdf.format(expense.getDate()));
@@ -171,7 +186,18 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 		categorySpinner.setAdapter(categoryAdaptor);
 
 		
+
+		//int currPos=getIndex(currencySpinner,expense.getCurr());
+		
+		//currencySpinner.setSelection(getIndex(currencySpinner, expense.getCurr()));
+		
+		//currencySpinner.setSelection(currencyAdaptor.getPosition(expense.getCurr()));
+		
+		
+		
+
 		currencySpinner.setSelection(currencyAdaptor.getPosition(expense.getCurr()));
+
 		categorySpinner.setSelection(categoryAdaptor.getPosition(expense.getCat()));
 		
 		setEditable();
@@ -180,6 +206,10 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 		//date.addTextChangedListener(this);
 	}
 
+	/**
+	 * check if the status of a claim is editable 
+	 * 
+	 */
 	private void setEditable() {
 		// TODO Auto-generated method stub
 		if(claim.getStatus().equals("Submitted") || claim.getStatus().equals("Approved")){
@@ -360,4 +390,25 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 	public void onTextChanged(CharSequence s, int start, int before, int count) {
 		
 	}
+	
+	
+	/**
+	 * help to find the position of one value in spinner list
+	 * @param spinner
+	 * @param myString
+	 * @return
+	 */
+	private int getIndex(Spinner spinner, String myString){
+
+        int index = 0;
+
+        for (int i=0;i<spinner.getCount();i++){
+            if (spinner.getItemAtPosition(i).equals(myString)){
+                index = i;
+            }
+        }
+        return index;
+    }
+	
+	
 }

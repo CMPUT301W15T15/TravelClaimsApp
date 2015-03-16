@@ -22,6 +22,12 @@ import java.util.Comparator;
 import com.cmput301w15t15.travelclaimsapp.model.Expense;
 import com.cmput301w15t15.travelclaimsapp.model.ExpenseList;
 
+/**
+ * 
+ * ExpenseListComparator is used sort expenseList by date
+ * @author bzhou2
+ *
+ */
 public class ExpenseListComparator implements Comparator<Expense> {
 
 //	public ExpenseListComparator() {

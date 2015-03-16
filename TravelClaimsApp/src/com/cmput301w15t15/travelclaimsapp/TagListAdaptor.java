@@ -41,6 +41,13 @@ public class TagListAdaptor extends ArrayAdapter<Tag> {
 	private int resource;
 	private ArrayList<Tag> tagList;
 	
+	/**
+	 * 
+	 * class constructor
+	 * @param context
+	 * @param resource
+	 * @param tags
+	 */
 	public TagListAdaptor(Context context, int resource, ArrayList<Tag> tags) {
 		super(context, resource, tags);
 		this.context = context;
@@ -48,6 +55,10 @@ public class TagListAdaptor extends ArrayAdapter<Tag> {
 		this.tagList = tags;
 	}
 
+	/**
+	 * get format view for one row
+	 * @see android.widget.ArrayAdapter#getView(int, android.view.View, android.view.ViewGroup)
+	 */
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		View rowView = convertView;
@@ -75,6 +86,10 @@ public class TagListAdaptor extends ArrayAdapter<Tag> {
 	}
 	
 	
+	/**
+	 * all format views
+	 *
+	 */
 	private static class ViewHolder {
         public TextView tagName;
     }

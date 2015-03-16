@@ -20,6 +20,7 @@ package com.cmput301w15t15.travelclaimsapp.model;
 import java.util.ArrayList;
 
 
+
 /**
  * Destination object refers to a location and reason for travel
  *

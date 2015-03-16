@@ -15,6 +15,13 @@
  *You should have received a copy of the GNU General Public License
  *along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
+
+
+/**
+ * @author bzhou2
+ *
+ */
+
 package com.cmput301w15t15.travelclaimsapp.model;
 
 import java.util.ArrayList;
@@ -22,6 +29,7 @@ import java.util.Date;
 import java.util.Map;
 
 import android.R;
+
 
 public class Claim implements Listenable{
 	private Claim claim;

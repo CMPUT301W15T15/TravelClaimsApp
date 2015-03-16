@@ -23,6 +23,12 @@ import com.cmput301w15t15.travelclaimsapp.model.ExpenseList;
 import com.cmput301w15t15.travelclaimsapp.model.Expense;
 import com.cmput301w15t15.travelclaimsapp.model.Listener;
 
+/**
+ * get expenseList from file directly
+ *
+ * @author bzhou2
+ *
+ */
 public class ExpenseListController {
 	
 	private static ExpenseList expenseList = null;
@@ -71,6 +77,12 @@ public class ExpenseListController {
 	}
 	
 	
+	/**
+	 * 
+	 * add expense into expense list
+	 * (for now, deal it in claim controller)
+	 * @param expense
+	 */
 	public static void addExpense(Expense expense){
 		//to do in ClaimListController
 		
@@ -81,11 +93,22 @@ public class ExpenseListController {
 	
 	
 
+	/**
+	 * 
+	 * add expenses listener 
+	 * (for now, deal with it in claimController)
+	 * @param expense
+	 */
 	private static void addExpenseListener(Expense expense) {
 		//same
 	}
 
 
+	/**
+	 * get expenselist from internet
+	 * 
+	 * @return expenseList
+	 */
 	static public ExpenseList getExpenseListWithInternet(){
 		if (expenseList == null){
 			claimList = ClaimListController.getClaimList();
@@ -111,11 +134,19 @@ public class ExpenseListController {
 	}
 	
 
+	/**
+	 * add expense listener
+	 * @param expense2
+	 */
 	private static void addExpenseListeners(Expense expense2) {
 		// TODO Auto-generated method stub
 		
 	}
 	
+	/**
+	 * save to file
+	 * (for now, deal with it in claim controller)
+	 */
 	public static void save() {
 //		FileManager.getSaver().saveClaimLInFile(ClaimListController.getClaimList());
 //		FileManager.getSaver().saveClaimLInFile(ClaimListController.getClaimList());
