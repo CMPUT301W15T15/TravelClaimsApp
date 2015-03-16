@@ -290,12 +290,19 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 			}catch(ParseException e){
 				//do nothing 
 			}
-		case R.id.Edit_Expense_Cost:
-			try{
-				expense.setDate(sdf.parse(expenseCostInput.getText().toString()));
-			}catch(ParseException e){
-				//do nothing
-			}		
+//		case R.id.Edit_Expense_Cost:
+//			//try{
+//				expense.setCost(Integer.parseInt(expenseCostInput.getText().toString()));
+//			//}catch(ParseException e){
+//				//do nothing
+//			//}
+		case R.id.CurrencySpinner:
+			//try{
+				expense.setCurr(currencySpinner.getSelectedItem().toString());
+			//}catch(ParseException e){
+		case R.id.CategorySpinner:
+			expense.setCat(categorySpinner.getSelectedItem().toString());
+			//}
 		}
 	}
 
