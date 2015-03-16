@@ -305,6 +305,7 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 			}catch(ParseException e){
 				//do nothing 
 			}
+<<<<<<< HEAD
 		case R.id.Edit_Expense_Cost:
 			try{
 				expense.setCost(sdf.parse(expenseCostInput.getText().toString()));
@@ -315,6 +316,21 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 			try{
 				expense.setCurr(currencySpinner.getSelectedItemPosition());
 			}
+=======
+//		case R.id.Edit_Expense_Cost:
+//			//try{
+//				expense.setCost(Integer.parseInt(expenseCostInput.getText().toString()));
+//			//}catch(ParseException e){
+//				//do nothing
+//			//}
+		case R.id.CurrencySpinner:
+			//try{
+				expense.setCurr(currencySpinner.getSelectedItem().toString());
+			//}catch(ParseException e){
+		case R.id.CategorySpinner:
+			expense.setCat(categorySpinner.getSelectedItem().toString());
+			//}
+>>>>>>> 3ff5a1eaa0cb5afe6bb95b492a3a7bd02977ce4a
 		}
 	}
 
