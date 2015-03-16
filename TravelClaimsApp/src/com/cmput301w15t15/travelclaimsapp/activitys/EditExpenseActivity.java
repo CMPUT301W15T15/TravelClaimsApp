@@ -346,6 +346,7 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 
     	String expenseName=expense.getName();
     	intent.putExtra("expenseName", expenseName);
+    	Toast.makeText(this, expense.getDes(), Toast.LENGTH_SHORT).show();////
 
     	startActivity(intent);   
     }
@@ -376,7 +377,6 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 			}
 		case R.id.Edit_Expense_Description:
 			expense.setDes(expenseDescriptionInput.getText().toString());
-
 		}
 	}
 
