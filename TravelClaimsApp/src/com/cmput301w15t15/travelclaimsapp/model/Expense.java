@@ -36,6 +36,20 @@ public class Expense implements Listenable{
 	protected int flag=0;
 	
 
+<<<<<<< HEAD
+	/*public Expense(String expenseName, String expenseDes, String expenseCurr, String expenseCat, Date expenseDate, Integer expenseCost) {
+		this.expenseName = expenseName;
+		this.expenseDes = expenseDes;
+		this.expenseDate = expenseDate;
+		this.expenseCost = expenseCost;
+		this.expenseCurr = expenseCurr;
+		this.expenseCat = expenseCat;
+		this.listeners = new ArrayList<Listener>();
+	}*/
+	
+
+=======
+>>>>>>> 1bddf43c5708395354b2fa8cb205d52d967c8d29
 	public Expense(String expenseName){
 		this.expenseName = expenseName;
 		this.expenseCurr = null;

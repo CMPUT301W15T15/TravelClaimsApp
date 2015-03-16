@@ -65,6 +65,7 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 	private ExpenseList expenseList;
 	private ExpenseListAdaptor expenseListAdaptor;
 	private int expenseCost=0;
+	private ExpenseListAdaptor expenseAdaptor;
 	private String expenseDescription; 
 	private static EditText expenseNameInput;
 	private static EditText date;
@@ -126,13 +127,24 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 		// TODO Auto-generated method stub
 		super.onStart();
 		expenseNameInput.setText(expenseName);
+<<<<<<< HEAD
+=======
 
 		
+>>>>>>> 1bddf43c5708395354b2fa8cb205d52d967c8d29
 		//expense show test
 //		expense.setDate(expenseDate);
 //		Date date = new Date();
 //		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
 //		System.out.println(dateFormat.format(date));
+<<<<<<< HEAD
+
+		if(expense.getDate()!=null){
+			date.setText(sdf.format(expense.getDate()));
+		}
+		//setEditable();
+		expenseNameInput.addTextChangedListener(this);
+=======
 		////////////////////////////
 		
 		if(expense.getDate()!=null){
@@ -141,6 +153,7 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 
 		setEditable();
 		//expenseNameInput.addTextChangedListener(this);
+>>>>>>> 1bddf43c5708395354b2fa8cb205d52d967c8d29
 		//date.addTextChangedListener(this);
 	}
 
@@ -260,11 +273,17 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
     	Bundle bundle=new Bundle();
     	String claimName= claim.getName();
     	intent.putExtra("claimName", claimName);
+<<<<<<< HEAD
+    	String expenseName=expense.getName();
+    	intent.putExtra("expenseName", expenseName);
+    	expenseAdaptor.notifyDataSetChanged();
+=======
     	//ClaimListController.addExpense(expense, claim);
     	Toast.makeText(this, expense.getCurr(), Toast.LENGTH_SHORT).show();///test////////
     	
     	
     	
+>>>>>>> 1bddf43c5708395354b2fa8cb205d52d967c8d29
     	startActivity(intent);   
     	
     }
