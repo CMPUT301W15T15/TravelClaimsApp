@@ -328,7 +328,7 @@ public class FileManager {
 		}
 	}
 	
-	
+	// https://github.com/joshua2ua/AndroidElasticSearch/blob/master/src/ca/ualberta/ssrg/movies/es/ESMovieManager.java
 	/**
 	 * Gets content from an HTTP response
 	 */
@@ -344,7 +344,7 @@ public class FileManager {
 		return result.toString();
 	}
 
-	
+	// https://github.com/joshua2ua/AndroidElasticSearch/blob/master/src/ca/ualberta/ssrg/movies/es/ESMovieManager.java
 	/**
 	 * Gets rid of elastic search header and returns saved claimlist.
 	 * @param response
@@ -366,6 +366,7 @@ public class FileManager {
 		return null;
 	}
 	
+	// https://github.com/joshua2ua/AndroidElasticSearch/blob/master/src/ca/ualberta/ssrg/movies/es/ESMovieManager.java
 	/**
 	 * Gets rid of elastic search header and returns saved user.
 	 * @param response
