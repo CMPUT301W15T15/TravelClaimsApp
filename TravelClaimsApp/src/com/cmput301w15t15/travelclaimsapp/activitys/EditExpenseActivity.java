@@ -206,6 +206,10 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 		//date.addTextChangedListener(this);
 	}
 
+	/**
+	 * check if the status of a claim is editable 
+	 * 
+	 */
 	private void setEditable() {
 		// TODO Auto-generated method stub
 		if(claim.getStatus().equals("Submitted") || claim.getStatus().equals("Approved")){
@@ -388,6 +392,12 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 	}
 	
 	
+	/**
+	 * help to find the position of one value in spinner list
+	 * @param spinner
+	 * @param myString
+	 * @return
+	 */
 	private int getIndex(Spinner spinner, String myString){
 
         int index = 0;

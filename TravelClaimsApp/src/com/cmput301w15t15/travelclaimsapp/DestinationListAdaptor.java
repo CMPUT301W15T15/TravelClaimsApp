@@ -44,6 +44,12 @@ public class DestinationListAdaptor extends ArrayAdapter<Destination>{
 	private int resource;
 	private ArrayList<Destination> destList;
 	
+	/**
+	 * class contructor
+	 * @param context
+	 * @param resource
+	 * @param dests
+	 */
 	public DestinationListAdaptor(Context context, int resource, ArrayList<Destination> dests) {
 		super(context, resource, dests);
 		this.context = context;
@@ -51,6 +57,11 @@ public class DestinationListAdaptor extends ArrayAdapter<Destination>{
 		this.destList = dests;
 	}
 
+	/**
+	 * return format view for list viewing
+	 * 
+	 * @see android.widget.ArrayAdapter#getView(int, android.view.View, android.view.ViewGroup)
+	 */
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		View rowView = convertView;
@@ -79,6 +90,12 @@ public class DestinationListAdaptor extends ArrayAdapter<Destination>{
 	}
 	
 	
+	/**
+	 * 
+	 * all format view for destination list view
+	 * @author
+	 *
+	 */
 	private static class ViewHolder {
         public TextView destLocation;
         public TextView destReason;
