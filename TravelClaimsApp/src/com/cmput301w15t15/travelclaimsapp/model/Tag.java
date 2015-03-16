@@ -28,9 +28,6 @@ public class Tag implements Listenable{
 		this.listeners = new ArrayList<Listener>();
 	}
 
-	/**Set Tag Name
-	 * @param tagName
-	 */
 	public void setName(String tagName){
 		this.tagName=tagName;
 		notifyListeners();
@@ -38,17 +35,11 @@ public class Tag implements Listenable{
 	}
 	
 	
-	/**Return tagName to tagList
-	 * @return tagName
-	 */
 	public String getName() {
 		// TODO Auto-generated method stub
 		return this.tagName;
 	}
 
-	/**Changes tagName
-	 * @param tagName2
-	 */
 	public void rename(String tagName2) {
 		// TODO Auto-generated method stub
 		this.tagName=tagName2;

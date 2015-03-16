@@ -56,7 +56,7 @@ public class ExpenseList {
 	}
 	
 	/**
-	 * get expense list
+	 * get expense list (Collection mode)
 	 * @return expenseList
 	 */
 	public Collection<Expense> getExpenseList() {
@@ -64,10 +64,20 @@ public class ExpenseList {
 	
 	}
 	
+	/**
+	 * get Expense by index (ArrayList way)
+	 * @param index
+	 * @return
+	 */
 	public Expense getExpenseByIndex(int index){
 		return this.expenseList.get(index);
 	}
 	
+	/**
+	 * get expense by expense name
+	 * @param expenseName
+	 * @return
+	 */
 	public Expense getExpense(String expenseName) {
 		if (expenseList==null){
 			return null;
@@ -84,41 +94,72 @@ public class ExpenseList {
 	}
 	
 
+	/**
+	 * remove expense by expense name
+	 * @param expense1
+	 */
 	public void removeExpense(Expense expense1) {
 		// TODO Auto-generated method stub
 		this.expenseList.remove(expense1);
 		notifyListeners();
 	}
 	
+	/**
+	 * get the size of expense list
+	 * @return
+	 */
 	public int size() {
 		// TODO Auto-generated method stub
 		return this.expenseList.size();
 	}
 	
 	
+	/**
+	 * return expense list (ArrayList mode)
+	 * @return expenseList (ArrayList<Expense>)
+	 */
 	public ArrayList<Expense> toArrayList(){
 		return this.expenseList;
 		
 	}
 	
+	/**
+	 * get expenseList which contains the expenses without receipt
+	 * @return
+	 */
 	public ExpenseList noImageExpenseList(){
 		return null;
 	}
 
+	/**
+	 * Listener
+	 */
 	public void notifyListeners() {
 		for (Listener listener : listeners) {
 			listener.update();
 		}
 	}
 	
+	/**
+	 * add Listener
+	 * @param listener
+	 */
 	public void addListener(Listener listener) {
 		listeners.add(listener);
 	}
 	
+	/**
+	 * delete listener
+	 * @param listener
+	 */
 	public void deleteListener(Listener listener){
 		listeners.remove(listener);
 	}
 	
+	/**
+	 * get total cost of all expenses in the expense list
+	 * @return totalValue (int)
+	 */
 	public int getTotalValue(){
 		this.totalValue=0;
 		for (int i=0;i<this.expenseList.size();i++){
@@ -130,11 +171,17 @@ public class ExpenseList {
 
 
 
+	/**
+	 * set linstener
+	 */
 	public void setListeners() {
 		this.listeners = new ArrayList<Listener>();
 		
 	}
 
+	/**
+	 * sort expenseList: sort expense by date
+	 */
 	public void sort() {
 		// TODO Auto-generated method stub
 		Collections.sort(expenseList, new ExpenseListComparator());
