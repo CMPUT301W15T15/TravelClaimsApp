@@ -110,14 +110,20 @@ public class ExpenseListActivity extends Activity
         super.onCreateContextMenu(menu, v, menuInfo);
         getMenuInflater().inflate(R.menu.expense_context_menu, menu);
     }
-	
+	/** Function that is called when Search menu item is clicked
+	 * @author Henry
+	 * @param menu
+	 */
     public void SearchOption (MenuItem menu)
     {
     	Toast.makeText(this, "Going to Search", Toast.LENGTH_SHORT).show();
     	Intent intent = new Intent(ExpenseListActivity.this, SearchActivity.class);
     	startActivity(intent);
     }
-    
+    /**Function that is called when the "Sign Out" menu item is clicked
+	 * @author Henry
+	 * @param menu
+	 */
     public void SignOut(MenuItem menu)
     {
     	Toast.makeText(this, "Signing Out", Toast.LENGTH_SHORT).show();
@@ -125,6 +131,10 @@ public class ExpenseListActivity extends Activity
     	startActivity(intent);
     }
 
+    /**Function that is called when the "Add new Expense" Button is clicked in UI
+     * @author Henry
+     * @param view
+     */
     public void AddExpenseButton(View view)
     {
     	Toast.makeText(this, "Going to Add Expense", Toast.LENGTH_SHORT).show();

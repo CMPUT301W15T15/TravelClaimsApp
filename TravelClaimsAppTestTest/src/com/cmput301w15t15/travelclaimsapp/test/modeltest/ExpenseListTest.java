@@ -28,12 +28,19 @@ import junit.framework.TestCase;
 
 public class ExpenseListTest extends TestCase
 {
+	/**Test case that tests if a list we create is indeed created and empty
+	 * 
+	 */
 	public void testExpenseList()
 	{
 		ExpenseList expenseList = new ExpenseList();
 		Collection<Expense> expenses = (Collection<Expense>) expenseList.getExpenseList();
 		assertTrue("Empty Expense List", expenses.size() == 0);
 	}
+	/**Test case that tests that when an object is added to the expenseList
+	 * is it actually added and shows the correct number of items in the expenseList
+	 * 
+	 */
 	public void testAddExpense()
 	{
 		ExpenseList expenseList = new ExpenseList();
@@ -44,6 +51,10 @@ public class ExpenseListTest extends TestCase
 		assertTrue("expense List Size not big enough", expenses.size() == 1);
 		assertTrue("Test expense not contain", expenses.contains(testexpense));
 	}
+	/**Test case that tests that if an object is deleted from the list
+	 * is it actually deleted and shows the correct number of items in the list
+	 * 
+	 */
 	public void testRemoveExpense()
 	{
 		ExpenseList expenseList = new ExpenseList();

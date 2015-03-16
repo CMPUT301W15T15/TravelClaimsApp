@@ -131,14 +131,22 @@ public class AddClaimActivity extends Activity {
                 return super.onContextItemSelected(item);
         }
     }
-    
+    /** Function that is called when "Search" menu item is clicked
+	 * and switches to the searchactivity
+	 * @author Henry
+	 * @param menu
+	 */
     public void SearchOption (MenuItem menu)
     {
     	Toast.makeText(this, "Going to Search", Toast.LENGTH_SHORT).show();
     	Intent intent = new Intent(AddClaimActivity.this, SearchActivity.class);
     	startActivity(intent);
     }
-    
+    /**Function that is called when the "Sign Out" menu item is clicked
+	 * and switches to the mainscreenactivity
+	 * @author Henry
+	 * @param menu
+	 */
     public void SignOut(MenuItem menu)
     {
     	Toast.makeText(this, "Signing Out", Toast.LENGTH_SHORT).show();

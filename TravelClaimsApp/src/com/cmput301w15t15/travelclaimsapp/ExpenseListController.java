@@ -37,6 +37,9 @@ public class ExpenseListController {
 	}
 	
 	
+	/** Method that retrieves the expenseList 
+	 * @return expenseList
+	 */
 	public static ExpenseList getExpenseList(){
 		
 		
@@ -77,6 +80,7 @@ public class ExpenseListController {
 	
 	
 	
+
 	private static void addExpenseListener(Expense expense) {
 		//same
 	}

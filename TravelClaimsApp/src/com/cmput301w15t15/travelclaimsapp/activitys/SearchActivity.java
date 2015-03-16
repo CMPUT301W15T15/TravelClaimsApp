@@ -74,7 +74,11 @@ public class SearchActivity extends Activity
 		getMenuInflater().inflate(R.menu.search_activity, menu);
 		return true;
 	}
-	
+	/**Function that is called when the "Sign Out" menu item is clicked
+	 * and switches to the mainscreenactivity
+	 * @author Henry
+	 * @param menu
+	 */
 	public void SignOut(MenuItem menu)
     {
     	Toast.makeText(this, "Signing Out", Toast.LENGTH_SHORT).show();

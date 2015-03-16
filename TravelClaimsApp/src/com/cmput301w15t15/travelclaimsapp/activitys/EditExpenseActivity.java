@@ -200,7 +200,12 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 		//adapter.remove(adapter.getItem(info.position));
 		return true;
 	}
-	
+	//Retrieved on February 28, 2015 from http://developer.android.com/guide/topics/ui/controls/pickers.html
+	/**This method creates a new instance of datepickerfragment and the condition statements 
+	 * sets what date will be start date and which one is end
+	 * @author Henry
+	 * @param v
+	 */
 	public void showTruitonDatePickerDialog(View v)
 	{	
 		if (v==date){
@@ -212,6 +217,10 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 		newFragment.show(getSupportFragmentManager(), "datePicker");
 	}
 	
+	/**
+	 * @author Henry
+	 * This defines dialogfragment by using the onCreateDialog method
+	 */
 	public static class DatePickerFragment extends DialogFragment
     implements DatePickerDialog.OnDateSetListener {
 
@@ -250,6 +259,11 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 		});
 	}
 	
+	/** Function that is called when "Search" menu item is clicked
+	 * and switches to the searchactivity
+	 * @author Henry
+	 * @param menu
+	 */
 	public void SearchOption(MenuItem menu)
     {
     	Toast.makeText(this, "Going to Search", Toast.LENGTH_SHORT).show();
@@ -257,6 +271,11 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
     	startActivity(intent);
     }
 	
+	/**Function that is called when the "Sign Out" menu item is clicked
+	 * and switches to the mainscreenactivity
+	 * @author Henry
+	 * @param menu
+	 */
 	public void SignOut(MenuItem menu)
     {
     	Toast.makeText(this, "Signing Out", Toast.LENGTH_SHORT).show();
@@ -264,6 +283,11 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
     	startActivity(intent);
     }
 	
+	/** Function that is called when the "Ok" Button is clicked and switches 
+	 * to the ExpenseListActivity
+	 * @author Henry
+	 * @param view
+	 */
 	public void CreateExpense(View view)
     {
     	Toast.makeText(this, "Creating an expense", Toast.LENGTH_SHORT).show();

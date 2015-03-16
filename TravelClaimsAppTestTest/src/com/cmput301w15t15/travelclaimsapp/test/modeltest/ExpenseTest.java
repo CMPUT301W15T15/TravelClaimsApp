@@ -26,12 +26,20 @@ import com.cmput301w15t15.travelclaimsapp.model.Expense;
 
 public class ExpenseTest extends TestCase
 {
+	/**Test case that that tests whether or not the info enter in the expenseName
+	 * field is correct
+	 * 
+	 */
 	public void testExpenseName()
 	{
 		String expenseName = "expense1";
 		Expense expense = new Expense(expenseName);
 		assertTrue("Expense name is not equal", expenseName.equals(expense.getName()));
 	}
+	/**Test case that that tests whether or not the info enter in the expenseCost
+	 * field is correct
+	 * 
+	 */
 	public void testExpenseCost()
 	{
 		Integer expenseCost = 12;
@@ -39,6 +47,10 @@ public class ExpenseTest extends TestCase
 		expense.setCost(expenseCost);
 		assertTrue("Expense cost is not equal", expenseCost.equals(expense.getCost()));
 	}
+	/**Test case that that tests whether or not the info enter in the expenseCurr
+	 * field is correct
+	 * 
+	 */
 	public void testExpenseCurr()
 	{
 		String expenseCurr = "CAD";
@@ -46,6 +58,10 @@ public class ExpenseTest extends TestCase
 		expense.setCurr(expenseCurr);
 		assertTrue("Expense curr is not equal", expenseCurr.equals(expense.getCurr()));
 	}
+	/**Test case that that tests whether or not the info enter in the expenseDes
+	 * field is correct
+	 * 
+	 */
 	public void testExpenseDes()
 	{
 		String expenseDes = "hello";
@@ -53,6 +69,10 @@ public class ExpenseTest extends TestCase
 		expense.setDes(expenseDes);
 		assertTrue("Expense curr is not equal", expenseDes.equals(expense.getDes()));
 	}
+	/**Test case that that tests whether or not the info enter in the expenseCat
+	 * field is correct
+	 * 
+	 */
 	public void testExpenseCat()
 	{
 		String expenseCat = "Air fare";
@@ -60,6 +80,10 @@ public class ExpenseTest extends TestCase
 		expense.setCat(expenseCat);
 		assertTrue("Expense curr is not equal", expenseCat.equals(expense.getCat()));
 	}
+	/**Test case that that tests whether or not the info enter in the expenseDate
+	 * field is correct
+	 * 
+	 */
 	public void testExpenseDate() throws ParseException
 	{
 		SimpleDateFormat fmt = new SimpleDateFormat("dd-MM-yyyy");

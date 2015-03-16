@@ -44,7 +44,11 @@ public class ApproverActivity extends Activity {
 		getMenuInflater().inflate(R.menu.approver, menu);
 		return true;
 	}
-	
+	/** Function that is called when "Search" menu item is clicked
+	 * and switches to the searchactivity
+	 * @author Henry
+	 * @param menu
+	 */
     public void SearchOption (MenuItem menu)
     {
     	Toast.makeText(this, "Going to search", Toast.LENGTH_SHORT).show();
