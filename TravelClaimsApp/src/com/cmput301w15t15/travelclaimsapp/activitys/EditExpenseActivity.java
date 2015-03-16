@@ -92,13 +92,13 @@ public class EditExpenseActivity extends FragmentActivity{
 		claim=claimList.getClaim(claimName);
 		expenseList=claim.getExpenseList();
 		expense=expenseList.getExpense(expenseName);
-		expenseCost = expense.getCost();
-		if (expense.getDes()!=null){
+		//expenseCost = expense.getCost();
+		/*if (expense.getDes()!=null){
 			expenseDescription = expense.getDes();
 		}
 		else{
 			expenseDescription="None";
-		}
+		}*/
 		set_on_click();
 	}
 	
