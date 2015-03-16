@@ -25,6 +25,11 @@ import java.util.Map;
 import com.cmput301w15t15.travelclaimsapp.ExpenseListComparator;
 
 
+/**
+ * @author Henry
+ * This the the expenseList model class that handles the expense List
+ *
+ */
 public class ExpenseList {
 	
 	private int totalValue;
