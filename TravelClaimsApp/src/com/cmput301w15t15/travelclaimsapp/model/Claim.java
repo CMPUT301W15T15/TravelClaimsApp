@@ -43,6 +43,10 @@ public class Claim implements Listenable{
 	private final String RETURNED = "Returned";
 	private final String APPROVED = "Approved";
 
+	/**
+	 * Claim constructor
+	 * @param string
+	 */
 	public Claim(String string) {
 		// TODO Auto-generated constructor stub
 		this.claimName=string;
@@ -55,11 +59,20 @@ public class Claim implements Listenable{
 	}
 
 	
+	/**
+	 * return Claim Name
+	 * @return
+	 */
 	public String getName() {
 		// TODO Auto-generated method stub
 		return this.claimName;
 	}
 	
+	
+	/**
+	 * set Claim Name
+	 * @param name
+	 */
 	public void setName(String name) {
 		// TODO Auto-generated method stub
 		this.claimName=name;
@@ -67,12 +80,20 @@ public class Claim implements Listenable{
 	}
 
 	
+	/**
+	 * return ExpenseList of one Claim
+	 * @return ExpenseList
+	 */
 	public ExpenseList getExpenseList(){
 		return expenseList;
 	}
 	
 
 
+	/**
+	 * set Claim Start Date
+	 * @param StartDate
+	 */
 	public void setStartDate(Date date) {
 		// TODO Auto-generated method stub
 		
@@ -82,6 +103,10 @@ public class Claim implements Listenable{
 	}
 	
 
+	/**
+	 * set Claim end Date
+	 * @param EndDate
+	 */
 	public void setEndDate(Date date) {
 		// TODO Auto-generated method stub
 		this.endDate=date;
@@ -89,6 +114,11 @@ public class Claim implements Listenable{
 		
 	}
 	
+	
+	/**
+	 * get Claim Start Date
+	 * @return startDate
+	 */
 	public Date getStartDate() {
 		// TODO Auto-generated method stub
 		return this.startDate;
@@ -99,6 +129,10 @@ public class Claim implements Listenable{
 
 
 	
+	/**
+	 * get Claim End Date
+	 * @return endDate
+	 */
 	public Date getEndDate() {
 		// TODO Auto-generated method stub
 		return this.endDate;
@@ -107,6 +141,7 @@ public class Claim implements Listenable{
 	
 	
 	/**
+	 * set Claim Tag, no duplicate
 	 * @param tagName
 	 */
 	public void setTag(String tagName)
@@ -123,6 +158,10 @@ public class Claim implements Listenable{
 		notifyListeners();
 	}
 
+	/**
+	 * remove one Tag for a Claim
+	 * @param tagName
+	 */
 	public void removeTag(String tagName){
 		this.tag=new Tag(tagName);
 		if (tagList.contains(tagName)){
@@ -132,6 +171,10 @@ public class Claim implements Listenable{
 	}
 	
 	
+	/**
+	 * get a list of all Tags for a Claim
+	 * @return
+	 */
 	public TagList getTagList(){
 		
 		return tagList;
@@ -139,6 +182,10 @@ public class Claim implements Listenable{
 	}
 	
 	
+	/**
+	 * get total cost for one claim
+	 * @return 
+	 */
 	public int getTotalValue(){
 		
 		return this.expenseList.getTotalValue();
@@ -147,11 +194,19 @@ public class Claim implements Listenable{
 
 
 
+	/**
+	 * get a list of destination for one claim
+	 * @return
+	 */
 	public DestinationList getDestinationList() {
 		
 		return this.destinationList;
 	}
 	
+	/**
+	 * get one claim status
+	 * @return claimStatus
+	 */
 	public String getClaimStatus() {
 		return this.status;
 	}
@@ -167,11 +222,19 @@ public class Claim implements Listenable{
 //	}
 
 
+	/**
+	 * set claim status
+	 * @param status
+	 */
 	public void setStatus(String status) {
 		this.status=status;
 		notifyListeners();
 	}
 
+	/**
+	 * check claim status and return true if status is INPROGRESS or RETURNED
+	 * @return
+	 */
 	public boolean isEditable() {
 		if(claim.getClaimStatus().equals(INPROGRESS) || claim.getStatus().equals(RETURNED)){
 			return true;
@@ -181,28 +244,48 @@ public class Claim implements Listenable{
 	}
 
 	
+	/**
+	 * set claim comment
+	 * @param string
+	 */
 	public void setComment(String string) {
 		// TODO Auto-generated method stub
 		this.comment=string;
 		notifyListeners();
 	}
 
+	/**
+	 * get claim comment
+	 * @return
+	 */
 	public String getComment() {
 		// TODO Auto-generated method stub
 		
 		return this.comment;
 	}
 
+	/**
+	 * set claim approver
+	 * @param approverId
+	 */
 	public void setApprover(int approverId) {
 		// TODO Auto-generated method stub
 		this.approveId=approverId;
 	
 	}
 
+	/**
+	 * get claim approver ID
+	 * @return approverId
+	 */
 	public int getApprover(){
 		return this.approveId;	
 	}
 
+	/**
+	 * get claim status
+	 * @return claimStatus
+	 */
 	public String getStatus() {
 		// TODO Auto-generated method stub
 		return this.status;
@@ -212,6 +295,10 @@ public class Claim implements Listenable{
 	
 	
 
+	/**
+	 * add one expense for one claim into its expenseList
+	 * @param expense
+	 */
 	public void addExpense(Expense expense)
 	{
 
@@ -221,6 +308,10 @@ public class Claim implements Listenable{
 		
 	}
 
+	/**
+	 * remove one expense for one claim from its expenseList
+	 * @param expense
+	 */
 	public void removeExpense(Expense expense)
 	{
 
@@ -229,6 +320,11 @@ public class Claim implements Listenable{
 		notifyListeners();
 	}
 
+	/**
+	 * return one expense of a claim 
+	 * @param expenseName (string)
+	 * @return expense (Expense)
+	 */
 	public Expense getExpense(String string)
 	{
 
@@ -239,21 +335,34 @@ public class Claim implements Listenable{
 	}
 	
 	
+	/* (non-Javadoc)
+	 * @see com.cmput301w15t15.travelclaimsapp.model.Listenable#notifyListeners()
+	 */
 	public void notifyListeners() {
 		for (Listener listener : listeners) {
 			listener.update();
 		}
 	}
 	
+	/* (non-Javadoc)
+	 * @see com.cmput301w15t15.travelclaimsapp.model.Listenable#addListener(com.cmput301w15t15.travelclaimsapp.model.Listener)
+	 */
 	public void addListener(Listener listener) {
 		listeners.add(listener);
 	}
 	
+	/* (non-Javadoc)
+	 * @see com.cmput301w15t15.travelclaimsapp.model.Listenable#deleteListener(com.cmput301w15t15.travelclaimsapp.model.Listener)
+	 */
 	public void deleteListener(Listener listener){
 		listeners.remove(listener);
 	}
 
 	
+	/**
+	 * get claimant Id
+	 * @return claimantID (int)
+	 */
 	public int getClaimantId()
 	{
 	
@@ -261,17 +370,28 @@ public class Claim implements Listenable{
 	}
 
 	
+	/**
+	 * set Claimant ID
+	 * @param claimantId
+	 */
 	public void setClaimantId(int claimantId)
 	{
 	
 		this.claimantId = claimantId;
 	}
 
-	public String toString(){
-		return this.claimName;
-	}
+//	/* 
+//	 * 
+//	 * @see java.lang.Object#toString()
+//	 */
+//	public String toString(){
+//		return this.claimName;
+//	}
 
 
+	/* (non-Javadoc)
+	 * @see com.cmput301w15t15.travelclaimsapp.model.Listenable#setListeners()
+	 */
 	@Override
 	public void setListeners() {
 		this.listeners = new ArrayList<Listener>();

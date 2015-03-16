@@ -53,6 +53,10 @@ public class Expense implements Listenable{
 	
 
 
+	/**
+	 * expense constructor
+	 * @param expenseName
+	 */
 	public Expense(String expenseName){
 		this.expenseName = expenseName;
 		this.expenseCurr = null;
@@ -60,61 +64,113 @@ public class Expense implements Listenable{
 		this.listeners = new ArrayList<Listener>();
 	}
 
+	/**
+	 * get one expense value (same as getCost) (may change soon)
+	 * @return
+	 */
 	public int getValue(){
 		return price;
 	}
 	
+	/**
+	 * set one expense cost (same as setCost) (may change soon)
+	 * @param value
+	 */
 	public void setValue(int value){
 		this.price=value;
 	}
 	
+	/**
+	 * set expense flagged
+	 */
 	public void addFlag(){
 		this.flag=1;
 		notifyListeners();
 		// TODO
 	}
 	
+	/**
+	 * get flag status
+	 * @return
+	 */
 	public int getFlag(){
 		return this.flag;
 	}
 	
+	/**
+	 * set expense name
+	 * @param expenseName
+	 */
 	public void setName(String expenseName) {
 		this.expenseName = expenseName;
 		notifyListeners();
 	}
 	
+	/**
+	 * get expense name
+	 * @return
+	 */
 	public String getName() {
 		return this.expenseName;
 	}
 	
+	/**
+	 * set cost of a expense (same as setValue) (may change soon)
+	 * @param expenseCost
+	 */
 	public void setCost(int expenseCost){
 		this.expenseCost = expenseCost;
 		notifyListeners();
 	}
 	
+	/**
+	 * get expense cost (same as getValue) (may change soon)
+	 * @return expenseCost
+	 */
 	public Integer getCost()
 	{
 		return this.expenseCost;
 	}
 	
+	/**
+	 * set expense cost currency
+	 * @param expenseCurr
+	 */
 	public void setCurr(String expenseCurr)
 	{
 		this.expenseCurr = expenseCurr;
 		notifyListeners();
 	}
 	
+	/**
+	 * get expense currency
+	 * @return expenseCurr(String)
+	 */
 	public String getCurr(){
 		return this.expenseCurr;
 	}
 	
+	/**
+	 * set expense catogary
+	 * @param expenseCat
+	 */
 	public void setCat(String expenseCat){
 		this.expenseCat = expenseCat;
 		notifyListeners();
 	}
+	
+	/**
+	 * get expense category
+	 * @return
+	 */
 	public String getCat(){
 		return this.expenseCat;
 	}
 
+	/**
+	 * remove one expense flag
+	 * 
+	 */
 	public void removeFlag()
 	{
 		this.flag=0;
@@ -123,62 +179,120 @@ public class Expense implements Listenable{
 		//return false;
 	}
 	
-//	public boolean emptyFlag(){
-//		return true;
-//	}
+	/**
+	 * return true if expense has no flag
+	 * @return
+	 */
+	public boolean emptyFlag(){
+		if(this.flag==0){
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
 
 
+	/**
+	 * set expense receipt
+	 * @param expenseReceipt
+	 */
 	public void takeReceipt(Uri expenseReceipt) {
 		this.expenseReceipt = expenseReceipt;
 	}
 	
 
+	/**
+	 * get expense receipt
+	 * @return expenseReceipt (Uri)
+	 */
 	public Uri getReceipt() {
 		// TODO Auto-generated method stub
 		return this.expenseReceipt;
 	}
 	
+	/**
+	 * delete recepit from one expense
+	 * 
+	 */
 	public void deleteReceipt() {
 		this.expenseReceipt = null;
 		
 	}
 	
+	/**
+	 * return true if expense has no receipt
+	 * @return boolean
+	 */
 	public boolean emptyReceipt() {
-		return false;
+		if (this.expenseReceipt == null){
+		return true;
+		}
+		else{
+			return false;
+		}
 	}
 
+	/**
+	 * get expense start date
+	 * @return
+	 */
 	public Date getDate() {
 		return this.expenseDate;
 	}
 
+	/**
+	 * set expense date
+	 * @param expenseDate
+	 */
 	public void setDate(Date expenseDate) {
 		this.expenseDate = expenseDate;
 		notifyListeners();
 	}
 
+	/**
+	 * set expense description
+	 * @param expenseDes
+	 */
 	public void setDes(String expenseDes) {
 		this.expenseDes = expenseDes;
 		notifyListeners();
 	}
 
+	/**
+	 * get expense description
+	 * @return expenseDes (string)
+	 */
 	public String getDes() {
 		return this.expenseDes;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.cmput301w15t15.travelclaimsapp.model.Listenable#notifyListeners()
+	 */
 	public void notifyListeners() {
 		for (Listener listener : listeners) {
 			listener.update();
 		}
 	}
 	
+	/* (non-Javadoc)
+	 * @see com.cmput301w15t15.travelclaimsapp.model.Listenable#addListener(com.cmput301w15t15.travelclaimsapp.model.Listener)
+	 */
 	public void addListener(Listener listener) {
 		listeners.add(listener);
 	}
 	
+	/* (non-Javadoc)
+	 * @see com.cmput301w15t15.travelclaimsapp.model.Listenable#deleteListener(com.cmput301w15t15.travelclaimsapp.model.Listener)
+	 */
 	public void deleteListener(Listener listener){
 		listeners.remove(listener);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.cmput301w15t15.travelclaimsapp.model.Listenable#setListeners()
+	 */
 	@Override
 	public void setListeners() {
 		this.listeners = new ArrayList<Listener>();

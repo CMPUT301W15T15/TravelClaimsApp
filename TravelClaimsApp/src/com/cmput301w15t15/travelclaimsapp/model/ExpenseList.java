@@ -37,16 +37,28 @@ public class ExpenseList {
 	protected transient ArrayList<Listener> listeners;
 	protected ArrayList<Expense> expenseList;
 	
+	/**
+	 * expenseList contructor
+	 * 
+	 */
 	public ExpenseList(){
 		this.expenseList = new ArrayList<Expense>();
 		this.listeners = new ArrayList<Listener>();
 	}
 	
+	/**
+	 * add expense into expense list
+	 * @param expense1
+	 */
 	public void addExpense(Expense expense1) {
 		this.expenseList.add(expense1);
 		notifyListeners();
 	}
 	
+	/**
+	 * get expense list
+	 * @return expenseList
+	 */
 	public Collection<Expense> getExpenseList() {
 		return this.expenseList;
 	
