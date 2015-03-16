@@ -151,7 +151,7 @@ public class Expense implements Listenable{
 	}
 	
 	/**
-	 * set expense catogary
+	 * set expense category
 	 * @param expenseCat
 	 */
 	public void setCat(String expenseCat){
