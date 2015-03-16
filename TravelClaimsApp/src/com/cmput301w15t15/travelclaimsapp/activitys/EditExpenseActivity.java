@@ -127,24 +127,22 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 		// TODO Auto-generated method stub
 		super.onStart();
 		expenseNameInput.setText(expenseName);
-<<<<<<< HEAD
-=======
 
 		
->>>>>>> 1bddf43c5708395354b2fa8cb205d52d967c8d29
+
 		//expense show test
 //		expense.setDate(expenseDate);
 //		Date date = new Date();
 //		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
 //		System.out.println(dateFormat.format(date));
-<<<<<<< HEAD
+
 
 		if(expense.getDate()!=null){
 			date.setText(sdf.format(expense.getDate()));
 		}
 		//setEditable();
 		expenseNameInput.addTextChangedListener(this);
-=======
+
 		////////////////////////////
 		
 		if(expense.getDate()!=null){
@@ -153,7 +151,6 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 
 		setEditable();
 		//expenseNameInput.addTextChangedListener(this);
->>>>>>> 1bddf43c5708395354b2fa8cb205d52d967c8d29
 		//date.addTextChangedListener(this);
 	}
 
@@ -273,17 +270,16 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
     	Bundle bundle=new Bundle();
     	String claimName= claim.getName();
     	intent.putExtra("claimName", claimName);
-<<<<<<< HEAD
+
     	String expenseName=expense.getName();
     	intent.putExtra("expenseName", expenseName);
-    	expenseAdaptor.notifyDataSetChanged();
-=======
+    	//expenseAdaptor.notifyDataSetChanged();
+
     	//ClaimListController.addExpense(expense, claim);
     	Toast.makeText(this, expense.getCurr(), Toast.LENGTH_SHORT).show();///test////////
     	
     	
-    	
->>>>>>> 1bddf43c5708395354b2fa8cb205d52d967c8d29
+
     	startActivity(intent);   
     	
     }
@@ -311,10 +307,14 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 			}
 		case R.id.Edit_Expense_Cost:
 			try{
-				expense.setDate(sdf.parse(expenseCostInput.getText().toString()));
+				expense.setCost(sdf.parse(expenseCostInput.getText().toString()));
 			}catch(ParseException e){
 				//do nothing
 			}		
+		case R.id.CurrencySpinner:
+			try{
+				expense.setCurr(currencySpinner.getSelectedItemPosition());
+			}
 		}
 	}
 
