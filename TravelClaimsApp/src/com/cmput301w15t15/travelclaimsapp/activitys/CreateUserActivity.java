@@ -33,6 +33,11 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
+/**
+ * CreateUserAcivity is used for creating a new User and pushing them to the server.
+ * 
+ * Can only be entered with an internet connection.
+ */
 public class CreateUserActivity extends Activity {
 
 	/**

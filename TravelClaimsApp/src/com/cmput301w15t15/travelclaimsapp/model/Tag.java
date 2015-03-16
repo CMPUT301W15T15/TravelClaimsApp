@@ -18,15 +18,27 @@
 package com.cmput301w15t15.travelclaimsapp.model;
 
 import java.util.ArrayList;
-
+/**
+ * 
+ * @author chris xinchao wang
+ *This is the tag model class that creates the tag object
+ */
 public class Tag implements Listenable{
 	protected String tagName;
 	private transient ArrayList<Listener> listeners;
-	
+	/**
+	 * Tag constructor
+	 * @param tagName1
+	 */
 	public Tag(String tagName1){
 		this.tagName=tagName1;
 		this.listeners = new ArrayList<Listener>();
 	}
+	/**
+	 * initialize tagName
+	 * @param tagName
+	 */
+	
 
 	public void setName(String tagName){
 		this.tagName=tagName;
@@ -35,21 +47,32 @@ public class Tag implements Listenable{
 	}
 	
 	
+	/**
+	 * return tagName
+	 * @return
+	 */
 	public String getName() {
 		// TODO Auto-generated method stub
 		return this.tagName;
 	}
-
+/**
+ * change the name of tag
+ * @param tagName2
+ */
 	public void rename(String tagName2) {
 		// TODO Auto-generated method stub
 		this.tagName=tagName2;
 		notifyListeners();
 	}
-
+/**
+ * convert tagName in Tag to String
+ */
 	public String toString(){
 		return tagName;
 	}
-	
+	/**
+	 * notifyListeners and update data
+	 */
 	@Override
 	public void notifyListeners() {
 		for(Listener listener : listeners){
@@ -57,19 +80,25 @@ public class Tag implements Listenable{
 		}
 		
 	}
-
+/**
+ * add listener to listeners.
+ */
 	@Override
 	public void addListener(Listener listener) {
 		this.listeners.add(listener);
 		
 	}
-
+/**
+ * initialize listener
+ */
 	@Override
 	public void setListeners() {
 		this.listeners = new ArrayList<Listener>();
 		
 	}
-
+/**
+ * delete listener from listener
+ */
 	@Override
 	public void deleteListener(Listener listener) {
 		this.listeners.remove(listener);

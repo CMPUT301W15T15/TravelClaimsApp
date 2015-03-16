@@ -17,6 +17,8 @@
  *along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
+// https://github.com/joshua2ua/AndroidElasticSearch/blob/master/src/ca/ualberta/ssrg/movies/es/data/SearchHit.java
+
 package com.cmput301w15t15.travelclaimapp.elasticsearch;
 
 public class SearchHit<T> {

@@ -22,30 +22,29 @@ import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+import com.cmput301w15t15.travelclaimsapp.FileManager;
+import com.cmput301w15t15.travelclaimsapp.UserController;
 import com.cmput301w15t15.travelclaimsapp.model.User;
 
 import android.test.AndroidTestCase;
 
-/**
- * Tests for User class.
- *
- */
-public class UserTest extends AndroidTestCase {
-	private User user1;
-	private User user2;
-	
+public class UserControllerTest extends AndroidTestCase {
+
 	
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
 
 	}
+	
+	
+
 	//test: UserTest#1
 	/**
-	 * Ensures users can be added.
+	 * Ensures user added to a file, is the same returned for the controller.
 	 * @throws IOException
 	 */
-	public void testAddUser() throws IOException{
+	public void testgetUser() throws IOException{
 		String name1 = "Jon";
 		String pass1 = "dog";
 		
@@ -66,44 +65,12 @@ public class UserTest extends AndroidTestCase {
 			e.printStackTrace();
 		}
 		
-		user1 = new User(name1, passHash);
+		User user1 = new User(name1, passHash);
 		
-		assertTrue("user1 was added", user1.getUsername().equals(name1));
-		assertFalse("user2 was not added", user1 == user2);
-		assertTrue("user1 is not an Approver", user1.isApprover()==false);
-	}
-	
-
-	//test: UserTest#4
-	/**
-	 * Ensures approvers can be added.
-	 * @throws IOException
-	 */
-	public void testAddUserApprover() throws IOException{
-		String name1 = "Shelby";
-		String pass1 = "Sunshine";
-		Boolean isApprover = true;
+		FileManager.getSaver().saveUserInFile(user1);
+		User checkUser = FileManager.getSaver().loadUserFromFile();
+		User checkUser2 = UserController.getUser();
 		
-		MessageDigest md = null;
-		byte[] passHash = null;
-		
-		try {
-			md = MessageDigest.getInstance("SHA-256");
-		} catch (NoSuchAlgorithmException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		
-		try {
-			passHash = md.digest(pass1.getBytes("UTF-8"));
-		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		user1 = new User(name1, passHash, isApprover);
-		
-		assertTrue("user1 was added", user1.getUsername().equals(name1));
-		assertFalse("user1 is an approver", user1.isApprover() == false);
+		assertTrue("getUser works", checkUser2.equals(checkUser));
 	}
 }

@@ -21,12 +21,18 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 
-
+/**
+ * Used to store tags and listeners for a user. 
+ * @author chri xinchao swang
+ *
+ */
 public class TagList implements Listenable{
 	//private String tagListName;
 	protected ArrayList<Tag> tagList;
 	private transient ArrayList<Listener> listeners;
-	
+	/**
+	 * TagList constructor
+	 */
 	public TagList(){
 		tagList=new ArrayList<Tag>();
 		this.listeners = new ArrayList<Listener>();
@@ -37,27 +43,43 @@ public class TagList implements Listenable{
 		this.tagListName=tagListName;
 	}
 	*******************/
-	
+	/**
+	 * add new tag to tagList
+	 * @param tag
+	 */
 	public void addTag(Tag tag) {
 		this.tagList.add(tag);
 		notifyListeners();
 	}
-
+/**
+ * create tagList and return tagList
+ * @return
+ */
 	public ArrayList<Tag> toArrayList(){
 		return this.tagList;
 	}
-
+/**
+ * return the size of a TagList
+ * @return
+ */
 	public int size() {
 		// TODO Auto-generated method stub
 		return tagList.size();
 	}
-
+/**
+ * delete a tag from a tagList
+ * @param tag
+ */
 	public void removeTag(Tag tag) {
 		tagList.remove(tag);
 		notifyListeners();
 		
 	}
-	
+/**
+ * check if the tagList has a certain tag	
+ * @param tagName
+ * @return true for the tagList has the certain tag; false for the tagList does not contain the certain tag
+ */
 	
 	public boolean contains(String tagName){
 		if (tagList.size()==0){
@@ -74,7 +96,11 @@ public class TagList implements Listenable{
 		
 	}
 	
-	
+	/**
+	 *get the tag from calling the tagName
+	 * @param tagName
+	 * @return null:does not have the certain tag or size of tagList is 0; certain tag.
+	 */
 	public Tag getTag(String tagName)
 	{
 
@@ -93,7 +119,11 @@ public class TagList implements Listenable{
 
 	}
 
-
+/**
+ * rename tagName from a TagList
+ * @param tagName
+ * @param newTagName
+ */
 	public void renameTag(String tagName, String newTagName)
 	{
 
@@ -105,6 +135,9 @@ public class TagList implements Listenable{
 		notifyListeners();
 		
 	}
+	/**
+	 * notifyListeners and update data
+	 */
 	@Override
 	public void notifyListeners() {
 		for(Listener listener : listeners){
@@ -112,19 +145,25 @@ public class TagList implements Listenable{
 		}
 		
 	}
-
+	/**
+	 * add listener to listeners.
+	 */
 	@Override
 	public void addListener(Listener listener) {
 		this.listeners.add(listener);
 		
 	}
-
+	/**
+	 * initialize listener
+	 */
 	@Override
 	public void setListeners() {
 		this.listeners = new ArrayList<Listener>();
 		
 	}
-
+	/**
+	 * delete listener from listener
+	 */
 	@Override
 	public void deleteListener(Listener listener) {
 		this.listeners.remove(listener);
