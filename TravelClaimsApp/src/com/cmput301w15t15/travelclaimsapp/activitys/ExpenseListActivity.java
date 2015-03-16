@@ -24,6 +24,7 @@ import com.cmput301w15t15.travelclaimsapp.FileManager;
 import com.cmput301w15t15.travelclaimsapp.R;
 import com.cmput301w15t15.travelclaimsapp.R.layout;
 import com.cmput301w15t15.travelclaimsapp.R.menu;
+import com.cmput301w15t15.travelclaimsapp.model.Claim;
 import com.cmput301w15t15.travelclaimsapp.model.Expense;
 import com.cmput301w15t15.travelclaimsapp.model.ExpenseList;
 
@@ -45,7 +46,7 @@ public class ExpenseListActivity extends Activity
 	private ExpenseListAdaptor expenseAdaptor;
 	private ExpenseList expenseList;
 	private ListView expenseListView;
-	
+	private String claimName;
 	
 	/* (non-Javadoc)
 	 * @see android.app.Activity#onCreate(android.os.Bundle)
@@ -57,7 +58,7 @@ public class ExpenseListActivity extends Activity
 		Intent intent=new Intent();
 		//Bundle b=new Bundle();
 		//b=this.getIntent().getExtras();
-		String claimName=this.getIntent().getExtras().getString("claimName");
+		claimName=this.getIntent().getExtras().getString("claimName");
 		setContentView(R.layout.activity_expense_list);
 		FileManager.initializeSaver(this);
 		//registerForContextMenu(findViewById(R.id.CurrentExpenseList));
@@ -127,7 +128,23 @@ public class ExpenseListActivity extends Activity
     public void AddExpenseButton(View view)
     {
     	Toast.makeText(this, "Going to Add Expense", Toast.LENGTH_SHORT).show();
+    	
+    	//startActivity(intent); 
+    	
+    	
+    	int i = expenseList.size();
+    	while(ClaimListController.getClaimList().getClaim(claimName).getExpense("Expense"+i)!=null){
+    		i++;
+    	}
+    	Expense expense = new Expense("Expense"+i);
+		ClaimListController.getClaimList().getClaim(claimName).addExpense(expense);
+		
+    	Toast.makeText(this, "Creating a Expense", Toast.LENGTH_SHORT).show();
     	Intent intent = new Intent(ExpenseListActivity.this, EditExpenseActivity.class);
+    	//Intent intent = new Intent(AddClaimActivity.this, EditClaimActivity.class);
+    	//attach claim name to intent and start activity
+    	intent.putExtra("claimName",claimName );
+    	intent.putExtra("expenseName", expense.getName());
     	startActivity(intent);   
     }
     
@@ -146,6 +163,7 @@ public class ExpenseListActivity extends Activity
             	Bundle bundle=new Bundle();
             	String expenseName= expense.getName();
             	intent.putExtra("expenseName",expenseName);
+            	intent.putExtra("claimName", claimName);
             	
             	expenseAdaptor.notifyDataSetChanged();
             	return true;

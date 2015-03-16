@@ -63,13 +63,16 @@ public class EditExpenseActivity extends FragmentActivity{
 	private int expenseCost=0;
 	private String expenseDescription; 
 	private static EditText expenseNameInput;
-	private static EditText Date;
+	private static EditText date;
 	private static EditText expenseCostInput;
 	private static EditText expenseDescriptionInput;
 	private static Spinner currencySpinner;
 	private static Spinner categorySpinner;
 	private SimpleDateFormat sdf; 
 	private static boolean Start;
+	private String expenseName;
+	private String claimName;
+	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -77,29 +80,34 @@ public class EditExpenseActivity extends FragmentActivity{
 		
 		
 		setContentView(R.layout.activity_edit_expense);
-		String expenseName=this.getIntent().getExtras().getString("expenseName");
-		sdf = new SimpleDateFormat("MM/dd/yyyy",Locale.CANADA);
 		
-		Date = (EditText) findViewById(R.id.Edit_Expense_Date);
+		sdf = new SimpleDateFormat("MM/dd/yyyy",Locale.CANADA);
+		expenseName=this.getIntent().getExtras().getString("expenseName");
+		claimName=this.getIntent().getExtras().getString("claimName");
+		date = (EditText) findViewById(R.id.Edit_Expense_Date);
+		
 		expenseNameInput=(EditText) findViewById(R.id.Edit_Expense_Name);
 		expenseCostInput=(EditText) findViewById(R.id.Edit_Expense_Cost);
 		expenseDescriptionInput=(EditText) findViewById(R.id.Edit_Expense_Description);
 		currencySpinner = (Spinner) findViewById(R.id.CurrencySpinner);
 		categorySpinner=(Spinner) findViewById(R.id.CategorySpinner);
+		
 		//String expenseName= getIntent().getExtras().getString("expenseName");
-		String claimName= getIntent().getExtras().getString("claimName");
+		//String claimName= getIntent().getExtras().getString("claimName");
 		claimList = ClaimListController.getClaimList();
 		claim=claimList.getClaim(claimName);
 		expenseList=claim.getExpenseList();
 		expense=expenseList.getExpense(expenseName);
-		expenseCost = expense.getCost();
-		if (expense.getDes()!=null){
-			expenseDescription = expense.getDes();
-		}
-		else{
-			expenseDescription="None";
-		}
+		//expenseCost = expense.getCost();
+//		if (expense.getDes()!=null){
+//			expenseDescription = expense.getDes();
+//		}
+//		else{
+//			expenseDescription="None";
+//		}
 		set_on_click();
+		//registerForContextMenu(findViewById(R.id.));
+		//registerForContextMenu(findViewById(R.id.edit_claim_taglist));
 	}
 	
 	@Override
@@ -108,10 +116,10 @@ public class EditExpenseActivity extends FragmentActivity{
 
 		// TODO Auto-generated method stub
 		super.onStart();
-		//expenseNameInput.setText(expense.getName());
-		/*if(expense.getDate()!=null){
-			Date.setText(sdf.format(expense.getDate()));
-		}*/
+		expenseNameInput.setText(expenseName);
+		if(expense.getDate()!=null){
+			date.setText(sdf.format(expense.getDate()));
+		}
 		//setEditable();
 	}
 
@@ -142,7 +150,7 @@ public class EditExpenseActivity extends FragmentActivity{
 	
 	public void showTruitonDatePickerDialog(View v)
 	{	
-		if (v==Date){
+		if (v==date){
 			Start=true;
 		}else{
 			Start=false;
@@ -171,13 +179,13 @@ public class EditExpenseActivity extends FragmentActivity{
 		public void onDateSet(DatePicker view, int year, int month, int day) 
 		{
 			// Do something with the date chosen by the user
-			Date.setText((month+1) + "/" + day + "/" + year);
+			date.setText((month+1) + "/" + day + "/" + year);
 		}	
 	}
 	
 	private void set_on_click()
 	{
-		Date.setOnClickListener(new View.OnClickListener() {
+		date.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) 
 			{
@@ -213,5 +221,5 @@ public class EditExpenseActivity extends FragmentActivity{
     	intent.putExtra("claimName", claimName);
     	startActivity(intent);   
     	
-    	}
+    }
 }
