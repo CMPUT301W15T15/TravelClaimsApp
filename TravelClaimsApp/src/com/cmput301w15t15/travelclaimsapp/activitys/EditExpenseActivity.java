@@ -50,6 +50,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.BounceInterpolator;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -115,7 +117,38 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 			expenseDescription="None";
 		}
 
+		currencySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+			@Override
+			public void onItemSelected(AdapterView<?> parent,View view, int position, long id){
+				expense.setCurr(parent.getItemAtPosition(position).toString());
+				//claimList.notifyListeners();
+			}
 
+			@Override
+			public void onNothingSelected(AdapterView<?> parent) {
+				// TODO Auto-generated method stub
+				
+			}
+		
+		});
+		
+		
+		categorySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+			@Override
+			public void onItemSelected(AdapterView<?> parent,View view, int position, long id){
+				expense.setCat(parent.getItemAtPosition(position).toString());
+				//claimList.notifyListeners();
+			}
+
+			@Override
+			public void onNothingSelected(AdapterView<?> parent) {
+				// TODO Auto-generated method stub
+				
+			}
+		
+		});
+		
+		
 		set_on_click();
 		//registerForContextMenu(findViewById(R.id.));
 		//registerForContextMenu(findViewById(R.id.edit_claim_taglist));
@@ -153,6 +186,20 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 			date.setText(sdf.format(expense.getDate()));
 		}
 
+		ArrayAdapter<CharSequence> currencyAdaptor=ArrayAdapter.createFromResource(this, R.array.CurrencyArray, android.R.layout.simple_spinner_dropdown_item);
+		currencySpinner.setAdapter(currencyAdaptor);
+		
+		
+		ArrayAdapter<CharSequence> categoryAdaptor=ArrayAdapter.createFromResource(this, R.array.CategoryArray, android.R.layout.simple_spinner_dropdown_item);
+		categorySpinner.setAdapter(categoryAdaptor);
+
+		
+		currencySpinner.setSelection(categoryAdaptor.getPosition(expense.getCurr()));
+		
+		
+		
+		categorySpinner.setSelection(categoryAdaptor.getPosition(expense.getCat()));
+		
 		setEditable();
 		//expenseNameInput.addTextChangedListener(this);
 
@@ -353,13 +400,13 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 			expense.setDes(expenseDescriptionInput.getText().toString());
 
 
-		case R.id.CurrencySpinner:
-			//try{
-			expense.setCurr(currencySpinner.getSelectedItem().toString());
-			//}catch(ParseException e){
-		case R.id.CategorySpinner:
-			expense.setCat(categorySpinner.getSelectedItem().toString());
-			//}
+//		case R.id.CurrencySpinner:
+//			try{
+//			expense.setCurr(currencySpinner.getSelectedItem().toString());
+//			}catch(ParseException e){
+//		case R.id.CategorySpinner:
+//			expense.setCat(categorySpinner.getSelectedItem().toString());
+//			//}
 
 		}
 	}
