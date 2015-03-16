@@ -100,11 +100,6 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 		currencySpinner = (Spinner) findViewById(R.id.CurrencySpinner);
 		categorySpinner=(Spinner) findViewById(R.id.CategorySpinner);
 		
-		
-		//String s = expenseCostInput.getText().toString();
-		
-		//String expenseName= getIntent().getExtras().getString("expenseName");
-		//String claimName= getIntent().getExtras().getString("claimName");
 		claimList = ClaimListController.getClaimList();
 		claim=claimList.getClaim(claimName);
 		expenseList=claim.getExpenseList();
@@ -126,7 +121,6 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 
 			@Override
 			public void onNothingSelected(AdapterView<?> parent) {
-				// TODO Auto-generated method stub
 				
 			}
 		
@@ -137,39 +131,23 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 			@Override
 			public void onItemSelected(AdapterView<?> parent,View view, int position, long id){
 				expense.setCat(parent.getItemAtPosition(position).toString());
-				//claimList.notifyListeners();
 			}
 
 			@Override
 			public void onNothingSelected(AdapterView<?> parent) {
-				// TODO Auto-generated method stub
 				
 			}
 		
 		});
-		
-		
 		set_on_click();
-		//registerForContextMenu(findViewById(R.id.));
-		//registerForContextMenu(findViewById(R.id.edit_claim_taglist));
 	}
 	
 	@Override
 	protected void onStart()
 	{
 
-		// TODO Auto-generated method stub
 		super.onStart();
 		expenseNameInput.setText(expenseName);
-
-
-		
-		//expense show test
-//		expense.setDate(expenseDate);
-//		Date date = new Date();
-//		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-//		System.out.println(dateFormat.format(date));
-
 
 		if(expense.getCost()!=null){
 			expenseCostInput.setText(expense.getCost().toString());
@@ -179,8 +157,6 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 		}
 		setEditable();
 		expenseNameInput.addTextChangedListener(this);
-
-		////////////////////////////
 		
 		if(expense.getDate()!=null){
 			date.setText(sdf.format(expense.getDate()));
@@ -240,10 +216,6 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 	
 	public boolean onContextItemSelected(MenuItem item) {
 		AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
-	
-		
-		
-	
 		//adapter.remove(adapter.getItem(info.position));
 		return true;
 	}
@@ -339,30 +311,15 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
     {
     	Toast.makeText(this, "Creating an expense", Toast.LENGTH_SHORT).show();
     	Intent intent = new Intent(EditExpenseActivity.this, ExpenseListActivity.class);
-//    	Bundle bundle=new Bundle();
-//    	bundle.putString("expenseName", this.expense.getName());
-//    	bundle.putInt("expenseCost", this.expenseCost);
-//    	bundle.putString("expenseDescription", this.expenseDescription);
+
     	Bundle bundle=new Bundle();
     	String claimName= claim.getName();
     	intent.putExtra("claimName", claimName);
 
-
-//    	String expenseName=expense.getName();
-//    	intent.putExtra("expenseName", expenseName);
-//    	expenseAdaptor.notifyDataSetChanged();
-
     	String expenseName=expense.getName();
     	intent.putExtra("expenseName", expenseName);
-    	//expenseAdaptor.notifyDataSetChanged();
-
-
-    	//ClaimListController.addExpense(expense, claim);
-    	//Toast.makeText(this, expense.getCurr(), Toast.LENGTH_SHORT).show();///test////////
-    	
 
     	startActivity(intent);   
-    	
     }
 
 	@Override
@@ -371,12 +328,8 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 		switch(getCurrentFocus().getId()){
 		case R.id.Edit_Expense_Name:
 			String newName = expenseNameInput.getText().toString();
-			//if length of name in edittext is 0 or if claim name is already in claimlist
-			//then do not save changes. Otherwise update the claim name
 			if(s.length() == 0 ){
 				Toast.makeText(this, "Expense name cannot be null", Toast.LENGTH_LONG).show();
-//			}else if(expense.getName()!=null){
-//				Toast.makeText(this, "Expense name cannot be duplicate of another claim", Toast.LENGTH_LONG).show();
 			}else{
 				expense.setName(expenseNameInput.getText().toString());
 			}
@@ -392,21 +345,9 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 				expense.setCost(Integer.parseInt(expenseCostInput.getText().toString()));
 			}catch(NumberFormatException e){
 				//do nothing
-//				if (expenseCostInput.getText().toString()!="Cost"){
-//				Toast.makeText(this, "Not Number", Toast.LENGTH_LONG).show();
-//				}
 			}
 		case R.id.Edit_Expense_Description:
 			expense.setDes(expenseDescriptionInput.getText().toString());
-
-
-//		case R.id.CurrencySpinner:
-//			try{
-//			expense.setCurr(currencySpinner.getSelectedItem().toString());
-//			}catch(ParseException e){
-//		case R.id.CategorySpinner:
-//			expense.setCat(categorySpinner.getSelectedItem().toString());
-//			//}
 
 		}
 	}
@@ -414,13 +355,11 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 	@Override
 	public void beforeTextChanged(CharSequence s, int start, int count,
 			int after) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void onTextChanged(CharSequence s, int start, int before, int count) {
-		// TODO Auto-generated method stub
 		
 	}
 }
