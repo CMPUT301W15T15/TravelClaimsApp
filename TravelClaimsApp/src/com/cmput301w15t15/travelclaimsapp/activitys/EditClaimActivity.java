@@ -63,8 +63,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 
+
 /**
- * Activity to handle editing claim 
+ *
  *
  */
 public class EditClaimActivity extends FragmentActivity implements TextWatcher {

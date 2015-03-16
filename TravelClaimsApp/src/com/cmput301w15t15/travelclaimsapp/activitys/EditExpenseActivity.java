@@ -161,7 +161,7 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 		// TODO Auto-generated method stub
 		super.onStart();
 		expenseNameInput.setText(expenseName);
-
+		
 
 		
 		//expense show test
@@ -171,16 +171,18 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 //		System.out.println(dateFormat.format(date));
 
 
+		if (expense.getDes()!=null){
+			expenseDescriptionInput.setText(expense.getDes().toString());
+		}
 		if(expense.getCost()!=null){
 			expenseCostInput.setText(expense.getCost().toString());
 		}
 		if(expense.getDate()!=null){
 			date.setText(sdf.format(expense.getDate()));
 		}
-		setEditable();
+
 		expenseNameInput.addTextChangedListener(this);
 
-		////////////////////////////
 		
 		if(expense.getDate()!=null){
 			date.setText(sdf.format(expense.getDate()));
@@ -194,7 +196,11 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 		categorySpinner.setAdapter(categoryAdaptor);
 
 		
-		currencySpinner.setSelection(categoryAdaptor.getPosition(expense.getCurr()));
+		//int currPos=getIndex(currencySpinner,expense.getCurr());
+		
+		//currencySpinner.setSelection(getIndex(currencySpinner, expense.getCurr()));
+		
+		currencySpinner.setSelection(currencyAdaptor.getPosition(expense.getCurr()));
 		
 		
 		
@@ -423,4 +429,19 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 		// TODO Auto-generated method stub
 		
 	}
+	
+	
+	private int getIndex(Spinner spinner, String myString){
+
+        int index = 0;
+
+        for (int i=0;i<spinner.getCount();i++){
+            if (spinner.getItemAtPosition(i).equals(myString)){
+                index = i;
+            }
+        }
+        return index;
+    }
+	
+	
 }

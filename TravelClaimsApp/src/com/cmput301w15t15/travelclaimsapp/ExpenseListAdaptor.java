@@ -34,6 +34,11 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+/**
+ * ExpenseListAdaptor is used to show expense values in th
+ * @author bzhou2
+ *
+ */
 public class ExpenseListAdaptor extends ArrayAdapter<Expense> {
 	
 	private Context context;

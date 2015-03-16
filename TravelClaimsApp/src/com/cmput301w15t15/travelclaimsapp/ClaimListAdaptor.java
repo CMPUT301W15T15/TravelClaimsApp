@@ -62,6 +62,7 @@ import android.widget.TextView;
  * @author searn
  *
  */
+
 public class ClaimListAdaptor extends ArrayAdapter<Claim>{
 
 	private Context context;
@@ -77,6 +78,7 @@ public class ClaimListAdaptor extends ArrayAdapter<Claim>{
 		this.claimList = claims;
 	}
 
+	
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		View rowView = convertView;

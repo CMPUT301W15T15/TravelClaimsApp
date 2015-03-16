@@ -41,6 +41,18 @@ import android.widget.ListView;
 import android.widget.Toast;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 
+
+/**
+ * @author bzhou2
+ *
+ */
+
+
+/**
+ * Activity to handle editing expense 
+ *
+ */
+
 public class ExpenseListActivity extends Activity
 {
 	private ExpenseListAdaptor expenseAdaptor;
@@ -82,6 +94,12 @@ public class ExpenseListActivity extends Activity
 
 	}
 
+	/**
+	 *  initialize activity valus
+	 * 
+	 * @author bzhou2
+	 * @see android.app.Activity#onStart()
+	 */
 	@Override
 	protected void onStart(){
 		super.onStart();
@@ -89,6 +107,11 @@ public class ExpenseListActivity extends Activity
 		
 	}
 	
+	/**
+	 * 
+	 * (non-Javadoc)
+	 * @see android.app.Activity#onResume()
+	 */
 	@Override
 	protected void onResume(){
 		super.onResume();
@@ -97,6 +120,10 @@ public class ExpenseListActivity extends Activity
 		
 	}
 	
+	/**
+	 *  (non-Javadoc)
+	 * @see android.app.Activity#onCreateOptionsMenu(android.view.Menu)
+	 */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu)
 	{
@@ -132,7 +159,7 @@ public class ExpenseListActivity extends Activity
     }
 
     /**Function that is called when the "Add new Expense" Button is clicked in UI
-     * @author Henry
+     * @author Henry Bo
      * @param view
      */
     public void AddExpenseButton(View view)
@@ -158,6 +185,10 @@ public class ExpenseListActivity extends Activity
     	startActivity(intent);   
     }
     
+	/**
+	 * save value anytime when you change values
+	 * @see android.app.Activity#onContextItemSelected(android.view.MenuItem)
+	 */
 	@Override
 	public boolean onContextItemSelected(MenuItem item)
 	{
