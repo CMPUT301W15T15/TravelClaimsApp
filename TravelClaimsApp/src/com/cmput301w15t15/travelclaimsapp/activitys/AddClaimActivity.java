@@ -106,7 +106,7 @@ public class AddClaimActivity extends Activity {
             	return true;
             case R.id.cmenu_submit_claim:
             	////////////
-            	//DO something to upload to elasticsearch server
+            	//DO something to upload to approver
             	///////////
             	claim.setStatus("Submitted");
             	claimAdaptor.notifyDataSetChanged();

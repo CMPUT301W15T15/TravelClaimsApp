@@ -73,7 +73,7 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 	private static EditText date;
 	private static EditText expenseCostInput;
 	private static EditText expenseDescriptionInput;
-	private static Spinner currencySpinner;
+	private Spinner currencySpinner;
 	private static Spinner categorySpinner;
 	private SimpleDateFormat sdf; 
 	private static boolean Start;
@@ -121,6 +121,7 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 			@Override
 			public void onItemSelected(AdapterView<?> parent,View view, int position, long id){
 				expense.setCurr(parent.getItemAtPosition(position).toString());
+				
 				//claimList.notifyListeners();
 			}
 
@@ -194,10 +195,7 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 		categorySpinner.setAdapter(categoryAdaptor);
 
 		
-		currencySpinner.setSelection(categoryAdaptor.getPosition(expense.getCurr()));
-		
-		
-		
+		currencySpinner.setSelection(currencyAdaptor.getPosition(expense.getCurr()));
 		categorySpinner.setSelection(categoryAdaptor.getPosition(expense.getCat()));
 		
 		setEditable();
