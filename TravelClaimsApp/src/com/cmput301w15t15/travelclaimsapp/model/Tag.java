@@ -23,19 +23,11 @@ public class Tag implements Listenable{
 	protected String tagName;
 	private transient ArrayList<Listener> listeners;
 	
-	/**
-	 * Tag constructor
-	 * @param tagName1
-	 */
 	public Tag(String tagName1){
 		this.tagName=tagName1;
 		this.listeners = new ArrayList<Listener>();
 	}
 
-	/**
-	 * set tag name
-	 * @param tagName
-	 */
 	public void setName(String tagName){
 		this.tagName=tagName;
 		notifyListeners();
@@ -43,28 +35,17 @@ public class Tag implements Listenable{
 	}
 	
 	
-	/**
-	 * get tag name
-	 * @return tagName (String)
-	 */
 	public String getName() {
 		// TODO Auto-generated method stub
 		return this.tagName;
 	}
 
-	/**
-	 * rename tag name
-	 * @param tagName2
-	 */
 	public void rename(String tagName2) {
 		// TODO Auto-generated method stub
 		this.tagName=tagName2;
 		notifyListeners();
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
 	public String toString(){
 		return tagName;
 	}
