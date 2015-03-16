@@ -41,6 +41,7 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -53,13 +54,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 
-public class EditExpenseActivity extends FragmentActivity {
+public class EditExpenseActivity extends FragmentActivity{
 	private Claim claim;
 	private ClaimList claimList;
 	private Expense expense;
 	private ExpenseList expenseList;
 	private ExpenseListAdaptor expenseListAdaptor;
-	private Integer expenseCost;
+	private int expenseCost=0;
 	private String expenseDescription; 
 	private static EditText expenseNameInput;
 	private static EditText Date;
@@ -91,8 +92,13 @@ public class EditExpenseActivity extends FragmentActivity {
 		claim=claimList.getClaim(claimName);
 		expenseList=claim.getExpenseList();
 		expense=expenseList.getExpense(expenseName);
-		//expenseCost = expense.getCost();
-		//expenseDescription = expense.getDes();
+		expenseCost = expense.getCost();
+		if (expense.getDes()!=null){
+			expenseDescription = expense.getDes();
+		}
+		else{
+			expenseDescription="None";
+		}
 		set_on_click();
 	}
 	
@@ -103,9 +109,9 @@ public class EditExpenseActivity extends FragmentActivity {
 		// TODO Auto-generated method stub
 		super.onStart();
 		//expenseNameInput.setText(expense.getName());
-		if(expense.getDate()!=null){
+		/*if(expense.getDate()!=null){
 			Date.setText(sdf.format(expense.getDate()));
-		}
+		}*/
 		//setEditable();
 	}
 
@@ -198,10 +204,13 @@ public class EditExpenseActivity extends FragmentActivity {
     {
     	Toast.makeText(this, "Creating an expense", Toast.LENGTH_SHORT).show();
     	Intent intent = new Intent(EditExpenseActivity.this, ExpenseListActivity.class);
+//    	Bundle bundle=new Bundle();
+//    	bundle.putString("expenseName", this.expense.getName());
+//    	bundle.putInt("expenseCost", this.expenseCost);
+//    	bundle.putString("expenseDescription", this.expenseDescription);
     	Bundle bundle=new Bundle();
-    	bundle.putString("expenseName", this.expense.getName());
-    	bundle.putInt("expenseCost", this.expenseCost);
-    	bundle.putString("expenseDescription", this.expenseDescription);
+    	String claimName= claim.getName();
+    	intent.putExtra("claimName", claimName);
     	startActivity(intent);   
     	
     	}
