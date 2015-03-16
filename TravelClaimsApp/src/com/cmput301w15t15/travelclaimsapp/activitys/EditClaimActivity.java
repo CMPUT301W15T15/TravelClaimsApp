@@ -139,6 +139,7 @@ public class EditClaimActivity extends FragmentActivity implements TextWatcher {
 		super.onResume();
 		//set rest of EditTexts if values exist 
 		destAdaptor.notifyDataSetChanged();
+		tagAdaptor.notifyDataSetChanged();
 	}
 
 	@Override
@@ -207,6 +208,7 @@ public class EditClaimActivity extends FragmentActivity implements TextWatcher {
             	tagAdaptor.notifyDataSetChanged();
             	return true;
             case R.id.cmenu_rename_tag:
+            	//create a Alert dialog for editing tag name
               	final TextView enterTag = new AutoCompleteTextView(this);
             	
             	enterTag.setHint("Enter tag");
@@ -334,19 +336,9 @@ public class EditClaimActivity extends FragmentActivity implements TextWatcher {
 	public void viewExpensesButton(View view)
     {
 		//need to make a expense 
-    	Toast.makeText(this, "Viewing Current Expenses", Toast.LENGTH_SHORT).show();
     	Intent intent = new Intent(EditClaimActivity.this, ExpenseListActivity.class);
-    	Bundle bundle=new Bundle();
     	String claimName= theClaim.getName();
     	intent.putExtra("claimName", claimName);
-    
-    	// making a expense to test
-    	//Expense expense1=new Expense("expense1");
-    	////////////////////
-    	
-    	//theClaim.addExpense(expense1);
-    	//bundle.putString("cliamName", claimName );
-    	//intent.putExtras(bundle);
     	startActivity(intent);   
     }
 
