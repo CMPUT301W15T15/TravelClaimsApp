@@ -17,22 +17,13 @@
  */
 package com.cmput301w15t15.travelclaimsapp.test.modeltest;
 
-
-import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
 import android.test.AndroidTestCase;
-
-import com.cmput301w15t15.travelclaimsapp.ClaimListController;
-import com.cmput301w15t15.travelclaimsapp.FileManager;
 import com.cmput301w15t15.travelclaimsapp.model.Claim;
 import com.cmput301w15t15.travelclaimsapp.model.ClaimList;
-
-
-import junit.framework.TestCase;
-
 
 
 /**
@@ -80,14 +71,10 @@ public class ClaimListTest extends AndroidTestCase{
 	 * test: AddClaimTest#3
 	 */
 	public void testAddClaimDuplicate(){
-		
-		
 		claimList.addClaim(new Claim("Claim4"));
 		claimList.addClaim(new Claim("Claim4"));
 		
 		assertEquals("Duplicate claimname add", 1, claimList.size());
-		
-		
 	}
 	/**
 	 * test: AddClaimTest#4
@@ -110,17 +97,11 @@ public class ClaimListTest extends AndroidTestCase{
 		claimList.addClaim(claim3);
 		claimList.addClaim(claim4);
 		
-		
-		
 		claimList.sort();
 		assertEquals("ClaimList not sorted", "Claim4",claimList.toArrayList().get(0).getName());
 		assertEquals("ClaimList not sorted", "Claim1",claimList.toArrayList().get(1).getName());
 		assertEquals("ClaimList not sorted", "Claim3",claimList.toArrayList().get(2).getName());
 		assertEquals("ClaimList not sorted", "Claim5",claimList.toArrayList().get(4).getName());
 	}
-	
-	
-	
-	
 	
 }

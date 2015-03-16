@@ -117,12 +117,14 @@ public class EditClaimActivityUITest extends
 		
 		
 	}
-
-
-
-	
 	/**
+	 * EditClaimActivityUITest#2
+	 * 
 	 * Test add destination dialog popup
+	 * 
+	 * TODO:
+	 * 	Currently does nothing, need to find a way
+	 * 	to check that a alert dialog has been created 
 	 */
 	public void testShowDestinationDialog(){
 		instrumentation.runOnMainSync(new Runnable() {
