@@ -34,9 +34,7 @@ public class Expense implements Listenable{
 	protected String expenseCat;
 	protected Uri expenseReceipt;
 	protected int flag=0;
-	
 
-<<<<<<< HEAD
 	/*public Expense(String expenseName, String expenseDes, String expenseCurr, String expenseCat, Date expenseDate, Integer expenseCost) {
 		this.expenseName = expenseName;
 		this.expenseDes = expenseDes;
@@ -48,8 +46,7 @@ public class Expense implements Listenable{
 	}*/
 	
 
-=======
->>>>>>> 1bddf43c5708395354b2fa8cb205d52d967c8d29
+
 	public Expense(String expenseName){
 		this.expenseName = expenseName;
 		this.expenseCurr = null;

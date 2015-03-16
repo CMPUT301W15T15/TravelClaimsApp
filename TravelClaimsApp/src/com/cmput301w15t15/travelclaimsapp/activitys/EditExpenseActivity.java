@@ -98,15 +98,16 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 		currencySpinner = (Spinner) findViewById(R.id.CurrencySpinner);
 		categorySpinner=(Spinner) findViewById(R.id.CategorySpinner);
 		
+		
+		//String s = expenseCostInput.getText().toString();
+		
 		//String expenseName= getIntent().getExtras().getString("expenseName");
 		//String claimName= getIntent().getExtras().getString("claimName");
 		claimList = ClaimListController.getClaimList();
 		claim=claimList.getClaim(claimName);
 		expenseList=claim.getExpenseList();
 		expense=expenseList.getExpense(expenseName);
-
 		expenseCost = expense.getCost();
-
 		if (expense.getDes()!=null){
 			expenseDescription = expense.getDes();
 		}
@@ -127,24 +128,25 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 		// TODO Auto-generated method stub
 		super.onStart();
 		expenseNameInput.setText(expenseName);
-<<<<<<< HEAD
-=======
+
 
 		
->>>>>>> 1bddf43c5708395354b2fa8cb205d52d967c8d29
+
 		//expense show test
 //		expense.setDate(expenseDate);
 //		Date date = new Date();
 //		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
 //		System.out.println(dateFormat.format(date));
-<<<<<<< HEAD
 
+		if(expense.getCost()!=null){
+			expenseCostInput.setText(expense.getCost().toString());
+		}
 		if(expense.getDate()!=null){
 			date.setText(sdf.format(expense.getDate()));
 		}
-		//setEditable();
+		setEditable();
 		expenseNameInput.addTextChangedListener(this);
-=======
+
 		////////////////////////////
 		
 		if(expense.getDate()!=null){
@@ -153,7 +155,7 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 
 		setEditable();
 		//expenseNameInput.addTextChangedListener(this);
->>>>>>> 1bddf43c5708395354b2fa8cb205d52d967c8d29
+
 		//date.addTextChangedListener(this);
 	}
 
@@ -273,17 +275,14 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
     	Bundle bundle=new Bundle();
     	String claimName= claim.getName();
     	intent.putExtra("claimName", claimName);
-<<<<<<< HEAD
-    	String expenseName=expense.getName();
-    	intent.putExtra("expenseName", expenseName);
-    	expenseAdaptor.notifyDataSetChanged();
-=======
+
+//    	String expenseName=expense.getName();
+//    	intent.putExtra("expenseName", expenseName);
+//    	expenseAdaptor.notifyDataSetChanged();
+
     	//ClaimListController.addExpense(expense, claim);
-    	Toast.makeText(this, expense.getCurr(), Toast.LENGTH_SHORT).show();///test////////
+    	//Toast.makeText(this, expense.getCurr(), Toast.LENGTH_SHORT).show();///test////////
     	
-    	
-    	
->>>>>>> 1bddf43c5708395354b2fa8cb205d52d967c8d29
     	startActivity(intent);   
     	
     }
@@ -293,13 +292,13 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 		// TODO Auto-generated method stub
 		switch(getCurrentFocus().getId()){
 		case R.id.Edit_Expense_Name:
-			String newName = s.toString();
+			String newName = expenseNameInput.getText().toString();
 			//if length of name in edittext is 0 or if claim name is already in claimlist
 			//then do not save changes. Otherwise update the claim name
 			if(s.length() == 0 ){
-				Toast.makeText(this, "Claim name cannot be null", Toast.LENGTH_LONG).show();
+				Toast.makeText(this, "Expense name cannot be null", Toast.LENGTH_LONG).show();
 //			}else if(expense.getName()!=null){
-//				Toast.makeText(this, "Claim name cannot be duplicate of another claim", Toast.LENGTH_LONG).show();
+//				Toast.makeText(this, "Expense name cannot be duplicate of another claim", Toast.LENGTH_LONG).show();
 			}else{
 				expense.setName(expenseNameInput.getText().toString());
 			}
@@ -309,15 +308,20 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 			}catch(ParseException e){
 				//do nothing 
 			}
-//		case R.id.Edit_Expense_Cost:
-//			//try{
-//				expense.setCost(Integer.parseInt(expenseCostInput.getText().toString()));
-//			//}catch(ParseException e){
-//				//do nothing
-//			//}
+		case R.id.Edit_Expense_Cost:
+			try{
+				expense.setCost(Integer.parseInt(expenseCostInput.getText().toString()));
+			}catch(NumberFormatException e){
+				//do nothing
+//				if (expenseCostInput.getText().toString()!="Cost"){
+//				Toast.makeText(this, "Not Number", Toast.LENGTH_LONG).show();
+//				}
+			}
+		case R.id.Edit_Expense_Description:
+			expense.setDes(expenseDescriptionInput.getText().toString());
 		case R.id.CurrencySpinner:
 			//try{
-				expense.setCurr(currencySpinner.getSelectedItem().toString());
+			expense.setCurr(currencySpinner.getSelectedItem().toString());
 			//}catch(ParseException e){
 		case R.id.CategorySpinner:
 			expense.setCat(categorySpinner.getSelectedItem().toString());

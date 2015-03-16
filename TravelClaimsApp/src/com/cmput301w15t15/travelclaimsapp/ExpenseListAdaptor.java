@@ -65,7 +65,8 @@ public class ExpenseListAdaptor extends ArrayAdapter<Expense> {
 	        viewHolder.expenseCategory= (TextView) rowView.findViewById(R.id.expenseAdaptor_category);
 	        viewHolder.expenseAmount = (TextView) rowView.findViewById(R.id.expenseAdaptor_amount);
 	        viewHolder.expenseDate = (TextView) rowView.findViewById(R.id.expenseAdaptor_date);
- 	        rowView.setTag(viewHolder);
+ 	        viewHolder.expenseName = (TextView) rowView.findViewById(R.id.expenseAdaptor_Name);
+	        rowView.setTag(viewHolder);
  	        
 		}else{
 			viewHolder = (ViewHolder) rowView.getTag();
@@ -74,9 +75,9 @@ public class ExpenseListAdaptor extends ArrayAdapter<Expense> {
         viewHolder.expenseCurrency.setText(expense.getCurr());
         viewHolder.expenseCategory.setText(expense.getCat());
         viewHolder.expenseAmount.setText(expense.getCost().toString());
+        viewHolder.expenseName.setText(expense.getName());
         
-        
-        SimpleDateFormat defaultExpenseDate = new SimpleDateFormat("mm/dd/yyyy",Locale.CANADA);
+        SimpleDateFormat defaultExpenseDate = new SimpleDateFormat("MM/dd/yyyy",Locale.CANADA);
         if(expense.getDate() == null){
         	viewHolder.expenseDate.setText("No Date");
         }else{
@@ -88,7 +89,8 @@ public class ExpenseListAdaptor extends ArrayAdapter<Expense> {
 	
 
 	private static class ViewHolder {
-        public TextView expenseDate;
+        public TextView expenseName;
+		public TextView expenseDate;
 		public TextView expenseAmount;
 		public TextView expenseCategory;
 		public TextView expenseCurrency;

@@ -158,12 +158,23 @@ public class ExpenseListActivity extends Activity
         switch (item.getItemId()) {
             case R.id.expenseListViewMenuEdit:
             	//expenseList.removeExpense(expense);
-            	Toast.makeText(this, "Viewing Current Expenses", Toast.LENGTH_SHORT).show();
+            	Toast.makeText(this, "Editing an expense", Toast.LENGTH_SHORT).show();
             	intent = new Intent(ExpenseListActivity.this, EditExpenseActivity.class);
+//            	Bundle bundle=new Bundle();
+//            	bundle.putString("expenseName", this.expense.getName());
+//            	bundle.putInt("expenseCost", this.expenseCost);
+//            	bundle.putString("expenseDescription", this.expenseDescription);
             	Bundle bundle=new Bundle();
-            	String expenseName= expense.getName();
-            	intent.putExtra("expenseName",expenseName);
             	intent.putExtra("claimName", claimName);
+            	intent.putExtra("expenseName", expense.getName());
+//            	String expenseName=expense.getName();
+//            	intent.putExtra("expenseName", expenseName);
+//            	expenseAdaptor.notifyDataSetChanged();
+
+            	//ClaimListController.addExpense(expense, claim);
+            	//Toast.makeText(this, expense.getCurr(), Toast.LENGTH_SHORT).show();///test////////
+            	
+            	startActivity(intent);   
             	
             	expenseAdaptor.notifyDataSetChanged();
             	return true;
