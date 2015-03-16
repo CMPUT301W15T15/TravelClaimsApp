@@ -26,8 +26,8 @@ import android.net.Uri;
 public class Expense implements Listenable{
 	protected int price;
 	protected transient ArrayList<Listener> listeners;
-	protected String expenseDes;
-	protected String expenseName;
+	protected String expenseDes=null;
+	protected String expenseName=null;
 	protected Date expenseDate;
 	protected int expenseCost=0;
 	protected String expenseCurr;
@@ -35,18 +35,10 @@ public class Expense implements Listenable{
 	protected Uri expenseReceipt;
 	protected int flag=0;
 	
-	public Expense(String expenseName, String expenseDes, String expenseCurr, String expenseCat, Date expenseDate, Integer expenseCost) {
-		this.expenseName = expenseName;
-		this.expenseDes = expenseDes;
-		this.expenseDate = expenseDate;
-		this.expenseCost = expenseCost;
-		this.expenseCurr = expenseCurr;
-		this.expenseCat = expenseCat;
-		this.listeners = new ArrayList<Listener>();
-	}
-	
 	public Expense(String expenseName){
 		this.expenseName = expenseName;
+		this.expenseCurr = null;
+		this.expenseCat = null;
 		this.listeners = new ArrayList<Listener>();
 	}
 

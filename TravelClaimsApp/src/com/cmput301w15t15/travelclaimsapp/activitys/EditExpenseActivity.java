@@ -19,6 +19,7 @@ package com.cmput301w15t15.travelclaimsapp.activitys;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 import com.cmput301w15t15.travelclaimsapp.ClaimListController;
@@ -41,7 +42,9 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
+import android.text.Editable;
 import android.text.TextWatcher;
+import android.text.format.DateFormat;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -54,7 +57,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 
-public class EditExpenseActivity extends FragmentActivity{
+public class EditExpenseActivity extends FragmentActivity implements TextWatcher {
 	private Claim claim;
 	private ClaimList claimList;
 	private Expense expense;
@@ -72,6 +75,7 @@ public class EditExpenseActivity extends FragmentActivity{
 	private static boolean Start;
 	private String expenseName;
 	private String claimName;
+	private Date expenseDate;
 	
 	
 	@Override
@@ -84,8 +88,8 @@ public class EditExpenseActivity extends FragmentActivity{
 		sdf = new SimpleDateFormat("MM/dd/yyyy",Locale.CANADA);
 		expenseName=this.getIntent().getExtras().getString("expenseName");
 		claimName=this.getIntent().getExtras().getString("claimName");
-		date = (EditText) findViewById(R.id.Edit_Expense_Date);
 		
+		date = (EditText) findViewById(R.id.Edit_Expense_Date);
 		expenseNameInput=(EditText) findViewById(R.id.Edit_Expense_Name);
 		expenseCostInput=(EditText) findViewById(R.id.Edit_Expense_Cost);
 		expenseDescriptionInput=(EditText) findViewById(R.id.Edit_Expense_Description);
@@ -98,13 +102,13 @@ public class EditExpenseActivity extends FragmentActivity{
 		claim=claimList.getClaim(claimName);
 		expenseList=claim.getExpenseList();
 		expense=expenseList.getExpense(expenseName);
-		//expenseCost = expense.getCost();
-//		if (expense.getDes()!=null){
-//			expenseDescription = expense.getDes();
-//		}
-//		else{
-//			expenseDescription="None";
-//		}
+		expenseCost = expense.getCost();
+		if (expense.getDes()!=null){
+			expenseDescription = expense.getDes();
+		}
+		else{
+			expenseDescription="None";
+		}
 		set_on_click();
 		//registerForContextMenu(findViewById(R.id.));
 		//registerForContextMenu(findViewById(R.id.edit_claim_taglist));
@@ -117,10 +121,20 @@ public class EditExpenseActivity extends FragmentActivity{
 		// TODO Auto-generated method stub
 		super.onStart();
 		expenseNameInput.setText(expenseName);
-		if(expense.getDate()!=null){
-			date.setText(sdf.format(expense.getDate()));
-		}
+		
+		//expense show test
+		expense.setDate(expenseDate);
+		Date date = new Date();
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+		System.out.println(dateFormat.format(date));
+		////////////////////////////
+		
+//		if(expense.getDate()!=null){
+//			date.setText(sdf.format(expense.getDate()));
+//		}
 		//setEditable();
+		expenseNameInput.addTextChangedListener(this);
+		//date.addTextChangedListener(this);
 	}
 
 	@Override
@@ -179,7 +193,10 @@ public class EditExpenseActivity extends FragmentActivity{
 		public void onDateSet(DatePicker view, int year, int month, int day) 
 		{
 			// Do something with the date chosen by the user
-			date.setText((month+1) + "/" + day + "/" + year);
+			if (Start)
+			{
+				date.setText((month + 1) + "/" + day + "/" + year);
+			}
 		}	
 	}
 	
@@ -222,4 +239,23 @@ public class EditExpenseActivity extends FragmentActivity{
     	startActivity(intent);   
     	
     }
+
+	@Override
+	public void afterTextChanged(Editable s) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void beforeTextChanged(CharSequence s, int start, int count,
+			int after) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onTextChanged(CharSequence s, int start, int before, int count) {
+		// TODO Auto-generated method stub
+		
+	}
 }

@@ -57,7 +57,7 @@ public class ExpenseList {
 		}
 		else{
 			for (int i=0; i<expenseList.size();i++){
-				if (expenseList.get(i).toString().equals(expenseName)){
+				if (expenseList.get(i).getName().toString().equals(expenseName)){
 					return expenseList.get(i);
 				}
 			}

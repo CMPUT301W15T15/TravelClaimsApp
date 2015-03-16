@@ -176,15 +176,22 @@ public class ExpenseListActivity extends Activity
             case R.id.expenseListViewMenuFlag:
             	int flagStatus=expense.getFlag();
             	if (flagStatus==1){
-            		expense.removeFlag();
+            		Toast.makeText(this, "Already Flaged", Toast.LENGTH_SHORT).show();
             	}
             	else{
             		expense.addFlag();
-            		
+            		Toast.makeText(this, "Expense Flaged", Toast.LENGTH_SHORT).show();
             	}
             	return true;
             case R.id.expenseListViewMenuUnflag:
-            	
+            	int flagStatus2=expense.getFlag();
+            	if (flagStatus2==1){
+            		expense.removeFlag();
+            		Toast.makeText(this, "Expense unflaged", Toast.LENGTH_SHORT).show();
+            	}
+            	else{
+            		Toast.makeText(this, "No Flag", Toast.LENGTH_SHORT).show();
+            	}
             default:
                 return super.onContextItemSelected(item);
         }
