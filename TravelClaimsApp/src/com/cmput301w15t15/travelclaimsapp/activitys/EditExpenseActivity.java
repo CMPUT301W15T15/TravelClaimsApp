@@ -102,13 +102,28 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 		claim=claimList.getClaim(claimName);
 		expenseList=claim.getExpenseList();
 		expense=expenseList.getExpense(expenseName);
+<<<<<<< HEAD
 		expenseCost = expense.getCost();
+=======
+		/*expenseCost = expense.getCost();
+
+>>>>>>> ae1e2fa861b8bdc5d43b6e006944a1ddab111797
 		if (expense.getDes()!=null){
 			expenseDescription = expense.getDes();
 		}
 		else{
 			expenseDescription="None";
 		}
+<<<<<<< HEAD
+=======
+		if (expense.getDes()!=null){
+			expenseDescription = expense.getDes();
+		}
+		else{
+			expenseDescription="None";
+		}*/
+
+>>>>>>> ae1e2fa861b8bdc5d43b6e006944a1ddab111797
 		set_on_click();
 		//registerForContextMenu(findViewById(R.id.));
 		//registerForContextMenu(findViewById(R.id.edit_claim_taglist));
@@ -121,6 +136,7 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 		// TODO Auto-generated method stub
 		super.onStart();
 		expenseNameInput.setText(expenseName);
+<<<<<<< HEAD
 		
 		//expense show test
 		expense.setDate(expenseDate);
@@ -132,6 +148,11 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 //		if(expense.getDate()!=null){
 //			date.setText(sdf.format(expense.getDate()));
 //		}
+=======
+		/*if(expense.getDate()!=null){
+			date.setText(sdf.format(expense.getDate()));
+		}*/
+>>>>>>> ae1e2fa861b8bdc5d43b6e006944a1ddab111797
 		//setEditable();
 		expenseNameInput.addTextChangedListener(this);
 		//date.addTextChangedListener(this);
