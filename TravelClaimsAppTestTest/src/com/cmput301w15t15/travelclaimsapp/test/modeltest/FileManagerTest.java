@@ -23,6 +23,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 import com.cmput301w15t15.travelclaimsapp.FileManager;
+import com.cmput301w15t15.travelclaimsapp.model.Claim;
 import com.cmput301w15t15.travelclaimsapp.model.ClaimList;
 import com.cmput301w15t15.travelclaimsapp.model.User;
 
@@ -34,6 +35,7 @@ public class FileManagerTest extends AndroidTestCase {
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
+//		FileManager.initializeSaver(this);
 
 	}
 	
@@ -69,7 +71,7 @@ public class FileManagerTest extends AndroidTestCase {
 		FileManager.getSaver().addUser(user1);
 		User checkUser = FileManager.getSaver().getUser(user1.getUsername());
 		
-		assertTrue("user1 was added", user1.equals(checkUser));
+		assertTrue("user1 was added", user1.getUsername().equals(checkUser.getUsername()));
 	}
 	
 
@@ -79,6 +81,9 @@ public class FileManagerTest extends AndroidTestCase {
 	 * @throws IOException
 	 */
 	public void testAddClaimlist() throws IOException{
+		ClaimList claimlist = new ClaimList();
+		Claim claim1 = new Claim("Claim1");
+		claimlist.addClaim(claim1);
 		String name1 = "Jon";
 		String pass1 = "dog";
 		
@@ -101,12 +106,10 @@ public class FileManagerTest extends AndroidTestCase {
 		
 		User user1 = new User(name1, passHash);
 		
-		ClaimList claimlist = new ClaimList();
-		
 		FileManager.getSaver().addClaimList(claimlist, user1.getUsername());
 		ClaimList checkClaimList = FileManager.getSaver().getClaimList(user1.getUsername());
 		
-		assertTrue("claimlist was added", claimlist.equals(checkClaimList));
+		assertTrue("claimlist was added", claim1.getName().equals(checkClaimList.getClaim("Claim1").getName()));
 	}
 	
 
@@ -141,7 +144,7 @@ public class FileManagerTest extends AndroidTestCase {
 		FileManager.getSaver().saveUserInFile(user1);
 		User checkUser = FileManager.getSaver().loadUserFromFile();
 		
-		assertTrue("user1 was added", user1.equals(checkUser));
+		assertTrue("user1 was added", user1.getUsername().equals(checkUser.getUsername()));
 	}
 	
 
@@ -151,6 +154,9 @@ public class FileManagerTest extends AndroidTestCase {
 	 * @throws IOException
 	 */
 	public void testAddClaimlist2() throws IOException{
+		ClaimList claimlist = new ClaimList();
+		Claim claim1 = new Claim("Claim1");
+		claimlist.addClaim(claim1);
 		String name1 = "Jon";
 		String pass1 = "dog";
 		
@@ -173,12 +179,10 @@ public class FileManagerTest extends AndroidTestCase {
 		
 		User user1 = new User(name1, passHash);
 		
-		ClaimList claimlist = new ClaimList();
-		
 		FileManager.getSaver().saveClaimLInFile(claimlist, user1.getUsername());
 		ClaimList checkClaimList = FileManager.getSaver().loadClaimLFromFile();
 		
-		assertTrue("claimlist was added", claimlist.equals(checkClaimList));
+		assertTrue("claimlist was added", claim1.getName().equals(checkClaimList.getClaim("Claim1").getName()));
 	}
 	
 }

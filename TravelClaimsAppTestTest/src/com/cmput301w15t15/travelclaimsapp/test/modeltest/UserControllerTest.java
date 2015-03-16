@@ -34,6 +34,7 @@ public class UserControllerTest extends AndroidTestCase {
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
+//		FileManager.initializeSaver(this);
 
 	}
 	
@@ -71,6 +72,6 @@ public class UserControllerTest extends AndroidTestCase {
 		User checkUser = FileManager.getSaver().loadUserFromFile();
 		User checkUser2 = UserController.getUser();
 		
-		assertTrue("getUser works", checkUser2.equals(checkUser));
+		assertTrue("getUser works", checkUser2.getUsername().equals(checkUser.getUsername()));
 	}
 }
