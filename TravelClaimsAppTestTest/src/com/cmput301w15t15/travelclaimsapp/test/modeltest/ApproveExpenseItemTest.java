@@ -46,29 +46,29 @@ public class ApproveExpenseItemTest extends TestCase {
 
 	
 	//TestNumber:ApproveViewTest #3
-	public void testViewExpenseItem() throws IOException{
-		ClaimList testClaimList = new ClaimList();
-		claim1 = new Claim("Claim1");
-		expense1 = new Expense("Expense1");
-		expense2= new Expense("Expense2");
-		
-		claim1.setStatus("Submitted");
-		ExpenseList expenseList = claim1.getExpenseList();
-		expenseList.addExpense(expense1);
-		
-		testClaimList.addClaim(claim1);
-		testClaimList.addClaim(claim2);
-		
-		Expense item1 = new Expense("food");
-		Expense item2 = new Expense("meat");
-		Expense item3 = new Expense("drink");
-		expenseList.addExpense(item1);
-		expenseList.addExpense(item2);
-		expenseList.addExpense(item3);
-		
-		
-		
-	}
+//	public void testViewExpenseItem() throws IOException{
+//		ClaimList testClaimList = new ClaimList();
+//		claim1 = new Claim("Claim1");
+//		expense1 = new Expense("Expense1");
+//		expense2= new Expense("Expense2");
+//		
+//		claim1.setStatus("Submitted");
+//		ExpenseList expenseList = claim1.getExpenseList();
+//		expenseList.addExpense(expense1);
+//		
+//		testClaimList.addClaim(claim1);
+//		testClaimList.addClaim(claim2);
+//		
+//		Expense item1 = new Expense("food");
+//		Expense item2 = new Expense("meat");
+//		Expense item3 = new Expense("drink");
+//		expenseList.addExpense(item1);
+//		expenseList.addExpense(item2);
+//		expenseList.addExpense(item3);
+//		
+//		
+//		
+//	}
 	
 	
 }

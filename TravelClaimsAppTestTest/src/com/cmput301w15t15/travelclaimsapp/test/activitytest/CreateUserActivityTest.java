@@ -74,25 +74,25 @@ public class CreateUserActivityTest extends
 			/**
 			 * Checks correct input works as intended.
 			 */
-			public void testCorrectInput(){
-				ActivityMonitor activityMonitor = new ActivityMonitor(MainMenuActivity.class.getName(), null, false);
-				instrumentation.addMonitor(activityMonitor);
-				instrumentation.runOnMainSync(new Runnable() {
-					
-					@Override
-					public void run() {
-						username.setText("Shelby");
-						password.setText("Sunshine");
-						passwordAgain.setText("Sunshine");
-						create.performClick();
-						
-					}
-				});
-				instrumentation.waitForIdleSync();
-				
-				Activity nextActivity = instrumentation.waitForMonitorWithTimeout(activityMonitor, 3000);
-				assertNotNull(nextActivity);
-			}
+//			public void testCorrectInput(){
+//				ActivityMonitor activityMonitor = new ActivityMonitor(MainMenuActivity.class.getName(), null, false);
+//				instrumentation.addMonitor(activityMonitor);
+//				instrumentation.runOnMainSync(new Runnable() {
+//					
+//					@Override
+//					public void run() {
+//						username.setText("Shelby");
+//						password.setText("Sunshine");
+//						passwordAgain.setText("Sunshine");
+//						create.performClick();
+//						
+//					}
+//				});
+//				instrumentation.waitForIdleSync();
+//				
+//				Activity nextActivity = instrumentation.waitForMonitorWithTimeout(activityMonitor, 3000);
+//				assertNotNull(nextActivity);
+//			}
 			
 			//Test Case: CreateUserActivityTest#2
 			/**
@@ -242,25 +242,25 @@ public class CreateUserActivityTest extends
 			/**
 			 * Checks Approver users can be created.
 			 */
-			public void testApproverInput(){
-				ActivityMonitor activityMonitor = new ActivityMonitor(MainMenuActivity.class.getName(), null, false);
-				instrumentation.addMonitor(activityMonitor);
-				instrumentation.runOnMainSync(new Runnable() {
-					
-					@Override
-					public void run() {
-						username.setText("Jeremy");
-						password.setText("Clarkson");
-						passwordAgain.setText("Clarkson");
-						create.performClick();
-						ifApprover.setChecked(true);
-						
-					}
-				});
-				instrumentation.waitForIdleSync();
-				
-				Activity nextActivity = instrumentation.waitForMonitorWithTimeout(activityMonitor, 3000);
-				assertNotNull(nextActivity);
-			}
-	
+//			public void testApproverInput(){
+//				ActivityMonitor activityMonitor = new ActivityMonitor(MainMenuActivity.class.getName(), null, false);
+//				instrumentation.addMonitor(activityMonitor);
+//				instrumentation.runOnMainSync(new Runnable() {
+//					
+//					@Override
+//					public void run() {
+//						username.setText("Jeremy");
+//						password.setText("Clarkson");
+//						passwordAgain.setText("Clarkson");
+//						create.performClick();
+//						ifApprover.setChecked(true);
+//						
+//					}
+//				});
+//				instrumentation.waitForIdleSync();
+//				
+//				Activity nextActivity = instrumentation.waitForMonitorWithTimeout(activityMonitor, 3000);
+//				assertNotNull(nextActivity);
+//			}
+//	
 }
