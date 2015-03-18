@@ -80,6 +80,7 @@ public class ExpenseListActivity extends Activity
 		
 		registerForContextMenu(findViewById(R.id.CurrentExpenseList));
 		ListView listView = (ListView) findViewById(R.id.CurrentExpenseList);
+		set_on_click();
 
 	}
 
@@ -125,6 +126,8 @@ public class ExpenseListActivity extends Activity
     public void onCreateContextMenu(ContextMenu menu, View v,ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
         getMenuInflater().inflate(R.menu.expense_context_menu, menu);
+        
+        
     }
 	/** Function that is called when Search menu item is clicked
 	 * @author Henry
@@ -172,6 +175,8 @@ public class ExpenseListActivity extends Activity
     	intent.putExtra("expenseName", expense.getName());
     	startActivity(intent);   
     }
+    
+    	
     
 	/**
 	 * save value anytime when you change values

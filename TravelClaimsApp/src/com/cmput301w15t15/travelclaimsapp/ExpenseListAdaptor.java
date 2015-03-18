@@ -29,9 +29,12 @@ import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.LayoutInflater.Filter;
+import android.view.Menu;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 /**
@@ -46,7 +49,7 @@ public class ExpenseListAdaptor extends ArrayAdapter<Expense> {
 	private ArrayList<Expense> expenseList;
 	private ViewHolder viewHolder;
 	private Filter tagFilter;
-	
+	private Expense expense;
 	
 	/**
 	 * class constructor
@@ -71,7 +74,7 @@ public class ExpenseListAdaptor extends ArrayAdapter<Expense> {
 	public View getView(int position, View convertView, ViewGroup parent) {
 		View rowView = convertView;
 		
-		Expense expense = expenseList.get(position);
+		expense = expenseList.get(position);
 		
 		if(rowView == null){
 			viewHolder = new ViewHolder();
@@ -83,7 +86,8 @@ public class ExpenseListAdaptor extends ArrayAdapter<Expense> {
 	        viewHolder.expenseAmount = (TextView) rowView.findViewById(R.id.expenseAdaptor_amount);
 	        viewHolder.expenseDate = (TextView) rowView.findViewById(R.id.expenseAdaptor_date);
  	        viewHolder.expenseName = (TextView) rowView.findViewById(R.id.expenseAdaptor_Name);
-	        rowView.setTag(viewHolder);
+	        viewHolder.expenseFlag = (ImageView) rowView.findViewById(R.id.expenseAdaptor_flag);
+ 	        rowView.setTag(viewHolder);
  	        
 		}else{
 			viewHolder = (ViewHolder) rowView.getTag();
@@ -93,6 +97,14 @@ public class ExpenseListAdaptor extends ArrayAdapter<Expense> {
         viewHolder.expenseCategory.setText(expense.getCat());
         viewHolder.expenseAmount.setText(expense.getCost().toString());
         viewHolder.expenseName.setText(expense.getName());
+        
+        if (expense.getFlag()==0){
+        	viewHolder.expenseFlag.setImageResource(R.drawable.ic_action_toggle_star_outline);
+        }
+        else{
+        	viewHolder.expenseFlag.setImageResource(R.drawable.ic_action_toggle_star);
+        }
+        
         
         SimpleDateFormat defaultExpenseDate = new SimpleDateFormat("MM/dd/yyyy",Locale.CANADA);
         if(expense.getDate() == null){
@@ -112,14 +124,28 @@ public class ExpenseListAdaptor extends ArrayAdapter<Expense> {
 	 *
 	 */
 	private static class ViewHolder {
-        public TextView expenseName;
+        public static ImageView expenseFlag;
+		public TextView expenseName;
 		public TextView expenseDate;
 		public TextView expenseAmount;
 		public TextView expenseCategory;
 		public TextView expenseCurrency;
     }
 	
-	
+	public boolean onCreateOptionsMenu(Menu menu) {
+	// Inflate the menu; this adds items to the action bar if it is present.
+	//getMenuInflater().inflate(R.menu.main, menu);
+	//ImageView expenseFlag = (ImageView) findViewById(R.id.expenseAdaptor_flag);
+		ViewHolder.expenseFlag.setOnClickListener(new OnClickListener() {
+			@Override
+        	public void onClick(View v) {
+				
+				expense.addFlag();
+				notifyDataSetInvalidated();
+			}
+		});
+		return true;
+	}
 /**************
 	public ExpenseListAdaptor(Context context,
 			int resource, ExpenseList expenseList) {
