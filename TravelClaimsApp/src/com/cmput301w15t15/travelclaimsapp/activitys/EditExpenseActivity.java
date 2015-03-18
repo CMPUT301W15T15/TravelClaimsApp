@@ -105,6 +105,7 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 		expenseList=claim.getExpenseList();
 		expense=expenseList.getExpense(expenseName);
 		expenseCost = expense.getCost();
+		
 		if (expense.getDes()!=null){
 			expenseDescription = expense.getDes();
 		}
@@ -148,8 +149,13 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 	{
 
 		super.onStart();
-		expenseNameInput.setText(expenseName);
-
+		
+		if (expense.getName()!=null){
+			expenseNameInput.setText(expense.getName());
+		}
+		else{
+			expenseNameInput.setText(expenseName);
+		}
 		
 
 		
@@ -214,8 +220,10 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 		// TODO Auto-generated method stub
 		if(claim.getStatus().equals("Submitted") || claim.getStatus().equals("Approved")){
 			expenseNameInput.setFocusable(false);
-			date.setFocusable(false);
+			date.setEnabled(false);
 			expenseCostInput.setFocusable(false);
+			currencySpinner.setClickable(false);
+			categorySpinner.setClickable(false);
 			expenseDescriptionInput.setFocusable(false);
 			
 		}else{
@@ -224,6 +232,7 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 			expenseNameInput.addTextChangedListener(this);
 			date.addTextChangedListener(this);
 			expenseCostInput.addTextChangedListener(this);
+			expenseDescriptionInput.addTextChangedListener(this);
 		}
 	}
 
@@ -346,7 +355,7 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 
     	String expenseName=expense.getName();
     	intent.putExtra("expenseName", expenseName);
-    	Toast.makeText(this, expense.getDes(), Toast.LENGTH_SHORT).show();////
+    	//Toast.makeText(this, expense.getDes(), Toast.LENGTH_SHORT).show();////
 
     	startActivity(intent);   
     }
