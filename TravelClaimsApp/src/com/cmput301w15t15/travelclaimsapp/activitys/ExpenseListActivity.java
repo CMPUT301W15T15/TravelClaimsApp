@@ -36,6 +36,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ContextMenu.ContextMenuInfo;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -59,7 +60,7 @@ public class ExpenseListActivity extends Activity
 	private ExpenseList expenseList;
 	private ListView expenseListView;
 	private String claimName;
-	
+	private Expense expense;
 	/* (non-Javadoc)
 	 * @see android.app.Activity#onCreate(android.os.Bundle)
 	 */
@@ -80,7 +81,7 @@ public class ExpenseListActivity extends Activity
 		
 		registerForContextMenu(findViewById(R.id.CurrentExpenseList));
 		ListView listView = (ListView) findViewById(R.id.CurrentExpenseList);
-		set_on_click();
+		//set_on_click();
 
 	}
 
@@ -177,6 +178,14 @@ public class ExpenseListActivity extends Activity
     }
     
     	
+//    public void onItemClick(AdapterView<?> parent, View view, int position, long id){
+//		Expense expense2= expenseList.get(position);
+//    	if (view.equals(viewHolder.expenseFlag)){
+//    		expense2.setFlag(1-expense.getFlag());
+//    		notifyDataSetChanged();
+//    	}
+//    }
+
     
 	/**
 	 * save value anytime when you change values
@@ -231,5 +240,16 @@ public class ExpenseListActivity extends Activity
                 return super.onContextItemSelected(item);
         }
 	}
+	
+//	   public void onItemClick(AdapterView<?> parent, View view, int position, long id){
+//		   if (view.equals(view.findViewById(R.id.expenseAdaptor_flag))){	
+//			   int pos=expenseListView.getPositionForView(view);
+//	        	Expense expense2= expenseList.get(position);
+//		    	
+//		    		expense2.setFlag(1-expense.getFlag());
+//		    		notifyDataSetChanged();
+//		    	}
+//	}
+//	
 
 }

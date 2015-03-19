@@ -275,6 +275,7 @@ public class Expense implements Listenable{
 	 */
 	public void deleteListener(Listener listener){
 		listeners.remove(listener);
+		
 	}
 
 	/* (non-Javadoc)
@@ -284,6 +285,12 @@ public class Expense implements Listenable{
 	public void setListeners() {
 		this.listeners = new ArrayList<Listener>();
 		
+	}
+
+	public void setFlag(int value) {
+		// TODO Auto-generated method stub
+		this.flag=value;
+		notifyListeners();
 	}
 	
 	

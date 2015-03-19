@@ -33,6 +33,7 @@ import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -50,6 +51,7 @@ public class ExpenseListAdaptor extends ArrayAdapter<Expense> {
 	private ViewHolder viewHolder;
 	private Filter tagFilter;
 	private Expense expense;
+	private boolean[] stars;
 	
 	/**
 	 * class constructor
@@ -63,6 +65,7 @@ public class ExpenseListAdaptor extends ArrayAdapter<Expense> {
 		this.context = context;
 		this.resource = resource;
 		this.expenseList = expenses;
+		this.stars= new boolean[expenses.size()];
 	}
 
 	/**
@@ -71,7 +74,7 @@ public class ExpenseListAdaptor extends ArrayAdapter<Expense> {
 	 * @see android.widget.ArrayAdapter#getView(int, android.view.View, android.view.ViewGroup)
 	 */
 	@Override
-	public View getView(int position, View convertView, ViewGroup parent) {
+	public View getView(final int position, View convertView, ViewGroup parent) {
 		View rowView = convertView;
 		
 		expense = expenseList.get(position);
@@ -113,10 +116,52 @@ public class ExpenseListAdaptor extends ArrayAdapter<Expense> {
         	viewHolder.expenseDate.setText(defaultExpenseDate.format(expense.getDate()));
         }
         
+        viewHolder.expenseFlag.setOnClickListener(new OnClickListener()
+        {
+        	public void onClick(View v){
+        		//stars[position]=!stars[position];
+        		expense.setFlag(1-expense.getFlag());
+        		notifyDataSetChanged();
+        		notifyDataSetInvalidated();
+        	}
+        });
+//			
+        
+//        	public void onClick(View v) {
+//				if (v.equals(ViewHolder.expenseFlag)){
+//					expense.setFlag(1-expense.getFlag());
+//					notifyDataSetInvalidated();
+//				}
+//			}	
+//        	public void onItemClick(AdapterView<?> parent, View view, int position, long id){
+//				Expense expense2= expenseList.get(position);
+//		    	if (view.equals(viewHolder.expenseFlag)){
+//		    		expense2.setFlag(1-expense.getFlag());
+//		    		notifyDataSetChanged();
+//		    	}
+//		    }
+//
+//		});
+//        
 		return rowView;
 	}
-	
 
+//	class imageViewClickListener implements OnClickListener{
+//    	int position;
+//    	
+//    	public imageViewClickListener(int pos){
+//    		this.position=pos;
+//    	}
+//    	
+//    	public void onClick(View v){
+//    		Expense expense1=expenseList.get(position);
+//    		if (v.equals(ViewHolder.expenseFlag)){
+//				expense1.setFlag(1-expense1.getFlag());
+//				notifyDataSetInvalidated();
+//			}
+//    	}
+//    	
+//    }
 	/**
 	 * 
 	 * all format view for expenselist view
@@ -132,20 +177,32 @@ public class ExpenseListAdaptor extends ArrayAdapter<Expense> {
 		public TextView expenseCurrency;
     }
 	
-	public boolean onCreateOptionsMenu(Menu menu) {
-	// Inflate the menu; this adds items to the action bar if it is present.
-	//getMenuInflater().inflate(R.menu.main, menu);
-	//ImageView expenseFlag = (ImageView) findViewById(R.id.expenseAdaptor_flag);
-		ViewHolder.expenseFlag.setOnClickListener(new OnClickListener() {
-			@Override
-        	public void onClick(View v) {
-				
-				expense.addFlag();
-				notifyDataSetInvalidated();
-			}
-		});
-		return true;
-	}
+	
+	
+	
+//	private void set_on_click()
+//	{
+//		claimStartDate.setOnClickListener(new View.OnClickListener() {
+//			@Override
+//			public void onClick(View v) 
+//			{
+//				showTruitonDatePickerDialog(v);
+//		
+//			}
+//		});
+//		claimEndDate.setOnClickListener(new View.OnClickListener() {
+//			@Override
+//			public void onClick(View v) 
+//			{
+//				showTruitonDatePickerDialog(v);
+//			}
+//		});
+//	}
+	
+	
+//	public void ChangeFlag(View view){
+//		expense.setFlag(1-expense.getFlag());
+//	}
 /**************
 	public ExpenseListAdaptor(Context context,
 			int resource, ExpenseList expenseList) {
