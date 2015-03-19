@@ -74,77 +74,141 @@ public class ExpenseListAdaptor extends ArrayAdapter<Expense> {
 	 * @see android.widget.ArrayAdapter#getView(int, android.view.View, android.view.ViewGroup)
 	 */
 	@Override
+	
+	
 	public View getView(final int position, View convertView, ViewGroup parent) {
 		View rowView = convertView;
-		
-		expense = expenseList.get(position);
-		
+
 		if(rowView == null){
-			viewHolder = new ViewHolder();
-			LayoutInflater inflater = ((Activity)context).getLayoutInflater();
-	        rowView = inflater.inflate(resource, parent, false);
-			
-	        viewHolder.expenseCurrency = (TextView) rowView.findViewById(R.id.expenseAdaptor_currency);
-	        viewHolder.expenseCategory= (TextView) rowView.findViewById(R.id.expenseAdaptor_category);
-	        viewHolder.expenseAmount = (TextView) rowView.findViewById(R.id.expenseAdaptor_amount);
-	        viewHolder.expenseDate = (TextView) rowView.findViewById(R.id.expenseAdaptor_date);
- 	        viewHolder.expenseName = (TextView) rowView.findViewById(R.id.expenseAdaptor_Name);
-	        viewHolder.expenseFlag = (ImageView) rowView.findViewById(R.id.expenseAdaptor_flag);
- 	        rowView.setTag(viewHolder);
- 	        
+		    viewHolder = new ViewHolder();
+		    LayoutInflater inflater = ((Activity)context).getLayoutInflater();
+		    rowView = inflater.inflate(resource, parent, false);
+
+		    viewHolder.expenseCurrency = (TextView) rowView.findViewById(R.id.expenseAdaptor_currency);
+		    viewHolder.expenseCategory= (TextView) rowView.findViewById(R.id.expenseAdaptor_category);
+		    viewHolder.expenseAmount = (TextView) rowView.findViewById(R.id.expenseAdaptor_amount);
+		    viewHolder.expenseDate = (TextView) rowView.findViewById(R.id.expenseAdaptor_date);
+		    viewHolder.expenseName = (TextView) rowView.findViewById(R.id.expenseAdaptor_Name);
+		    viewHolder.expenseFlag = (ImageView) rowView.findViewById(R.id.expenseAdaptor_flag);
+		    rowView.setTag(viewHolder);
+
 		}else{
-			viewHolder = (ViewHolder) rowView.getTag();
+		    viewHolder = (ViewHolder) rowView.getTag();
 		}
-		
-        viewHolder.expenseCurrency.setText(expense.getCurr());
-        viewHolder.expenseCategory.setText(expense.getCat());
-        viewHolder.expenseAmount.setText(expense.getCost().toString());
-        viewHolder.expenseName.setText(expense.getName());
-        
-        if (expense.getFlag()==0){
-        	viewHolder.expenseFlag.setImageResource(R.drawable.ic_action_toggle_star_outline);
-        }
-        else{
-        	viewHolder.expenseFlag.setImageResource(R.drawable.ic_action_toggle_star);
-        }
-        
-        
-        SimpleDateFormat defaultExpenseDate = new SimpleDateFormat("MM/dd/yyyy",Locale.CANADA);
-        if(expense.getDate() == null){
-        	viewHolder.expenseDate.setText("No Date");
-        }else{
-        	viewHolder.expenseDate.setText(defaultExpenseDate.format(expense.getDate()));
-        }
-        
-        viewHolder.expenseFlag.setOnClickListener(new OnClickListener()
-        {
-        	public void onClick(View v){
-        		//stars[position]=!stars[position];
-        		expense.setFlag(1-expense.getFlag());
-        		notifyDataSetChanged();
-        		notifyDataSetInvalidated();
-        	}
-        });
-//			
-        
-//        	public void onClick(View v) {
-//				if (v.equals(ViewHolder.expenseFlag)){
-//					expense.setFlag(1-expense.getFlag());
-//					notifyDataSetInvalidated();
-//				}
-//			}	
-//        	public void onItemClick(AdapterView<?> parent, View view, int position, long id){
-//				Expense expense2= expenseList.get(position);
-//		    	if (view.equals(viewHolder.expenseFlag)){
-//		    		expense2.setFlag(1-expense.getFlag());
-//		    		notifyDataSetChanged();
-//		    	}
-//		    }
-//
-//		});
-//        
+
+		Expense expense = expenseList.get(position);  ///<-- add I'm not sure what you named that class so change EXPENSELISTITEM to whatever you call it
+		viewHolder.expense = expense ;  ///<-- make sure the item is stored with the view holder too.
+
+		viewHolder.expenseCurrency.setText(expense.getCurr());
+		viewHolder.expenseCategory.setText(expense.getCat());
+		viewHolder.expenseAmount.setText(expense.getCost().toString());
+		viewHolder.expenseName.setText(expense.getName());
+
+		if (expense.getFlag()==0){
+		    viewHolder.expenseFlag.setImageResource(R.drawable.ic_action_toggle_star_outline);
+		}
+		else{
+		    viewHolder.expenseFlag.setImageResource(R.drawable.ic_action_toggle_star);
+		}
+
+
+		SimpleDateFormat defaultExpenseDate = new SimpleDateFormat("MM/dd/yyyy",Locale.CANADA);
+		if(expense.getDate() == null){
+		    viewHolder.expenseDate.setText("No Date");
+		}else{
+		    viewHolder.expenseDate.setText(defaultExpenseDate.format(expense.getDate()));
+		}
+
+		viewHolder.expenseFlag.setOnClickListener(new OnClickListener()
+		{
+		    public void onClick(View v){
+		        //stars[position]=!stars[position];
+		        viewHolder.expense.setFlag(1-viewHolder.expense.getFlag());
+		        notifyDataSetChanged();
+		    }
+		});
 		return rowView;
-	}
+		}
+	
+	
+	
+	
+	
+//	public View getView(final int position, View convertView, ViewGroup parent) {
+//		View rowView = convertView;
+//		
+//		expense = expenseList.get(position);
+//		
+//		if(rowView == null){
+//			viewHolder = new ViewHolder();
+//			LayoutInflater inflater = ((Activity)context).getLayoutInflater();
+//	        rowView = inflater.inflate(resource, parent, false);
+//			
+//	        viewHolder.expenseCurrency = (TextView) rowView.findViewById(R.id.expenseAdaptor_currency);
+//	        viewHolder.expenseCategory= (TextView) rowView.findViewById(R.id.expenseAdaptor_category);
+//	        viewHolder.expenseAmount = (TextView) rowView.findViewById(R.id.expenseAdaptor_amount);
+//	        viewHolder.expenseDate = (TextView) rowView.findViewById(R.id.expenseAdaptor_date);
+// 	        viewHolder.expenseName = (TextView) rowView.findViewById(R.id.expenseAdaptor_Name);
+//	        viewHolder.expenseFlag = (ImageView) rowView.findViewById(R.id.expenseAdaptor_flag);
+// 	        rowView.setTag(viewHolder);
+// 	        
+//		}else{
+//			viewHolder = (ViewHolder) rowView.getTag();
+//		}
+//		
+//		Expense expense = expenseList.get(position);
+//		viewHolder.expense =expense;
+//		
+//        viewHolder.expenseCurrency.setText(expense.getCurr());
+//        viewHolder.expenseCategory.setText(expense.getCat());
+//        viewHolder.expenseAmount.setText(expense.getCost().toString());
+//        viewHolder.expenseName.setText(expense.getName());
+//        
+//        if (expense.getFlag()==0){
+//        	viewHolder.expenseFlag.setImageResource(R.drawable.ic_action_toggle_star_outline);
+//        }
+//        else{
+//        	viewHolder.expenseFlag.setImageResource(R.drawable.ic_action_toggle_star);
+//        }
+//        
+//        
+//        SimpleDateFormat defaultExpenseDate = new SimpleDateFormat("MM/dd/yyyy",Locale.CANADA);
+//        if(expense.getDate() == null){
+//        	viewHolder.expenseDate.setText("No Date");
+//        }else{
+//        	viewHolder.expenseDate.setText(defaultExpenseDate.format(expense.getDate()));
+//        }
+//        
+//        viewHolder.expenseFlag.setOnClickListener(new OnClickListener()
+//        {
+//        	@Override
+//        	public void onClick(View v){
+//        		//stars[position]=!stars[position];
+//        		viewHolder.expense.setFlag(1-viewHolder.expense.getFlag());
+//        		notifyDataSetChanged();
+//        		//notifyDataSetInvalidated();
+//        	}
+//        });
+////			
+//        
+////        	public void onClick(View v) {
+////				if (v.equals(ViewHolder.expenseFlag)){
+////					expense.setFlag(1-expense.getFlag());
+////					notifyDataSetInvalidated();
+////				}
+////			}	
+////        	public void onItemClick(AdapterView<?> parent, View view, int position, long id){
+////				Expense expense2= expenseList.get(position);
+////		    	if (view.equals(viewHolder.expenseFlag)){
+////		    		expense2.setFlag(1-expense.getFlag());
+////		    		notifyDataSetChanged();
+////		    	}
+////		    }
+////
+////		});
+////        
+//		return rowView;
+//	}
 
 //	class imageViewClickListener implements OnClickListener{
 //    	int position;
@@ -169,7 +233,8 @@ public class ExpenseListAdaptor extends ArrayAdapter<Expense> {
 	 *
 	 */
 	private static class ViewHolder {
-        public static ImageView expenseFlag;
+        public Expense expense;
+		public static ImageView expenseFlag;
 		public TextView expenseName;
 		public TextView expenseDate;
 		public TextView expenseAmount;
