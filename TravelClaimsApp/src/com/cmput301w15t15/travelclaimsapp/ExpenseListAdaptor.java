@@ -125,7 +125,17 @@ public class ExpenseListAdaptor extends ArrayAdapter<Expense> {
 		        //stars[position]=!stars[position];
 		        viewHolder.expense.setFlag(1-viewHolder.expense.getFlag());
 		        notifyDataSetChanged();
+		        notifyDataSetInvalidated();
 		    }
+		    public void onItemClick(AdapterView<?> parent, View view, int position, long id){
+			Expense expense2= expenseList.get(position);
+	    	if (view.equals(viewHolder.expenseFlag)){
+	    		expense2.setFlag(1-expense2.getFlag());
+	    		notifyDataSetChanged();
+	    		notifyDataSetInvalidated();
+	    	}
+	    }
+		    
 		});
 		return rowView;
 		}

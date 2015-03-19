@@ -224,6 +224,7 @@ public class ExpenseListActivity extends Activity
             	}
             	else{
             		expense.addFlag();
+            		expenseAdaptor.notifyDataSetChanged();
             		Toast.makeText(this, "Expense Flaged", Toast.LENGTH_SHORT).show();
             	}
             	return true;
@@ -231,6 +232,7 @@ public class ExpenseListActivity extends Activity
             	int flagStatus2=expense.getFlag();
             	if (flagStatus2==1){
             		expense.removeFlag();
+            		expenseAdaptor.notifyDataSetChanged();
             		Toast.makeText(this, "Expense unflaged", Toast.LENGTH_SHORT).show();
             	}
             	else{
