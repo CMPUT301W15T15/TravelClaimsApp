@@ -95,7 +95,8 @@ public class ExpenseListAdaptor extends ArrayAdapter<Expense> {
 		}else{
 		    viewHolder = (ViewHolder) rowView.getTag();
 		}
-
+		
+		viewHolder.expenseFlag.setTag(position);
 		Expense expense = expenseList.get(position);  ///<-- add I'm not sure what you named that class so change EXPENSELISTITEM to whatever you call it
 		viewHolder.expense = expense ;  ///<-- make sure the item is stored with the view holder too.
 
@@ -121,20 +122,24 @@ public class ExpenseListAdaptor extends ArrayAdapter<Expense> {
 
 		viewHolder.expenseFlag.setOnClickListener(new OnClickListener()
 		{
-		    public void onClick(View v){
+		    @Override
+			public void onClick(View v){
+		    	ImageView i= (ImageView) v;
+		    	int pos = (Integer) v.getTag();
+		    	Expense expense1 = expenseList.get(pos);
 		        //stars[position]=!stars[position];
-		        viewHolder.expense.setFlag(1-viewHolder.expense.getFlag());
-		        notifyDataSetChanged();
-		        notifyDataSetInvalidated();
+		        expense1.setFlag(1-expense1.getFlag());
+		        if (expense1.getFlag()==0){
+				    i.setImageResource(R.drawable.ic_action_toggle_star_outline);
+				}
+				else{
+				    i.setImageResource(R.drawable.ic_action_toggle_star);
+				}
+		        //notifyDataSetChanged();
+		        //notifyDataSetInvalidated();
+		        
 		    }
-		    public void onItemClick(AdapterView<?> parent, View view, int position, long id){
-			Expense expense2= expenseList.get(position);
-	    	if (view.equals(viewHolder.expenseFlag)){
-	    		expense2.setFlag(1-expense2.getFlag());
-	    		notifyDataSetChanged();
-	    		notifyDataSetInvalidated();
-	    	}
-	    }
+		    
 		    
 		});
 		return rowView;
