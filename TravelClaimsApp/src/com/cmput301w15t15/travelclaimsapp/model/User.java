@@ -19,6 +19,8 @@ package com.cmput301w15t15.travelclaimsapp.model;
 
 import java.util.ArrayList;
 
+import android.location.Location;
+
 /**
  * @author machinsk
  *
@@ -27,11 +29,13 @@ import java.util.ArrayList;
  */
 public class User  implements Listenable{
 
+	
 	private String username;
 	
 	//private ClaimList claimList;
 	private byte[] pHash;
 	private boolean approver;
+	private Location homeLocation;
 	protected transient ArrayList<Listener> listeners;
 	
 	
@@ -95,7 +99,27 @@ public class User  implements Listenable{
 		return approver;
 	}
 
+	/**
+	 * Returns the users home location 
+	 * 
+	 * @return returns a {@link Location}
+	 */
+	public Location getHomeLocation() {
+		return homeLocation;
+	}
 
+	/**
+	 * Sets the user home location
+	 * 
+	 * @param latitude a double 
+	 * @param longitude a double 
+	 */
+	public void setHomeLocation(double latitude, double longitude) {
+		this.homeLocation.setLatitude(latitude);
+		this.homeLocation.setLatitude(longitude);
+	}
+
+	
 	public void notifyListeners() {
 		for (Listener listener : listeners) {
 			listener.update();
@@ -115,6 +139,9 @@ public class User  implements Listenable{
 		this.listeners = new ArrayList<Listener>();
 		
 	}
+
+
+
 
 	
 }
