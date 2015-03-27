@@ -35,7 +35,7 @@ public class User  implements Listenable{
 	//private ClaimList claimList;
 	private byte[] pHash;
 	private boolean approver;
-	private Location homeLocation;
+	private GeoLocation homeLocation;
 	protected transient ArrayList<Listener> listeners;
 	
 	
@@ -104,7 +104,7 @@ public class User  implements Listenable{
 	 * 
 	 * @return returns a {@link Location}
 	 */
-	public Location getHomeLocation() {
+	public GeoLocation getHomeLocation() {
 		return homeLocation;
 	}
 
@@ -118,7 +118,13 @@ public class User  implements Listenable{
 		this.homeLocation.setLatitude(latitude);
 		this.homeLocation.setLatitude(longitude);
 	}
-
+	
+	/**
+	 * Consider getting rid of this function
+	 */
+	public void initHomeLocation(){
+		this.homeLocation = new GeoLocation();
+	}
 	
 	public void notifyListeners() {
 		for (Listener listener : listeners) {
