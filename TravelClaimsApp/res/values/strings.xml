@@ -37,6 +37,7 @@
     <string name="CurrentExpense">Current Expenses:</string>
     <string name="Des">Add Destination</string>
     <string name="Welcome">Welcome to the travel claims app.   Please login to continue</string>
+    <string name="Register">Register</string>
 
     <string-array name="StatusArray">
         <item>In Progress</item>
