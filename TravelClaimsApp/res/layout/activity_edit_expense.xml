@@ -21,16 +21,6 @@
         <requestFocus />
     </EditText>
 
-    <EditText
-        android:id="@+id/Edit_Expense_Cost"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/Edit_Expense_Date"
-        android:ems="10"
-        android:hint="@string/Cost"
-        android:inputType="numberDecimal" />
-
     <Button
         android:id="@+id/Edit_Expense_Ok"
         android:layout_width="wrap_content"
@@ -42,29 +32,41 @@
         android:text="@string/Ok" />
 
     <EditText
+        android:id="@+id/Edit_Expense_Cost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/Edit_Expense_Name"
+        android:layout_below="@+id/Edit_Expense_Date"
+        android:ems="10"
+        android:hint="@string/Cost"
+        android:inputType="numberDecimal" />
+
+    <Spinner
+        android:id="@+id/CurrencySpinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/Edit_Expense_Cost"
+        android:layout_toRightOf="@+id/Edit_Expense_Cost"
+        android:entries="@array/CurrencyArray" />
+
+    <EditText
         android:id="@+id/Edit_Expense_Date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
+        android:layout_alignLeft="@+id/Edit_Expense_Cost"
         android:layout_below="@+id/Edit_Expense_Name"
         android:ems="10"
         android:hint="@string/Date"
         android:inputType="date" />
 
     <Spinner
-        android:id="@+id/CurrencySpinner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/Edit_Expense_Cost"
-        android:entries="@array/CurrencyArray" />
-
-    <Spinner
         android:id="@+id/CategorySpinner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/CurrencySpinner"
-        android:layout_below="@+id/CurrencySpinner"
+        android:layout_alignLeft="@+id/Edit_Expense_Cost"
+        android:layout_alignRight="@+id/Edit_Expense_Cost"
+        android:layout_below="@+id/Edit_Expense_Cost"
         android:entries="@array/CategoryArray" />
 
     <EditText
@@ -72,8 +74,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/CategorySpinner"
-        android:layout_alignRight="@+id/CategorySpinner"
-        android:layout_below="@+id/CategorySpinner"
+        android:layout_below="@+id/CurrencySpinner"
         android:ems="10"
         android:hint="@string/Description"
         android:inputType="textMultiLine" />
