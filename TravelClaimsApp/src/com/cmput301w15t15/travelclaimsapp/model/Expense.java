@@ -39,6 +39,7 @@ public class Expense implements Listenable{
 	protected String expenseCat;
 	protected Uri expenseReceipt;
 	protected int flag=0;
+	protected GeoLocation geoLocation;
 
 	/**
 	 * expense constructor
@@ -253,6 +254,17 @@ public class Expense implements Listenable{
 	public String getDes() {
 		return this.expenseDes;
 	}
+	
+
+	public GeoLocation getGeoLocation() {
+		// TODO Auto-generated method stub
+		return this.geoLocation;
+	}
+	
+	public void setGeoLocation(GeoLocation gl) {
+		this.geoLocation = gl;
+		
+	}
 
 	/* (non-Javadoc)
 	 * @see com.cmput301w15t15.travelclaimsapp.model.Listenable#notifyListeners()
@@ -292,6 +304,10 @@ public class Expense implements Listenable{
 		this.flag=value;
 		notifyListeners();
 	}
+
+	
+
+	
 	
 	
 }

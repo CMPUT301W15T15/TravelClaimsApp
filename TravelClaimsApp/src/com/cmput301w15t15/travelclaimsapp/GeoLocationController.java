@@ -19,6 +19,8 @@ package com.cmput301w15t15.travelclaimsapp;
 
 import java.util.Date;
 
+import com.cmput301w15t15.travelclaimsapp.model.Destination;
+import com.cmput301w15t15.travelclaimsapp.model.Expense;
 import com.cmput301w15t15.travelclaimsapp.model.GeoLocation;
 import com.cmput301w15t15.travelclaimsapp.model.Listener;
 
@@ -130,5 +132,56 @@ public class GeoLocationController {
 	public static void save(){
 		FileManager.getSaver().saveUserInFile(UserController.getUser());
 	}
-
+	
+	/**
+	 * Sets a {@link Destination} GeoLocation
+	 * 
+	 * If dest's GeoLocation is null then a new GeoLocation is made and added to dest 
+	 * otherwise the dest's current GeoLocation Lat and Lng are updated
+	 * 
+	 * @param dest Destination to update
+	 * @param lat  Latitude to set
+	 * @param lng  Longitude to set 
+	 */
+	public static void setDestinationGeoLocation(Destination dest, double lat, double lng) {
+		if(dest.getGeoLocation() == null){
+			GeoLocation gl = new GeoLocation(lat,lng);
+			gl.addListener(new Listener() {
+				
+				@Override
+				public void update() {
+					save();
+				}
+			});
+			dest.setGeoLocation(gl);
+		}else{
+			dest.getGeoLocation().setLatLng(lat, lng);
+		}	
+	}
+	/**
+	 * Set a {@link Expense} GeoLocation
+	 * 
+	 * If expense's GeoLocation is null then a new GeoLocation is made and add to expense
+	 * otherwise the dest's current {@link GeoLocation} Lat and Lng are updated 
+	 * 
+	 * @param expense {@link Expense} to update
+	 * @param lat	   Latitude to set
+	 * @param lng	   Longitude to set
+	 */
+	public static void setExpenseGeoLocation(Expense expense, double lat, double lng) {
+		if(expense.getGeoLocation() == null){
+			GeoLocation gl = new GeoLocation(lat, lng);
+			gl.addListener(new Listener() {
+				@Override
+				public void update() {
+					save();
+					
+				}
+			});
+			expense.setGeoLocation(gl);
+		}else{
+			expense.getGeoLocation().setLatLng(lat, lng);
+		}
+		
+	}
 }

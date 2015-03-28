@@ -5,6 +5,8 @@ import java.util.Calendar;
 import java.util.Date;
 
 import com.cmput301w15t15.travelclaimsapp.GeoLocationController;
+import com.cmput301w15t15.travelclaimsapp.model.Destination;
+import com.cmput301w15t15.travelclaimsapp.model.Expense;
 import com.cmput301w15t15.travelclaimsapp.model.GeoLocation;
 
 import android.location.Location;
@@ -52,9 +54,23 @@ public class GeoLocationControllerTest extends AndroidTestCase {
 		GeoLocationController.setHomeLocation(53.544389, -113.490927);
 		GeoLocation gl = new GeoLocation(51.048615,-114.070846);
 		
-		assertEquals("Distance calculated not correct", 280,Math.round(Math.floor(GeoLocationController.getDistanceFromHome(gl))));
-		
+		assertEquals("Distance calculated not correct", 280,Math.round(Math.floor(GeoLocationController.getDistanceFromHome(gl))));	
 	}
 	
+	public void testSetGeoLocation(){
+		Destination dest = new Destination("Somewhere", "Somehow");
+		GeoLocationController.setDestinationGeoLocation(dest, 53.544389, -113.490927);
+		
+		assertEquals("Controller did not set geolocation",53.544389,dest.getGeoLocation().getLatitude());
+		assertEquals("Controller did not set geolocation",-113.490927,dest.getGeoLocation().getLongitude());
+		
+		Expense expense = new Expense("Dur");
+		
+		GeoLocationController.setExpenseGeoLocation(expense, 53.544389,-113.490927);
+		
+		assertEquals("Controller did not set geolocation",53.544389,expense.getGeoLocation().getLatitude());
+		assertEquals("Controller did not set geolocation",-113.490927,expense.getGeoLocation().getLongitude());
+		
+	}
 	
 }

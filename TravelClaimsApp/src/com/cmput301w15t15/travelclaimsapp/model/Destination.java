@@ -30,6 +30,7 @@ public class Destination implements Listenable{
 	private transient ArrayList<Listener> listeners;
 	private String location;
 	private String reason;
+	private GeoLocation geoLocation;
 	
 	/**
 	 * Creates a Destination object with a location and reason
@@ -82,6 +83,15 @@ public class Destination implements Listenable{
 		return this.reason;
 	}
 	
+	public void setGeoLocation(GeoLocation gl) {
+		this.geoLocation = gl;
+	}
+	
+	public GeoLocation getGeoLocation() {
+		// TODO Auto-generated method stub
+		return this.geoLocation;
+	}
+	
 	@Override
 	public void notifyListeners() {
 		for (Listener listener : listeners) {
@@ -107,5 +117,9 @@ public class Destination implements Listenable{
 		this.listeners = new ArrayList<Listener>();
 		
 	}
+
+	
+
+
 	
 }
