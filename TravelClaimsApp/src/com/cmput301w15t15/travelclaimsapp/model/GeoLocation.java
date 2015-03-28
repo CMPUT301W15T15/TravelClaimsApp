@@ -22,13 +22,12 @@ import java.util.ArrayList;
 /**
  * Contains a latitude and longitude for representing a location
  * 
- *
  */
 public class GeoLocation implements Listenable{
 
 	private double latitude;
 	private double longitude;
-	private ArrayList<Listener> listeners;
+	private transient ArrayList<Listener> listeners;
 	
 	public GeoLocation(double latitude, double longitude) {
 		this.latitude = latitude;
@@ -40,24 +39,50 @@ public class GeoLocation implements Listenable{
 		this.listeners = new ArrayList<Listener>();
 	}
 
+	/**
+	 * Returns the {@link GeoLocation} latitude
+	 * 
+	 * @return {@link GeoLocation} latitude
+	 */
 	public double getLatitude() {
 		return latitude;
 	}
 
+	/**
+	 * Returns the {@link GeoLocation} longitude
+	 * 
+	 * @return {@link GeoLocation} longitude
+	 */
 	public double getLongitude() {
 		return longitude;
 	}
 
+	/**
+	 * Sets {@link GeoLocation} longitude
+	 * 
+	 * @param lng pass the {@link Double} to set longitude to 
+	 */
 	public void setLongitude(double lng) {
 		this.longitude = lng;
 		notifyListeners();
 	}
-
+	
+	/**
+	 * Sets {@link GeoLocation} latitude 
+	 * 
+	 * @param lat pass the {@link Double} to set latitude to 
+	 */
 	public void setLatitude(double lat) {
 		this.latitude = lat;
 		notifyListeners();
 	}
 	
+	/**
+	 * Sets {@link GeoLocation} latitude and longitude
+	 * 
+	 * @param lat lat pass the {@link Double} to set latitude to
+	 * @param lng lng pass the {@link Double} to set longitude to 
+ 	 */
 	public void setLatLng(double lat,double lng){
 		this.latitude = lat;
 		this.longitude = lng;
@@ -86,6 +111,11 @@ public class GeoLocation implements Listenable{
 		listeners.remove(listener);
 	}
 
+	/**
+	 * Returns a latitude and longitude as comma separated string
+	 * 
+	 * @return latitude and longitude string
+	 */
 	public String getString() {
 		return new String(this.latitude+","+this.longitude);
 	}

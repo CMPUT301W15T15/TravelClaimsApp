@@ -75,5 +75,6 @@
     <string name="AddButton">Add</string>
     <string name="TagListTitle">Tags:</string>
     <string name="SearchHint">Eg. Food, Hotel, Taxi</string>
+    <string name="title_activity_map">MapActivity</string>
 
 </resources>

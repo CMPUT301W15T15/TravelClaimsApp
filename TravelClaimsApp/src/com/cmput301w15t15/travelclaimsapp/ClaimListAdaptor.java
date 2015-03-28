@@ -51,20 +51,6 @@ import android.widget.TextView;
  *  	
  */
 
-/**
- * @author searn
- *
- */
-/**
- * @author searn
- *
- */
-/**
- * @author searn
- *
- */
-
-
 public class ClaimListAdaptor extends ArrayAdapter<Claim>{
 
 	private Context context;

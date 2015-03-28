@@ -28,6 +28,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.cmput301w15t15.travelclaimsapp.model.Claim;
@@ -76,6 +77,7 @@ public class DestinationListAdaptor extends ArrayAdapter<Destination>{
 			
 	        viewHolder.destLocation = (TextView) rowView.findViewById(R.id.destAdaptor_location);
 	        viewHolder.destReason = (TextView) rowView.findViewById(R.id.destAdaptor_reason);
+	        viewHolder.destMap = (ImageView) rowView.findViewById(R.id.destAdaptor_map_image);
 	        
  	        rowView.setTag(viewHolder);
  	        
@@ -85,6 +87,12 @@ public class DestinationListAdaptor extends ArrayAdapter<Destination>{
 		
         viewHolder.destLocation.setText(d.getLocation());
         viewHolder.destReason.setText(d.getReason());  
+        
+        if(d.getGeoLocation() == null){
+        	viewHolder.destMap.setVisibility(android.view.View.INVISIBLE);
+        }else{
+        	viewHolder.destMap.setVisibility(android.view.View.VISIBLE);
+        }
         
 		return rowView;
 	}
@@ -99,7 +107,7 @@ public class DestinationListAdaptor extends ArrayAdapter<Destination>{
 	private static class ViewHolder {
         public TextView destLocation;
         public TextView destReason;
-      
+        public ImageView destMap;
     
     }
 	
