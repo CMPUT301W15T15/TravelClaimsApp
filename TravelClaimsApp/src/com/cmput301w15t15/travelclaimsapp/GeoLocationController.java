@@ -19,6 +19,7 @@ package com.cmput301w15t15.travelclaimsapp;
 
 import java.util.Date;
 
+import com.cmput301w15t15.travelclaimsapp.model.ClaimListSaveListener;
 import com.cmput301w15t15.travelclaimsapp.model.Destination;
 import com.cmput301w15t15.travelclaimsapp.model.Expense;
 import com.cmput301w15t15.travelclaimsapp.model.GeoLocation;
@@ -146,13 +147,7 @@ public class GeoLocationController {
 	public static void setDestinationGeoLocation(Destination dest, double lat, double lng) {
 		if(dest.getGeoLocation() == null){
 			GeoLocation gl = new GeoLocation(lat,lng);
-			gl.addListener(new Listener() {
-				
-				@Override
-				public void update() {
-					save();
-				}
-			});
+			gl.addListener(new ClaimListSaveListener());
 			dest.setGeoLocation(gl);
 		}else{
 			dest.getGeoLocation().setLatLng(lat, lng);
@@ -171,13 +166,7 @@ public class GeoLocationController {
 	public static void setExpenseGeoLocation(Expense expense, double lat, double lng) {
 		if(expense.getGeoLocation() == null){
 			GeoLocation gl = new GeoLocation(lat, lng);
-			gl.addListener(new Listener() {
-				@Override
-				public void update() {
-					save();
-					
-				}
-			});
+			gl.addListener(new ClaimListSaveListener());
 			expense.setGeoLocation(gl);
 		}else{
 			expense.getGeoLocation().setLatLng(lat, lng);

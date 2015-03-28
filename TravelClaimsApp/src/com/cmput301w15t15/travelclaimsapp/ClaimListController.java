@@ -24,6 +24,7 @@ import java.util.Locale;
 
 import com.cmput301w15t15.travelclaimsapp.model.Claim;
 import com.cmput301w15t15.travelclaimsapp.model.ClaimList;
+import com.cmput301w15t15.travelclaimsapp.model.ClaimListSaveListener;
 import com.cmput301w15t15.travelclaimsapp.model.Destination;
 import com.cmput301w15t15.travelclaimsapp.model.DestinationList;
 import com.cmput301w15t15.travelclaimsapp.model.Expense;
@@ -157,13 +158,7 @@ public class ClaimListController {
 	 */
 	public static void addExpense(Expense expense, Claim claim){
 		claim.addExpense(expense);
-		expense.addListener(new Listener() { 
-			@Override
-			public void update() {
-				save();
-				
-			}
-		});
+		expense.addListener(new ClaimListSaveListener());
 	}
 	
 	/**
@@ -181,14 +176,7 @@ public class ClaimListController {
 	 */
 	public static void addDestination(Destination dest, Claim claim){
 		claim.getDestinationList().addDestination(dest);
-		dest.addListener(new Listener() {
-			
-			@Override
-			public void update() {
-				save();
-				
-			}
-		});
+		dest.addListener(new ClaimListSaveListener());
 	}
 	/**
 	 * Deletes a destination from a claim
@@ -207,13 +195,7 @@ public class ClaimListController {
 	 * @param tag   tag to add to claim
 	 */
 	public static void addTag(Claim claim, Tag tag) {
-		tag.addListener(new Listener() {
-			@Override
-			public void update() {
-				save();
-				
-			}
-		});
+		tag.addListener(new ClaimListSaveListener());
 		claim.getTagList().addTag(tag);
 	}
 	
@@ -226,8 +208,6 @@ public class ClaimListController {
 	public static void removeTag(Claim claim, Tag tag) {
 		claim.getTagList().removeTag(tag);
 	}
-	
-	
 	
 	/**
 	 * Saves claimlist to file using FileManager class 
@@ -256,75 +236,39 @@ public class ClaimListController {
 			public void update() {
 				getClaimList().sort();
 				save();
-				
 			}
 		});
 		//next add listener to expenselist
 		ExpenseList eList = claim.getExpenseList();
 		eList.setListeners();
-		eList.addListener(new Listener() {
-			
-			@Override
-			public void update() {
-				save();
-				
-			}
-		});
+		eList.addListener(new ClaimListSaveListener());
 		//next add a listener to each expense in the claim 
 		for(Expense expense : eList.toArrayList()){
 			expense.setListeners();
-			expense.addListener(new Listener() {
-				
-				@Override
-				public void update() {
-					save();
-					
-				}
-			});
+			expense.addListener(new ClaimListSaveListener());
+			if(expense.getGeoLocation() != null){
+				expense.getGeoLocation().setListeners();
+				expense.getGeoLocation().addListener(new ClaimListSaveListener());
+			}
 		}
 		
 		DestinationList dList = claim.getDestinationList();
 		dList.setListeners();
-		dList.addListener(new Listener() {
-			
-			@Override
-			public void update() {
-				save();
-				
-			}
-		});
+		dList.addListener(new ClaimListSaveListener());
 		for(Destination dest : dList.toArrayList()){
 			dest.setListeners();
-			dest.addListener(new Listener() {
-				
-				@Override
-				public void update() {
-					save();
-					
-				}
-			});
-			
+			dest.addListener(new ClaimListSaveListener());
+			if(dest.getGeoLocation() != null){
+				dest.getGeoLocation().setListeners();
+				dest.getGeoLocation().addListener(new ClaimListSaveListener());
+			}
 		}
 		TagList tList = claim.getTagList();
 		tList.setListeners();
-		tList.addListener(new Listener() {
-			
-			@Override
-			public void update() {
-				save();
-				
-			}
-		});
+		tList.addListener(new ClaimListSaveListener());
 		for(Tag tag : tList.toArrayList()){
 			tag.setListeners();
-			tag.addListener(new Listener() {
-				
-				@Override
-				public void update() {
-					save();
-					
-				}
-			});
+			tag.addListener(new ClaimListSaveListener());
 			
 		}
 		
@@ -376,4 +320,7 @@ public class ClaimListController {
 		return newClaims;
 	}
 
+	
+
+	
 }
