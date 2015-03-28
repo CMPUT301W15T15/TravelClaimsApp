@@ -56,7 +56,7 @@ public class MainMenuActivityTest extends
 		FileManager.initializeSaver(activity);
 		
 		//need to change ids once UI has been created 
-		login = (Button) activity.findViewById(R.id.LoginButton);
+		login = (Button) activity.findViewById(R.id.Login_Button);
 		username = (EditText) activity.findViewById(R.id.UsernameEditText);
 		password = (EditText) activity.findViewById(R.id.PasswordEditText);
 		

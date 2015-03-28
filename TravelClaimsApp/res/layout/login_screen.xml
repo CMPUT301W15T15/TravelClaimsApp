@@ -1,0 +1,70 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/background"
+    android:orientation="vertical"
+    android:paddingBottom="100dp"
+    android:paddingLeft="30dp"
+    android:paddingRight="30dp"
+    android:paddingTop="100dp" >
+
+    <TextView
+        android:id="@+id/WelcomeText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/Welcome"
+        android:textColor="#ffffff" />
+
+    <EditText
+        android:id="@+id/LoginField"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/User" >
+
+        <requestFocus />
+    </EditText>
+
+    <EditText
+        android:id="@+id/PasswordField"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/Password"
+        android:inputType="textPassword" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+        
+        <Button
+            android:id="@+id/Register_Button"
+            android:layout_width="120dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:background="@drawable/buttonshape"
+            android:shadowColor="#A8A8A8"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:shadowRadius="5"
+            android:text="@string/Register"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp" />
+        
+        <Button
+            android:id="@+id/Login_Button"
+            android:layout_width="120dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:background="@drawable/buttonshape"
+            android:shadowColor="#A8A8A8"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:shadowRadius="5"
+            android:text="@string/Login"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp" />
+        
+    </LinearLayout>
+
+</LinearLayout>
