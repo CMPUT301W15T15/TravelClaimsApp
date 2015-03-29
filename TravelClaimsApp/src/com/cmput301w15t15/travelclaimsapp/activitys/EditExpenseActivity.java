@@ -80,7 +80,7 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 	private String expenseName;
 	private String claimName;
 	private Date expenseDate;
-	
+	private byte[] imgShow;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
