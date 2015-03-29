@@ -66,7 +66,7 @@ public class MainMenuActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main_menu);
+		setContentView(R.layout.login_screen);
 		FileManager.initializeSaver(this);
 	}
 
@@ -87,8 +87,8 @@ public class MainMenuActivity extends Activity {
 	 * @param v
 	 */
 	public void OnLoginClick(View v){
-		EditText passText = (EditText) findViewById(R.id.PasswordEditText);
-		EditText userText = (EditText) findViewById(R.id.UsernameEditText);
+		EditText passText = (EditText) findViewById(R.id.PasswordField);
+		EditText userText = (EditText) findViewById(R.id.LoginField);
 		MessageDigest md = null;
 		byte[] passHash = null;
 		String givenUsername = userText.getText().toString();
@@ -182,7 +182,17 @@ public class MainMenuActivity extends Activity {
 		}
     }
 	
-
+	public void RegisterButton(View v)
+    {
+		
+		if(InternetController.isInternetAvailable2(this)){
+			Toast.makeText(this, "Create User", Toast.LENGTH_SHORT).show();
+			Intent intent = new Intent(MainMenuActivity.this, CreateUserActivity.class);
+			startActivity(intent);
+		} else {
+			Toast.makeText(this, "Cannot Create User offline", Toast.LENGTH_SHORT).show();
+		}
+    }
 	
 	/**
 	 * When connected to the internet, given info is compared with server info.
