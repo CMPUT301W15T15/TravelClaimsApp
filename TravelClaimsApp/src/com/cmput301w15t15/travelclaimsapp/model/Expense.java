@@ -40,7 +40,9 @@ public class Expense implements Listenable{
 	protected Uri expenseReceipt;
 	protected int flag=0;
 	protected GeoLocation geoLocation;
-
+	private byte[] img;
+	
+	
 	/**
 	 * expense constructor
 	 * @param expenseName
@@ -306,6 +308,14 @@ public class Expense implements Listenable{
 	}
 
 	
+	// real picture taking
+	public byte[] getPicture() {
+		return this.img;
+	}
+	
+	public void takePictrue(byte[] picture){
+		this.img=picture;
+	}
 
 	
 	

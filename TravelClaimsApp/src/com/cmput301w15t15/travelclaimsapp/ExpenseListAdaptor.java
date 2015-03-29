@@ -65,7 +65,7 @@ public class ExpenseListAdaptor extends ArrayAdapter<Expense> {
 		this.context = context;
 		this.resource = resource;
 		this.expenseList = expenses;
-		this.stars= new boolean[expenses.size()];
+		//this.stars= new boolean[expenses.size()];
 	}
 
 	/**

@@ -17,6 +17,9 @@
  */
 package com.cmput301w15t15.travelclaimsapp.activitys;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -36,16 +39,23 @@ import com.cmput301w15t15.travelclaimsapp.model.ClaimList;
 import com.cmput301w15t15.travelclaimsapp.model.Expense;
 import com.cmput301w15t15.travelclaimsapp.model.ExpenseList;
 
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.text.format.DateFormat;
+import android.util.Base64;
+import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -54,6 +64,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -80,6 +91,8 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 	private String expenseName;
 	private String claimName;
 	private Date expenseDate;
+	private ImageView receiptView;
+	private byte[] imgShow;
 	
 	
 	@Override
@@ -99,12 +112,25 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 		expenseDescriptionInput=(EditText) findViewById(R.id.Edit_Expense_Description);
 		currencySpinner = (Spinner) findViewById(R.id.CurrencySpinner);
 		categorySpinner=(Spinner) findViewById(R.id.CategorySpinner);
+		receiptView=(ImageView) findViewById(R.id.ReceiptImg);
 		
 		claimList = ClaimListController.getClaimList();
 		claim=claimList.getClaim(claimName);
 		expenseList=claim.getExpenseList();
 		expense=expenseList.getExpense(expenseName);
 		expenseCost = expense.getCost();
+		imgShow = expense.getPicture();
+		
+		// show default picture
+		if (imgShow != null){
+			Bitmap bm = BitmapFactory.decodeByteArray(imgShow, 0, imgShow.length);
+			DisplayMetrics dm = new DisplayMetrics();
+			getWindowManager().getDefaultDisplay().getMetrics(dm);
+		
+			receiptView.setMinimumHeight(dm.heightPixels);
+			receiptView.setMinimumWidth(dm.widthPixels);
+			receiptView.setImageBitmap(bm);
+		}
 		
 		if (expense.getDes()!=null){
 			expenseDescription = expense.getDes();
@@ -128,7 +154,7 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 		
 		});
 		
-		
+	
 		categorySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 			@Override
 			public void onItemSelected(AdapterView<?> parent,View view, int position, long id){
@@ -141,7 +167,69 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 			}
 		
 		});
+		
+		// Going to do
+		//receiptView.setOnClickListener(l);
+		
+		
+		
 		set_on_click();
+	}
+	
+	
+	
+//	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//
+//		if (requestCode == 1 && resultCode == RESULT_OK) {
+//			Uri selectedImageUri = data.getData();
+//			
+//			String imagepath = getPath(selectedImageUri);
+//			Bitmap bitmap = BitmapFactory.decodeFile(imagepath);
+//			long lengthbmp = bitmap.getRowBytes() * bitmap.getHeight();
+//			
+//			ByteArrayOutputStream stream;
+//			byte[] byteArray;
+//			
+//			if (lengthbmp > 64000) {
+//				int w = bitmap.getWidth();
+//				int h = bitmap.getHeight();
+//				int inH = h*SCALED_IMAGE_WIDTH/w;
+//	    		Bitmap resizedBmp = Bitmap.createScaledBitmap(bitmap, SCALED_IMAGE_WIDTH, inH, true);
+//	    		stream = new ByteArrayOutputStream();
+//				resizedBmp.compress(Bitmap.CompressFormat.JPEG, 60, stream);
+//				byteArray = stream.toByteArray();
+//				lengthbmp = byteArray.length;
+//					
+//				if (lengthbmp > 64000) {
+//					Toast.makeText(getApplicationContext(), "Picture Still Too Big After Resizing", Toast.LENGTH_SHORT).show();
+//				return;
+//				}
+//				
+//			} else {
+//				stream = new ByteArrayOutputStream();
+//				bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+//				byteArray = stream.toByteArray();
+//			}
+//			
+//			// Attach image to picture
+//			bytebitmap = Base64.encode(byteArray, 1);
+//
+//			// Display attached image
+//			byte[] decodedBytes = Base64.decode(bytebitmap, 1);
+//			InputStream is = new ByteArrayInputStream(decodedBytes);
+//			Bitmap bmp = BitmapFactory.decodeStream(is);
+//			imageview.setImageBitmap(bmp);
+//		}
+//	}
+	
+	public String getPath(Uri uri) {
+		String[] projection = { MediaStore.Images.Media.DATA };
+		@SuppressWarnings("deprecation")
+		Cursor cursor = managedQuery(uri, projection, null, null, null);
+		int column_index = cursor
+				.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+		cursor.moveToFirst();
+		return cursor.getString(column_index);
 	}
 	
 	@Override
