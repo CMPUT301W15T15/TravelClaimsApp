@@ -83,6 +83,7 @@ public class ClaimListAdaptor extends ArrayAdapter<Claim>{
 	        viewHolder.destinations = (LinearLayout) rowView.findViewById(R.id.linearLayout_destinations);
 	        viewHolder.tags = (LinearLayout) rowView.findViewById(R.id.LinearLayout_tags);
 	        viewHolder.amounts = (LinearLayout) rowView.findViewById(R.id.LinearLayout_amounts);
+	        
  	        rowView.setTag(viewHolder);
  	        
 		}else{
@@ -106,6 +107,7 @@ public class ClaimListAdaptor extends ArrayAdapter<Claim>{
         	tv1.setTextColor(context.getResources().getColor(color.primary_text_dark));
         	tv1.setText("Destinations");
         	viewHolder.destinations.addView(tv1);
+        	
         	for(Destination dest : dests){
             	TextView tv = new TextView(context);
             	tv.setTextColor(context.getResources().getColor(color.primary_text_dark));
@@ -113,6 +115,7 @@ public class ClaimListAdaptor extends ArrayAdapter<Claim>{
             	viewHolder.destinations.addView(tv);
             }
         }else{
+        	viewHolder.destinations.removeAllViews();
         	viewHolder.destinations.setVisibility(android.view.View.INVISIBLE);	
         }
         //add tags to viewholder
@@ -138,6 +141,7 @@ public class ClaimListAdaptor extends ArrayAdapter<Claim>{
             }
         }else{
         	//if tagList is empty then set LinearLayout for tags to invisible
+        	viewHolder.tags.removeAllViews();
         	viewHolder.tags.setVisibility(android.view.View.INVISIBLE);	
         }
         //Get amounts with currencies from expenselist
@@ -157,6 +161,7 @@ public class ClaimListAdaptor extends ArrayAdapter<Claim>{
 				viewHolder.amounts.addView(tv);
             }
         }else{
+        	viewHolder.amounts.removeAllViews();
         	viewHolder.amounts.setVisibility(android.view.View.INVISIBLE);	
         }
         
@@ -207,6 +212,7 @@ public class ClaimListAdaptor extends ArrayAdapter<Claim>{
         public LinearLayout destinations;
         public LinearLayout amounts;
         public LinearLayout tags;
+        
     
     }
 	
