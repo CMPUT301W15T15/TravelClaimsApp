@@ -51,9 +51,9 @@ public class AddClaimActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_add_claim);
+		setContentView(R.layout.add_claim);
 		FileManager.initializeSaver(this);
-		claimListView = (ListView) findViewById(R.id.claim_list_listview);
+		claimListView = (ListView) findViewById(R.id.Claim_Listview);
 		claimList = ClaimListController.getClaimList();
 		
 		//create a adaptor for claim list and set it
@@ -61,7 +61,7 @@ public class AddClaimActivity extends Activity {
 		claimAdaptor.notifyDataSetChanged();
         claimListView.setAdapter(claimAdaptor);
         
-		registerForContextMenu(findViewById(R.id.claim_list_listview));
+		registerForContextMenu(findViewById(R.id.Claim_Listview));
 	}
 	
 	@Override

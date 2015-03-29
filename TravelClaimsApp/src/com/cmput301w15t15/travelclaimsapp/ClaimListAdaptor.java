@@ -94,7 +94,7 @@ public class ClaimListAdaptor extends ArrayAdapter<Claim>{
         if(claim.getClaimStatus().equals("Submitted")){
         	viewHolder.claimStatus.setTextColor(context.getResources().getColor(color.holo_red_light));
         }else{
-        	viewHolder.claimStatus.setTextColor(context.getResources().getColor(color.black));
+        	viewHolder.claimStatus.setTextColor(context.getResources().getColor(color.primary_text_dark));
         }
         viewHolder.claimStatus.setText(claim.getClaimStatus());
         //add destinations to viewholder
@@ -103,10 +103,12 @@ public class ClaimListAdaptor extends ArrayAdapter<Claim>{
         	viewHolder.destinations.removeAllViews();
         	viewHolder.destinations.setVisibility(android.view.View.VISIBLE);
         	TextView tv1 = new TextView(context);
+        	tv1.setTextColor(context.getResources().getColor(color.primary_text_dark));
         	tv1.setText("Destinations");
         	viewHolder.destinations.addView(tv1);
         	for(Destination dest : dests){
             	TextView tv = new TextView(context);
+            	tv.setTextColor(context.getResources().getColor(color.primary_text_dark));
             	tv.setText(dest.getLocation()+": "+dest.getReason());
             	viewHolder.destinations.addView(tv);
             }
@@ -119,11 +121,13 @@ public class ClaimListAdaptor extends ArrayAdapter<Claim>{
         if(taglist.size()>0){
         	viewHolder.tags.removeAllViews();
         	TextView tv1 = new TextView(context);
+        	tv1.setTextColor(context.getResources().getColor(color.primary_text_dark));
         	tv1.setText("Tags:");
         	viewHolder.tags.setVisibility(android.view.View.VISIBLE);
         	viewHolder.tags.addView(tv1);
         	for(int i = 0; i<taglist.size(); i++){
             	TextView tv = new TextView(context);
+            	tv.setTextColor(context.getResources().getColor(color.primary_text_dark));
             	if(i == 0){
             		tv.setText(" "+taglist.get(i).getName());
             	}else{
@@ -148,6 +152,7 @@ public class ClaimListAdaptor extends ArrayAdapter<Claim>{
         	//concatenated with amount 
         	for(String s : totals.keySet()){
 				TextView tv = new TextView(context);
+				tv.setTextColor(context.getResources().getColor(color.primary_text_dark));
 				tv.setText(s +": "+totals.get(s));
 				viewHolder.amounts.addView(tv);
             }

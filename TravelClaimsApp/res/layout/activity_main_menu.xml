@@ -9,7 +9,7 @@
     tools:context=".MainMenuActivity" >
 
     <Button
-        android:id="@+id/LoginButton"
+        android:id="@+id/Login_Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -22,9 +22,9 @@
         android:id="@+id/NewPassATextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/LoginButton"
+        android:layout_alignLeft="@+id/Login_Button"
         android:layout_alignParentTop="true"
-        android:layout_alignRight="@+id/LoginButton"
+        android:layout_alignRight="@+id/Login_Button"
         android:text="@string/User" />
 
     <EditText

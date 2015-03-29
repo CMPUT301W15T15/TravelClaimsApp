@@ -21,6 +21,7 @@
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/claimAdaptor_display_name"
         android:text="Small Text"
+        android:textColor="#ffffff"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <TextView
@@ -30,6 +31,7 @@
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/claimAdaptor_status"
         android:text="Small Text"
+        android:textColor="#ffffff"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
    	<Space
