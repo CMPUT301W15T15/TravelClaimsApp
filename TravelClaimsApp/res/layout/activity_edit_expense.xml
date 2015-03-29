@@ -57,15 +57,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/Edit_Expense_Cost"
+        android:layout_toRightOf="@+id/Edit_Expense_Cost"
         android:entries="@array/CurrencyArray" />
-
-    <Spinner
-        android:id="@+id/CategorySpinner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/CurrencySpinner"
-        android:layout_below="@+id/CurrencySpinner"
-        android:entries="@array/CategoryArray" />
 
     <EditText
         android:id="@+id/Edit_Expense_Description"
@@ -77,5 +70,14 @@
         android:ems="10"
         android:hint="@string/Description"
         android:inputType="textMultiLine" />
+
+    <Spinner
+        android:id="@+id/CategorySpinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/Edit_Expense_Cost"
+        android:layout_alignTop="@+id/CurrencySpinner"
+        android:layout_toLeftOf="@+id/CurrencySpinner"
+        android:entries="@array/CategoryArray" />
 
 </RelativeLayout>
