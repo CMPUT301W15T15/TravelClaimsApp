@@ -36,6 +36,8 @@
     <string name="View">View Expenses</string>
     <string name="CurrentExpense">Current Expenses:</string>
     <string name="Des">Add Destination</string>
+    <string name="Welcome">Welcome to the travel claims app.   Please login to continue</string>
+    <string name="Register">Register</string>
 
     <string-array name="StatusArray">
         <item>In Progress</item>
@@ -75,5 +77,6 @@
     <string name="AddButton">Add</string>
     <string name="TagListTitle">Tags:</string>
     <string name="SearchHint">Eg. Food, Hotel, Taxi</string>
+    <string name="title_activity_welcome">WelcomeActivity</string>
 
 </resources>
