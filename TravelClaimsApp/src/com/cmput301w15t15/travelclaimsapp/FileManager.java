@@ -34,7 +34,7 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 
-import com.cmput301w15t15.travelclaimapp.elasticsearch.SearchHit;
+import com.cmput301w15t15.travelclaimsapp.elasticsearch.SearchHit;
 import com.cmput301w15t15.travelclaimsapp.model.ClaimList;
 
 import com.cmput301w15t15.travelclaimsapp.model.User;

@@ -122,8 +122,8 @@ public class User  implements Listenable{
 	/**
 	 * Consider getting rid of this function
 	 */
-	public void initHomeLocation(){
-		this.homeLocation = new GeoLocation();
+	public void initHomeLocation(GeoLocation gl){
+		this.homeLocation = gl;
 	}
 	
 	public void notifyListeners() {

@@ -16,7 +16,7 @@
     <string name="Expense">Expenses:</string>
     <string name="Status">Status</string>
     <string name="Description">Description</string>
-    <string name="Claim">Claims:</string>
+    <string name="Claim">Existing Claims:</string>
     <string name="NewClaim">Add New Claim</string>
     <string name="User">Username</string>
     <string name="Approver">Approver</string>
@@ -36,8 +36,14 @@
     <string name="View">View Expenses</string>
     <string name="CurrentExpense">Current Expenses:</string>
     <string name="Des">Add Destination</string>
+<<<<<<< HEAD
     <string name="Welcome">Welcome to the travel claims app.   Please login to continue</string>
     <string name="Register">Register</string>
+=======
+    <string name="Welcome">Welcome to the Travel Claims App.  Please login in to continue.</string>
+    <string name="Register">Register</string>
+    <string name="CreateUserText">Please full all fields and check box if you are an approver.</string>
+>>>>>>> 5c9718f590da865f1bc5672bc3a7974b65489834
 
     <string-array name="StatusArray">
         <item>In Progress</item>
@@ -77,6 +83,13 @@
     <string name="AddButton">Add</string>
     <string name="TagListTitle">Tags:</string>
     <string name="SearchHint">Eg. Food, Hotel, Taxi</string>
+<<<<<<< HEAD
+=======
+    <string name="title_activity_map">MapActivity</string>
+>>>>>>> 5c9718f590da865f1bc5672bc3a7974b65489834
     <string name="title_activity_welcome">WelcomeActivity</string>
 
+
+    
+    
 </resources>

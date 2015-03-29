@@ -14,7 +14,6 @@ import android.test.AndroidTestCase;
 
 /**
  * Test GeoLocationController class 
- * @author searn
  *
  */
 public class GeoLocationControllerTest extends AndroidTestCase {
@@ -43,6 +42,9 @@ public class GeoLocationControllerTest extends AndroidTestCase {
 		assertNotNull(currentLocation);
 	}	
 	
+	/**
+	 * Tests setting the home location 
+	 */
 	public void testsetLatLng(){	
 		GeoLocationController.setHomeLocation(53.544389, -113.490927);
 		GeoLocation temp = GeoLocationController.getHomeLocation();
@@ -50,13 +52,27 @@ public class GeoLocationControllerTest extends AndroidTestCase {
 		assertTrue("Location longitudes do not equal", temp.getLongitude() == homeLocation.getLongitude());	
 	}
 	
+	/**
+	 * Tests the getDistanceFromHome method
+	 */
 	public void testDistanceFromHome(){
 		GeoLocationController.setHomeLocation(53.544389, -113.490927);
 		GeoLocation gl = new GeoLocation(51.048615,-114.070846);
 		
+		//distance greater than 0
 		assertEquals("Distance calculated not correct", 280,Math.round(Math.floor(GeoLocationController.getDistanceFromHome(gl))));	
+		
+		
+		//distance equal to zero 
+		GeoLocationController.setHomeLocation(51.048615, -114.070846);
+		
+		assertEquals("Distance calculated not correct", 0,Math.round(Math.floor(GeoLocationController.getDistanceFromHome(gl))));
+		
 	}
 	
+	/**
+	 * Tests setting the geolocation for destinations and expenses 
+	 */
 	public void testSetGeoLocation(){
 		Destination dest = new Destination("Somewhere", "Somehow");
 		GeoLocationController.setDestinationGeoLocation(dest, 53.544389, -113.490927);
@@ -71,6 +87,10 @@ public class GeoLocationControllerTest extends AndroidTestCase {
 		assertEquals("Controller did not set geolocation",53.544389,expense.getGeoLocation().getLatitude());
 		assertEquals("Controller did not set geolocation",-113.490927,expense.getGeoLocation().getLongitude());
 		
+	}
+	
+	public void testGPSenabled(){
+		assertTrue(GeoLocationController.checkGPSEnabled());
 	}
 	
 }

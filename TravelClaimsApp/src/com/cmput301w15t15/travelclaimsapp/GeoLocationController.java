@@ -32,30 +32,56 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 
+/**
+ * Singleton class to track current location of device 
+ * 
+ * Also used for attaching {@link GeoLocation} to {@link Destination} and {@link Expense} 
+ * and calculating distance from one {@link GeoLocation} to the users home {@link GeoLocation}
+ *
+ */
 public class GeoLocationController {
 
 	private static Location currentLocation = null;
 	private static LocationManager lm;
 	
 	
-	//referenced https://github.com/joshua2ua/MockLocationTester on March 26th 2015
+	/**
+	 * Initializes location manager
+	 * 
+	 * Should be passed the Application context
+	 * 
+	 * @param context takes the Application context 
+	 */
 	public static void initializeLocationManager(Context context){
 		if(lm == null){
+			//referenced https://github.com/joshua2ua/MockLocationTester on March 26th 2015
 			lm = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
 		}
 	}
+	
+	/**
+	 * Used to check if the devices GPS is enabled
+	 * 
+	 * @return true if GPS enabled
+	 */
+	public static boolean checkGPSEnabled(){
+		if(lm == null){
+			throw new RuntimeException("Location manager was not initialized");
+		}
+		return lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
+	}
+	
 	/**
 	 * Gets the current location using GPS and returns a geolocation object
 	 * 
 	 * @return returns the current GeoLocation 
 	 */
-	//referenced https://github.com/joshua2ua/MockLocationTester on March 26th 2015
 	public static GeoLocation getLocation() {
 		if(lm == null){
 			throw new RuntimeException("Location manager was not initialized");
 		}
-		
 		if(currentLocation == null){
+			//referenced https://github.com/joshua2ua/MockLocationTester on March 26th 2015
 			currentLocation = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 			lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 1, new LocationListener() {
 				
@@ -105,7 +131,7 @@ public class GeoLocationController {
 	public static void setHomeLocation(double latitude, double longitude) {
 		GeoLocation gl = UserController.getUser().getHomeLocation();
 		if(gl == null){
-			UserController.getUser().initHomeLocation();
+			UserController.getUser().initHomeLocation(new GeoLocation(latitude, longitude));
 			UserController.getUser().getHomeLocation().addListener(new Listener() {
 				@Override
 				public void update() {
@@ -172,5 +198,27 @@ public class GeoLocationController {
 			expense.getGeoLocation().setLatLng(lat, lng);
 		}
 		
+	}
+	/**
+	 * Sets the {@link GeoLocation} of the passed {@link Destination} 
+	 * 
+	 * Uses latitude and longitude of current location
+	 * 
+	 * @param dest 
+	 */
+	public static void setDestinationGeoLocationGPS(Destination dest) {
+		GeoLocation gl = getLocation();
+		setDestinationGeoLocation(dest, gl.getLatitude(), gl.getLongitude());
+	}
+	/**
+	 * Sets the {@link GeoLocation} of the passed {@link Expense}
+	 * 
+	 * Uses latitude and longitude of current location
+	 * 
+	 * @param dest
+	 */
+	public static void setExpenseGeoLocationGPS(Expense expense) {
+		GeoLocation gl = getLocation();
+		setExpenseGeoLocation(expense, gl.getLatitude(), gl.getLongitude());
 	}
 }

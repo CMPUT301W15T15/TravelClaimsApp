@@ -1,91 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent" 
+    android:orientation="vertical" >
 
+    <View
+    android:layout_width="fill_parent"
+    android:layout_height="1dp"
+    android:layout_below="@+id/claimAdaptor_startDate"
+    android:background="@android:color/darker_gray"/>
+    <View
+    android:layout_width="fill_parent"
+    android:layout_height="1dp"
+    android:layout_below="@+id/claimAdaptor_startDate"
+    android:background="@android:color/darker_gray"/>
+    
     <TextView
         android:id="@+id/claimAdaptor_display_name"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
+        android:background="#FFFFFF"
         android:text="Medium Text"
-        android:background="#D1D0EA"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
         android:id="@+id/claimAdaptor_status"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
         android:layout_below="@+id/claimAdaptor_display_name"
         android:text="Small Text"
+        android:textColor="#ffffff"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <TextView
         android:id="@+id/claimAdaptor_startDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/claimAdaptor_status"
         android:text="Small Text"
+        android:textColor="#ffffff"
+        android:drawableBottom="@drawable/horizontal_line"
+        android:paddingBottom="1dp"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
-   	<Space
-   	    android:layout_width="wrap_content"
-   	    android:layout_height="wrap_content"
-   	    android:layout_alignLeft="@+id/linearLayout_destinations"
-   	    android:layout_alignTop="@+id/claimAdaptor_status" />
-	<View
-    android:layout_width="fill_parent"
-    android:layout_height="1dp"
-    android:layout_below="@+id/claimAdaptor_startDate"
-    android:background="@android:color/darker_gray"/>
-	<View
-    android:layout_width="fill_parent"
-    android:layout_height="1dp"
-    android:layout_below="@+id/claimAdaptor_display_name"
-    android:background="@android:color/darker_gray"/>
-	<View
-    android:layout_width="fill_parent"
-    android:layout_height="1dp"
-    android:background="@android:color/darker_gray"/>
    	<LinearLayout
    	    android:id="@+id/linearLayout_destinations"
    	    android:layout_width="wrap_content"
    	    android:layout_height="wrap_content"
-   	    android:layout_alignParentLeft="true"
-   	    android:layout_alignParentRight="true"
-   	    android:layout_below="@+id/claimAdaptor_startDate"
+   	    android:divider="@drawable/horizontal_line"
+   	    android:showDividers="end"
+   	    android:dividerPadding="1dp"
    	    android:orientation="vertical" >
 
    	</LinearLayout>
-	<View
-    android:layout_width="fill_parent"
-    android:layout_height="1dp"
-    android:layout_below="@+id/LinearLayout_tags"
-    android:background="@android:color/darker_gray"/>
+
    	<LinearLayout
    	    android:id="@+id/LinearLayout_tags"
    	    android:layout_width="wrap_content"
    	    android:layout_height="wrap_content"
-   	    android:layout_alignParentLeft="true"
-   	    android:layout_below="@+id/linearLayout_destinations"
    	    android:orientation="horizontal">
    	</LinearLayout>
-	<View
-    android:layout_width="fill_parent"
-    android:layout_height="1dp"
-    android:layout_below="@+id/linearLayout_destinations"
-    android:background="@android:color/darker_gray"/>
+	
    	<LinearLayout
    	    android:id="@+id/LinearLayout_amounts"
    	    android:layout_width="wrap_content"
    	    android:layout_height="wrap_content"
-   	    android:layout_alignParentLeft="true"
-   	    android:layout_below="@+id/LinearLayout_tags"
+   	    android:divider="@drawable/horizontal_line"
+   	    android:showDividers="end"
    	    android:orientation="vertical" >
    	</LinearLayout>
+   
 
-</RelativeLayout>
+
+</LinearLayout>

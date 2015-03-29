@@ -2,6 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
     <item android:id="@+id/cmenu_dlist_delete" android:title="Delete"></item>
     <item android:id="@+id/cmenu_dlist_edit" android:title="Edit Destination"></item>
+    <item android:id="@+id/cmenu_dlist_geolocation" android:title="Set GeoLocation"></item>
     
 
 </menu>

@@ -13,11 +13,19 @@ android:right="0dp"
 android:bottom="0dp"
 />
 <size
+<<<<<<< HEAD
 android:width="270dp"
+=======
+android:width="120dp"
+>>>>>>> 5c9718f590da865f1bc5672bc3a7974b65489834
 android:height="60dp"
 />
 <stroke
 android:width="3dp"
 android:color="#878787"
 />
+<<<<<<< HEAD
 </shape>
+=======
+</shape> 
+>>>>>>> 5c9718f590da865f1bc5672bc3a7974b65489834

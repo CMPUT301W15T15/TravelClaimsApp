@@ -36,4 +36,8 @@ public class WelcomeActivity extends Activity {
 		super.onPause();
 		finish();
 	}
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 5c9718f590da865f1bc5672bc3a7974b65489834
