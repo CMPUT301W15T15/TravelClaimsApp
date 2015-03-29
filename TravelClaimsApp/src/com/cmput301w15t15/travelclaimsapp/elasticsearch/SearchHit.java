@@ -19,7 +19,7 @@
 
 // https://github.com/joshua2ua/AndroidElasticSearch/blob/master/src/ca/ualberta/ssrg/movies/es/data/SearchHit.java
 
-package com.cmput301w15t15.travelclaimapp.elasticsearch;
+package com.cmput301w15t15.travelclaimsapp.elasticsearch;
 
 public class SearchHit<T> {
 	private String _index;
