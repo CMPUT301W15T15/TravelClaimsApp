@@ -236,7 +236,7 @@ public class EditClaimActivity extends FragmentActivity implements TextWatcher {
 						}
 						Intent intent = new Intent(EditClaimActivity.this, MapActivity.class);
 				    	intent.putExtra("uri", uri);
-				    	startActivity(intent);  
+				    	startActivityForResult(intent, GET_GEOLOCATION_CODE);
 					}
 				});
             	
