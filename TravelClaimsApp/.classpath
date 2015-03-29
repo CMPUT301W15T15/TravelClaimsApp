@@ -5,6 +5,11 @@
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
 	<classpathentry kind="lib" path="libs/gson-2.3.1-javadoc(1).jar"/>
 	<classpathentry kind="lib" path="libs/gson-2.3.1(1).jar"/>
+<<<<<<< HEAD
+=======
+	<classpathentry kind="lib" path="/cshome/searn/Documents/TravelClaimsApp/TravelClaimsApp/libs/osmdroid-android-4.2.jar"/>
+	<classpathentry kind="lib" path="/cshome/searn/Documents/TravelClaimsApp/TravelClaimsApp/libs/slf4j-android-1.6.1-RC1.jar"/>
+>>>>>>> 07910be9a9055ba0f7bef5cc384433832979ec2e
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="gen"/>
 	<classpathentry kind="output" path="bin/classes"/>
