@@ -263,6 +263,7 @@ public class Expense implements Listenable{
 	
 	public void setGeoLocation(GeoLocation gl) {
 		this.geoLocation = gl;
+		notifyListeners();
 		
 	}
 

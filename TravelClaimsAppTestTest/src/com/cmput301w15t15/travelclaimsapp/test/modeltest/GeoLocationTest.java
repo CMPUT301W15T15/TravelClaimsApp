@@ -64,6 +64,11 @@ public class GeoLocationTest extends TestCase {
 		assertEquals("setter did not set", "51.544389,-111.490927", gl.getString());
 	}
 	
+	public void testGetGeolocationFromString(){
+		GeoLocation gl = GeoLocation.getFromString("50.45,-113.1");
+		assertEquals("Function returned incorrect lat and long", 50.45,gl.getLatitude());
+		assertEquals("Function returned incorrect lat and long", -113.1,gl.getLongitude());
+	}
 	
 	
 }

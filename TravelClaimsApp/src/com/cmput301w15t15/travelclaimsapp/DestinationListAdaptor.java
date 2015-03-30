@@ -24,13 +24,17 @@ import java.util.Locale;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.cmput301w15t15.travelclaimsapp.activitys.EditClaimActivity;
+import com.cmput301w15t15.travelclaimsapp.activitys.MapActivity;
 import com.cmput301w15t15.travelclaimsapp.model.Claim;
 import com.cmput301w15t15.travelclaimsapp.model.Destination;
 import com.cmput301w15t15.travelclaimsapp.model.DestinationList;
@@ -44,7 +48,7 @@ public class DestinationListAdaptor extends ArrayAdapter<Destination>{
 	private Context context;
 	private int resource;
 	private ArrayList<Destination> destList;
-	
+	private int GET_GEOLOCATION_CODE = 10;
 	/**
 	 * class contructor
 	 * @param context
@@ -68,7 +72,7 @@ public class DestinationListAdaptor extends ArrayAdapter<Destination>{
 		View rowView = convertView;
 		
 		ViewHolder viewHolder;
-		Destination d = destList.get(position);
+		final Destination d = destList.get(position);
 		
 		if(rowView == null){
 			viewHolder = new ViewHolder();
@@ -78,6 +82,7 @@ public class DestinationListAdaptor extends ArrayAdapter<Destination>{
 	        viewHolder.destLocation = (TextView) rowView.findViewById(R.id.destAdaptor_location);
 	        viewHolder.destReason = (TextView) rowView.findViewById(R.id.destAdaptor_reason);
 	        viewHolder.destMap = (ImageView) rowView.findViewById(R.id.destAdaptor_map_image);
+	        
 	        
  	        rowView.setTag(viewHolder);
  	        
@@ -90,9 +95,18 @@ public class DestinationListAdaptor extends ArrayAdapter<Destination>{
         
         if(d.getGeoLocation() == null){
         	viewHolder.destMap.setVisibility(android.view.View.INVISIBLE);
+        	viewHolder.destMap.setClickable(false);
         }else{
         	viewHolder.destMap.setVisibility(android.view.View.VISIBLE);
         }
+        viewHolder.destMap.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(context, MapActivity.class);
+				intent.putExtra("LatLng", d.getGeoLocation().getString());
+		    	context.startActivity(intent);
+			}
+		});
         
 		return rowView;
 	}

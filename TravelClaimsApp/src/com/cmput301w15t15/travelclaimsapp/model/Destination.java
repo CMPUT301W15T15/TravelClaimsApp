@@ -85,6 +85,7 @@ public class Destination implements Listenable{
 	
 	public void setGeoLocation(GeoLocation gl) {
 		this.geoLocation = gl;
+		notifyListeners();
 	}
 	
 	public GeoLocation getGeoLocation() {

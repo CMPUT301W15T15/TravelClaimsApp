@@ -34,6 +34,7 @@ import com.cmput301w15t15.travelclaimsapp.model.ClaimList;
 import com.cmput301w15t15.travelclaimsapp.model.Destination;
 import com.cmput301w15t15.travelclaimsapp.model.DestinationList;
 import com.cmput301w15t15.travelclaimsapp.model.Expense;
+import com.cmput301w15t15.travelclaimsapp.model.GeoLocation;
 import com.cmput301w15t15.travelclaimsapp.model.Tag;
 import com.cmput301w15t15.travelclaimsapp.model.TagList;
 
@@ -90,6 +91,7 @@ public class EditClaimActivity extends FragmentActivity implements TextWatcher {
 	private Button addDestButton;
 	private Button addTagButton;
 	private static int GET_GEOLOCATION_CODE = 10;
+	private int adaptorPos;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -214,6 +216,7 @@ public class EditClaimActivity extends FragmentActivity implements TextWatcher {
         		return true;
         		
             case R.id.cmenu_dlist_geolocation:
+            	adaptorPos = info.position;
             	AlertDialog.Builder alertGl = new AlertDialog.Builder(this);
             	alertGl.setPositiveButton("GPS", new DialogInterface.OnClickListener() {
 					@Override
@@ -228,14 +231,8 @@ public class EditClaimActivity extends FragmentActivity implements TextWatcher {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						//Open map view \
-						Uri uri;
-						if(UserController.getUser().getHomeLocation()==null){
-							uri = Uri.parse("geo:0,0");
-						}else{
-							uri = Uri.parse("geo:0,0?q="+UserController.getUser().getHomeLocation()+"(Home)");
-						}
 						Intent intent = new Intent(EditClaimActivity.this, MapActivity.class);
-				    	intent.putExtra("uri", uri);
+				    	intent.putExtra("adaptorIndex", info.position);
 				    	startActivityForResult(intent, GET_GEOLOCATION_CODE);
 					}
 				});
@@ -560,32 +557,35 @@ public class EditClaimActivity extends FragmentActivity implements TextWatcher {
 	
 		alert.show(); 
    	}
-//   	//Retrieved form https://developer.android.com/guide/components/intents-common.html#Maps on March 28th 2015
-//   	public void showMap(Uri geoLocation) {
-//   	    Intent intent = new Intent(Intent.ACTION_VIEW);
-//   	    intent.setData(geoLocation);
-//   	    if (intent.resolveActivity(getPackageManager()) != null) {
-//   	    	startActivityForResult(intent, GET_GEOLOCATION_CODE);
-//   	    }
-//   	}
-//   	
-//	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//		if(requestCode == GET_GEOLOCATION_CODE){
-//			switch (resultCode) {
-//			case RESULT_OK:
-//				Toast.makeText(this, "RESULT_OK", Toast.LENGTH_SHORT).show();
-//				break;
-//			case RESULT_CANCELED:
-//				break;
-//				
-//			default:
-//				break;
-//			}
-//			
-//		}
-//		
-//		
-//	}
+   	
+   	
+   	
+   	
+
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if(requestCode == GET_GEOLOCATION_CODE){
+			switch (resultCode) {
+			case RESULT_OK:
+				Toast.makeText(this, "RESULT_OK", Toast.LENGTH_SHORT).show();
+				String geoString = data.getExtras().getString("geoLocation");
+				//double[] latlng = getIntent().getExtras().getDoubleArray("LatLng2");
+				GeoLocation gl = GeoLocation.getFromString(geoString);
+				Destination dest = destAdaptor.getItem(adaptorPos);
+				GeoLocationController.setDestinationGeoLocation(dest, gl.getLatitude(), gl.getLongitude());
+				break;
+			case RESULT_CANCELED:
+				Toast.makeText(this, "RESULT_CANCEL", Toast.LENGTH_SHORT).show();
+				break;
+				
+			default:
+				Toast.makeText(this, "NOTHING", Toast.LENGTH_SHORT).show();
+				break;
+			}
+			
+		}
+		
+		
+	}
    	
    	
 }

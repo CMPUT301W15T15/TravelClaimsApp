@@ -120,4 +120,18 @@ public class GeoLocation implements Listenable{
 		return new String(this.latitude+","+this.longitude);
 	}
 
+	/**
+	 * Returns a {@link GeoLocation} from parsing the passed {@link String}
+	 * 
+	 * String needs to be formatted with a comma separating the latitude and longitude
+	 * 
+	 * @param geolocation String in the format "latitude,longitude"
+	 * @return {@link GeoLocation} made from splitting passed string
+	 */
+	public static GeoLocation getFromString(String geolocation) {
+		String[] parts = geolocation.split(",");
+		GeoLocation gl = new GeoLocation(Double.parseDouble(parts[0]), Double.parseDouble(parts[1]));
+		return gl;
+	}
+
 }

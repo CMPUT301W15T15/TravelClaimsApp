@@ -56,6 +56,33 @@ public class GeoLocationController {
 		if(lm == null){
 			//referenced https://github.com/joshua2ua/MockLocationTester on March 26th 2015
 			lm = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
+			lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 1, new LocationListener() {
+				
+				@Override
+				public void onLocationChanged(Location location) {
+					if (location != null) {
+						currentLocation.set(location);
+					}
+				}
+				
+				@Override
+				public void onStatusChanged(String provider, int status, Bundle extras) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void onProviderEnabled(String provider) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void onProviderDisabled(String provider) {
+					// TODO Auto-generated method stub
+					
+				}
+			});
 		}
 	}
 	
@@ -82,36 +109,12 @@ public class GeoLocationController {
 		}
 		if(currentLocation == null){
 			//referenced https://github.com/joshua2ua/MockLocationTester on March 26th 2015
-			currentLocation = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-			lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 1, new LocationListener() {
-				
-				@Override
-				public void onLocationChanged(Location location) {
-					if (location != null) {
-						double lat = location.getLatitude();
-						double lng = location.getLongitude();
-						Date date = new Date(location.getTime());
-					}
-				}
-				
-				@Override
-				public void onStatusChanged(String provider, int status, Bundle extras) {
-					// TODO Auto-generated method stub
-					
-				}
-				
-				@Override
-				public void onProviderEnabled(String provider) {
-					// TODO Auto-generated method stub
-					
-				}
-				
-				@Override
-				public void onProviderDisabled(String provider) {
-					// TODO Auto-generated method stub
-					
-				}
-			});
+			if(checkGPSEnabled()){
+				currentLocation = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+			}else{
+				return new GeoLocation(0,0);
+			}
+			
 		}
 		return new GeoLocation(currentLocation.getLatitude(), currentLocation.getLongitude());
 	}
