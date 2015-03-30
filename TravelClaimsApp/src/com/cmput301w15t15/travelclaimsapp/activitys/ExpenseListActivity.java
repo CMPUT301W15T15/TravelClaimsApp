@@ -21,15 +21,20 @@ import com.cmput301w15t15.travelclaimsapp.ClaimListController;
 import com.cmput301w15t15.travelclaimsapp.ExpenseListAdaptor;
 import com.cmput301w15t15.travelclaimsapp.ExpenseListController;
 import com.cmput301w15t15.travelclaimsapp.FileManager;
+import com.cmput301w15t15.travelclaimsapp.GeoLocationController;
 import com.cmput301w15t15.travelclaimsapp.R;
 import com.cmput301w15t15.travelclaimsapp.R.layout;
 import com.cmput301w15t15.travelclaimsapp.R.menu;
 import com.cmput301w15t15.travelclaimsapp.model.Claim;
+import com.cmput301w15t15.travelclaimsapp.model.Destination;
 import com.cmput301w15t15.travelclaimsapp.model.Expense;
 import com.cmput301w15t15.travelclaimsapp.model.ExpenseList;
+import com.cmput301w15t15.travelclaimsapp.model.GeoLocation;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.ContextMenu;
 import android.view.Menu;
@@ -56,11 +61,15 @@ import android.widget.AdapterView.AdapterContextMenuInfo;
 
 public class ExpenseListActivity extends Activity
 {
+
+
 	private ExpenseListAdaptor expenseAdaptor;
 	private ExpenseList expenseList;
 	private ListView expenseListView;
 	private String claimName;
 	private Expense expense;
+	private int adaptorPos;
+	private static final int GET_GEOLOCATION_CODE = 10;
 	/* (non-Javadoc)
 	 * @see android.app.Activity#onCreate(android.os.Bundle)
 	 */
@@ -127,7 +136,6 @@ public class ExpenseListActivity extends Activity
     public void onCreateContextMenu(ContextMenu menu, View v,ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
         getMenuInflater().inflate(R.menu.expense_context_menu, menu);
-        
         
     }
 	/** Function that is called when Search menu item is clicked
@@ -217,6 +225,30 @@ public class ExpenseListActivity extends Activity
             	expenseAdaptor.notifyDataSetChanged();
             	return true;
             	
+            case R.id.expenseListViewMenuGeoLocation:
+            	adaptorPos = info.position;
+            	AlertDialog.Builder alertGl = new AlertDialog.Builder(this);
+            	alertGl.setPositiveButton("GPS", new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						if(GeoLocationController.checkGPSEnabled()){
+							GeoLocationController.setExpenseGeoLocationGPS(expense);
+							expenseAdaptor.notifyDataSetChanged();
+						}
+					}
+				});
+            	alertGl.setNegativeButton("Map", new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						//Open map view \
+						Intent intent = GeoLocationController.pickLocationIntent(ExpenseListActivity.this);
+				    	startActivityForResult(intent, GET_GEOLOCATION_CODE);
+					}
+				});
+            	alertGl.show();
+            	
+            	return true;
+            	
 //            case R.id.expenseListViewMenuFlag:
 //            	int flagStatus=expense.getFlag();
 //            	if (flagStatus==1){
@@ -243,6 +275,32 @@ public class ExpenseListActivity extends Activity
         }
 	}
 	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		// TODO Auto-generated method stub
+		if(requestCode == GET_GEOLOCATION_CODE){
+			switch (resultCode) {
+			case RESULT_OK:
+				Toast.makeText(this, "RESULT_OK", Toast.LENGTH_SHORT).show();
+				String geoString = data.getExtras().getString("geoLocation");
+				GeoLocation gl = GeoLocation.getFromString(geoString);
+				Expense e = expenseAdaptor.getItem(adaptorPos);
+				GeoLocationController.setExpenseGeoLocation(e, gl.getLatitude(), gl.getLongitude());
+				break;
+			case RESULT_CANCELED:
+				Toast.makeText(this, "RESULT_CANCEL", Toast.LENGTH_SHORT).show();
+				break;
+				
+			default:
+				Toast.makeText(this, "NOTHING", Toast.LENGTH_SHORT).show();
+				break;
+			}
+			
+		}
+	}
+
+	
+	
 //	   public void onItemClick(AdapterView<?> parent, View view, int position, long id){
 //		   if (view.equals(view.findViewById(R.id.expenseAdaptor_flag))){	
 //			   int pos=expenseListView.getPositionForView(view);
@@ -253,5 +311,6 @@ public class ExpenseListActivity extends Activity
 //		    	}
 //	}
 //	
+	
 
 }

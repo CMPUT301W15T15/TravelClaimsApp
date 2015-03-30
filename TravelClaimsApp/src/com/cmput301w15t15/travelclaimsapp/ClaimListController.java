@@ -40,6 +40,7 @@ import com.cmput301w15t15.travelclaimsapp.model.TagList;
  */
 public class ClaimListController {
 	
+
 	private static ClaimList claimList = null;
 	private static ExpenseList expenseList = null;
 

@@ -81,4 +81,25 @@
         android:layout_below="@+id/NewPassAEditText"
         android:text="@string/Approver" />
 
+    <TextView
+        android:id="@+id/NewHomeGeolocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/ApproverCheckBox"
+        android:layout_below="@+id/ApproverCheckBox"
+        android:text="Select home location" />
+
+    <ImageButton
+        android:id="@+id/imageButton1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/NewHomeGeolocation"
+        android:layout_below="@+id/NewHomeGeolocation"
+        android:adjustViewBounds="true"
+        android:baselineAlignBottom="true"
+        android:cropToPadding="true"
+        android:onClick="selectHomeLocation"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_action_map_icon" />
+
 </RelativeLayout>

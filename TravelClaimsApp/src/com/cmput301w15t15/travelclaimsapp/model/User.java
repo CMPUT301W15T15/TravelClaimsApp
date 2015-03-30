@@ -51,7 +51,7 @@ public class User  implements Listenable{
 		this.username = username;
 		this.pHash = password;
 		this.approver = approver;
-		
+		this.listeners = new ArrayList<Listener>();
 	}
 	
 	
@@ -66,7 +66,7 @@ public class User  implements Listenable{
 		this.username = username;
 		this.pHash = password;
 		this.approver = false;
-		
+		this.listeners = new ArrayList<Listener>();
 	}
 
 	
@@ -104,20 +104,20 @@ public class User  implements Listenable{
 	 * 
 	 * @return returns a {@link Location}
 	 */
-	public GeoLocation getHomeLocation() {
+	public GeoLocation getGeoLocation() {
 		return homeLocation;
 	}
 
 	/**
-	 * Sets the user home location
+	 * Sets the homeGeoLocation field for user to the passed {@link GeoLocation}
 	 * 
-	 * @param latitude a double 
-	 * @param longitude a double 
+	 * @param gl  {@link GeoLocation} to set as {@link User} home location
 	 */
-	public void setHomeLocation(double latitude, double longitude) {
-		this.homeLocation.setLatitude(latitude);
-		this.homeLocation.setLatitude(longitude);
+	public void setGeoLocation(GeoLocation gl) {
+		this.homeLocation = gl;
+		notifyListeners();
 	}
+	
 	
 	/**
 	 * Consider getting rid of this function

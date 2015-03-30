@@ -22,11 +22,15 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 import com.cmput301w15t15.travelclaimsapp.FileManager;
+import com.cmput301w15t15.travelclaimsapp.GeoLocationController;
 import com.cmput301w15t15.travelclaimsapp.R;
+import com.cmput301w15t15.travelclaimsapp.model.Destination;
+import com.cmput301w15t15.travelclaimsapp.model.GeoLocation;
 import com.cmput301w15t15.travelclaimsapp.model.User;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
 import android.widget.CheckBox;
@@ -39,7 +43,9 @@ import android.widget.Toast;
  * Can only be entered with an internet connection.
  */
 public class CreateUserActivity extends Activity {
-
+	
+	private GeoLocation selectedGeoLocation; 
+	
 	/**
 	 * Thread that closes the activity after finishing addUser.
 	 */
@@ -63,6 +69,7 @@ public class CreateUserActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_create_user);
+		GeoLocationController.initializeLocationManager(this.getApplicationContext());
 	}
 
 	@Override
@@ -95,6 +102,9 @@ public class CreateUserActivity extends Activity {
 		}else if(!passText.getText().toString().equals(passAgainText.getText().toString())){
 			Toast.makeText(this, "Mismatch Password.", Toast.LENGTH_LONG).show();
 			return;
+		}else if(selectedGeoLocation == null){
+			Toast.makeText(this, "No home location selected.", Toast.LENGTH_LONG).show();
+			return;
 		}
 		
 		//hashes password
@@ -114,12 +124,38 @@ public class CreateUserActivity extends Activity {
 		
 		
 		User newUser = new User(userText.getText().toString(), passHash, isApprover.isChecked());
+		GeoLocationController.setUserGeoLocation(newUser, selectedGeoLocation.getLatitude(), selectedGeoLocation.getLongitude());
 		Thread thread = new tryToAddUserThread(newUser);
 		thread.start();
 		
 	}
 	
-
+	public void selectHomeLocation(View v){
+		Intent intent = GeoLocationController.pickLocationIntent(CreateUserActivity.this);
+		startActivityForResult(intent, 20);
+	}
+	
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if(requestCode == 20){
+			switch (resultCode) {
+			case RESULT_OK:
+				Toast.makeText(this, "RESULT_OK", Toast.LENGTH_SHORT).show();
+				String geoString = data.getExtras().getString("geoLocation");
+				selectedGeoLocation = GeoLocation.getFromString(geoString);
+				break;
+			case RESULT_CANCELED:
+				Toast.makeText(this, "RESULT_CANCEL", Toast.LENGTH_SHORT).show();
+				break;
+				
+			default:
+				Toast.makeText(this, "NOTHING", Toast.LENGTH_SHORT).show();
+				break;
+			}
+			
+		}
+		
+		
+	}
 	
 	/**
 	 * Thread talks to server to see if given user was on it.

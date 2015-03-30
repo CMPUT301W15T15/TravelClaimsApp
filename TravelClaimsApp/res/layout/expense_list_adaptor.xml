@@ -59,4 +59,13 @@
         android:onClick="ChangeFlag"
         android:src="@drawable/ic_action_toggle_star_outline" />
 
+    <ImageView
+        android:id="@+id/expenseAdaptor_map"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/expenseAdaptor_flag"
+        android:layout_below="@+id/expenseAdaptor_currency"
+        android:layout_toLeftOf="@+id/expenseAdaptor_flag"
+        android:src="@drawable/ic_action_map_icon" />
+
 </RelativeLayout>

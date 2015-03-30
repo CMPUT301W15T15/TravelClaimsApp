@@ -65,7 +65,7 @@ import android.widget.RelativeLayout.LayoutParams;
 
 
 /**
- * Activity for displaying openstreetmaps 
+ * Activity for displaying openstreetmap using osmdroid api 
  * 
  * Used the osmdroid sample project OpenStreetMapViewer retrieved from 
  * https://github.com/osmdroid/osmdroid/tree/master/OpenStreetMapViewer March 25th 2015
@@ -107,12 +107,14 @@ public class MapActivity extends Activity implements MapEventsReceiver{
 	private int lastValidY;
 	private GeoLocation currentLocation;
 	private GeoLocation pickedLocation;
+	private GeoLocation homeLocation;
 	private List<OverlayItem> points;
 	private ItemizedIconOverlay<OverlayItem> pointsOverlay;
 	private OverlayItem current;
 	private OverlayItem pick = null;
 	private static String focusOn; 
 	private static Integer adaptorIndex;
+	private static boolean canEdit;
 	// ===========================================================
 	// Constructors
 	// ===========================================================
@@ -126,6 +128,8 @@ public class MapActivity extends Activity implements MapEventsReceiver{
 		if(getIntent().getExtras().getString("LatLng") != null){
 			focusOn = getIntent().getExtras().getString("LatLng");
 		}
+		
+		canEdit = getIntent().getExtras().getBoolean("MAP_EDIT");
 		
 		//mResourceProxy = new ResourceProxyImpl(getApplicationContext());
 		mResourceProxy = new DefaultResourceProxyImpl(getApplicationContext());
@@ -201,11 +205,11 @@ public class MapActivity extends Activity implements MapEventsReceiver{
 			pick = new OverlayItem("Picked Location","Pick", GeoPoint.fromDoubleString(focusOn, ','));
 			pointsOverlay.addItem(pick);
 			pointsOverlay.setFocus(pick);
+			this.mapController.setCenter(GeoPoint.fromDoubleString(focusOn, ','));
 		}else{
-			pointsOverlay.setFocus(current);
+			this.mapController.setCenter(gp);
 		}
 		
-
 		this.mapView.getOverlays().add(pointsOverlay);
 		this.mapView.getOverlays().add(new MapEventsOverlay(this, this));
 		//this.mapView.getOverlayManager().add(1, new MapEventsOverlay(this, this));
@@ -254,7 +258,7 @@ public class MapActivity extends Activity implements MapEventsReceiver{
 
 	@Override
 	public boolean singleTapConfirmedHelper(GeoPoint p) {
-		//if(focusOn != null){
+		if(canEdit == true){
 			if(pick == null){
 				pick = new OverlayItem("Picked Location","Pick", p);
 	            pick.setMarker(getResources().getDrawable((R.drawable.marker_default)));
@@ -268,7 +272,7 @@ public class MapActivity extends Activity implements MapEventsReceiver{
 	        }
 			mapView.invalidate();
 			pickedLocation = new GeoLocation(p.getLatitude(), p.getLongitude());
-		//}
+		}
 		   
 	     return false;
 	}

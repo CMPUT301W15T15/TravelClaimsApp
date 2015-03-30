@@ -231,17 +231,12 @@ public class EditClaimActivity extends FragmentActivity implements TextWatcher {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						//Open map view \
-						Intent intent = new Intent(EditClaimActivity.this, MapActivity.class);
-				    	intent.putExtra("adaptorIndex", info.position);
+						Intent intent = GeoLocationController.pickLocationIntent(EditClaimActivity.this);
 				    	startActivityForResult(intent, GET_GEOLOCATION_CODE);
 					}
 				});
             	
             	alertGl.show();
-            	if(destAdaptor.getItem(info.position).getGeoLocation() != null){
-            		Toast.makeText(this, destAdaptor.getItem(info.position).getGeoLocation().getString(), Toast.LENGTH_SHORT).show();	
-            	}
-            	
             	return true;
             case R.id.cmenu_delete_tag:
             	ClaimListController.removeTag(theClaim, tagAdaptor.getItem(info.position));

@@ -19,14 +19,18 @@ package com.cmput301w15t15.travelclaimsapp;
 
 import java.util.Date;
 
+import com.cmput301w15t15.travelclaimsapp.activitys.EditClaimActivity;
+import com.cmput301w15t15.travelclaimsapp.activitys.MapActivity;
 import com.cmput301w15t15.travelclaimsapp.model.ClaimListSaveListener;
 import com.cmput301w15t15.travelclaimsapp.model.Destination;
 import com.cmput301w15t15.travelclaimsapp.model.Expense;
 import com.cmput301w15t15.travelclaimsapp.model.GeoLocation;
 import com.cmput301w15t15.travelclaimsapp.model.Listener;
+import com.cmput301w15t15.travelclaimsapp.model.User;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -43,7 +47,7 @@ public class GeoLocationController {
 
 	private static Location currentLocation = null;
 	private static LocationManager lm;
-	
+	public static final int GET_GEOLOCATION_CODE = 10;
 	
 	/**
 	 * Initializes location manager
@@ -61,7 +65,11 @@ public class GeoLocationController {
 				@Override
 				public void onLocationChanged(Location location) {
 					if (location != null) {
-						currentLocation.set(location);
+						if(currentLocation == null){
+							currentLocation = new Location(location);
+						}else{
+							currentLocation.set(location);
+						}
 					}
 				}
 				
@@ -109,18 +117,16 @@ public class GeoLocationController {
 		}
 		if(currentLocation == null){
 			//referenced https://github.com/joshua2ua/MockLocationTester on March 26th 2015
-			if(checkGPSEnabled()){
-				currentLocation = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-			}else{
-				return new GeoLocation(0,0);
+			currentLocation = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+			if(currentLocation == null){
+				return new GeoLocation(0,0);	
 			}
-			
 		}
 		return new GeoLocation(currentLocation.getLatitude(), currentLocation.getLongitude());
 	}
 
 	public static GeoLocation getHomeLocation() {
-		return UserController.getUser().getHomeLocation();
+		return UserController.getUser().getGeoLocation();
 	}
 
 	/**
@@ -132,19 +138,21 @@ public class GeoLocationController {
 	 * @param longitude
 	 */
 	public static void setHomeLocation(double latitude, double longitude) {
-		GeoLocation gl = UserController.getUser().getHomeLocation();
+		GeoLocation gl = UserController.getUser().getGeoLocation();
 		if(gl == null){
 			UserController.getUser().initHomeLocation(new GeoLocation(latitude, longitude));
-			UserController.getUser().getHomeLocation().addListener(new Listener() {
+			UserController.getUser().getGeoLocation().addListener(new Listener() {
 				@Override
 				public void update() {
 					save();
 				}
 			});
 		}
-		UserController.getUser().getHomeLocation().setLatLng(latitude, longitude);
+		UserController.getUser().getGeoLocation().setLatLng(latitude, longitude);
 	}
 
+	
+	
 	/**
 	 * Takes a {@link GeoLocation} and returns the distance between that geolocation and the 
 	 * Users home GeoLocation
@@ -154,7 +162,7 @@ public class GeoLocationController {
 	 */
 	public static double getDistanceFromHome(GeoLocation gl) {
 		float[] results = new float[3];
-		GeoLocation home = UserController.getUser().getHomeLocation();
+		GeoLocation home = UserController.getUser().getGeoLocation();
 		Location.distanceBetween(home.getLatitude(), home.getLongitude(), gl.getLatitude(), gl.getLongitude(), results);
 		return results[0]/1000;
 	}
@@ -203,6 +211,26 @@ public class GeoLocationController {
 		
 	}
 	/**
+	 * Set a {@link User} GeoLocation
+	 * 
+	 * If user's GeoLocation is null then a new GeoLocation is made and added to user
+	 * otherwise user's GeoLocation lat and lng are updated
+	 * 
+	 * @param user	{@link User} to update
+	 * @param lat	Latitude to set
+	 * @param lng	Longitude to set
+	 */
+	public static void setUserGeoLocation(User user, double lat, double lng){
+		if(user.getGeoLocation() == null){
+			GeoLocation gl = new GeoLocation(lat, lng);
+			gl.addListener(new ClaimListSaveListener());
+			user.setGeoLocation(gl);
+		}else{
+			user.getGeoLocation().setLatLng(lat, lng);
+		}
+	}
+	
+	/**
 	 * Sets the {@link GeoLocation} of the passed {@link Destination} 
 	 * 
 	 * Uses latitude and longitude of current location
@@ -223,5 +251,20 @@ public class GeoLocationController {
 	public static void setExpenseGeoLocationGPS(Expense expense) {
 		GeoLocation gl = getLocation();
 		setExpenseGeoLocation(expense, gl.getLatitude(), gl.getLongitude());
+	}
+	
+	
+	public static Intent pickLocationIntent(Context context){
+		Intent intent = new Intent(context, MapActivity.class);
+    	intent.putExtra("MAP_EDIT", true);
+    	
+    	return intent;
+	}
+	public static Intent viewLocationIntent(Context context, GeoLocation gl){
+		Intent intent = new Intent(context, MapActivity.class);
+		intent.putExtra("LatLng", gl.getString());
+    	intent.putExtra("MAP_EDIT", false);
+    	
+    	return intent;
 	}
 }

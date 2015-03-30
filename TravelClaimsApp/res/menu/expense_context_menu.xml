@@ -2,6 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
     <item android:id="@+id/expenseListViewMenuEdit" android:title="Edit"></item>
     <item android:id="@+id/expenseListViewMenuDelete" android:title="Delete"></item>
+    <item android:id="@+id/expenseListViewMenuGeoLocation" android:title="Set GeoLocation"></item>
     
 
 </menu>

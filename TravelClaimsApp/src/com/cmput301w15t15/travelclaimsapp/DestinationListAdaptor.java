@@ -48,7 +48,7 @@ public class DestinationListAdaptor extends ArrayAdapter<Destination>{
 	private Context context;
 	private int resource;
 	private ArrayList<Destination> destList;
-	private int GET_GEOLOCATION_CODE = 10;
+
 	/**
 	 * class contructor
 	 * @param context
@@ -102,8 +102,7 @@ public class DestinationListAdaptor extends ArrayAdapter<Destination>{
         viewHolder.destMap.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(context, MapActivity.class);
-				intent.putExtra("LatLng", d.getGeoLocation().getString());
+				Intent intent = GeoLocationController.viewLocationIntent(context, d.getGeoLocation());
 		    	context.startActivity(intent);
 			}
 		});

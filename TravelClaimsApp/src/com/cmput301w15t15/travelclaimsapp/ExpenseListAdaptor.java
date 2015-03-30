@@ -27,6 +27,7 @@ import com.cmput301w15t15.travelclaimsapp.model.ExpenseList;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.LayoutInflater.Filter;
 import android.view.Menu;
@@ -90,6 +91,7 @@ public class ExpenseListAdaptor extends ArrayAdapter<Expense> {
 		    viewHolder.expenseDate = (TextView) rowView.findViewById(R.id.expenseAdaptor_date);
 		    viewHolder.expenseName = (TextView) rowView.findViewById(R.id.expenseAdaptor_Name);
 		    viewHolder.expenseFlag = (ImageView) rowView.findViewById(R.id.expenseAdaptor_flag);
+		    viewHolder.expenseMap = (ImageView) rowView.findViewById(R.id.expenseAdaptor_map);
 		    rowView.setTag(viewHolder);
 
 		}else{
@@ -97,7 +99,7 @@ public class ExpenseListAdaptor extends ArrayAdapter<Expense> {
 		}
 		
 		viewHolder.expenseFlag.setTag(position);
-		Expense expense = expenseList.get(position);  ///<-- add I'm not sure what you named that class so change EXPENSELISTITEM to whatever you call it
+		final Expense expense = expenseList.get(position);  ///<-- add I'm not sure what you named that class so change EXPENSELISTITEM to whatever you call it
 		viewHolder.expense = expense ;  ///<-- make sure the item is stored with the view holder too.
 
 		viewHolder.expenseCurrency.setText(expense.getCurr());
@@ -136,12 +138,24 @@ public class ExpenseListAdaptor extends ArrayAdapter<Expense> {
 				    i.setImageResource(R.drawable.ic_action_toggle_star);
 				}
 		        //notifyDataSetChanged();
-		        //notifyDataSetInvalidated();
-		        
+		        //notifyDataSetInvalidated(); 
 		    }
-		    
-		    
 		});
+		if(expense.getGeoLocation() == null){
+        	viewHolder.expenseMap.setVisibility(android.view.View.INVISIBLE);
+        	viewHolder.expenseMap.setClickable(false);
+        }else{
+        	viewHolder.expenseMap.setVisibility(android.view.View.VISIBLE);
+        }
+		viewHolder.expenseMap.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent intent = GeoLocationController.viewLocationIntent(context, expense.getGeoLocation());
+				context.startActivity(intent);
+			}
+		});
+		
 		return rowView;
 		}
 	
@@ -248,7 +262,8 @@ public class ExpenseListAdaptor extends ArrayAdapter<Expense> {
 	 *
 	 */
 	private static class ViewHolder {
-        public Expense expense;
+        public ImageView expenseMap;
+		public Expense expense;
 		public static ImageView expenseFlag;
 		public TextView expenseName;
 		public TextView expenseDate;

@@ -173,6 +173,12 @@ public class ClaimListAdaptor extends ArrayAdapter<Claim>{
         	viewHolder.claimStartDate.setText(sdf.format(claim.getStartDate()));
         }
         
+        if(claim.getStartDate() == null){
+        	viewHolder.claimStartDate.setHeight(0);
+        }else{
+        	viewHolder.claimStartDate.setHeight(35);
+        }
+        
 		return rowView;
 	}
 	/**
