@@ -122,6 +122,7 @@ public class MapActivity extends Activity implements MapEventsReceiver{
 	public void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
+		//check if there is a item to set the focus to 
 		if(getIntent().getExtras().getString("LatLng") != null){
 			focusOn = getIntent().getExtras().getString("LatLng");
 		}
@@ -235,26 +236,7 @@ public class MapActivity extends Activity implements MapEventsReceiver{
 		}
 		return false;
 	}
-	//http://stackoverflow.com/questions/16665426/get-coordinates-by-clicking-on-map-openstreetmaps on March 26 2015 
-//	@Override
-//	public boolean dispatchTouchEvent(MotionEvent ev) {
-//	    int actionType = ev.getAction();
-//	    switch (actionType) {
-//	    case MotionEvent.ACTION_UP:
-//            Projection proj = mapView.getProjection();
-//            GeoPoint loc = (GeoPoint) proj.fromPixels((int)ev.getX(), (int)ev.getY()); 
-//            String longitude = Double.toString(((double)loc.getLongitudeE6())/1000000);
-//            String latitude = Double.toString(((double)loc.getLatitudeE6())/1000000);
-//            
-//            pickedLocation = new GeoLocation(loc.getLatitude(), loc.getLongitude());
-//            
-//       
-//	    }
-//	    return super.dispatchTouchEvent(ev);
-//	}
-	
-	
-	
+
 	@Override
 	public void onBackPressed() {
 		Intent intent = new Intent();

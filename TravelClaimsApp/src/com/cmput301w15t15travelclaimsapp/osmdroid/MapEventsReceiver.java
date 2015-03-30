@@ -1,5 +1,5 @@
 package com.cmput301w15t15travelclaimsapp.osmdroid;
-//https://code.google.com/p/osmbonuspack/source/browse/trunk/OSMBonusPack/src/org/osmdroid/bonuspack/overlays/MapEventsReceiver.java
+//https://code.google.com/p/osmbonuspack/source/browse/trunk/OSMBonusPack/src/org/osmdroid/bonuspack/overlays/MapEventsReceiver.java March 26 2015
 import org.osmdroid.util.GeoPoint;
 
 /**
