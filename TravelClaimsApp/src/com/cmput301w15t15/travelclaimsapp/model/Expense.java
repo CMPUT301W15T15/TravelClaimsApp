@@ -40,6 +40,7 @@ public class Expense implements Listenable{
 	protected Uri expenseReceipt;
 	protected int flag=0;
 	protected GeoLocation geoLocation;
+	protected byte[] picture;
 
 	/**
 	 * expense constructor
@@ -49,6 +50,7 @@ public class Expense implements Listenable{
 		this.expenseName = expenseName;
 		this.expenseCurr = null;
 		this.expenseCat = null;
+		this.picture=null;
 		this.listeners = new ArrayList<Listener>();
 	}
 
@@ -306,7 +308,14 @@ public class Expense implements Listenable{
 		notifyListeners();
 	}
 
+	// deal with picture of receipt
+	public byte[] getPicture(){
+		return this.picture;
+	}
 	
+	public void takePicture(byte[] picture){
+		this.picture=picture;
+	}
 
 	
 	

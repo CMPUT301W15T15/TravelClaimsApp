@@ -54,6 +54,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -81,6 +82,7 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 	private String claimName;
 	private Date expenseDate;
 	private byte[] imgShow;
+	private ImageView expenseReceiptView;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -99,6 +101,7 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 		expenseDescriptionInput=(EditText) findViewById(R.id.Edit_Expense_Description);
 		currencySpinner = (Spinner) findViewById(R.id.CurrencySpinner);
 		categorySpinner=(Spinner) findViewById(R.id.CategorySpinner);
+		expenseReceiptView = (ImageView) findViewById(R.id.Edit_Expense_Image);
 		
 		claimList = ClaimListController.getClaimList();
 		claim=claimList.getClaim(claimName);
@@ -112,7 +115,12 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 		else{
 			expenseDescription="None";
 		}
-
+		
+		// show initial image
+		if (expense.getPicture()!=null){
+			
+		}
+		
 		currencySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 			@Override
 			public void onItemSelected(AdapterView<?> parent,View view, int position, long id){
