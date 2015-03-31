@@ -39,6 +39,7 @@
     <string name="Welcome">Welcome to the Travel Claims App.  Please login in to continue.</string>
     <string name="Register">Register</string>
     <string name="CreateUserText">Please full all fields and check box if you are an approver.</string>
+    <string name="to">To</string>
 
     <string-array name="StatusArray">
         <item>In Progress</item>
