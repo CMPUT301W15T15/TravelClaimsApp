@@ -68,7 +68,7 @@ public class CreateUserActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_create_user);
+		setContentView(R.layout.new_user);
 		GeoLocationController.initializeLocationManager(this.getApplicationContext());
 	}
 
@@ -87,10 +87,10 @@ public class CreateUserActivity extends Activity {
 	 * @param v
 	 */
 	public void OnClickCreateUser(View v){
-		EditText userText = (EditText) findViewById(R.id.NewUsernameEditText);
-		EditText passText = (EditText) findViewById(R.id.NewPasswordEditText);
-		EditText passAgainText = (EditText) findViewById(R.id.NewPassAEditText);
-		CheckBox isApprover = (CheckBox) findViewById(R.id.ApproverCheckBox);
+		EditText userText = (EditText) findViewById(R.id.Create_Username);
+		EditText passText = (EditText) findViewById(R.id.Create_Password);
+		EditText passAgainText = (EditText) findViewById(R.id.Create_Password_Again);
+		CheckBox isApprover = (CheckBox) findViewById(R.id.Approver_Check_Box);
 		MessageDigest md = null;
 		byte[] passHash = null;
 		

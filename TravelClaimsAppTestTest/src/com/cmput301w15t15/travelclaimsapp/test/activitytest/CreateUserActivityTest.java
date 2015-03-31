@@ -19,7 +19,6 @@ package com.cmput301w15t15.travelclaimsapp.test.activitytest;
 
 import com.cmput301w15t15.travelclaimsapp.FileManager;
 import com.cmput301w15t15.travelclaimsapp.R;
-import com.cmput301w15t15.travelclaimsapp.activitys.AddClaimActivity;
 import com.cmput301w15t15.travelclaimsapp.activitys.CreateUserActivity;
 import com.cmput301w15t15.travelclaimsapp.activitys.MainMenuActivity;
 
@@ -60,11 +59,11 @@ public class CreateUserActivityTest extends
 		FileManager.initializeSaver(activity);
 		
 		//need to change ids once UI has been created 
-		create = (Button) activity.findViewById(R.id.CreateUserButton);
-		username = (EditText) activity.findViewById(R.id.NewUsernameEditText);
-		password = (EditText) activity.findViewById(R.id.NewPasswordEditText);
-		passwordAgain = (EditText) activity.findViewById(R.id.NewPassAEditText);
-		ifApprover = (CheckBox) activity.findViewById(R.id.ApproverCheckBox);
+		create = (Button) activity.findViewById(R.id.Create_User_Button);
+		username = (EditText) activity.findViewById(R.id.Create_Username);
+		password = (EditText) activity.findViewById(R.id.Create_Password);
+		passwordAgain = (EditText) activity.findViewById(R.id.Create_Password_Again);
+		ifApprover = (CheckBox) activity.findViewById(R.id.Approver_Check_Box);
 		
 		
 	}
