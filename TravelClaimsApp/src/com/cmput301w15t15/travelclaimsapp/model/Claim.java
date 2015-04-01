@@ -395,8 +395,15 @@ public class Claim implements Listenable{
 		this.listeners = new ArrayList<Listener>();
 		
 	}
+	
+	/**
+	 * Adds a destination to Claim destination list
+	 * 
+	 * @param dest The {@link Destination} to add to the Claim
+	 */
+	public void addDestination(Destination dest){
+		this.destinationList.addDestination(dest);
+	}
 
 	
-
-
 }

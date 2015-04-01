@@ -17,10 +17,12 @@
  */
 package com.cmput301w15t15.travelclaimsapp;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 import com.cmput301w15t15.travelclaimsapp.activitys.EditClaimActivity;
 import com.cmput301w15t15.travelclaimsapp.activitys.MapActivity;
+import com.cmput301w15t15.travelclaimsapp.model.Claim;
 import com.cmput301w15t15.travelclaimsapp.model.ClaimListSaveListener;
 import com.cmput301w15t15.travelclaimsapp.model.Destination;
 import com.cmput301w15t15.travelclaimsapp.model.Expense;
@@ -31,6 +33,8 @@ import com.cmput301w15t15.travelclaimsapp.model.User;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources.Theme;
+import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -253,13 +257,27 @@ public class GeoLocationController {
 		setExpenseGeoLocation(expense, gl.getLatitude(), gl.getLongitude());
 	}
 	
-	
+	/**
+	 * Returns a {@link Intent} used for opening the {@link MapActivity}, when wanting to pick a location from the map
+	 * 
+	 * @param context   The context of the activity you call the function from 
+	 * @return			A {@link Intent} that will open {@link MapActivity} in the select location mode
+	 */
 	public static Intent pickLocationIntent(Context context){
 		Intent intent = new Intent(context, MapActivity.class);
+		intent.putExtra("LatLng", "");
     	intent.putExtra("MAP_EDIT", true);
     	intent.putExtra("newUser", false);
     	return intent;
 	}
+	
+	/**
+	 * Returns a {@link Intent} used for opening the {@link MapActivity} focused on a specific {@link GeoLocation}
+	 * 
+	 * @param context 	The context of the activity you call the function from
+	 * @param gl		The geolocation you wish to view when you start the {@link MapActivity}
+	 * @return			A {@link Intent} that will open the {@link MapActivity} for viewing the supplied {@link GeoLocation}
+	 */
 	public static Intent viewLocationIntent(Context context, GeoLocation gl){
 		Intent intent = new Intent(context, MapActivity.class);
 		intent.putExtra("LatLng", gl.getString());
@@ -268,10 +286,57 @@ public class GeoLocationController {
     	return intent;
 	}
 	
+	/**
+	 * Returns a {@link Intent} used for opening the {@link MapActivity} when creating a new user
+	 * 
+	 * @param context The context of the activity you call the function from
+	 * @return 	A intent that will open MapActivity under new user conditions 
+	 */
 	public static Intent newUserLocationIntent(Context context){
 		Intent intent = new Intent(context, MapActivity.class);
+		intent.putExtra("LatLng", "");
     	intent.putExtra("MAP_EDIT", true);
     	intent.putExtra("newUser", true);
 		return intent;
 	}
+	
+	/**
+	 * Returns the color code and distance associated with the first destination with a GeoLocation 
+	 * 
+	 * Takes a {@link Claim} and finds its first destination with a {@link GeoLocation} attached and 
+	 * calculates the distance from the users home location. Then returns the color code associated with 
+	 * distance from home and distance calculated in int[]
+	 * 
+	 * @param claim 	{@link Claim} to find destination color code for  
+	 * @return			A int[] containing the color code and distance from home for the Claim
+	 */
+	public static int[] getFirstDestinationColorCode(Claim claim){
+		GeoLocation gl;
+		int colorCode = Color.rgb(35, 54, 132);
+		int distance = 0;
+		ArrayList<Destination> dests = claim.getDestinationList().toArrayList();
+		for(Destination dest : dests){
+			gl = dest.getGeoLocation();
+	    	if(gl != null){
+	    		distance = (int) Math.round(GeoLocationController.getDistanceFromHome(gl));
+	    		if(distance<400){
+	    			colorCode = Color.rgb(13, 116, 11);		//green : close
+	    		}else if(distance<2000){
+	    			colorCode = Color.rgb(193, 191, 35);	//yellow : medium
+	    		}else if(distance>2000){
+	    			colorCode = Color.rgb(135, 27, 27);		//red : far
+	    		}
+	    		break;
+	    	}else{
+	    		colorCode = Color.rgb(35, 54, 132);			//blue : no GeoLocation
+			   	distance = 0;
+	    	}
+	    }
+		int[] colorAndDistance = {colorCode, distance};
+		
+		return colorAndDistance;
+		
+	}
+	
+
 }

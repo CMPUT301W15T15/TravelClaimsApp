@@ -83,7 +83,6 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 	private Date expenseDate;
 	private byte[] imgShow;
 	private ImageView expenseReceiptView;
-	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

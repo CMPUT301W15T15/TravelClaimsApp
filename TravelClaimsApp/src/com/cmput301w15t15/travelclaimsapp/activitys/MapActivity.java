@@ -9,56 +9,26 @@ import java.util.List;
 import org.osmdroid.DefaultResourceProxyImpl;
 import org.osmdroid.ResourceProxy;
 import org.osmdroid.api.IMapController;
-import org.osmdroid.events.MapEvent;
-import org.osmdroid.events.MapListener;
-import org.osmdroid.events.ScrollEvent;
-import org.osmdroid.events.ZoomEvent;
-import org.osmdroid.tileprovider.tilesource.ITileSource;
-import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
-import org.osmdroid.util.BoundingBoxE6;
+import org.osmdroid.bonuspack.overlays.MapEventsOverlay;
+import org.osmdroid.bonuspack.overlays.MapEventsReceiver;
+import org.osmdroid.bonuspack.overlays.Marker;
 import org.osmdroid.util.GeoPoint;
-import org.osmdroid.util.ResourceProxyImpl;
 import org.osmdroid.views.MapView;
-import org.osmdroid.views.Projection;
 import org.osmdroid.views.overlay.ItemizedIconOverlay;
-import org.osmdroid.views.overlay.ItemizedIconOverlay.OnItemGestureListener;
 import org.osmdroid.views.overlay.MinimapOverlay;
+import org.osmdroid.views.overlay.Overlay;
 import org.osmdroid.views.overlay.OverlayItem;
-import org.osmdroid.views.overlay.PathOverlay;
 import org.osmdroid.views.overlay.ScaleBarOverlay;
 import org.osmdroid.views.overlay.SimpleLocationOverlay;
-import org.osmdroid.views.overlay.mylocation.GpsMyLocationProvider;
-import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay;
 
 import com.cmput301w15t15.travelclaimsapp.GeoLocationController;
 import com.cmput301w15t15.travelclaimsapp.R;
-import com.cmput301w15t15.travelclaimsapp.R.drawable;
 import com.cmput301w15t15.travelclaimsapp.model.GeoLocation;
-import com.cmput301w15t15travelclaimsapp.osmdroid.MapEventsOverlay;
-import com.cmput301w15t15travelclaimsapp.osmdroid.MapEventsReceiver;
-import com.cmput301w15t15travelclaimsapp.osmdroid.OpenStreetMapConstants;
-
-
-import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.res.Resources;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
-import android.view.SubMenu;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.webkit.WebView.FindListener;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 import android.widget.RelativeLayout.LayoutParams;
@@ -73,6 +43,8 @@ import android.widget.RelativeLayout.LayoutParams;
  * 
  * Used https://github.com/osmdroid/osmdroid/blob/master/OpenStreetMapViewer/src/org/osmdroid/samples/SampleExtensive.java
  * written by Nicolas Gramlich retrieved on March 25th 2015 as base for this activity 
+ * 
+ * Used osmbonuspack from https://code.google.com/p/osmbonuspack/source/browse/#svn%2FBonusPackDownloads on April 1st 2015
  * 
  * MODIFICATIONS:
  * 	-Added scroll limits and min zoom level
@@ -98,22 +70,15 @@ public class MapActivity extends Activity implements MapEventsReceiver{
 
 	private MapView mapView;
 	private IMapController mapController;
-	private SimpleLocationOverlay mMyLocationOverlay;
 	private ResourceProxy mResourceProxy;
 	private ScaleBarOverlay mScaleBarOverlay;
-	private MinimapOverlay mMiniMapOverlay;
-	private int lastVaildX;
-	private int lastValidY;
 	private GeoLocation currentLocation;
 	private GeoLocation pickedLocation;
 	private GeoLocation homeLocation;
-	private List<OverlayItem> points;
-	private ItemizedIconOverlay<OverlayItem> pointsOverlay;
-	private OverlayItem current;
-	private OverlayItem pick = null;
-	private OverlayItem home;
+	private Marker current;
+	private Marker pick = null;
+	private Marker home;
 	private static String focusOn; 
-	private static Integer adaptorIndex;
 	private static boolean canEdit;
 	private GeoPoint currentGeoPoint; 
 	private GeoPoint homeGeoPoint;
@@ -124,18 +89,14 @@ public class MapActivity extends Activity implements MapEventsReceiver{
 	public void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-		
-		
 		//check if there is a item to set the focus to 
-		if(getIntent().getExtras().getString("LatLng") != null){
+		if(getIntent().getExtras().getString("LatLng").length() > 0){
 			focusOn = getIntent().getExtras().getString("LatLng");
 		}
 		
 		canEdit = getIntent().getExtras().getBoolean("MAP_EDIT");
 		
-		//mResourceProxy = new ResourceProxyImpl(getApplicationContext());
 		mResourceProxy = new DefaultResourceProxyImpl(getApplicationContext());
-		points = new ArrayList<OverlayItem>();
 		
 		final RelativeLayout rl = new RelativeLayout(this);
 		
@@ -147,7 +108,6 @@ public class MapActivity extends Activity implements MapEventsReceiver{
 		mapView.setBuiltInZoomControls(true);
 		mapView.setMinZoomLevel(3);
 		mapController.setZoom(5);
-		
 		/* Scale Bar Overlay */
 		{
 			this.mScaleBarOverlay = new ScaleBarOverlay(this, mResourceProxy);
@@ -160,46 +120,44 @@ public class MapActivity extends Activity implements MapEventsReceiver{
 		}
 
 		
-		pointsOverlay = new ItemizedIconOverlay<OverlayItem>(points, new ItemizedIconOverlay.OnItemGestureListener<OverlayItem>() {
-
-			@Override
-			public boolean onItemLongPress(int arg0, OverlayItem arg1) {
-				return false;
-			}
-			@Override
-			public boolean onItemSingleTapUp(int arg0, OverlayItem arg1) {
-				return false;
-			}
-		},mResourceProxy);
-		
 		
 		if(!getIntent().getExtras().getBoolean("newUser")){
 			homeLocation = GeoLocationController.getHomeLocation();
 			homeGeoPoint = new GeoPoint(homeLocation.getLatitude(),homeLocation.getLongitude());
-			home = new OverlayItem("Home Location", "Home", homeGeoPoint);
-			home.setMarker(getResources().getDrawable(drawable.map_home));
-			pointsOverlay.addItem(home);
+			home = new Marker(mapView);
+			home.setIcon(getResources().getDrawable(R.drawable.map_home));
+			setMarkerInfoMessage(home, "Home", "Your home location is "+homeLocation.getString());
+			setMarker(home, homeGeoPoint);
 		}
 		
 		currentLocation = GeoLocationController.getLocation();
 		currentGeoPoint = new GeoPoint(currentLocation.getLatitude(),currentLocation.getLongitude());
-		current = new OverlayItem("Current Location","Current", currentGeoPoint);
-		current.setMarker(getResources().getDrawable((R.drawable.person)));
-		pointsOverlay.addItem(current);
-	
+		current = new Marker(mapView);
+		current.setIcon(getResources().getDrawable((R.drawable.person)));
+		setMarker(current, currentGeoPoint);
+		setMarkerInfoMessageWithDistance(current, "Current", "Your current GPS location is "+currentLocation.getString(), currentLocation);
 		if(focusOn != null){
 			pickGeoPoint = GeoPoint.fromDoubleString(focusOn, ',');
-			pick = new OverlayItem("Picked Location","Pick", pickGeoPoint);
-			pointsOverlay.addItem(pick);
-			pointsOverlay.setFocus(pick);
-			mapController.setCenter(pickGeoPoint);
+			pick = new Marker(mapView);
+			setMarker(pick, pickGeoPoint);
+			setMarkerInfoMessageWithDistance(pick, "Selected Location", "The selected location is at "+currentLocation.getString(), new GeoLocation(pickGeoPoint.getLatitude(), pickGeoPoint.getLongitude()));
 		}else{
 			this.mapController.setCenter(currentGeoPoint);
 		}
 		
-		this.mapView.getOverlays().add(pointsOverlay);
 		this.mapView.getOverlays().add(new MapEventsOverlay(this, this));
-		//this.mapView.getOverlayManager().add(1, new MapEventsOverlay(this, this));
+		
+		
+//		pick.setOnMarkerClickListener(new OnMarkerClickListener() {
+//			@Override
+//			public boolean onMarkerClick(Marker arg0, MapView arg1) {
+//				arg0.showInfoWindow();
+//				return false;
+//			}
+//		});
+		
+		
+		
 		
 		this.setContentView(rl);
 	}
@@ -256,16 +214,13 @@ public class MapActivity extends Activity implements MapEventsReceiver{
 	public boolean singleTapConfirmedHelper(GeoPoint p) {
 		if(canEdit == true){
 			if(pick == null){
-				pick = new OverlayItem("Picked Location","Pick", p);
-	            pick.setMarker(getResources().getDrawable((R.drawable.marker_default)));
-	            pointsOverlay.addItem(pick);
-	             
+				pick = new Marker(mapView);
+			
 			}else{
-				pointsOverlay.removeItem(pick);
-	         	pick = new OverlayItem("Picked Location","Pick", p);
-	         	pick.setMarker(getResources().getDrawable((R.drawable.marker_default)));
-	         	pointsOverlay.addItem(pick);
+				mapView.getOverlays().remove(pick);
 	        }
+			setMarker(pick, p);
+			
 			mapView.invalidate();
 			pickedLocation = new GeoLocation(p.getLatitude(), p.getLongitude());
 		}
@@ -276,11 +231,25 @@ public class MapActivity extends Activity implements MapEventsReceiver{
 
 	@Override
 	public boolean longPressHelper(GeoPoint p) {
-		// TODO Auto-generated method stub
 		return false;
 	}
+	
+	private void setMarker(Marker mark, GeoPoint gp){
+		mark.setPosition(gp);
+		mark.setDraggable(true);
+		mark.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
+		mapController.setCenter(gp);
+		mapView.getOverlays().add(mark);
+	}
 
-	
-	
+	private void setMarkerInfoMessage(Marker mark, String title, String description){
+		mark.setTitle(title);
+		mark.setSnippet(description);
+	}
+	private void setMarkerInfoMessageWithDistance(Marker mark, String title, String description, GeoLocation gl){
+		mark.setTitle(title);
+		mark.setSnippet(description);
+		mark.setSubDescription("Distance from home: " + Double.toString(Math.round(GeoLocationController.getDistanceFromHome(gl)))+" KM");
+	}
 }
 
