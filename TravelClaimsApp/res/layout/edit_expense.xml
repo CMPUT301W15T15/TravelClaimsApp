@@ -74,7 +74,7 @@
             android:src="@drawable/ic_action_new_picture" />
 
         <Button
-            android:id="@+id/dit_Expense_Ok2"
+            android:id="@+id/Edit_Expense_Ok2"
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:background="@drawable/buttonshape"
