@@ -30,11 +30,13 @@ import com.cmput301w15t15.travelclaimsapp.R.id;
 import com.cmput301w15t15.travelclaimsapp.model.Claim;
 import com.cmput301w15t15.travelclaimsapp.model.Destination;
 import com.cmput301w15t15.travelclaimsapp.model.Expense;
+import com.cmput301w15t15.travelclaimsapp.model.GeoLocation;
 import com.cmput301w15t15.travelclaimsapp.model.Tag;
 
 import android.R.color;
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -83,7 +85,7 @@ public class ClaimListAdaptor extends ArrayAdapter<Claim>{
 	        viewHolder.destinations = (LinearLayout) rowView.findViewById(R.id.linearLayout_destinations);
 	        viewHolder.tags = (LinearLayout) rowView.findViewById(R.id.LinearLayout_tags);
 	        viewHolder.amounts = (LinearLayout) rowView.findViewById(R.id.LinearLayout_amounts);
-	        
+	        viewHolder.distColor = (TextView) rowView.findViewById(R.id.claim_color_code);
  	        rowView.setTag(viewHolder);
  	        
 		}else{
@@ -101,14 +103,37 @@ public class ClaimListAdaptor extends ArrayAdapter<Claim>{
         
         //add destinations to viewholder
         ArrayList<Destination> dests = claim.getDestinationList().toArrayList();
+        
+       
         if(dests.size()>0){
+        	GeoLocation gl;
+        	for(Destination dest : dests){
+        		gl = dest.getGeoLocation();
+            	if(gl != null){
+            		int d = (int) Math.round(GeoLocationController.getDistanceFromHome(gl));
+            		viewHolder.distColor.setText(Integer.toString(d));
+            		if(d<400){
+            			viewHolder.distColor.setBackgroundColor(Color.rgb(13, 116, 11));
+            			viewHolder.distColor.setTextColor(Color.rgb(13, 116, 11));
+            		}else if(d<2000){
+            			viewHolder.distColor.setBackgroundColor(Color.rgb(193, 191, 35));
+            			viewHolder.distColor.setTextColor(Color.rgb(193, 191, 35));
+            		}else if(d>2000){
+            			viewHolder.distColor.setBackgroundColor(Color.rgb(135, 27, 27));
+            			viewHolder.distColor.setTextColor(Color.rgb(135, 27, 27));
+            		}
+            	}else{
+            		viewHolder.distColor.setBackgroundColor(Color.rgb(35, 54, 132));
+        		   	viewHolder.distColor.setTextColor(Color.rgb(35, 54, 132));
+        		   	viewHolder.distColor.setText("0");
+            	}
+            }
         	viewHolder.destinations.removeAllViews();
         	viewHolder.destinations.setVisibility(android.view.View.VISIBLE);
         	TextView tv1 = new TextView(context);
         	tv1.setTextColor(context.getResources().getColor(color.primary_text_dark));
         	tv1.setText("Destinations");
         	viewHolder.destinations.addView(tv1);
-        	
         	for(Destination dest : dests){
             	TextView tv = new TextView(context);
             	tv.setTextColor(context.getResources().getColor(color.primary_text_dark));
@@ -219,7 +244,7 @@ public class ClaimListAdaptor extends ArrayAdapter<Claim>{
         public LinearLayout destinations;
         public LinearLayout amounts;
         public LinearLayout tags;
-        
+        public TextView distColor;
     
     }
 	

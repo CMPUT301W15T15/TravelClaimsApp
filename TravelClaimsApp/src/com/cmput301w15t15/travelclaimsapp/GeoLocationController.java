@@ -154,11 +154,11 @@ public class GeoLocationController {
 	
 	
 	/**
-	 * Takes a {@link GeoLocation} and returns the distance between that geolocation and the 
+	 * Takes a {@link GeoLocation} and returns the distance IN KILOMETERS between that geolocation and the 
 	 * Users home GeoLocation
 	 * 
 	 * @param gl GeoLocation to compare with home
-	 * @return Distance between GeoLocations in Meters 
+	 * @return Distance between GeoLocations in kilometers
 	 */
 	public static double getDistanceFromHome(GeoLocation gl) {
 		float[] results = new float[3];
@@ -257,14 +257,21 @@ public class GeoLocationController {
 	public static Intent pickLocationIntent(Context context){
 		Intent intent = new Intent(context, MapActivity.class);
     	intent.putExtra("MAP_EDIT", true);
-    	
+    	intent.putExtra("newUser", false);
     	return intent;
 	}
 	public static Intent viewLocationIntent(Context context, GeoLocation gl){
 		Intent intent = new Intent(context, MapActivity.class);
 		intent.putExtra("LatLng", gl.getString());
     	intent.putExtra("MAP_EDIT", false);
-    	
+    	intent.putExtra("newUser", false);
     	return intent;
+	}
+	
+	public static Intent newUserLocationIntent(Context context){
+		Intent intent = new Intent(context, MapActivity.class);
+    	intent.putExtra("MAP_EDIT", true);
+    	intent.putExtra("newUser", true);
+		return intent;
 	}
 }

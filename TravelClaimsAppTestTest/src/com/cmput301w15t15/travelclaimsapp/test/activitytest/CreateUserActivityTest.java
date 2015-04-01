@@ -19,9 +19,9 @@ package com.cmput301w15t15.travelclaimsapp.test.activitytest;
 
 import com.cmput301w15t15.travelclaimsapp.FileManager;
 import com.cmput301w15t15.travelclaimsapp.R;
-import com.cmput301w15t15.travelclaimsapp.activitys.AddClaimActivity;
 import com.cmput301w15t15.travelclaimsapp.activitys.CreateUserActivity;
 import com.cmput301w15t15.travelclaimsapp.activitys.MainMenuActivity;
+import com.cmput301w15t15.travelclaimsapp.activitys.MapActivity;
 
 import android.app.Activity;
 import android.app.Instrumentation;
@@ -30,6 +30,7 @@ import android.test.ActivityInstrumentationTestCase2;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageButton;
 
 /**
  * Tests for the CreateUserActivity
@@ -45,6 +46,7 @@ public class CreateUserActivityTest extends
 	private EditText passwordAgain;
 	private CheckBox ifApprover;
 	private Activity activity;
+	private ImageButton geolocation;
 	
 	public CreateUserActivityTest() {
 		super(CreateUserActivity.class);
@@ -60,12 +62,14 @@ public class CreateUserActivityTest extends
 		FileManager.initializeSaver(activity);
 		
 		//need to change ids once UI has been created 
-		create = (Button) activity.findViewById(R.id.CreateUserButton);
-		username = (EditText) activity.findViewById(R.id.NewUsernameEditText);
-		password = (EditText) activity.findViewById(R.id.NewPasswordEditText);
-		passwordAgain = (EditText) activity.findViewById(R.id.NewPassAEditText);
-		ifApprover = (CheckBox) activity.findViewById(R.id.ApproverCheckBox);
-		
+
+		create = (Button) activity.findViewById(R.id.Create_User_Button);
+		username = (EditText) activity.findViewById(R.id.Create_Username);
+		password = (EditText) activity.findViewById(R.id.Create_Password);
+		passwordAgain = (EditText) activity.findViewById(R.id.Create_Password_Again);
+		ifApprover = (CheckBox) activity.findViewById(R.id.Approver_Check_Box);
+		geolocation = (ImageButton) activity.findViewById(R.id.NewUserGeoLocationButton);
+
 		
 	}
 	
@@ -236,6 +240,30 @@ public class CreateUserActivityTest extends
 				
 				Activity nextActivity = instrumentation.waitForMonitorWithTimeout(activityMonitor, 3000);
 				assertNull(nextActivity);
+			}
+			
+			//Test case: CreateUserActivityTest#8
+			/**
+			 * Tests what happens when the geolocation button is selected
+			 */
+			public void testPressGeoLocationButton(){
+				ActivityMonitor activityMonitor = new ActivityMonitor(MapActivity.class.getName(), null, false);
+				instrumentation.addMonitor(activityMonitor);
+				instrumentation.runOnMainSync(new Runnable() {
+					
+					@Override
+					public void run() {
+						username.setText("");
+						password.setText("");
+						passwordAgain.setText("");
+						geolocation.performClick();
+						
+					}
+				});
+				instrumentation.waitForIdleSync();
+				
+				Activity nextActivity = instrumentation.waitForMonitorWithTimeout(activityMonitor, 3000);
+				assertNotNull(nextActivity);
 			}
 			
 			//Test Case: CreateUserActivityTest#8
