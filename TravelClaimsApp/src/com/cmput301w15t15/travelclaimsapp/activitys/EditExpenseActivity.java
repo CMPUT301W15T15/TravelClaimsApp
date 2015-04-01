@@ -37,12 +37,15 @@ import com.cmput301w15t15.travelclaimsapp.model.ClaimList;
 import com.cmput301w15t15.travelclaimsapp.model.Expense;
 import com.cmput301w15t15.travelclaimsapp.model.ExpenseList;
 
+import android.media.ThumbnailUtils;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -54,12 +57,15 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.text.format.DateFormat;
 import android.util.DisplayMetrics;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
+import android.view.View.OnLongClickListener;
+import android.view.ViewGroup;
 import android.view.animation.BounceInterpolator;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -132,6 +138,11 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 		// show initial image
 		if (expense.getPicture()!=null){
 			imgShow = expense.getPicture();
+			
+//			Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.v);  
+//	        bitmap = ThumbnailUtils.extractThumbnail(bitmap, 100, 100);    
+//	        expenseReceiptView.setImageBitmap(bitmap);    
+			
 	        Bitmap bm = BitmapFactory.decodeByteArray(imgShow, 0, imgShow.length);
 	        DisplayMetrics dm = new DisplayMetrics();
 	        getWindowManager().getDefaultDisplay().getMetrics(dm);
@@ -142,53 +153,51 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 		}
 		
 		
-		expenseReceiptView.setOnTouchListener(new OnTouchListener() {
-		      
-			@Override
-		      public boolean onTouch(View v, MotionEvent event) {
-		        if (event.getAction() == MotionEvent.ACTION_DOWN) {
-		          then = (long) System.currentTimeMillis();
-		        } else if (event.getAction() == MotionEvent.ACTION_UP) {
-		          if ((System.currentTimeMillis() - then) > longClickDuration) {
-		            /* Implement long click behavior here */
-		            System.out.println("Long Click has happened!");
-		            Intent i = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-					// Start new activity with the LOAD_IMAGE_RESULTS to handle back the results when image is picked from the Image Gallery.
-			        startActivityForResult(i, 1);
-		            return false;
-		          } else {
-		            /* Implement short click behavior here or do nothing */
-		            System.out.println("Short Click has happened...");
-		            return true;
-		          }
-		        }
-		        return true;
-		      }
-		    });
-		
-		
-		
-//		expenseReceiptView.setOnLongClickListener(new OnLongClickListener()
-//		{
+//		expenseReceiptView.setOnTouchListener(new OnTouchListener() {
+//		      
 //			@Override
-//			public boolean onLongClick(View v) {
-//				// Create the Intent for Image Gallery.
-//				Intent i = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-//				
-//				// Start new activity with the LOAD_IMAGE_RESULTS to handle back the results when image is picked from the Image Gallery.
-//		        startActivityForResult(i, 1);
+//		      public boolean onTouch(View v, MotionEvent event) {
+//		        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+//		          then = (long) System.currentTimeMillis();
+//		        } else if (event.getAction() == MotionEvent.ACTION_UP) {
+//		          if ((System.currentTimeMillis() - then) > longClickDuration) {
+//		            /* Implement long click behavior here */
+//		            System.out.println("Long Click has happened!");
+//		            Intent i = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+//					// Start new activity with the LOAD_IMAGE_RESULTS to handle back the results when image is picked from the Image Gallery.
+//			        startActivityForResult(i, 1);
+//		            return false;
+//		          } else {
+//		            /* Implement short click behavior here or do nothing */
+//		            System.out.println("Short Click has happened...");
+//		            return true;
+//		          }
+//		        }
 //		        return true;
-//			}
-//		});
+//		      }
+//		    });
 //		
-//		expenseReceiptView.setOnClickListener(new OnClickListener() {
-//		    @Override
-//		    public void onClick(View v) {
-//		        //your stuff
-//		        
-//		    }
-//		});
-//		
+		
+		
+		expenseReceiptView.setOnLongClickListener(new OnLongClickListener()
+		{
+			@Override
+			public boolean onLongClick(View v) {
+				// Create the Intent for Image Gallery.
+				Intent i = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+				// Start new activity with the LOAD_IMAGE_RESULTS to handle back the results when image is picked from the Image Gallery.
+		        startActivityForResult(i, 1);
+		        return true;
+			}
+		});
+		
+		expenseReceiptView.setOnClickListener(new OnClickListener() {
+		    @Override
+		    public void onClick(View v) {
+		    	loadPhoto((ImageView) v,100,100);   
+		    }
+		});
+		
 		
 		
 		
@@ -223,6 +232,31 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 		});
 		set_on_click();
 	}
+	
+	
+//	 @Override
+//     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//         super.onActivityResult(requestCode, resultCode, data);
+//
+//         if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && null != data) {
+//             Uri selectedImage = data.getData();
+//             String[] filePathColumn = { MediaStore.Images.Media.DATA };
+//
+//             Cursor cursor = getContentResolver().query(selectedImage,
+//                     filePathColumn, null, null, null);
+//             cursor.moveToFirst();
+//
+//             int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+//             String picturePath = cursor.getString(columnIndex);
+//             cursor.close();
+//
+//             ImageView imageView = (ImageView) findViewById(R.id.imgView);
+//             imageView.setImageBitmap(BitmapFactory.decodeFile(picturePath));
+//
+//         }
+//
+//
+//     }
 	
 	
 	@Override
@@ -319,6 +353,33 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 	 * check if the status of a claim is editable 
 	 * 
 	 */
+	
+	private void loadPhoto(ImageView imageView, int width, int height) {
+
+        ImageView tempImageView = imageView;
+
+
+        AlertDialog.Builder imageDialog = new AlertDialog.Builder(this);
+        LayoutInflater inflater = (LayoutInflater) this.getSystemService(LAYOUT_INFLATER_SERVICE);
+
+        View layout = inflater.inflate(R.layout.image_adapter,
+                (ViewGroup) findViewById(R.id.layout_root));
+        ImageView image = (ImageView) layout.findViewById(R.id.fullimage);
+        image.setImageDrawable(tempImageView.getDrawable());
+        imageDialog.setView(layout);
+        imageDialog.setPositiveButton(expense.getName(), new DialogInterface.OnClickListener(){
+        	
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+
+        });
+
+
+        imageDialog.create();
+        imageDialog.show();     
+    }
+	
 	private void setEditable() {
 		// TODO Auto-generated method stub
 		if(claim.getStatus().equals("Submitted") || claim.getStatus().equals("Approved")){
