@@ -79,17 +79,17 @@ public class ExpenseListActivity extends Activity
 		super.onCreate(savedInstanceState);
 		Intent intent=new Intent();
 		claimName=this.getIntent().getExtras().getString("claimName");
-		setContentView(R.layout.activity_expense_list);
+		setContentView(R.layout.expense_list);
 		FileManager.initializeSaver(this);
-		expenseListView = (ListView) findViewById(R.id.CurrentExpenseList);
+		expenseListView = (ListView) findViewById(R.id.CurrentExpenseList2);
 		expenseList = ClaimListController.getClaimList().getClaim(claimName).getExpenseList();
 
 		expenseAdaptor = new ExpenseListAdaptor(this,R.layout.expense_list_adaptor,expenseList.toArrayList());
 		expenseAdaptor.notifyDataSetChanged();
 		expenseListView.setAdapter(expenseAdaptor);
 		
-		registerForContextMenu(findViewById(R.id.CurrentExpenseList));
-		ListView listView = (ListView) findViewById(R.id.CurrentExpenseList);
+		registerForContextMenu(findViewById(R.id.CurrentExpenseList2));
+		ListView listView = (ListView) findViewById(R.id.CurrentExpenseList2);
 		//set_on_click();
 
 	}
