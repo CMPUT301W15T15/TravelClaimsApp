@@ -83,6 +83,11 @@ public class UserController {
 	
 	
 	
+	public static void resetUserController(){
+		user = null;
+	}
+	
+	
 	
 	
 }

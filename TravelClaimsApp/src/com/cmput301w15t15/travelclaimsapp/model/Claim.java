@@ -40,9 +40,9 @@ public class Claim implements Listenable{
 	private Tag tag;
 	private String status;
 	private String comment;
+	private String approverName;
+	private String claimantName;
 	private int totalValue=0;
-	private int approveId;
-	private int claimantId;
 	private ExpenseList expenseList;
 	private TagList tagList;
 	protected transient ArrayList<Listener> listeners;
@@ -264,20 +264,20 @@ public class Claim implements Listenable{
 
 	/**
 	 * set claim approver
-	 * @param approverId
+	 * @param approverName
 	 */
-	public void setApprover(int approverId) {
+	public void setApprover(String approverName) {
 		// TODO Auto-generated method stub
-		this.approveId=approverId;
+		this.approverName=approverName;
 	
 	}
 
 	/**
-	 * get claim approver ID
-	 * @return approverId
+	 * get claim approver name
+	 * @return approverName
 	 */
-	public int getApprover(){
-		return this.approveId;	
+	public String getApprover(){
+		return this.approverName;	
 	}
 
 	/**
@@ -358,24 +358,24 @@ public class Claim implements Listenable{
 
 	
 	/**
-	 * get claimant Id
-	 * @return claimantID (int)
+	 * gets String of claimant name
+	 * @return claimantName (String)
 	 */
-	public int getClaimantId()
+	public String getClaimantName()
 	{
 	
-		return claimantId;
+		return claimantName;
 	}
 
 	
 	/**
-	 * set Claimant ID
-	 * @param claimantId
+	 * sets String of claimant name
+	 * @param claimantName
 	 */
-	public void setClaimantId(int claimantId)
+	public void setClaimantName(String claimantName)
 	{
 	
-		this.claimantId = claimantId;
+		this.claimantName = claimantName;
 	}
 
 //	/* 

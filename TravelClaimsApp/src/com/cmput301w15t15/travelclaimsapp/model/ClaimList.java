@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import com.cmput301w15t15.travelclaimsapp.ClaimListComparator;
+import com.cmput301w15t15.travelclaimsapp.UserController;
 
 /**
  * Used to store claims and listeners for a user. Expenses are also stored within.
@@ -29,8 +30,10 @@ import com.cmput301w15t15.travelclaimsapp.ClaimListComparator;
 public class ClaimList implements Listenable{
 	protected ArrayList<Claim> claimList;
 	protected transient ArrayList<Listener> listeners;
+	protected String username;
 
 	
+
 	/**
 	 * Initializes new claim and listener arrays.
 	 */
@@ -92,6 +95,24 @@ public class ClaimList implements Listenable{
 	 */
 	public int size() {
 		return claimList.size();
+	}
+	
+	/**
+	 * Gets the username string for the claimList so ownership can be checked
+	 * 
+	 * @return
+	 */
+	public String getUsername() {
+		return username;
+	}
+
+	/**
+	 * Sets the username string for the claimList so ownership can be checked later
+	 * 
+	 * @param username
+	 */
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	/**

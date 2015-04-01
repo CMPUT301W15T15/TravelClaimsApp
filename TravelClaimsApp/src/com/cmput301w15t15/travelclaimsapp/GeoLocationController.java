@@ -46,7 +46,7 @@ import android.os.Bundle;
 public class GeoLocationController {
 
 	private static Location currentLocation = null;
-	private static LocationManager lm;
+	private static LocationManager lm = null;
 	public static final int GET_GEOLOCATION_CODE = 10;
 	
 	/**
@@ -274,4 +274,10 @@ public class GeoLocationController {
     	intent.putExtra("newUser", true);
 		return intent;
 	}
+	
+	public static void resetGeoLocationController(){
+		currentLocation = null;
+		lm = null;
+	}
+	
 }

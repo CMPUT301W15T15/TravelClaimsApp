@@ -23,6 +23,7 @@ import com.cmput301w15t15.travelclaimsapp.ExpenseListController;
 import com.cmput301w15t15.travelclaimsapp.FileManager;
 import com.cmput301w15t15.travelclaimsapp.GeoLocationController;
 import com.cmput301w15t15.travelclaimsapp.R;
+import com.cmput301w15t15.travelclaimsapp.SignOutController;
 import com.cmput301w15t15.travelclaimsapp.R.layout;
 import com.cmput301w15t15.travelclaimsapp.R.menu;
 import com.cmput301w15t15.travelclaimsapp.model.Claim;
@@ -154,6 +155,7 @@ public class ExpenseListActivity extends Activity
 	 */
     public void SignOut(MenuItem menu)
     {
+    	SignOutController.reset();
     	Toast.makeText(this, "Signing Out", Toast.LENGTH_SHORT).show();
     	Intent intent = new Intent(ExpenseListActivity.this, MainMenuActivity.class);
     	startActivity(intent);
