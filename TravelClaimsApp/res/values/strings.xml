@@ -40,6 +40,7 @@
     <string name="Register">Register</string>
     <string name="CreateUserText">Please full all fields and check box if you are an approver.</string>
     <string name="to">To</string>
+    <string name="home">Select your home location.</string>
 
     <string-array name="StatusArray">
         <item>In Progress</item>

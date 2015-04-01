@@ -89,19 +89,19 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 		super.onCreate(savedInstanceState);
 		
 		
-		setContentView(R.layout.activity_edit_expense);
+		setContentView(R.layout.edit_expense);
 		
 		sdf = new SimpleDateFormat("MM/dd/yyyy",Locale.CANADA);
 		expenseName=this.getIntent().getExtras().getString("expenseName");
 		claimName=this.getIntent().getExtras().getString("claimName");
 		
-		date = (EditText) findViewById(R.id.Edit_Expense_Date);
-		expenseNameInput=(EditText) findViewById(R.id.Edit_Expense_Name);
-		expenseCostInput=(EditText) findViewById(R.id.Edit_Expense_Cost);
-		expenseDescriptionInput=(EditText) findViewById(R.id.Edit_Expense_Description);
-		currencySpinner = (Spinner) findViewById(R.id.CurrencySpinner);
-		categorySpinner=(Spinner) findViewById(R.id.CategorySpinner);
-		expenseReceiptView = (ImageView) findViewById(R.id.Edit_Expense_Image);
+		date = (EditText) findViewById(R.id.Edit_Expense_Date2);
+		expenseNameInput=(EditText) findViewById(R.id.Edit_Expense_Name2);
+		expenseCostInput=(EditText) findViewById(R.id.Edit_Expense_Cost2);
+		expenseDescriptionInput=(EditText) findViewById(R.id.Edit_Expense_Description2);
+		currencySpinner = (Spinner) findViewById(R.id.CurrencySpinner2);
+		categorySpinner=(Spinner) findViewById(R.id.CategorySpinner2);
+		expenseReceiptView = (ImageView) findViewById(R.id.Edit_Expense_Image2);
 		
 		claimList = ClaimListController.getClaimList();
 		claim=claimList.getClaim(claimName);
@@ -372,27 +372,27 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 	public void afterTextChanged(Editable s) {
 		// TODO Auto-generated method stub
 		switch(getCurrentFocus().getId()){
-		case R.id.Edit_Expense_Name:
+		case R.id.Edit_Expense_Name2:
 			String newName = expenseNameInput.getText().toString();
 			if(s.length() == 0 ){
 				Toast.makeText(this, "Expense name cannot be null", Toast.LENGTH_LONG).show();
 			}else{
 				expense.setName(expenseNameInput.getText().toString());
 			}
-		case R.id.Edit_Expense_Date:
+		case R.id.Edit_Expense_Date2:
 			try{
 				expense.setDate(sdf.parse(date.getText().toString()));
 			}catch(ParseException e){
 				//do nothing 
 			}
 
-		case R.id.Edit_Expense_Cost:
+		case R.id.Edit_Expense_Cost2:
 			try{
 				expense.setCost(Integer.parseInt(expenseCostInput.getText().toString()));
 			}catch(NumberFormatException e){
 				//do nothing
 			}
-		case R.id.Edit_Expense_Description:
+		case R.id.Edit_Expense_Description2:
 			expense.setDes(expenseDescriptionInput.getText().toString());
 		}
 	}

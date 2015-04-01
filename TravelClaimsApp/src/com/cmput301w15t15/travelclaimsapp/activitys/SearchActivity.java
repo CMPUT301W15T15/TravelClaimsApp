@@ -55,10 +55,10 @@ public class SearchActivity extends Activity
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_search);
-		searchButton = (Button) this.findViewById(R.id.Search_Button);
-		claimListView = (ListView) this.findViewById(R.id.Search_List);
-		searchField = (EditText) this.findViewById(R.id.Search_Text);
+		setContentView(R.layout.search);
+		searchButton = (Button) this.findViewById(R.id.Search_Button2);
+		claimListView = (ListView) this.findViewById(R.id.Search_List2);
+		searchField = (EditText) this.findViewById(R.id.Search_Text2);
 		claimList = new ClaimList();
 		claimListView.setTextFilterEnabled(true);
 		claimListAdaptor = new ClaimListAdaptor(this,R.layout.claim_list_adaptor, claimList.toArrayList());

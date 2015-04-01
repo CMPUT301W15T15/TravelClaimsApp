@@ -57,8 +57,8 @@ public class MainMenuActivityTest extends
 		
 		//need to change ids once UI has been created 
 		login = (Button) activity.findViewById(R.id.Login_Button);
-		username = (EditText) activity.findViewById(R.id.UsernameEditText);
-		password = (EditText) activity.findViewById(R.id.PasswordEditText);
+		username = (EditText) activity.findViewById(R.id.LoginField);
+		password = (EditText) activity.findViewById(R.id.PasswordField);
 		
 		
 	}

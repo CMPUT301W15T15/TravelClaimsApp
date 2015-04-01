@@ -42,6 +42,7 @@ import android.widget.Toast;
  * 
  * Can only be entered with an internet connection.
  */
+
 public class CreateUserActivity extends Activity {
 	
 	private GeoLocation selectedGeoLocation; 
@@ -68,7 +69,7 @@ public class CreateUserActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_create_user);
+		setContentView(R.layout.new_user);
 		GeoLocationController.initializeLocationManager(this.getApplicationContext());
 	}
 
@@ -87,10 +88,10 @@ public class CreateUserActivity extends Activity {
 	 * @param v
 	 */
 	public void OnClickCreateUser(View v){
-		EditText userText = (EditText) findViewById(R.id.NewUsernameEditText);
-		EditText passText = (EditText) findViewById(R.id.NewPasswordEditText);
-		EditText passAgainText = (EditText) findViewById(R.id.NewPassAEditText);
-		CheckBox isApprover = (CheckBox) findViewById(R.id.ApproverCheckBox);
+		EditText userText = (EditText) findViewById(R.id.Create_Username);
+		EditText passText = (EditText) findViewById(R.id.Create_Password);
+		EditText passAgainText = (EditText) findViewById(R.id.Create_Password_Again);
+		CheckBox isApprover = (CheckBox) findViewById(R.id.Approver_Check_Box);
 		MessageDigest md = null;
 		byte[] passHash = null;
 		
@@ -131,7 +132,7 @@ public class CreateUserActivity extends Activity {
 	}
 	
 	public void selectHomeLocation(View v){
-		Intent intent = GeoLocationController.pickLocationIntent(CreateUserActivity.this);
+		Intent intent = GeoLocationController.newUserLocationIntent(CreateUserActivity.this);
 		startActivityForResult(intent, 20);
 	}
 	
@@ -139,12 +140,13 @@ public class CreateUserActivity extends Activity {
 		if(requestCode == 20){
 			switch (resultCode) {
 			case RESULT_OK:
-				Toast.makeText(this, "RESULT_OK", Toast.LENGTH_SHORT).show();
+				Toast.makeText(this, "Success!", Toast.LENGTH_SHORT).show();
 				String geoString = data.getExtras().getString("geoLocation");
+				Toast.makeText(this, "Success!", Toast.LENGTH_SHORT).show();
 				selectedGeoLocation = GeoLocation.getFromString(geoString);
 				break;
 			case RESULT_CANCELED:
-				Toast.makeText(this, "RESULT_CANCEL", Toast.LENGTH_SHORT).show();
+				Toast.makeText(this, "No location selected", Toast.LENGTH_SHORT).show();
 				break;
 				
 			default:

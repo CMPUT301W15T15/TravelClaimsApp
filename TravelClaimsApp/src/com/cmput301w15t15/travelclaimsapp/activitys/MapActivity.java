@@ -32,6 +32,7 @@ import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay;
 
 import com.cmput301w15t15.travelclaimsapp.GeoLocationController;
 import com.cmput301w15t15.travelclaimsapp.R;
+import com.cmput301w15t15.travelclaimsapp.R.drawable;
 import com.cmput301w15t15.travelclaimsapp.model.GeoLocation;
 import com.cmput301w15t15travelclaimsapp.osmdroid.MapEventsOverlay;
 import com.cmput301w15t15travelclaimsapp.osmdroid.MapEventsReceiver;
@@ -77,6 +78,7 @@ import android.widget.RelativeLayout.LayoutParams;
  * 	-Added scroll limits and min zoom level
  *  -Uses default zoom control and no minimap
  *  -changed menu
+ *  -added overlay items showing current, pick and home locations
  * 
  */
 public class MapActivity extends Activity implements MapEventsReceiver{
@@ -86,12 +88,9 @@ public class MapActivity extends Activity implements MapEventsReceiver{
 	// ===========================================================
 
 
-	private static final int RETURN_TO_ADD_CLAIM = Menu.FIRST;
-	private static final int SHOW_OTHER_GEO = RETURN_TO_ADD_CLAIM + 1;
-	
-	private static final int MAX_LAT = 88;
-	private static final int MIN_LAT = -88;
-
+	private static final int GOTO_HOME = Menu.FIRST;
+	private static final int GOTO_CURRENT = GOTO_HOME + 1;
+	private static final int GOTO_PICK = GOTO_HOME +2;
 
 	// ===========================================================
 	// Fields
@@ -112,17 +111,20 @@ public class MapActivity extends Activity implements MapEventsReceiver{
 	private ItemizedIconOverlay<OverlayItem> pointsOverlay;
 	private OverlayItem current;
 	private OverlayItem pick = null;
+	private OverlayItem home;
 	private static String focusOn; 
 	private static Integer adaptorIndex;
 	private static boolean canEdit;
-	// ===========================================================
-	// Constructors
-	// ===========================================================
+	private GeoPoint currentGeoPoint; 
+	private GeoPoint homeGeoPoint;
+	private GeoPoint pickGeoPoint;
 
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+		
 		
 		//check if there is a item to set the focus to 
 		if(getIntent().getExtras().getString("LatLng") != null){
@@ -133,7 +135,6 @@ public class MapActivity extends Activity implements MapEventsReceiver{
 		
 		//mResourceProxy = new ResourceProxyImpl(getApplicationContext());
 		mResourceProxy = new DefaultResourceProxyImpl(getApplicationContext());
-		currentLocation = GeoLocationController.getLocation();
 		points = new ArrayList<OverlayItem>();
 		
 		final RelativeLayout rl = new RelativeLayout(this);
@@ -143,33 +144,10 @@ public class MapActivity extends Activity implements MapEventsReceiver{
 		rl.addView(this.mapView, new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT,
 				LayoutParams.MATCH_PARENT));
 		
-		mapView.setMapListener(new MapListener() {
-			
-			@Override
-			public boolean onZoom(ZoomEvent arg0) {
-				return false;
-			}
-			@Override
-			public boolean onScroll(ScrollEvent arg0) {
-				return false;
-			}
-		});
-		
-		mapView.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-			
-			}
-		});
-		
 		mapView.setBuiltInZoomControls(true);
 		mapView.setMinZoomLevel(3);
 		mapController.setZoom(5);
-	
 		
-		mapController.setCenter(new GeoPoint(currentLocation.getLatitude(), currentLocation.getLongitude()));
 		/* Scale Bar Overlay */
 		{
 			this.mScaleBarOverlay = new ScaleBarOverlay(this, mResourceProxy);
@@ -186,7 +164,6 @@ public class MapActivity extends Activity implements MapEventsReceiver{
 
 			@Override
 			public boolean onItemLongPress(int arg0, OverlayItem arg1) {
-				
 				return false;
 			}
 			@Override
@@ -195,19 +172,29 @@ public class MapActivity extends Activity implements MapEventsReceiver{
 			}
 		},mResourceProxy);
 		
-		GeoPoint gp = new GeoPoint(currentLocation.getLatitude(),currentLocation.getLongitude());
-		current = new OverlayItem("Current Location","Current", gp);
+		
+		if(!getIntent().getExtras().getBoolean("newUser")){
+			homeLocation = GeoLocationController.getHomeLocation();
+			homeGeoPoint = new GeoPoint(homeLocation.getLatitude(),homeLocation.getLongitude());
+			home = new OverlayItem("Home Location", "Home", homeGeoPoint);
+			home.setMarker(getResources().getDrawable(drawable.map_home));
+			pointsOverlay.addItem(home);
+		}
+		
+		currentLocation = GeoLocationController.getLocation();
+		currentGeoPoint = new GeoPoint(currentLocation.getLatitude(),currentLocation.getLongitude());
+		current = new OverlayItem("Current Location","Current", currentGeoPoint);
 		current.setMarker(getResources().getDrawable((R.drawable.person)));
 		pointsOverlay.addItem(current);
-		
-		
+	
 		if(focusOn != null){
-			pick = new OverlayItem("Picked Location","Pick", GeoPoint.fromDoubleString(focusOn, ','));
+			pickGeoPoint = GeoPoint.fromDoubleString(focusOn, ',');
+			pick = new OverlayItem("Picked Location","Pick", pickGeoPoint);
 			pointsOverlay.addItem(pick);
 			pointsOverlay.setFocus(pick);
-			this.mapController.setCenter(GeoPoint.fromDoubleString(focusOn, ','));
+			mapController.setCenter(pickGeoPoint);
 		}else{
-			this.mapController.setCenter(gp);
+			this.mapController.setCenter(currentGeoPoint);
 		}
 		
 		this.mapView.getOverlays().add(pointsOverlay);
@@ -224,18 +211,27 @@ public class MapActivity extends Activity implements MapEventsReceiver{
 
 	@Override
 	public boolean onCreateOptionsMenu(final Menu pMenu) {
-		pMenu.add(0, RETURN_TO_ADD_CLAIM, Menu.NONE, "Back To Main");
-		pMenu.add(0, SHOW_OTHER_GEO, Menu.NONE, "Show Other Locations");
+		pMenu.add(0, GOTO_HOME, Menu.NONE, "Home Location");
+		pMenu.add(0, GOTO_CURRENT, Menu.NONE, "Current Location");
+		pMenu.add(0, GOTO_PICK, Menu.NONE, "Picked Location");
 		return true;
 	}
 
 	@Override
 	public boolean onMenuItemSelected(final int featureId, final MenuItem item) {
 		switch (item.getItemId()) {
-		case RETURN_TO_ADD_CLAIM:
+		case GOTO_HOME:
+			if(homeLocation != null){
+				mapController.setCenter(homeGeoPoint);
+			}
 			return true;
-
-		case SHOW_OTHER_GEO:
+		case GOTO_CURRENT:
+			mapController.setCenter(currentGeoPoint);
+			return true;
+		case GOTO_PICK:
+			if(pickGeoPoint != null){
+				mapController.setCenter(pickGeoPoint);
+			}
 			return true;
 		}
 		return false;
