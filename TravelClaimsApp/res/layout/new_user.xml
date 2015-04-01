@@ -3,10 +3,10 @@
     android:layout_height="fill_parent"
     android:background="@drawable/background"
     android:orientation="vertical"
-    android:paddingBottom="100dp"
+    android:paddingBottom="50dp"
     android:paddingLeft="30dp"
     android:paddingRight="30dp"
-    android:paddingTop="100dp" >
+    android:paddingTop="50dp" >
 
     <TextView
         android:id="@+id/Create_User_Text"
@@ -62,5 +62,19 @@
         android:text="@string/CreateUser"
         android:textColor="#FFFFFF"
         android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/HomeLocationTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/home"
+        android:textColor="#ffffff" />
+
+    <ImageButton
+        android:id="@+id/HomeLocationIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="selectHomeLocation"
+        android:src="@drawable/ic_action_map_icon" />
 
 </LinearLayout>
