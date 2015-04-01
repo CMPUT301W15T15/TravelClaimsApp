@@ -89,7 +89,6 @@ public class MainMenuActivity extends Activity {
 	public void OnLoginClick(View v){
 		EditText passText = (EditText) findViewById(R.id.PasswordField);
 		EditText userText = (EditText) findViewById(R.id.LoginField);
-		MessageDigest md = null;
 		byte[] passHash = null;
 		String givenUsername = userText.getText().toString();
 		
@@ -105,19 +104,8 @@ public class MainMenuActivity extends Activity {
 			return;
 		}
 		
-		try {
-			md = MessageDigest.getInstance("SHA-256");
-		} catch (NoSuchAlgorithmException e1) {
-			// TODO Auto-generated catch block
-			throw new RuntimeException();
-		}
 		
-		try {
-			passHash = md.digest(passText.getEditableText().toString().getBytes("UTF-8"));
-		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			throw new RuntimeException();
-		}
+		passHash = User.hashToSHA256(passText.getEditableText().toString());
 		
 		
 		if(InternetController.isInternetAvailable2(this)){

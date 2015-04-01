@@ -17,6 +17,9 @@
  */
 package com.cmput301w15t15.travelclaimsapp.model;
 
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 
 import android.location.Location;
@@ -46,10 +49,10 @@ public class User  implements Listenable{
 	 * @param password
 	 * @param approver
 	 */
-	public User(String username, byte[] password, boolean approver){
+	public User(String username, String password, boolean approver){
 		
 		this.username = username;
-		this.pHash = password;
+		this.pHash = hashToSHA256(password);
 		this.approver = approver;
 		this.listeners = new ArrayList<Listener>();
 	}
@@ -61,10 +64,10 @@ public class User  implements Listenable{
 	 * @param username
 	 * @param password
 	 */
-	public User(String username, byte[] password){
+	public User(String username, String password){
 		
 		this.username = username;
-		this.pHash = password;
+		this.pHash = hashToSHA256(password);
 		this.approver = false;
 		this.listeners = new ArrayList<Listener>();
 	}
@@ -116,6 +119,31 @@ public class User  implements Listenable{
 	public void setGeoLocation(GeoLocation gl) {
 		this.homeLocation = gl;
 		notifyListeners();
+	}
+
+	/**
+	 * Take the string entered for a password and hashes it into SHA-256 bit byte array
+	 * 
+	 * @param pass  {@link String} to SHA-256 bit hash {@link byte[]} 
+	 */
+	public static byte[] hashToSHA256(String pass) {
+		MessageDigest md = null;
+		byte[] hash = null;
+		
+		try {
+			md = MessageDigest.getInstance("SHA-256");
+		} catch (NoSuchAlgorithmException e1) {
+			// TODO Auto-generated catch block
+			throw new RuntimeException();
+		}
+		
+		try {
+			hash = md.digest(pass.getBytes("UTF-8"));
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			throw new RuntimeException();
+		}
+		return hash;
 	}
 	
 	

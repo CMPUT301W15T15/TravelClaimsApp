@@ -49,24 +49,7 @@ public class UserTest extends AndroidTestCase {
 		String name1 = "Jon";
 		String pass1 = "dog";
 		
-		MessageDigest md = null;
-		byte[] passHash = null;
-		
-		try {
-			md = MessageDigest.getInstance("SHA-256");
-		} catch (NoSuchAlgorithmException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		
-		try {
-			passHash = md.digest(pass1.getBytes("UTF-8"));
-		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		user1 = new User(name1, passHash);
+		user1 = new User(name1, pass1);
 		
 		assertTrue("user1 was added", user1.getUsername().equals(name1));
 		assertFalse("user2 was not added", user1 == user2);
@@ -84,24 +67,7 @@ public class UserTest extends AndroidTestCase {
 		String pass1 = "Sunshine";
 		Boolean isApprover = true;
 		
-		MessageDigest md = null;
-		byte[] passHash = null;
-		
-		try {
-			md = MessageDigest.getInstance("SHA-256");
-		} catch (NoSuchAlgorithmException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		
-		try {
-			passHash = md.digest(pass1.getBytes("UTF-8"));
-		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		user1 = new User(name1, passHash, isApprover);
+		user1 = new User(name1, pass1, isApprover);
 		
 		assertTrue("user1 was added", user1.getUsername().equals(name1));
 		assertFalse("user1 is an approver", user1.isApprover() == false);
