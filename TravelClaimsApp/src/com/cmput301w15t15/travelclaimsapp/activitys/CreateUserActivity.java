@@ -42,6 +42,7 @@ import android.widget.Toast;
  * 
  * Can only be entered with an internet connection.
  */
+
 public class CreateUserActivity extends Activity {
 	
 	private GeoLocation selectedGeoLocation; 
@@ -131,7 +132,7 @@ public class CreateUserActivity extends Activity {
 	}
 	
 	public void selectHomeLocation(View v){
-		Intent intent = GeoLocationController.pickLocationIntent(CreateUserActivity.this);
+		Intent intent = GeoLocationController.newUserLocationIntent(CreateUserActivity.this);
 		startActivityForResult(intent, 20);
 	}
 	
@@ -139,12 +140,13 @@ public class CreateUserActivity extends Activity {
 		if(requestCode == 20){
 			switch (resultCode) {
 			case RESULT_OK:
-				Toast.makeText(this, "RESULT_OK", Toast.LENGTH_SHORT).show();
+				Toast.makeText(this, "Success!", Toast.LENGTH_SHORT).show();
 				String geoString = data.getExtras().getString("geoLocation");
+				Toast.makeText(this, "Success!", Toast.LENGTH_SHORT).show();
 				selectedGeoLocation = GeoLocation.getFromString(geoString);
 				break;
 			case RESULT_CANCELED:
-				Toast.makeText(this, "RESULT_CANCEL", Toast.LENGTH_SHORT).show();
+				Toast.makeText(this, "No location selected", Toast.LENGTH_SHORT).show();
 				break;
 				
 			default:

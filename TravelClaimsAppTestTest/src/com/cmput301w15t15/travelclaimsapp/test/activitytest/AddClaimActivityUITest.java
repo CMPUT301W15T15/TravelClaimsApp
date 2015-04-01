@@ -67,7 +67,7 @@ public class AddClaimActivityUITest extends ActivityInstrumentationTestCase2<Add
 		instrumentation = getInstrumentation();
 		listView = (ListView) activity.findViewById(R.id.claim_list_listview);
 		adaptor = new ClaimListAdaptor(activity, R.id.claim_list_listview, claimList.toArrayList());
-		newClaimButton = (Button) activity.findViewById(R.id.add_claim_button);
+		newClaimButton = (Button) activity.findViewById(R.id.Add_Claim_Button2);
 	}
 
 	@Override
