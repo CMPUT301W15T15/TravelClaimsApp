@@ -55,6 +55,8 @@ public class FileManager {
 
 	private static final String USER_RESOURCE_URL = "http://cmput301.softwareprocess.es:8080/cmput301w15t15/user/";
 	private static final String CLAIMLIST_RESOURCE_URL = "http://cmput301.softwareprocess.es:8080/cmput301w15t15/claimlist/";
+	
+	private static final String APPROVECLAIMLIST_RESOURCE_URL = "http://cmput301.softwareprocess.es:8080/cmput301w15t15/approveclaimlist/";
 	private static final String USER_TAG = "UserSearch";
 	private static final String CLAIMLIST_TAG = "ClaimListSearch";
 	private static final String USERFILENAME = "user.sav";

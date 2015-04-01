@@ -27,7 +27,7 @@ import com.cmput301w15t15.travelclaimsapp.ClaimListController;
 import com.cmput301w15t15.travelclaimsapp.DestinationListAdaptor;
 import com.cmput301w15t15.travelclaimsapp.GeoLocationController;
 import com.cmput301w15t15.travelclaimsapp.R;
-import com.cmput301w15t15.travelclaimsapp.SignOutController;
+//import com.cmput301w15t15.travelclaimsapp.SignOutController;
 import com.cmput301w15t15.travelclaimsapp.TagListAdaptor;
 import com.cmput301w15t15.travelclaimsapp.UserController;
 import com.cmput301w15t15.travelclaimsapp.model.Claim;
@@ -359,7 +359,7 @@ public class EditClaimActivity extends FragmentActivity implements TextWatcher {
 	 */
 	public void SignOut(MenuItem menu)
     {
-    	SignOutController.reset();
+    	//SignOutController.reset();
     	Toast.makeText(this, "Signing Out", Toast.LENGTH_SHORT).show();
     	Intent intent = new Intent(EditClaimActivity.this, MainMenuActivity.class);
     	startActivity(intent);

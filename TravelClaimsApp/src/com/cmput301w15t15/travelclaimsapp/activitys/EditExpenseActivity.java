@@ -28,7 +28,7 @@ import com.cmput301w15t15.travelclaimsapp.ClaimListController;
 import com.cmput301w15t15.travelclaimsapp.ExpenseListAdaptor;
 import com.cmput301w15t15.travelclaimsapp.ExpenseListController;
 import com.cmput301w15t15.travelclaimsapp.R;
-import com.cmput301w15t15.travelclaimsapp.SignOutController;
+//import com.cmput301w15t15.travelclaimsapp.SignOutController;
 import com.cmput301w15t15.travelclaimsapp.R.id;
 import com.cmput301w15t15.travelclaimsapp.R.layout;
 import com.cmput301w15t15.travelclaimsapp.R.menu;
@@ -153,33 +153,6 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 	        expenseReceiptView.setImageBitmap(bm);
 		}
 		
-		
-//		expenseReceiptView.setOnTouchListener(new OnTouchListener() {
-//		      
-//			@Override
-//		      public boolean onTouch(View v, MotionEvent event) {
-//		        if (event.getAction() == MotionEvent.ACTION_DOWN) {
-//		          then = (long) System.currentTimeMillis();
-//		        } else if (event.getAction() == MotionEvent.ACTION_UP) {
-//		          if ((System.currentTimeMillis() - then) > longClickDuration) {
-//		            /* Implement long click behavior here */
-//		            System.out.println("Long Click has happened!");
-//		            Intent i = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-//					// Start new activity with the LOAD_IMAGE_RESULTS to handle back the results when image is picked from the Image Gallery.
-//			        startActivityForResult(i, 1);
-//		            return false;
-//		          } else {
-//		            /* Implement short click behavior here or do nothing */
-//		            System.out.println("Short Click has happened...");
-//		            return true;
-//		          }
-//		        }
-//		        return true;
-//		      }
-//		    });
-//		
-		
-		
 		expenseReceiptView.setOnLongClickListener(new OnLongClickListener()
 		{
 			@Override
@@ -198,10 +171,6 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 		    	loadPhoto((ImageView) v,100,100);   
 		    }
 		});
-		
-		
-		
-		
 		
 		currencySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 			@Override
@@ -272,15 +241,6 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 		else{
 			expenseNameInput.setText(expenseName);
 		}
-		
-
-		
-		//expense show test
-//		expense.setDate(expenseDate);
-//		Date date = new Date();
-//		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-//		System.out.println(dateFormat.format(date));
-
 
 		if (expense.getDes()!=null){
 			expenseDescriptionInput.setText(expense.getDes().toString());
@@ -304,32 +264,15 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 		currencyAdaptor.setDropDownViewResource(R.layout.spinner_dropdown_item);
 		currencySpinner.setAdapter(currencyAdaptor);
 		
-		//currencySpinner.setCo
-		
-		
 		ArrayAdapter<CharSequence> categoryAdaptor=ArrayAdapter.createFromResource(this, R.array.CategoryArray, R.layout.spinner_item);
 		categoryAdaptor.setDropDownViewResource(R.layout.spinner_dropdown_item);
 		categorySpinner.setAdapter(categoryAdaptor);
-
-		
-
-		//int currPos=getIndex(currencySpinner,expense.getCurr());
-		
-		//currencySpinner.setSelection(getIndex(currencySpinner, expense.getCurr()));
-		
-		//currencySpinner.setSelection(currencyAdaptor.getPosition(expense.getCurr()));
 		
 		
-		
-
 		currencySpinner.setSelection(currencyAdaptor.getPosition(expense.getCurr()));
-
 		categorySpinner.setSelection(categoryAdaptor.getPosition(expense.getCat()));
 		
 		setEditable();
-		//expenseNameInput.addTextChangedListener(this);
-
-		//date.addTextChangedListener(this);
 	}
 
 	/**
@@ -340,7 +283,6 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 	private void loadPhoto(ImageView imageView, int width, int height) {
 
         ImageView tempImageView = imageView;
-
 
         AlertDialog.Builder imageDialog = new AlertDialog.Builder(this);
         LayoutInflater inflater = (LayoutInflater) this.getSystemService(LAYOUT_INFLATER_SERVICE);
@@ -361,9 +303,7 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
             }
-
         });
-
 
         imageDialog.create();
         imageDialog.show();     
@@ -393,7 +333,6 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 	@Override
 	protected void onResume()
 	{
-
 		// TODO Auto-generated method stub
 		super.onResume();
 	}
@@ -488,7 +427,7 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 	 */
 	public void SignOut(MenuItem menu)
     {
-    	SignOutController.reset();
+    	//SignOutController.reset();
     	Toast.makeText(this, "Signing Out", Toast.LENGTH_SHORT).show();
     	Intent intent = new Intent(EditExpenseActivity.this, MainMenuActivity.class);
     	startActivity(intent);
