@@ -17,6 +17,7 @@
  */
 package com.cmput301w15t15.travelclaimsapp.activitys;
 
+import java.io.ByteArrayOutputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -27,6 +28,7 @@ import com.cmput301w15t15.travelclaimsapp.ClaimListController;
 import com.cmput301w15t15.travelclaimsapp.ExpenseListAdaptor;
 import com.cmput301w15t15.travelclaimsapp.ExpenseListController;
 import com.cmput301w15t15.travelclaimsapp.R;
+//import com.cmput301w15t15.travelclaimsapp.SignOutController;
 import com.cmput301w15t15.travelclaimsapp.R.id;
 import com.cmput301w15t15.travelclaimsapp.R.layout;
 import com.cmput301w15t15.travelclaimsapp.R.menu;
@@ -36,19 +38,35 @@ import com.cmput301w15t15.travelclaimsapp.model.ClaimList;
 import com.cmput301w15t15.travelclaimsapp.model.Expense;
 import com.cmput301w15t15.travelclaimsapp.model.ExpenseList;
 
+import android.media.ThumbnailUtils;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.Bitmap.CompressFormat;
+import android.graphics.BitmapFactory;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.text.format.DateFormat;
+import android.util.DisplayMetrics;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.View.OnTouchListener;
+import android.view.View.OnLongClickListener;
+import android.view.ViewGroup;
 import android.view.animation.BounceInterpolator;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -83,6 +101,11 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 	private Date expenseDate;
 	private byte[] imgShow;
 	private ImageView expenseReceiptView;
+
+	private int longClickDuration = 2000;
+	private long then;
+	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -117,8 +140,39 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 		
 		// show initial image
 		if (expense.getPicture()!=null){
+			imgShow = expense.getPicture();
 			
+//			Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.v);  
+//	        bitmap = ThumbnailUtils.extractThumbnail(bitmap, 100, 100);    
+//	        expenseReceiptView.setImageBitmap(bitmap);    
+			
+	        Bitmap bm = BitmapFactory.decodeByteArray(imgShow, 0, imgShow.length);
+	        DisplayMetrics dm = new DisplayMetrics();
+	        getWindowManager().getDefaultDisplay().getMetrics(dm);
+
+	        expenseReceiptView.setMinimumHeight(dm.heightPixels);
+	        expenseReceiptView.setMinimumWidth(dm.widthPixels);
+	        expenseReceiptView.setImageBitmap(bm);
 		}
+		
+		expenseReceiptView.setOnLongClickListener(new OnLongClickListener()
+		{
+			@Override
+			public boolean onLongClick(View v) {
+				// Create the Intent for Image Gallery.
+				Intent i = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+				// Start new activity with the LOAD_IMAGE_RESULTS to handle back the results when image is picked from the Image Gallery.
+		        startActivityForResult(i, 1);
+		        return true;
+			}
+		});
+		
+		expenseReceiptView.setOnClickListener(new OnClickListener() {
+		    @Override
+		    public void onClick(View v) {
+		    	loadPhoto((ImageView) v,100,100);   
+		    }
+		});
 		
 		currencySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 			@Override
@@ -151,6 +205,32 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 		set_on_click();
 	}
 	
+	
+
+	
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if (requestCode == 1 && resultCode == RESULT_OK && data != null) {
+			Uri pickedImage = data.getData();
+            String[] filePath = { MediaStore.Images.Media.DATA };
+            Cursor cursor = getContentResolver().query(pickedImage, filePath, null, null, null);
+            cursor.moveToFirst();
+            String imagePath = cursor.getString(cursor.getColumnIndex(filePath[0]));
+            expenseReceiptView.setImageBitmap(BitmapFactory.decodeFile(imagePath));
+            Bitmap imgToSave = BitmapFactory.decodeFile(imagePath);
+            imgShow = getBytesFromBitmap(imgToSave);
+            cursor.close();
+		}
+	}
+	
+	public byte[] getBytesFromBitmap(Bitmap bitmap) {
+	    ByteArrayOutputStream stream = new ByteArrayOutputStream();
+	    bitmap.compress(CompressFormat.JPEG, 70, stream);
+	    return stream.toByteArray();
+	}
+	
 	@Override
 	protected void onStart()
 	{
@@ -163,15 +243,6 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 		else{
 			expenseNameInput.setText(expenseName);
 		}
-		
-
-		
-		//expense show test
-//		expense.setDate(expenseDate);
-//		Date date = new Date();
-//		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-//		System.out.println(dateFormat.format(date));
-
 
 		if (expense.getDes()!=null){
 			expenseDescriptionInput.setText(expense.getDes().toString());
@@ -191,38 +262,55 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 			date.setText(sdf.format(expense.getDate()));
 		}
 
-		ArrayAdapter<CharSequence> currencyAdaptor=ArrayAdapter.createFromResource(this, R.array.CurrencyArray, android.R.layout.simple_spinner_dropdown_item);
+		ArrayAdapter<CharSequence> currencyAdaptor=ArrayAdapter.createFromResource(this, R.array.CurrencyArray, R.layout.spinner_item);
+		currencyAdaptor.setDropDownViewResource(R.layout.spinner_dropdown_item);
 		currencySpinner.setAdapter(currencyAdaptor);
 		
-		
-		ArrayAdapter<CharSequence> categoryAdaptor=ArrayAdapter.createFromResource(this, R.array.CategoryArray, android.R.layout.simple_spinner_dropdown_item);
+		ArrayAdapter<CharSequence> categoryAdaptor=ArrayAdapter.createFromResource(this, R.array.CategoryArray, R.layout.spinner_item);
+		categoryAdaptor.setDropDownViewResource(R.layout.spinner_dropdown_item);
 		categorySpinner.setAdapter(categoryAdaptor);
-
-		
-
-		//int currPos=getIndex(currencySpinner,expense.getCurr());
-		
-		//currencySpinner.setSelection(getIndex(currencySpinner, expense.getCurr()));
-		
-		//currencySpinner.setSelection(currencyAdaptor.getPosition(expense.getCurr()));
 		
 		
-		
-
 		currencySpinner.setSelection(currencyAdaptor.getPosition(expense.getCurr()));
-
 		categorySpinner.setSelection(categoryAdaptor.getPosition(expense.getCat()));
 		
 		setEditable();
-		//expenseNameInput.addTextChangedListener(this);
-
-		//date.addTextChangedListener(this);
 	}
 
 	/**
 	 * check if the status of a claim is editable 
 	 * 
 	 */
+	
+	private void loadPhoto(ImageView imageView, int width, int height) {
+
+        ImageView tempImageView = imageView;
+
+        AlertDialog.Builder imageDialog = new AlertDialog.Builder(this);
+        LayoutInflater inflater = (LayoutInflater) this.getSystemService(LAYOUT_INFLATER_SERVICE);
+
+        View layout = inflater.inflate(R.layout.image_adapter,
+                (ViewGroup) findViewById(R.id.layout_root));
+        ImageView image = (ImageView) layout.findViewById(R.id.fullimage);
+        image.setImageDrawable(tempImageView.getDrawable());
+        imageDialog.setView(layout);
+        String showDate = null;
+        if (expense.getDate()!=null){
+        	showDate = sdf.format(expense.getDate());
+        }
+        else{
+        	showDate ="";
+        }
+        imageDialog.setPositiveButton(expense.getName() + " "+ showDate, new DialogInterface.OnClickListener(){
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        imageDialog.create();
+        imageDialog.show();     
+    }
+	
 	private void setEditable() {
 		// TODO Auto-generated method stub
 		if(claim.getStatus().equals("Submitted") || claim.getStatus().equals("Approved")){
@@ -232,6 +320,7 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 			currencySpinner.setClickable(false);
 			categorySpinner.setClickable(false);
 			expenseDescriptionInput.setFocusable(false);
+			expenseReceiptView.setLongClickable(false);
 			
 		}else{
 			set_on_click();
@@ -246,7 +335,6 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 	@Override
 	protected void onResume()
 	{
-
 		// TODO Auto-generated method stub
 		super.onResume();
 	}
@@ -341,6 +429,7 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 	 */
 	public void SignOut(MenuItem menu)
     {
+    	//SignOutController.reset();
     	Toast.makeText(this, "Signing Out", Toast.LENGTH_SHORT).show();
     	Intent intent = new Intent(EditExpenseActivity.this, MainMenuActivity.class);
     	startActivity(intent);
@@ -361,6 +450,7 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
     	intent.putExtra("claimName", claimName);
 
     	String expenseName=expense.getName();
+    	expense.takePicture(imgShow);
     	intent.putExtra("expenseName", expenseName);
     	//Toast.makeText(this, expense.getDes(), Toast.LENGTH_SHORT).show();////
 

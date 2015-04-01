@@ -50,7 +50,13 @@ public class ClaimListController {
 	 */
 	static public void initClaimListController() {
 		if(claimList == null){
-			claimList = FileManager.getSaver().loadClaimLFromFile();
+			ClaimList tempClaimList = FileManager.getSaver().loadClaimLFromFile();
+			if(tempClaimList.getUsername() == null || !tempClaimList.getUsername().equals(UserController.getUser().getUsername())){
+				claimList = new ClaimList();
+				claimList.setUsername(UserController.getUser().getUsername());
+			} else {
+				claimList = tempClaimList;
+			}
 			claimList.sort();
 			claimList.addListener(new Listener() {
 				
@@ -321,7 +327,10 @@ public class ClaimListController {
 		return newClaims;
 	}
 
-	
+	public static void resetClaimListController(){
+		claimList = null;
+		expenseList = null;
+	}
 
 	
 }

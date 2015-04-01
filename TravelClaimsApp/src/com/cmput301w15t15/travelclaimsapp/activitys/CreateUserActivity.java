@@ -92,8 +92,6 @@ public class CreateUserActivity extends Activity {
 		EditText passText = (EditText) findViewById(R.id.Create_Password);
 		EditText passAgainText = (EditText) findViewById(R.id.Create_Password_Again);
 		CheckBox isApprover = (CheckBox) findViewById(R.id.Approver_Check_Box);
-		MessageDigest md = null;
-		byte[] passHash = null;
 		
 		
 		//some error handling
@@ -108,23 +106,8 @@ public class CreateUserActivity extends Activity {
 			return;
 		}
 		
-		//hashes password
-		try {
-			md = MessageDigest.getInstance("SHA-256");
-		} catch (NoSuchAlgorithmException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
 		
-		try {
-			passHash = md.digest(passText.getEditableText().toString().getBytes("UTF-8"));
-		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		
-		User newUser = new User(userText.getText().toString(), passHash, isApprover.isChecked());
+		User newUser = new User(userText.getText().toString(), passText.getEditableText().toString(), isApprover.isChecked());
 		GeoLocationController.setUserGeoLocation(newUser, selectedGeoLocation.getLatitude(), selectedGeoLocation.getLongitude());
 		Thread thread = new tryToAddUserThread(newUser);
 		thread.start();

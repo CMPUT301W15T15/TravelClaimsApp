@@ -49,24 +49,7 @@ public class UserControllerTest extends AndroidTestCase {
 		String name1 = "Jon";
 		String pass1 = "dog";
 		
-		MessageDigest md = null;
-		byte[] passHash = null;
-		
-		try {
-			md = MessageDigest.getInstance("SHA-256");
-		} catch (NoSuchAlgorithmException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		
-		try {
-			passHash = md.digest(pass1.getBytes("UTF-8"));
-		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		User user1 = new User(name1, passHash);
+		User user1 = new User(name1, pass1);
 		
 		FileManager.getSaver().saveUserInFile(user1);
 		User checkUser = FileManager.getSaver().loadUserFromFile();

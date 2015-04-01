@@ -5,12 +5,15 @@
     android:orientation="vertical"
     android:padding="20dp" >
 
+
+    
     <EditText
         android:id="@+id/Edit_Expense_Name2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="@string/Name"
+        android:textColorHint="#808080"
         android:textColor="#ffffff" >
 
         <requestFocus />
@@ -23,11 +26,13 @@
         android:ems="10"
         android:hint="@string/Date"
         android:inputType="date"
+        android:textColorHint="#808080"
         android:textColor="#ffffff" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
+
 
         <EditText
             android:id="@+id/Edit_Expense_Cost2"
@@ -37,6 +42,7 @@
             android:ems="10"
             android:hint="@string/Cost"
             android:inputType="numberDecimal"
+            android:textColorHint="#808080"
             android:textColor="#ffffff" />
 
         <Spinner
@@ -44,6 +50,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:textColor="#ffffff"
+            android:textColorHint="#808080"
             android:entries="@array/CurrencyArray" />
     </LinearLayout>
 
@@ -56,6 +64,8 @@
             android:id="@+id/CategorySpinner2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="#ffffff"
+            android:textColorHint="#808080"
             android:entries="@array/CategoryArray" />
 
         <EditText
@@ -65,12 +75,14 @@
             android:ems="10"
             android:hint="@string/Description"
             android:inputType="textMultiLine"
+            android:textColorHint="#808080"
             android:textColor="#ffffff" />
 
         <ImageView
             android:id="@+id/Edit_Expense_Image2"
             android:layout_width="match_parent"
             android:layout_height="152dp"
+            android:background="#909090"
             android:src="@drawable/ic_action_new_picture" />
 
         <Button

@@ -315,6 +315,7 @@ public class Expense implements Listenable{
 	
 	public void takePicture(byte[] picture){
 		this.picture=picture;
+		notifyListeners();
 	}
 
 	
