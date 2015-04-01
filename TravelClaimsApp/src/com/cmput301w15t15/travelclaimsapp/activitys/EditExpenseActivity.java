@@ -299,12 +299,15 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 			date.setText(sdf.format(expense.getDate()));
 		}
 
-		ArrayAdapter<CharSequence> currencyAdaptor=ArrayAdapter.createFromResource(this, R.array.CurrencyArray, android.R.layout.simple_spinner_dropdown_item);
+		ArrayAdapter<CharSequence> currencyAdaptor=ArrayAdapter.createFromResource(this, R.array.CurrencyArray, R.layout.spinner_item);
+		currencyAdaptor.setDropDownViewResource(R.layout.spinner_dropdown_item);
 		currencySpinner.setAdapter(currencyAdaptor);
+		
 		//currencySpinner.setCo
 		
 		
-		ArrayAdapter<CharSequence> categoryAdaptor=ArrayAdapter.createFromResource(this, R.array.CategoryArray, android.R.layout.simple_spinner_dropdown_item);
+		ArrayAdapter<CharSequence> categoryAdaptor=ArrayAdapter.createFromResource(this, R.array.CategoryArray, R.layout.spinner_item);
+		categoryAdaptor.setDropDownViewResource(R.layout.spinner_dropdown_item);
 		categorySpinner.setAdapter(categoryAdaptor);
 
 		

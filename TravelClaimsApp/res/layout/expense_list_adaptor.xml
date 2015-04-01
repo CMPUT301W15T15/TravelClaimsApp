@@ -15,32 +15,12 @@
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <TextView
-        android:id="@+id/expenseAdaptor_currency"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:text="currency"
-        android:textColor="#FFFFFF"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <TextView
         android:id="@+id/expenseAdaptor_Name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/expenseAdaptor_date"
         android:layout_alignParentLeft="true"
         android:text="ExpenseName"
-        android:textColor="#FFFFFF"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <TextView
-        android:id="@+id/expenseAdaptor_amount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/expenseAdaptor_category"
-        android:layout_toLeftOf="@+id/expenseAdaptor_currency"
-        android:text="amount"
         android:textColor="#FFFFFF"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
@@ -72,5 +52,25 @@
         android:layout_below="@+id/expenseAdaptor_currency"
         android:layout_toLeftOf="@+id/expenseAdaptor_flag"
         android:src="@drawable/ic_action_map_icon" />
+
+    <TextView
+        android:id="@+id/expenseAdaptor_currency"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:text="currency"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#FFFFFF" />
+
+    <TextView
+        android:id="@+id/expenseAdaptor_amount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@+id/expenseAdaptor_map"
+        android:text="amount"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#FFFFFF" />
 
 </RelativeLayout>
