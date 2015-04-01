@@ -17,6 +17,7 @@
  */
 package com.cmput301w15t15.travelclaimsapp.activitys;
 
+import java.io.ByteArrayOutputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -36,19 +37,29 @@ import com.cmput301w15t15.travelclaimsapp.model.ClaimList;
 import com.cmput301w15t15.travelclaimsapp.model.Expense;
 import com.cmput301w15t15.travelclaimsapp.model.ExpenseList;
 
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.Bitmap.CompressFormat;
+import android.graphics.BitmapFactory;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.text.format.DateFormat;
+import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.View.OnTouchListener;
 import android.view.animation.BounceInterpolator;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -83,6 +94,8 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 	private Date expenseDate;
 	private byte[] imgShow;
 	private ImageView expenseReceiptView;
+	private int longClickDuration = 2000;
+	private long then;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -118,8 +131,67 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 		
 		// show initial image
 		if (expense.getPicture()!=null){
-			
+			imgShow = expense.getPicture();
+	        Bitmap bm = BitmapFactory.decodeByteArray(imgShow, 0, imgShow.length);
+	        DisplayMetrics dm = new DisplayMetrics();
+	        getWindowManager().getDefaultDisplay().getMetrics(dm);
+
+	        expenseReceiptView.setMinimumHeight(dm.heightPixels);
+	        expenseReceiptView.setMinimumWidth(dm.widthPixels);
+	        expenseReceiptView.setImageBitmap(bm);
 		}
+		
+		
+		expenseReceiptView.setOnTouchListener(new OnTouchListener() {
+		      
+			@Override
+		      public boolean onTouch(View v, MotionEvent event) {
+		        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+		          then = (long) System.currentTimeMillis();
+		        } else if (event.getAction() == MotionEvent.ACTION_UP) {
+		          if ((System.currentTimeMillis() - then) > longClickDuration) {
+		            /* Implement long click behavior here */
+		            System.out.println("Long Click has happened!");
+		            Intent i = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+					// Start new activity with the LOAD_IMAGE_RESULTS to handle back the results when image is picked from the Image Gallery.
+			        startActivityForResult(i, 1);
+		            return false;
+		          } else {
+		            /* Implement short click behavior here or do nothing */
+		            System.out.println("Short Click has happened...");
+		            return true;
+		          }
+		        }
+		        return true;
+		      }
+		    });
+		
+		
+		
+//		expenseReceiptView.setOnLongClickListener(new OnLongClickListener()
+//		{
+//			@Override
+//			public boolean onLongClick(View v) {
+//				// Create the Intent for Image Gallery.
+//				Intent i = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+//				
+//				// Start new activity with the LOAD_IMAGE_RESULTS to handle back the results when image is picked from the Image Gallery.
+//		        startActivityForResult(i, 1);
+//		        return true;
+//			}
+//		});
+//		
+//		expenseReceiptView.setOnClickListener(new OnClickListener() {
+//		    @Override
+//		    public void onClick(View v) {
+//		        //your stuff
+//		        
+//		    }
+//		});
+//		
+		
+		
+		
 		
 		currencySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 			@Override
@@ -150,6 +222,29 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 		
 		});
 		set_on_click();
+	}
+	
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if (requestCode == 1 && resultCode == RESULT_OK && data != null) {
+			Uri pickedImage = data.getData();
+            String[] filePath = { MediaStore.Images.Media.DATA };
+            Cursor cursor = getContentResolver().query(pickedImage, filePath, null, null, null);
+            cursor.moveToFirst();
+            String imagePath = cursor.getString(cursor.getColumnIndex(filePath[0]));
+            expenseReceiptView.setImageBitmap(BitmapFactory.decodeFile(imagePath));
+            Bitmap imgToSave = BitmapFactory.decodeFile(imagePath);
+            imgShow = getBytesFromBitmap(imgToSave);
+            cursor.close();
+		}
+	}
+	
+	public byte[] getBytesFromBitmap(Bitmap bitmap) {
+	    ByteArrayOutputStream stream = new ByteArrayOutputStream();
+	    bitmap.compress(CompressFormat.JPEG, 70, stream);
+	    return stream.toByteArray();
 	}
 	
 	@Override
@@ -362,6 +457,7 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
     	intent.putExtra("claimName", claimName);
 
     	String expenseName=expense.getName();
+    	expense.takePicture(imgShow);
     	intent.putExtra("expenseName", expenseName);
     	//Toast.makeText(this, expense.getDes(), Toast.LENGTH_SHORT).show();////
 

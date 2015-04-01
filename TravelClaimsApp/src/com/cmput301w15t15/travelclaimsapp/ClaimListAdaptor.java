@@ -98,6 +98,7 @@ public class ClaimListAdaptor extends ArrayAdapter<Claim>{
         	viewHolder.claimStatus.setTextColor(context.getResources().getColor(color.primary_text_dark));
         }
         viewHolder.claimStatus.setText(claim.getClaimStatus());
+        
         //add destinations to viewholder
         ArrayList<Destination> dests = claim.getDestinationList().toArrayList();
         if(dests.size()>0){
