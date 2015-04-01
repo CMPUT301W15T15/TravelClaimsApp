@@ -234,29 +234,7 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 	}
 	
 	
-//	 @Override
-//     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//         super.onActivityResult(requestCode, resultCode, data);
-//
-//         if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && null != data) {
-//             Uri selectedImage = data.getData();
-//             String[] filePathColumn = { MediaStore.Images.Media.DATA };
-//
-//             Cursor cursor = getContentResolver().query(selectedImage,
-//                     filePathColumn, null, null, null);
-//             cursor.moveToFirst();
-//
-//             int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-//             String picturePath = cursor.getString(columnIndex);
-//             cursor.close();
-//
-//             ImageView imageView = (ImageView) findViewById(R.id.imgView);
-//             imageView.setImageBitmap(BitmapFactory.decodeFile(picturePath));
-//
-//         }
-//
-//
-//     }
+
 	
 	
 	@Override
@@ -323,6 +301,7 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 
 		ArrayAdapter<CharSequence> currencyAdaptor=ArrayAdapter.createFromResource(this, R.array.CurrencyArray, android.R.layout.simple_spinner_dropdown_item);
 		currencySpinner.setAdapter(currencyAdaptor);
+		//currencySpinner.setCo
 		
 		
 		ArrayAdapter<CharSequence> categoryAdaptor=ArrayAdapter.createFromResource(this, R.array.CategoryArray, android.R.layout.simple_spinner_dropdown_item);
@@ -367,8 +346,14 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
         ImageView image = (ImageView) layout.findViewById(R.id.fullimage);
         image.setImageDrawable(tempImageView.getDrawable());
         imageDialog.setView(layout);
-        imageDialog.setPositiveButton(expense.getName(), new DialogInterface.OnClickListener(){
-        	
+        String showDate = null;
+        if (expense.getDate()!=null){
+        	showDate = sdf.format(expense.getDate());
+        }
+        else{
+        	showDate ="";
+        }
+        imageDialog.setPositiveButton(expense.getName() + " "+ showDate, new DialogInterface.OnClickListener(){
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
             }
@@ -389,6 +374,7 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 			currencySpinner.setClickable(false);
 			categorySpinner.setClickable(false);
 			expenseDescriptionInput.setFocusable(false);
+			expenseReceiptView.setLongClickable(false);
 			
 		}else{
 			set_on_click();

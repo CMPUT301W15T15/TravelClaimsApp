@@ -108,10 +108,10 @@ public class ExpenseListAdaptor extends ArrayAdapter<Expense> {
 		viewHolder.expenseName.setText(expense.getName());
 
 		if (expense.getFlag()==0){
-		    viewHolder.expenseFlag.setImageResource(R.drawable.ic_action_toggle_star_outline);
+		    viewHolder.expenseFlag.setImageResource(R.drawable.ic_toggle_star_outline);
 		}
 		else{
-		    viewHolder.expenseFlag.setImageResource(R.drawable.ic_action_toggle_star);
+		    viewHolder.expenseFlag.setImageResource(R.drawable.ic_toggle_star);
 		}
 
 
@@ -132,10 +132,10 @@ public class ExpenseListAdaptor extends ArrayAdapter<Expense> {
 		        //stars[position]=!stars[position];
 		        expense1.setFlag(1-expense1.getFlag());
 		        if (expense1.getFlag()==0){
-				    i.setImageResource(R.drawable.ic_action_toggle_star_outline);
+				    i.setImageResource(R.drawable.ic_toggle_star_outline);
 				}
 				else{
-				    i.setImageResource(R.drawable.ic_action_toggle_star);
+				    i.setImageResource(R.drawable.ic_toggle_star);
 				}
 		        //notifyDataSetChanged();
 		        //notifyDataSetInvalidated(); 

@@ -82,6 +82,7 @@
             android:id="@+id/Edit_Expense_Image2"
             android:layout_width="match_parent"
             android:layout_height="152dp"
+            android:background="#909090"
             android:src="@drawable/ic_action_new_picture" />
 
         <Button

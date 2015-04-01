@@ -11,6 +11,7 @@
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/expenseAdaptor_currency"
         android:text="date"
+        android:textColor="#FFFFFF"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <TextView
@@ -20,6 +21,7 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:text="currency"
+        android:textColor="#FFFFFF"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
@@ -29,6 +31,7 @@
         android:layout_above="@+id/expenseAdaptor_date"
         android:layout_alignParentLeft="true"
         android:text="ExpenseName"
+        android:textColor="#FFFFFF"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
@@ -38,6 +41,7 @@
         android:layout_above="@+id/expenseAdaptor_category"
         android:layout_toLeftOf="@+id/expenseAdaptor_currency"
         android:text="amount"
+        android:textColor="#FFFFFF"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
@@ -48,6 +52,7 @@
         android:layout_alignBottom="@+id/expenseAdaptor_date"
         android:layout_centerHorizontal="true"
         android:text="category"
+        android:textColor="#FFFFFF"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <ImageView
@@ -57,7 +62,7 @@
         android:layout_alignParentRight="true"
         android:layout_alignTop="@+id/expenseAdaptor_category"
         android:onClick="ChangeFlag"
-        android:src="@drawable/ic_action_toggle_star_outline" />
+        android:src="@drawable/ic_toggle_star_outline" />
 
     <ImageView
         android:id="@+id/expenseAdaptor_map"
