@@ -41,7 +41,7 @@
 
         <Spinner
             android:id="@+id/CurrencySpinner2"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:entries="@array/CurrencyArray" />
@@ -70,7 +70,7 @@
         <ImageView
             android:id="@+id/Edit_Expense_Image2"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="152dp"
             android:src="@drawable/ic_action_new_picture" />
 
         <Button
@@ -78,7 +78,7 @@
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:background="@drawable/buttonshape"
-            android:onClick="RegisterButton"
+            android:onClick="CreateExpense"
             android:shadowColor="#A8A8A8"
             android:shadowDx="0"
             android:shadowDy="0"
