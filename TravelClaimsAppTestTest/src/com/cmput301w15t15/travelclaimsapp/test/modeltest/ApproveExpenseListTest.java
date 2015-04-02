@@ -48,51 +48,73 @@ public class ApproveExpenseListTest extends TestCase {
 	}
 	
 	//TestNumber:ApproveViewTest #4
-	/*public void testViewSubmittedExpense() throws IOException {
+	public void testViewSubmittedExpense() throws IOException {
 		ClaimList approveClaimList = new ClaimList();
 		claim1 = new Claim("Claim1");
-		expense1 = new Expense("Expense1", null, null, null, null, 0);
+		claim1.setStatus("Process");
+		expense1 = new Expense("Expense1");
 		
 		approveClaimList.addClaim(claim1);
-		claim1.setStatus("Submitted");
 		ExpenseList expenseList = claim1.getExpenseList();
 		expenseList.addExpense(expense1);
-
-		assertTrue("name is equal", approveClaimList.toArrayList()
-				.get(0).getExpenseList().getExpense("Expense1").getName().toString().equals("Expense1"));
-		
 		Date date = new Date();
 		expense1.setDate(date);
+		expense1.setDes("Description");
+		expense1.setGeoLocation(null);
+		expense1.setCat("Air Fare");
+		expense1.setCost(100);
+		expense1.setCurr("CAN");
+		expense1.setFlag(1);
+		claim1.setStatus("Submitted");
+		
+		
+		assertTrue("name is equal", approveClaimList.toArrayList()
+				.get(0).getExpenseList().getExpense("Expense1").getName().toString().equals("Expense1"));
+	
 		assertTrue("date is equal", approveClaimList.toArrayList()
 				.get(0).getExpenseList().getExpense("Expense1").getDate().equals(date));
 		
-		expense1.setDes("Description");
 		assertTrue("Description is equal", approveClaimList.toArrayList()
 				.get(0).getExpenseList().getExpense("Expense1").getDes().equals("Description"));
+		assertTrue("Geolocation is equal", approveClaimList.toArrayList()
+				.get(0).getExpenseList().getExpense("Expense1").getGeoLocation().equals(null));
+		assertTrue("category is equal", approveClaimList.toArrayList()
+				.get(0).getExpenseList().getExpense("Expense1").getCat().equals("Air Fare"));
+		assertTrue("cost is equal", approveClaimList.toArrayList()
+				.get(0).getExpenseList().getExpense("Expense1").getCost().equals(100));
+		assertTrue("Currency is equal", approveClaimList.toArrayList()
+				.get(0).getExpenseList().getExpense("Expense1").getCurr().equals("CAN"));
+		assertTrue("flag is existing", approveClaimList.toArrayList()
+				.get(0).getExpenseList().getExpense("Expense1").getFlag()==1);
+		
+		assertTrue("expenses1 is not editeble", approveClaimList.toArrayList().get(0).isEditable()==false);
 	}
-	*/
-	//TestNumber:ReceiptViewTest #1
-//	public void testViewExpenseReceipt() throws IOException{
-//		ClaimList testClaimList = new ClaimList();
-//		claim1 = new Claim("Claim1");
-//		expense1 = new Expense("Expense1");
-//		expense2 = new Expense("Expense2");
-//		
-//		claim1.setStatus("Submitted");
-//		ExpenseList expenseList = claim1.getExpenseList();
-//		expenseList.addExpense(expense1);
-//		expenseList.addExpense(expense2);
-//		
-//
-//		testClaimList.addClaim(claim1);
-//		testClaimList.addClaim(claim2);
-//		Expense item1 = new Expense("food");
-//		Expense item2 = new Expense("meat");
-//		Expense item3 = new Expense("drink");
-//		
-//		expense1.takeReceipt(null);
-//		assertFalse("Image yes?", expense1.getReceipt().equals(null));
-//		assertTrue("Image no", expense2.getReceipt().equals(null));
-//		}
 
+	//TestNumber:ReceiptViewTest #1
+	public void testViewExpenseReceipt() throws IOException
+	{
+
+		ClaimList testClaimList = new ClaimList();
+		claim1 = new Claim("Claim1");
+		expense1 = new Expense("Expense1");
+		expense2 = new Expense("Expense2");
+		
+		claim1.setStatus("Process");
+		ExpenseList expenseList = claim1.getExpenseList();
+		expenseList.addExpense(expense1);
+		expenseList.addExpense(expense2);
+
+		testClaimList.addClaim(claim1);
+		testClaimList.addClaim(claim2);
+		Expense item1 = new Expense("food");
+		Expense item2 = new Expense("meat");
+		Expense item3 = new Expense("drink");
+		
+		expense1.takeReceipt(null);
+		claim1.setStatus("Submitted");
+		assertFalse("Image yes?", expense1.getReceipt().equals(null));
+		assertTrue("Image no", expense2.getReceipt().equals(null));
+		assertTrue("photo is not editable", claim1.isEditable()==false);
+	}
 }
+	
