@@ -28,7 +28,7 @@ import android.test.TouchUtils;
 import android.view.View;
 import android.widget.Button;
 
-public class ApproverActivityTest extends
+public class ApproverActivityTest extends 
 	ActivityInstrumentationTestCase2<ApproverClaimListActivity> {
 	private Instrumentation instrumentation;
 	private Activity activity;
@@ -71,6 +71,9 @@ public class ApproverActivityTest extends
         //Do some other testing afterward
 		//comment field is not null
     }
+    
+    
+    
     
     
 
