@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/approve_claim_list_adaptor"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <TextView
+        android:id="@+id/approveListAdaptor_Name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/expenseAdaptor_date"
+        android:layout_alignParentLeft="true"
+        android:layout_alignRight="@+id/approveListAdaptor_Status"
+        android:text="ClaimName"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#000000" />
+
+    <TextView
+        android:id="@+id/approveListAdaptor_Status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/approveListAdaptor_Approver"
+        android:layout_alignBottom="@+id/approveListAdaptor_Approver"
+        android:layout_centerHorizontal="true"
+        android:text="status"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/approveListAdaptor_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/approveListAdaptor_Status"
+        android:layout_alignBottom="@+id/approveListAdaptor_Status"
+        android:layout_alignParentLeft="true"
+        android:layout_toLeftOf="@+id/approveListAdaptor_Status"
+        android:text="date"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="#000000" />
+
+    <TextView
+        android:id="@+id/approveListAdaptor_claimant"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/approveListAdaptor_Name"
+        android:layout_alignBottom="@+id/approveListAdaptor_Name"
+        android:layout_toLeftOf="@+id/claim_color_code_approve"
+        android:layout_toRightOf="@+id/approveListAdaptor_Name"
+        android:text="claimant"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="#000000" />
+
+    <TextView
+        android:id="@+id/approveListAdaptor_Approver"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/approveListAdaptor_claimant"
+        android:text="Approver"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+    
+    <TextView
+        android:id="@+id/claim_color_code_approve"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_weight="1"
+        android:background="#0746F2"
+        android:text="S"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="#0746F2" />
+        
+    <LinearLayout
+        android:id="@+id/linearLayout_destinations_approve"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:divider="@drawable/horizontal_line"
+        android:dividerPadding="1dp"
+        android:orientation="vertical"
+        android:showDividers="end" >
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout_amounts_approve"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:divider="@drawable/horizontal_line"
+        android:orientation="vertical"
+        android:showDividers="end" >
+    </LinearLayout>
+
+
+
+</RelativeLayout>

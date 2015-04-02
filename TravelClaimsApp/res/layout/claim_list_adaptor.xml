@@ -44,11 +44,11 @@
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:layout_gravity="right"
-	        android:background="#0746F2"
-	        android:textColor="#0746F2"
-	        android:text="S"
 	        android:layout_weight="1"
-	        android:textAppearance="?android:attr/textAppearanceSmall" />
+	        android:background="#0746F2"
+	        android:text="S"
+	        android:textAppearance="?android:attr/textAppearanceSmall"
+	        android:textColor="#0746F2" />
 
     </LinearLayout>
     
