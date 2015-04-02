@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
+import com.cmput301w15t15.travelclaimsapp.ClaimListController;
 import com.cmput301w15t15.travelclaimsapp.GeoLocationController;
 import com.cmput301w15t15.travelclaimsapp.model.Claim;
 import com.cmput301w15t15.travelclaimsapp.model.Destination;
@@ -134,5 +135,45 @@ public class GeoLocationControllerTest extends AndroidTestCase {
 		assertEquals("Color code should be red", Color.rgb(135, 27, 27), GeoLocationController.getFirstDestinationColorCode(claim3)[0]);
 		assertEquals("Color code should be blue", Color.rgb(35, 54, 132), GeoLocationController.getFirstDestinationColorCode(claim4)[0]);
 	}
+	/**
+	 * Test getting the first destination with a geolocation color code 
+	 */
+	public void testgetClaimDestinationMarkers(){
+		GeoLocationController.setHomeLocation(53.581667, -116.434444);		//Edson
+		GeoLocation gl = new GeoLocation(53.544389,-113.490927);			//Edmonton
+		GeoLocation gl1 = new GeoLocation(52.133214,-106.670046);			//Saskatoon
+		GeoLocation gl2 = new GeoLocation(51.507351,-0.127758);				//London, UK
+		Destination d = new Destination("Edmonton", "Test");
+		Destination d1 = new Destination("Saskatoon", "Test");
+		Destination d2 = new Destination("London, UK", "Test");
+		Destination d3 = new Destination("No GeoLocation", "Test");
+		d.setGeoLocation(gl);
+		d1.setGeoLocation(gl1);
+		d2.setGeoLocation(gl2);
+		
+		Claim claim1 = new Claim("Test1");		//add first destination with green color code distance
+		claim1.addDestination(d);
+		claim1.addDestination(d1);
+		claim1.addDestination(d2);
+			
+		Claim claim2 = new Claim("Test2");		//add first destination with yellow color code distance
+		claim2.addDestination(d3);
+		claim2.addDestination(d3);
+		claim2.addDestination(d1);
+		
+		Claim claim3 = new Claim("Test3");		//add first destination with red color code distance
+		claim3.addDestination(d3);
+		claim3.addDestination(d2);
+		claim3.addDestination(d3);
+		
+		Claim claim4 = new Claim("Test4");		//no destination color code should be blue 
+		
+		
+		assertEquals("Color code should be green", Color.rgb(13, 116, 11), GeoLocationController.getFirstDestinationColorCode(claim1)[0]);
+		assertEquals("Color code should be yellow", Color.rgb(193, 191, 35), GeoLocationController.getFirstDestinationColorCode(claim2)[0]);
+		assertEquals("Color code should be red", Color.rgb(135, 27, 27), GeoLocationController.getFirstDestinationColorCode(claim3)[0]);
+		assertEquals("Color code should be blue", Color.rgb(35, 54, 132), GeoLocationController.getFirstDestinationColorCode(claim4)[0]);
+	}
 	
+
 }

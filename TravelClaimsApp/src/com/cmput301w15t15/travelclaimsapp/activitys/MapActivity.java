@@ -1,11 +1,6 @@
 package com.cmput301w15t15.travelclaimsapp.activitys;
 
 
-
-
-import java.util.ArrayList;
-import java.util.List;
-
 import org.osmdroid.DefaultResourceProxyImpl;
 import org.osmdroid.ResourceProxy;
 import org.osmdroid.api.IMapController;
@@ -14,13 +9,7 @@ import org.osmdroid.bonuspack.overlays.MapEventsReceiver;
 import org.osmdroid.bonuspack.overlays.Marker;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
-import org.osmdroid.views.overlay.ItemizedIconOverlay;
-import org.osmdroid.views.overlay.MinimapOverlay;
-import org.osmdroid.views.overlay.Overlay;
-import org.osmdroid.views.overlay.OverlayItem;
 import org.osmdroid.views.overlay.ScaleBarOverlay;
-import org.osmdroid.views.overlay.SimpleLocationOverlay;
-
 import com.cmput301w15t15.travelclaimsapp.GeoLocationController;
 import com.cmput301w15t15.travelclaimsapp.R;
 import com.cmput301w15t15.travelclaimsapp.model.GeoLocation;
@@ -30,7 +19,6 @@ import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 import android.widget.RelativeLayout.LayoutParams;
 
 
@@ -46,28 +34,12 @@ import android.widget.RelativeLayout.LayoutParams;
  * 
  * Used osmbonuspack from https://code.google.com/p/osmbonuspack/source/browse/#svn%2FBonusPackDownloads on April 1st 2015
  * 
- * MODIFICATIONS:
- * 	-Added scroll limits and min zoom level
- *  -Uses default zoom control and no minimap
- *  -changed menu
- *  -added overlay items showing current, pick and home locations
- * 
  */
 public class MapActivity extends Activity implements MapEventsReceiver{
-
-	// ===========================================================
-	// Constants
-	// ===========================================================
-
 
 	private static final int GOTO_HOME = Menu.FIRST;
 	private static final int GOTO_CURRENT = GOTO_HOME + 1;
 	private static final int GOTO_PICK = GOTO_HOME +2;
-
-	// ===========================================================
-	// Fields
-	// ===========================================================
-
 	private MapView mapView;
 	private IMapController mapController;
 	private ResourceProxy mResourceProxy;
@@ -145,28 +117,9 @@ public class MapActivity extends Activity implements MapEventsReceiver{
 			this.mapController.setCenter(currentGeoPoint);
 		}
 		
-		this.mapView.getOverlays().add(new MapEventsOverlay(this, this));
-		
-		
-//		pick.setOnMarkerClickListener(new OnMarkerClickListener() {
-//			@Override
-//			public boolean onMarkerClick(Marker arg0, MapView arg1) {
-//				arg0.showInfoWindow();
-//				return false;
-//			}
-//		});
-		
-		
-		
-		
+		this.mapView.getOverlays().add(new MapEventsOverlay(this, this));	
 		this.setContentView(rl);
 	}
-
-
-	// ===========================================================
-	// Methods from SuperClass/Interfaces
-	// ===========================================================
-
 	@Override
 	public boolean onCreateOptionsMenu(final Menu pMenu) {
 		pMenu.add(0, GOTO_HOME, Menu.NONE, "Home Location");

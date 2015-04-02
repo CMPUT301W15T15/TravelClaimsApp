@@ -56,12 +56,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ContextMenu.ContextMenuInfo;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
@@ -385,7 +387,10 @@ public class EditClaimActivity extends FragmentActivity implements TextWatcher {
 	 * @param view
 	 */
 	public void addDestinationButton(View view){
+		adaptorPos = destAdaptor.getCount();
 		showDestinationAlert(new String(), new String());
+		
+
 	}
 	
 	/**
@@ -538,12 +543,20 @@ public class EditClaimActivity extends FragmentActivity implements TextWatcher {
     	AlertDialog.Builder alert = new AlertDialog.Builder(this);
     	
     	alert.setView(linearLayout);
+    	
+    	
     
     	alert.setPositiveButton("Add", new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int whichButton) {
 				Destination dest = new Destination(enterLocation.getText().toString(), enterReason.getText().toString());
 				ClaimListController.addDestination(dest, theClaim);
+				
+				//open Map activity and make user pick a geolocation
+				Intent intent = GeoLocationController.pickLocationIntent(EditClaimActivity.this);
+				startActivityForResult(intent, GET_GEOLOCATION_CODE);
+				
 				destAdaptor.notifyDataSetChanged();
+				
 			}
 		});
 		alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -554,10 +567,6 @@ public class EditClaimActivity extends FragmentActivity implements TextWatcher {
 	
 		alert.show(); 
    	}
-   	
-   	
-   	
-   	
 
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if(requestCode == GET_GEOLOCATION_CODE){
