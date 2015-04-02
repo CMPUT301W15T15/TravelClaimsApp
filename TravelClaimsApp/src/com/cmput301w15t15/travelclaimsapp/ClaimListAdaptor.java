@@ -106,28 +106,12 @@ public class ClaimListAdaptor extends ArrayAdapter<Claim>{
         
        
         if(dests.size()>0){
-        	GeoLocation gl;
-        	for(Destination dest : dests){
-        		gl = dest.getGeoLocation();
-            	if(gl != null){
-            		int d = (int) Math.round(GeoLocationController.getDistanceFromHome(gl));
-            		viewHolder.distColor.setText(Integer.toString(d));
-            		if(d<400){
-            			viewHolder.distColor.setBackgroundColor(Color.rgb(13, 116, 11));
-            			viewHolder.distColor.setTextColor(Color.rgb(13, 116, 11));
-            		}else if(d<2000){
-            			viewHolder.distColor.setBackgroundColor(Color.rgb(193, 191, 35));
-            			viewHolder.distColor.setTextColor(Color.rgb(193, 191, 35));
-            		}else if(d>2000){
-            			viewHolder.distColor.setBackgroundColor(Color.rgb(135, 27, 27));
-            			viewHolder.distColor.setTextColor(Color.rgb(135, 27, 27));
-            		}
-            	}else{
-            		viewHolder.distColor.setBackgroundColor(Color.rgb(35, 54, 132));
-        		   	viewHolder.distColor.setTextColor(Color.rgb(35, 54, 132));
-        		   	viewHolder.distColor.setText("0");
-            	}
-            }
+        	int[] colorDistance = GeoLocationController.getFirstDestinationColorCode(claim);
+        	
+            viewHolder.distColor.setBackgroundColor(colorDistance[0]);
+    		viewHolder.distColor.setTextColor(colorDistance[0]);
+            viewHolder.distColor.setText(Integer.toString(colorDistance[1]));
+           
         	viewHolder.destinations.removeAllViews();
         	viewHolder.destinations.setVisibility(android.view.View.VISIBLE);
         	TextView tv1 = new TextView(context);

@@ -68,7 +68,7 @@ public class CreateUserActivityTest extends
 		password = (EditText) activity.findViewById(R.id.Create_Password);
 		passwordAgain = (EditText) activity.findViewById(R.id.Create_Password_Again);
 		ifApprover = (CheckBox) activity.findViewById(R.id.Approver_Check_Box);
-		geolocation = (ImageButton) activity.findViewById(R.id.NewUserGeoLocationButton);
+		geolocation = (ImageButton) activity.findViewById(R.id.HomeLocationIcon);
 
 		
 	}

@@ -101,9 +101,11 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 	private Date expenseDate;
 	private byte[] imgShow;
 	private ImageView expenseReceiptView;
+
 	private int longClickDuration = 2000;
 	private long then;
 	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
