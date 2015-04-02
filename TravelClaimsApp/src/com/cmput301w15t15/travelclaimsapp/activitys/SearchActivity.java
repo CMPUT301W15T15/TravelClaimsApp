@@ -82,7 +82,7 @@ public class SearchActivity extends Activity
 	 */
 	public void SignOut(MenuItem menu)
     {
-    	//SignOutController.reset();
+    	SignOutController.reset();
     	Toast.makeText(this, "Signing Out", Toast.LENGTH_SHORT).show();
     	Intent intent = new Intent(SearchActivity.this, MainMenuActivity.class);
     	startActivity(intent);

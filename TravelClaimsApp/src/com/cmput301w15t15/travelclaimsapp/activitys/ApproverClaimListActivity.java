@@ -151,7 +151,7 @@ public class ApproverClaimListActivity extends Activity {
 	 */
     public void SignOut(MenuItem menu)
     {
-    	//SignOutController.reset();
+    	SignOutController.reset();
     	Toast.makeText(this, "Signing Out", Toast.LENGTH_SHORT).show();
     	Intent intent = new Intent(ApproverClaimListActivity.this, MainMenuActivity.class);
     	startActivity(intent);
