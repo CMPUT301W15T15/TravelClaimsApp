@@ -17,6 +17,8 @@
  */
 package com.cmput301w15t15.travelclaimsapp.activitys;
 
+import com.cmput301w15t15.travelclaimsapp.ApproveClaimListController;
+import com.cmput301w15t15.travelclaimsapp.ApproverClaimListAdaptor;
 import com.cmput301w15t15.travelclaimsapp.ClaimListAdaptor;
 import com.cmput301w15t15.travelclaimsapp.ClaimListController;
 import com.cmput301w15t15.travelclaimsapp.FileManager;
@@ -42,10 +44,10 @@ import android.widget.Toast;
  * 
  * TODO:
  */
-public class AddClaimActivity extends Activity {
+public class ApproverClaimListActivity extends Activity {
 
 	private static final int LENGTH_SHORT = 0;
-	private ClaimListAdaptor claimAdaptor;
+	private ApproverClaimListAdaptor claimAdaptor;
 	private ListView claimListView;
 	private ClaimList claimList;
 	
@@ -54,11 +56,11 @@ public class AddClaimActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.add_claim);
 		FileManager.initializeSaver(this);
-		claimListView = (ListView) findViewById(R.id.Claim_Listview);
-		claimList = ClaimListController.getClaimList();
+		claimListView = (ListView) findViewById(R.id.approve_claim_list_view);
+		claimList = ApproveClaimListController.getClaimList();
 		
 		//create a adaptor for claim list and set it
-		claimAdaptor = new ClaimListAdaptor(this,R.layout.claim_list_adaptor, claimList.toArrayList());
+		claimAdaptor = new ApproverClaimListAdaptor(this,R.layout.approve_claim_list_adaptor, claimList.toArrayList());
 		claimAdaptor.notifyDataSetChanged();
         claimListView.setAdapter(claimAdaptor);
         
@@ -113,7 +115,7 @@ public class AddClaimActivity extends Activity {
             	claimAdaptor.notifyDataSetChanged();
             	return true;
             case R.id.cmenu_addExpense:
-            	intent= new Intent(AddClaimActivity.this, EditExpenseActivity.class);
+            	intent= new Intent(ApproverClaimListActivity.this, EditExpenseActivity.class);
             	//create new expense with default name and add to claimlist
             	Expense expense = new Expense("Expense"+claim.getExpenseList().size());
             	ClaimListController.addExpense(expense, claim);
@@ -124,7 +126,7 @@ public class AddClaimActivity extends Activity {
             	return true;
             case R.id.cmenu_editExpense:
             	//pass the claim selected to new activity 
-            	intent = new Intent(AddClaimActivity.this, EditClaimActivity.class);
+            	intent = new Intent(ApproverClaimListActivity.this, EditClaimActivity.class);
             	intent.putExtra("claimName", claim.getName());
             	startActivity(intent);   
             	return true;
@@ -140,7 +142,7 @@ public class AddClaimActivity extends Activity {
     public void SearchOption (MenuItem menu)
     {
     	Toast.makeText(this, "Going to Search", Toast.LENGTH_SHORT).show();
-    	Intent intent = new Intent(AddClaimActivity.this, SearchActivity.class);
+    	Intent intent = new Intent(ApproverClaimListActivity.this, SearchActivity.class);
     	startActivity(intent);
     }
     /**Function that is called when the "Sign Out" menu item is clicked
@@ -152,7 +154,7 @@ public class AddClaimActivity extends Activity {
     {
     	//SignOutController.reset();
     	Toast.makeText(this, "Signing Out", Toast.LENGTH_SHORT).show();
-    	Intent intent = new Intent(AddClaimActivity.this, MainMenuActivity.class);
+    	Intent intent = new Intent(ApproverClaimListActivity.this, MainMenuActivity.class);
     	startActivity(intent);
     }
 
@@ -172,17 +174,12 @@ public class AddClaimActivity extends Activity {
 		ClaimListController.addClaim(claim);
 		
     	Toast.makeText(this, "Creating a Claim", Toast.LENGTH_SHORT).show();
-    	Intent intent = new Intent(AddClaimActivity.this, EditClaimActivity.class);
+    	Intent intent = new Intent(ApproverClaimListActivity.this, EditClaimActivity.class);
     	//attach claim name to intent and start activity
     	intent.putExtra("claimName", claim.getName());
     	startActivity(intent);   
     }
  
-    public void MenuApprover(MenuItem menu){
-    	Toast.makeText(this, "go to approve", Toast.LENGTH_SHORT).show();
-    	Intent intent = new Intent(AddClaimActivity.this, ApproverClaimListActivity.class);
-    	startActivity(intent);
-    }
     
 	
 }

@@ -17,7 +17,7 @@
  */
 package com.cmput301w15t15.travelclaimsapp.test.activitytest;
 
-import com.cmput301w15t15.travelclaimsapp.activitys.ApproverActivity;
+import com.cmput301w15t15.travelclaimsapp.activitys.ApproverClaimListActivity;
 
 
 import android.app.Activity;
@@ -29,13 +29,13 @@ import android.view.View;
 import android.widget.Button;
 
 public class ApproverActivityTest extends
-	ActivityInstrumentationTestCase2<ApproverActivity> {
+	ActivityInstrumentationTestCase2<ApproverClaimListActivity> {
 	private Instrumentation instrumentation;
 	private Activity activity;
 	private Intent intent;
 	
 	public ApproverActivityTest() {
-		super(ApproverActivity.class);
+		super(ApproverClaimListActivity.class);
 	}
 
 	@Override
@@ -52,7 +52,7 @@ public class ApproverActivityTest extends
 
         setActivityInitialTouchMode(true);
 
-        ApproverActivity mClickFunActivity = getActivity();
+        ApproverClaimListActivity mClickFunActivity = getActivity();
         //Button mClickMeButton = (Button) 
                 //mClickFunActivity.findViewById(R.id.launch_next_activity_button);
     }

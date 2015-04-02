@@ -53,7 +53,7 @@ import android.widget.TextView;
  *  	
  */
 
-public class ApproverListAdaptor extends ArrayAdapter<Claim>{
+public class ApproverClaimListAdaptor extends ArrayAdapter<Claim>{
 
 	private Context context;
 	private int resource;
@@ -61,7 +61,7 @@ public class ApproverListAdaptor extends ArrayAdapter<Claim>{
 	private ViewHolder viewHolder;
 	private Filter tagFilter;
 	
-	public ApproverListAdaptor(Context context, int resource, ArrayList<Claim> claims) {
+	public ApproverClaimListAdaptor(Context context, int resource, ArrayList<Claim> claims) {
 		super(context, resource, claims);
 		this.context = context;
 		this.resource = resource;

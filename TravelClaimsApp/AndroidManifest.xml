@@ -53,7 +53,7 @@
             android:label="@string/title_activity_edit_expense" >
         </activity>
         <activity
-            android:name="com.cmput301w15t15.travelclaimsapp.activitys.ApproverActivity"
+            android:name="com.cmput301w15t15.travelclaimsapp.activitys.ApproverClaimListActivity"
             android:label="@string/title_activity_approver" >
         </activity>
         <activity

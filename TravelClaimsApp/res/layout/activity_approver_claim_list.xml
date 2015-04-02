@@ -7,7 +7,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".ApproverActivity" >
+    tools:context=".ApproverClaimListActivity" >
 
     <TextView
         android:id="@+id/approver_textview"
@@ -15,10 +15,11 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:text="Submmited Claims" />
+        android:text="Submmited Claims"
+        android:textColor="#FFFFFF" />
 
     <ListView
-        android:id="@+id/approver_lsitview"
+        android:id="@+id/approve_claim_list_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"

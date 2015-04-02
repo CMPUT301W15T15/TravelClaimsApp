@@ -13,7 +13,7 @@
         android:layout_alignRight="@+id/approveListAdaptor_Status"
         android:text="ClaimName"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="#000000" />
+        android:textColor="#ffffff" />
 
     <TextView
         android:id="@+id/approveListAdaptor_Status"
@@ -23,6 +23,7 @@
         android:layout_alignBottom="@+id/approveListAdaptor_Approver"
         android:layout_centerHorizontal="true"
         android:text="status"
+        android:textColor="#ffffff"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <TextView
@@ -35,7 +36,7 @@
         android:layout_toLeftOf="@+id/approveListAdaptor_Status"
         android:text="date"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="#000000" />
+        android:textColor="#ffffff" />
 
     <TextView
         android:id="@+id/approveListAdaptor_claimant"
@@ -47,7 +48,7 @@
         android:layout_toRightOf="@+id/approveListAdaptor_Name"
         android:text="claimant"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="#000000" />
+        android:textColor="#ffffff" />
 
     <TextView
         android:id="@+id/approveListAdaptor_Approver"
@@ -56,6 +57,7 @@
         android:layout_alignParentRight="true"
         android:layout_below="@+id/approveListAdaptor_claimant"
         android:text="Approver"
+        android:textColor="#ffffff"
         android:textAppearance="?android:attr/textAppearanceSmall" />
     
     <TextView
