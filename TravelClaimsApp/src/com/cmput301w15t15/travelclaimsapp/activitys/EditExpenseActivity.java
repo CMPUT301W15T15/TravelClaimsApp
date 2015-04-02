@@ -101,7 +101,6 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 	private Date expenseDate;
 	private byte[] imgShow;
 	private ImageView expenseReceiptView;
-
 	private int longClickDuration = 2000;
 	private long then;
 	
@@ -434,6 +433,18 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
     	Intent intent = new Intent(EditExpenseActivity.this, MainMenuActivity.class);
     	startActivity(intent);
     }
+	
+	 /**
+     * Function that is called when "Return to claim list" menu item clicked
+     * 
+     * @param menu		menu item that was clicked
+     */
+    public void backToClaimList(MenuItem menu)
+    {
+    	Intent intent = new Intent(EditExpenseActivity.this, AddClaimActivity.class);
+    	startActivity(intent);
+    }
+
 	
 	/** Function that is called when the "Ok" Button is clicked and switches 
 	 * to the ExpenseListActivity

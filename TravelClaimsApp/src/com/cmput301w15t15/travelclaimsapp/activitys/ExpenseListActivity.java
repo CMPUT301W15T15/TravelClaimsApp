@@ -160,7 +160,19 @@ public class ExpenseListActivity extends Activity
     	Intent intent = new Intent(ExpenseListActivity.this, MainMenuActivity.class);
     	startActivity(intent);
     }
+    
+    /**
+     * Function that is called when "Return to claim list" menu item clicked
+     * 
+     * @param menu		menu item that was clicked
+     */
+    public void backToClaimList(MenuItem menu)
+    {
+    	Intent intent = new Intent(ExpenseListActivity.this, AddClaimActivity.class);
+    	startActivity(intent);
+    }
 
+    
     /**Function that is called when the "Add new Expense" Button is clicked in UI
      * @author Henry Bo
      * @param view

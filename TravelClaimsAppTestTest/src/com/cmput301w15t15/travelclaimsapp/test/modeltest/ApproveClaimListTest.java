@@ -63,9 +63,9 @@ public class ApproveClaimListTest extends TestCase {
 		testList.add(claim1);
 		testList.add(claim2);
 		assertFalse("Submittedlist", claimList.toArrayList().equals(testList));
-		assertTrue("submittedClaim is not editedble", claim1.isEditable()==False);
+		assertTrue("submittedClaim is not editedble", claim1.isEditable()==false);
 		claim1.setStatus("Returned");
-		assertTrue("ReturnedClaim is editedble", claim1.isEditable()==True);
+		assertTrue("ReturnedClaim is editedble", claim1.isEditable()==true);
 		 
 	}
 	
