@@ -38,7 +38,7 @@ import com.cmput301w15t15.travelclaimsapp.model.TagList;
  * Singleton class used for getting static application ClaimList
  * and adding claims to ClaimList
  */
-public class ClaimListController {
+public class ApproveClaimListController {
 	
 
 	private static ClaimList claimList = null;
@@ -51,7 +51,7 @@ public class ClaimListController {
 	 */
 	static public void initClaimListController() {
 		if(claimList == null){
-			ClaimList tempClaimList = FileManager.getSaver().loadClaimLFromFile();
+			ClaimList tempClaimList = FileManager.getSaver().loadApproveClaimLFromFile();
 			if(tempClaimList.getUsername() == null || !tempClaimList.getUsername().equals(UserController.getUser().getUsername())){
 				claimList = new ClaimList();
 				claimList.setUsername(UserController.getUser().getUsername());
@@ -87,7 +87,7 @@ public class ClaimListController {
 	 */
 	static public ClaimList getClaimList() {
 		if(claimList == null){
-			claimList = FileManager.getSaver().loadClaimLFromFile();
+			claimList = FileManager.getSaver().loadApproveClaimLFromFile();
 			claimList.sort();
 			claimList.setListeners();
 			claimList.addListener(new Listener() {
@@ -222,7 +222,7 @@ public class ClaimListController {
 	 * Saves claimlist to file using FileManager class 
 	 */
 	public static void save(){
-		FileManager.getSaver().saveClaimLInFile(getClaimList(), UserController.getUser().getUsername());
+		FileManager.getSaver().saveApproveClaimLInFile(getClaimList(), UserController.getUser().getUsername());
 	}
 	
 	/**

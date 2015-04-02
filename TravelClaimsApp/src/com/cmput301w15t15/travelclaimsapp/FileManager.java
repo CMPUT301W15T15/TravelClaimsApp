@@ -61,6 +61,7 @@ public class FileManager {
 	private static final String CLAIMLIST_TAG = "ClaimListSearch";
 	private static final String USERFILENAME = "user.sav";
 	private static final String CLAIMLISTFILENAME = "claimlist.sav";
+	private static final String APPROVE_CLAIMLISTFILENAME = "approveclaimlist.sav";
 	
 	private Gson gson;
 	private Context context;
@@ -147,6 +148,7 @@ public class FileManager {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
 	}
 
 	/**
@@ -194,6 +196,31 @@ public class FileManager {
 	}
 	
 	
+	/**
+	 * get approveClaimList
+	 * @param Username
+	 * @return
+	 */
+	public ClaimList getApproveClaimList(String Username) {
+		HttpClient httpClient = new DefaultHttpClient();
+		HttpGet httpGet = new HttpGet(APPROVECLAIMLIST_RESOURCE_URL + Username);
+
+		HttpResponse response;
+
+		try {
+			response = httpClient.execute(httpGet);
+			SearchHit<ClaimList> sr = parseClaimListHit(response);
+			return sr.getSource();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
+
+		return null;
+		
+		
+	}
+	
 	
 	/**
 	 * Adds a new ClaimList to server.
@@ -217,10 +244,36 @@ public class FileManager {
 		}
 	}
 	
+	/**
+	 * 
+	 * add approve claim to server
+	 * @param newClaimList
+	 * @param Username
+	 */
+	public void addApproveClaimList(ClaimList newClaimList, String Username) {
+		HttpClient httpClient = new DefaultHttpClient();
+
+		try {
+			HttpPost addRequest = new HttpPost(APPROVECLAIMLIST_RESOURCE_URL + Username);
+
+			StringEntity stringEntity = new StringEntity(gson.toJson(newClaimList));
+			addRequest.setEntity(stringEntity);
+			addRequest.setHeader("Accept", "application/json");
+
+			HttpResponse response = httpClient.execute(addRequest);
+			String status = response.getStatusLine().toString();
+			Log.i(CLAIMLIST_TAG, status);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	
 	
 	//from https://github.com/scheidemanS/lonelyTwitter/blob/master/src/ca/ualberta/cs/lonelytwitter/LonelyTwitterActivity.java on 2015-01-25
 	/**
+	 * 
 	 * Gets a claimlist from local file.
 	 * @return
 	 */
@@ -248,7 +301,35 @@ public class FileManager {
 		return claims;
 	}
 	
+	/**
+	 * 
+	 * get an ApproveClaimList from local file
+	 * @return
+	 */
+	public ClaimList loadApproveClaimLFromFile(){
 	
+		ClaimList claims = new ClaimList();
+		
+		try {
+			//openFileInput only takes a a filename
+			FileInputStream fis = context.openFileInput(APPROVE_CLAIMLISTFILENAME);
+			InputStreamReader in = new InputStreamReader(fis);
+			//Taken from http://google-gson.googlecode.com/svn/trunk/gson/docs/javadocs/index.html 2015-19-01
+			Type typeOfT = new TypeToken<ClaimList>(){}.getType();
+			claims = gson.fromJson(in, typeOfT);
+			fis.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			return null;
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			return null;
+		}
+		if (claims == null){
+			return new ClaimList();
+		}
+		return claims;
+	}
 	
 	
 	//from https://github.com/scheidemanS/lonelyTwitter/blob/master/src/ca/ualberta/cs/lonelytwitter/LonelyTwitterActivity.java on 2015-01-25
@@ -264,6 +345,32 @@ public class FileManager {
 		try {
 			//openFileOutput is a Activity method
 			FileOutputStream fos = context.openFileOutput(CLAIMLISTFILENAME,0);
+			OutputStreamWriter osw = new OutputStreamWriter(fos);
+			gson.toJson(claimList, osw);
+			osw.flush();
+			fos.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * 
+	 * Saves Approve claimlist to file and attempts to save online if there is an internet connection.
+	 * @param claimList
+	 * @param username
+	 */
+	public void saveApproveClaimLInFile(ClaimList claimList, String username) {
+		Thread thread = new onlineSaveClaimListThread(claimList, username);
+		thread.start();
+		
+		try {
+			//openFileOutput is a Activity method
+			FileOutputStream fos = context.openFileOutput(APPROVE_CLAIMLISTFILENAME,0);
 			OutputStreamWriter osw = new OutputStreamWriter(fos);
 			gson.toJson(claimList, osw);
 			osw.flush();
@@ -416,6 +523,7 @@ public class FileManager {
 	}
 
 	/**
+	 * 
 	 * Thread for running http calls for user when save() is called in controller
 	 *
 	 */
