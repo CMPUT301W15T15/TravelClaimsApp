@@ -17,9 +17,12 @@
  */
 package com.cmput301w15t15.travelclaimsapp.test.modeltest;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 import java.util.Map;
 
 
@@ -48,6 +51,38 @@ public class ApproveClaimListTest extends TestCase {
 	public void testViewSubmittedClaims() throws IOException {
 		claimList = new ClaimList();
 		claim1 = new Claim("Claim1");
+		claimList.addClaim(claim1);
+		claim1.setStatus("Process");
+		claim1.setClaimantName("Daniel");
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy", Locale.CANADA);
+		try{
+			claim1.setStartDate(sdf.parse("11/21/2015"));
+			claim1.setEndDate(sdf.parse("11/25/2015"));
+		} catch (ParseException e) {
+			
+		}
+		claim1.setTag("Business");
+		ArrayList<Claim> testList = new ArrayList<Claim>();
+		testList.add(claim1);
+		claim1.setStatus("Submitted");
+		assertFalse("Submittedlist", claimList.toArrayList().equals(testList));
+		assertTrue("submittedClaim is not editedble", claim1.isEditable()==false);
+		assertTrue("status is equal",testList.get(0).getStatus().equals("Submitted"));
+		assertTrue("claimantName is equal",testList.get(0).getClaimantName().equals("Daniel"));
+		assertTrue("startdate is equal",testList.get(0).getStartDate().equals("11/21/2015"));
+		assertTrue("Enddate is equal",testList.get(0).getEndDate().equals("11/25/2015"));
+		assertTrue("tag is equal",testList.get(0).getTagList().getTag("Business").toString().equals("Business"));
+		claim1.setStatus("Returned");
+		assertTrue("ReturnedClaim is editedble", claim1.isEditable()==true);
+		 
+	}
+	
+	
+	
+	public void testCommentSubmittedClaims() throws IOException {
+		claimList = new ClaimList();
+		claim1 = new Claim("Claim1");
 		claim2 = new Claim("Claim2");
 		claim3 = new Claim("Claim3");
 		claim4 = new Claim("Claim4");
@@ -56,16 +91,73 @@ public class ApproveClaimListTest extends TestCase {
 		claimList.addClaim(claim3);
 		claimList.addClaim(claim4);
 		claim1.setStatus("Submitted");
-		claim2.setStatus("Returned");
-		claim3.setStatus("Process");
-		claim4.setStatus("Approved");
+		claim2.setStatus("Submitted");
+		claim3.setStatus("Submitted");
+		claim4.setStatus("Submitted");
 		ArrayList<Claim> testList = new ArrayList<Claim>();
 		testList.add(claim1);
 		testList.add(claim2);
-		assertFalse("Submittedlist", claimList.toArrayList().equals(testList));
-		 
+		testList.add(claim3);
+		testList.add(claim4);
+		claim1.setComment("Too much spending on taxi");
+		assertTrue("comment is added", claim1.getComment()=="Too much spending on taxi");	
+		
 	}
 	
+	
+	public void testReturnedClaims() throws IOException {
+		claimList = new ClaimList();
+		claim1 = new Claim("Claim1");
+		claim2 = new Claim("Claim2");
+		claim3 = new Claim("Claim3");
+		claim4 = new Claim("Claim4");
+		claimList.addClaim(claim1);
+		claimList.addClaim(claim2);
+		claimList.addClaim(claim3);
+		claimList.addClaim(claim4);
+		claim1.setStatus("Submitted");
+		claim2.setStatus("Submitted");
+		claim3.setStatus("Submitted");
+		claim4.setStatus("Submitted");
+		ArrayList<Claim> testList = new ArrayList<Claim>();
+		testList.add(claim1);
+		testList.add(claim2);
+		testList.add(claim3);
+		testList.add(claim4);
+		assertTrue("the approverList size is wrong", testList.size()==4);
+		testList.get(0).setStatus("Returned");
+		assertTrue("the approverList size is wrong", testList.size()==3);	
+		assertFalse("the claim is still existing", testList.get(0).getName().toString()=="claim1");
+		
+	}
+	public void testApprovedClaims() throws IOException {
+		claimList = new ClaimList();
+		claim1 = new Claim("Claim1");
+		claim2 = new Claim("Claim2");
+		claim3 = new Claim("Claim3");
+		claim4 = new Claim("Claim4");
+		claimList.addClaim(claim1);
+		claimList.addClaim(claim2);
+		claimList.addClaim(claim3);
+		claimList.addClaim(claim4);
+		claim1.setStatus("Submitted");
+		claim2.setStatus("Submitted");
+		claim3.setStatus("Submitted");
+		claim4.setStatus("Submitted");
+		ArrayList<Claim> testList = new ArrayList<Claim>();
+		testList.add(claim1);
+		testList.add(claim2);
+		testList.add(claim3);
+		testList.add(claim4);
+		assertTrue("the approverList size is wrong", testList.size()==4);
+		testList.get(0).setStatus("Approved");
+		assertTrue("the approverList size is wrong", testList.size()==3);
+		assertFalse("the claim is still existing", testList.get(0).getName().toString()=="claim1");
+		testList.get(0).setStatus("Returned");
+		assertTrue("the approverList size is wrong", testList.size()==2);
+		assertFalse("the claim is still existing", testList.get(0).getName().toString()=="claim2");
+		
+	}
 	//TestNumber: ApproveViewTest #2
 //	public void testViewSubmittedExpense() throws IOException {
 //		ClaimList approveClaimList = new ClaimList();
