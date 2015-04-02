@@ -521,6 +521,25 @@ public class FileManager {
 		}
 		
 	}
+	
+	class onlineSaveApproveClaimLThread extends Thread {
+		private ClaimList claimlist;
+		private String username;
+		
+		public onlineSaveApproveClaimLThread(ClaimList claimlist, String username){
+			this.claimlist = claimlist;
+			this.username = username;
+		}
+		
+		@Override
+		public void run() {
+			
+			if(InternetController.isInternetAvailable2(context)){
+				addClaimList(claimlist, username);
+			}
+			
+		}
+	}
 
 	/**
 	 * 

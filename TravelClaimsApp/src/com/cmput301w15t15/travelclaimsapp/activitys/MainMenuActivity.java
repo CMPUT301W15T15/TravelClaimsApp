@@ -205,7 +205,9 @@ public class MainMenuActivity extends Activity {
 					if(Arrays.equals(pulledUser.getpHash(), givenPassHash)){
 						FileManager.getSaver().saveUserInFile(pulledUser);
 						ClaimList claimlist = FileManager.getSaver().getClaimList(givenUsername);
+						ClaimList approveClaimList = FileManager.getSaver().getApproveClaimList(givenUsername);
 						FileManager.getSaver().saveClaimLInFile(claimlist, givenUsername);
+						FileManager.getSaver().saveApproveClaimLInFile(approveClaimList, givenUsername);
 						runOnUiThread(launchAddClaims);
 					} else {
 						runOnUiThread(popToast);
