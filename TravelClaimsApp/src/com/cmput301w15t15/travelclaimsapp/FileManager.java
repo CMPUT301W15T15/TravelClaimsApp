@@ -55,13 +55,15 @@ public class FileManager {
 
 	private static final String USER_RESOURCE_URL = "http://cmput301.softwareprocess.es:8080/cmput301w15t15/user/";
 	private static final String CLAIMLIST_RESOURCE_URL = "http://cmput301.softwareprocess.es:8080/cmput301w15t15/claimlist/";
+	private static final String SUBMITTED_CLAIMLIST_RESOURCE_URL = "http://cmput301.softwareprocess.es:8080/cmput301w15t15/submitted_claimlist";
 	
-	private static final String APPROVECLAIMLIST_RESOURCE_URL = "http://cmput301.softwareprocess.es:8080/cmput301w15t15/approveclaimlist/";
 	private static final String USER_TAG = "UserSearch";
 	private static final String CLAIMLIST_TAG = "ClaimListSearch";
+	private static final String SUBMITTED_CLAIMLIST_TAG = "SubmittedClaimListSearch";
 	private static final String USERFILENAME = "user.sav";
 	private static final String CLAIMLISTFILENAME = "claimlist.sav";
-	private static final String APPROVE_CLAIMLISTFILENAME = "approveclaimlist.sav";
+	private static final String SUBMITTED_CLAIMLISTFILENAME = "submitted_claimlist.sav";
+	private static final String CLAIMANT_CLAIMLISTFILENAME = "claimant_claimlist.sav";
 	
 	private Gson gson;
 	private Context context;
@@ -197,32 +199,6 @@ public class FileManager {
 	
 	
 	/**
-	 * get approveClaimList
-	 * @param Username
-	 * @return
-	 */
-	public ClaimList getApproveClaimList(String Username) {
-		HttpClient httpClient = new DefaultHttpClient();
-		HttpGet httpGet = new HttpGet(APPROVECLAIMLIST_RESOURCE_URL + Username);
-
-		HttpResponse response;
-
-		try {
-			response = httpClient.execute(httpGet);
-			SearchHit<ClaimList> sr = parseClaimListHit(response);
-			return sr.getSource();
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		} 
-
-		return null;
-		
-		
-	}
-	
-	
-	/**
 	 * Adds a new ClaimList to server.
 	 */
 	public void addClaimList(ClaimList newClaimList, String Username) {
@@ -230,31 +206,31 @@ public class FileManager {
 
 		try {
 			HttpPost addRequest = new HttpPost(CLAIMLIST_RESOURCE_URL + Username);
-
+			
 			StringEntity stringEntity = new StringEntity(gson.toJson(newClaimList));
 			addRequest.setEntity(stringEntity);
 			addRequest.setHeader("Accept", "application/json");
-
+			
 			HttpResponse response = httpClient.execute(addRequest);
 			String status = response.getStatusLine().toString();
 			Log.i(CLAIMLIST_TAG, status);
-
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
+
 	
 	/**
+	 * Add submitted claim to server by updating the submitted claimlist.
 	 * 
-	 * add approve claim to server
 	 * @param newClaimList
-	 * @param Username
 	 */
-	public void addApproveClaimList(ClaimList newClaimList, String Username) {
+	public void addSubmittedClaim(ClaimList newClaimList) {
 		HttpClient httpClient = new DefaultHttpClient();
 
 		try {
-			HttpPost addRequest = new HttpPost(APPROVECLAIMLIST_RESOURCE_URL + Username);
+			HttpPost addRequest = new HttpPost(SUBMITTED_CLAIMLIST_RESOURCE_URL);
 
 			StringEntity stringEntity = new StringEntity(gson.toJson(newClaimList));
 			addRequest.setEntity(stringEntity);
@@ -262,7 +238,7 @@ public class FileManager {
 
 			HttpResponse response = httpClient.execute(addRequest);
 			String status = response.getStatusLine().toString();
-			Log.i(CLAIMLIST_TAG, status);
+			Log.i(SUBMITTED_CLAIMLIST_TAG, status);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -303,16 +279,16 @@ public class FileManager {
 	
 	/**
 	 * 
-	 * get an ApproveClaimList from local file
+	 * get an SubmittedClaimList from local file
 	 * @return
 	 */
-	public ClaimList loadApproveClaimLFromFile(){
+	public ClaimList loadSubmittedClaimLFromFile(){
 	
 		ClaimList claims = new ClaimList();
 		
 		try {
 			//openFileInput only takes a a filename
-			FileInputStream fis = context.openFileInput(APPROVE_CLAIMLISTFILENAME);
+			FileInputStream fis = context.openFileInput(SUBMITTED_CLAIMLISTFILENAME);
 			InputStreamReader in = new InputStreamReader(fis);
 			//Taken from http://google-gson.googlecode.com/svn/trunk/gson/docs/javadocs/index.html 2015-19-01
 			Type typeOfT = new TypeToken<ClaimList>(){}.getType();
@@ -360,17 +336,17 @@ public class FileManager {
 	
 	/**
 	 * 
-	 * Saves Approve claimlist to file and attempts to save online if there is an internet connection.
+	 * Saves Submitted claimlist to file and attempts to save online if there is an internet connection.
 	 * @param claimList
 	 * @param username
 	 */
-	public void saveApproveClaimLInFile(ClaimList claimList, String username) {
+	public void saveSubmittedClaimLInFile(ClaimList claimList, String username) {
 		Thread thread = new onlineSaveClaimListThread(claimList, username);
 		thread.start();
 		
 		try {
 			//openFileOutput is a Activity method
-			FileOutputStream fos = context.openFileOutput(APPROVE_CLAIMLISTFILENAME,0);
+			FileOutputStream fos = context.openFileOutput(SUBMITTED_CLAIMLISTFILENAME,0);
 			OutputStreamWriter osw = new OutputStreamWriter(fos);
 			gson.toJson(claimList, osw);
 			osw.flush();
@@ -522,20 +498,18 @@ public class FileManager {
 		
 	}
 	
-	class onlineSaveApproveClaimLThread extends Thread {
+	class onlineSaveSubmittedClaimLThread extends Thread {
 		private ClaimList claimlist;
-		private String username;
 		
-		public onlineSaveApproveClaimLThread(ClaimList claimlist, String username){
+		public onlineSaveSubmittedClaimLThread(ClaimList claimlist){
 			this.claimlist = claimlist;
-			this.username = username;
 		}
 		
 		@Override
 		public void run() {
 			
 			if(InternetController.isInternetAvailable2(context)){
-				addClaimList(claimlist, username);
+				addSubmittedClaim(claimlist);
 			}
 			
 		}

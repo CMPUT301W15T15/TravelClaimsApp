@@ -428,7 +428,7 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 	 */
 	public void SignOut(MenuItem menu)
     {
-    	//SignOutController.reset();
+    	SignOutController.reset();
     	Toast.makeText(this, "Signing Out", Toast.LENGTH_SHORT).show();
     	Intent intent = new Intent(EditExpenseActivity.this, MainMenuActivity.class);
     	startActivity(intent);

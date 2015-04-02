@@ -17,7 +17,6 @@
  */
 package com.cmput301w15t15.travelclaimsapp.activitys;
 
-import com.cmput301w15t15.travelclaimsapp.ApproveClaimListController;
 import com.cmput301w15t15.travelclaimsapp.ApproverClaimListAdaptor;
 import com.cmput301w15t15.travelclaimsapp.ClaimListAdaptor;
 import com.cmput301w15t15.travelclaimsapp.ClaimListController;
@@ -57,7 +56,7 @@ public class ApproverClaimListActivity extends Activity {
 		setContentView(R.layout.add_claim);
 		FileManager.initializeSaver(this);
 		claimListView = (ListView) findViewById(R.id.approve_claim_list_view);
-		claimList = ApproveClaimListController.getClaimList();
+//		claimList = ApproveClaimListController.getClaimList();
 		
 		//create a adaptor for claim list and set it
 		claimAdaptor = new ApproverClaimListAdaptor(this,R.layout.approve_claim_list_adaptor, claimList.toArrayList());
@@ -152,7 +151,7 @@ public class ApproverClaimListActivity extends Activity {
 	 */
     public void SignOut(MenuItem menu)
     {
-    	//SignOutController.reset();
+    	SignOutController.reset();
     	Toast.makeText(this, "Signing Out", Toast.LENGTH_SHORT).show();
     	Intent intent = new Intent(ApproverClaimListActivity.this, MainMenuActivity.class);
     	startActivity(intent);
