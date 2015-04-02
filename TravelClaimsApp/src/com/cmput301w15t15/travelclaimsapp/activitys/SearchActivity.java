@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import com.cmput301w15t15.travelclaimsapp.ClaimListAdaptor;
 import com.cmput301w15t15.travelclaimsapp.ClaimListController;
 import com.cmput301w15t15.travelclaimsapp.R;
+import com.cmput301w15t15.travelclaimsapp.SignOutController;
 //import com.cmput301w15t15.travelclaimsapp.SignOutController;
 import com.cmput301w15t15.travelclaimsapp.model.Claim;
 import com.cmput301w15t15.travelclaimsapp.model.ClaimList;
@@ -82,7 +83,7 @@ public class SearchActivity extends Activity
 	 */
 	public void SignOut(MenuItem menu)
     {
-    	//SignOutController.reset();
+    	SignOutController.reset();
     	Toast.makeText(this, "Signing Out", Toast.LENGTH_SHORT).show();
     	Intent intent = new Intent(SearchActivity.this, MainMenuActivity.class);
     	startActivity(intent);
