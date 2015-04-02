@@ -226,8 +226,20 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 	
 	public byte[] getBytesFromBitmap(Bitmap bitmap) {
 	    ByteArrayOutputStream stream = new ByteArrayOutputStream();
+	    byte[] tempImg;
+	    
 	    bitmap.compress(CompressFormat.JPEG, 70, stream);
-	    return stream.toByteArray();
+	    tempImg=stream.toByteArray();
+	    if (tempImg.length > 65536){
+	    	Bitmap resizedMap; 
+	    	resizedMap = bitmap.createScaledBitmap(bitmap, 256, 256, false);
+	    	resizedMap.compress(CompressFormat.JPEG, 70, stream);
+	    	tempImg=stream.toByteArray();
+	    }
+	    int sizeNum=tempImg.length;
+	   // Toast.makeText(this, sizeNum, Toast.LENGTH_LONG).show();
+	    return tempImg;
+	    
 	}
 	
 	@Override

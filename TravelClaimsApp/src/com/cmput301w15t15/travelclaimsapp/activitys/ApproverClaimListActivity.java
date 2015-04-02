@@ -81,12 +81,12 @@ public class ApproverClaimListActivity extends Activity {
 		claimAdaptor.notifyDataSetChanged();
 	}
 
-//	@Override
-//	public boolean onCreateOptionsMenu(Menu menu) {
-//		// Inflate the menu; this adds items to the action bar if it is present.
-//		getMenuInflater().inflate(R.menu.add_claim, menu);
-//		return true;
-//	}
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.approver_claim_list, menu);
+		return true;
+	}
 //	
 //	
 //    @Override
