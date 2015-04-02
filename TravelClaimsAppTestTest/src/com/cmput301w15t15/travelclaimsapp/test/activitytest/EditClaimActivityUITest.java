@@ -25,11 +25,14 @@ import java.util.GregorianCalendar;
 
 import com.cmput301w15t15.travelclaimsapp.ClaimListController;
 import com.cmput301w15t15.travelclaimsapp.FileManager;
+import com.cmput301w15t15.travelclaimsapp.GeoLocationController;
 import com.cmput301w15t15.travelclaimsapp.R;
 import com.cmput301w15t15.travelclaimsapp.activitys.EditClaimActivity;
 import com.cmput301w15t15.travelclaimsapp.activitys.EditExpenseActivity;
+import com.cmput301w15t15.travelclaimsapp.activitys.MapActivity;
 import com.cmput301w15t15.travelclaimsapp.model.Claim;
 import com.cmput301w15t15.travelclaimsapp.model.ClaimList;
+import com.cmput301w15t15.travelclaimsapp.model.GeoLocation;
 
 
 
@@ -88,7 +91,7 @@ public class EditClaimActivityUITest extends
 		activity = getActivity();
 		
 		instrumentation = getInstrumentation();
-	
+		GeoLocationController.initializeLocationManager(activity.getApplicationContext());
 		inputName = (EditText) activity.findViewById(R.id.Edit_Claim_Name);
 		inputStartDate = (EditText) activity.findViewById(R.id.ClaimStart);
 		inputEndDate = (EditText) activity.findViewById(R.id.ClaimEnd);
@@ -140,6 +143,29 @@ public class EditClaimActivityUITest extends
 		
 	}
 
+
+	
+	public void testMapActivityViewIntent(){
+		GeoLocation gl = new GeoLocation(0,0);
+		intent = GeoLocationController.viewLocationIntent(activity, gl);
+		
+		ActivityMonitor activityMonitor = new ActivityMonitor(MapActivity.class.getName(), null, false);
+		instrumentation.addMonitor(activityMonitor);
+		instrumentation.runOnMainSync(new Runnable() {
+			
+			@Override
+			public void run() {
+		
+				activity.startActivity(intent);
+				
+			}
+		});
+		instrumentation.waitForIdleSync();
+		
+		Activity nextActivity = instrumentation.waitForMonitorWithTimeout(activityMonitor, 3000);
+		assertNotNull(nextActivity);
+		
+	}
 	@Override
 	protected void tearDown() throws Exception {
 		// TODO Auto-generated method stub
@@ -147,9 +173,6 @@ public class EditClaimActivityUITest extends
 		ClaimListController.removeClaim(claim);
 		
 	}
-	
-
-	
 	
 
 

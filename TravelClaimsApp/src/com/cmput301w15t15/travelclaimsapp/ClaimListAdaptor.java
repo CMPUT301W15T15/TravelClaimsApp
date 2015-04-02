@@ -229,6 +229,7 @@ public class ClaimListAdaptor extends ArrayAdapter<Claim>{
         public LinearLayout amounts;
         public LinearLayout tags;
         public TextView distColor;
+        public LinearLayout claimDateHolder;
     
     }
 	

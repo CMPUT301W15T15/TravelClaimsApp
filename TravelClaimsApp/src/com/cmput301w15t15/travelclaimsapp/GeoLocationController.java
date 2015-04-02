@@ -20,6 +20,8 @@ package com.cmput301w15t15.travelclaimsapp;
 import java.util.ArrayList;
 import java.util.Date;
 
+import org.osmdroid.bonuspack.overlays.Marker;
+
 import com.cmput301w15t15.travelclaimsapp.activitys.EditClaimActivity;
 import com.cmput301w15t15.travelclaimsapp.activitys.MapActivity;
 import com.cmput301w15t15.travelclaimsapp.model.Claim;
@@ -320,6 +322,7 @@ public class GeoLocationController {
 	    	if(gl != null){
 	    		distance = (int) Math.round(GeoLocationController.getDistanceFromHome(gl));
 	    		if(distance<400){
+	    			distance = 10;							//set display bar to 2 char width
 	    			colorCode = Color.rgb(13, 116, 11);		//green : close
 	    		}else if(distance<2000){
 	    			colorCode = Color.rgb(193, 191, 35);	//yellow : medium
@@ -343,6 +346,8 @@ public class GeoLocationController {
 		currentLocation = null;
 		lm = null;
 	}
+
+	
 	
 
 }
