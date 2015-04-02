@@ -28,7 +28,7 @@ import android.test.TouchUtils;
 import android.view.View;
 import android.widget.Button;
 
-public class ApproverActivityTest extends
+public class ApproverActivityTest extends 
 	ActivityInstrumentationTestCase2<ApproverClaimListActivity> {
 	private Instrumentation instrumentation;
 	private Activity activity;
@@ -58,19 +58,22 @@ public class ApproverActivityTest extends
     }
 
 	//TestNumber:ApproveCheckTest #1
-    public void testApproveButtonClick() {
-        //View mClickMeButton = null;
-		//TouchUtils.clickView(this, mClickMeButton);
-        //Do some other testing afterward
-    }
-
-    //TestNumber:ApproveCheckTest #2
-    public void testReturnButtonClick() {
-        //View mClickMeButton = null;
-		//TouchUtils.clickView(this, mClickMeButton);
-        //Do some other testing afterward
-		//comment field is not null
-    }
+//    public void testApproveButtonClick() {
+//        //View mClickMeButton = null;
+//		//TouchUtils.clickView(this, mClickMeButton);
+//        //Do some other testing afterward
+//    }
+//
+//    //TestNumber:ApproveCheckTest #2
+//    public void testReturnButtonClick() {
+//        //View mClickMeButton = null;
+//		//TouchUtils.clickView(this, mClickMeButton);
+//        //Do some other testing afterward
+//		//comment field is not null
+//    }
+//    
+    
+    
     
     
 
