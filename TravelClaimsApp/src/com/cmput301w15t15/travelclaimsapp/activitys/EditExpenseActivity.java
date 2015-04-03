@@ -105,6 +105,10 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 	private int longClickDuration = 2000;
 	private long then;
 	
+	private Integer sizeNum=0;
+	private String size="0";
+	private String isRescale="Original";
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -147,6 +151,8 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 //	        expenseReceiptView.setImageBitmap(bitmap);    
 			
 	        Bitmap bm = BitmapFactory.decodeByteArray(imgShow, 0, imgShow.length);
+	        sizeNum=imgShow.length;
+	        size=sizeNum.toString();
 	        DisplayMetrics dm = new DisplayMetrics();
 	        getWindowManager().getDefaultDisplay().getMetrics(dm);
 
@@ -219,6 +225,7 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
             cursor.moveToFirst();
             String imagePath = cursor.getString(cursor.getColumnIndex(filePath[0]));
             expenseReceiptView.setImageBitmap(BitmapFactory.decodeFile(imagePath));
+            
             Bitmap imgToSave = BitmapFactory.decodeFile(imagePath);
             imgShow = getBytesFromBitmap(imgToSave);
             cursor.close();
@@ -228,17 +235,42 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 	public byte[] getBytesFromBitmap(Bitmap bitmap) {
 	    ByteArrayOutputStream stream = new ByteArrayOutputStream();
 	    byte[] tempImg;
-	    
-	    bitmap.compress(CompressFormat.JPEG, 70, stream);
-	    tempImg=stream.toByteArray();
+	    Bitmap tempMap = bitmap;
+	    Bitmap resizedMap; 
+	    resizedMap = tempMap.createScaledBitmap(tempMap, 10, 10, false);
+    	resizedMap.compress(CompressFormat.JPEG, 10, stream);
+    	tempImg=stream.toByteArray();
+    	tempMap = resizedMap;
+    	//isRescale="Scaled";
+//	    tempMap.compress(CompressFormat.JPEG, 70, stream);
+//	    tempImg=stream.toByteArray();
 	    if (tempImg.length > 65536){
-	    	Bitmap resizedMap; 
-	    	resizedMap = bitmap.createScaledBitmap(bitmap, 256, 256, false);
+	    	resizedMap = tempMap.createScaledBitmap(tempMap, 10, 10, false);
 	    	resizedMap.compress(CompressFormat.JPEG, 70, stream);
 	    	tempImg=stream.toByteArray();
+	    	tempMap = resizedMap;
+	    	isRescale="Scaled";
 	    }
-	    int sizeNum=tempImg.length;
-	   // Toast.makeText(this, sizeNum, Toast.LENGTH_LONG).show();
+	    
+	    if (tempImg.length > 65536){
+	    	resizedMap = tempMap.createScaledBitmap(tempMap, 10, 10, false);
+	    	resizedMap.compress(CompressFormat.JPEG, 30, stream);
+	    	tempImg=stream.toByteArray();
+	    	tempMap = resizedMap;
+	    	isRescale="Scaled2";
+	    }
+	    
+	    if (tempImg.length > 65536){
+	    	resizedMap = tempMap.createScaledBitmap(tempMap, 10,10, false);
+	    	resizedMap.compress(CompressFormat.JPEG, 10, stream);
+	    	tempImg=stream.toByteArray();
+	    	tempMap = resizedMap;
+	    	isRescale="Scaled3";
+	    }
+	    
+	    sizeNum=tempImg.length;
+	    size = sizeNum.toString();
+	    Toast.makeText(this, size, Toast.LENGTH_LONG).show();
 	    return tempImg;
 	    
 	}
@@ -313,7 +345,7 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
         else{
         	showDate ="";
         }
-        imageDialog.setPositiveButton(expense.getName() + " "+ showDate, new DialogInterface.OnClickListener(){
+        imageDialog.setPositiveButton(expense.getName() + " "+ showDate+" "+isRescale+" "+"Size: "+size, new DialogInterface.OnClickListener(){
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
             }

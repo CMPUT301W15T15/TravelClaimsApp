@@ -87,7 +87,7 @@ public class ApproverClaimListActivity extends Activity {
 		getMenuInflater().inflate(R.menu.approver_claim_list, menu);
 		return true;
 	}
-<<<<<<< HEAD
+
 //	
 //	
 //    @Override
@@ -180,7 +180,7 @@ public class ApproverClaimListActivity extends Activity {
 //    	intent.putExtra("claimName", claim.getName());
 //    	startActivity(intent);   
 //    }
-=======
+
 	
 	
     @Override
@@ -273,7 +273,7 @@ public class ApproverClaimListActivity extends Activity {
     	intent.putExtra("claimName", claim.getName());
     	startActivity(intent);   
     }
->>>>>>> abcdf6c6607be93582c6120e4fb71bfd5414777e
+
  
     
 	
