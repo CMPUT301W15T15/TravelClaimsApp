@@ -1,7 +1,12 @@
-package com.cmput301w15t15.travelclaimsapp;
+package com.cmput301w15t15.travelclaimsapp.activitys;
 
-import com.cmput301w15t15.travelclaimsapp.activitys.EditExpenseActivity;
-import com.cmput301w15t15.travelclaimsapp.activitys.ExpenseListActivity;
+import com.cmput301w15t15.travelclaimsapp.ApproverExpenseListAdaptor;
+import com.cmput301w15t15.travelclaimsapp.ClaimListController;
+import com.cmput301w15t15.travelclaimsapp.R;
+import com.cmput301w15t15.travelclaimsapp.R.drawable;
+import com.cmput301w15t15.travelclaimsapp.R.id;
+import com.cmput301w15t15.travelclaimsapp.R.layout;
+import com.cmput301w15t15.travelclaimsapp.R.menu;
 import com.cmput301w15t15.travelclaimsapp.model.Expense;
 import com.cmput301w15t15.travelclaimsapp.model.ExpenseList;
 

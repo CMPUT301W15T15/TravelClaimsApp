@@ -77,7 +77,7 @@
             android:label="@string/title_activity_map" >
         </activity>
         <activity
-            android:name="com.cmput301w15t15.travelclaimsapp.ApproverExpenseListActivity"
+            android:name="com.cmput301w15t15.travelclaimsapp.activitys.ApproverExpenseListActivity"
             android:label="@string/title_activity_approver_expense_list" >
         </activity>
     </application>

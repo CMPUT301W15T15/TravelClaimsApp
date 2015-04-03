@@ -202,7 +202,10 @@ public class MapActivity extends Activity implements MapEventsReceiver{
 	private void setMarkerInfoMessageWithDistance(Marker mark, String title, String description, GeoLocation gl){
 		mark.setTitle(title);
 		mark.setSnippet(description);
-		mark.setSubDescription("Distance from home: " + Double.toString(Math.round(GeoLocationController.getDistanceFromHome(gl)))+" KM");
+		if(!getIntent().getExtras().getBoolean("newUser")){
+			mark.setSubDescription("Distance from home: " + Double.toString(Math.round(GeoLocationController.getDistanceFromHome(gl)))+" KM");
+		}
+	
 	}
 }
 
