@@ -85,5 +85,7 @@
     <string name="title_activity_map">MapActivity</string>
     <string name="title_activity_welcome">WelcomeActivity</string>
     <string name="title_activity_approver_expense_list">ApproverExpenseListActivity</string>
+    <string name="title_activity_des_tab">DesTabActivity</string>
+    <string name="title_activity_tag_tab">TagTabActivity</string>
 
 </resources>

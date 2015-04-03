@@ -1,8 +1,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:layout_gravity="center"
     android:background="@drawable/background"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:padding="8dp" >
 
     <EditText
         android:id="@+id/Edit_Claim_Name2"
@@ -29,14 +31,16 @@
             android:inputType="date"
             android:textColor="#ffffff" />
 
-        <EditText
+        <TextView
             android:id="@+id/Edit_Extra"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
+            android:layout_weight="3"
             android:ems="10"
+            android:inputType="none"
             android:text="to"
-            android:textColor="#ffffff" />
+            android:textColor="#ffffff"
+            android:textSize="20sp" />
 
         <EditText
             android:id="@+id/Claim_Finish_Date"
@@ -48,6 +52,77 @@
             android:inputType="date"
             android:textColor="#ffffff" />
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/DesTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="100"
+            android:text="@string/Destination"
+            android:textColor="#ffffff"
+            android:textSize="25sp" />
+
+        <Button
+            android:id="@+id/AddDestinationButton2"
+            android:layout_width="150dp"
+            android:layout_height="30dp"
+            android:layout_gravity="right"
+            android:background="@drawable/buttonshape"
+            android:onClick="addDestinationButton"
+            android:shadowColor="#A8A8A8"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:shadowRadius="5"
+            android:text="@string/AddDes"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/DestinationList2"
+        android:layout_width="match_parent"
+        android:layout_height="140dp" >
+    </ListView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/TagTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="100"
+            android:text="@string/TagListTitle"
+            android:textColor="#ffffff"
+            android:textSize="25sp" />
+
+        <Button
+            android:id="@+id/AddTagButton2"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_gravity="right"
+            android:background="@drawable/buttonshape"
+            android:onClick="addTagButton"
+            android:shadowColor="#A8A8A8"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:shadowRadius="5"
+            android:text="@string/AddTag"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/TagList2"
+        android:layout_width="match_parent"
+        android:layout_height="140dp" >
+
+    </ListView>
 
     <Button
         android:id="@+id/ViewExpense2"
@@ -62,81 +137,5 @@
         android:text="@string/View"
         android:textColor="#FFFFFF"
         android:textSize="20sp" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-
-        <Button
-            android:id="@+id/AddDestinationButton2"
-            android:layout_width="120dp"
-            android:layout_height="30dp"
-            android:layout_weight="1"
-            android:background="@drawable/buttonshape"
-            android:onClick="addDestinationButton"
-            android:shadowColor="#A8A8A8"
-            android:shadowDx="0"
-            android:shadowDy="0"
-            android:shadowRadius="5"
-            android:text="@string/AddDes"
-            android:textColor="#FFFFFF"
-            android:textSize="20sp" />
-
-        <Button
-            android:id="@+id/AddTagButton2"
-            android:layout_width="120dp"
-            android:layout_height="30dp"
-            android:layout_weight="1"
-            android:background="@drawable/buttonshape"
-            android:onClick="addTagButton"
-            android:shadowColor="#A8A8A8"
-            android:shadowDx="0"
-            android:shadowDy="0"
-            android:shadowRadius="5"
-            android:text="@string/AddTag"
-            android:textColor="#FFFFFF"
-            android:textSize="20sp" />
-    </LinearLayout>
-
-<TabHost
-    android:id="@android:id/tabhost"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent" >
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical" >
-
-        <TabWidget
-            android:id="@android:id/tabs"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
-        </TabWidget>
-
-        <FrameLayout
-            android:id="@android:id/tabcontent"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" >
-
-            <LinearLayout
-                android:id="@+id/DesTab"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal" >
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/TagTab"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal" >
-
-            </LinearLayout>
-
-        </FrameLayout>
-    </LinearLayout>
-</TabHost>
 
 </LinearLayout>
