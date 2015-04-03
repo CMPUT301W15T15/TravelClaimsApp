@@ -23,7 +23,7 @@ public class SubmittedClaimListController
 	
 	public static void initSubmittedClaimListController() {
 		if(submittedClaimList == null){
-			submittedClaimList = FileManager.getSaver().loadSubmittedClaimLFromFile();
+			submittedClaimList = FileManager.getSaver().getSumbittedClaimList();
 			if(submittedClaimList == null){
 				submittedClaimList = new ClaimList();
 			}
@@ -56,8 +56,7 @@ public class SubmittedClaimListController
 	 */
 	static public ClaimList getClaimList() {
 		if(submittedClaimList == null){
-			submittedClaimList = FileManager.getSaver().loadSubmittedClaimLFromFile();
-			submittedClaimList.sort();
+			submittedClaimList = FileManager.getSaver().getSumbittedClaimList();
 			submittedClaimList.setListeners();
 			submittedClaimList.addListener(new Listener() {
 				

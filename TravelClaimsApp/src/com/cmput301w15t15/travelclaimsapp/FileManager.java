@@ -55,7 +55,7 @@ public class FileManager {
 
 	private static final String USER_RESOURCE_URL = "http://cmput301.softwareprocess.es:8080/cmput301w15t15/user/";
 	private static final String CLAIMLIST_RESOURCE_URL = "http://cmput301.softwareprocess.es:8080/cmput301w15t15/claimlist/";
-	private static final String SUBMITTED_CLAIMLIST_RESOURCE_URL = "http://cmput301.softwareprocess.es:8080/cmput301w15t15/submitted_claimlist";
+	private static final String SUBMITTED_CLAIMLIST_RESOURCE_URL = "http://cmput301.softwareprocess.es:8080/cmput301w15t15/submitted_claimlist/";
 	
 	private static final String USER_TAG = "UserSearch";
 	private static final String CLAIMLIST_TAG = "ClaimListSearch";
@@ -199,6 +199,31 @@ public class FileManager {
 	
 	
 	/**
+	 * Gets claimlist from server.
+	 * @param Username
+	 * @return
+	 */
+	public ClaimList getSumbittedClaimList() {
+
+		HttpClient httpClient = new DefaultHttpClient();
+		HttpGet httpGet = new HttpGet(SUBMITTED_CLAIMLIST_RESOURCE_URL + "main");
+
+		HttpResponse response;
+
+		try {
+			response = httpClient.execute(httpGet);
+			SearchHit<ClaimList> sr = parseClaimListHit(response);
+			return sr.getSource();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
+
+		return null;
+	}
+	
+	
+	/**
 	 * Adds a new ClaimList to server.
 	 */
 	public void addClaimList(ClaimList newClaimList, String Username) {
@@ -226,11 +251,11 @@ public class FileManager {
 	 * 
 	 * @param newClaimList
 	 */
-	public void addSubmittedClaim(ClaimList newClaimList) {
+	public void addSubmittedClaimL(ClaimList newClaimList) {
 		HttpClient httpClient = new DefaultHttpClient();
 
 		try {
-			HttpPost addRequest = new HttpPost(SUBMITTED_CLAIMLIST_RESOURCE_URL);
+			HttpPost addRequest = new HttpPost(SUBMITTED_CLAIMLIST_RESOURCE_URL + "main");
 
 			StringEntity stringEntity = new StringEntity(gson.toJson(newClaimList));
 			addRequest.setEntity(stringEntity);
@@ -259,36 +284,6 @@ public class FileManager {
 		try {
 			//openFileInput only takes a a filename
 			FileInputStream fis = context.openFileInput(CLAIMLISTFILENAME);
-			InputStreamReader in = new InputStreamReader(fis);
-			//Taken from http://google-gson.googlecode.com/svn/trunk/gson/docs/javadocs/index.html 2015-19-01
-			Type typeOfT = new TypeToken<ClaimList>(){}.getType();
-			claims = gson.fromJson(in, typeOfT);
-			fis.close();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			return null;
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			return null;
-		}
-		if (claims == null){
-			return new ClaimList();
-		}
-		return claims;
-	}
-	
-	/**
-	 * 
-	 * get an SubmittedClaimList from local file
-	 * @return
-	 */
-	public ClaimList loadSubmittedClaimLFromFile(){
-	
-		ClaimList claims = new ClaimList();
-		
-		try {
-			//openFileInput only takes a a filename
-			FileInputStream fis = context.openFileInput(SUBMITTED_CLAIMLISTFILENAME);
 			InputStreamReader in = new InputStreamReader(fis);
 			//Taken from http://google-gson.googlecode.com/svn/trunk/gson/docs/javadocs/index.html 2015-19-01
 			Type typeOfT = new TypeToken<ClaimList>(){}.getType();
@@ -343,21 +338,7 @@ public class FileManager {
 	public void saveSubmittedClaimLInFile(ClaimList claimList) {
 		Thread thread = new onlineSaveSubmittedClaimLThread(claimList);
 		thread.start();
-		
-		try {
-			//openFileOutput is a Activity method
-			FileOutputStream fos = context.openFileOutput(SUBMITTED_CLAIMLISTFILENAME,0);
-			OutputStreamWriter osw = new OutputStreamWriter(fos);
-			gson.toJson(claimList, osw);
-			osw.flush();
-			fos.close();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
 	}
 	
 	
@@ -509,7 +490,7 @@ public class FileManager {
 		public void run() {
 			
 			if(InternetController.isInternetAvailable2(context)){
-				addSubmittedClaim(claimlist);
+				addSubmittedClaimL(claimlist);
 			}
 			
 		}
