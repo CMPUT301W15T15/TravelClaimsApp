@@ -169,7 +169,7 @@ public class EditClaimActivity extends FragmentActivity implements TextWatcher {
   @Override
     public void onCreateContextMenu(ContextMenu menu, View v,ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
-        if(v.getId() == R.id.DestinationList){
+        if(v.getId() == R.id.DestinationList2){
         	getMenuInflater().inflate(R.menu.destinations_context_menu, menu);
         }else{
         	getMenuInflater().inflate(R.menu.edit_tag_contextmenu, menu);
@@ -370,6 +370,14 @@ public class EditClaimActivity extends FragmentActivity implements TextWatcher {
     	startActivity(intent);
     }
 	
+	public void ReturnClaim(MenuItem menu)
+    {
+    	SignOutController.reset();
+    	Toast.makeText(this, "Returning to claimlist", Toast.LENGTH_SHORT).show();
+    	Intent intent = new Intent(EditClaimActivity.this, AddClaimActivity.class);
+    	startActivity(intent);
+    }
+	
 	/**
 	 * Function that is called when user presses the view expenses button
 	 * 
@@ -463,7 +471,7 @@ public class EditClaimActivity extends FragmentActivity implements TextWatcher {
 	public void afterTextChanged(Editable s) {
 		
 		switch(getCurrentFocus().getId()){
-			case R.id.Edit_Claim_Name:
+			case R.id.Edit_Claim_Name2:
 				String newName = s.toString();
 				//if length of name in edittext is 0 or if claim name is already in claimlist
 				//then do not save changes. Otherwise update the claim name
@@ -474,13 +482,13 @@ public class EditClaimActivity extends FragmentActivity implements TextWatcher {
 				}else{
 					theClaim.setName(claimNameInput.getText().toString());
 				}
-			case R.id.ClaimStart:
+			case R.id.Claim_Start_Date:
 				try{
 					theClaim.setStartDate(sdf.parse(claimStartDate.getText().toString()));
 				}catch(ParseException e){
 					//do nothing 
 				}
-			case R.id.ClaimEnd:
+			case R.id.Claim_Finish_Date:
 				try{
 					theClaim.setEndDate(sdf.parse(claimEndDate.getText().toString()));
 				}catch(ParseException e){

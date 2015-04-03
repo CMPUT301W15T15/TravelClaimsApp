@@ -92,10 +92,10 @@ public class EditClaimActivityUITest extends
 		
 		instrumentation = getInstrumentation();
 		GeoLocationController.initializeLocationManager(activity.getApplicationContext());
-		inputName = (EditText) activity.findViewById(R.id.Edit_Claim_Name);
-		inputStartDate = (EditText) activity.findViewById(R.id.ClaimStart);
-		inputEndDate = (EditText) activity.findViewById(R.id.ClaimEnd);
-		b = (Button) activity.findViewById(R.id.AddDestinationButton);
+		inputName = (EditText) activity.findViewById(R.id.Edit_Claim_Name2);
+		inputStartDate = (EditText) activity.findViewById(R.id.Claim_Start_Date);
+		inputEndDate = (EditText) activity.findViewById(R.id.Claim_Finish_Date);
+		b = (Button) activity.findViewById(R.id.AddDestinationButton2);
 	}
 	
 	/**

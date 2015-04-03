@@ -102,9 +102,14 @@ public class SearchActivity extends Activity
 		ArrayList<Claim> claims = ClaimListController.getFilteredClaimList(searchField.getText().toString());
 		claimListAdaptor.addAll(claims);
 		claimListAdaptor.notifyDataSetChanged();
-		
-		
 	}
+	
+	public void ReturnClaim(MenuItem menu)
+    {
+    	Toast.makeText(this, "Returning to claimlist", Toast.LENGTH_SHORT).show();
+    	Intent intent = new Intent(SearchActivity.this, AddClaimActivity.class);
+    	startActivity(intent);
+    }
 	
 	@Override
     public void onCreateContextMenu(ContextMenu menu, View v,ContextMenuInfo menuInfo) {

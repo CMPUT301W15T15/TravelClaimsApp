@@ -25,6 +25,7 @@ import java.util.Locale;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -89,7 +90,8 @@ public class DestinationListAdaptor extends ArrayAdapter<Destination>{
 		}else{
 			viewHolder = (ViewHolder) rowView.getTag();
 		}
-		
+		viewHolder.destLocation.setTextColor(Color.WHITE);
+		viewHolder.destReason.setTextColor(Color.WHITE);
         viewHolder.destLocation.setText(d.getLocation());
         viewHolder.destReason.setText(d.getReason());  
         
