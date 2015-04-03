@@ -340,8 +340,8 @@ public class FileManager {
 	 * @param claimList
 	 * @param username
 	 */
-	public void saveSubmittedClaimLInFile(ClaimList claimList, String username) {
-		Thread thread = new onlineSaveClaimListThread(claimList, username);
+	public void saveSubmittedClaimLInFile(ClaimList claimList) {
+		Thread thread = new onlineSaveSubmittedClaimLThread(claimList);
 		thread.start();
 		
 		try {
