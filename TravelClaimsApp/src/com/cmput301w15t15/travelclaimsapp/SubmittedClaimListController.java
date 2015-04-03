@@ -24,7 +24,9 @@ public class SubmittedClaimListController
 	public static void initSubmittedClaimListController() {
 		if(submittedClaimList == null){
 			submittedClaimList = FileManager.getSaver().loadSubmittedClaimLFromFile();
-			submittedClaimList.sort();
+			if(submittedClaimList == null){
+				submittedClaimList = new ClaimList();
+			}
 			submittedClaimList.setListeners();
 			submittedClaimList.addListener(new Listener() {
 				
@@ -112,7 +114,6 @@ public class SubmittedClaimListController
 	public static void addClaim(Claim claim){
 		addClaimListeners(claim);
 		getClaimList().addClaim(claim);
-		getClaimList().sort();
 	}
 	/**
 	 * Uses ClaimList.removeClaim to remove a claim from claimList. 
