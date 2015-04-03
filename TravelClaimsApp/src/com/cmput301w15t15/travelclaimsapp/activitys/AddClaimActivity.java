@@ -17,6 +17,8 @@
  */
 package com.cmput301w15t15.travelclaimsapp.activitys;
 
+import java.util.Arrays;
+
 import com.cmput301w15t15.travelclaimsapp.ClaimListAdaptor;
 import com.cmput301w15t15.travelclaimsapp.ClaimListController;
 import com.cmput301w15t15.travelclaimsapp.FileManager;
@@ -26,6 +28,7 @@ import com.cmput301w15t15.travelclaimsapp.SignOutController;
 import com.cmput301w15t15.travelclaimsapp.SubmittedClaimListController;
 import com.cmput301w15t15.travelclaimsapp.UserController;
 //import com.cmput301w15t15.travelclaimsapp.SignOutController;
+import com.cmput301w15t15.travelclaimsapp.activitys.MainMenuActivity.loginThread;
 import com.cmput301w15t15.travelclaimsapp.model.Claim;
 import com.cmput301w15t15.travelclaimsapp.model.ClaimList;
 import com.cmput301w15t15.travelclaimsapp.model.Expense;
@@ -33,6 +36,7 @@ import com.cmput301w15t15.travelclaimsapp.model.User;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.view.ContextMenu;
 import android.view.Menu;
@@ -113,13 +117,10 @@ public class AddClaimActivity extends Activity {
             	return true;
             case R.id.cmenu_submit_claim:
             	if(InternetController.isInternetAvailable2(this)){
-            		claim.setClaimantName(UserController.getUser().getUsername());
-                	SubmittedClaimListController.initSubmittedClaimListController();
-                	SubmittedClaimListController.addClaim(claim);
-                	SubmittedClaimListController.save();
-                	SubmittedClaimListController.reset();
+            		Thread thread = new submitClaimThread(claim, this);
+        			thread.start();
             	} else {
-            		Toast.makeText(this, "Internet Connection Needed", Toast.LENGTH_LONG);
+            		Toast.makeText(this, "Internet Connection Needed", Toast.LENGTH_LONG).show();
             	}
             	
             	
@@ -197,6 +198,35 @@ public class AddClaimActivity extends Activity {
     	Intent intent = new Intent(AddClaimActivity.this, ApproverClaimListActivity.class);
     	startActivity(intent);
     }
+	
+	/**
+	 * When connected to the internet, given info is compared with server info.
+	 * 
+	 * When not connect to the internet, given info is compared with user file on hand.
+	 */
+	class submitClaimThread extends Thread {
+		
+		private Claim toSubmit;
+		private Context context;
+		
+		public submitClaimThread(Claim claim, Context context){
+			toSubmit = claim;
+			this.context = context;
+		}
+		
+		public void run() {
+			toSubmit.setClaimantName(UserController.getUser().getUsername());
+        	if(!SubmittedClaimListController.initSubmittedClaimListController()){
+            	Toast.makeText(this.context, "go to approve", Toast.LENGTH_SHORT).show();
+        	} else {
+            	SubmittedClaimListController.addClaim(toSubmit);
+            	SubmittedClaimListController.save();
+        	}
+        	
+			
+		}
+		
+	}
     
 	
 }

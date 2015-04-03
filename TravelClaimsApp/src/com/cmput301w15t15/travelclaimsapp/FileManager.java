@@ -55,7 +55,7 @@ public class FileManager {
 
 	private static final String USER_RESOURCE_URL = "http://cmput301.softwareprocess.es:8080/cmput301w15t15/user/";
 	private static final String CLAIMLIST_RESOURCE_URL = "http://cmput301.softwareprocess.es:8080/cmput301w15t15/claimlist/";
-	private static final String SUBMITTED_CLAIMLIST_RESOURCE_URL = "http://cmput301.softwareprocess.es:8080/cmput301w15t15/submitted_claimlist";
+	private static final String SUBMITTED_CLAIMLIST_RESOURCE_URL = "http://cmput301.softwareprocess.es:8080/cmput301w15t15/submitted_claimlist/";
 	
 	private static final String USER_TAG = "UserSearch";
 	private static final String CLAIMLIST_TAG = "ClaimListSearch";
@@ -64,6 +64,7 @@ public class FileManager {
 	private static final String CLAIMLISTFILENAME = "claimlist.sav";
 	private static final String SUBMITTED_CLAIMLISTFILENAME = "submitted_claimlist.sav";
 	private static final String CLAIMANT_CLAIMLISTFILENAME = "claimant_claimlist.sav";
+	private static final String TAG = "TravelClaimsApp";
 	
 	private Gson gson;
 	private Context context;
@@ -148,7 +149,7 @@ public class FileManager {
 			Log.i(USER_TAG, status);
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			Log.d(TAG, "addUser did not work: " + e.getMessage());
 		}
 		
 	}
@@ -168,7 +169,7 @@ public class FileManager {
 			Log.i(USER_TAG, status);
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			Log.d(TAG, "deleteUser did not work: " + e.getMessage());
 		}
 	}
 	
@@ -191,10 +192,38 @@ public class FileManager {
 			return sr.getSource();
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			Log.d(TAG, "getClaimlist did not work: " + e.getMessage());
 		} 
 
 		return null;
+	}
+	
+	
+	/**
+	 * Gets claimlist from server.
+	 * @param Username
+	 * @return
+	 */
+	public ClaimList getSumbittedClaimList() {
+
+		HttpClient httpClient = new DefaultHttpClient();
+		HttpGet httpGet = new HttpGet(SUBMITTED_CLAIMLIST_RESOURCE_URL + "main");
+
+		HttpResponse response;
+
+		try {
+			response = httpClient.execute(httpGet);
+			SearchHit<ClaimList> sr = parseClaimListHit(response);
+			if(sr.getSource() == null){
+				return new ClaimList();
+			} else {
+				return sr.getSource();
+			}
+
+		} catch (Exception e) {
+			return null;
+		} 
+		
 	}
 	
 	
@@ -216,7 +245,7 @@ public class FileManager {
 			Log.i(CLAIMLIST_TAG, status);
 			
 		} catch (Exception e) {
-			e.printStackTrace();
+			Log.d(TAG, "addClaimList did not work: " + e.getMessage());
 		}
 	}
 
@@ -226,11 +255,11 @@ public class FileManager {
 	 * 
 	 * @param newClaimList
 	 */
-	public void addSubmittedClaim(ClaimList newClaimList) {
+	public void addSubmittedClaimL(ClaimList newClaimList) {
 		HttpClient httpClient = new DefaultHttpClient();
 
 		try {
-			HttpPost addRequest = new HttpPost(SUBMITTED_CLAIMLIST_RESOURCE_URL);
+			HttpPost addRequest = new HttpPost(SUBMITTED_CLAIMLIST_RESOURCE_URL + "main");
 
 			StringEntity stringEntity = new StringEntity(gson.toJson(newClaimList));
 			addRequest.setEntity(stringEntity);
@@ -241,7 +270,7 @@ public class FileManager {
 			Log.i(SUBMITTED_CLAIMLIST_TAG, status);
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			Log.d(TAG, "addSubmittedClaimL did not work: " + e.getMessage());
 		}
 	}
 	
@@ -259,36 +288,6 @@ public class FileManager {
 		try {
 			//openFileInput only takes a a filename
 			FileInputStream fis = context.openFileInput(CLAIMLISTFILENAME);
-			InputStreamReader in = new InputStreamReader(fis);
-			//Taken from http://google-gson.googlecode.com/svn/trunk/gson/docs/javadocs/index.html 2015-19-01
-			Type typeOfT = new TypeToken<ClaimList>(){}.getType();
-			claims = gson.fromJson(in, typeOfT);
-			fis.close();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			return null;
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			return null;
-		}
-		if (claims == null){
-			return new ClaimList();
-		}
-		return claims;
-	}
-	
-	/**
-	 * 
-	 * get an SubmittedClaimList from local file
-	 * @return
-	 */
-	public ClaimList loadSubmittedClaimLFromFile(){
-	
-		ClaimList claims = new ClaimList();
-		
-		try {
-			//openFileInput only takes a a filename
-			FileInputStream fis = context.openFileInput(SUBMITTED_CLAIMLISTFILENAME);
 			InputStreamReader in = new InputStreamReader(fis);
 			//Taken from http://google-gson.googlecode.com/svn/trunk/gson/docs/javadocs/index.html 2015-19-01
 			Type typeOfT = new TypeToken<ClaimList>(){}.getType();
@@ -327,10 +326,10 @@ public class FileManager {
 			fos.close();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Log.d(TAG, "saveClaimLInFile could not find file: " + e.getMessage());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Log.d(TAG, "saveClaimLInFile did not work: " + e.getMessage());
 		}
 	}
 	
@@ -343,21 +342,7 @@ public class FileManager {
 	public void saveSubmittedClaimLInFile(ClaimList claimList) {
 		Thread thread = new onlineSaveSubmittedClaimLThread(claimList);
 		thread.start();
-		
-		try {
-			//openFileOutput is a Activity method
-			FileOutputStream fos = context.openFileOutput(SUBMITTED_CLAIMLISTFILENAME,0);
-			OutputStreamWriter osw = new OutputStreamWriter(fos);
-			gson.toJson(claimList, osw);
-			osw.flush();
-			fos.close();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
 	}
 	
 	
@@ -406,10 +391,10 @@ public class FileManager {
 			fos.close();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Log.d(TAG, "saveClaimLInFile could not find file: " + e.getMessage());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Log.d(TAG, "saveClaimLInFile could not find file: " + e.getMessage());
 		}
 	}
 	
@@ -445,7 +430,7 @@ public class FileManager {
 			return sr;
 		} 
 		catch (IOException e) {
-			e.printStackTrace();
+			Log.d(TAG, "parseClaimListHit did not work: " + e.getMessage());
 		}
 		
 		return null;
@@ -467,7 +452,7 @@ public class FileManager {
 			return sr;
 		} 
 		catch (IOException e) {
-			e.printStackTrace();
+			Log.d(TAG, "parseUseHit could not work: " + e.getMessage());
 		}
 		
 		return null;
@@ -509,7 +494,7 @@ public class FileManager {
 		public void run() {
 			
 			if(InternetController.isInternetAvailable2(context)){
-				addSubmittedClaim(claimlist);
+				addSubmittedClaimL(claimlist);
 			}
 			
 		}
