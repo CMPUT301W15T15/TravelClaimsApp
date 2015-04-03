@@ -234,44 +234,42 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 	
 	public byte[] getBytesFromBitmap(Bitmap bitmap) {
 	    ByteArrayOutputStream stream = new ByteArrayOutputStream();
+	    ByteArrayOutputStream stream2 = new ByteArrayOutputStream();
 	    byte[] tempImg;
 	    Bitmap tempMap = bitmap;
 	    Bitmap resizedMap; 
-	    resizedMap = tempMap.createScaledBitmap(tempMap, 10, 10, false);
-    	resizedMap.compress(CompressFormat.JPEG, 10, stream);
-    	tempImg=stream.toByteArray();
-    	tempMap = resizedMap;
-    	//isRescale="Scaled";
-//	    tempMap.compress(CompressFormat.JPEG, 70, stream);
-//	    tempImg=stream.toByteArray();
+	    
+//	    resizedMap = tempMap.createScaledBitmap(tempMap, 256, 256, false);
+//    	resizedMap.compress(CompressFormat.JPEG, 70, stream);
+//    	tempImg=stream.toByteArray();
+//    	tempMap = resizedMap;
+//    	isRescale="Scaled";
+	    tempMap.compress(CompressFormat.JPEG, 70, stream2);
+	    tempImg=stream2.toByteArray();
 	    if (tempImg.length > 65536){
-	    	resizedMap = tempMap.createScaledBitmap(tempMap, 10, 10, false);
-	    	resizedMap.compress(CompressFormat.JPEG, 70, stream);
+	    	resizedMap = bitmap.createScaledBitmap(bitmap, 256, 256, false);
+	    	resizedMap.compress(CompressFormat.JPEG, 100, stream);
 	    	tempImg=stream.toByteArray();
-	    	tempMap = resizedMap;
 	    	isRescale="Scaled";
 	    }
 	    
-	    if (tempImg.length > 65536){
-	    	resizedMap = tempMap.createScaledBitmap(tempMap, 10, 10, false);
-	    	resizedMap.compress(CompressFormat.JPEG, 30, stream);
+	    else {
+		    resizedMap = tempMap.createScaledBitmap(tempMap, 256, 256, false);
+	    	resizedMap.compress(CompressFormat.JPEG, 70, stream);
 	    	tempImg=stream.toByteArray();
-	    	tempMap = resizedMap;
-	    	isRescale="Scaled2";
 	    }
-	    
-	    if (tempImg.length > 65536){
-	    	resizedMap = tempMap.createScaledBitmap(tempMap, 10,10, false);
-	    	resizedMap.compress(CompressFormat.JPEG, 10, stream);
-	    	tempImg=stream.toByteArray();
-	    	tempMap = resizedMap;
-	    	isRescale="Scaled3";
-	    }
-	    
-	    sizeNum=tempImg.length;
+	        
+	    sizeNum = tempImg.length;
 	    size = sizeNum.toString();
-	    Toast.makeText(this, size, Toast.LENGTH_LONG).show();
-	    return tempImg;
+	   
+	    if(sizeNum>65530){
+	    	Toast.makeText(this, "Image Too Large", Toast.LENGTH_LONG).show();
+	    	return null;
+	    }
+	    //Toast.makeText(this, size, Toast.LENGTH_LONG).show();
+	    else {
+	    	return tempImg;
+	    }
 	    
 	}
 	
@@ -345,7 +343,7 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
         else{
         	showDate ="";
         }
-        imageDialog.setPositiveButton(expense.getName() + " "+ showDate+" "+isRescale+" "+"Size: "+size, new DialogInterface.OnClickListener(){
+        imageDialog.setPositiveButton(expense.getName() + " "+ showDate+" "+isRescale+" "+"Size: "+size+" Byte", new DialogInterface.OnClickListener(){
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
             }
