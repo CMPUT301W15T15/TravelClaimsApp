@@ -183,13 +183,14 @@ public class ExpenseListActivity extends Activity
     	
     	//startActivity(intent); 
     	
-    	
+    	Claim claim = ClaimListController.getClaimList().getClaim(claimName);
     	int i = expenseList.size();
     	while(ClaimListController.getClaimList().getClaim(claimName).getExpense("Expense"+i)!=null){
     		i++;
     	}
     	Expense expense = new Expense("Expense"+i);
-		ClaimListController.getClaimList().getClaim(claimName).addExpense(expense);
+		//ClaimListController.getClaimList().getClaim(claimName).addExpense(expense);
+		ClaimListController.addExpense(expense, claim);
 		
     	Toast.makeText(this, "Creating a Expense", Toast.LENGTH_SHORT).show();
     	Intent intent = new Intent(ExpenseListActivity.this, EditExpenseActivity.class);

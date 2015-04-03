@@ -200,8 +200,7 @@ public class AddClaimActivity extends Activity {
     		return;
     	}
 	
-    	Intent intent = new Intent(AddClaimActivity.this, ApproverClaimListActivity.class);
-    	startActivity(intent);
+    	
     }
     
     /**
