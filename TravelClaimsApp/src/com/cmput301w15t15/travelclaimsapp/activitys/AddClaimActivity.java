@@ -122,8 +122,6 @@ public class AddClaimActivity extends Activity {
             	} else {
             		Toast.makeText(this, "Internet Connection Needed", Toast.LENGTH_LONG).show();
             	}
-            	
-            	
             	claim.setStatus("Submitted");
             	claimAdaptor.notifyDataSetChanged();
             	return true;
@@ -194,7 +192,14 @@ public class AddClaimActivity extends Activity {
     }
  
     public void MenuApprover(MenuItem menu){
-    	Toast.makeText(this, "go to approve", Toast.LENGTH_SHORT).show();
+    	if(InternetController.isInternetAvailable2(this)){
+    		Thread thread = new initApproverActivityThread(this);
+			thread.start();
+    	} else {
+    		Toast.makeText(this, "Internet Connection Needed", Toast.LENGTH_LONG).show();
+    		return;
+    	}
+	
     	Intent intent = new Intent(AddClaimActivity.this, ApproverClaimListActivity.class);
     	startActivity(intent);
     }
@@ -224,6 +229,24 @@ public class AddClaimActivity extends Activity {
         	}
         	
 			
+		}
+		
+	}
+	
+	class initApproverActivityThread extends Thread {
+		
+		Context context;
+		
+		public initApproverActivityThread(Context context) {
+
+			this.context = context;
+		}
+
+		public void run() {
+			if(!SubmittedClaimListController.initSubmittedClaimListController()){
+				Toast.makeText(context, "Internet connection needed", Toast.LENGTH_SHORT).show();
+			}
+		
 		}
 		
 	}

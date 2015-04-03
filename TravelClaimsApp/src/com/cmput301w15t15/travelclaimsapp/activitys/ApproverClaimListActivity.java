@@ -24,12 +24,14 @@ import com.cmput301w15t15.travelclaimsapp.FileManager;
 import com.cmput301w15t15.travelclaimsapp.R;
 import com.cmput301w15t15.travelclaimsapp.SignOutController;
 import com.cmput301w15t15.travelclaimsapp.SubmittedClaimListController;
+import com.cmput301w15t15.travelclaimsapp.UserController;
 //import com.cmput301w15t15.travelclaimsapp.SignOutController;
 import com.cmput301w15t15.travelclaimsapp.model.Claim;
 import com.cmput301w15t15.travelclaimsapp.model.ClaimList;
 import com.cmput301w15t15.travelclaimsapp.model.Expense;
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.view.ContextMenu;
 import android.view.Menu;
@@ -50,7 +52,7 @@ public class ApproverClaimListActivity extends Activity {
 	private static final int LENGTH_SHORT = 0;
 	private ApproverClaimListAdaptor claimAdaptor;
 	private ListView claimListView;
-	private ClaimList claimList;
+	public ClaimList claimList;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +60,7 @@ public class ApproverClaimListActivity extends Activity {
 		setContentView(R.layout.activity_approver_claim_list);
 		FileManager.initializeSaver(this);
 		claimListView = (ListView) findViewById(R.id.approve_claim_list_view);
+		SubmittedClaimListController.initSubmittedClaimListController();
 		claimList = SubmittedClaimListController.getClaimList();
 		
 		//create a adaptor for claim list and set it
@@ -139,7 +142,7 @@ public class ApproverClaimListActivity extends Activity {
 
 
 
- 
+	
     
 	
 }
