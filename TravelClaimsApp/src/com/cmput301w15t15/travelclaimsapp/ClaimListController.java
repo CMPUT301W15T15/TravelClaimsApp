@@ -166,7 +166,7 @@ public class ClaimListController {
 	 */
 	public static void addExpense(Expense expense, Claim claim){
 		claim.addExpense(expense);
-		claim.getExpenseList().sort();
+		//claim.getExpenseList().sort();
 		expense.addListener(new ClaimListSaveListener());
 	}
 	
