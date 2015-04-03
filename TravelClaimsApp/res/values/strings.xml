@@ -41,6 +41,8 @@
     <string name="CreateUserText">Please full all fields and check box if you are an approver.</string>
     <string name="to">To</string>
     <string name="home">Select your home location.</string>
+    <string name="AddTag">Add Tag</string>
+    <string name="AddDes">Add Destination</string>
 
     <string-array name="StatusArray">
         <item>In Progress</item>
