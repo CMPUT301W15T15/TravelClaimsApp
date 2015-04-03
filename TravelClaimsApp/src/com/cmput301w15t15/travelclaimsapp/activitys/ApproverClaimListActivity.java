@@ -54,9 +54,7 @@ public class ApproverClaimListActivity extends Activity {
 		setContentView(R.layout.activity_approver_claim_list);
 		FileManager.initializeSaver(this);
 		claimListView = (ListView) findViewById(R.id.approve_claim_list_view);
-		SubmittedClaimListController.initSubmittedClaimListController();
 		claimList = SubmittedClaimListController.getClaimList();
-		
 		//create a adaptor for claim list and set it
 		claimAdaptor = new ApproverClaimListAdaptor(this,R.layout.approve_claim_list_adaptor, claimList.toArrayList());
 		claimAdaptor.notifyDataSetChanged();
