@@ -21,11 +21,12 @@ public class SubmittedClaimListController
 	private static ClaimList submittedClaimList = null;
 	private static ExpenseList submittedExpenseList = null;
 	
-	public static void initSubmittedClaimListController() {
+	public static boolean initSubmittedClaimListController() {
+		reset();
 		if(submittedClaimList == null){
 			submittedClaimList = FileManager.getSaver().getSumbittedClaimList();
 			if(submittedClaimList == null){
-				submittedClaimList = new ClaimList();
+				return false;
 			}
 			submittedClaimList.setListeners();
 			submittedClaimList.addListener(new Listener() {
@@ -43,6 +44,7 @@ public class SubmittedClaimListController
 				addClaimListeners(claim);
 			}
 		}
+		return true;
 	}
 	
 	

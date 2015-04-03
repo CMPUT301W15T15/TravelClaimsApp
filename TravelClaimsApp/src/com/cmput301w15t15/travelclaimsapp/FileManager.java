@@ -213,13 +213,16 @@ public class FileManager {
 		try {
 			response = httpClient.execute(httpGet);
 			SearchHit<ClaimList> sr = parseClaimListHit(response);
-			return sr.getSource();
+			if(sr.getSource() == null){
+				return new ClaimList();
+			} else {
+				return sr.getSource();
+			}
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			return null;
 		} 
-
-		return null;
+		
 	}
 	
 	
