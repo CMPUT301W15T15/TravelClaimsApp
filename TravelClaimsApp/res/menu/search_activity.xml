@@ -6,5 +6,6 @@
         android:showAsAction="never"
         android:title="@string/action_settings"/>
     <item android:id="@+id/item1" android:title="Sign Out" android:onClick="SignOut"></item>
+    <item android:id="@+id/Claimlist" android:onClick="ReturnClaim" android:title="Return to claimlist"></item>
 
 </menu>

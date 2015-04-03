@@ -25,6 +25,7 @@ import com.cmput301w15t15.travelclaimsapp.model.Tag;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -79,7 +80,7 @@ public class TagListAdaptor extends ArrayAdapter<Tag> {
 			viewHolder = (ViewHolder) rowView.getTag();
 		}
 		
-    
+		viewHolder.tagName.setTextColor(Color.WHITE);
         viewHolder.tagName.setText(d.getName());  
         
 		return rowView;
