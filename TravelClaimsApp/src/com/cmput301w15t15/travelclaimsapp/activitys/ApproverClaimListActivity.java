@@ -18,20 +18,14 @@
 package com.cmput301w15t15.travelclaimsapp.activitys;
 
 import com.cmput301w15t15.travelclaimsapp.ApproverClaimListAdaptor;
-import com.cmput301w15t15.travelclaimsapp.ClaimListAdaptor;
-import com.cmput301w15t15.travelclaimsapp.ClaimListController;
 import com.cmput301w15t15.travelclaimsapp.FileManager;
 import com.cmput301w15t15.travelclaimsapp.R;
 import com.cmput301w15t15.travelclaimsapp.SignOutController;
 import com.cmput301w15t15.travelclaimsapp.SubmittedClaimListController;
-import com.cmput301w15t15.travelclaimsapp.UserController;
-//import com.cmput301w15t15.travelclaimsapp.SignOutController;
 import com.cmput301w15t15.travelclaimsapp.model.Claim;
 import com.cmput301w15t15.travelclaimsapp.model.ClaimList;
-import com.cmput301w15t15.travelclaimsapp.model.Expense;
 import android.os.Bundle;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.view.ContextMenu;
 import android.view.Menu;
