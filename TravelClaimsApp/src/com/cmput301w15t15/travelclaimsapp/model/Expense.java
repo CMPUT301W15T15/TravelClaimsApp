@@ -41,7 +41,8 @@ public class Expense implements Listenable{
 	protected int flag=0;
 	protected GeoLocation geoLocation;
 	protected byte[] picture;
-
+	protected String isRescale="";
+	
 	/**
 	 * expense constructor
 	 * @param expenseName
@@ -318,7 +319,14 @@ public class Expense implements Listenable{
 		notifyListeners();
 	}
 
+	public String getScale(){
+		return this.isRescale;
+	}
 	
+	public void setScale(String scale){
+		this.isRescale = scale;
+		notifyListeners();
+	}
 	
 	
 }
