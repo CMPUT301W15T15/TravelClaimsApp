@@ -168,7 +168,7 @@ public class ExpenseListAdaptor extends ArrayAdapter<Expense> {
 			}
 		});
 		
-		if(expense.getReceipt() == null){
+		if(expense.getPicture() == null){
         	viewHolder.expenseImageAttach.setVisibility(android.view.View.INVISIBLE);
         }else{
         	viewHolder.expenseImageAttach.setVisibility(android.view.View.VISIBLE);

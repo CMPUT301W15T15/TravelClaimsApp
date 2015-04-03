@@ -248,8 +248,7 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 	    
 	    while (resizeWidth*resizeHeight >= 65536 ){
 	    	resizeWidth=resizeWidth*0.9;
-	    	resizeHeight=resizeHeight*0.9;
-	    	expense.setScale("Rescaled");	
+	    	resizeHeight=resizeHeight*0.9;	
 	    }
 	    
 //	    resizedMap = tempMap.createScaledBitmap(tempMap, 256, 256, false);
@@ -264,6 +263,7 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 	    	resizedMap.compress(CompressFormat.JPEG, 100, stream);
 	    	tempImg=stream.toByteArray();
 	    	//isRescale="Scaled";
+	    	expense.setScale("Rescaled");
 	    }
 	    
 	    else {
