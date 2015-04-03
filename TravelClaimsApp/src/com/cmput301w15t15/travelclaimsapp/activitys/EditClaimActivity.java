@@ -97,21 +97,23 @@ public class EditClaimActivity extends FragmentActivity implements TextWatcher {
 	private static int GET_GEOLOCATION_CODE = 10;
 	private int adaptorPos;
 	
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_edit_claim);
+		setContentView(R.layout.edit_claim);
 		sdf = new SimpleDateFormat("MM/dd/yyyy",Locale.CANADA);
 		
 		GeoLocationController.initializeLocationManager(this.getApplicationContext());
 		
-		claimStartDate = (EditText) findViewById(R.id.ClaimStart);
-		claimEndDate = (EditText) findViewById(R.id.ClaimEnd);
-		claimNameInput = (EditText) findViewById(R.id.Edit_Claim_Name);
-		destListView = (ListView) findViewById(R.id.DestinationList);
-		addDestButton = (Button) findViewById(R.id.AddDestinationButton);
-		addTagButton = (Button) findViewById(R.id.AddTagbutton);
-		tagListView = (ListView) findViewById(R.id.edit_claim_taglist);
+		claimStartDate = (EditText) findViewById(R.id.Claim_Start_Date);
+		claimEndDate = (EditText) findViewById(R.id.Claim_Finish_Date);
+		claimNameInput = (EditText) findViewById(R.id.Edit_Claim_Name2);
+		destListView = (ListView) findViewById(R.id.DestinationList2);
+		addDestButton = (Button) findViewById(R.id.AddDestinationButton2);
+		addTagButton = (Button) findViewById(R.id.AddTagButton2);
+		tagListView = (ListView) findViewById(R.id.TagList2);
 		claimList = ClaimListController.getClaimList();
 	
 		//get the claim name passed with the intent 
@@ -127,8 +129,8 @@ public class EditClaimActivity extends FragmentActivity implements TextWatcher {
 		tagListView.setAdapter(tagAdaptor);
 		
 		//register listviews for the context menu popup
-		registerForContextMenu(findViewById(R.id.DestinationList));
-		registerForContextMenu(findViewById(R.id.edit_claim_taglist));
+		registerForContextMenu(findViewById(R.id.DestinationList2));
+		registerForContextMenu(findViewById(R.id.TagList2));
 	}
 
 	@Override

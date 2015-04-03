@@ -80,6 +80,14 @@
             android:name="com.cmput301w15t15.travelclaimsapp.activitys.ApproverExpenseListActivity"
             android:label="@string/title_activity_approver_expense_list" >
         </activity>
+        <activity
+            android:name="com.cmput301w15t15.travelclaimsapp.activitys.DesTabActivity"
+            android:label="@string/title_activity_des_tab" >
+        </activity>
+        <activity
+            android:name="com.cmput301w15t15.travelclaimsapp.activitys.TagTabActivity"
+            android:label="@string/title_activity_tag_tab" >
+        </activity>
     </application>
 
 </manifest>
