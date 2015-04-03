@@ -82,8 +82,6 @@
     <string name="SearchHint">Eg. Food, Hotel, Taxi</string>
     <string name="title_activity_map">MapActivity</string>
     <string name="title_activity_welcome">WelcomeActivity</string>
+    <string name="title_activity_approver_expense_list">ApproverExpenseListActivity</string>
 
-
-    
-    
 </resources>

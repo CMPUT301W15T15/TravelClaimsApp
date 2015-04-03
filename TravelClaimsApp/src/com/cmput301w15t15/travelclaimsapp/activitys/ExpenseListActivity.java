@@ -89,7 +89,6 @@ public class ExpenseListActivity extends Activity
 		expenseAdaptor = new ExpenseListAdaptor(this,R.layout.expense_list_adaptor,expenseList.toArrayList());
 		expenseAdaptor.notifyDataSetChanged();
 		expenseListView.setAdapter(expenseAdaptor);
-		
 		registerForContextMenu(findViewById(R.id.CurrentExpenseList2));
 		ListView listView = (ListView) findViewById(R.id.CurrentExpenseList2);
 		//set_on_click();
