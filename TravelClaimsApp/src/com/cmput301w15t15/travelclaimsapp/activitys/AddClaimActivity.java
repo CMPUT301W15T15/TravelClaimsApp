@@ -122,8 +122,6 @@ public class AddClaimActivity extends Activity {
             	} else {
             		Toast.makeText(this, "Internet Connection Needed", Toast.LENGTH_LONG).show();
             	}
-            	
-            	
             	claim.setStatus("Submitted");
             	claimAdaptor.notifyDataSetChanged();
             	return true;
@@ -194,15 +192,31 @@ public class AddClaimActivity extends Activity {
     }
  
     public void MenuApprover(MenuItem menu){
-    	Toast.makeText(this, "go to approve", Toast.LENGTH_SHORT).show();
+    	if(InternetController.isInternetAvailable2(this)){
+    		Thread thread = new initApproverActivityThread(this);
+			thread.start();
+    	} else {
+    		Toast.makeText(this, "Internet Connection Needed", Toast.LENGTH_LONG).show();
+    		return;
+    	}
+	
     	Intent intent = new Intent(AddClaimActivity.this, ApproverClaimListActivity.class);
     	startActivity(intent);
     }
+    
+    /**
+	 * Thread that closes the activity after Submitted ClaimList has loaded.
+	 */
+	private Runnable launchApprover = new Runnable() {
+		public void run() {
+			Intent intent = new Intent(AddClaimActivity.this, ApproverClaimListActivity.class);
+	    	startActivity(intent);
+		}
+	};
 	
 	/**
 	 * When connected to the internet, given info is compared with server info.
 	 * 
-	 * When not connect to the internet, given info is compared with user file on hand.
 	 */
 	class submitClaimThread extends Thread {
 		
@@ -217,13 +231,33 @@ public class AddClaimActivity extends Activity {
 		public void run() {
 			toSubmit.setClaimantName(UserController.getUser().getUsername());
         	if(!SubmittedClaimListController.initSubmittedClaimListController()){
-            	Toast.makeText(this.context, "go to approve", Toast.LENGTH_SHORT).show();
+            	Toast.makeText(this.context, "Internet Connection Needed", Toast.LENGTH_LONG).show();
         	} else {
             	SubmittedClaimListController.addClaim(toSubmit);
             	SubmittedClaimListController.save();
         	}
         	
 			
+		}
+		
+	}
+	
+	class initApproverActivityThread extends Thread {
+		
+		Context context;
+		
+		public initApproverActivityThread(Context context) {
+
+			this.context = context;
+		}
+
+		public void run() {
+			if(!SubmittedClaimListController.initSubmittedClaimListController()){
+				Toast.makeText(context, "Internet connection needed", Toast.LENGTH_SHORT).show();
+			} else {
+				runOnUiThread(launchApprover);
+			}
+		
 		}
 		
 	}
