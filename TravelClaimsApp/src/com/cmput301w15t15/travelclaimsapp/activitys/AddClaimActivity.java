@@ -199,9 +199,7 @@ public class AddClaimActivity extends Activity {
     		Toast.makeText(this, "Internet Connection Needed", Toast.LENGTH_LONG).show();
     		return;
     	}
-	
-    	Intent intent = new Intent(AddClaimActivity.this, ApproverClaimListActivity.class);
-    	startActivity(intent);
+
     }
     
     /**

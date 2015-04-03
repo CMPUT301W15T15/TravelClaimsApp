@@ -69,6 +69,7 @@ public class Expense implements Listenable{
 	 */
 	public void setValue(int value){
 		this.price=value;
+		notifyListeners();
 	}
 	
 	/**
