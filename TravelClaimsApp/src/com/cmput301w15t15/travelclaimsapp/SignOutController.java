@@ -7,7 +7,7 @@ public class SignOutController {
 	public static void reset() {
 		ClaimListController.getClaimList().notifyListeners();
 		ClaimListController.resetClaimListController();
-		SubmittedClaimListController.resetSubmittedClaimListController();
+		SubmittedClaimListController.reset();
 		UserController.resetUserController();
 		GeoLocationController.resetGeoLocationController();
 	}

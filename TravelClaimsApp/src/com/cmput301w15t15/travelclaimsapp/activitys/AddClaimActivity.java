@@ -20,12 +20,17 @@ package com.cmput301w15t15.travelclaimsapp.activitys;
 import com.cmput301w15t15.travelclaimsapp.ClaimListAdaptor;
 import com.cmput301w15t15.travelclaimsapp.ClaimListController;
 import com.cmput301w15t15.travelclaimsapp.FileManager;
+import com.cmput301w15t15.travelclaimsapp.InternetController;
 import com.cmput301w15t15.travelclaimsapp.R;
 import com.cmput301w15t15.travelclaimsapp.SignOutController;
+import com.cmput301w15t15.travelclaimsapp.SubmittedClaimListController;
+import com.cmput301w15t15.travelclaimsapp.UserController;
 //import com.cmput301w15t15.travelclaimsapp.SignOutController;
 import com.cmput301w15t15.travelclaimsapp.model.Claim;
 import com.cmput301w15t15.travelclaimsapp.model.ClaimList;
 import com.cmput301w15t15.travelclaimsapp.model.Expense;
+import com.cmput301w15t15.travelclaimsapp.model.User;
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -107,9 +112,16 @@ public class AddClaimActivity extends Activity {
             	claimAdaptor.notifyDataSetChanged();
             	return true;
             case R.id.cmenu_submit_claim:
-            	////////////
-            	//DO something to upload to approver
-            	///////////
+            	if(InternetController.isInternetAvailable2(this)){
+            		claim.setClaimantName(UserController.getUser().getUsername());
+                	SubmittedClaimListController.initSubmittedClaimListController();
+                	SubmittedClaimListController.addClaim(claim);
+                	SubmittedClaimListController.reset();
+            	} else {
+            		Toast.makeText(this, "Internet Connection Needed", Toast.LENGTH_LONG);
+            	}
+            	
+            	
             	claim.setStatus("Submitted");
             	claimAdaptor.notifyDataSetChanged();
             	return true;
