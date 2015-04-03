@@ -116,6 +116,7 @@ public class AddClaimActivity extends Activity {
             		claim.setClaimantName(UserController.getUser().getUsername());
                 	SubmittedClaimListController.initSubmittedClaimListController();
                 	SubmittedClaimListController.addClaim(claim);
+                	SubmittedClaimListController.save();
                 	SubmittedClaimListController.reset();
             	} else {
             		Toast.makeText(this, "Internet Connection Needed", Toast.LENGTH_LONG);
