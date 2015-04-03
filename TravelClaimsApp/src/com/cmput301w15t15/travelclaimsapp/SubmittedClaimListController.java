@@ -17,11 +17,12 @@ public class SubmittedClaimListController
 	private static ClaimList submittedClaimList = null;
 	private static ExpenseList submittedExpenseList = null;
 	
-	public static void initSubmittedClaimListController() {
+	public static boolean initSubmittedClaimListController() {
+		reset();
 		if(submittedClaimList == null){
 			submittedClaimList = FileManager.getSaver().getSumbittedClaimList();
 			if(submittedClaimList == null){
-				submittedClaimList = new ClaimList();
+				return false;
 			}
 			submittedClaimList.setListeners();
 			submittedClaimList.addListener(new Listener() {
@@ -29,7 +30,6 @@ public class SubmittedClaimListController
 				@Override
 				public void update() {
 					save();
-					
 				}
 			});
 			//add a listener to each claim in loaded claimlist
@@ -38,6 +38,7 @@ public class SubmittedClaimListController
 				addClaimListeners(claim);
 			}
 		}
+		return true;
 	}
 	
 	/**
@@ -143,7 +144,6 @@ public class SubmittedClaimListController
 			}
 		});
 	}
-
 
 	/**
 	 * Returns the current ClaimList filtered as a ArrayList<Claim>
