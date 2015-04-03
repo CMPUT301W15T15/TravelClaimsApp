@@ -29,7 +29,6 @@ public class SubmittedClaimListController
 				@Override
 				public void update() {
 					save();
-					
 				}
 			});
 			//add a listener to each claim in loaded claimlist
@@ -143,7 +142,6 @@ public class SubmittedClaimListController
 			}
 		});
 	}
-
 
 	/**
 	 * Returns the current ClaimList filtered as a ArrayList<Claim>

@@ -64,6 +64,7 @@ public class FileManager {
 	private static final String CLAIMLISTFILENAME = "claimlist.sav";
 	private static final String SUBMITTED_CLAIMLISTFILENAME = "submitted_claimlist.sav";
 	private static final String CLAIMANT_CLAIMLISTFILENAME = "claimant_claimlist.sav";
+	private static final String TAG = "TravelClaimsApp";
 	
 	private Gson gson;
 	private Context context;
@@ -148,7 +149,7 @@ public class FileManager {
 			Log.i(USER_TAG, status);
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			Log.d(TAG, "addUser did not work: " + e.getMessage());
 		}
 		
 	}
@@ -168,7 +169,7 @@ public class FileManager {
 			Log.i(USER_TAG, status);
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			Log.d(TAG, "deleteUser did not work: " + e.getMessage());
 		}
 	}
 	
@@ -191,7 +192,7 @@ public class FileManager {
 			return sr.getSource();
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			Log.d(TAG, "getClaimlist did not work: " + e.getMessage());
 		} 
 
 		return null;
@@ -216,7 +217,7 @@ public class FileManager {
 			return sr.getSource();
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			Log.d(TAG, "getSubmittedClaimList did not work: " + e.getMessage());
 		} 
 
 		return null;
@@ -241,7 +242,7 @@ public class FileManager {
 			Log.i(CLAIMLIST_TAG, status);
 			
 		} catch (Exception e) {
-			e.printStackTrace();
+			Log.d(TAG, "addClaimList did not work: " + e.getMessage());
 		}
 	}
 
@@ -266,7 +267,7 @@ public class FileManager {
 			Log.i(SUBMITTED_CLAIMLIST_TAG, status);
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			Log.d(TAG, "addSubmittedClaimL did not work: " + e.getMessage());
 		}
 	}
 	
@@ -322,10 +323,10 @@ public class FileManager {
 			fos.close();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Log.d(TAG, "saveClaimLInFile could not find file: " + e.getMessage());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Log.d(TAG, "saveClaimLInFile did not work: " + e.getMessage());
 		}
 	}
 	
@@ -387,10 +388,10 @@ public class FileManager {
 			fos.close();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Log.d(TAG, "saveClaimLInFile could not find file: " + e.getMessage());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Log.d(TAG, "saveClaimLInFile could not find file: " + e.getMessage());
 		}
 	}
 	
@@ -426,7 +427,7 @@ public class FileManager {
 			return sr;
 		} 
 		catch (IOException e) {
-			e.printStackTrace();
+			Log.d(TAG, "parseClaimListHit did not work: " + e.getMessage());
 		}
 		
 		return null;
@@ -448,7 +449,7 @@ public class FileManager {
 			return sr;
 		} 
 		catch (IOException e) {
-			e.printStackTrace();
+			Log.d(TAG, "parseUseHit could not work: " + e.getMessage());
 		}
 		
 		return null;
