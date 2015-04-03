@@ -51,22 +51,7 @@ public class SubmittedClaimListController
 	 */
 	static public ClaimList getClaimList() {
 		if(submittedClaimList == null){
-			submittedClaimList = FileManager.getSaver().getSumbittedClaimList();
-			submittedClaimList.setListeners();
-			submittedClaimList.addListener(new Listener() {
-				
-				@Override
-				public void update() {
-					save();
-					
-				}
-			});
-			//add a listener to each claim in loaded claimlist
-			for(Claim claim : submittedClaimList.toArrayList()){
-				claim.setListeners(); 
-				addClaimListeners(claim);
-			}
-			return submittedClaimList;
+			initSubmittedClaimListController();
 		}
 		return submittedClaimList;
 	}

@@ -203,11 +203,20 @@ public class AddClaimActivity extends Activity {
     	Intent intent = new Intent(AddClaimActivity.this, ApproverClaimListActivity.class);
     	startActivity(intent);
     }
+    
+    /**
+	 * Thread that closes the activity after Submitted ClaimList has loaded.
+	 */
+	private Runnable launchApprover = new Runnable() {
+		public void run() {
+			Intent intent = new Intent(AddClaimActivity.this, ApproverClaimListActivity.class);
+	    	startActivity(intent);
+		}
+	};
 	
 	/**
 	 * When connected to the internet, given info is compared with server info.
 	 * 
-	 * When not connect to the internet, given info is compared with user file on hand.
 	 */
 	class submitClaimThread extends Thread {
 		
@@ -222,7 +231,7 @@ public class AddClaimActivity extends Activity {
 		public void run() {
 			toSubmit.setClaimantName(UserController.getUser().getUsername());
         	if(!SubmittedClaimListController.initSubmittedClaimListController()){
-            	Toast.makeText(this.context, "go to approve", Toast.LENGTH_SHORT).show();
+            	Toast.makeText(this.context, "Internet Connection Needed", Toast.LENGTH_LONG).show();
         	} else {
             	SubmittedClaimListController.addClaim(toSubmit);
             	SubmittedClaimListController.save();
@@ -245,6 +254,8 @@ public class AddClaimActivity extends Activity {
 		public void run() {
 			if(!SubmittedClaimListController.initSubmittedClaimListController()){
 				Toast.makeText(context, "Internet connection needed", Toast.LENGTH_SHORT).show();
+			} else {
+				runOnUiThread(launchApprover);
 			}
 		
 		}
