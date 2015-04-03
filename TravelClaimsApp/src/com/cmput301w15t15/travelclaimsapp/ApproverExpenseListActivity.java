@@ -18,6 +18,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.View.OnLongClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -45,7 +47,16 @@ public class ApproverExpenseListActivity extends Activity {
 		expenseListView.setAdapter(expenseAdaptor);
 		registerForContextMenu(findViewById(R.id.CurrentExpenseList2));
 		
-		
+		expenseListView.setOnItemLongClickListener(new OnItemLongClickListener() {
+
+			@Override
+			public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
+					int arg2, long arg3) {
+				// TODO Auto-generated method stub
+				return false;
+			}
+			
+		});
 	}
 
 	@Override
