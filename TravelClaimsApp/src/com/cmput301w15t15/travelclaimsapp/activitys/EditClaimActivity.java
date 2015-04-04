@@ -366,7 +366,7 @@ public class EditClaimActivity extends FragmentActivity implements TextWatcher {
     {
     	SignOutController.reset();
     	Toast.makeText(this, "Signing Out", Toast.LENGTH_SHORT).show();
-    	Intent intent = new Intent(EditClaimActivity.this, MainMenuActivity.class);
+    	Intent intent = new Intent(EditClaimActivity.this, LoginActivity.class);
     	startActivity(intent);
     }
 	

@@ -157,7 +157,7 @@ public class ExpenseListActivity extends Activity
     {
     	SignOutController.reset();
     	Toast.makeText(this, "Signing Out", Toast.LENGTH_SHORT).show();
-    	Intent intent = new Intent(ExpenseListActivity.this, MainMenuActivity.class);
+    	Intent intent = new Intent(ExpenseListActivity.this, LoginActivity.class);
     	startActivity(intent);
     }
     

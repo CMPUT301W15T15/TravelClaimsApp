@@ -28,7 +28,7 @@ import com.cmput301w15t15.travelclaimsapp.SignOutController;
 import com.cmput301w15t15.travelclaimsapp.SubmittedClaimListController;
 import com.cmput301w15t15.travelclaimsapp.UserController;
 //import com.cmput301w15t15.travelclaimsapp.SignOutController;
-import com.cmput301w15t15.travelclaimsapp.activitys.MainMenuActivity.loginThread;
+import com.cmput301w15t15.travelclaimsapp.activitys.LoginActivity.loginThread;
 import com.cmput301w15t15.travelclaimsapp.model.Claim;
 import com.cmput301w15t15.travelclaimsapp.model.ClaimList;
 import com.cmput301w15t15.travelclaimsapp.model.Expense;
@@ -165,7 +165,7 @@ public class AddClaimActivity extends Activity {
     {
     	SignOutController.reset();
     	Toast.makeText(this, "Signing Out", Toast.LENGTH_SHORT).show();
-    	Intent intent = new Intent(AddClaimActivity.this, MainMenuActivity.class);
+    	Intent intent = new Intent(AddClaimActivity.this, LoginActivity.class);
     	startActivity(intent);
     }
 
