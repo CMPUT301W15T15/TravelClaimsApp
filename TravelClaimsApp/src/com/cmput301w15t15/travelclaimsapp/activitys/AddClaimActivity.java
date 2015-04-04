@@ -36,7 +36,10 @@ import com.cmput301w15t15.travelclaimsapp.model.User;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.view.ContextMenu;
 import android.view.Menu;
@@ -44,7 +47,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.AdapterView.AdapterContextMenuInfo;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 /**
@@ -102,6 +107,16 @@ public class AddClaimActivity extends Activity {
         super.onCreateContextMenu(menu, v, menuInfo);
         getMenuInflater().inflate(R.menu.add_claim_context_menu, menu);
        
+        AdapterContextMenuInfo adaptorinfo = (AdapterContextMenuInfo) menuInfo;
+        int position = adaptorinfo.position;
+        
+        String status = claimAdaptor.getItem(position).getStatus();
+        
+        if(status.equals(Claim.APPROVED) || status.equals(Claim.RETURNED)){
+        	menu.getItem(4).setVisible(true);
+        }else{
+        	menu.getItem(4).setVisible(false);
+        }
     }
    
     @Override
@@ -112,6 +127,9 @@ public class AddClaimActivity extends Activity {
         final Claim claim = claimAdaptor.getItem(info.position);
         switch (item.getItemId()) {
             case R.id.cmenu_delete_claim:
+            	if(claim.getStatus().equals(claim.SUBMITTED) || claim.getStatus().equals(claim.APPROVED)){
+            		return true;		//do not delete
+            	}
             	claimList.removeClaim(claim);
             	claimAdaptor.notifyDataSetChanged();
             	return true;
@@ -140,6 +158,22 @@ public class AddClaimActivity extends Activity {
             	intent = new Intent(AddClaimActivity.this, EditClaimActivity.class);
             	intent.putExtra("claimName", claim.getName());
             	startActivity(intent);   
+            	return true;
+            case R.id.cmenu_view_comments:
+            	ListView listView = new ListView(this);
+            	ArrayAdapter<String> ad = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, claim.getComments());
+            	AlertDialog.Builder ald = new AlertDialog.Builder(this);
+            	listView.setAdapter(ad);
+            	ald.setView(listView);
+            	ald.setPositiveButton("Done", new OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						return;
+					}
+				});
+            	ald.show();
+            	
+            	
             	return true;
             default:
                 return super.onContextItemSelected(item);

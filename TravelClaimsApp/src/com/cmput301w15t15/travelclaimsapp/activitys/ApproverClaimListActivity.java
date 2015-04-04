@@ -236,8 +236,10 @@ public class ApproverClaimListActivity extends Activity {
 		if(claim.getClaimantName().equals(UserController.getUser().getUsername())){
 			Toast.makeText(this, "No approver priviledge for this claim", Toast.LENGTH_SHORT).show();
 			return false;
+		}else if(claim.getApprover() == null){
+			return true;
 		}
-		if(claim.getApprover() != null && claim.getApprover().equals(UserController.getUser().getUsername())){
+		if(!claim.getApprover().equals(UserController.getUser().getUsername())){
     		Toast.makeText(this, "You are not the approver for this claim", Toast.LENGTH_SHORT).show();
     		return false;
     	}
