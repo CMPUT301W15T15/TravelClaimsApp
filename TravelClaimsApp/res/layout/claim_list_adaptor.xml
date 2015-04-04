@@ -109,7 +109,14 @@
    	    android:orientation="vertical" >
    	</LinearLayout>
    	
-	 
+	 <LinearLayout
+   	    android:id="@+id/LinearLayout_approverName"
+   	    android:layout_width="wrap_content"
+   	    android:layout_height="wrap_content"
+   	    android:divider="@drawable/horizontal_line"
+   	    android:showDividers="end"
+   	    android:orientation="vertical" >
+   	</LinearLayout>
    
    
 

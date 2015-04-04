@@ -115,6 +115,10 @@ public class ApproverClaimListActivity extends Activity {
             	startActivity(intent);
             	return true;
             case R.id.cmenu_comment:
+            	if(claim.getApprover() != null && claim.getApprover() != UserController.getUser().getUsername()){
+            		Toast.makeText(this, "You are not the approver for this claim", Toast.LENGTH_SHORT).show();
+            		return true;
+            	}
             	final EditText tv = new EditText(this);
             	tv.setHeight(240);
             	if(claim.getComment() != null){
@@ -128,6 +132,7 @@ public class ApproverClaimListActivity extends Activity {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						claim.setComment(tv.getText().toString());
+						claim.setApprover(UserController.getUser().getUsername());
 						claimAdaptor.notifyDataSetChanged();
 						return;
 					}
@@ -140,6 +145,10 @@ public class ApproverClaimListActivity extends Activity {
 					}
 				});
             	alertd.show();
+            	return true;
+            case R.id.cmenu_approve:
+            
+            case R.id.cmenu_return:
             	
             default:
                 return super.onContextItemSelected(item);

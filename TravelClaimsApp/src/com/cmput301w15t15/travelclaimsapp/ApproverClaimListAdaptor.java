@@ -87,13 +87,13 @@ public class ApproverClaimListAdaptor extends ArrayAdapter<Claim>{
 	        viewHolder.amounts = (LinearLayout) rowView.findViewById(R.id.LinearLayout_amounts);
 	        viewHolder.distColor = (TextView) rowView.findViewById(R.id.claim_color_code);
 	        viewHolder.claimant = (LinearLayout) rowView.findViewById(R.id.LinearLayout_userName);
-	        //viewHolder.claimApprover = (TextView) rowView.findViewById(R.id.approveListAdaptor_Approver);
+	        viewHolder.claimApprover = (LinearLayout) rowView.findViewById(R.id.LinearLayout_approverName);
 	        //viewHolder.commentIcon = (ImageView) rowView.findViewById(R.id.approveListAdaptor_commentIcon);
 	        viewHolder.distColor.setVisibility(View.INVISIBLE);
 	        TextView userName = new TextView(context);
-	        userName.setText("Claimant: "+claim.getClaimantName());
-	        userName.setTextColor(Color.WHITE);
-	        viewHolder.claimant.addView(userName);
+			userName.setText("Claimant: "+claim.getClaimantName());
+			userName.setTextColor(Color.WHITE);
+			viewHolder.claimant.addView(userName);
  	        rowView.setTag(viewHolder);
  	        
 		}else{
@@ -101,6 +101,17 @@ public class ApproverClaimListAdaptor extends ArrayAdapter<Claim>{
 		}
 		
 		
+		
+	        
+		TextView approverName = new TextView(context);
+		approverName.setText("Approver: "+claim.getApprover());
+		approverName.setTextColor(Color.WHITE);
+		
+	
+		if(claim.getApprover() != null){
+			viewHolder.claimApprover.removeAllViews();
+			viewHolder.claimApprover.addView(approverName);
+		}
 		
 		//add name to adaptor view
         viewHolder.claimName.setText(claim.getName());
@@ -218,7 +229,7 @@ public class ApproverClaimListAdaptor extends ArrayAdapter<Claim>{
 	}
 	
 	private static class ViewHolder {
-        //public TextView claimApprover;
+        public LinearLayout claimApprover;
 		public LinearLayout claimant;
 		public TextView claimName;
         public TextView claimStatus;
