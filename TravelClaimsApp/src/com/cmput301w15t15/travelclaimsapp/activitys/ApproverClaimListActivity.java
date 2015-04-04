@@ -17,13 +17,18 @@
  */
 package com.cmput301w15t15.travelclaimsapp.activitys;
 
+import java.util.Arrays;
+
 import com.cmput301w15t15.travelclaimsapp.ApproverClaimListAdaptor;
 import com.cmput301w15t15.travelclaimsapp.FileManager;
 import com.cmput301w15t15.travelclaimsapp.R;
 import com.cmput301w15t15.travelclaimsapp.SignOutController;
 import com.cmput301w15t15.travelclaimsapp.SubmittedClaimListController;
+import com.cmput301w15t15.travelclaimsapp.UserController;
 import com.cmput301w15t15.travelclaimsapp.model.Claim;
 import com.cmput301w15t15.travelclaimsapp.model.ClaimList;
+import com.cmput301w15t15.travelclaimsapp.model.User;
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -164,7 +169,30 @@ public class ApproverClaimListActivity extends Activity {
     	startActivity(intent);
     }
 
-
+	class saveChangesThread extends Thread {
+		
+		private ClaimList newSubmittedClaimList;
+		private Claim modifiedClaim;
+		
+		public saveChangesThread(ClaimList claimlist, Claim claim){
+			newSubmittedClaimList = claimlist;
+			modifiedClaim = claim;
+		}
+		
+		public void run() {
+			String modUsername = modifiedClaim.getClaimantName();
+			modifiedClaim.setApprover(UserController.getUser().getUsername());
+			ClaimList claimantClaimList = FileManager.getSaver().getClaimList(modUsername);
+			claimantClaimList.removeClaim(claimantClaimList.getClaim(modifiedClaim.getName()));
+			claimantClaimList.addClaim(modifiedClaim);
+			FileManager.getSaver().addClaimList(claimantClaimList, modUsername);
+			
+			FileManager.getSaver().addSubmittedClaimL(newSubmittedClaimList);
+			
+			
+		}
+		
+	}
 
 	
     
