@@ -16,7 +16,7 @@ import com.google.gson.Gson;
 
 public class parseResponse {
 
-	private static Gson gson;
+	private static Gson gson = new Gson();
 	private static final String TAG = "Petat";
 	
 	// https://github.com/joshua2ua/AndroidElasticSearch/blob/master/src/ca/ualberta/ssrg/movies/es/ESMovieManager.java
