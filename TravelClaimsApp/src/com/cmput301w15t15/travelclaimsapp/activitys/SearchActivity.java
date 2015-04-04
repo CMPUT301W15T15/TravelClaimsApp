@@ -21,6 +21,7 @@ import java.util.ArrayList;
 
 import com.cmput301w15t15.travelclaimsapp.ClaimListAdaptor;
 import com.cmput301w15t15.travelclaimsapp.ClaimListController;
+import com.cmput301w15t15.travelclaimsapp.ExpenseListController;
 import com.cmput301w15t15.travelclaimsapp.R;
 import com.cmput301w15t15.travelclaimsapp.SignOutController;
 //import com.cmput301w15t15.travelclaimsapp.SignOutController;
@@ -114,6 +115,7 @@ public class SearchActivity extends Activity
         getMenuInflater().inflate(R.menu.add_claim_context_menu, menu);
         
         menu.getItem(3).setVisible(false);
+        menu.getItem(2).setVisible(false);
     }
    
     @Override
@@ -135,8 +137,9 @@ public class SearchActivity extends Activity
             case R.id.cmenu_addExpense:
             	intent= new Intent(SearchActivity.this, EditExpenseActivity.class);
             	//create new expense with default name and add to claimlist
+            	ExpenseListController elc = new ExpenseListController(claim.getName());
             	Expense expense = new Expense("Expense"+claim.getExpenseList().size());
-            	ClaimListController.addExpense(expense, claim);
+            	elc.addExpense(expense);
             	// attach claim name and expense name to intent 
             	intent.putExtra("expenseName", expense.getName());
             	intent.putExtra("claimName", claim.getName());

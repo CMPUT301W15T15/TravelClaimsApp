@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import com.cmput301w15t15.travelclaimsapp.ClaimListController;
+import com.cmput301w15t15.travelclaimsapp.ExpenseListController;
 import com.cmput301w15t15.travelclaimsapp.FileManager;
 import com.cmput301w15t15.travelclaimsapp.model.Claim;
 import com.cmput301w15t15.travelclaimsapp.model.ClaimList;
@@ -107,7 +108,8 @@ public class ClaimListControllerTest extends AndroidTestCase {
 	 */
 	public void testExpenseListeners() throws IOException{
 		ClaimListController.addClaim(claim4);
-		ClaimListController.addExpense(expense, claim4);
+		ExpenseListController elc = new ExpenseListController(claim4.getName());
+		elc.addExpense(expense);
 		claimList2 = ClaimListController.getClaimList();
 		Claim claim2 = claimList2.getClaim("c4");
 	
@@ -234,7 +236,8 @@ public class ClaimListControllerTest extends AndroidTestCase {
 		claim.setStartDate(new Date());	//test complete claim fields
 		assertFalse(ClaimListController.incompleteFields(claim));
 		
-		ClaimListController.addExpense(expense, claim);
+		ExpenseListController elc = new ExpenseListController(claim.getName());
+		elc.addExpense(expense);
 		
 		expense.setFlag(1);				//test setting flag
 		assertTrue(ClaimListController.incompleteFields(claim));
