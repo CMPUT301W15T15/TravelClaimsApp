@@ -115,8 +115,7 @@ public class ApproverClaimListActivity extends Activity {
             	startActivity(intent);
             	return true;
             case R.id.cmenu_comment:
-            	if(claim.getApprover() != null && claim.getApprover() != UserController.getUser().getUsername()){
-            		Toast.makeText(this, "You are not the approver for this claim", Toast.LENGTH_SHORT).show();
+            	if(!canApprove(claim)){
             		return true;
             	}
             	final EditText tv = new EditText(this);
@@ -203,7 +202,18 @@ public class ApproverClaimListActivity extends Activity {
 		
 	}
 
-	
+	private boolean canApprove(Claim claim){
+		if(claim.getClaimantName().equals(UserController.getUser().getUsername())){
+			Toast.makeText(this, "No approver priviledge for this claim", Toast.LENGTH_SHORT).show();
+			return false;
+		}
+		if(claim.getApprover() != null && claim.getApprover().equals(UserController.getUser().getUsername())){
+    		Toast.makeText(this, "You are not the approver for this claim", Toast.LENGTH_SHORT).show();
+    		return false;
+    	}
+		
+		return true;
+	}
     
 	
 }
