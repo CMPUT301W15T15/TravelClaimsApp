@@ -145,27 +145,27 @@ public class EditClaimActivityUITest extends
 
 
 	
-	public void testMapActivityViewIntent(){
-		GeoLocation gl = new GeoLocation(0,0);
-		intent = GeoLocationController.viewLocationIntent(activity, gl);
-		
-		ActivityMonitor activityMonitor = new ActivityMonitor(MapActivity.class.getName(), null, false);
-		instrumentation.addMonitor(activityMonitor);
-		instrumentation.runOnMainSync(new Runnable() {
-			
-			@Override
-			public void run() {
-		
-				activity.startActivity(intent);
-				
-			}
-		});
-		instrumentation.waitForIdleSync();
-		
-		Activity nextActivity = instrumentation.waitForMonitorWithTimeout(activityMonitor, 3000);
-		assertNotNull(nextActivity);
-		
-	}
+//	public void testMapActivityViewIntent(){
+//		GeoLocation gl = new GeoLocation(0,0);
+//		intent = GeoLocationController.viewLocationIntent(activity, gl);
+//		
+//		ActivityMonitor activityMonitor = new ActivityMonitor(MapActivity.class.getName(), null, false);
+//		instrumentation.addMonitor(activityMonitor);
+//		instrumentation.runOnMainSync(new Runnable() {
+//			
+//			@Override
+//			public void run() {
+//		
+//				activity.startActivity(intent);
+//				
+//			}
+//		});
+//		instrumentation.waitForIdleSync();
+//		
+//		Activity nextActivity = instrumentation.waitForMonitorWithTimeout(activityMonitor, 3000);
+//		assertNotNull(nextActivity);
+//		
+//	}
 	@Override
 	protected void tearDown() throws Exception {
 		// TODO Auto-generated method stub

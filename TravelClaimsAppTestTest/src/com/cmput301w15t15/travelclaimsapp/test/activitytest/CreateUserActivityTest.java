@@ -70,33 +70,32 @@ public class CreateUserActivityTest extends
 		ifApprover = (CheckBox) activity.findViewById(R.id.Approver_Check_Box);
 		geolocation = (ImageButton) activity.findViewById(R.id.HomeLocationIcon);
 
-		
 	}
 	
 	//Test for valid inputs
 		//Test Case: CreateUserActivityTest#1
 			/**
-			 * Checks correct input works as intended.
+			 * Sets up user without geolocation, ensures no user was created
 			 */
-//			public void testCorrectInput(){
-//				ActivityMonitor activityMonitor = new ActivityMonitor(MainMenuActivity.class.getName(), null, false);
-//				instrumentation.addMonitor(activityMonitor);
-//				instrumentation.runOnMainSync(new Runnable() {
-//					
-//					@Override
-//					public void run() {
-//						username.setText("Shelby");
-//						password.setText("Sunshine");
-//						passwordAgain.setText("Sunshine");
-//						create.performClick();
-//						
-//					}
-//				});
-//				instrumentation.waitForIdleSync();
-//				
-//				Activity nextActivity = instrumentation.waitForMonitorWithTimeout(activityMonitor, 3000);
-//				assertNotNull(nextActivity);
-//			}
+			public void testMatchingPassNoGeoInput(){
+				ActivityMonitor activityMonitor = new ActivityMonitor(LoginActivity.class.getName(), null, false);
+				instrumentation.addMonitor(activityMonitor);
+				instrumentation.runOnMainSync(new Runnable() {
+					
+					@Override
+					public void run() {
+						username.setText("Shelby");
+						password.setText("Sunshine");
+						passwordAgain.setText("Sunshine");
+						create.performClick();
+						
+					}
+				});
+				instrumentation.waitForIdleSync();
+				
+				Activity nextActivity = instrumentation.waitForMonitorWithTimeout(activityMonitor, 3000);
+				assertNull(nextActivity);
+			}
 			
 			//Test Case: CreateUserActivityTest#2
 			/**

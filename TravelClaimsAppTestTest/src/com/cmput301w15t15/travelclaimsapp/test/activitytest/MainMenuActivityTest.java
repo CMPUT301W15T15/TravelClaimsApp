@@ -22,6 +22,7 @@ import com.cmput301w15t15.travelclaimsapp.R;
 import com.cmput301w15t15.travelclaimsapp.activitys.AddClaimActivity;
 import com.cmput301w15t15.travelclaimsapp.activitys.EditClaimActivity;
 import com.cmput301w15t15.travelclaimsapp.activitys.LoginActivity;
+import com.cmput301w15t15.travelclaimsapp.model.User;
 
 import android.app.Activity;
 import android.app.Instrumentation;
@@ -33,49 +34,49 @@ import android.widget.EditText;
 public class MainMenuActivityTest extends
 		ActivityInstrumentationTestCase2<LoginActivity> {
 
-	private Instrumentation instrumentation;
-	private Button login;
-	private EditText username;
-	private EditText password;
-	private Activity activity;
-	
-	/**
-	 * Tests for the MainMenuActivity.
-	 */
-	public MainMenuActivityTest() {
-		super(LoginActivity.class);
-	}
-	
-
-	protected void setUp() throws Exception {
-		super.setUp();
-		instrumentation = getInstrumentation();
-		setActivityInitialTouchMode(true);
-		activity = getActivity();
+		private Instrumentation instrumentation;
+		private Button login;
+		private EditText username;
+		private EditText password;
+		private Activity activity;
 		
-		FileManager.initializeSaver(activity);
-		
-		//need to change ids once UI has been created 
-		login = (Button) activity.findViewById(R.id.Login_Button);
-		username = (EditText) activity.findViewById(R.id.LoginField);
-		password = (EditText) activity.findViewById(R.id.PasswordField);
-		
-		
-	}
-	
-	//Test for valid inputs
-	//Test Case: MainMenuActivityTest#1
 		/**
-		 * Tests to see if real user can login.
+		 * Tests for the MainMenuActivity.
 		 */
-		public void testRealUser(){
+		public MainMenuActivityTest() {
+			super(LoginActivity.class);
+		}
+		
+	
+		protected void setUp() throws Exception {
+			super.setUp();
+			instrumentation = getInstrumentation();
+			setActivityInitialTouchMode(true);
+			activity = getActivity();
+			
+			FileManager.initializeSaver(activity);
+			
+			//need to change ids once UI has been created 
+			login = (Button) activity.findViewById(R.id.Login_Button);
+			username = (EditText) activity.findViewById(R.id.LoginField);
+			password = (EditText) activity.findViewById(R.id.PasswordField);
+			
+			
+		}
+		
+		//Test for valid inputs
+		//Test Case: MainMenuActivityTest#1
+		/**
+		 * Ensures if a real password is given, there is no login without the username.
+		 */
+		public void testRealUserNoUsername(){
 			ActivityMonitor activityMonitor = new ActivityMonitor(AddClaimActivity.class.getName(), null, false);
 			instrumentation.addMonitor(activityMonitor);
 			instrumentation.runOnMainSync(new Runnable() {
 				
 				@Override
 				public void run() {
-					username.setText("Shelby");
+					username.setText("");
 					password.setText("Sunshine");
 					login.performClick();
 					
@@ -84,103 +85,101 @@ public class MainMenuActivityTest extends
 			instrumentation.waitForIdleSync();
 			
 			Activity nextActivity = instrumentation.waitForMonitorWithTimeout(activityMonitor, 3000);
-			assertNotNull(nextActivity);
+			assertNull(nextActivity);
 		}
-		
+			
 		//Test for valid inputs
 		//Test Case: MainMenuActivityTest#2
-			/**
-			 * Ensures fake user cannot login
-			 */
-			public void testFakeUser(){
-				ActivityMonitor activityMonitor = new ActivityMonitor(AddClaimActivity.class.getName(), null, false);
-				instrumentation.addMonitor(activityMonitor);
-				instrumentation.runOnMainSync(new Runnable() {
-					
-					@Override
-					public void run() {
-						username.setText("Stig");
-						password.setText("The");
-						login.performClick();
-						
-					}
-				});
-				instrumentation.waitForIdleSync();
+		/**
+		 * Ensures fake user cannot login
+		 */
+		public void testFakeUser(){
+			ActivityMonitor activityMonitor = new ActivityMonitor(AddClaimActivity.class.getName(), null, false);
+			instrumentation.addMonitor(activityMonitor);
+			instrumentation.runOnMainSync(new Runnable() {
 				
-				Activity nextActivity = instrumentation.waitForMonitorWithTimeout(activityMonitor, 3000);
-				assertNull(nextActivity);
-			}
-			
-			//Test for valid inputs
-			//Test Case: MainMenuActivityTest#3
-				/**
-				 * Ensure wrong passwords cannot login.
-				 */
-				public void testRealUserBadPass(){
-					ActivityMonitor activityMonitor = new ActivityMonitor(AddClaimActivity.class.getName(), null, false);
-					instrumentation.addMonitor(activityMonitor);
-					instrumentation.runOnMainSync(new Runnable() {
-						
-						@Override
-						public void run() {
-							username.setText("Shelby");
-							password.setText("Mustang");
-							login.performClick();
-							
-						}
-					});
-					instrumentation.waitForIdleSync();
+				@Override
+				public void run() {
+					username.setText("Stig");
+					password.setText("The");
+					login.performClick();
 					
-					Activity nextActivity = instrumentation.waitForMonitorWithTimeout(activityMonitor, 3000);
-					assertNull(nextActivity);
 				}
-
-				//Test for valid inputs
-				//Test Case: MainMenuActivityTest#4
-					/**
-					 * Ensures no given password, will not login. 
-					 */
-					public void testRealUserNoPass(){
-						ActivityMonitor activityMonitor = new ActivityMonitor(AddClaimActivity.class.getName(), null, false);
-						instrumentation.addMonitor(activityMonitor);
-						instrumentation.runOnMainSync(new Runnable() {
-							
-							@Override
-							public void run() {
-								username.setText("Shelby");
-								password.setText("");
-								login.performClick();
-								
-							}
-						});
-						instrumentation.waitForIdleSync();
-						
-						Activity nextActivity = instrumentation.waitForMonitorWithTimeout(activityMonitor, 3000);
-						assertNull(nextActivity);
-					}
-
-					//Test for valid inputs
-					//Test Case: MainMenuActivityTest#5
-						/**
-						 * Ensures if a real password is given, there is no login without the username.
-						 */
-						public void testRealUserNoUsername(){
-							ActivityMonitor activityMonitor = new ActivityMonitor(AddClaimActivity.class.getName(), null, false);
-							instrumentation.addMonitor(activityMonitor);
-							instrumentation.runOnMainSync(new Runnable() {
-								
-								@Override
-								public void run() {
-									username.setText("");
-									password.setText("Sunshine");
-									login.performClick();
-									
-								}
-							});
-							instrumentation.waitForIdleSync();
-							
-							Activity nextActivity = instrumentation.waitForMonitorWithTimeout(activityMonitor, 3000);
-							assertNull(nextActivity);
-						}
+			});
+			instrumentation.waitForIdleSync();
+			
+			Activity nextActivity = instrumentation.waitForMonitorWithTimeout(activityMonitor, 3000);
+			assertNull(nextActivity);
+		}
+				
+		//Test for valid inputs
+		//Test Case: MainMenuActivityTest#3
+		/**
+		 * Ensure wrong passwords cannot login.
+		 */
+		public void testRealUserBadPass(){
+			ActivityMonitor activityMonitor = new ActivityMonitor(AddClaimActivity.class.getName(), null, false);
+			instrumentation.addMonitor(activityMonitor);
+			instrumentation.runOnMainSync(new Runnable() {
+				
+				@Override
+				public void run() {
+					username.setText("Shelby");
+					password.setText("Mustang");
+					login.performClick();
+					
+				}
+			});
+			instrumentation.waitForIdleSync();
+			
+			Activity nextActivity = instrumentation.waitForMonitorWithTimeout(activityMonitor, 3000);
+			assertNull(nextActivity);
+		}
 	
+		//Test for valid inputs
+		//Test Case: MainMenuActivityTest#4
+		/**
+		 * Ensures no given password, will not login. 
+		 */
+		public void testRealUserNoPass(){
+			ActivityMonitor activityMonitor = new ActivityMonitor(AddClaimActivity.class.getName(), null, false);
+			instrumentation.addMonitor(activityMonitor);
+			instrumentation.runOnMainSync(new Runnable() {
+				
+				@Override
+				public void run() {
+					username.setText("Shelby");
+					password.setText("");
+					login.performClick();
+					
+				}
+			});
+			instrumentation.waitForIdleSync();
+			
+			Activity nextActivity = instrumentation.waitForMonitorWithTimeout(activityMonitor, 3000);
+			assertNull(nextActivity);
+		}
+	
+		//Test for valid inputs
+		//Test Case: MainMenuActivityTest#5
+		/**
+		 * Tests to see if real user can login.
+		 */
+		public void testRealUser(){
+			instrumentation.runOnMainSync(new Runnable() {
+				
+				@Override
+				public void run() {
+					String name1 = "Shelby";
+					String pass1 = "Sunshine";
+					
+					User user1 = new User(name1, pass1);
+					
+					FileManager.getSaver().saveUserInFile(user1);
+					
+					
+				}
+			});
+			instrumentation.waitForIdleSync();
+		}
 }
