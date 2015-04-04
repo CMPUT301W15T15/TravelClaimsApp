@@ -32,6 +32,10 @@ import android.R;
 
 
 public class Claim implements Listenable{
+	
+
+
+
 	private Claim claim;
 	private String claimName;
 	private Date startDate;
@@ -45,6 +49,7 @@ public class Claim implements Listenable{
 	private int totalValue=0;
 	private ExpenseList expenseList;
 	private TagList tagList;
+	private ArrayList<String> comments;
 	protected transient ArrayList<Listener> listeners;
 	private final String INPROGRESS = "In Progress";
 	private final String SUBMITTED = "Submitted";
@@ -63,7 +68,7 @@ public class Claim implements Listenable{
 		this.status = "In Progress";
 		this.destinationList = new DestinationList();
 		this.tagList = new TagList();
-		
+		this.comments = new ArrayList<String>();
 	}
 
 	
@@ -330,6 +335,26 @@ public class Claim implements Listenable{
 		
 		return this.expenseList.getExpense(string);
 			
+	}
+	
+	/**
+	 * Get the list of comments for this claim
+	 * 
+	 * @return 	the list of comments that have been added to this claim
+	 */
+	public ArrayList<String> getComments() {
+		return comments;
+	}
+	
+	/**
+	 * Adds a comment to the list of comments for this claim
+	 * 
+	 * Adds comment to start of the list so that most recent comment is the item in list
+	 * 
+	 * @param comment the comment you want to add to the list 
+	 */
+	public void addComment(String comment){
+		this.comments.add(0, comment);
 	}
 	
 	
