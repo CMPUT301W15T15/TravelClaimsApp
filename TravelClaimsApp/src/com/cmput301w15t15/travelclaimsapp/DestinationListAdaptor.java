@@ -17,10 +17,7 @@
  */
 package com.cmput301w15t15.travelclaimsapp;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
 
 import android.app.Activity;
 import android.content.Context;
@@ -34,9 +31,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.cmput301w15t15.travelclaimsapp.activitys.EditClaimActivity;
-import com.cmput301w15t15.travelclaimsapp.activitys.MapActivity;
-import com.cmput301w15t15.travelclaimsapp.model.Claim;
 import com.cmput301w15t15.travelclaimsapp.model.Destination;
 import com.cmput301w15t15.travelclaimsapp.model.DestinationList;
 

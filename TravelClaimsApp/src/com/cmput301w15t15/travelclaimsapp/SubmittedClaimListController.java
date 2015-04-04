@@ -104,7 +104,7 @@ public class SubmittedClaimListController
 	 * Saves claimlist to file using FileManager class 
 	 */
 	public static void save(){
-		FileManager.getSaver().saveSubmittedClaimLInFile(getClaimList());
+		FileManager.getSaver().saveSubmittedClaimLToServer(getClaimList());
 	}
 	
 	/**

@@ -26,12 +26,9 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-import com.cmput301w15t15.travelclaimsapp.R.id;
 import com.cmput301w15t15.travelclaimsapp.model.Claim;
 import com.cmput301w15t15.travelclaimsapp.model.Destination;
 import com.cmput301w15t15.travelclaimsapp.model.Expense;
-import com.cmput301w15t15.travelclaimsapp.model.GeoLocation;
-import com.cmput301w15t15.travelclaimsapp.model.Tag;
 
 import android.R.color;
 import android.app.Activity;
@@ -41,9 +38,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Filter;
-import android.widget.Filterable;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -60,7 +54,6 @@ public class ApproverClaimListAdaptor extends ArrayAdapter<Claim>{
 	private int resource;
 	private ArrayList<Claim> claimList;
 	private ViewHolder viewHolder;
-	private Filter tagFilter;
 	
 	public ApproverClaimListAdaptor(Context context, int resource, ArrayList<Claim> claims) {
 		super(context, resource, claims);
