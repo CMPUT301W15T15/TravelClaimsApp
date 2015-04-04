@@ -17,7 +17,6 @@
  */
 package com.cmput301w15t15.travelclaimsapp;
 
-import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -34,6 +33,7 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 
 import com.cmput301w15t15.travelclaimsapp.elasticsearch.SearchHit;
+import com.cmput301w15t15.travelclaimsapp.elasticsearch.parseResponse;
 import com.cmput301w15t15.travelclaimsapp.model.ClaimList;
 
 import com.cmput301w15t15.travelclaimsapp.model.User;
@@ -117,7 +117,7 @@ public class FileManager {
 
 		try {
 			response = httpClient.execute(httpGet);
-			SearchHit<User> sr = parseUserHit(response);
+			SearchHit<User> sr = parseResponse.userHit(response);
 			return sr.getSource();
 
 		} catch (Exception e) {
@@ -166,7 +166,7 @@ public class FileManager {
 
 		try {
 			response = httpClient.execute(httpGet);
-			SearchHit<ClaimList> sr = parseClaimListHit(response);
+			SearchHit<ClaimList> sr = parseResponse.claimListHit(response);
 			return sr.getSource();
 
 		} catch (Exception e) {
@@ -191,7 +191,7 @@ public class FileManager {
 
 		try {
 			response = httpClient.execute(httpGet);
-			SearchHit<ClaimList> sr = parseClaimListHit(response);
+			SearchHit<ClaimList> sr = parseResponse.claimListHit(response);
 			if(sr.getSource() == null){
 				return new ClaimList();
 			} else {
@@ -374,66 +374,6 @@ public class FileManager {
 			// TODO Auto-generated catch block
 			Log.d(TAG, "saveClaimLInFile could not find file: " + e.getMessage());
 		}
-	}
-	
-	// https://github.com/joshua2ua/AndroidElasticSearch/blob/master/src/ca/ualberta/ssrg/movies/es/ESMovieManager.java
-	/**
-	 * Gets content from an HTTP response
-	 */
-	public String getEntityContent(HttpResponse response) throws IOException {
-		BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
-
-		StringBuffer result = new StringBuffer();
-		String line = "";
-		while ((line = rd.readLine()) != null) {
-			result.append(line);
-		}
-
-		return result.toString();
-	}
-
-	// https://github.com/joshua2ua/AndroidElasticSearch/blob/master/src/ca/ualberta/ssrg/movies/es/ESMovieManager.java
-	/**
-	 * Gets rid of elastic search header and returns saved claimlist.
-	 * @param response
-	 * @return
-	 */
-	private SearchHit<ClaimList> parseClaimListHit(HttpResponse response) {
-		
-		try {
-			String json = getEntityContent(response);
-			Type searchHitType = new TypeToken<SearchHit<ClaimList>>() {}.getType();
-			
-			SearchHit<ClaimList> sr = gson.fromJson(json, searchHitType);
-			return sr;
-		} 
-		catch (IOException e) {
-			Log.d(TAG, "parseClaimListHit did not work: " + e.getMessage());
-		}
-		
-		return null;
-	}
-	
-	// https://github.com/joshua2ua/AndroidElasticSearch/blob/master/src/ca/ualberta/ssrg/movies/es/ESMovieManager.java
-	/**
-	 * Gets rid of elastic search header and returns saved user.
-	 * @param response
-	 * @return
-	 */
-	private SearchHit<User> parseUserHit(HttpResponse response) {
-
-		try {
-			String json = getEntityContent(response);
-			Type searchHitType = new TypeToken<SearchHit<User>>() {}.getType();
-			
-			SearchHit<User> sr = gson.fromJson(json, searchHitType);
-			return sr;
-		} 
-		catch (IOException e) {
-			Log.d(TAG, "parseUseHit could not work: " + e.getMessage());
-		}
-		
-		return null;
 	}
 
 	/**
