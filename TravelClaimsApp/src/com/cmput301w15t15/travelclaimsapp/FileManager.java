@@ -61,7 +61,7 @@ public class FileManager {
 	private static final String SUBMITTED_CLAIMLIST_TAG = "SubmittedClaimListSearch";
 	private static final String USERFILENAME = "user.sav";
 	private static final String CLAIMLISTFILENAME = "claimlist.sav";
-	private static final String TAG = "TravelClaimsApp";
+	private static final String TAG = "Petat";
 	
 	private Gson gson;
 	private Context context;
@@ -461,6 +461,9 @@ public class FileManager {
 		
 	}
 	
+	/**
+	 * Thread for storing a new submitted claimlist to the server.
+	 */
 	class onlineSaveSubmittedClaimLThread extends Thread {
 		private ClaimList claimlist;
 		

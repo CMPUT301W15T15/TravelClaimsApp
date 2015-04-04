@@ -21,7 +21,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import com.cmput301w15t15.travelclaimsapp.ClaimListComparator;
-import com.cmput301w15t15.travelclaimsapp.UserController;
 
 /**
  * Used to store claims and listeners for a user. Expenses are also stored within.

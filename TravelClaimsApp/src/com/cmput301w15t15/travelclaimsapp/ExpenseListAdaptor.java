@@ -28,7 +28,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.view.LayoutInflater;
-import android.view.LayoutInflater.Filter;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -48,9 +47,6 @@ public class ExpenseListAdaptor extends ArrayAdapter<Expense> {
 	private int resource;
 	private ArrayList<Expense> expenseList;
 	private ViewHolder viewHolder;
-	private Filter tagFilter;
-	private Expense expense;
-	private boolean[] stars;
 	
 	/**
 	 * class constructor
@@ -64,7 +60,6 @@ public class ExpenseListAdaptor extends ArrayAdapter<Expense> {
 		this.context = context;
 		this.resource = resource;
 		this.expenseList = expenses;
-		this.stars= new boolean[expenses.size()];
 	}
 
 	/**
@@ -88,7 +83,7 @@ public class ExpenseListAdaptor extends ArrayAdapter<Expense> {
 		    viewHolder.expenseAmount = (TextView) rowView.findViewById(R.id.expenseAdaptor_amount);
 		    viewHolder.expenseDate = (TextView) rowView.findViewById(R.id.expenseAdaptor_date);
 		    viewHolder.expenseName = (TextView) rowView.findViewById(R.id.expenseAdaptor_Name);
-		    viewHolder.expenseFlag = (ImageView) rowView.findViewById(R.id.expenseAdaptor_flag);
+		    ViewHolder.expenseFlag = (ImageView) rowView.findViewById(R.id.expenseAdaptor_flag);
 		    viewHolder.expenseMap = (ImageView) rowView.findViewById(R.id.expenseAdaptor_map);
 		    viewHolder.expenseDescription = (LinearLayout) rowView.findViewById(R.id.expenseAdaptor_description);
 		    viewHolder.expenseImageAttach = (ImageView) rowView.findViewById(R.id.expenseAdaptor_attachment);
@@ -98,9 +93,8 @@ public class ExpenseListAdaptor extends ArrayAdapter<Expense> {
 		    viewHolder = (ViewHolder) rowView.getTag();
 		}
 		
-		viewHolder.expenseFlag.setTag(position);
+		ViewHolder.expenseFlag.setTag(position);
 		final Expense expense = expenseList.get(position);  ///<-- add I'm not sure what you named that class so change EXPENSELISTITEM to whatever you call it
-		viewHolder.expense = expense ;  ///<-- make sure the item is stored with the view holder too.
 
 		viewHolder.expenseCurrency.setText(expense.getCurr());
 		viewHolder.expenseCategory.setText(expense.getCat());
@@ -119,10 +113,10 @@ public class ExpenseListAdaptor extends ArrayAdapter<Expense> {
 		}
 
 		if (expense.getFlag()==0){
-		    viewHolder.expenseFlag.setImageResource(R.drawable.ic_toggle_star_outline);
+		    ViewHolder.expenseFlag.setImageResource(R.drawable.ic_toggle_star_outline);
 		}
 		else{
-		    viewHolder.expenseFlag.setImageResource(R.drawable.ic_toggle_star);
+		    ViewHolder.expenseFlag.setImageResource(R.drawable.ic_toggle_star);
 		}
 
 
@@ -133,7 +127,7 @@ public class ExpenseListAdaptor extends ArrayAdapter<Expense> {
 		    viewHolder.expenseDate.setText(defaultExpenseDate.format(expense.getDate()));
 		}
 
-		viewHolder.expenseFlag.setOnClickListener(new OnClickListener()
+		ViewHolder.expenseFlag.setOnClickListener(new OnClickListener()
 		{
 		    @Override
 			public void onClick(View v){
@@ -184,7 +178,6 @@ public class ExpenseListAdaptor extends ArrayAdapter<Expense> {
         public LinearLayout expenseDescription;
 		public ImageView expenseMap;
 		public ImageView expenseImageAttach;
-		public Expense expense;
 		public static ImageView expenseFlag;
 		public TextView expenseName;
 		public TextView expenseDate;
@@ -192,21 +185,6 @@ public class ExpenseListAdaptor extends ArrayAdapter<Expense> {
 		public TextView expenseCategory;
 		public TextView expenseCurrency;
     }
-
-/**************
-	public ExpenseListAdaptor(Context context,
-			int resource, ExpenseList expenseList) {
-		super(context, resource, expenseList.toArrayList());
-		// TODO Auto-generated constructor stub
-	}
-
-
-	@Override
-	public View getView(int position, View convertView, ViewGroup parent) {
-		// TODO Auto-generated method stub
-		return super.getView(position, convertView, parent);
-	}
-*************/
 
 
 }

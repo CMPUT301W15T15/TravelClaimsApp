@@ -20,7 +20,6 @@ package com.cmput301w15t15.travelclaimsapp.model;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Map;
 
 import com.cmput301w15t15.travelclaimsapp.ExpenseListComparator;
 

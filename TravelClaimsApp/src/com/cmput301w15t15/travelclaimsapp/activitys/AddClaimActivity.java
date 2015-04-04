@@ -17,8 +17,6 @@
  */
 package com.cmput301w15t15.travelclaimsapp.activitys;
 
-import java.util.Arrays;
-
 import com.cmput301w15t15.travelclaimsapp.ClaimListAdaptor;
 import com.cmput301w15t15.travelclaimsapp.ClaimListController;
 import com.cmput301w15t15.travelclaimsapp.FileManager;
@@ -27,12 +25,9 @@ import com.cmput301w15t15.travelclaimsapp.R;
 import com.cmput301w15t15.travelclaimsapp.SignOutController;
 import com.cmput301w15t15.travelclaimsapp.SubmittedClaimListController;
 import com.cmput301w15t15.travelclaimsapp.UserController;
-//import com.cmput301w15t15.travelclaimsapp.SignOutController;
-import com.cmput301w15t15.travelclaimsapp.activitys.LoginActivity.loginThread;
 import com.cmput301w15t15.travelclaimsapp.model.Claim;
 import com.cmput301w15t15.travelclaimsapp.model.ClaimList;
 import com.cmput301w15t15.travelclaimsapp.model.Expense;
-import com.cmput301w15t15.travelclaimsapp.model.User;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -49,7 +44,6 @@ import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 /**
@@ -59,7 +53,6 @@ import android.widget.Toast;
  */
 public class AddClaimActivity extends Activity {
 
-	private static final int LENGTH_SHORT = 0;
 	private ClaimListAdaptor claimAdaptor;
 	private ListView claimListView;
 	private ClaimList claimList;
@@ -127,7 +120,7 @@ public class AddClaimActivity extends Activity {
         final Claim claim = claimAdaptor.getItem(info.position);
         switch (item.getItemId()) {
             case R.id.cmenu_delete_claim:
-            	if(claim.getStatus().equals(claim.SUBMITTED) || claim.getStatus().equals(claim.APPROVED)){
+            	if(claim.getStatus().equals(Claim.SUBMITTED) || claim.getStatus().equals(Claim.APPROVED)){
             		return true;		//do not delete
             	}
             	claimList.removeClaim(claim);

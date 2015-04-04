@@ -26,9 +26,6 @@ package com.cmput301w15t15.travelclaimsapp.model;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Map;
-
-import android.R;
 
 
 public class Claim implements Listenable{
@@ -46,7 +43,6 @@ public class Claim implements Listenable{
 	private String comment;
 	private String approverName;
 	private String claimantName;
-	private int totalValue=0;
 	private ExpenseList expenseList;
 	private TagList tagList;
 	private ArrayList<String> comments;

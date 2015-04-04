@@ -6,7 +6,6 @@ import java.util.Locale;
 
 import com.cmput301w15t15.travelclaimsapp.model.Claim;
 import com.cmput301w15t15.travelclaimsapp.model.ClaimList;
-import com.cmput301w15t15.travelclaimsapp.model.ExpenseList;
 import com.cmput301w15t15.travelclaimsapp.model.Listener;
 import com.cmput301w15t15.travelclaimsapp.model.Tag;
 import com.cmput301w15t15.travelclaimsapp.model.TagList;
@@ -15,7 +14,6 @@ import com.cmput301w15t15.travelclaimsapp.model.TagList;
 public class SubmittedClaimListController
 {
 	private static ClaimList submittedClaimList = null;
-	private static ExpenseList submittedExpenseList = null;
 	
 	public static boolean initSubmittedClaimListController() {
 		reset();
@@ -143,7 +141,6 @@ public class SubmittedClaimListController
 		final ArrayList<Claim> claims = getClaimList().toArrayList();
 	    ArrayList<Claim> newClaims = new ArrayList<Claim>(claims.size());
 	    String[] searchWords = filterString.split(",");
-        int wordCount = searchWords.length;
         boolean match;
         for (Claim claim : claims) {
         	match = false;
@@ -177,6 +174,5 @@ public class SubmittedClaimListController
 
 	public static void reset(){
 		submittedClaimList = null;
-		submittedExpenseList = null;
 	}
 }
