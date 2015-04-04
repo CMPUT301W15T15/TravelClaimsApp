@@ -44,6 +44,7 @@ import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 /**
@@ -127,7 +128,6 @@ public class AddClaimActivity extends Activity {
             	claimAdaptor.notifyDataSetChanged();
             	return true;
             case R.id.cmenu_submit_claim:
-            	boolean submit = true;
             	if(ClaimListController.incompleteFields(claim)){
             		TextView tv = new TextView(this);
             		tv.setText("There are incomplete fields for this claim. Are you sure you want to submit?");
