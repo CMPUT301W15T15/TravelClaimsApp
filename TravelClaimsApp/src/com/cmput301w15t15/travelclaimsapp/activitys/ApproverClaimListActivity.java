@@ -150,21 +150,22 @@ public class ApproverClaimListActivity extends Activity {
             	if(canApprove(claim)){
             		claim.setStatus(Claim.APPROVED);
             		claim.addComment(claim.getComment());
-            		claimList.removeClaim(claimList.getClaim(claim.getName()));
+            		SubmittedClaimListController.removeClaim(claimList.getClaim(claim.getName()));
             		claimAdaptor.notifyDataSetChanged();
             		Thread approvedThread = new saveChangesThread(claimList, claim, this);
             		approvedThread.start();
             	}
-            
+            	return true;
             case R.id.cmenu_return:
             	if(canApprove(claim)){
             		claim.setStatus(Claim.RETURNED);
             		claim.addComment(claim.getComment());
-            		claimList.removeClaim(claimList.getClaim(claim.getName()));
+            		SubmittedClaimListController.removeClaim(claimList.getClaim(claim.getName()));
             		claimAdaptor.notifyDataSetChanged();
             		Thread returnedThread = new saveChangesThread(claimList, claim, this);
             		returnedThread.start();
             	}
+            	return true;
             default:
                 return super.onContextItemSelected(item);
         }
