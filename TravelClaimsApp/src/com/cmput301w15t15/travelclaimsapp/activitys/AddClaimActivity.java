@@ -192,6 +192,10 @@ public class AddClaimActivity extends Activity {
     }
  
     public void MenuApprover(MenuItem menu){
+    	if(!UserController.getUser().isApprover()){
+    		Toast.makeText(this, "Not an Approver", Toast.LENGTH_LONG).show();
+    		return;
+    	}
     	if(InternetController.isInternetAvailable2(this)){
     		Thread thread = new initApproverActivityThread(this);
 			thread.start();

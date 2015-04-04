@@ -355,6 +355,7 @@ public class Claim implements Listenable{
 	 */
 	public void addComment(String comment){
 		this.comments.add(0, comment);
+		notifyListeners();
 	}
 	
 	

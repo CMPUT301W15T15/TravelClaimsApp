@@ -22,11 +22,15 @@ import com.cmput301w15t15.travelclaimsapp.ExpenseListAdaptor;
 import com.cmput301w15t15.travelclaimsapp.ExpenseListController;
 import com.cmput301w15t15.travelclaimsapp.FileManager;
 import com.cmput301w15t15.travelclaimsapp.GeoLocationController;
+import com.cmput301w15t15.travelclaimsapp.InternetController;
 import com.cmput301w15t15.travelclaimsapp.R;
 import com.cmput301w15t15.travelclaimsapp.SignOutController;
+import com.cmput301w15t15.travelclaimsapp.SubmittedClaimListController;
+import com.cmput301w15t15.travelclaimsapp.UserController;
 //import com.cmput301w15t15.travelclaimsapp.SignOutController;
 import com.cmput301w15t15.travelclaimsapp.R.layout;
 import com.cmput301w15t15.travelclaimsapp.R.menu;
+import com.cmput301w15t15.travelclaimsapp.activitys.AddClaimActivity.initApproverActivityThread;
 import com.cmput301w15t15.travelclaimsapp.model.Claim;
 import com.cmput301w15t15.travelclaimsapp.model.Destination;
 import com.cmput301w15t15.travelclaimsapp.model.Expense;
@@ -36,6 +40,7 @@ import com.cmput301w15t15.travelclaimsapp.model.GeoLocation;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.ContextMenu;
@@ -170,6 +175,21 @@ public class ExpenseListActivity extends Activity
     {
     	Intent intent = new Intent(ExpenseListActivity.this, AddClaimActivity.class);
     	startActivity(intent);
+    }
+ 
+    public void MenuApprover(MenuItem menu){
+    	if(!UserController.getUser().isApprover()){
+    		Toast.makeText(this, "Not an Approver", Toast.LENGTH_LONG).show();
+    		return;
+    	}
+    	if(InternetController.isInternetAvailable2(this)){
+    		Thread thread = new initApproverActivityThread(this);
+			thread.start();
+    	} else {
+    		Toast.makeText(this, "Internet Connection Needed", Toast.LENGTH_LONG).show();
+    		return;
+    	}
+
     }
 
     
@@ -313,19 +333,38 @@ public class ExpenseListActivity extends Activity
 			
 		}
 	}
+    
+    /**
+	 * Thread that closes the activity after Submitted ClaimList has loaded.
+	 */
+	private Runnable launchApprover = new Runnable() {
+		public void run() {
+			Intent intent = new Intent(ExpenseListActivity.this, ApproverClaimListActivity.class);
+	    	startActivity(intent);
+		}
+	};
+	
+	class initApproverActivityThread extends Thread {
+		
+		Context context;
+		
+		public initApproverActivityThread(Context context) {
+
+			this.context = context;
+		}
+
+		public void run() {
+			if(!SubmittedClaimListController.initSubmittedClaimListController()){
+				Toast.makeText(context, "Internet connection needed", Toast.LENGTH_SHORT).show();
+			} else {
+				runOnUiThread(launchApprover);
+			}
+		
+		}
+		
+	}
 
 	
-	
-//	   public void onItemClick(AdapterView<?> parent, View view, int position, long id){
-//		   if (view.equals(view.findViewById(R.id.expenseAdaptor_flag))){	
-//			   int pos=expenseListView.getPositionForView(view);
-//	        	Expense expense2= expenseList.get(position);
-//		    	
-//		    		expense2.setFlag(1-expense.getFlag());
-//		    		notifyDataSetChanged();
-//		    	}
-//	}
-//	
 	
 
 }

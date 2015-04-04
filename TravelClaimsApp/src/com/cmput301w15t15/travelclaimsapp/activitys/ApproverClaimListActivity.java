@@ -147,15 +147,25 @@ public class ApproverClaimListActivity extends Activity {
             	alertd.show();
             	return true;
             case R.id.cmenu_approve:
-            	claim.setStatus(Claim.APPROVED);
-            	Thread approvedThread = new saveChangesThread(claimList, claim, this);
-            	approvedThread.start();
-            
+            	if(canApprove(claim)){
+            		claim.setStatus(Claim.APPROVED);
+            		claim.addComment(claim.getComment());
+            		SubmittedClaimListController.removeClaim(claimList.getClaim(claim.getName()));
+            		claimAdaptor.notifyDataSetChanged();
+            		Thread approvedThread = new saveChangesThread(claimList, claim, this);
+            		approvedThread.start();
+            	}
+            	return true;
             case R.id.cmenu_return:
-            	claim.setStatus(Claim.RETURNED);
-            	Thread returnedThread = new saveChangesThread(claimList, claim, this);
-            	returnedThread.start();
-            	
+            	if(canApprove(claim)){
+            		claim.setStatus(Claim.RETURNED);
+            		claim.addComment(claim.getComment());
+            		SubmittedClaimListController.removeClaim(claimList.getClaim(claim.getName()));
+            		claimAdaptor.notifyDataSetChanged();
+            		Thread returnedThread = new saveChangesThread(claimList, claim, this);
+            		returnedThread.start();
+            	}
+            	return true;
             default:
                 return super.onContextItemSelected(item);
         }
@@ -206,7 +216,6 @@ public class ApproverClaimListActivity extends Activity {
 				claimantClaimList.removeClaim(claimantClaimList.getClaim(modifiedClaim.getName()));
 				claimantClaimList.addClaim(modifiedClaim);
 				FileManager.getSaver().addClaimList(claimantClaimList, modUsername);
-				
 				FileManager.getSaver().addSubmittedClaimL(newSubmittedClaimList);
 			}
 		
