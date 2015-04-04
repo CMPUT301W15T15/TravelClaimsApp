@@ -40,6 +40,7 @@ import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.ArrayAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
@@ -87,6 +88,8 @@ public class ClaimListAdaptor extends ArrayAdapter<Claim>{
 	        viewHolder.amounts = (LinearLayout) rowView.findViewById(R.id.LinearLayout_amounts);
 	        viewHolder.distColor = (TextView) rowView.findViewById(R.id.claim_color_code);
  	        rowView.setTag(viewHolder);
+ 	        
+
  	        
 		}else{
 			viewHolder = (ViewHolder) rowView.getTag();
@@ -178,17 +181,12 @@ public class ClaimListAdaptor extends ArrayAdapter<Claim>{
         SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy",Locale.CANADA);
         if(claim.getStartDate() == null){
         	viewHolder.claimStartDate.setVisibility(View.INVISIBLE);
+        	viewHolder.claimStartDate.setHeight(0);
         }else{
         	viewHolder.claimStartDate.setVisibility(View.VISIBLE);
         	viewHolder.claimStartDate.setText(sdf.format(claim.getStartDate()));
+        	viewHolder.claimStartDate.setHeight(60);
         }
-        
-        if(claim.getStartDate() == null){
-        	viewHolder.claimStartDate.setHeight(0);
-        }else{
-        	viewHolder.claimStartDate.setHeight(35);
-        }
-        
 		return rowView;
 	}
 	/**

@@ -372,7 +372,6 @@ public class EditClaimActivity extends FragmentActivity implements TextWatcher {
 	
 	public void ReturnClaim(MenuItem menu)
     {
-    	SignOutController.reset();
     	Toast.makeText(this, "Returning to claimlist", Toast.LENGTH_SHORT).show();
     	Intent intent = new Intent(EditClaimActivity.this, AddClaimActivity.class);
     	startActivity(intent);
