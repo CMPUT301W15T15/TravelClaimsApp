@@ -43,7 +43,6 @@ public class ClaimListController {
 
 	private static ClaimList claimList = null;
 
-	
 	/**
 	 * 
 	 * Load the claimList from the android file system
@@ -312,7 +311,6 @@ public class ClaimListController {
 	public static void resetClaimListController(){
 		claimList = null;
 	}
-
 
 	public static boolean incompleteFields(Claim claim) {
 		if(claim.getEndDate() == null || claim.getStartDate() == null){

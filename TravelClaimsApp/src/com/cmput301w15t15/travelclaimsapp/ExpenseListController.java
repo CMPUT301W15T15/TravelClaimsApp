@@ -18,7 +18,6 @@
 package com.cmput301w15t15.travelclaimsapp;
 
 import com.cmput301w15t15.travelclaimsapp.model.Claim;
-import com.cmput301w15t15.travelclaimsapp.model.ClaimList;
 import com.cmput301w15t15.travelclaimsapp.model.ClaimListSaveListener;
 import com.cmput301w15t15.travelclaimsapp.model.ExpenseList;
 import com.cmput301w15t15.travelclaimsapp.model.Expense;
