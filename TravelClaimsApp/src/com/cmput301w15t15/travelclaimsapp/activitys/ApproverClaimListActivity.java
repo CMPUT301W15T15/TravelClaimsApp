@@ -26,6 +26,9 @@ import com.cmput301w15t15.travelclaimsapp.model.Claim;
 import com.cmput301w15t15.travelclaimsapp.model.ClaimList;
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.view.ContextMenu;
 import android.view.Menu;
@@ -33,7 +36,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.AdapterView.AdapterContextMenuInfo;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 /**
@@ -56,7 +61,7 @@ public class ApproverClaimListActivity extends Activity {
 		claimListView = (ListView) findViewById(R.id.approve_claim_list_view);
 		claimList = SubmittedClaimListController.getClaimList();
 		//create a adaptor for claim list and set it
-		claimAdaptor = new ApproverClaimListAdaptor(this,R.layout.approve_claim_list_adaptor, claimList.toArrayList());
+		claimAdaptor = new ApproverClaimListAdaptor(this,R.layout.claim_list_adaptor, claimList.toArrayList());
 		claimAdaptor.notifyDataSetChanged();
         claimListView.setAdapter(claimAdaptor);
         
@@ -104,6 +109,33 @@ public class ApproverClaimListActivity extends Activity {
             	intent.putExtra("claimName", claim.getName());
             	startActivity(intent);
             	return true;
+            case R.id.cmenu_comment:
+            	final EditText tv = new EditText(this);
+            	tv.setHeight(240);
+            	if(claim.getComment() != null){
+            		tv.setText(claim.getComment());
+            	}
+            	AlertDialog.Builder alertd = new AlertDialog.Builder(this);
+            	
+            	alertd.setView(tv);
+            	
+            	alertd.setPositiveButton("Ok", new OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						claim.setComment(tv.getText().toString());
+						claimAdaptor.notifyDataSetChanged();
+						return;
+					}
+				});
+            	alertd.setNegativeButton("Cancel", new OnClickListener() {
+					
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						return;
+					}
+				});
+            	alertd.show();
+            	
             default:
                 return super.onContextItemSelected(item);
         }

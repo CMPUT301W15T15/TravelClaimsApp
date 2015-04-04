@@ -43,6 +43,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -79,29 +80,37 @@ public class ApproverClaimListAdaptor extends ArrayAdapter<Claim>{
 			viewHolder = new ViewHolder();
 			LayoutInflater inflater = ((Activity)context).getLayoutInflater();
 	        rowView = inflater.inflate(resource, parent, false);
-	        viewHolder.claimName = (TextView) rowView.findViewById(R.id.approveListAdaptor_Name);
-	        viewHolder.claimStatus = (TextView) rowView.findViewById(R.id.approveListAdaptor_Status);
-	        viewHolder.claimStartDate = (TextView) rowView.findViewById(R.id.approveListAdaptor_date);
-	        viewHolder.destinations = (LinearLayout) rowView.findViewById(R.id.linearLayout_destinations_approve);
-	        viewHolder.amounts = (LinearLayout) rowView.findViewById(R.id.linearLayout_amounts_approve);
-	        viewHolder.distColor = (TextView) rowView.findViewById(R.id.claim_color_code_approve);
-	        viewHolder.claimant = (TextView) rowView.findViewById(R.id.approveListAdaptor_claimant);
-	        viewHolder.claimApprover = (TextView) rowView.findViewById(R.id.approveListAdaptor_Approver);
+	        viewHolder.claimName = (TextView) rowView.findViewById(R.id.claimAdaptor_display_name);
+	        viewHolder.claimStatus = (TextView) rowView.findViewById(R.id.claimAdaptor_status);
+	        viewHolder.claimStartDate = (TextView) rowView.findViewById(R.id.claimAdaptor_startDate);
+	        viewHolder.destinations = (LinearLayout) rowView.findViewById(R.id.linearLayout_destinations);
+	        viewHolder.amounts = (LinearLayout) rowView.findViewById(R.id.LinearLayout_amounts);
+	        viewHolder.distColor = (TextView) rowView.findViewById(R.id.claim_color_code);
+	        viewHolder.claimant = (LinearLayout) rowView.findViewById(R.id.LinearLayout_userName);
+	        //viewHolder.claimApprover = (TextView) rowView.findViewById(R.id.approveListAdaptor_Approver);
+	        //viewHolder.commentIcon = (ImageView) rowView.findViewById(R.id.approveListAdaptor_commentIcon);
+	        viewHolder.distColor.setVisibility(View.INVISIBLE);
+	        TextView userName = new TextView(context);
+	        userName.setText("Claimant: "+claim.getClaimantName());
+	        userName.setTextColor(Color.WHITE);
+	        viewHolder.claimant.addView(userName);
  	        rowView.setTag(viewHolder);
  	        
 		}else{
 			viewHolder = (ViewHolder) rowView.getTag();
 		}
 		
+		
+		
 		//add name to adaptor view
         viewHolder.claimName.setText(claim.getName());
         
         //add claimant to adaptor view
-        viewHolder.claimant.setText(claim.getClaimantName());
+        //viewHolder.claimant.setText(claim.getClaimantName());
         
         //add approver to adaptor view
         //need to set exception , don't show if just be submit and never be touched
-        viewHolder.claimApprover.setText(claim.getApprover());
+        //viewHolder.claimApprover.setText(claim.getApprover());
         
         //add status to adaptor view
         viewHolder.claimStatus.setText(claim.getClaimStatus());
@@ -121,12 +130,7 @@ public class ApproverClaimListAdaptor extends ArrayAdapter<Claim>{
         
        
         if(dests.size()>0){
-        	int[] colorDistance = GeoLocationController.getFirstDestinationColorCode(claim);
-        	
-            viewHolder.distColor.setBackgroundColor(colorDistance[0]);
-    		viewHolder.distColor.setTextColor(colorDistance[0]);
-            viewHolder.distColor.setText(Integer.toString(colorDistance[1]));
-           
+   
         	viewHolder.destinations.removeAllViews();
         	viewHolder.destinations.setVisibility(android.view.View.VISIBLE);
         	TextView tv1 = new TextView(context);
@@ -144,35 +148,7 @@ public class ApproverClaimListAdaptor extends ArrayAdapter<Claim>{
         	viewHolder.destinations.setVisibility(android.view.View.INVISIBLE);	
         }
         
-        
-        //add tags to viewholder
-//        ArrayList<Tag> taglist = claim.getTagList().toArrayList();
-//        
-//        if(taglist.size()>0){
-//        	viewHolder.tags.removeAllViews();
-//        	TextView tv1 = new TextView(context);
-//        	tv1.setTextColor(context.getResources().getColor(color.primary_text_dark));
-//        	tv1.setText("Tags:");
-//        	viewHolder.tags.setVisibility(android.view.View.VISIBLE);
-//        	viewHolder.tags.addView(tv1);
-//        	for(int i = 0; i<taglist.size(); i++){
-//            	TextView tv = new TextView(context);
-//            	tv.setTextColor(context.getResources().getColor(color.primary_text_dark));
-//            	if(i == 0){
-//            		tv.setText(" "+taglist.get(i).getName());
-//            	}else{
-//            		tv.setText(", "+taglist.get(i).getName());
-//            	}
-//            	//tv.setText(" "+taglist.get(i).getName());
-//            	viewHolder.tags.addView(tv);
-//            }
-//        }else{
-//        	//if tagList is empty then set LinearLayout for tags to invisible
-//        	viewHolder.tags.removeAllViews();
-//        	viewHolder.tags.setVisibility(android.view.View.INVISIBLE);	
-//        }
-        
-        
+               
         //Get amounts with currencies from expenselist
         ArrayList<Expense> expenseList = claim.getExpenseList().toArrayList();
         Map<String, Integer> totals = getAmountTotals(expenseList);
@@ -208,6 +184,7 @@ public class ApproverClaimListAdaptor extends ArrayAdapter<Claim>{
         	viewHolder.claimStartDate.setHeight(35);
         }
         
+        
 		return rowView;
 	}
 	/**
@@ -241,8 +218,8 @@ public class ApproverClaimListAdaptor extends ArrayAdapter<Claim>{
 	}
 	
 	private static class ViewHolder {
-        public TextView claimApprover;
-		public TextView claimant;
+        //public TextView claimApprover;
+		public LinearLayout claimant;
 		public TextView claimName;
         public TextView claimStatus;
         public TextView claimStartDate;
@@ -250,6 +227,7 @@ public class ApproverClaimListAdaptor extends ArrayAdapter<Claim>{
         public LinearLayout amounts;
         //public LinearLayout tags;
         public TextView distColor;
+        //public ImageView commentIcon;
     
     }
 	

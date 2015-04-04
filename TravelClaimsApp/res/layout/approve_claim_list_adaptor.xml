@@ -60,17 +60,6 @@
         android:textColor="#ffffff"
         android:textAppearance="?android:attr/textAppearanceSmall" />
     
-    <TextView
-        android:id="@+id/claim_color_code_approve"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:layout_weight="1"
-        android:background="#0746F2"
-        android:text="S"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="#0746F2" />
         
     <LinearLayout
         android:id="@+id/linearLayout_destinations_approve"
@@ -91,6 +80,12 @@
         android:showDividers="end" >
     </LinearLayout>
 
-
+    <ImageView
+        android:id="@+id/approveListAdaptor_commentIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/ic_action_unread" />
 
 </RelativeLayout>

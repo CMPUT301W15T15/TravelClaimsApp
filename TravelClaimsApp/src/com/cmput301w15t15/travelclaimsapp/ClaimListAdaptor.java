@@ -26,24 +26,19 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-import com.cmput301w15t15.travelclaimsapp.R.id;
 import com.cmput301w15t15.travelclaimsapp.model.Claim;
 import com.cmput301w15t15.travelclaimsapp.model.Destination;
 import com.cmput301w15t15.travelclaimsapp.model.Expense;
-import com.cmput301w15t15.travelclaimsapp.model.GeoLocation;
 import com.cmput301w15t15.travelclaimsapp.model.Tag;
 
 import android.R.color;
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewGroup.LayoutParams;
 import android.widget.ArrayAdapter;
 import android.widget.Filter;
-import android.widget.Filterable;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -60,7 +55,6 @@ public class ClaimListAdaptor extends ArrayAdapter<Claim>{
 	private int resource;
 	private ArrayList<Claim> claimList;
 	private ViewHolder viewHolder;
-	private Filter tagFilter;
 	
 	public ClaimListAdaptor(Context context, int resource, ArrayList<Claim> claims) {
 		super(context, resource, claims);
@@ -87,6 +81,8 @@ public class ClaimListAdaptor extends ArrayAdapter<Claim>{
 	        viewHolder.tags = (LinearLayout) rowView.findViewById(R.id.LinearLayout_tags);
 	        viewHolder.amounts = (LinearLayout) rowView.findViewById(R.id.LinearLayout_amounts);
 	        viewHolder.distColor = (TextView) rowView.findViewById(R.id.claim_color_code);
+	        viewHolder.userName = (LinearLayout) rowView.findViewById(R.id.LinearLayout_userName);
+	        //viewHolder.userName.setVisibility(View.INVISIBLE);
  	        rowView.setTag(viewHolder);
  	        
 
@@ -185,7 +181,7 @@ public class ClaimListAdaptor extends ArrayAdapter<Claim>{
         }else{
         	viewHolder.claimStartDate.setVisibility(View.VISIBLE);
         	viewHolder.claimStartDate.setText(sdf.format(claim.getStartDate()));
-        	viewHolder.claimStartDate.setHeight(60);
+        	viewHolder.claimStartDate.setHeight(45);
         }
 		return rowView;
 	}
@@ -228,6 +224,7 @@ public class ClaimListAdaptor extends ArrayAdapter<Claim>{
         public LinearLayout tags;
         public TextView distColor;
         public LinearLayout claimDateHolder;
+        public LinearLayout userName;
     
     }
 	
