@@ -17,8 +17,6 @@
  */
 package com.cmput301w15t15.travelclaimsapp.activitys;
 
-import java.util.Arrays;
-
 import com.cmput301w15t15.travelclaimsapp.ApproverClaimListAdaptor;
 import com.cmput301w15t15.travelclaimsapp.FileManager;
 import com.cmput301w15t15.travelclaimsapp.InternetController;
@@ -27,7 +25,6 @@ import com.cmput301w15t15.travelclaimsapp.SignOutController;
 import com.cmput301w15t15.travelclaimsapp.SubmittedClaimListController;
 import com.cmput301w15t15.travelclaimsapp.SubmittedListComparator;
 import com.cmput301w15t15.travelclaimsapp.UserController;
-import com.cmput301w15t15.travelclaimsapp.activitys.LoginActivity.loginThread;
 import com.cmput301w15t15.travelclaimsapp.model.Claim;
 import com.cmput301w15t15.travelclaimsapp.model.ClaimList;
 
@@ -55,7 +52,6 @@ import android.widget.Toast;
  */
 public class ApproverClaimListActivity extends Activity {
 
-	private static final int LENGTH_SHORT = 0;
 	private ApproverClaimListAdaptor claimAdaptor;
 	private ListView claimListView;
 	public ClaimList claimList;

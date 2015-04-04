@@ -36,7 +36,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ContextMenu.ContextMenuInfo;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -47,7 +46,6 @@ import android.widget.AdapterView.AdapterContextMenuInfo;
  */
 public class SearchActivity extends Activity
 {
-	private Button searchButton;
 	private ListView claimListView;
 	private EditText searchField;
 	private ClaimListAdaptor claimListAdaptor;
@@ -58,7 +56,6 @@ public class SearchActivity extends Activity
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.search);
-		searchButton = (Button) this.findViewById(R.id.Search_Button2);
 		claimListView = (ListView) this.findViewById(R.id.Search_List2);
 		searchField = (EditText) this.findViewById(R.id.Search_Text2);
 		claimList = new ClaimList();

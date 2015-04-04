@@ -38,7 +38,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Filter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -81,8 +80,6 @@ public class ClaimListAdaptor extends ArrayAdapter<Claim>{
 	        viewHolder.tags = (LinearLayout) rowView.findViewById(R.id.LinearLayout_tags);
 	        viewHolder.amounts = (LinearLayout) rowView.findViewById(R.id.LinearLayout_amounts);
 	        viewHolder.distColor = (TextView) rowView.findViewById(R.id.claim_color_code);
-	        viewHolder.userName = (LinearLayout) rowView.findViewById(R.id.LinearLayout_userName);
-	        //viewHolder.userName.setVisibility(View.INVISIBLE);
  	        rowView.setTag(viewHolder);
  	        
 
@@ -223,8 +220,6 @@ public class ClaimListAdaptor extends ArrayAdapter<Claim>{
         public LinearLayout amounts;
         public LinearLayout tags;
         public TextView distColor;
-        public LinearLayout claimDateHolder;
-        public LinearLayout userName;
     
     }
 	

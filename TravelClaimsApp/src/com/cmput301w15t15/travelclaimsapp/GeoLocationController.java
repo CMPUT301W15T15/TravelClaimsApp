@@ -18,11 +18,7 @@
 package com.cmput301w15t15.travelclaimsapp;
 
 import java.util.ArrayList;
-import java.util.Date;
 
-import org.osmdroid.bonuspack.overlays.Marker;
-
-import com.cmput301w15t15.travelclaimsapp.activitys.EditClaimActivity;
 import com.cmput301w15t15.travelclaimsapp.activitys.MapActivity;
 import com.cmput301w15t15.travelclaimsapp.model.Claim;
 import com.cmput301w15t15.travelclaimsapp.model.ClaimListSaveListener;
@@ -32,10 +28,8 @@ import com.cmput301w15t15.travelclaimsapp.model.GeoLocation;
 import com.cmput301w15t15.travelclaimsapp.model.Listener;
 import com.cmput301w15t15.travelclaimsapp.model.User;
 
-
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources.Theme;
 import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationListener;

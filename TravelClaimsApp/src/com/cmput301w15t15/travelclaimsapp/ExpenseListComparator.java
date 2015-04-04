@@ -20,7 +20,6 @@ package com.cmput301w15t15.travelclaimsapp;
 import java.util.Comparator;
 
 import com.cmput301w15t15.travelclaimsapp.model.Expense;
-import com.cmput301w15t15.travelclaimsapp.model.ExpenseList;
 
 /**
  * 

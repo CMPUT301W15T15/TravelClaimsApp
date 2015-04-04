@@ -21,29 +21,19 @@ import java.io.ByteArrayOutputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.Locale;
 
 import com.cmput301w15t15.travelclaimsapp.ClaimListController;
-import com.cmput301w15t15.travelclaimsapp.ExpenseListAdaptor;
-import com.cmput301w15t15.travelclaimsapp.ExpenseListController;
 import com.cmput301w15t15.travelclaimsapp.R;
 import com.cmput301w15t15.travelclaimsapp.SignOutController;
-//import com.cmput301w15t15.travelclaimsapp.SignOutController;
-import com.cmput301w15t15.travelclaimsapp.R.id;
-import com.cmput301w15t15.travelclaimsapp.R.layout;
-import com.cmput301w15t15.travelclaimsapp.R.menu;
-import com.cmput301w15t15.travelclaimsapp.activitys.EditClaimActivity.DatePickerFragment;
 import com.cmput301w15t15.travelclaimsapp.model.Claim;
 import com.cmput301w15t15.travelclaimsapp.model.ClaimList;
 import com.cmput301w15t15.travelclaimsapp.model.Expense;
 import com.cmput301w15t15.travelclaimsapp.model.ExpenseList;
 
-import android.media.ThumbnailUtils;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
@@ -57,38 +47,27 @@ import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.text.format.DateFormat;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.View.OnTouchListener;
 import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
-import android.view.animation.BounceInterpolator;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.AdapterView.AdapterContextMenuInfo;
 
 public class EditExpenseActivity extends FragmentActivity implements TextWatcher {
 	private Claim claim;
 	private ClaimList claimList;
 	private Expense expense;
 	private ExpenseList expenseList;
-	private ExpenseListAdaptor expenseListAdaptor;
-	private int expenseCost=0;
-	private ExpenseListAdaptor expenseAdaptor;
-	private String expenseDescription; 
 	private static EditText expenseNameInput;
 	private static EditText date;
 	private static EditText expenseCostInput;
@@ -99,11 +78,8 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 	private static boolean Start;
 	private String expenseName;
 	private String claimName;
-	private Date expenseDate;
 	private byte[] imgShow;
 	private ImageView expenseReceiptView;
-	private int longClickDuration = 2000;
-	private long then;
 	
 	private Integer sizeNum=0;
 	private String size="0";
@@ -132,22 +108,11 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 		claim=claimList.getClaim(claimName);
 		expenseList=claim.getExpenseList();
 		expense=expenseList.getExpense(expenseName);
-		expenseCost = expense.getCost();
-		
-		if (expense.getDes()!=null){
-			expenseDescription = expense.getDes();
-		}
-		else{
-			expenseDescription="None";
-		}
 		
 		// show initial image
 		if (expense.getPicture()!=null){
 			imgShow = expense.getPicture();
 			
-//			Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.v);  
-//	        bitmap = ThumbnailUtils.extractThumbnail(bitmap, 100, 100);    
-//	        expenseReceiptView.setImageBitmap(bitmap);    
 			
 	        Bitmap bm = BitmapFactory.decodeByteArray(imgShow, 0, imgShow.length);
 	        sizeNum=imgShow.length;
@@ -254,7 +219,7 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 	    tempMap.compress(CompressFormat.JPEG, 70, stream2);
 	    tempImg=stream2.toByteArray();
 	    if (tempImg.length > 65536){
-	    	resizedMap = bitmap.createScaledBitmap(bitmap, (int) resizeWidth, (int) resizeHeight, false);
+	    	resizedMap = Bitmap.createScaledBitmap(bitmap, (int) resizeWidth, (int) resizeHeight, false);
 	    	resizedMap.compress(CompressFormat.JPEG, 100, stream);
 	    	tempImg=stream.toByteArray();
 	    	//isRescale="Scaled";
@@ -262,7 +227,7 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 	    }
 	    
 	    else {
-		    resizedMap = tempMap.createScaledBitmap(tempMap, 256, 256, false);
+		    resizedMap = Bitmap.createScaledBitmap(tempMap, 256, 256, false);
 	    	resizedMap.compress(CompressFormat.JPEG, 70, stream);
 	    	tempImg=stream.toByteArray();
 	    	expense.setScale("Original");
@@ -397,11 +362,6 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 		return true;
 	}
 	
-	public boolean onContextItemSelected(MenuItem item) {
-		AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
-		//adapter.remove(adapter.getItem(info.position));
-		return true;
-	}
 	//Retrieved on February 28, 2015 from http://developer.android.com/guide/topics/ui/controls/pickers.html
 	/**This method creates a new instance of datepickerfragment and the condition statements 
 	 * sets what date will be start date and which one is end
@@ -508,14 +468,12 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
     	Toast.makeText(this, "Creating an expense", Toast.LENGTH_SHORT).show();
     	Intent intent = new Intent(EditExpenseActivity.this, ExpenseListActivity.class);
 
-    	Bundle bundle=new Bundle();
     	String claimName= claim.getName();
     	intent.putExtra("claimName", claimName);
 
     	String expenseName=expense.getName();
     	expense.takePicture(imgShow);
     	intent.putExtra("expenseName", expenseName);
-    	//Toast.makeText(this, expense.getDes(), Toast.LENGTH_SHORT).show();////
 
     	startActivity(intent);   
     }
@@ -525,7 +483,6 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 		// TODO Auto-generated method stub
 		switch(getCurrentFocus().getId()){
 		case R.id.Edit_Expense_Name2:
-			String newName = expenseNameInput.getText().toString();
 			if(s.length() == 0 ){
 				Toast.makeText(this, "Expense name cannot be null", Toast.LENGTH_LONG).show();
 			}else{
@@ -561,23 +518,6 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 	}
 	
 	
-	/**
-	 * help to find the position of one value in spinner list
-	 * @param spinner
-	 * @param myString
-	 * @return
-	 */
-	private int getIndex(Spinner spinner, String myString){
-
-        int index = 0;
-
-        for (int i=0;i<spinner.getCount();i++){
-            if (spinner.getItemAtPosition(i).equals(myString)){
-                index = i;
-            }
-        }
-        return index;
-    }
 	
 	
 }

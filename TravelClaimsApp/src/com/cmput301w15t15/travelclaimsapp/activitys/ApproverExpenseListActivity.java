@@ -1,35 +1,22 @@
 package com.cmput301w15t15.travelclaimsapp.activitys;
 
 import com.cmput301w15t15.travelclaimsapp.ApproverExpenseListAdaptor;
-import com.cmput301w15t15.travelclaimsapp.ClaimListController;
 import com.cmput301w15t15.travelclaimsapp.R;
-import com.cmput301w15t15.travelclaimsapp.R.drawable;
-import com.cmput301w15t15.travelclaimsapp.R.id;
-import com.cmput301w15t15.travelclaimsapp.R.layout;
-import com.cmput301w15t15.travelclaimsapp.R.menu;
 import com.cmput301w15t15.travelclaimsapp.SubmittedClaimListController;
-import com.cmput301w15t15.travelclaimsapp.model.Expense;
 import com.cmput301w15t15.travelclaimsapp.model.ExpenseList;
 
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ContextMenu.ContextMenuInfo;
-import android.view.View.OnLongClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.Toast;
-import android.widget.AdapterView.AdapterContextMenuInfo;
 
 public class ApproverExpenseListActivity extends Activity {
 
@@ -42,7 +29,6 @@ public class ApproverExpenseListActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.expense_list);
-		Intent intent=new Intent();
 		claimName=this.getIntent().getExtras().getString("claimName");
 		setContentView(R.layout.expense_list);
 		expenseListView = (ListView) findViewById(R.id.CurrentExpenseList2);

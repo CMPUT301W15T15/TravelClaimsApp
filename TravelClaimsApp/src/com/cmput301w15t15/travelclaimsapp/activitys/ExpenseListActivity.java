@@ -19,7 +19,6 @@ package com.cmput301w15t15.travelclaimsapp.activitys;
 
 import com.cmput301w15t15.travelclaimsapp.ClaimListController;
 import com.cmput301w15t15.travelclaimsapp.ExpenseListAdaptor;
-import com.cmput301w15t15.travelclaimsapp.ExpenseListController;
 import com.cmput301w15t15.travelclaimsapp.FileManager;
 import com.cmput301w15t15.travelclaimsapp.GeoLocationController;
 import com.cmput301w15t15.travelclaimsapp.InternetController;
@@ -27,12 +26,7 @@ import com.cmput301w15t15.travelclaimsapp.R;
 import com.cmput301w15t15.travelclaimsapp.SignOutController;
 import com.cmput301w15t15.travelclaimsapp.SubmittedClaimListController;
 import com.cmput301w15t15.travelclaimsapp.UserController;
-//import com.cmput301w15t15.travelclaimsapp.SignOutController;
-import com.cmput301w15t15.travelclaimsapp.R.layout;
-import com.cmput301w15t15.travelclaimsapp.R.menu;
-import com.cmput301w15t15.travelclaimsapp.activitys.AddClaimActivity.initApproverActivityThread;
 import com.cmput301w15t15.travelclaimsapp.model.Claim;
-import com.cmput301w15t15.travelclaimsapp.model.Destination;
 import com.cmput301w15t15.travelclaimsapp.model.Expense;
 import com.cmput301w15t15.travelclaimsapp.model.ExpenseList;
 import com.cmput301w15t15.travelclaimsapp.model.GeoLocation;
@@ -48,8 +42,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ContextMenu.ContextMenuInfo;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 import android.widget.AdapterView.AdapterContextMenuInfo;
@@ -74,7 +66,6 @@ public class ExpenseListActivity extends Activity
 	private ExpenseList expenseList;
 	private ListView expenseListView;
 	private String claimName;
-	private Expense expense;
 	private int adaptorPos;
 	private static final int GET_GEOLOCATION_CODE = 10;
 	/* (non-Javadoc)
@@ -84,7 +75,6 @@ public class ExpenseListActivity extends Activity
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		Intent intent=new Intent();
 		claimName=this.getIntent().getExtras().getString("claimName");
 		setContentView(R.layout.expense_list);
 		FileManager.initializeSaver(this);
@@ -95,7 +85,6 @@ public class ExpenseListActivity extends Activity
 		expenseAdaptor.notifyDataSetChanged();
 		expenseListView.setAdapter(expenseAdaptor);
 		registerForContextMenu(findViewById(R.id.CurrentExpenseList2));
-		ListView listView = (ListView) findViewById(R.id.CurrentExpenseList2);
 		//set_on_click();
 
 	}
@@ -246,7 +235,6 @@ public class ExpenseListActivity extends Activity
             	Toast.makeText(this, "Editing an expense", Toast.LENGTH_SHORT).show();
             	intent = new Intent(ExpenseListActivity.this, EditExpenseActivity.class);
 
-            	Bundle bundle=new Bundle();
             	intent.putExtra("claimName", claimName);
             	intent.putExtra("expenseName", expense.getName());
 

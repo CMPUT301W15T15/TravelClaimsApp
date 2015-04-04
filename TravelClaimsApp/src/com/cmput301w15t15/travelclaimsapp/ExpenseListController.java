@@ -35,7 +35,6 @@ public class ExpenseListController {
 	private static ClaimList claimList = null;
 	private static String claimName;
 	private static Claim claim;
-	private static Expense expense;
 	
 	public ExpenseListController(String Name) {
 		// TODO Auto-generated constructor stub	

@@ -42,7 +42,6 @@ public class ClaimListController {
 	
 
 	private static ClaimList claimList = null;
-	private static ExpenseList expenseList = null;
 
 	
 	/**
@@ -297,7 +296,6 @@ public class ClaimListController {
 		final ArrayList<Claim> claims = getClaimList().toArrayList();
 	    ArrayList<Claim> newClaims = new ArrayList<Claim>(claims.size());
 	    String[] searchWords = filterString.split(",");
-        int wordCount = searchWords.length;
         boolean match;
         for (Claim claim : claims) {
         	match = false;
@@ -331,7 +329,6 @@ public class ClaimListController {
 
 	public static void resetClaimListController(){
 		claimList = null;
-		expenseList = null;
 	}
 
 

@@ -28,7 +28,6 @@ import java.lang.reflect.Type;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
@@ -62,9 +61,7 @@ public class FileManager {
 	private static final String SUBMITTED_CLAIMLIST_TAG = "SubmittedClaimListSearch";
 	private static final String USERFILENAME = "user.sav";
 	private static final String CLAIMLISTFILENAME = "claimlist.sav";
-	private static final String SUBMITTED_CLAIMLISTFILENAME = "submitted_claimlist.sav";
-	private static final String CLAIMANT_CLAIMLISTFILENAME = "claimant_claimlist.sav";
-	private static final String TAG = "TravelClaimsApp";
+	private static final String TAG = "Petat";
 	
 	private Gson gson;
 	private Context context;
@@ -152,25 +149,6 @@ public class FileManager {
 			Log.d(TAG, "addUser did not work: " + e.getMessage());
 		}
 		
-	}
-
-	/**
-	 * Deletes the specific user
-	 */
-	public void deleteUser(User newUser) {
-		HttpClient httpClient = new DefaultHttpClient();
-
-		try {
-			HttpDelete deleteRequest = new HttpDelete(USER_RESOURCE_URL + newUser.getUsername());
-			deleteRequest.setHeader("Accept", "application/json");
-
-			HttpResponse response = httpClient.execute(deleteRequest);
-			String status = response.getStatusLine().toString();
-			Log.i(USER_TAG, status);
-
-		} catch (Exception e) {
-			Log.d(TAG, "deleteUser did not work: " + e.getMessage());
-		}
 	}
 	
 	
@@ -339,7 +317,7 @@ public class FileManager {
 	 * @param claimList
 	 * @param username
 	 */
-	public void saveSubmittedClaimLInFile(ClaimList claimList) {
+	public void saveSubmittedClaimLToServer(ClaimList claimList) {
 		Thread thread = new onlineSaveSubmittedClaimLThread(claimList);
 		thread.start();
 
@@ -483,6 +461,9 @@ public class FileManager {
 		
 	}
 	
+	/**
+	 * Thread for storing a new submitted claimlist to the server.
+	 */
 	class onlineSaveSubmittedClaimLThread extends Thread {
 		private ClaimList claimlist;
 		
@@ -524,27 +505,5 @@ public class FileManager {
 		
 	}
 
-	/**
-	 * Thread for running http calls for user when save() is called in controller
-	 *
-	 */
-	class onlineDeleteUserThread extends Thread {
-		
-		private User user;
-		
-		public onlineDeleteUserThread(User user){
-			this.user = user;
-		}
-		
-		@Override
-		public void run() {
-			
-			if(InternetController.isInternetAvailable2(context)){
-				deleteUser(user);
-			}
-			
-		}
-		
-	}
 	
 }
