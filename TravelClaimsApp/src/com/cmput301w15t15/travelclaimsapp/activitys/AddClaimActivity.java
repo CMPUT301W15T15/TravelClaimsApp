@@ -19,6 +19,7 @@ package com.cmput301w15t15.travelclaimsapp.activitys;
 
 import com.cmput301w15t15.travelclaimsapp.ClaimListAdaptor;
 import com.cmput301w15t15.travelclaimsapp.ClaimListController;
+import com.cmput301w15t15.travelclaimsapp.ExpenseListController;
 import com.cmput301w15t15.travelclaimsapp.FileManager;
 import com.cmput301w15t15.travelclaimsapp.InternetController;
 import com.cmput301w15t15.travelclaimsapp.R;
@@ -128,7 +129,6 @@ public class AddClaimActivity extends Activity {
             	claimAdaptor.notifyDataSetChanged();
             	return true;
             case R.id.cmenu_submit_claim:
-            	boolean submit = true;
             	if(ClaimListController.incompleteFields(claim)){
             		TextView tv = new TextView(this);
             		tv.setText("There are incomplete fields for this claim. Are you sure you want to submit?");
@@ -165,16 +165,13 @@ public class AddClaimActivity extends Activity {
 	            	claim.setStatus("Submitted");
 	            	claimAdaptor.notifyDataSetChanged();
             	}
-            	
- 
-            	
-            	
             	return true;
             case R.id.cmenu_addExpense:
             	intent= new Intent(AddClaimActivity.this, EditExpenseActivity.class);
             	//create new expense with default name and add to claimlist
+            	ExpenseListController elc = new ExpenseListController(claim.getName());
             	Expense expense = new Expense("Expense"+claim.getExpenseList().size());
-            	ClaimListController.addExpense(expense, claim);
+            	elc.addExpense(expense);
             	// attach claim name and expense name to intent 
             	intent.putExtra("expenseName", expense.getName());
             	intent.putExtra("claimName", claim.getName());

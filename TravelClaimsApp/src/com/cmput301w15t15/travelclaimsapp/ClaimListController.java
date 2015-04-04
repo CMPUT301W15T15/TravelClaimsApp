@@ -43,7 +43,6 @@ public class ClaimListController {
 
 	private static ClaimList claimList = null;
 
-	
 	/**
 	 * 
 	 * Load the claimList from the android file system
@@ -157,24 +156,6 @@ public class ClaimListController {
 	}
 	
 	
-	/**
-	 * Uses Claim.addExpense() to add a expense with listener to claim
-	 * 
-	 * @param expense	the Expense to be added to claim
-	 * @param claim		the Claim to add expense to
-	 */
-	public static void addExpense(Expense expense, Claim claim){
-		claim.addExpense(expense);
-		//claim.getExpenseList().sort();
-		expense.addListener(new ClaimListSaveListener());
-	}
-	
-	/**
-	 * Removes expense from singleton Claimlist
-	 */
-	public static void removeExpense(Expense expense, Claim claim){
-		claim.removeExpense(expense);
-	}
 	
 	/**
 	 * Adds a destination to a claim
@@ -330,7 +311,6 @@ public class ClaimListController {
 	public static void resetClaimListController(){
 		claimList = null;
 	}
-
 
 	public static boolean incompleteFields(Claim claim) {
 		if(claim.getEndDate() == null || claim.getStartDate() == null){

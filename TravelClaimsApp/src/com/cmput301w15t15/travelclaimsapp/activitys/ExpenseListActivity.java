@@ -19,6 +19,7 @@ package com.cmput301w15t15.travelclaimsapp.activitys;
 
 import com.cmput301w15t15.travelclaimsapp.ClaimListController;
 import com.cmput301w15t15.travelclaimsapp.ExpenseListAdaptor;
+import com.cmput301w15t15.travelclaimsapp.ExpenseListController;
 import com.cmput301w15t15.travelclaimsapp.FileManager;
 import com.cmput301w15t15.travelclaimsapp.GeoLocationController;
 import com.cmput301w15t15.travelclaimsapp.InternetController;
@@ -46,13 +47,6 @@ import android.widget.ListView;
 import android.widget.Toast;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 
-
-/**
- * @author bzhou2
- *
- */
-
-
 /**
  * Activity to handle editing expense 
  *
@@ -60,13 +54,12 @@ import android.widget.AdapterView.AdapterContextMenuInfo;
 
 public class ExpenseListActivity extends Activity
 {
-
-
 	private ExpenseListAdaptor expenseAdaptor;
 	private ExpenseList expenseList;
 	private ListView expenseListView;
 	private String claimName;
 	private int adaptorPos;
+	private ExpenseListController elc;
 	private static final int GET_GEOLOCATION_CODE = 10;
 	/* (non-Javadoc)
 	 * @see android.app.Activity#onCreate(android.os.Bundle)
@@ -79,7 +72,8 @@ public class ExpenseListActivity extends Activity
 		setContentView(R.layout.expense_list);
 		FileManager.initializeSaver(this);
 		expenseListView = (ListView) findViewById(R.id.CurrentExpenseList2);
-		expenseList = ClaimListController.getClaimList().getClaim(claimName).getExpenseList();
+		elc = new ExpenseListController(claimName);
+		expenseList = elc.getExpenseList();
 
 		expenseAdaptor = new ExpenseListAdaptor(this,R.layout.expense_list_adaptor,expenseList.toArrayList());
 		expenseAdaptor.notifyDataSetChanged();
@@ -199,7 +193,7 @@ public class ExpenseListActivity extends Activity
     	}
     	Expense expense = new Expense("Expense"+i);
 		//ClaimListController.getClaimList().getClaim(claimName).addExpense(expense);
-		ClaimListController.addExpense(expense, claim);
+		elc.addExpense(expense);
 		
     	Toast.makeText(this, "Creating a Expense", Toast.LENGTH_SHORT).show();
     	Intent intent = new Intent(ExpenseListActivity.this, EditExpenseActivity.class);
@@ -210,15 +204,6 @@ public class ExpenseListActivity extends Activity
     }
     
     	
-//    public void onItemClick(AdapterView<?> parent, View view, int position, long id){
-//		Expense expense2= expenseList.get(position);
-//    	if (view.equals(viewHolder.expenseFlag)){
-//    		expense2.setFlag(1-expense.getFlag());
-//    		notifyDataSetChanged();
-//    	}
-//    }
-
-    
 	/**
 	 * save value anytime when you change values
 	 * @see android.app.Activity#onContextItemSelected(android.view.MenuItem)
@@ -244,7 +229,7 @@ public class ExpenseListActivity extends Activity
             	return true;
                 
             case R.id.expenseListViewMenuDelete:
-            	expenseList.removeExpense(expense);
+            	elc.removeExpense(expense);
             	expenseAdaptor.notifyDataSetChanged();
             	return true;
             	

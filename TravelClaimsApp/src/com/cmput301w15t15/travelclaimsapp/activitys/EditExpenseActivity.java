@@ -376,9 +376,10 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 			Start=false;
 		}
 		DialogFragment newFragment = new DatePickerFragment();
+
 		newFragment.show(getSupportFragmentManager(), "datePicker");
 	}
-	
+	//Retrieved on February 28, 2015 from http://developer.android.com/guide/topics/ui/controls/pickers.html
 	/**
 	 * @author Henry
 	 * This defines dialogfragment by using the onCreateDialog method
@@ -399,7 +400,6 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 		}
 
 		@Override
-
 		public void onDateSet(DatePicker view, int year, int month, int day) 
 		{
 			// Do something with the date chosen by the user
