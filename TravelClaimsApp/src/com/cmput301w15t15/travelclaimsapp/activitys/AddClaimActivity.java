@@ -134,14 +134,47 @@ public class AddClaimActivity extends Activity {
             	claimAdaptor.notifyDataSetChanged();
             	return true;
             case R.id.cmenu_submit_claim:
-            	if(InternetController.isInternetAvailable2(this)){
-            		Thread thread = new submitClaimThread(claim, this);
-        			thread.start();
-            	} else {
-            		Toast.makeText(this, "Internet Connection Needed", Toast.LENGTH_LONG).show();
+            	boolean submit = true;
+            	if(ClaimListController.incompleteFields(claim)){
+            		TextView tv = new TextView(this);
+            		tv.setText("There are incomplete fields for this claim. Are you sure you want to submit?");
+            		AlertDialog.Builder ald = new AlertDialog.Builder(this);
+            		ald.setView(tv);
+            		ald.setPositiveButton("Yes", new OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							if(InternetController.isInternetAvailable2(AddClaimActivity.this)){
+			            		Thread thread = new submitClaimThread(claim, AddClaimActivity.this);
+			            		thread.start();
+			            	} else {
+			            		Toast.makeText(AddClaimActivity.this, "Internet Connection Needed", Toast.LENGTH_LONG).show();
+			            	}
+			            	claim.setStatus("Submitted");
+			            	claimAdaptor.notifyDataSetChanged();
+						}
+					});
+            		ald.setNegativeButton("Cancel", new OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							return;
+						}
+					});
+            		ald.show();
+            		return true;
+            	}else{
+            		if(InternetController.isInternetAvailable2(AddClaimActivity.this)){
+	            		Thread thread = new submitClaimThread(claim, AddClaimActivity.this);
+	            		thread.start();
+	            	} else {
+	            		Toast.makeText(AddClaimActivity.this, "Internet Connection Needed", Toast.LENGTH_LONG).show();
+	            	}
+	            	claim.setStatus("Submitted");
+	            	claimAdaptor.notifyDataSetChanged();
             	}
-            	claim.setStatus("Submitted");
-            	claimAdaptor.notifyDataSetChanged();
+            	
+ 
+            	
+            	
             	return true;
             case R.id.cmenu_addExpense:
             	intent= new Intent(AddClaimActivity.this, EditExpenseActivity.class);

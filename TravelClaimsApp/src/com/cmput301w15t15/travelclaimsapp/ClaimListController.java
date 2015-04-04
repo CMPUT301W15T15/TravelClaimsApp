@@ -334,5 +334,21 @@ public class ClaimListController {
 		expenseList = null;
 	}
 
+
+	public static boolean incompleteFields(Claim claim) {
+		if(claim.getEndDate() == null || claim.getStartDate() == null){
+			return true;
+		}
+		ArrayList<Expense> expenses= claim.getExpenseList().toArrayList(); 
+
+		for(Expense expense : expenses){
+			if(expense.getFlag() == 1){
+				return true;
+			}
+		}
+
+		return false;
+	}
+
 	
 }

@@ -25,6 +25,7 @@ import com.cmput301w15t15.travelclaimsapp.InternetController;
 import com.cmput301w15t15.travelclaimsapp.R;
 import com.cmput301w15t15.travelclaimsapp.SignOutController;
 import com.cmput301w15t15.travelclaimsapp.SubmittedClaimListController;
+import com.cmput301w15t15.travelclaimsapp.SubmittedListComparator;
 import com.cmput301w15t15.travelclaimsapp.UserController;
 import com.cmput301w15t15.travelclaimsapp.activitys.LoginActivity.loginThread;
 import com.cmput301w15t15.travelclaimsapp.model.Claim;
@@ -68,6 +69,7 @@ public class ApproverClaimListActivity extends Activity {
 		claimList = SubmittedClaimListController.getClaimList();
 		//create a adaptor for claim list and set it
 		claimAdaptor = new ApproverClaimListAdaptor(this,R.layout.claim_list_adaptor, claimList.toArrayList());
+		claimAdaptor.sort(new SubmittedListComparator());
 		claimAdaptor.notifyDataSetChanged();
         claimListView.setAdapter(claimAdaptor);
         
@@ -78,6 +80,7 @@ public class ApproverClaimListActivity extends Activity {
 	protected void onStart() {
 		// TODO Auto-generated method stub
 		super.onStart();
+		claimAdaptor.sort(new SubmittedListComparator());
 		claimAdaptor.notifyDataSetChanged();
 	}
 	
@@ -147,9 +150,10 @@ public class ApproverClaimListActivity extends Activity {
             	alertd.show();
             	return true;
             case R.id.cmenu_approve:
-            	if(canApprove(claim)){
+            	if(canApprove(claim) && hasComment(claim)){
             		claim.setStatus(Claim.APPROVED);
             		claim.addComment(claim.getComment());
+            		claim.setComment("");
             		SubmittedClaimListController.removeClaim(claimList.getClaim(claim.getName()));
             		claimAdaptor.notifyDataSetChanged();
             		Thread approvedThread = new saveChangesThread(claimList, claim, this);
@@ -157,9 +161,10 @@ public class ApproverClaimListActivity extends Activity {
             	}
             	return true;
             case R.id.cmenu_return:
-            	if(canApprove(claim)){
+            	if(canApprove(claim) && hasComment(claim)){
             		claim.setStatus(Claim.RETURNED);
             		claim.addComment(claim.getComment());
+            		claim.setComment("");
             		SubmittedClaimListController.removeClaim(claimList.getClaim(claim.getName()));
             		claimAdaptor.notifyDataSetChanged();
             		Thread returnedThread = new saveChangesThread(claimList, claim, this);
@@ -232,7 +237,20 @@ public class ApproverClaimListActivity extends Activity {
 		}
 	};
 
+	private boolean hasComment(Claim claim){
+		if(claim.getComment() == null){
+			Toast.makeText(this, "Please comment first", Toast.LENGTH_SHORT).show();
+			return false;
+		}
+		if(claim.getComment().equals("")){
+			Toast.makeText(this, "Please comment first", Toast.LENGTH_SHORT).show();
+			return false;
+		}
+		return true;
+	}
+	
 	private boolean canApprove(Claim claim){
+		
 		if(claim.getClaimantName().equals(UserController.getUser().getUsername())){
 			Toast.makeText(this, "No approver priviledge for this claim", Toast.LENGTH_SHORT).show();
 			return false;
@@ -243,6 +261,7 @@ public class ApproverClaimListActivity extends Activity {
     		Toast.makeText(this, "You are not the approver for this claim", Toast.LENGTH_SHORT).show();
     		return false;
     	}
+	
 		
 		return true;
 	}

@@ -19,6 +19,7 @@ package com.cmput301w15t15.travelclaimsapp.test.modeltest;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 
 import com.cmput301w15t15.travelclaimsapp.ClaimListController;
 import com.cmput301w15t15.travelclaimsapp.FileManager;
@@ -217,5 +218,31 @@ public class ClaimListControllerTest extends AndroidTestCase {
 		
 		assertEquals("ClaimList was not filtered", 1, filtered.size());
 		assertTrue("ClaimList was not filtered correctly", filtered.indexOf(claim4)>-1);
+	}
+	
+	/**
+	 * ClaimListController test #6
+	 * 
+	 * Test the incompleteFields function
+	 */
+	public void testincompleteFields(){
+		ClaimListController.addClaim(claim);
+		
+		claim.setEndDate(new Date());	//test incomplete claim fields
+		assertTrue(ClaimListController.incompleteFields(claim));
+		
+		claim.setStartDate(new Date());	//test complete claim fields
+		assertFalse(ClaimListController.incompleteFields(claim));
+		
+		ClaimListController.addExpense(expense, claim);
+		
+		expense.setFlag(1);				//test setting flag
+		assertTrue(ClaimListController.incompleteFields(claim));
+		
+		expense.setFlag(0);				//test unsetting flag
+		assertFalse(ClaimListController.incompleteFields(claim));
+		
+		
+		
 	}
 }

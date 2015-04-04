@@ -2,6 +2,7 @@ package com.cmput301w15t15.travelclaimsapp;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Locale;
 
 import com.cmput301w15t15.travelclaimsapp.model.Claim;

@@ -107,9 +107,9 @@ public class ApproverClaimListAdaptor extends ArrayAdapter<Claim>{
 		approverName.setText("Approver: "+claim.getApprover());
 		approverName.setTextColor(Color.WHITE);
 		
-	
+		viewHolder.claimApprover.removeAllViews();
 		if(claim.getApprover() != null){
-			viewHolder.claimApprover.removeAllViews();
+			
 			viewHolder.claimApprover.addView(approverName);
 		}
 		

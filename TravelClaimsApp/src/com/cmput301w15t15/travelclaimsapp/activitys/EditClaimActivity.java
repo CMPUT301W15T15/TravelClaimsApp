@@ -513,11 +513,17 @@ public class EditClaimActivity extends FragmentActivity implements TextWatcher {
 			claimNameInput.setFocusable(false);
 			destListView.setClickable(false);
 			destListView.setLongClickable(false);
-			tagListView.setClickable(false);
-			tagListView.setLongClickable(false);
+			if(theClaim.getStatus().equals("Submitted")){
+				tagListView.setClickable(false);
+				tagListView.setLongClickable(false);
+				addTagButton.setClickable(false);
+			}else{
+				tagListView.setClickable(true);
+				tagListView.setLongClickable(true);
+				addTagButton.setClickable(true);
+			}
 			claimStartDate.setFocusable(false);
 			claimEndDate.setFocusable(false);
-			addTagButton.setClickable(false);
 			addDestButton.setClickable(false);
 			
 		}else{
