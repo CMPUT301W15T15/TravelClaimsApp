@@ -46,22 +46,22 @@ public class ApproverExpenseListAdaptor extends ArrayAdapter<Expense> {
 		    LayoutInflater inflater = ((Activity)context).getLayoutInflater();
 		    rowView = inflater.inflate(resource, parent, false);
 
-		    viewHolder.expenseCurrency = (TextView) rowView.findViewById(R.id.expenseAdaptor_currency);
-		    viewHolder.expenseCategory= (TextView) rowView.findViewById(R.id.expenseAdaptor_category);
-		    viewHolder.expenseAmount = (TextView) rowView.findViewById(R.id.expenseAdaptor_amount);
-		    viewHolder.expenseDate = (TextView) rowView.findViewById(R.id.expenseAdaptor_date);
-		    viewHolder.expenseName = (TextView) rowView.findViewById(R.id.expenseAdaptor_Name);
-		    viewHolder.expenseFlag = (ImageView) rowView.findViewById(R.id.expenseAdaptor_flag);
-		    viewHolder.expenseMap = (ImageView) rowView.findViewById(R.id.expenseAdaptor_map);
-		    viewHolder.expenseDescription = (LinearLayout) rowView.findViewById(R.id.expenseAdaptor_description);
-		    viewHolder.expenseImageAttach = (ImageView) rowView.findViewById(R.id.expenseAdaptor_attachment);
+		    viewHolder.expenseCurrency = (TextView) rowView.findViewById(R.id.expenseAdaptor_currency_approve);
+		    viewHolder.expenseCategory= (TextView) rowView.findViewById(R.id.expenseAdaptor_category_approve);
+		    viewHolder.expenseAmount = (TextView) rowView.findViewById(R.id.expenseAdaptor_amount_approve);
+		    viewHolder.expenseDate = (TextView) rowView.findViewById(R.id.expenseAdaptor_date_approve);
+		    viewHolder.expenseName = (TextView) rowView.findViewById(R.id.expenseAdaptor_Name_approve);
+		    //viewHolder.expenseFlag = (ImageView) rowView.findViewById(R.id.expenseAdaptor_flag_approve);
+		    viewHolder.expenseMap = (ImageView) rowView.findViewById(R.id.expenseAdaptor_map_approve);
+		    viewHolder.expenseDescription = (LinearLayout) rowView.findViewById(R.id.expenseAdaptor_description_approve);
+		    viewHolder.expenseImageAttach = (ImageView) rowView.findViewById(R.id.expenseAdaptor_attachment_approve);
 		    rowView.setTag(viewHolder);
 
 		}else{
 		    viewHolder = (ViewHolder) rowView.getTag();
 		}
 		
-		viewHolder.expenseFlag.setTag(position);
+		//viewHolder.expenseFlag.setTag(position);
 		expense = expenseList.get(position); 
 		viewHolder.expenseCurrency.setText(expense.getCurr());
 		viewHolder.expenseCategory.setText(expense.getCat());
@@ -69,7 +69,7 @@ public class ApproverExpenseListAdaptor extends ArrayAdapter<Expense> {
 		viewHolder.expenseName.setText(expense.getName());
 		
 		//Set flag to invisible approver does not need to see it 
-		viewHolder.expenseFlag.setVisibility(android.view.View.INVISIBLE);
+		//viewHolder.expenseFlag.setVisibility(android.view.View.INVISIBLE);
 		
 		viewHolder.expenseDescription.removeAllViews();
 		if(expense.getDes() != null){
@@ -105,10 +105,10 @@ public class ApproverExpenseListAdaptor extends ArrayAdapter<Expense> {
 		});
 		
 		if(expense.getReceipt() == null){
-        	viewHolder.expenseImageAttach.setVisibility(android.view.View.INVISIBLE);
+        	viewHolder.expenseImageAttach.setVisibility(android.view.View.VISIBLE);
         	viewHolder.expenseImageAttach.setClickable(false);
         }else{
-        	viewHolder.expenseImageAttach.setVisibility(android.view.View.VISIBLE);
+        	viewHolder.expenseImageAttach.setVisibility(android.view.View.INVISIBLE);
         }
 		
 		return rowView;
@@ -124,7 +124,7 @@ public class ApproverExpenseListAdaptor extends ArrayAdapter<Expense> {
         public LinearLayout expenseDescription;
 		public ImageView expenseMap;
 		public ImageView expenseImageAttach;
-		public ImageView expenseFlag;
+		//public ImageView expenseFlag;
 		public TextView expenseName;
 		public TextView expenseDate;
 		public TextView expenseAmount;

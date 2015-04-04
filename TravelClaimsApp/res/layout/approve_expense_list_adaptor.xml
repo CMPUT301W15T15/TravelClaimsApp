@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/approve_expense_list_adaptor"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <TextView
+        android:id="@+id/expenseAdaptor_date_approve"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignRight="@+id/expenseAdaptor_Name_approve"
+        android:layout_below="@+id/expenseAdaptor_currency_approve"
+        android:text="date"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="#FFFFFF" />
+
+    <TextView
+        android:id="@+id/expenseAdaptor_Name_approve"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/expenseAdaptor_date_approve"
+        android:layout_alignParentLeft="true"
+        android:text="ExpenseName"
+        android:textColor="#FFFFFF"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/expenseAdaptor_currency_approve"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:text="currency"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#FFFFFF" />
+
+    <TextView
+        android:id="@+id/expenseAdaptor_amount_approve"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@+id/expenseAdaptor_map_approve"
+        android:text="amount"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#FFFFFF" />
+
+    <ImageView
+        android:id="@+id/expenseAdaptor_map_approve"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/expenseAdaptor_attachment_approve"
+        android:layout_alignTop="@+id/expenseAdaptor_attachment_approve"
+        android:layout_toLeftOf="@+id/expenseAdaptor_attachment_approve"
+        android:src="@drawable/ic_action_map_white" />
+
+    <LinearLayout
+        android:id="@+id/expenseAdaptor_description_approve"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/expenseAdaptor_map_approve"
+        android:orientation="vertical" >
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/expenseAdaptor_attachment_approve"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/expenseAdaptor_category_approve"
+        android:src="@drawable/ic_no_img" />
+
+    <TextView
+        android:id="@+id/expenseAdaptor_category_approve"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/expenseAdaptor_Name_approve"
+        android:layout_centerHorizontal="true"
+        android:text="category"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="#FFFFFF" />
+
+</RelativeLayout>

@@ -7,6 +7,7 @@ import com.cmput301w15t15.travelclaimsapp.R.drawable;
 import com.cmput301w15t15.travelclaimsapp.R.id;
 import com.cmput301w15t15.travelclaimsapp.R.layout;
 import com.cmput301w15t15.travelclaimsapp.R.menu;
+import com.cmput301w15t15.travelclaimsapp.SubmittedClaimListController;
 import com.cmput301w15t15.travelclaimsapp.model.Expense;
 import com.cmput301w15t15.travelclaimsapp.model.ExpenseList;
 
@@ -45,9 +46,9 @@ public class ApproverExpenseListActivity extends Activity {
 		claimName=this.getIntent().getExtras().getString("claimName");
 		setContentView(R.layout.expense_list);
 		expenseListView = (ListView) findViewById(R.id.CurrentExpenseList2);
-		expenseList = ClaimListController.getClaimList().getClaim(claimName).getExpenseList();
+		expenseList = SubmittedClaimListController.getClaimList().getClaim(claimName).getExpenseList();
 
-		expenseAdaptor = new ApproverExpenseListAdaptor(this,R.layout.expense_list_adaptor,expenseList.toArrayList());
+		expenseAdaptor = new ApproverExpenseListAdaptor(this,R.layout.approve_expense_list_adaptor,expenseList.toArrayList());
 		expenseAdaptor.notifyDataSetChanged();
 		expenseListView.setAdapter(expenseAdaptor);
 		registerForContextMenu(findViewById(R.id.CurrentExpenseList2));
