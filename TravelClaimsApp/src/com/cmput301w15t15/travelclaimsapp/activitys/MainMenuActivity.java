@@ -47,6 +47,7 @@ public class MainMenuActivity extends Activity {
 	    	Toast.makeText(MainMenuActivity.this, "Claim List", Toast.LENGTH_SHORT).show();
 	    	Intent intent = new Intent(MainMenuActivity.this, AddClaimActivity.class);
 	    	startActivity(intent);
+	    	finish();
 		}
 	};
 	
