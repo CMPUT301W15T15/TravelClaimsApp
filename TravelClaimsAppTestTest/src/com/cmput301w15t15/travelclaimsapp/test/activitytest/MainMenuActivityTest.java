@@ -21,7 +21,7 @@ import com.cmput301w15t15.travelclaimsapp.FileManager;
 import com.cmput301w15t15.travelclaimsapp.R;
 import com.cmput301w15t15.travelclaimsapp.activitys.AddClaimActivity;
 import com.cmput301w15t15.travelclaimsapp.activitys.EditClaimActivity;
-import com.cmput301w15t15.travelclaimsapp.activitys.MainMenuActivity;
+import com.cmput301w15t15.travelclaimsapp.activitys.LoginActivity;
 
 import android.app.Activity;
 import android.app.Instrumentation;
@@ -31,7 +31,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 public class MainMenuActivityTest extends
-		ActivityInstrumentationTestCase2<MainMenuActivity> {
+		ActivityInstrumentationTestCase2<LoginActivity> {
 
 	private Instrumentation instrumentation;
 	private Button login;
@@ -43,7 +43,7 @@ public class MainMenuActivityTest extends
 	 * Tests for the MainMenuActivity.
 	 */
 	public MainMenuActivityTest() {
-		super(MainMenuActivity.class);
+		super(LoginActivity.class);
 	}
 	
 

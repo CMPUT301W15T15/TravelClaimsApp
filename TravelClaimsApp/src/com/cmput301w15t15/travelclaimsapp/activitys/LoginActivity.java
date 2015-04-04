@@ -36,7 +36,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class MainMenuActivity extends Activity {
+public class LoginActivity extends Activity {
 
 	/**
 	 * Thread that closes the activity after finishing addClaims.
@@ -44,8 +44,8 @@ public class MainMenuActivity extends Activity {
 	private Runnable launchAddClaims = new Runnable() {
 		public void run() {
 			ClaimListController.initClaimListController();
-	    	Toast.makeText(MainMenuActivity.this, "Claim List", Toast.LENGTH_SHORT).show();
-	    	Intent intent = new Intent(MainMenuActivity.this, AddClaimActivity.class);
+	    	Toast.makeText(LoginActivity.this, "Claim List", Toast.LENGTH_SHORT).show();
+	    	Intent intent = new Intent(LoginActivity.this, AddClaimActivity.class);
 	    	startActivity(intent);
 	    	finish();
 		}
@@ -57,7 +57,7 @@ public class MainMenuActivity extends Activity {
 	 */
 	private Runnable popToast = new Runnable() {
 		public void run() {
-			Toast.makeText(MainMenuActivity.this, "Wrong username or password.", Toast.LENGTH_LONG).show();
+			Toast.makeText(LoginActivity.this, "Wrong username or password.", Toast.LENGTH_LONG).show();
 		}
 	};
 
@@ -137,7 +137,7 @@ public class MainMenuActivity extends Activity {
 	public void SearchOption(MenuItem menu)
     {
     	Toast.makeText(this, "Going to Search", Toast.LENGTH_SHORT).show();
-    	Intent intent = new Intent(MainMenuActivity.this, SearchActivity.class);
+    	Intent intent = new Intent(LoginActivity.this, SearchActivity.class);
     	startActivity(intent);
     }
 	
@@ -148,7 +148,7 @@ public class MainMenuActivity extends Activity {
 	public void AddClaimMenu(MenuItem menu)
     {
     	Toast.makeText(this, "Going to Claims", Toast.LENGTH_SHORT).show();
-    	Intent intent = new Intent(MainMenuActivity.this, AddClaimActivity.class);
+    	Intent intent = new Intent(LoginActivity.this, AddClaimActivity.class);
     	startActivity(intent);
     }
 	
@@ -161,7 +161,7 @@ public class MainMenuActivity extends Activity {
 		
 		if(InternetController.isInternetAvailable2(this)){
 			Toast.makeText(this, "Create User", Toast.LENGTH_SHORT).show();
-			Intent intent = new Intent(MainMenuActivity.this, CreateUserActivity.class);
+			Intent intent = new Intent(LoginActivity.this, CreateUserActivity.class);
 			startActivity(intent);
 		} else {
 			Toast.makeText(this, "Cannot Create User offline", Toast.LENGTH_SHORT).show();
@@ -173,7 +173,7 @@ public class MainMenuActivity extends Activity {
 		
 		if(InternetController.isInternetAvailable2(this)){
 			Toast.makeText(this, "Create User", Toast.LENGTH_SHORT).show();
-			Intent intent = new Intent(MainMenuActivity.this, CreateUserActivity.class);
+			Intent intent = new Intent(LoginActivity.this, CreateUserActivity.class);
 			startActivity(intent);
 		} else {
 			Toast.makeText(this, "Cannot Create User offline", Toast.LENGTH_SHORT).show();

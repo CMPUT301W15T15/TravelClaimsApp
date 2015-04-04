@@ -20,7 +20,7 @@ package com.cmput301w15t15.travelclaimsapp.test.activitytest;
 import com.cmput301w15t15.travelclaimsapp.FileManager;
 import com.cmput301w15t15.travelclaimsapp.R;
 import com.cmput301w15t15.travelclaimsapp.activitys.CreateUserActivity;
-import com.cmput301w15t15.travelclaimsapp.activitys.MainMenuActivity;
+import com.cmput301w15t15.travelclaimsapp.activitys.LoginActivity;
 import com.cmput301w15t15.travelclaimsapp.activitys.MapActivity;
 
 import android.app.Activity;
@@ -103,7 +103,7 @@ public class CreateUserActivityTest extends
 			 * Checks mismatch passwords do not create users.
 			 */
 			public void testMismatchPassInput(){
-				ActivityMonitor activityMonitor = new ActivityMonitor(MainMenuActivity.class.getName(), null, false);
+				ActivityMonitor activityMonitor = new ActivityMonitor(LoginActivity.class.getName(), null, false);
 				instrumentation.addMonitor(activityMonitor);
 				instrumentation.runOnMainSync(new Runnable() {
 					
@@ -127,7 +127,7 @@ public class CreateUserActivityTest extends
 			 * Checks when no password given, do not create users.
 			 */
 			public void testNoPassInput(){
-				ActivityMonitor activityMonitor = new ActivityMonitor(MainMenuActivity.class.getName(), null, false);
+				ActivityMonitor activityMonitor = new ActivityMonitor(LoginActivity.class.getName(), null, false);
 				instrumentation.addMonitor(activityMonitor);
 				instrumentation.runOnMainSync(new Runnable() {
 					
@@ -151,7 +151,7 @@ public class CreateUserActivityTest extends
 			 * Checks when no passwordAgain given, do not create users.
 			 */
 			public void testNoPass2Input(){
-				ActivityMonitor activityMonitor = new ActivityMonitor(MainMenuActivity.class.getName(), null, false);
+				ActivityMonitor activityMonitor = new ActivityMonitor(LoginActivity.class.getName(), null, false);
 				instrumentation.addMonitor(activityMonitor);
 				instrumentation.runOnMainSync(new Runnable() {
 					
@@ -175,7 +175,7 @@ public class CreateUserActivityTest extends
 			 * Checks when no password fields given, do not create users.
 			 */
 			public void testNoPass3Input(){
-				ActivityMonitor activityMonitor = new ActivityMonitor(MainMenuActivity.class.getName(), null, false);
+				ActivityMonitor activityMonitor = new ActivityMonitor(LoginActivity.class.getName(), null, false);
 				instrumentation.addMonitor(activityMonitor);
 				instrumentation.runOnMainSync(new Runnable() {
 					
@@ -199,7 +199,7 @@ public class CreateUserActivityTest extends
 			 * Checks when no username given, do not create users.
 			 */
 			public void testNoUserInput(){
-				ActivityMonitor activityMonitor = new ActivityMonitor(MainMenuActivity.class.getName(), null, false);
+				ActivityMonitor activityMonitor = new ActivityMonitor(LoginActivity.class.getName(), null, false);
 				instrumentation.addMonitor(activityMonitor);
 				instrumentation.runOnMainSync(new Runnable() {
 					
@@ -223,7 +223,7 @@ public class CreateUserActivityTest extends
 			 * Checks when no no input fields are given, do not create users.
 			 */
 			public void testNoNothingInput(){
-				ActivityMonitor activityMonitor = new ActivityMonitor(MainMenuActivity.class.getName(), null, false);
+				ActivityMonitor activityMonitor = new ActivityMonitor(LoginActivity.class.getName(), null, false);
 				instrumentation.addMonitor(activityMonitor);
 				instrumentation.runOnMainSync(new Runnable() {
 					

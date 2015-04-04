@@ -30,7 +30,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.cmput301w15t15.travelclaimsapp.activitys.MainMenuActivity"
+            android:name="com.cmput301w15t15.travelclaimsapp.activitys.LoginActivity"
             android:label="@string/title_activity_main_menu" >
         </activity>
         <activity

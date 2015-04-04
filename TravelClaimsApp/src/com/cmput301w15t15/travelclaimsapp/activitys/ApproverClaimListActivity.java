@@ -21,17 +21,19 @@ import java.util.Arrays;
 
 import com.cmput301w15t15.travelclaimsapp.ApproverClaimListAdaptor;
 import com.cmput301w15t15.travelclaimsapp.FileManager;
+import com.cmput301w15t15.travelclaimsapp.InternetController;
 import com.cmput301w15t15.travelclaimsapp.R;
 import com.cmput301w15t15.travelclaimsapp.SignOutController;
 import com.cmput301w15t15.travelclaimsapp.SubmittedClaimListController;
 import com.cmput301w15t15.travelclaimsapp.UserController;
+import com.cmput301w15t15.travelclaimsapp.activitys.LoginActivity.loginThread;
 import com.cmput301w15t15.travelclaimsapp.model.Claim;
 import com.cmput301w15t15.travelclaimsapp.model.ClaimList;
-import com.cmput301w15t15.travelclaimsapp.model.User;
 
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
@@ -43,7 +45,6 @@ import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 /**
@@ -146,8 +147,14 @@ public class ApproverClaimListActivity extends Activity {
             	alertd.show();
             	return true;
             case R.id.cmenu_approve:
+            	claim.setStatus(Claim.APPROVED);
+            	Thread approvedThread = new saveChangesThread(claimList, claim, this);
+            	approvedThread.start();
             
             case R.id.cmenu_return:
+            	claim.setStatus(Claim.RETURNED);
+            	Thread returnedThread = new saveChangesThread(claimList, claim, this);
+            	returnedThread.start();
             	
             default:
                 return super.onContextItemSelected(item);
@@ -173,7 +180,7 @@ public class ApproverClaimListActivity extends Activity {
     {
     	SignOutController.reset();
     	Toast.makeText(this, "Signing Out", Toast.LENGTH_SHORT).show();
-    	Intent intent = new Intent(ApproverClaimListActivity.this, MainMenuActivity.class);
+    	Intent intent = new Intent(ApproverClaimListActivity.this, LoginActivity.class);
     	startActivity(intent);
     }
 
@@ -181,26 +188,40 @@ public class ApproverClaimListActivity extends Activity {
 		
 		private ClaimList newSubmittedClaimList;
 		private Claim modifiedClaim;
+		private Context context;
 		
-		public saveChangesThread(ClaimList claimlist, Claim claim){
+		public saveChangesThread(ClaimList claimlist, Claim claim, Context context){
 			newSubmittedClaimList = claimlist;
 			modifiedClaim = claim;
+			this.context = context;
 		}
 		
 		public void run() {
-			String modUsername = modifiedClaim.getClaimantName();
-			modifiedClaim.setApprover(UserController.getUser().getUsername());
-			ClaimList claimantClaimList = FileManager.getSaver().getClaimList(modUsername);
-			claimantClaimList.removeClaim(claimantClaimList.getClaim(modifiedClaim.getName()));
-			claimantClaimList.addClaim(modifiedClaim);
-			FileManager.getSaver().addClaimList(claimantClaimList, modUsername);
-			
-			FileManager.getSaver().addSubmittedClaimL(newSubmittedClaimList);
-			
-			
+			if(!InternetController.isInternetAvailable2(context)){
+				runOnUiThread(popToast);
+			} else {
+				String modUsername = modifiedClaim.getClaimantName();
+				modifiedClaim.setApprover(UserController.getUser().getUsername());
+				ClaimList claimantClaimList = FileManager.getSaver().getClaimList(modUsername);
+				claimantClaimList.removeClaim(claimantClaimList.getClaim(modifiedClaim.getName()));
+				claimantClaimList.addClaim(modifiedClaim);
+				FileManager.getSaver().addClaimList(claimantClaimList, modUsername);
+				
+				FileManager.getSaver().addSubmittedClaimL(newSubmittedClaimList);
+			}
+		
 		}
 		
 	}
+	
+	/**
+	 * Warning when no internet connection found.
+	 */
+	private Runnable popToast = new Runnable() {
+		public void run() {
+			Toast.makeText(ApproverClaimListActivity.this, "Internet Connection Needed", Toast.LENGTH_LONG).show();
+		}
+	};
 
 	private boolean canApprove(Claim claim){
 		if(claim.getClaimantName().equals(UserController.getUser().getUsername())){

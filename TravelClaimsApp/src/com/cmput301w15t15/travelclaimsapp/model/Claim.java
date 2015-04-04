@@ -46,10 +46,10 @@ public class Claim implements Listenable{
 	private ExpenseList expenseList;
 	private TagList tagList;
 	protected transient ArrayList<Listener> listeners;
-	private final String INPROGRESS = "In Progress";
-	private final String SUBMITTED = "Submitted";
-	private final String RETURNED = "Returned";
-	private final String APPROVED = "Approved";
+	public final static String INPROGRESS = "In Progress";
+	public final static String SUBMITTED = "Submitted";
+	public final static String RETURNED = "Returned";
+	public final static String APPROVED = "Approved";
 
 	/**
 	 * Claim constructor
