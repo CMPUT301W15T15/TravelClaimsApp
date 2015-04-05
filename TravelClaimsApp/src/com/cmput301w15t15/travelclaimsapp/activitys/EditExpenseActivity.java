@@ -227,7 +227,7 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 	    }
 	    
 	    else {
-		    resizedMap = Bitmap.createScaledBitmap(tempMap, 256, 256, false);
+		    resizedMap = Bitmap.createScaledBitmap(tempMap, (int) resizeWidth, (int) resizeHeight, false);
 	    	resizedMap.compress(CompressFormat.JPEG, 70, stream);
 	    	tempImg=stream.toByteArray();
 	    	expense.setScale("Original");

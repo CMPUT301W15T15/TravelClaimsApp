@@ -128,7 +128,7 @@ public class ApproverExpenseListAdaptor extends ArrayAdapter<Expense> {
 			}
 		});
 		
-		if(expense.getReceipt() == null){
+		if(expense.getPicture() == null){
         	viewHolder.expenseImageAttach.setVisibility(android.view.View.VISIBLE);
         	viewHolder.expenseImageAttach.setClickable(false);
         }else{

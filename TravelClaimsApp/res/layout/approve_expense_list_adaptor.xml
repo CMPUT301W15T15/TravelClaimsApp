@@ -9,8 +9,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_alignRight="@+id/expenseAdaptor_Name_approve"
         android:layout_below="@+id/expenseAdaptor_currency_approve"
+        android:layout_toLeftOf="@+id/expenseAdaptor_amount_approve"
         android:text="date"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="#FFFFFF" />
@@ -69,6 +69,7 @@
         android:id="@+id/expenseAdaptor_attachment_approve"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/expenseAdaptor_category_approve"
         android:layout_alignParentRight="true"
         android:layout_alignTop="@+id/expenseAdaptor_category_approve"
         android:src="@drawable/ic_no_img" />
@@ -77,8 +78,9 @@
         android:id="@+id/expenseAdaptor_category_approve"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/expenseAdaptor_Name_approve"
-        android:layout_centerHorizontal="true"
+        android:layout_alignBaseline="@+id/expenseAdaptor_date_approve"
+        android:layout_alignBottom="@+id/expenseAdaptor_date_approve"
+        android:layout_toRightOf="@+id/expenseAdaptor_date_approve"
         android:text="category"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="#FFFFFF" />

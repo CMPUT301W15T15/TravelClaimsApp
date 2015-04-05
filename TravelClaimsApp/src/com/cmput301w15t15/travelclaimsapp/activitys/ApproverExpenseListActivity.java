@@ -9,12 +9,14 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemLongClickListener;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageView;
 import android.widget.ListView;
 
@@ -49,6 +51,20 @@ public class ApproverExpenseListActivity extends Activity {
 			}
 			
 		});
+		
+		expenseListView.setOnItemClickListener(new OnItemClickListener() {
+			
+			 public void onItemClick(AdapterView<?> parent, View view,
+				        int position, long id) 
+			 {
+				 		loadPhoto(position, 200, 100);
+			 }
+			
+			
+		});
+		
+		
+		
 	}
 
 	@Override
@@ -59,7 +75,7 @@ public class ApproverExpenseListActivity extends Activity {
 	}
 	
 	
-	private void loadPhoto( int width, int height) {
+	private void loadPhoto(int position, int width, int height) {
 
 
         AlertDialog.Builder imageDialog = new AlertDialog.Builder(this);
@@ -68,7 +84,10 @@ public class ApproverExpenseListActivity extends Activity {
         View layout = inflater.inflate(R.layout.image_adapter,
                 (ViewGroup) findViewById(R.id.layout_root));
         ImageView image = (ImageView) layout.findViewById(R.id.fullimage);
-        image.setImageDrawable(getResources().getDrawable(R.drawable.ic_action_attach));
+        
+        byte[] imageShowing = expenseList.getExpenseByIndex(position).getPicture();
+
+        image.setImageBitmap(BitmapFactory.decodeByteArray(imageShowing,0,imageShowing.length) ); 
         imageDialog.setView(layout);
        
         imageDialog.setPositiveButton("Return", new DialogInterface.OnClickListener(){
