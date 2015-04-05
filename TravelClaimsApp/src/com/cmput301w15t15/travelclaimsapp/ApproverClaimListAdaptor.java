@@ -42,12 +42,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 /**
- * 	Custom ArrayAdaptor for displaying the claimlist 
- *  
- *  
- *  	
+ * 	Custom ArrayAdaptor for displaying the claimlist.  	
  */
-
 public class ApproverClaimListAdaptor extends ArrayAdapter<Claim>{
 
 	private Context context;
@@ -81,7 +77,6 @@ public class ApproverClaimListAdaptor extends ArrayAdapter<Claim>{
 	        viewHolder.distColor = (TextView) rowView.findViewById(R.id.claim_color_code);
 	        viewHolder.claimant = (LinearLayout) rowView.findViewById(R.id.LinearLayout_userName);
 	        viewHolder.claimApprover = (LinearLayout) rowView.findViewById(R.id.LinearLayout_approverName);
-	        //viewHolder.commentIcon = (ImageView) rowView.findViewById(R.id.approveListAdaptor_commentIcon);
 	        viewHolder.distColor.setVisibility(View.INVISIBLE);
 	        TextView userName = new TextView(context);
 			userName.setText("Claimant: "+claim.getClaimantName());
@@ -108,15 +103,6 @@ public class ApproverClaimListAdaptor extends ArrayAdapter<Claim>{
 		
 		//add name to adaptor view
         viewHolder.claimName.setText(claim.getName());
-        
-        //add claimant to adaptor view
-        //viewHolder.claimant.setText(claim.getClaimantName());
-        
-        //add approver to adaptor view
-        //need to set exception , don't show if just be submit and never be touched
-        //viewHolder.claimApprover.setText(claim.getApprover());
-        
-        //add status to adaptor view
         viewHolder.claimStatus.setText(claim.getClaimStatus());
         
         
@@ -229,9 +215,7 @@ public class ApproverClaimListAdaptor extends ArrayAdapter<Claim>{
         public TextView claimStartDate;
         public LinearLayout destinations;
         public LinearLayout amounts;
-        //public LinearLayout tags;
         public TextView distColor;
-        //public ImageView commentIcon;
     
     }
 	

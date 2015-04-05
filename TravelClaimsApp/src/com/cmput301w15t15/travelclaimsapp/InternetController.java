@@ -30,7 +30,7 @@ import android.net.ConnectivityManager;
 public class InternetController {
 	/**
 	 * Checks for internet connection by checking for IP Address. Needs to be run in its own thread.
-	 * @return
+	 * @return boolean
 	 */
 	public static boolean isInternetAvailable() {
         try {
@@ -56,7 +56,7 @@ public class InternetController {
 	/**
 	 * Checks for internet connection by checking network activity. Needs activity context to be run.
 	 * @param context
-	 * @return
+	 * @return boolean
 	 */
 	public static boolean isInternetAvailable2(Context context) {
 		return ((ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE)).getActiveNetworkInfo() != null;

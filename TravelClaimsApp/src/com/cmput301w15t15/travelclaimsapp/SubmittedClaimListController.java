@@ -2,7 +2,6 @@ package com.cmput301w15t15.travelclaimsapp;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Locale;
 
 import com.cmput301w15t15.travelclaimsapp.model.Claim;
@@ -16,6 +15,14 @@ public class SubmittedClaimListController
 {
 	private static ClaimList submittedClaimList = null;
 	
+	/**
+	 * Initializes Submitted claimant list to be used.
+	 * 
+	 * Must be run on it's own thread, requiring online synchronization.
+	 * Method handles inability to connect online.
+	 * 
+	 * @return boolean True if singleton creation was successful, else false.
+	 */
 	public static boolean initSubmittedClaimListController() {
 		reset();
 		if(submittedClaimList == null){
@@ -173,6 +180,9 @@ public class SubmittedClaimListController
 		return newClaims;
 	}
 
+	/**
+	 * Reset SubmittedClaimListController singleton.
+	 */
 	public static void reset(){
 		submittedClaimList = null;
 	}

@@ -249,6 +249,11 @@ public class AddClaimActivity extends Activity {
     	startActivity(intent);   
     }
  
+    /**
+     * Checks if user is an approver, then starts Approver activity.
+     * 
+     * @param menu
+     */
     public void MenuApprover(MenuItem menu){
     	if(!UserController.getUser().isApprover()){
     		Toast.makeText(this, "Not an Approver", Toast.LENGTH_LONG).show();
@@ -276,7 +281,6 @@ public class AddClaimActivity extends Activity {
 	
 	/**
 	 * When connected to the internet, given info is compared with server info.
-	 * 
 	 */
 	class submitClaimThread extends Thread {
 		
@@ -302,6 +306,9 @@ public class AddClaimActivity extends Activity {
 		
 	}
 	
+	/**
+	 * Thread to get submittedClaimList for Controller in Approver activity.
+	 */
 	class initApproverActivityThread extends Thread {
 		
 		Context context;

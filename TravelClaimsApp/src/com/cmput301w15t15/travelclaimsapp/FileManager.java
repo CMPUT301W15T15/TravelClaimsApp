@@ -155,7 +155,7 @@ public class FileManager {
 	/**
 	 * Gets claimlist from server.
 	 * @param Username
-	 * @return
+	 * @return ClaimList
 	 */
 	public ClaimList getClaimList(String Username) {
 
@@ -178,9 +178,9 @@ public class FileManager {
 	
 	
 	/**
-	 * Gets claimlist from server.
-	 * @param Username
-	 * @return
+	 * Gets Submitted claimlist from server.
+	 * 
+	 * @return ClaimList submitted claimlist
 	 */
 	public ClaimList getSumbittedClaimList() {
 
@@ -207,6 +207,9 @@ public class FileManager {
 	
 	/**
 	 * Adds a new ClaimList to server.
+	 * 
+	 * @param newClaimList
+	 * @param Username
 	 */
 	public void addClaimList(ClaimList newClaimList, String Username) {
 		HttpClient httpClient = new DefaultHttpClient();
@@ -256,9 +259,9 @@ public class FileManager {
 	
 	//from https://github.com/scheidemanS/lonelyTwitter/blob/master/src/ca/ualberta/cs/lonelytwitter/LonelyTwitterActivity.java on 2015-01-25
 	/**
-	 * 
 	 * Gets a claimlist from local file.
-	 * @return
+	 * 
+	 * @return ClaimList
 	 */
 	public ClaimList loadClaimLFromFile() {
 		ClaimList claims = new ClaimList();
@@ -288,6 +291,7 @@ public class FileManager {
 	//from https://github.com/scheidemanS/lonelyTwitter/blob/master/src/ca/ualberta/cs/lonelytwitter/LonelyTwitterActivity.java on 2015-01-25
 	/**
 	 * Saves claimlist to file and attempts to save online if there is an internet connection.
+	 * 
 	 * @param claimList
 	 * @param username
 	 */
@@ -312,8 +316,8 @@ public class FileManager {
 	}
 	
 	/**
-	 * 
 	 * Saves Submitted claimlist to file and attempts to save online if there is an internet connection.
+	 * 
 	 * @param claimList
 	 * @param username
 	 */
@@ -327,6 +331,8 @@ public class FileManager {
 	
 	/**
 	 * Loads user from file.
+	 *
+	 * @return User
 	 */
 	public User loadUserFromFile() {
 		User user;
@@ -354,6 +360,7 @@ public class FileManager {
 	//from https://github.com/scheidemanS/lonelyTwitter/blob/master/src/ca/ualberta/cs/lonelytwitter/LonelyTwitterActivity.java on 2015-01-25
 	/**
 	 * Saves user to file and attempts to save online if there is an internet connection.
+	 * 
 	 * @param user
 	 */
 	public void saveUserInFile(User user) {
@@ -378,7 +385,6 @@ public class FileManager {
 
 	/**
 	 * Thread for running http calls for claimlist when save() is called in controller
-	 *
 	 */
 	class onlineSaveClaimListThread extends Thread {
 		
@@ -422,9 +428,7 @@ public class FileManager {
 	}
 
 	/**
-	 * 
 	 * Thread for running http calls for user when save() is called in controller
-	 *
 	 */
 	class onlineSaveUserThread extends Thread {
 		

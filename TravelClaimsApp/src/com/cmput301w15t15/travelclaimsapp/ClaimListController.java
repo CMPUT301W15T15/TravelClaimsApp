@@ -44,7 +44,6 @@ public class ClaimListController {
 	private static ClaimList claimList = null;
 
 	/**
-	 * 
 	 * Load the claimList from the android file system
 	 */
 	static public void initClaimListController() {
@@ -308,10 +307,19 @@ public class ClaimListController {
 		return newClaims;
 	}
 
+	/**
+	 * Resets Singleton of ClaimListController
+	 */
 	public static void resetClaimListController(){
 		claimList = null;
 	}
 
+	/**
+	 * Looks for incomplete field in a claim.
+	 * 
+	 * @param Claim claim
+	 * @return boolean True if inCompelete, else false.
+	 */
 	public static boolean incompleteFields(Claim claim) {
 		if(claim.getEndDate() == null || claim.getStartDate() == null){
 			return true;

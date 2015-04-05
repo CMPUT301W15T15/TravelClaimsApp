@@ -54,7 +54,6 @@ public class UserController {
 	
 	/**
 	 * Pulls user from file for controller to use.
-	 * 
 	 */
 	static public void initUserController() {
 		if(user == null){
@@ -75,7 +74,6 @@ public class UserController {
 	
 	/**
 	 * Used to save controller user.
-	 * 
 	 */
 	public static void save(){
 		FileManager.getSaver().saveUserInFile(getUser());
@@ -83,6 +81,9 @@ public class UserController {
 	
 	
 	
+	/**
+	 * Resets UserController Singleton.
+	 */
 	public static void resetUserController(){
 		user = null;
 	}

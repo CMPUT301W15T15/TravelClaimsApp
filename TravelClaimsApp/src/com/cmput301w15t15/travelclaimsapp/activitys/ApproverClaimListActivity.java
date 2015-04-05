@@ -195,6 +195,9 @@ public class ApproverClaimListActivity extends Activity {
     	startActivity(intent);
     }
 
+	/**
+	 * Thread used to update the claimant's claimlist and update the submittedClaimList.
+	 */
 	class saveChangesThread extends Thread {
 		
 		private ClaimList newSubmittedClaimList;
@@ -233,6 +236,12 @@ public class ApproverClaimListActivity extends Activity {
 		}
 	};
 
+	/**
+	 * Checks for Comments on a Claim
+	 * 
+	 * @param claim
+	 * @return boolean
+	 */
 	private boolean hasComment(Claim claim){
 		if(claim.getComment() == null){
 			Toast.makeText(this, "Please comment first", Toast.LENGTH_SHORT).show();
@@ -245,6 +254,13 @@ public class ApproverClaimListActivity extends Activity {
 		return true;
 	}
 	
+	/**
+	 * Checks if a Approver can approve this claim, based on if it was returned before.
+	 * Only the returner can continue to use this claim, otherwise anyone can use the claim.
+	 * 
+	 * @param claim
+	 * @return boolean
+	 */
 	private boolean canApprove(Claim claim){
 		
 		if(claim.getClaimantName().equals(UserController.getUser().getUsername())){

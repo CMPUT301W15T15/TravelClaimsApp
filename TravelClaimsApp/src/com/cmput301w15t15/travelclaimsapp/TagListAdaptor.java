@@ -86,7 +86,6 @@ public class TagListAdaptor extends ArrayAdapter<Tag> {
 	
 	/**
 	 * all format views
-	 *
 	 */
 	private static class ViewHolder {
         public TextView tagName;

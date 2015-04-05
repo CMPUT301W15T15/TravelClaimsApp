@@ -21,10 +21,20 @@
 
 package com.cmput301w15t15.travelclaimsapp.elasticsearch;
 
+/**
+ * Generalizaton used to collect returns from elastic search.
+ *
+ * @param <T> Generalize type returned.
+ */
 public class SearchHit<T> {
 	private T _source;
 
 
+	/**
+	 * Returns Generalized type collected, designed for elastic search.
+	 * 
+	 * @return Generalized type.
+	 */
 	public T getSource() {
 		return _source;
 	}
