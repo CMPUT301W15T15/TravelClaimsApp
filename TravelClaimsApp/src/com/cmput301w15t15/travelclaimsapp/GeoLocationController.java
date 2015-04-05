@@ -336,6 +336,9 @@ public class GeoLocationController {
 	}
 	
 
+	/**
+	 * Sets the current location to null for signing out
+	 */
 	public static void resetGeoLocationController(){
 		currentLocation = null;
 		lm = null;

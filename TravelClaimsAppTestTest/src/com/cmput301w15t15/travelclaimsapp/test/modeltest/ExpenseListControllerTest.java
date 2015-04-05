@@ -36,7 +36,7 @@ public class ExpenseListControllerTest extends AndroidTestCase {
 		claim = new Claim("Claim");
 		ClaimListController.addClaim(claim);
 		expense = new Expense("e1");
-		elc = new ExpenseListController("Claim");
+		elc = new ExpenseListController("Claim",false);
 	}
 
 	public void testAddExpense(){
@@ -52,8 +52,13 @@ public class ExpenseListControllerTest extends AndroidTestCase {
 	public void testcontroller(){
 		Claim claim1 = new Claim("Claim2");
 		ClaimListController.addClaim(claim1);
-		ExpenseListController elc2 = new ExpenseListController(claim1.getName());
+		ExpenseListController elc2 = new ExpenseListController(claim1.getName(),false);
 		assertTrue(elc2.getExpenseList().size() == 0);
+	}
+	
+	public void testgetAmountTotals(){
+		fail();
+		//need to write test
 	}
 	
 }

@@ -144,7 +144,9 @@ public class EditClaimActivityUITest extends
 	}
 
 
-	
+	/**
+	 * EditClaimActivityUITest#3
+	 */
 //	public void testMapActivityViewIntent(){
 //		GeoLocation gl = new GeoLocation(0,0);
 //		intent = GeoLocationController.viewLocationIntent(activity, gl);

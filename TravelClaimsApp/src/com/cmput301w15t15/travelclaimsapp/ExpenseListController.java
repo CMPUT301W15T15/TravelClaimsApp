@@ -17,6 +17,10 @@
  */
 package com.cmput301w15t15.travelclaimsapp;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
 import com.cmput301w15t15.travelclaimsapp.model.Claim;
 import com.cmput301w15t15.travelclaimsapp.model.ClaimListSaveListener;
 import com.cmput301w15t15.travelclaimsapp.model.ExpenseList;
@@ -31,10 +35,20 @@ public class ExpenseListController {
 	private ExpenseList expenseList;
 	private Claim claim;
 	
-	public ExpenseListController(String name) {
-		claim = ClaimListController.getClaimList().getClaim(name);
+	/**
+	 * @param name
+	 * @param submitted
+	 */
+	public ExpenseListController(String name, boolean submitted) {
+		if(submitted){
+			claim = SubmittedClaimListController.getClaimList().getClaim(name);
+		}else{
+			claim = ClaimListController.getClaimList().getClaim(name);
+		}
+		
 		expenseList = claim.getExpenseList();
 	}
+	
 	
 	
 	/** Method that retrieves the expenseList 
@@ -63,5 +77,36 @@ public class ExpenseListController {
 		claim.removeExpense(expense);
 	}
 	
+	
+	/**
+	 * Takes the current expenses and returns a map containing the total 
+	 * currency amounts for all expenses
+	 * 
+	 * Only returns currencies with amounts greater than zero
+	 * 
+	 * @param expenses ArrayList<Expense> to get totals from
+	 * @return returns a map with key = currencies (String) and values = totals (Integer)
+	 */
+	public Map<String, Integer> getAmountTotals(){
+		
+		ArrayList<Expense> expenses = this.expenseList.toArrayList();
+		Map<String, Integer> totalAmounts = new HashMap<String, Integer>();
+		
+		for(Expense expense : expenses){
+			String cur = expense.getCurr();
+			Integer amount = expense.getCost();
+			
+			if(amount == null){
+				continue;
+			}
+			
+			if(totalAmounts.containsKey(cur)){
+				totalAmounts.put(cur, amount + totalAmounts.get(cur));
+			}else if(amount != 0){
+				totalAmounts.put(cur,amount);
+			}
+		}
+		return totalAmounts;
+	}
 	
 }

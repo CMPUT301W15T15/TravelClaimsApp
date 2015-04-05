@@ -37,6 +37,7 @@ public class GeoLocationControllerTest extends AndroidTestCase {
 	}
 	
 	/**
+	 * GeoLocationControllerTest#1
 	 * Tests using GPS to get current location 
 	 * 
 	 * NOTE: If using emulator need to set latitude and longitude using DDMS for 
@@ -47,6 +48,8 @@ public class GeoLocationControllerTest extends AndroidTestCase {
 	}	
 	
 	/**
+	 * GeoLocationControllerTest#2
+	 * 
 	 * Tests setting the home location 
 	 */
 	public void testsetLatLng(){	
@@ -57,6 +60,8 @@ public class GeoLocationControllerTest extends AndroidTestCase {
 	}
 	
 	/**
+	 * GeoLocationControllerTest#3
+	 * 
 	 * Tests the getDistanceFromHome method
 	 */
 	public void testDistanceFromHome(){
@@ -75,6 +80,8 @@ public class GeoLocationControllerTest extends AndroidTestCase {
 	}
 	
 	/**
+	 * GeoLocationControllerTest#4
+	 * 
 	 * Tests setting the geolocation for destinations and expenses 
 	 */
 	public void testSetGeoLocation(){
@@ -92,11 +99,15 @@ public class GeoLocationControllerTest extends AndroidTestCase {
 		assertEquals("Controller did not set geolocation",-113.490927,expense.getGeoLocation().getLongitude());
 		
 	}
-	
+	/**
+	 * GeoLocationControllerTest#5
+	 */
 	public void testGPSenabled(){
 		assertTrue(GeoLocationController.checkGPSEnabled());
 	}
 	/**
+	 * GeoLocationControllerTest#6
+	 * 
 	 * Test getting the first destination with a geolocation color code 
 	 */
 	public void testGetFirstDestWithGeoLocaion(){
@@ -136,6 +147,8 @@ public class GeoLocationControllerTest extends AndroidTestCase {
 		assertEquals("Color code should be blue", Color.rgb(35, 54, 132), GeoLocationController.getFirstDestinationColorCode(claim4)[0]);
 	}
 	/**
+	 * GeoLocationControllerTest#7
+	 * 
 	 * Test getting the first destination with a geolocation color code 
 	 */
 	public void testgetClaimDestinationMarkers(){

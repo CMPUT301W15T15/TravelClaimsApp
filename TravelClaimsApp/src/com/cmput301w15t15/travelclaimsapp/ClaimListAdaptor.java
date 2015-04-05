@@ -151,11 +151,11 @@ public class ClaimListAdaptor extends ArrayAdapter<Claim>{
         	viewHolder.tags.setVisibility(android.view.View.INVISIBLE);	
         }
         //Get amounts with currencies from expenselist
-        ArrayList<Expense> expenseList = claim.getExpenseList().toArrayList();
-        Map<String, Integer> totals = getAmountTotals(expenseList);
+        ExpenseListController elc = new ExpenseListController(claim.getName(), false);
+        Map<String, Integer> totals = elc.getAmountTotals();
         
         //add amounts to viewholder 
-        if(expenseList.size()>0){
+        if(elc.getExpenseList().size()>0){
         	viewHolder.amounts.removeAllViews();
         	viewHolder.amounts.setVisibility(android.view.View.VISIBLE);
         	//for each amount add a TextView to linearlayout with the currency 
@@ -181,35 +181,6 @@ public class ClaimListAdaptor extends ArrayAdapter<Claim>{
         	viewHolder.claimStartDate.setHeight(45);
         }
 		return rowView;
-	}
-	/**
-	 * Takes a arraylist of expenses and returns a map containing the total 
-	 * currency amounts for all expenses
-	 * 
-	 * Only returns currencies with amounts greater than zero
-	 * 
-	 * @param expenses ArrayList<Expense> to get totals from
-	 * @return returns a map with key = currencies (String) and values = totals (Integer)
-	 */
-	private Map<String, Integer> getAmountTotals(ArrayList<Expense> expenses){
-		
-		Map<String, Integer> totalAmounts = new HashMap<String, Integer>();
-		
-		for(Expense expense : expenses){
-			String cur = expense.getCurr();
-			Integer amount = expense.getCost();
-			
-			if(amount == null){
-				continue;
-			}
-			
-			if(totalAmounts.containsKey(cur)){
-				totalAmounts.put(cur, amount + totalAmounts.get(cur));
-			}else if(amount != 0){
-				totalAmounts.put(cur,amount);
-			}
-		}
-		return totalAmounts;
 	}
 	
 	private static class ViewHolder {

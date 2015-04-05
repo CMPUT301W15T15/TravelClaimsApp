@@ -72,7 +72,7 @@ public class ExpenseListActivity extends Activity
 		setContentView(R.layout.expense_list);
 		FileManager.initializeSaver(this);
 		expenseListView = (ListView) findViewById(R.id.CurrentExpenseList2);
-		elc = new ExpenseListController(claimName);
+		elc = new ExpenseListController(claimName, false);
 		expenseList = elc.getExpenseList();
 
 		expenseAdaptor = new ExpenseListAdaptor(this,R.layout.expense_list_adaptor,expenseList.toArrayList());

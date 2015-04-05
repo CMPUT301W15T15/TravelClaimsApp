@@ -74,7 +74,7 @@ public class EditExpenseActivityUITest extends
 		instrumentation = getInstrumentation();
 		ClaimListController.addClaim(claim1);
 		claim1.addExpense(expense1);
-		ExpenseListController e1 = new ExpenseListController(claim1.getName());
+		ExpenseListController e1 = new ExpenseListController(claim1.getName(), false);
 		e1.addExpense(expense1);
 		
 		//need to change ids once UI has been created 
