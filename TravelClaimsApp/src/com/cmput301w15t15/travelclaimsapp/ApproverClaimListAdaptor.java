@@ -42,7 +42,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 /**
- * 	Custom ArrayAdaptor for displaying the claimlist.  	
+
+ * 	Custom ArrayAdaptor for displaying the the submitted claimlist.
+ *  
+ *  	
  */
 public class ApproverClaimListAdaptor extends ArrayAdapter<Claim>{
 
@@ -77,7 +80,7 @@ public class ApproverClaimListAdaptor extends ArrayAdapter<Claim>{
 	        viewHolder.distColor = (TextView) rowView.findViewById(R.id.claim_color_code);
 	        viewHolder.claimant = (LinearLayout) rowView.findViewById(R.id.LinearLayout_userName);
 	        viewHolder.claimApprover = (LinearLayout) rowView.findViewById(R.id.LinearLayout_approverName);
-	        viewHolder.distColor.setVisibility(View.INVISIBLE);
+	        viewHolder.distColor.setVisibility(View.INVISIBLE);		//do not use distcolor so hide
 	        TextView userName = new TextView(context);
 			userName.setText("Claimant: "+claim.getClaimantName());
 			userName.setTextColor(Color.WHITE);
@@ -87,10 +90,7 @@ public class ApproverClaimListAdaptor extends ArrayAdapter<Claim>{
 		}else{
 			viewHolder = (ViewHolder) rowView.getTag();
 		}
-		
-		
-		
-	        
+		      
 		TextView approverName = new TextView(context);
 		approverName.setText("Approver: "+claim.getApprover());
 		approverName.setTextColor(Color.WHITE);
@@ -103,6 +103,7 @@ public class ApproverClaimListAdaptor extends ArrayAdapter<Claim>{
 		
 		//add name to adaptor view
         viewHolder.claimName.setText(claim.getName());
+        //add status to adaptor view
         viewHolder.claimStatus.setText(claim.getClaimStatus());
         
         
@@ -113,12 +114,9 @@ public class ApproverClaimListAdaptor extends ArrayAdapter<Claim>{
         }else{
         	viewHolder.claimStatus.setTextColor(context.getResources().getColor(color.primary_text_dark));
         }
-        
-        
+       
         //add destinations to viewholder
         ArrayList<Destination> dests = claim.getDestinationList().toArrayList();
-        
-       
         if(dests.size()>0){
    
         	viewHolder.destinations.removeAllViews();
@@ -140,11 +138,11 @@ public class ApproverClaimListAdaptor extends ArrayAdapter<Claim>{
         
                
         //Get amounts with currencies from expenselist
-        ArrayList<Expense> expenseList = claim.getExpenseList().toArrayList();
-        Map<String, Integer> totals = getAmountTotals(expenseList);
+        ExpenseListController elc = new ExpenseListController(claim.getName(), true);
+        Map<String, Integer> totals = elc.getAmountTotals();
         
         //add amounts to viewholder 
-        if(expenseList.size()>0){
+        if(elc.getExpenseList().size()>0){
         	viewHolder.amounts.removeAllViews();
         	viewHolder.amounts.setVisibility(android.view.View.VISIBLE);
         	//for each amount add a TextView to linearlayout with the currency 
@@ -163,15 +161,11 @@ public class ApproverClaimListAdaptor extends ArrayAdapter<Claim>{
         SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy",Locale.CANADA);
         if(claim.getStartDate() == null){
         	viewHolder.claimStartDate.setVisibility(View.INVISIBLE);
+         	viewHolder.claimStartDate.setHeight(0);
         }else{
         	viewHolder.claimStartDate.setVisibility(View.VISIBLE);
         	viewHolder.claimStartDate.setText(sdf.format(claim.getStartDate()));
-        }
-        
-        if(claim.getStartDate() == null){
-        	viewHolder.claimStartDate.setHeight(0);
-        }else{
-        	viewHolder.claimStartDate.setHeight(35);
+        	viewHolder.claimStartDate.setHeight(45);
         }
         
         
@@ -186,26 +180,26 @@ public class ApproverClaimListAdaptor extends ArrayAdapter<Claim>{
 	 * @param expenses ArrayList<Expense> to get totals from
 	 * @return returns a map with key = currencies (String) and values = totals (Integer)
 	 */
-	private Map<String, Integer> getAmountTotals(ArrayList<Expense> expenses){
-		
-		Map<String, Integer> totalAmounts = new HashMap<String, Integer>();
-		
-		for(Expense expense : expenses){
-			String cur = expense.getCurr();
-			Integer amount = expense.getCost();
-			
-			if(amount == null){
-				continue;
-			}
-			
-			if(totalAmounts.containsKey(cur)){
-				totalAmounts.put(cur, amount + totalAmounts.get(cur));
-			}else if(amount != 0){
-				totalAmounts.put(cur,amount);
-			}
-		}
-		return totalAmounts;
-	}
+//	private Map<String, Integer> getAmountTotals(ArrayList<Expense> expenses){
+//		
+//		Map<String, Integer> totalAmounts = new HashMap<String, Integer>();
+//		
+//		for(Expense expense : expenses){
+//			String cur = expense.getCurr();
+//			Integer amount = expense.getCost();
+//			
+//			if(amount == null){
+//				continue;
+//			}
+//			
+//			if(totalAmounts.containsKey(cur)){
+//				totalAmounts.put(cur, amount + totalAmounts.get(cur));
+//			}else if(amount != 0){
+//				totalAmounts.put(cur,amount);
+//			}
+//		}
+//		return totalAmounts;
+//	}
 	
 	private static class ViewHolder {
         public LinearLayout claimApprover;
@@ -216,7 +210,6 @@ public class ApproverClaimListAdaptor extends ArrayAdapter<Claim>{
         public LinearLayout destinations;
         public LinearLayout amounts;
         public TextView distColor;
-    
     }
 	
 

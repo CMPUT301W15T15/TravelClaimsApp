@@ -108,7 +108,7 @@ public class ClaimListControllerTest extends AndroidTestCase {
 	 */
 	public void testExpenseListeners() throws IOException{
 		ClaimListController.addClaim(claim4);
-		ExpenseListController elc = new ExpenseListController(claim4.getName());
+		ExpenseListController elc = new ExpenseListController(claim4.getName(),false);
 		elc.addExpense(expense);
 		claimList2 = ClaimListController.getClaimList();
 		Claim claim2 = claimList2.getClaim("c4");
@@ -236,7 +236,7 @@ public class ClaimListControllerTest extends AndroidTestCase {
 		claim.setStartDate(new Date());	//test complete claim fields
 		assertFalse(ClaimListController.incompleteFields(claim));
 		
-		ExpenseListController elc = new ExpenseListController(claim.getName());
+		ExpenseListController elc = new ExpenseListController(claim.getName(),false);
 		elc.addExpense(expense);
 		
 		expense.setFlag(1);				//test setting flag

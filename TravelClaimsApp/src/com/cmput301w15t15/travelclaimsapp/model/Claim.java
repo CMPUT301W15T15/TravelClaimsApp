@@ -30,9 +30,6 @@ import java.util.Date;
 
 public class Claim implements Listenable{
 	
-
-
-
 	private Claim claim;
 	private String claimName;
 	private Date startDate;
@@ -67,7 +64,6 @@ public class Claim implements Listenable{
 		this.comments = new ArrayList<String>();
 	}
 
-	
 	/**
 	 * return Claim Name
 	 * @return
@@ -76,7 +72,6 @@ public class Claim implements Listenable{
 		// TODO Auto-generated method stub
 		return this.claimName;
 	}
-	
 	
 	/**
 	 * set Claim Name
@@ -88,7 +83,6 @@ public class Claim implements Listenable{
 		notifyListeners();
 	}
 
-	
 	/**
 	 * return ExpenseList of one Claim
 	 * @return ExpenseList
@@ -97,8 +91,6 @@ public class Claim implements Listenable{
 		return expenseList;
 	}
 	
-
-
 	/**
 	 * set Claim Start Date
 	 * @param StartDate
@@ -111,7 +103,6 @@ public class Claim implements Listenable{
 		
 	}
 	
-
 	/**
 	 * set Claim end Date
 	 * @param EndDate
@@ -123,7 +114,6 @@ public class Claim implements Listenable{
 		
 	}
 	
-	
 	/**
 	 * get Claim Start Date
 	 * @return startDate
@@ -133,11 +123,6 @@ public class Claim implements Listenable{
 		return this.startDate;
 	}
 
-
-
-
-
-	
 	/**
 	 * get Claim End Date
 	 * @return endDate
@@ -147,8 +132,6 @@ public class Claim implements Listenable{
 		return this.endDate;
 	}
 
-	
-	
 	/**
 	 * set Claim Tag, no duplicate
 	 * @param tagName
@@ -179,7 +162,6 @@ public class Claim implements Listenable{
 		notifyListeners();
 	}
 	
-	
 	/**
 	 * get a list of all Tags for a Claim
 	 * @return
@@ -190,7 +172,6 @@ public class Claim implements Listenable{
 		
 	}
 	
-	
 	/**
 	 * get total cost for one claim
 	 * @return 
@@ -200,8 +181,6 @@ public class Claim implements Listenable{
 		return this.expenseList.getTotalValue();
 		
 	}
-
-
 
 	/**
 	 * get a list of destination for one claim
@@ -242,7 +221,6 @@ public class Claim implements Listenable{
 		
 	}
 
-	
 	/**
 	 * set claim comment
 	 * @param string
@@ -289,10 +267,6 @@ public class Claim implements Listenable{
 		// TODO Auto-generated method stub
 		return this.status;
 	}
-
-
-	
-	
 
 	/**
 	 * add one expense for one claim into its expenseList

@@ -137,7 +137,7 @@ public class SearchActivity extends Activity
             case R.id.cmenu_addExpense:
             	intent= new Intent(SearchActivity.this, EditExpenseActivity.class);
             	//create new expense with default name and add to claimlist
-            	ExpenseListController elc = new ExpenseListController(claim.getName());
+            	ExpenseListController elc = new ExpenseListController(claim.getName(), false);
             	Expense expense = new Expense("Expense"+claim.getExpenseList().size());
             	elc.addExpense(expense);
             	// attach claim name and expense name to intent 
