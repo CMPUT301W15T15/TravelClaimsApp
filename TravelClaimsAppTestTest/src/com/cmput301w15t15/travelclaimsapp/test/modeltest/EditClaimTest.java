@@ -22,14 +22,13 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import android.annotation.SuppressLint;
 import android.test.AndroidTestCase;
 
 import com.cmput301w15t15.travelclaimsapp.ClaimListController;
 import com.cmput301w15t15.travelclaimsapp.FileManager;
 import com.cmput301w15t15.travelclaimsapp.model.Claim;
 import com.cmput301w15t15.travelclaimsapp.model.ClaimList;
-
-import junit.framework.TestCase;
 
 /**
  *	Tests for test editing {@link Claim}
@@ -81,6 +80,7 @@ public class EditClaimTest extends AndroidTestCase {
 	 * test case: EditClaimTest#2
 	 * @throws ParseException 
 	 */
+	@SuppressLint("SimpleDateFormat")
 	public void testEditClaimDate() throws ParseException{
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");

@@ -17,17 +17,11 @@
  */
 package com.cmput301w15t15.travelclaimsapp.test.modeltest;
 
-import android.app.Activity;
-import android.app.Instrumentation;
-import android.widget.Button;
-
-import com.cmput301w15t15.travelclaimsapp.activitys.ApproverClaimListActivity;
 import com.cmput301w15t15.travelclaimsapp.model.Claim;
 
 import junit.framework.TestCase;
 
 public class ClaimStatusTest extends TestCase {
-	private Claim Claim1;
 	private Claim Claim2;
 
 	
@@ -37,7 +31,6 @@ public class ClaimStatusTest extends TestCase {
 
 	protected void setUp() throws Exception {
 		super.setUp();
-		Claim1=new Claim("Claim1");
 	}
 
 	

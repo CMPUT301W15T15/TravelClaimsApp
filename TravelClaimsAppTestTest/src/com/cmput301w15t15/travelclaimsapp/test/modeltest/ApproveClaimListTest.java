@@ -21,9 +21,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Locale;
-import java.util.Map;
 
 
 import com.cmput301w15t15.travelclaimsapp.model.Claim;
