@@ -205,14 +205,14 @@ public class ClaimListController {
 	 * Saves claimlist to file using FileManager class 
 	 */
 	public static void save(){
-		FileManager.getSaver().saveClaimLInFile(getClaimList(), UserController.getUser().getUsername());
+		
 	}
 	
 	/**
 	 * Saves claimlist to file using FileManager class 
 	 */
-	public static void saveToServer(){
-		FileManager.getSaver().saveClaimLToServer(getClaimList(), UserController.getUser().getUsername());
+	public static void saveInEditActivities(){
+		FileManager.getSaver().saveClaimLInFile(getClaimList(), UserController.getUser().getUsername());
 	}
 	
 	/**
