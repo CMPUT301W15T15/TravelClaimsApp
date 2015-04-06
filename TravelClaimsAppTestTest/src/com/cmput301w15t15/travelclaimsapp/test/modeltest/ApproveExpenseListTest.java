@@ -19,7 +19,6 @@ package com.cmput301w15t15.travelclaimsapp.test.modeltest;
 
 import java.io.IOException;
 import java.util.Date;
-import java.util.Map;
 
 
 import com.cmput301w15t15.travelclaimsapp.model.Claim;
@@ -111,6 +110,7 @@ public class ApproveExpenseListTest extends TestCase {
 		claim1.setStatus("Submitted");
 		assertTrue("Image yes?", expense1.getPicture() == null);
 		assertTrue("Image no", expense2.getPicture() == null);
+
 	}
 }
 	

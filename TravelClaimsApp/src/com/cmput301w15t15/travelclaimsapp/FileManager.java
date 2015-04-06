@@ -130,6 +130,7 @@ public class FileManager {
 	
 	/**
 	 * Adds a new user to server.
+	 * @param User newUser
 	 */
 	public void addUser(User newUser) {
 		HttpClient httpClient = new DefaultHttpClient();
@@ -153,8 +154,8 @@ public class FileManager {
 	
 	
 	/**
-	 * Gets claimlist from server.
-	 * @param Username
+	 * Gets claimlist from server for the give Username.
+	 * @param String Username
 	 * @return ClaimList
 	 */
 	public ClaimList getClaimList(String Username) {
@@ -180,7 +181,7 @@ public class FileManager {
 	/**
 	 * Gets Submitted claimlist from server.
 	 * 
-	 * @return ClaimList submitted claimlist
+	 * @return ClaimList submittedClaimlist
 	 */
 	public ClaimList getSumbittedClaimList() {
 
@@ -206,10 +207,10 @@ public class FileManager {
 	
 	
 	/**
-	 * Adds a new ClaimList to server.
+	 * Adds a new ClaimList to server for the given Username.
 	 * 
-	 * @param newClaimList
-	 * @param Username
+	 * @param ClaimList newClaimList
+	 * @param String Username
 	 */
 	public void addClaimList(ClaimList newClaimList, String Username) {
 		HttpClient httpClient = new DefaultHttpClient();
@@ -234,7 +235,7 @@ public class FileManager {
 	/**
 	 * Add submitted claim to server by updating the submitted claimlist.
 	 * 
-	 * @param newClaimList
+	 * @param ClaimList newClaimList
 	 */
 	public void addSubmittedClaimL(ClaimList newClaimList) {
 		HttpClient httpClient = new DefaultHttpClient();
@@ -292,8 +293,8 @@ public class FileManager {
 	/**
 	 * Saves claimlist to file and attempts to save online if there is an internet connection.
 	 * 
-	 * @param claimList
-	 * @param username
+	 * @param ClaimList claimList
+	 * @param String username
 	 */
 	public void saveClaimLInFile(ClaimList claimList, String username) {
 		Thread thread = new onlineSaveClaimListThread(claimList, username);
@@ -318,8 +319,7 @@ public class FileManager {
 	/**
 	 * Saves Submitted claimlist to file and attempts to save online if there is an internet connection.
 	 * 
-	 * @param claimList
-	 * @param username
+	 * @param ClaimList claimList
 	 */
 	public void saveSubmittedClaimLToServer(ClaimList claimList) {
 		Thread thread = new onlineSaveSubmittedClaimLThread(claimList);
@@ -361,7 +361,7 @@ public class FileManager {
 	/**
 	 * Saves user to file and attempts to save online if there is an internet connection.
 	 * 
-	 * @param user
+	 * @param User user
 	 */
 	public void saveUserInFile(User user) {
 		Thread thread = new onlineSaveUserThread(user);
@@ -384,7 +384,7 @@ public class FileManager {
 	}
 
 	/**
-	 * Thread for running http calls for claimlist when save() is called in controller
+	 * Thread for running http calls for claimlist when save() is called in controller.
 	 */
 	class onlineSaveClaimListThread extends Thread {
 		
@@ -428,7 +428,7 @@ public class FileManager {
 	}
 
 	/**
-	 * Thread for running http calls for user when save() is called in controller
+	 * Thread for running http calls for user when save() is called in controller.
 	 */
 	class onlineSaveUserThread extends Thread {
 		

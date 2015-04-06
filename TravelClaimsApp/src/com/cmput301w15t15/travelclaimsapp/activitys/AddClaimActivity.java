@@ -49,9 +49,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 /**
- * Activity for the AddClaim/ClaimList view 
+ * Activity for the AddClaim/ClaimList view.
  * 
- * TODO:
  */
 public class AddClaimActivity extends Activity {
 
@@ -205,7 +204,7 @@ public class AddClaimActivity extends Activity {
     }
     /** Function that is called when "Search" menu item is clicked
 	 * and switches to the searchactivity
-	 * @author Henry
+	 * 
 	 * @param menu
 	 */
     public void SearchOption (MenuItem menu)
@@ -216,7 +215,7 @@ public class AddClaimActivity extends Activity {
     }
     /**Function that is called when the "Sign Out" menu item is clicked
 	 * and switches to the mainscreenactivity
-	 * @author Henry
+	 * 
 	 * @param menu
 	 */
     public void SignOut(MenuItem menu)

@@ -102,6 +102,10 @@ public class SearchActivity extends Activity
 		claimListAdaptor.notifyDataSetChanged();
 	}
 	
+	/**
+	 * Return to ClaimList activity.
+	 * @param menu
+	 */
 	public void ReturnClaim(MenuItem menu)
     {
     	Toast.makeText(this, "Returning to claimlist", Toast.LENGTH_SHORT).show();
@@ -113,6 +117,17 @@ public class SearchActivity extends Activity
     public void onCreateContextMenu(ContextMenu menu, View v,ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
         getMenuInflater().inflate(R.menu.add_claim_context_menu, menu);
+       
+        AdapterContextMenuInfo adaptorinfo = (AdapterContextMenuInfo) menuInfo;
+        int position = adaptorinfo.position;
+        
+        String status = claimListAdaptor.getItem(position).getStatus();
+        
+        if(status.equals(Claim.APPROVED) || status.equals(Claim.RETURNED)){
+        	menu.getItem(4).setVisible(true);
+        }else{
+        	menu.getItem(4).setVisible(false);
+        }
         
         menu.getItem(3).setVisible(false);
         menu.getItem(2).setVisible(false);
@@ -127,13 +142,6 @@ public class SearchActivity extends Activity
         final Claim claim = claimListAdaptor.getItem(info.position);
         
         switch (item.getItemId()) {
-            case R.id.cmenu_submit_claim:
-            	////////////
-            	//DO something to upload to elasticsearch server
-            	///////////
-            	claim.setStatus("Submitted");
-            	claimListAdaptor.notifyDataSetChanged();
-            	return true;
             case R.id.cmenu_addExpense:
             	intent= new Intent(SearchActivity.this, EditExpenseActivity.class);
             	//create new expense with default name and add to claimlist

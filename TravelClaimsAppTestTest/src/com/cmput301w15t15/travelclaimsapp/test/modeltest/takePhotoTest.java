@@ -19,6 +19,8 @@ package com.cmput301w15t15.travelclaimsapp.test.modeltest;
 
 import com.cmput301w15t15.travelclaimsapp.model.Expense;
 
+import android.R;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import junit.framework.TestCase;
 
@@ -28,6 +30,9 @@ public class takePhotoTest extends TestCase
 	
 	Uri imageFileUri;
 	private Expense expense;
+	private byte[] testPicture;
+	
+	
 	protected void setUp() throws Exception
 	{
 	    expense = new Expense("Business");
@@ -36,7 +41,12 @@ public class takePhotoTest extends TestCase
 	//TestCase: takePhotoTest#1
 	 protected void testTakePhoto() {
 		 Expense expense = new Expense("Business");
-		 //expense.takeReceipt(imageFileUri);
+
+		 
+		 //testPicture= ( R.drawable.ic_dialog_alert );
+		 
+		// expense.takePicture(imageFileUri);
+
 		 //assertTrue("exist photo", expense.takeReceipt(imageFileUri) != null);
 		 }
 	//TestCase: takePhotoTest#2

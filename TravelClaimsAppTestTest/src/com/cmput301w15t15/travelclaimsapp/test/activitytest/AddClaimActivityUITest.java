@@ -19,14 +19,13 @@ package com.cmput301w15t15.travelclaimsapp.test.activitytest;
 
 
 import java.util.Date;
-
-import com.cmput301w15t15.travelclaimsapp.ClaimListAdaptor;
 import com.cmput301w15t15.travelclaimsapp.ClaimListController;
 import com.cmput301w15t15.travelclaimsapp.R;
 import com.cmput301w15t15.travelclaimsapp.activitys.AddClaimActivity;
 import com.cmput301w15t15.travelclaimsapp.activitys.EditClaimActivity;
 import com.cmput301w15t15.travelclaimsapp.model.Claim;
 import com.cmput301w15t15.travelclaimsapp.model.ClaimList;
+
 
 
 
@@ -46,10 +45,10 @@ public class AddClaimActivityUITest extends ActivityInstrumentationTestCase2<Add
 	private Activity activity;
 	private Instrumentation instrumentation;
 	private Button newClaimButton;
-	private ClaimList claimList;
-	private ListView listView;
-	private ClaimListAdaptor adaptor;
 	Claim claim1;
+	ClaimList claimList = new ClaimList();
+	private ListView listView;
+	
 	
 	public AddClaimActivityUITest() {
 		super(AddClaimActivity.class);
@@ -59,10 +58,9 @@ public class AddClaimActivityUITest extends ActivityInstrumentationTestCase2<Add
 		super.setUp();
 		setActivityInitialTouchMode(true);
 		activity = getActivity();
+		listView = (ListView) activity.findViewById(R.id.Claim_Listview);
 		claimList = ClaimListController.getClaimList();
 		instrumentation = getInstrumentation();
-		listView = (ListView) activity.findViewById(R.id.Claim_Listview);
-		adaptor = new ClaimListAdaptor(activity, R.id.Claim_Listview, claimList.toArrayList());
 		newClaimButton = (Button) activity.findViewById(R.id.Add_Claim_Button2);
 	}
 
@@ -103,6 +101,8 @@ public class AddClaimActivityUITest extends ActivityInstrumentationTestCase2<Add
 		ClaimListController.addClaim(claim4);
 		
 		instrumentation.runOnMainSync(new Runnable() {
+	
+
 			@Override
 			public void run() {
 				listView.getChildAt(0).performLongClick();

@@ -25,7 +25,6 @@ import android.net.ConnectivityManager;
 
 /**
  * Used to check connectivity to the internet through different methods
- *
  */
 public class InternetController {
 	/**
@@ -35,19 +34,15 @@ public class InternetController {
 	public static boolean isInternetAvailable() {
         try {
             InetAddress ipAddr = InetAddress.getByName("http://cmput301.softwareprocess.es:8080/cmput301w15t15/");
-//            InetAddress ipAddr = InetAddress.getByName("https://www.google.ca/webhp?hl=en");
 
             if (ipAddr.equals("")) {
                 return false;
-//            	return "no ip";
             } else {
                 return true;
-//            	return "good";
             }
 
         } catch (Exception e) {
             return false;
-//        	return "else";
         }
 
     }
@@ -55,6 +50,9 @@ public class InternetController {
 
 	/**
 	 * Checks for internet connection by checking network activity. Needs activity context to be run.
+	 * 
+	 * This is a less conclusive test. You may have connectivity to the internet, but the server could be down.
+	 *  
 	 * @param context
 	 * @return boolean
 	 */

@@ -20,10 +20,6 @@ package com.cmput301w15t15.travelclaimsapp.test.modeltest;
 
 import java.io.IOException;
 
-import com.cmput301w15t15.travelclaimsapp.model.Claim;
-
-
-
 import com.cmput301w15t15.travelclaimsapp.model.Tag;
 import com.cmput301w15t15.travelclaimsapp.model.TagList;
 

@@ -26,12 +26,10 @@ import com.cmput301w15t15.travelclaimsapp.model.Expense;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -39,9 +37,10 @@ import android.widget.TextView;
 
 /**
  * 
- * 
- * @author searn
- *
+ * 	Custom ArrayAdaptor for displaying the expenselist within a claim in the submitted claimlist.
+ *  
+ *  Builds a Array list to hold Expenses in and a ViewHolder to display them.
+ *  	
  */
 public class ApproverExpenseListAdaptor extends ArrayAdapter<Expense> {
 
@@ -75,8 +74,6 @@ public class ApproverExpenseListAdaptor extends ArrayAdapter<Expense> {
 		    viewHolder.expenseAmount = (TextView) rowView.findViewById(R.id.expenseAdaptor_amount_approve);
 		    viewHolder.expenseDate = (TextView) rowView.findViewById(R.id.expenseAdaptor_date_approve);
 		    viewHolder.expenseName = (TextView) rowView.findViewById(R.id.expenseAdaptor_Name_approve);
-		    //viewHolder.expenseFlag = (ImageView) rowView.findViewById(R.id.expenseAdaptor_flag_approve);
-		    viewHolder.expenseMap = (ImageView) rowView.findViewById(R.id.expenseAdaptor_map_approve);
 		    viewHolder.expenseDescription = (LinearLayout) rowView.findViewById(R.id.expenseAdaptor_description_approve);
 		    viewHolder.expenseImageAttach = (ImageView) rowView.findViewById(R.id.expenseAdaptor_attachment_approve);
 		    rowView.setTag(viewHolder);
@@ -114,9 +111,9 @@ public class ApproverExpenseListAdaptor extends ArrayAdapter<Expense> {
 		}
 	
 		if(expense.getPicture() == null){
-        	viewHolder.expenseImageAttach.setVisibility(android.view.View.INVISIBLE);
-        }else{
         	viewHolder.expenseImageAttach.setVisibility(android.view.View.VISIBLE);
+        }else{
+        	viewHolder.expenseImageAttach.setVisibility(android.view.View.INVISIBLE);
         }
 		
 		return rowView;
@@ -130,9 +127,7 @@ public class ApproverExpenseListAdaptor extends ArrayAdapter<Expense> {
 	 */
 	private static class ViewHolder {
         public LinearLayout expenseDescription;
-		public ImageView expenseMap;
 		public ImageView expenseImageAttach;
-		//public ImageView expenseFlag;
 		public TextView expenseName;
 		public TextView expenseDate;
 		public TextView expenseAmount;

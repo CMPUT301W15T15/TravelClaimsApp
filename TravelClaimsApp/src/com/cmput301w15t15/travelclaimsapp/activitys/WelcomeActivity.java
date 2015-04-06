@@ -6,6 +6,9 @@ import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 
+/**
+ * Shows intro picture and plays intro song.
+ */
 public class WelcomeActivity extends Activity {
 	MediaPlayer ourSong;
 	

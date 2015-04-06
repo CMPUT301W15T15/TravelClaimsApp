@@ -53,7 +53,7 @@ public class CreateUserActivity extends Activity {
 	};
 	
 	/**
-	 * Duplicate user.
+	 * Duplicate user was found.
 	 */
 	private Runnable popToast = new Runnable() {
 		public void run() {
@@ -109,10 +109,15 @@ public class CreateUserActivity extends Activity {
 		
 	}
 	
+	/**
+	 * Sets the selection of the home location for this user.
+	 * @param View v
+	 */
 	public void selectHomeLocation(View v){
 		Intent intent = GeoLocationController.newUserLocationIntent(CreateUserActivity.this);
 		startActivityForResult(intent, 20);
 	}
+	
 	
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if(requestCode == 20){

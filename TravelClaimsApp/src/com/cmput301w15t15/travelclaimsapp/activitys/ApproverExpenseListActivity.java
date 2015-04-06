@@ -20,6 +20,9 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageView;
 import android.widget.ListView;
 
+/**
+ * Activity for viewing the ExpenseList of a Submitted Claim.
+ */
 public class ApproverExpenseListActivity extends Activity {
 
 	private String claimName;
@@ -30,16 +33,16 @@ public class ApproverExpenseListActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.expense_list);
+		setContentView(R.layout.activity_approver_expense_list);
 		claimName=this.getIntent().getExtras().getString("claimName");
-		setContentView(R.layout.expense_list);
-		expenseListView = (ListView) findViewById(R.id.CurrentExpenseList2);
+		setContentView(R.layout.activity_approver_expense_list);
+		expenseListView = (ListView) findViewById(R.id.CurrentExpenseList3);
 		expenseList = SubmittedClaimListController.getClaimList().getClaim(claimName).getExpenseList();
 
 		expenseAdaptor = new ApproverExpenseListAdaptor(this,R.layout.approve_expense_list_adaptor,expenseList.toArrayList());
 		expenseAdaptor.notifyDataSetChanged();
 		expenseListView.setAdapter(expenseAdaptor);
-		registerForContextMenu(findViewById(R.id.CurrentExpenseList2));
+		registerForContextMenu(findViewById(R.id.CurrentExpenseList3));
 		
 		expenseListView.setOnItemLongClickListener(new OnItemLongClickListener() {
 
@@ -75,6 +78,17 @@ public class ApproverExpenseListActivity extends Activity {
 	}
 	
 	
+	/**
+	 * Called when dialog appears to show current expense photo.
+	 * 
+	 * Loads photo to be displayed.
+	 * Position is the position of the Expense in the listview, height and width
+	 * are of the size the the image will be displayed in.
+	 * 
+	 * @param int position
+	 * @param int width
+	 * @param int height
+	 */
 	private void loadPhoto(int position, int width, int height) {
 
 
@@ -86,10 +100,13 @@ public class ApproverExpenseListActivity extends Activity {
         ImageView image = (ImageView) layout.findViewById(R.id.fullimage);
         
         byte[] imageShowing = expenseList.getExpenseByIndex(position).getPicture();
-
-        image.setImageBitmap(BitmapFactory.decodeByteArray(imageShowing,0,imageShowing.length) ); 
+        if (imageShowing==null){
+        	image.setImageResource(R.drawable.ic_action_new_picture);
+        }
+        else{
+        	image.setImageBitmap(BitmapFactory.decodeByteArray(imageShowing,0,imageShowing.length) ); 
+        }
         imageDialog.setView(layout);
-       
         imageDialog.setPositiveButton("Return", new DialogInterface.OnClickListener(){
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();

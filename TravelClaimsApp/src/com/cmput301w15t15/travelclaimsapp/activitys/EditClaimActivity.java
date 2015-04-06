@@ -67,8 +67,7 @@ import android.widget.AdapterView.AdapterContextMenuInfo;
 
 
 /**
- *	Activity that handles claim editing 
- *
+ *	Activity that handles claim editing.
  */
 public class EditClaimActivity extends FragmentActivity implements TextWatcher {
 	
@@ -272,6 +271,10 @@ public class EditClaimActivity extends FragmentActivity implements TextWatcher {
     }
 	
 	//Retrieved on February 28, 2015 from http://developer.android.com/guide/topics/ui/controls/pickers.html
+	/**
+	 * Shows datePicker dialog.
+	 * @param View v
+	 */
 	public void showTruitonDatePickerDialog(View v)
 	{
 		if (v == claimStartDate)
@@ -287,6 +290,10 @@ public class EditClaimActivity extends FragmentActivity implements TextWatcher {
 		newFragment.show(getSupportFragmentManager(), "datePicker");
 	}
 	
+	/**
+	 * Creates a DatePicker dialog and returns selection.
+	 * Default date, is current date.
+	 */
 	public static class DatePickerFragment extends DialogFragment
     implements DatePickerDialog.OnDateSetListener {
 
@@ -363,6 +370,10 @@ public class EditClaimActivity extends FragmentActivity implements TextWatcher {
     	startActivity(intent);
     }
 	
+	/**
+	 * Return to ClaimList activity.
+	 * @param menu
+	 */
 	public void ReturnClaim(MenuItem menu)
     {
     	Toast.makeText(this, "Returning to claimlist", Toast.LENGTH_SHORT).show();
@@ -577,23 +588,20 @@ public class EditClaimActivity extends FragmentActivity implements TextWatcher {
 		alert.show(); 
    	}
 
+   	
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if(requestCode == GET_GEOLOCATION_CODE){
 			switch (resultCode) {
 			case RESULT_OK:
-				Toast.makeText(this, "RESULT_OK", Toast.LENGTH_SHORT).show();
 				String geoString = data.getExtras().getString("geoLocation");
-				//double[] latlng = getIntent().getExtras().getDoubleArray("LatLng2");
 				GeoLocation gl = GeoLocation.getFromString(geoString);
 				Destination dest = destAdaptor.getItem(adaptorPos);
 				GeoLocationController.setDestinationGeoLocation(dest, gl.getLatitude(), gl.getLongitude());
 				break;
 			case RESULT_CANCELED:
-				Toast.makeText(this, "RESULT_CANCEL", Toast.LENGTH_SHORT).show();
 				break;
 				
 			default:
-				Toast.makeText(this, "NOTHING", Toast.LENGTH_SHORT).show();
 				break;
 			}
 			
