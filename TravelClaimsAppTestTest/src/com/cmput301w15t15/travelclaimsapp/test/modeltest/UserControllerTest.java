@@ -34,8 +34,6 @@ public class UserControllerTest extends AndroidTestCase {
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-//		FileManager.initializeSaver(this);
-
 	}
 	
 	

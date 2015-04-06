@@ -17,6 +17,7 @@
  */
 package com.cmput301w15t15.travelclaimsapp.test.modeltest;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import com.cmput301w15t15.travelclaimsapp.ClaimListController;
@@ -35,7 +36,7 @@ public class ExpenseListTest extends TestCase
 	public void testExpenseList()
 	{
 		ExpenseList expenseList = new ExpenseList();
-		Collection<Expense> expenses = (Collection<Expense>) expenseList.getExpenseList();
+		ArrayList<Expense> expenses = expenseList.toArrayList();
 		assertTrue("Empty Expense List", expenses.size() == 0);
 	}
 	/**Test case that tests that when an object is added to the expenseList
@@ -48,7 +49,7 @@ public class ExpenseListTest extends TestCase
 		String x = "New Expense" ;
 		Expense testexpense = new Expense(x);
 		expenseList.addExpense(testexpense);
-		Collection<Expense> expenses = (Collection<Expense>) expenseList.getExpenseList();
+		Collection<Expense> expenses = (Collection<Expense>) expenseList.toArrayList();
 		assertTrue("expense List Size not big enough", expenses.size() == 1);
 		assertTrue("Test expense not contain", expenses.contains(testexpense));
 	}
@@ -62,11 +63,11 @@ public class ExpenseListTest extends TestCase
 		String x = "New Expense" ;
 		Expense testexpense = new Expense(x);
 		expenseList.addExpense(testexpense);
-		Collection<Expense> expenses = (Collection<Expense>) expenseList.getExpenseList();
+		Collection<Expense> expenses = (Collection<Expense>) expenseList.toArrayList();
 		assertTrue("expense List Size isnt small enough", expenses.size() == 1);
 		assertTrue("", expenses.contains(testexpense));
 		expenseList.removeExpense(testexpense);
-		expenses = (Collection<Expense>) expenseList.getExpenseList();
+		expenses = (Collection<Expense>) expenseList.toArrayList();
 		assertTrue("expense List Size", expenses.size() == 0);
 		assertFalse("Test expense contain", expenses.contains(testexpense));
 	}

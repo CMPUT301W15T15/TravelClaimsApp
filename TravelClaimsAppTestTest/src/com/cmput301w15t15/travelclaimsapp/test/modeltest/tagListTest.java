@@ -28,7 +28,11 @@ import com.cmput301w15t15.travelclaimsapp.model.Tag;
 import com.cmput301w15t15.travelclaimsapp.model.TagList;
 
 import junit.framework.TestCase;
-
+/**
+ * 
+ * Tests for TagList
+ *
+ */
 public class tagListTest extends TestCase {
 	private TagList tagList;
 
@@ -36,7 +40,6 @@ public class tagListTest extends TestCase {
 	private Tag tag2=new Tag("Personal");
 	private Tag tag3=new Tag("school");
 
-	private Claim claim1;
 	@Override
 	protected void setUp() throws Exception {
 		// TODO Auto-generated method stub
@@ -69,13 +72,8 @@ public class tagListTest extends TestCase {
 		tag2.setName("Personal");
 		tag1.setName("School");
 
-		//claim1.renameTag("School");
 		assertTrue("The length of the claimList is not two",  this.tagList.size()==2);
 		assertTrue("claim1 was not added", this.tagList.getTag("Personal") == tag2);
-		assertTrue("claim1 was not added", this.tagList.getTag("School") ==tag1);
-		//assertTrue("claim1 was not added", this.claim1.getTag() =="School");
-		
-		
+		assertTrue("claim1 was not added", this.tagList.getTag("School") ==tag1);	
 	}
-	
 }

@@ -17,25 +17,22 @@
  */
 package com.cmput301w15t15.travelclaimsapp.test.activitytest;
 
-import java.io.IOException;
+
+import java.util.Date;
 
 import com.cmput301w15t15.travelclaimsapp.ClaimListAdaptor;
 import com.cmput301w15t15.travelclaimsapp.ClaimListController;
 import com.cmput301w15t15.travelclaimsapp.R;
 import com.cmput301w15t15.travelclaimsapp.activitys.AddClaimActivity;
 import com.cmput301w15t15.travelclaimsapp.activitys.EditClaimActivity;
-import com.cmput301w15t15.travelclaimsapp.activitys.EditExpenseActivity;
 import com.cmput301w15t15.travelclaimsapp.model.Claim;
 import com.cmput301w15t15.travelclaimsapp.model.ClaimList;
-import com.cmput301w15t15.travelclaimsapp.test.modeltest.ClaimListControllerTest;
 
 
 
 import android.app.Activity;
 import android.app.Instrumentation;
 import android.app.Instrumentation.ActivityMonitor;
-import android.content.Intent;
-import android.content.IntentFilter;
 import android.test.ActivityInstrumentationTestCase2;
 import android.widget.Button;
 import android.widget.ListView;
@@ -63,7 +60,6 @@ public class AddClaimActivityUITest extends ActivityInstrumentationTestCase2<Add
 		setActivityInitialTouchMode(true);
 		activity = getActivity();
 		claimList = ClaimListController.getClaimList();
-		
 		instrumentation = getInstrumentation();
 		listView = (ListView) activity.findViewById(R.id.Claim_Listview);
 		adaptor = new ClaimListAdaptor(activity, R.id.Claim_Listview, claimList.toArrayList());
@@ -74,7 +70,6 @@ public class AddClaimActivityUITest extends ActivityInstrumentationTestCase2<Add
 	protected void tearDown() throws Exception {
 		// TODO Auto-generated method stub
 		super.tearDown();
-		ClaimListController.removeClaim(claim1);
 	}
 	
 	/**
@@ -94,8 +89,34 @@ public class AddClaimActivityUITest extends ActivityInstrumentationTestCase2<Add
 		instrumentation.waitForIdleSync();
 		
 		Activity nextActivity = instrumentation.waitForMonitorWithTimeout(activityMonitor, 3000);
-		assertNotNull(nextActivity);	
-		
-		
+		assertNotNull(nextActivity);		
 	}
+	/**
+	 * Test pressing the delete button in context menu
+	 */
+	public void testContextMenuDelete(){
+		Claim claim2 = new Claim("c1");
+		Claim claim3 = new Claim("c2");
+		Claim claim4 = new Claim("c3");
+		ClaimListController.addClaim(claim2);
+		ClaimListController.addClaim(claim3);
+		ClaimListController.addClaim(claim4);
+		
+		instrumentation.runOnMainSync(new Runnable() {
+			@Override
+			public void run() {
+				listView.getChildAt(0).performLongClick();
+				
+			}
+		});
+		instrumentation.waitForIdleSync();
+		instrumentation.invokeContextMenuAction(activity, R.id.cmenu_delete_claim, 0);
+		
+		assertEquals(claimList.size(),ClaimListController.getClaimList().size());
+		
+		ClaimListController.removeClaim(claim2);
+		ClaimListController.removeClaim(claim3);
+		ClaimListController.removeClaim(claim4);
+	}
+
 }
