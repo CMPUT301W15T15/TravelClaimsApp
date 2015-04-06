@@ -27,7 +27,6 @@ import com.cmput301w15t15.travelclaimsapp.R;
 import com.cmput301w15t15.travelclaimsapp.SignOutController;
 import com.cmput301w15t15.travelclaimsapp.SubmittedClaimListController;
 import com.cmput301w15t15.travelclaimsapp.UserController;
-import com.cmput301w15t15.travelclaimsapp.model.Claim;
 import com.cmput301w15t15.travelclaimsapp.model.Expense;
 import com.cmput301w15t15.travelclaimsapp.model.ExpenseList;
 import com.cmput301w15t15.travelclaimsapp.model.GeoLocation;
@@ -184,15 +183,11 @@ public class ExpenseListActivity extends Activity
     {
     	Toast.makeText(this, "Going to Add Expense", Toast.LENGTH_SHORT).show();
     	
-    	//startActivity(intent); 
-    	
-    	Claim claim = ClaimListController.getClaimList().getClaim(claimName);
     	int i = expenseList.size();
     	while(ClaimListController.getClaimList().getClaim(claimName).getExpense("Expense"+i)!=null){
     		i++;
     	}
     	Expense expense = new Expense("Expense"+i);
-		//ClaimListController.getClaimList().getClaim(claimName).addExpense(expense);
 		elc.addExpense(expense);
 		
     	Toast.makeText(this, "Creating a Expense", Toast.LENGTH_SHORT).show();

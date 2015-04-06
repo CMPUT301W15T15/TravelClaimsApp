@@ -87,5 +87,8 @@
     <string name="title_activity_approver_expense_list">ApproverExpenseListActivity</string>
     <string name="title_activity_des_tab">DesTabActivity</string>
     <string name="title_activity_tag_tab">TagTabActivity</string>
+    <string name="Logout">Logout</string>
+    <string name="ApproveClaims">Approve Claims</string>
+    <string name="ReturnClaimL">Return To Claimlist</string>
 
 </resources>

@@ -1,5 +1,5 @@
 
    <menu xmlns:android="http://schemas.android.com/apk/res/android" >
-    <item android:id="@+id/SearchMenuButton" android:title="Search"></item>
+    <item android:id="@+id/SearchMenuButton" android:title="@string/Search"></item>
 
 </menu>
