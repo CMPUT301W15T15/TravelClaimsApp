@@ -42,6 +42,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ContextMenu.ContextMenuInfo;
+import android.view.Window;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -61,6 +62,7 @@ public class AddClaimActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.add_claim);
 		FileManager.initializeSaver(this);
 		claimListView = (ListView) findViewById(R.id.Claim_Listview);
@@ -209,7 +211,6 @@ public class AddClaimActivity extends Activity {
 	 */
     public void SearchOption (MenuItem menu)
     {
-    	Toast.makeText(this, "Going to Search", Toast.LENGTH_SHORT).show();
     	Intent intent = new Intent(AddClaimActivity.this, SearchActivity.class);
     	startActivity(intent);
     }
@@ -221,7 +222,6 @@ public class AddClaimActivity extends Activity {
     public void SignOut(MenuItem menu)
     {
     	SignOutController.reset();
-    	Toast.makeText(this, "Signing Out", Toast.LENGTH_SHORT).show();
     	Intent intent = new Intent(AddClaimActivity.this, LoginActivity.class);
     	startActivity(intent);
     }
@@ -241,7 +241,6 @@ public class AddClaimActivity extends Activity {
     	Claim claim = new Claim("Claim"+i);
 		ClaimListController.addClaim(claim);
 		
-    	Toast.makeText(this, "Creating a Claim", Toast.LENGTH_SHORT).show();
     	Intent intent = new Intent(AddClaimActivity.this, EditClaimActivity.class);
     	//attach claim name to intent and start activity
     	intent.putExtra("claimName", claim.getName());

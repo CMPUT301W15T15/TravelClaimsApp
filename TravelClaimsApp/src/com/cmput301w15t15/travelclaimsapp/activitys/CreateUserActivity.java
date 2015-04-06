@@ -28,6 +28,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
+import android.view.Window;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -64,6 +65,7 @@ public class CreateUserActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.new_user);
 		GeoLocationController.initializeLocationManager(this.getApplicationContext());
 	}
@@ -123,17 +125,12 @@ public class CreateUserActivity extends Activity {
 		if(requestCode == 20){
 			switch (resultCode) {
 			case RESULT_OK:
-				Toast.makeText(this, "Success!", Toast.LENGTH_SHORT).show();
 				String geoString = data.getExtras().getString("geoLocation");
-				Toast.makeText(this, "Success!", Toast.LENGTH_SHORT).show();
 				selectedGeoLocation = GeoLocation.getFromString(geoString);
 				break;
 			case RESULT_CANCELED:
-				Toast.makeText(this, "No location selected", Toast.LENGTH_SHORT).show();
 				break;
-				
 			default:
-				Toast.makeText(this, "NOTHING", Toast.LENGTH_SHORT).show();
 				break;
 			}
 			

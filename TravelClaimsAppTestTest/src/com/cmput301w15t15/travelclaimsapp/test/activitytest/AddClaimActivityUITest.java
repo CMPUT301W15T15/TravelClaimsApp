@@ -18,7 +18,6 @@
 package com.cmput301w15t15.travelclaimsapp.test.activitytest;
 
 
-import java.util.Date;
 import com.cmput301w15t15.travelclaimsapp.ClaimListController;
 import com.cmput301w15t15.travelclaimsapp.R;
 import com.cmput301w15t15.travelclaimsapp.activitys.AddClaimActivity;

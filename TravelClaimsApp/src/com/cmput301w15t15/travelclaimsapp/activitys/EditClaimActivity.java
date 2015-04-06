@@ -52,6 +52,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ContextMenu.ContextMenuInfo;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -94,6 +95,7 @@ public class EditClaimActivity extends FragmentActivity implements TextWatcher {
 	protected void onCreate(Bundle savedInstanceState) {
 		
 		super.onCreate(savedInstanceState);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.edit_claim);
 		sdf = new SimpleDateFormat("MM/dd/yyyy",Locale.CANADA);
 		
@@ -353,7 +355,6 @@ public class EditClaimActivity extends FragmentActivity implements TextWatcher {
 	 */
 	public void SearchOption(MenuItem menu)
     {
-    	Toast.makeText(this, "Going to Search", Toast.LENGTH_SHORT).show();
     	Intent intent = new Intent(EditClaimActivity.this, SearchActivity.class);
     	startActivity(intent);
     }
@@ -365,7 +366,6 @@ public class EditClaimActivity extends FragmentActivity implements TextWatcher {
 	public void SignOut(MenuItem menu)
     {
     	SignOutController.reset();
-    	Toast.makeText(this, "Signing Out", Toast.LENGTH_SHORT).show();
     	Intent intent = new Intent(EditClaimActivity.this, LoginActivity.class);
     	startActivity(intent);
     }
@@ -376,7 +376,6 @@ public class EditClaimActivity extends FragmentActivity implements TextWatcher {
 	 */
 	public void ReturnClaim(MenuItem menu)
     {
-    	Toast.makeText(this, "Returning to claimlist", Toast.LENGTH_SHORT).show();
     	Intent intent = new Intent(EditClaimActivity.this, AddClaimActivity.class);
     	startActivity(intent);
     }
@@ -479,9 +478,9 @@ public class EditClaimActivity extends FragmentActivity implements TextWatcher {
 				//if length of name in edittext is 0 or if claim name is already in claimlist
 				//then do not save changes. Otherwise update the claim name
 				if(s.length() == 0 ){
-					Toast.makeText(this, "Claim name cannot be null", Toast.LENGTH_LONG).show();
+					Toast.makeText(this, "Claim name cannot be null", Toast.LENGTH_SHORT).show();
 				}else if(claimList.getClaim(newName)!=null){
-					Toast.makeText(this, "Claim name cannot be duplicate of another claim", Toast.LENGTH_LONG).show();
+					Toast.makeText(this, "Claim name cannot be duplicate of another claim", Toast.LENGTH_SHORT).show();
 				}else{
 					theClaim.setName(claimNameInput.getText().toString());
 				}
