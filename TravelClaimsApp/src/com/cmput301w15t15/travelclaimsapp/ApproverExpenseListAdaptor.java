@@ -114,9 +114,9 @@ public class ApproverExpenseListAdaptor extends ArrayAdapter<Expense> {
 		}
 	
 		if(expense.getPicture() == null){
-        	viewHolder.expenseImageAttach.setVisibility(android.view.View.INVISIBLE);
-        }else{
         	viewHolder.expenseImageAttach.setVisibility(android.view.View.VISIBLE);
+        }else{
+        	viewHolder.expenseImageAttach.setVisibility(android.view.View.INVISIBLE);
         }
 		
 		return rowView;
