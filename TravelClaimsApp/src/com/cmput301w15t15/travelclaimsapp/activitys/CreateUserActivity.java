@@ -123,17 +123,12 @@ public class CreateUserActivity extends Activity {
 		if(requestCode == 20){
 			switch (resultCode) {
 			case RESULT_OK:
-				Toast.makeText(this, "Success!", Toast.LENGTH_SHORT).show();
 				String geoString = data.getExtras().getString("geoLocation");
-				Toast.makeText(this, "Success!", Toast.LENGTH_SHORT).show();
 				selectedGeoLocation = GeoLocation.getFromString(geoString);
 				break;
 			case RESULT_CANCELED:
-				Toast.makeText(this, "No location selected", Toast.LENGTH_SHORT).show();
 				break;
-				
 			default:
-				Toast.makeText(this, "NOTHING", Toast.LENGTH_SHORT).show();
 				break;
 			}
 			

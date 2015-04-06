@@ -209,7 +209,6 @@ public class AddClaimActivity extends Activity {
 	 */
     public void SearchOption (MenuItem menu)
     {
-    	Toast.makeText(this, "Going to Search", Toast.LENGTH_SHORT).show();
     	Intent intent = new Intent(AddClaimActivity.this, SearchActivity.class);
     	startActivity(intent);
     }
@@ -221,7 +220,6 @@ public class AddClaimActivity extends Activity {
     public void SignOut(MenuItem menu)
     {
     	SignOutController.reset();
-    	Toast.makeText(this, "Signing Out", Toast.LENGTH_SHORT).show();
     	Intent intent = new Intent(AddClaimActivity.this, LoginActivity.class);
     	startActivity(intent);
     }
@@ -241,7 +239,6 @@ public class AddClaimActivity extends Activity {
     	Claim claim = new Claim("Claim"+i);
 		ClaimListController.addClaim(claim);
 		
-    	Toast.makeText(this, "Creating a Claim", Toast.LENGTH_SHORT).show();
     	Intent intent = new Intent(AddClaimActivity.this, EditClaimActivity.class);
     	//attach claim name to intent and start activity
     	intent.putExtra("claimName", claim.getName());
