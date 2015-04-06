@@ -209,6 +209,13 @@ public class ClaimListController {
 	}
 	
 	/**
+	 * Saves claimlist to file using FileManager class 
+	 */
+	public static void saveToServer(){
+		FileManager.getSaver().saveClaimLToServer(getClaimList(), UserController.getUser().getUsername());
+	}
+	
+	/**
 	 * Sets the application {@link ClaimList} to new empty {@link ClaimList}
 	 */
 	public static void removeAllClaims(){

@@ -297,8 +297,6 @@ public class FileManager {
 	 * @param String username
 	 */
 	public void saveClaimLInFile(ClaimList claimList, String username) {
-		Thread thread = new onlineSaveClaimListThread(claimList, username);
-		thread.start();
 		
 		try {
 			//openFileOutput is a Activity method
@@ -314,6 +312,16 @@ public class FileManager {
 			// TODO Auto-generated catch block
 			Log.d(TAG, "saveClaimLInFile did not work: " + e.getMessage());
 		}
+	}
+	/**
+	 * Saves claimlist to file and attempts to save online if there is an internet connection.
+	 * 
+	 * @param ClaimList claimList
+	 * @param String username
+	 */
+	public void saveClaimLToServer(ClaimList claimList, String username) {
+		Thread thread = new onlineSaveClaimListThread(claimList, username);
+		thread.start();
 	}
 	
 	/**
