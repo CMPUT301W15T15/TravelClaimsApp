@@ -89,7 +89,6 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		
 		setContentView(R.layout.edit_expense);
 		
@@ -489,7 +488,7 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 		switch(getCurrentFocus().getId()){
 		case R.id.Edit_Expense_Name2:
 			if(s.length() == 0 ){
-				Toast.makeText(this, "Expense name cannot be null", Toast.LENGTH_LONG).show();
+				//Toast.makeText(this, "Expense name cannot be null", Toast.LENGTH_LONG).show();
 			}else{
 				expense.setName(expenseNameInput.getText().toString());
 			}
