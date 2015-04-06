@@ -176,7 +176,6 @@ public class ApproverClaimListActivity extends Activity {
 	 */
     public void SearchOption (MenuItem menu)
     {
-    	Toast.makeText(this, "Going to Search", Toast.LENGTH_SHORT).show();
     	Intent intent = new Intent(ApproverClaimListActivity.this, SearchActivity.class);
     	startActivity(intent);
     }
@@ -188,7 +187,6 @@ public class ApproverClaimListActivity extends Activity {
     public void SignOut(MenuItem menu)
     {
     	SignOutController.reset();
-    	Toast.makeText(this, "Signing Out", Toast.LENGTH_SHORT).show();
     	Intent intent = new Intent(ApproverClaimListActivity.this, LoginActivity.class);
     	startActivity(intent);
     }
