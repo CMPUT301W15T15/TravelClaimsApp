@@ -35,6 +35,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.Window;
 import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
 
@@ -80,7 +81,7 @@ public class MapActivity extends Activity implements MapEventsReceiver{
 	@Override
 	public void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		//check if there is a item to set the focus to 
 		if(getIntent().getExtras().getString("LatLng").length() > 0){
 			focusOn = getIntent().getExtras().getString("LatLng");
