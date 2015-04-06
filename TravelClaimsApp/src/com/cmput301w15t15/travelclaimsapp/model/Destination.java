@@ -45,7 +45,7 @@ public class Destination implements Listenable{
 	/**
 	 * Returns Destinations location
 	 * 
-	 * @return location
+	 * @return location	the location string for Destination
 	 */
 	public String getLocation() {
 		return location;
@@ -74,17 +74,16 @@ public class Destination implements Listenable{
 	/**
 	 * Returns the reason for destination
 	 * 
-	 * @return reason string
+	 * @return the string representing the reason for travel to Destination
 	 */
 	public String getReason() {
-		// TODO Auto-generated method stub
 		return this.reason;
 	}
 	
 	/**
 	 * Set the destination GeoLocation
 	 * 
-	 * @param gl The GeoLocation to set the value to 
+	 * @param gl The GeoLocation to set the destination GeoLocation value to 
 	 */
 	public void setGeoLocation(GeoLocation gl) {
 		this.geoLocation = gl;
@@ -106,7 +105,6 @@ public class Destination implements Listenable{
 		for (Listener listener : listeners) {
 			listener.update();
 		}
-		
 	}
 
 	@Override
@@ -126,9 +124,4 @@ public class Destination implements Listenable{
 		this.listeners = new ArrayList<Listener>();
 		
 	}
-
-	
-
-
-	
 }

@@ -126,7 +126,6 @@ public class EditClaimActivityUITest extends
 
 	@Override
 	protected void tearDown() throws Exception {
-		// TODO Auto-generated method stub
 		super.tearDown();
 		ClaimListController.removeClaim(claim);
 		

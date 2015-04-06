@@ -40,7 +40,6 @@ import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Window;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.Toast;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 
 /**
@@ -84,7 +83,6 @@ public class SearchActivity extends Activity
 	public void SignOut(MenuItem menu)
     {
     	SignOutController.reset();
-    	Toast.makeText(this, "Signing Out", Toast.LENGTH_SHORT).show();
     	Intent intent = new Intent(SearchActivity.this, LoginActivity.class);
     	startActivity(intent);
     }
@@ -97,7 +95,6 @@ public class SearchActivity extends Activity
 	 * @param view
 	 */
 	public void searchButton(View view){
-		Toast.makeText(this, "Searching", Toast.LENGTH_SHORT).show();
 		claimListAdaptor.clear();
 		ArrayList<Claim> claims = ClaimListController.getFilteredClaimList(searchField.getText().toString());
 		claimListAdaptor.addAll(claims);
@@ -110,7 +107,6 @@ public class SearchActivity extends Activity
 	 */
 	public void ReturnClaim(MenuItem menu)
     {
-    	Toast.makeText(this, "Returning to claimlist", Toast.LENGTH_SHORT).show();
     	Intent intent = new Intent(SearchActivity.this, AddClaimActivity.class);
     	startActivity(intent);
     }

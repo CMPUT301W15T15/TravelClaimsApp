@@ -86,7 +86,6 @@ public class ApproveExpenseListTest extends TestCase {
 		assertTrue("flag is existing", approveClaimList.toArrayList()
 				.get(0).getExpenseList().getExpense("Expense1").getFlag()==1);
 		
-//		assertTrue("expenses1 is not editeble", approveClaimList.toArrayList().get(0).isEditable()==false);
 	}
 
 	//TestNumber:ReceiptViewTest #1
@@ -107,11 +106,11 @@ public class ApproveExpenseListTest extends TestCase {
 		testClaimList.addClaim(claim1);
 		testClaimList.addClaim(claim2);
 		
-		expense1.takeReceipt(null);
+		expense1.takePicture(null);
 		claim1.setStatus("Submitted");
 		assertTrue("Image yes?", expense1.getPicture() == null);
 		assertTrue("Image no", expense2.getPicture() == null);
-//		assertTrue("photo is not editable", claim1.isEditable()==false);
+
 	}
 }
 	

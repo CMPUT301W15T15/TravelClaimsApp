@@ -124,7 +124,6 @@ public class ExpenseListActivity extends Activity
 	 */
     public void SearchOption (MenuItem menu)
     {
-    	Toast.makeText(this, "Going to Search", Toast.LENGTH_SHORT).show();
     	Intent intent = new Intent(ExpenseListActivity.this, SearchActivity.class);
     	startActivity(intent);
     }
@@ -135,7 +134,6 @@ public class ExpenseListActivity extends Activity
     public void SignOut(MenuItem menu)
     {
     	SignOutController.reset();
-    	Toast.makeText(this, "Signing Out", Toast.LENGTH_SHORT).show();
     	Intent intent = new Intent(ExpenseListActivity.this, LoginActivity.class);
     	startActivity(intent);
     }
@@ -177,7 +175,6 @@ public class ExpenseListActivity extends Activity
      */
     public void AddExpenseButton(View view)
     {
-    	Toast.makeText(this, "Going to Add Expense", Toast.LENGTH_SHORT).show();
     	
     	int i = expenseList.size();
     	while(ClaimListController.getClaimList().getClaim(claimName).getExpense("Expense"+i)!=null){
@@ -186,7 +183,6 @@ public class ExpenseListActivity extends Activity
     	Expense expense = new Expense("Expense"+i);
 		elc.addExpense(expense);
 		
-    	Toast.makeText(this, "Creating a Expense", Toast.LENGTH_SHORT).show();
     	Intent intent = new Intent(ExpenseListActivity.this, EditExpenseActivity.class);
 
     	intent.putExtra("claimName",claimName );
@@ -208,7 +204,6 @@ public class ExpenseListActivity extends Activity
 		final Expense expense = expenseAdaptor.getItem(info.position);
         switch (item.getItemId()) {
             case R.id.expenseListViewMenuEdit:
-            	Toast.makeText(this, "Editing an expense", Toast.LENGTH_SHORT).show();
             	intent = new Intent(ExpenseListActivity.this, EditExpenseActivity.class);
 
             	intent.putExtra("claimName", claimName);
@@ -260,18 +255,15 @@ public class ExpenseListActivity extends Activity
 		if(requestCode == GET_GEOLOCATION_CODE){
 			switch (resultCode) {
 			case RESULT_OK:
-				Toast.makeText(this, "RESULT_OK", Toast.LENGTH_SHORT).show();
 				String geoString = data.getExtras().getString("geoLocation");
 				GeoLocation gl = GeoLocation.getFromString(geoString);
 				Expense e = expenseAdaptor.getItem(adaptorPos);
 				GeoLocationController.setExpenseGeoLocation(e, gl.getLatitude(), gl.getLongitude());
 				break;
 			case RESULT_CANCELED:
-				Toast.makeText(this, "RESULT_CANCEL", Toast.LENGTH_SHORT).show();
 				break;
 				
 			default:
-				Toast.makeText(this, "NOTHING", Toast.LENGTH_SHORT).show();
 				break;
 			}
 			
