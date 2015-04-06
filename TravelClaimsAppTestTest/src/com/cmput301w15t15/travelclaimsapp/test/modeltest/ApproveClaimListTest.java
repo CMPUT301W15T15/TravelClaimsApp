@@ -21,14 +21,20 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Locale;
 
 
+import com.cmput301w15t15.travelclaimsapp.SubmittedListComparator;
 import com.cmput301w15t15.travelclaimsapp.model.Claim;
 import com.cmput301w15t15.travelclaimsapp.model.ClaimList;
 
 import junit.framework.TestCase;
 
+/**
+ * Tests for list of submitted claims
+ *
+ */
 public class ApproveClaimListTest extends TestCase {
 	private Claim claim1;
 	private Claim claim2;
@@ -45,39 +51,12 @@ public class ApproveClaimListTest extends TestCase {
 		super.setUp();
 	}
 
-	//TestNumber: ApproveViewTest #1
-	public void testViewSubmittedClaims() throws IOException {
-		claimList = new ClaimList();
-		claim1 = new Claim("Claim1");
-		claimList.addClaim(claim1);
-		claim1.setStatus("Process");
-		claim1.setClaimantName("Daniel");
-		
-		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy", Locale.CANADA);
-		try{
-			claim1.setStartDate(sdf.parse("11/21/2015"));
-			claim1.setEndDate(sdf.parse("11/25/2015"));
-		} catch (ParseException e) {
-			
-		}
-		claim1.setTag("Business");
-		ArrayList<Claim> testList = new ArrayList<Claim>();
-		testList.add(claim1);
-		claim1.setStatus("Submitted");
-		assertFalse("Submittedlist", claimList.toArrayList().equals(testList));
-		assertTrue("submittedClaim is not editedble", claim1.isEditable()==false);
-		assertTrue("status is equal",testList.get(0).getStatus().equals("Submitted"));
-		assertTrue("claimantName is equal",testList.get(0).getClaimantName().equals("Daniel"));
-		assertTrue("startdate is equal",testList.get(0).getStartDate().equals("11/21/2015"));
-		assertTrue("Enddate is equal",testList.get(0).getEndDate().equals("11/25/2015"));
-		assertTrue("tag is equal",testList.get(0).getTagList().getTag("Business").toString().equals("Business"));
-		claim1.setStatus("Returned");
-		assertTrue("ReturnedClaim is editedble", claim1.isEditable()==true);
-		 
-	}
 	
-	
-	
+	/**
+	 * ApproveClaimListTest 1 
+	 * 
+	 * Tests commenting a claim
+	 */
 	public void testCommentSubmittedClaims() throws IOException {
 		claimList = new ClaimList();
 		claim1 = new Claim("Claim1");
@@ -102,92 +81,42 @@ public class ApproveClaimListTest extends TestCase {
 		
 	}
 	
-	
-	public void testReturnedClaims() throws IOException {
-		claimList = new ClaimList();
+	/**
+	 * ApproveClaimListTest 2
+	 * 
+	 * Tests sorting a list of claims using SubmittedListComparator
+	 */
+	public void testApproverListSort() throws IOException {
 		claim1 = new Claim("Claim1");
 		claim2 = new Claim("Claim2");
 		claim3 = new Claim("Claim3");
 		claim4 = new Claim("Claim4");
-		claimList.addClaim(claim1);
-		claimList.addClaim(claim2);
-		claimList.addClaim(claim3);
-		claimList.addClaim(claim4);
-		claim1.setStatus("Submitted");
-		claim2.setStatus("Submitted");
-		claim3.setStatus("Submitted");
-		claim4.setStatus("Submitted");
-		ArrayList<Claim> testList = new ArrayList<Claim>();
-		testList.add(claim1);
-		testList.add(claim2);
-		testList.add(claim3);
-		testList.add(claim4);
-		assertTrue("the approverList size is wrong", testList.size()==4);
-		testList.get(0).setStatus("Returned");
-		assertTrue("the approverList size is wrong", testList.size()==3);	
-		assertFalse("the claim is still existing", testList.get(0).getName().toString()=="claim1");
-		
-	}
-	public void testApprovedClaims() throws IOException {
+		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy", Locale.CANADA);
+		try{
+			claim1.setStartDate(sdf.parse("4/5/2015"));
+			claim2.setStartDate(sdf.parse("4/3/2015"));
+			claim3.setStartDate(sdf.parse("4/4/2015"));
+			claim4.setStartDate(sdf.parse("4/2/2015"));
+		} catch (ParseException e) {
+			
+		}
 		claimList = new ClaimList();
-		claim1 = new Claim("Claim1");
-		claim2 = new Claim("Claim2");
-		claim3 = new Claim("Claim3");
-		claim4 = new Claim("Claim4");
 		claimList.addClaim(claim1);
 		claimList.addClaim(claim2);
 		claimList.addClaim(claim3);
 		claimList.addClaim(claim4);
-		claim1.setStatus("Submitted");
-		claim2.setStatus("Submitted");
-		claim3.setStatus("Submitted");
-		claim4.setStatus("Submitted");
-		ArrayList<Claim> testList = new ArrayList<Claim>();
-		testList.add(claim1);
-		testList.add(claim2);
-		testList.add(claim3);
-		testList.add(claim4);
-		assertTrue("the approverList size is wrong", testList.size()==4);
-		testList.get(0).setStatus("Approved");
-		assertTrue("the approverList size is wrong", testList.size()==3);
-		assertFalse("the claim is still existing", testList.get(0).getName().toString()=="claim1");
-		testList.get(0).setStatus("Returned");
-		assertTrue("the approverList size is wrong", testList.size()==2);
-		assertFalse("the claim is still existing", testList.get(0).getName().toString()=="claim2");
 		
+		ArrayList<Claim> cl = claimList.toArrayList();
+		
+		Collections.sort(cl, new SubmittedListComparator());
+		
+		assertTrue(cl.get(0).getName().equals(claim4.getName()));
+		assertTrue(cl.get(1).getName().equals(claim2.getName()));
+		assertTrue(cl.get(2).getName().equals(claim3.getName()));
+		assertTrue(cl.get(3).getName().equals(claim1.getName()));
 	}
-	//TestNumber: ApproveViewTest #2
-//	public void testViewSubmittedExpense() throws IOException {
-//		ClaimList approveClaimList = new ClaimList();
-//		claim1 = new Claim("Claim1");
-//		approveClaimList.addClaim(claim1);
-//		claim1.setStatus("Submitted");
-//		assertTrue("name is equal", approveClaimList.toArrayList()
-//				.get(0).getName().toString().equals("Claim1"));
-//		
-//		Date date = new Date();
-//		claim1.setStartDate(date);
-//		assertTrue("starting date is equal", approveClaimList
-//				.toArrayList().get(0).getStartDate().equals(date));
-//		
-//		Date endDate = new Date();
-//		claim1.setEndDate(endDate);
-//		assertTrue("ending date is equal", approveClaimList.toArrayList().get(0).getEndDate().equals(endDate));
-//		
-//		//claim1.setDescription("Description");
-//		//assertTrue("description is equal", approveClaimList.getClaimList().get(0).getDescription().equals("Description"));
-//		
-//		claim1.setStatus("Submitted");
-//		assertTrue("status is equal", approveClaimList.toArrayList().get(0).getStatus().equals("Submitted"));
-//		
-//		// destination data structure need to be discussed
-//		String Country="Canada";
-//		Map<String,String> testDestinationList = null ;
-//		testDestinationList.put(Country, "Edmonton");
-//		//.addDestination(Country, "Edmonton");
-//		assertTrue("destionation is true",approveClaimList.toArrayList().get(0).getDestinationList()
-//				.equals(testDestinationList));
-//	}
+
+
 	
 	
 }

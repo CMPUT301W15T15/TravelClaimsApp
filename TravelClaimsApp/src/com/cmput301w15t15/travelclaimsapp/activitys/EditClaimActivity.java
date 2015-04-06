@@ -252,7 +252,7 @@ public class EditClaimActivity extends FragmentActivity implements TextWatcher {
             
             	alertTag.setPositiveButton("Add", new DialogInterface.OnClickListener() {
         			public void onClick(DialogInterface dialog, int whichButton) {
-        				tagAdaptor.getItem(info.position).rename(enterTag.getText().toString());
+        				tagAdaptor.getItem(info.position).setName(enterTag.getText().toString());
         				tagAdaptor.notifyDataSetChanged();
         			}
         		});
