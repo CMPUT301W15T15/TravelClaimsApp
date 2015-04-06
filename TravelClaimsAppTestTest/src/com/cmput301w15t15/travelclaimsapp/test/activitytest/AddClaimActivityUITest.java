@@ -63,7 +63,7 @@ public class AddClaimActivityUITest extends ActivityInstrumentationTestCase2<Add
 		setActivityInitialTouchMode(true);
 		activity = getActivity();
 		claimList = ClaimListController.getClaimList();
-	
+		
 		instrumentation = getInstrumentation();
 		listView = (ListView) activity.findViewById(R.id.Claim_Listview);
 		adaptor = new ClaimListAdaptor(activity, R.id.Claim_Listview, claimList.toArrayList());

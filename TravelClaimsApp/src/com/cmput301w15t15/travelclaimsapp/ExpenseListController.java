@@ -49,6 +49,15 @@ public class ExpenseListController {
 		expenseList = claim.getExpenseList();
 	}
 	
+	public ExpenseListController(Claim claim, boolean submitted) {
+		if(submitted){
+			claim = SubmittedClaimListController.getClaimList().getClaim(claim.getName());
+		}else{
+			claim = ClaimListController.getClaimList().getClaim(claim.getName());
+		}
+		
+		expenseList = claim.getExpenseList();
+	}
 	
 	
 	/** Method that retrieves the expenseList 
@@ -59,7 +68,7 @@ public class ExpenseListController {
 	}
 	
 	/**
-	 * Adds a expense with listener to the ExpenseListController {@link ExpenseList}
+	 * Adds a expense with listener to the ExpenseListController {@link ExpenseList} 
 	 * 
 	 * @param expense	the Expense to be added to the 
 	 */
@@ -80,11 +89,10 @@ public class ExpenseListController {
 	
 	/**
 	 * Takes the current expenses and returns a map containing the total 
-	 * currency amounts for all expenses
+	 * currency amounts for all expenses. <br>
 	 * 
 	 * Only returns currencies with amounts greater than zero
 	 * 
-	 * @param expenses ArrayList<Expense> to get totals from
 	 * @return returns a map with key = currencies (String) and values = totals (Integer)
 	 */
 	public Map<String, Integer> getAmountTotals(){

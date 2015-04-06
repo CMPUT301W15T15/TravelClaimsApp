@@ -1,19 +1,29 @@
+/*
+ *TravelClaimsApp
+ *Copyright (C) 2015 Jon Machinski, Bo Zhou, Henry Ha, Chris Wang, Sean Scheideman
+ *
+ *This program is free software: you can redistribute it and/or modify
+ *it under the terms of the GNU General Public License as published by
+ *the Free Software Foundation, either version 3 of the License, or
+ *(at your option) any later version.
+ *
+ *This program is distributed in the hope that it will be useful,
+ *but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ *GNU General Public License for more details.
+ *
+ *You should have received a copy of the GNU General Public License
+ *along with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
 package com.cmput301w15t15.travelclaimsapp.test.modeltest;
 
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-
-import com.cmput301w15t15.travelclaimsapp.ClaimListController;
 import com.cmput301w15t15.travelclaimsapp.GeoLocationController;
 import com.cmput301w15t15.travelclaimsapp.model.Claim;
 import com.cmput301w15t15.travelclaimsapp.model.Destination;
 import com.cmput301w15t15.travelclaimsapp.model.Expense;
 import com.cmput301w15t15.travelclaimsapp.model.GeoLocation;
-
 import android.graphics.Color;
-import android.location.Location;
 import android.test.AndroidTestCase;
 
 /**
@@ -40,8 +50,6 @@ public class GeoLocationControllerTest extends AndroidTestCase {
 	 * GeoLocationControllerTest#1
 	 * Tests using GPS to get current location 
 	 * 
-	 * NOTE: If using emulator need to set latitude and longitude using DDMS for 
-	 * this test to work 
 	 */
 	public void testGetCurrentgeolocation(){
 		assertNotNull(currentLocation);
