@@ -39,9 +39,10 @@ import android.widget.TextView;
 
 /**
  * 
- * 
- * @author searn
- *
+ * 	Custom ArrayAdaptor for displaying the expenselist within a claim in the submitted claimlist.
+ *  
+ *  Builds a Array list to hold Expenses in and a ViewHolder to display them.
+ *  	
  */
 public class ApproverExpenseListAdaptor extends ArrayAdapter<Expense> {
 

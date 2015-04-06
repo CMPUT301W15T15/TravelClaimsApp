@@ -149,7 +149,6 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 			public void onItemSelected(AdapterView<?> parent,View view, int position, long id){
 				expense.setCurr(parent.getItemAtPosition(position).toString());
 				
-				//claimList.notifyListeners();
 			}
 
 			@Override
@@ -196,6 +195,12 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 		}
 	}
 	
+	/**
+	 * Returns given bitmap as a byte array. Rescales large images to correct size.
+	 * 
+	 * @param bitmap
+	 * @return byte[]
+	 */
 	public byte[] getBytesFromBitmap(Bitmap bitmap) {
 	    ByteArrayOutputStream stream = new ByteArrayOutputStream();
 	    ByteArrayOutputStream stream2 = new ByteArrayOutputStream();
@@ -203,9 +208,7 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 	    Bitmap tempMap = bitmap;
 	    Bitmap resizedMap; 
 	    
-	    //int initWidth = bitmap.getWidth();
 	    double initWidth = Double.valueOf(bitmap.getWidth());
-	    //int initHeight = bitmap.getHeight();
 	    double initHeight = Double.valueOf(bitmap.getHeight());
 	    
 	    double resizeWidth = initWidth;
@@ -222,7 +225,6 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 	    	resizedMap = Bitmap.createScaledBitmap(bitmap, (int) resizeWidth, (int) resizeHeight, false);
 	    	resizedMap.compress(CompressFormat.JPEG, 100, stream);
 	    	tempImg=stream.toByteArray();
-	    	//isRescale="Scaled";
 	    	expense.setScale("Rescaled");
 	    }
 	    
@@ -240,7 +242,6 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 	    	Toast.makeText(this, "Image Too Large", Toast.LENGTH_LONG).show();
 	    	return null;
 	    }
-	    //Toast.makeText(this, size, Toast.LENGTH_LONG).show();
 	    else {
 	    	return tempImg;
 	    }
@@ -293,11 +294,18 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 		setEditable();
 	}
 
-	/**
-	 * check if the status of a claim is editable 
-	 * 
-	 */
 	
+	/**
+	 * Called when dialog appears to show current expense photo.
+	 * 
+	 * Loads photo to be displayed.
+	 * ImageView is the location for the image to be displayed, height and width
+	 * are of the size the the image will be displayed in.
+	 * 
+	 * @param ImageView
+	 * @param int width
+	 * @param int height
+	 */
 	private void loadPhoto(ImageView imageView, int width, int height) {
 
         ImageView tempImageView = imageView;
@@ -327,6 +335,9 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
         imageDialog.show();     
     }
 	
+	/**
+	 * check if the status of a claim is editable 
+	 */	
 	private void setEditable() {
 		// TODO Auto-generated method stub
 		if(claim.getStatus().equals("Submitted") || claim.getStatus().equals("Approved")){
@@ -381,7 +392,6 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 	}
 	//Retrieved on February 28, 2015 from http://developer.android.com/guide/topics/ui/controls/pickers.html
 	/**
-	 * @author Henry
 	 * This defines dialogfragment by using the onCreateDialog method
 	 */
 	public static class DatePickerFragment extends DialogFragment
@@ -423,7 +433,6 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 	
 	/** Function that is called when "Search" menu item is clicked
 	 * and switches to the searchactivity
-	 * @author Henry
 	 * @param menu
 	 */
 	public void SearchOption(MenuItem menu)
@@ -435,7 +444,6 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 	
 	/**Function that is called when the "Sign Out" menu item is clicked
 	 * and switches to the mainscreenactivity
-	 * @author Henry
 	 * @param menu
 	 */
 	public void SignOut(MenuItem menu)
@@ -460,7 +468,6 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 	
 	/** Function that is called when the "Ok" Button is clicked and switches 
 	 * to the ExpenseListActivity
-	 * @author Henry
 	 * @param view
 	 */
 	public void CreateExpense(View view)

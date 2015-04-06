@@ -36,6 +36,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+/**
+ * Activity handles setting up a user to access their claimlist.
+ */
 public class LoginActivity extends Activity {
 
 	/**
@@ -168,6 +171,10 @@ public class LoginActivity extends Activity {
 		}
     }
 	
+	/**
+	 * Checks for Internet to ensure the users can create an account.
+	 * @param View v
+	 */
 	public void RegisterButton(View v)
     {
 		

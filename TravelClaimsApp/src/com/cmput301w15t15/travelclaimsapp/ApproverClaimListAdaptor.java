@@ -40,9 +40,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 /**
-
- * 	Custom ArrayAdaptor for displaying the the submitted claimlist.
+ * 
+ * 	Custom ArrayAdaptor for displaying the submitted claimlist.
  *  
+ *  Builds a Array list to hold Claims in and a ViewHolder to display them.
  *  	
  */
 public class ApproverClaimListAdaptor extends ArrayAdapter<Claim>{
@@ -169,35 +170,6 @@ public class ApproverClaimListAdaptor extends ArrayAdapter<Claim>{
         
 		return rowView;
 	}
-	/**
-	 * Takes a arraylist of expenses and returns a map containing the total 
-	 * currency amounts for all expenses
-	 * 
-	 * Only returns currencies with amounts greater than zero
-	 * 
-	 * @param expenses ArrayList<Expense> to get totals from
-	 * @return returns a map with key = currencies (String) and values = totals (Integer)
-	 */
-//	private Map<String, Integer> getAmountTotals(ArrayList<Expense> expenses){
-//		
-//		Map<String, Integer> totalAmounts = new HashMap<String, Integer>();
-//		
-//		for(Expense expense : expenses){
-//			String cur = expense.getCurr();
-//			Integer amount = expense.getCost();
-//			
-//			if(amount == null){
-//				continue;
-//			}
-//			
-//			if(totalAmounts.containsKey(cur)){
-//				totalAmounts.put(cur, amount + totalAmounts.get(cur));
-//			}else if(amount != 0){
-//				totalAmounts.put(cur,amount);
-//			}
-//		}
-//		return totalAmounts;
-//	}
 	
 	private static class ViewHolder {
         public LinearLayout claimApprover;

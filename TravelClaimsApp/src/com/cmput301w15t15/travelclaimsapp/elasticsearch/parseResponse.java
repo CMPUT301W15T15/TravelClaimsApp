@@ -14,6 +14,9 @@ import com.cmput301w15t15.travelclaimsapp.model.User;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.Gson;
 
+/**
+ * Handles parsing related to http responses in Elastic Search.
+ */
 public class parseResponse {
 
 	private static Gson gson = new Gson();
@@ -39,7 +42,7 @@ public class parseResponse {
 	/**
 	 * Gets rid of elastic search header and returns saved claimlist.
 	 * @param response
-	 * @return
+	 * @return SearchHit<ClaimList>
 	 */
 	public static SearchHit<ClaimList> claimListHit(HttpResponse response) {
 		
@@ -61,7 +64,7 @@ public class parseResponse {
 	/**
 	 * Gets rid of elastic search header and returns saved user.
 	 * @param response
-	 * @return
+	 * @return SearchHit<User>
 	 */
 	public static SearchHit<User> userHit(HttpResponse response) {
 

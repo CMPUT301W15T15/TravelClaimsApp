@@ -23,8 +23,7 @@ import com.cmput301w15t15.travelclaimsapp.model.Listener;
 import com.cmput301w15t15.travelclaimsapp.model.User;
 
 /**
- * Singleton class used for getting static application User
- *
+ * Singleton class used for getting static application User.
  */
 public class UserController {
 	
@@ -33,7 +32,7 @@ public class UserController {
 	/**
 	 * Pulls User from file on android, if no User, then returns user.
 	 * 
-	 * @return
+	 * @return User
 	 */
 	static public User getUser() {
 		if(user == null){

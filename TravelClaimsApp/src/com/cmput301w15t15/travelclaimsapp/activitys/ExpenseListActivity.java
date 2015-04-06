@@ -50,7 +50,6 @@ import android.widget.AdapterView.AdapterContextMenuInfo;
  * Activity to handle editing expense 
  *
  */
-
 public class ExpenseListActivity extends Activity
 {
 	private ExpenseListAdaptor expenseAdaptor;
@@ -60,9 +59,8 @@ public class ExpenseListActivity extends Activity
 	private int adaptorPos;
 	private ExpenseListController elc;
 	private static final int GET_GEOLOCATION_CODE = 10;
-	/* (non-Javadoc)
-	 * @see android.app.Activity#onCreate(android.os.Bundle)
-	 */
+
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -78,12 +76,11 @@ public class ExpenseListActivity extends Activity
 		expenseAdaptor.notifyDataSetChanged();
 		expenseListView.setAdapter(expenseAdaptor);
 		registerForContextMenu(findViewById(R.id.CurrentExpenseList2));
-		//set_on_click();
 
 	}
 
 	/**
-	 *  initialize activity valus
+	 *  initialize activity value
 	 * 
 	 * @author bzhou2
 	 * @see android.app.Activity#onStart()
@@ -95,11 +92,7 @@ public class ExpenseListActivity extends Activity
 		
 	}
 	
-	/**
-	 * 
-	 * (non-Javadoc)
-	 * @see android.app.Activity#onResume()
-	 */
+
 	@Override
 	protected void onResume(){
 		super.onResume();
@@ -108,10 +101,7 @@ public class ExpenseListActivity extends Activity
 		
 	}
 	
-	/**
-	 *  (non-Javadoc)
-	 * @see android.app.Activity#onCreateOptionsMenu(android.view.Menu)
-	 */
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu)
 	{
@@ -126,8 +116,8 @@ public class ExpenseListActivity extends Activity
         getMenuInflater().inflate(R.menu.expense_context_menu, menu);
         
     }
-	/** Function that is called when Search menu item is clicked
-	 * @author Henry
+	/** 
+	 * Function that is called when Search menu item is clicked
 	 * @param menu
 	 */
     public void SearchOption (MenuItem menu)
@@ -136,8 +126,8 @@ public class ExpenseListActivity extends Activity
     	Intent intent = new Intent(ExpenseListActivity.this, SearchActivity.class);
     	startActivity(intent);
     }
-    /**Function that is called when the "Sign Out" menu item is clicked
-	 * @author Henry
+    /**
+     * Function that is called when the "Sign Out" menu item is clicked
 	 * @param menu
 	 */
     public void SignOut(MenuItem menu)
@@ -159,6 +149,10 @@ public class ExpenseListActivity extends Activity
     	startActivity(intent);
     }
  
+    /**
+     * Checks if approver Activity can be launched.
+     * @param menu
+     */
     public void MenuApprover(MenuItem menu){
     	if(!UserController.getUser().isApprover()){
     		Toast.makeText(this, "Not an Approver", Toast.LENGTH_LONG).show();
@@ -175,8 +169,8 @@ public class ExpenseListActivity extends Activity
     }
 
     
-    /**Function that is called when the "Add new Expense" Button is clicked in UI
-     * @author Henry Bo
+    /**
+     * Function that is called when the "Add new Expense" Button is clicked in UI
      * @param view
      */
     public void AddExpenseButton(View view)
@@ -292,6 +286,9 @@ public class ExpenseListActivity extends Activity
 		}
 	};
 	
+	/**
+	 * Thread for getting submitted ClaimList for approver activity.
+	 */
 	class initApproverActivityThread extends Thread {
 		
 		Context context;

@@ -44,7 +44,11 @@ public class ClaimListController {
 	private static ClaimList claimList = null;
 
 	/**
-	 * Load the claimList from the android file system
+	 * Gives value to the claimList for the global application.
+	 * 
+	 * If the file on hand does not match the current user, a new claimList is made.
+	 * 
+	 * @return the application claimList
 	 */
 	static public void initClaimListController() {
 		if(claimList == null){

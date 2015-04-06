@@ -36,8 +36,8 @@ public class ExpenseListController {
 	private Claim claim;
 	
 	/**
-	 * @param name
-	 * @param submitted
+	 * @param String name
+	 * @param Boolean submitted
 	 */
 	public ExpenseListController(String name, boolean submitted) {
 		if(submitted){
@@ -51,8 +51,9 @@ public class ExpenseListController {
 	
 	
 	
-	/** Method that retrieves the expenseList 
-	 * @return expenseList
+	/** 
+	 * Method that retrieves the expenseList 
+	 * @return ExpenseList expenseList
 	 */
 	public ExpenseList getExpenseList(){
 		return expenseList;
@@ -61,7 +62,7 @@ public class ExpenseListController {
 	/**
 	 * Adds a expense with listener to the ExpenseListController {@link ExpenseList}
 	 * 
-	 * @param expense	the Expense to be added to the 
+	 * @param Expense expense	the Expense to be added to the ExpenseList
 	 */
 	public void addExpense(Expense expense){
 		claim.addExpense(expense);
