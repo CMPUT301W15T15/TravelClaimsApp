@@ -1,7 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
-    <item android:id="@+id/SearchMenuButton" android:title="Search" android:onClick="SearchOption"></item>
-    <item android:id="@+id/SignOut" android:title="Sign Out" android:onClick="SignOut"></item>
-    <item android:id="@+id/back_to_claimlist" android:title="Return to claim list" android:onClick="backToClaimList"></item>
-    <item android:id="@+id/Approver" android:onClick="MenuApprover" android:title="Approve Claims"></item>
+    <item android:id="@+id/SearchMenuButton" android:title="@string/Search" android:onClick="SearchOption"></item>
+    <item android:id="@+id/SignOut" android:title="@string/Logout" android:onClick="SignOut"></item>
+    <item android:id="@+id/back_to_claimlist" android:title="@string/ReturnClaimL" android:onClick="backToClaimList"></item>
+    <item android:id="@+id/Approver" android:onClick="MenuApprover" android:title="@string/ApproveClaims"></item>
 
 </menu>

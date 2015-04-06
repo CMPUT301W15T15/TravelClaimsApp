@@ -1,6 +1,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
-    <item android:id="@+id/SearchMenuButton" android:title="Search" android:onClick="SearchOption"></item>
-    <item android:id="@+id/SignOut" android:title="Sign Out" android:onClick="SignOut"></item>
-    <item android:id="@+id/ClaimList" android:title="Return to claimlist" android:onClick="ReturnClaim"></item>
+    <item android:id="@+id/SearchMenuButton" android:title="@string/Search" android:onClick="SearchOption"></item>
+    <item android:id="@+id/SignOut" android:title="@string/Logout" android:onClick="SignOut"></item>
+    <item android:id="@+id/ClaimList" android:title="@string/ReturnClaimL" android:onClick="ReturnClaim"></item>
 
 </menu>
