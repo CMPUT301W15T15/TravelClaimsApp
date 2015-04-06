@@ -113,8 +113,8 @@ public class ApproveExpenseListTest extends TestCase {
 		
 		expense1.takeReceipt(null);
 		claim1.setStatus("Submitted");
-		assertTrue("Image yes?", expense1.getReceipt() == null);
-		assertTrue("Image no", expense2.getReceipt() == null);
+		assertTrue("Image yes?", expense1.getPicture() == null);
+		assertTrue("Image no", expense2.getPicture() == null);
 //		assertTrue("photo is not editable", claim1.isEditable()==false);
 	}
 }

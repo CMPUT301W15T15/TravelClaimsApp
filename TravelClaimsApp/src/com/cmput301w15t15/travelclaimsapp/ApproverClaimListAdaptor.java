@@ -60,6 +60,10 @@ public class ApproverClaimListAdaptor extends ArrayAdapter<Claim>{
 	}
 
 	
+	/* 
+	 * get view of each item from adapter
+	 * 
+	 */
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		View rowView = convertView;
@@ -199,6 +203,11 @@ public class ApproverClaimListAdaptor extends ArrayAdapter<Claim>{
 //		return totalAmounts;
 //	}
 	
+	/**
+	 * @author bzhou2
+	 *	ViewHolder for Claim list adaptor
+	 *
+	 */
 	private static class ViewHolder {
         public LinearLayout claimApprover;
 		public LinearLayout claimant;

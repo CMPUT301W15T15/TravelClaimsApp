@@ -9,7 +9,7 @@
         android:id="@+id/CurrentExpenseTitle3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/CurrentExpense"
+        android:text="@string/Expense"
         android:textColor="#ffffff"
         android:textSize="20sp"
         android:textStyle="bold" />
