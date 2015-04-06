@@ -18,12 +18,7 @@
 package com.cmput301w15t15.travelclaimsapp.test.modeltest;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-
 import com.cmput301w15t15.travelclaimsapp.model.User;
-
 import android.test.AndroidTestCase;
 
 /**

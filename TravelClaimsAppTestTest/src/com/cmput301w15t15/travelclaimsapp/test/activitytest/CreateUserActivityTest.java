@@ -28,7 +28,6 @@ import android.app.Instrumentation;
 import android.app.Instrumentation.ActivityMonitor;
 import android.test.ActivityInstrumentationTestCase2;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
@@ -44,7 +43,6 @@ public class CreateUserActivityTest extends
 	private EditText username;
 	private EditText password;
 	private EditText passwordAgain;
-	private CheckBox ifApprover;
 	private Activity activity;
 	private ImageButton geolocation;
 	
@@ -67,7 +65,6 @@ public class CreateUserActivityTest extends
 		username = (EditText) activity.findViewById(R.id.Create_Username);
 		password = (EditText) activity.findViewById(R.id.Create_Password);
 		passwordAgain = (EditText) activity.findViewById(R.id.Create_Password_Again);
-		ifApprover = (CheckBox) activity.findViewById(R.id.Approver_Check_Box);
 		geolocation = (ImageButton) activity.findViewById(R.id.HomeLocationIcon);
 
 	}
@@ -265,29 +262,4 @@ public class CreateUserActivityTest extends
 				assertNotNull(nextActivity);
 			}
 			
-			//Test Case: CreateUserActivityTest#8
-			/**
-			 * Checks Approver users can be created.
-			 */
-//			public void testApproverInput(){
-//				ActivityMonitor activityMonitor = new ActivityMonitor(MainMenuActivity.class.getName(), null, false);
-//				instrumentation.addMonitor(activityMonitor);
-//				instrumentation.runOnMainSync(new Runnable() {
-//					
-//					@Override
-//					public void run() {
-//						username.setText("Jeremy");
-//						password.setText("Clarkson");
-//						passwordAgain.setText("Clarkson");
-//						create.performClick();
-//						ifApprover.setChecked(true);
-//						
-//					}
-//				});
-//				instrumentation.waitForIdleSync();
-//				
-//				Activity nextActivity = instrumentation.waitForMonitorWithTimeout(activityMonitor, 3000);
-//				assertNotNull(nextActivity);
-//			}
-//	
 }

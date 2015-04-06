@@ -19,7 +19,6 @@ package com.cmput301w15t15.travelclaimsapp.test.modeltest;
 
 import java.io.IOException;
 import java.util.Date;
-import java.util.Map;
 
 
 import com.cmput301w15t15.travelclaimsapp.model.Claim;
@@ -107,9 +106,6 @@ public class ApproveExpenseListTest extends TestCase {
 
 		testClaimList.addClaim(claim1);
 		testClaimList.addClaim(claim2);
-		Expense item1 = new Expense("food");
-		Expense item2 = new Expense("meat");
-		Expense item3 = new Expense("drink");
 		
 		expense1.takeReceipt(null);
 		claim1.setStatus("Submitted");

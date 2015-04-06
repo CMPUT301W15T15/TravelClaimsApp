@@ -17,11 +17,9 @@
  */
 package com.cmput301w15t15.travelclaimsapp.test.activitytest;
 
-import com.cmput301w15t15.travelclaimsapp.ClaimListController;
 import com.cmput301w15t15.travelclaimsapp.FileManager;
 import com.cmput301w15t15.travelclaimsapp.R;
 import com.cmput301w15t15.travelclaimsapp.activitys.AddClaimActivity;
-import com.cmput301w15t15.travelclaimsapp.activitys.EditClaimActivity;
 import com.cmput301w15t15.travelclaimsapp.activitys.LoginActivity;
 import com.cmput301w15t15.travelclaimsapp.model.User;
 

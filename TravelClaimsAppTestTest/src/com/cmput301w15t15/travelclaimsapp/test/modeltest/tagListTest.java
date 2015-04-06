@@ -20,10 +20,6 @@ package com.cmput301w15t15.travelclaimsapp.test.modeltest;
 
 import java.io.IOException;
 
-import com.cmput301w15t15.travelclaimsapp.model.Claim;
-
-
-
 import com.cmput301w15t15.travelclaimsapp.model.Tag;
 import com.cmput301w15t15.travelclaimsapp.model.TagList;
 
@@ -36,7 +32,6 @@ public class tagListTest extends TestCase {
 	private Tag tag2=new Tag("Personal");
 	private Tag tag3=new Tag("school");
 
-	private Claim claim1;
 	@Override
 	protected void setUp() throws Exception {
 		// TODO Auto-generated method stub
