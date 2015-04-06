@@ -119,7 +119,7 @@ public class GeoLocationController {
 			//referenced https://github.com/joshua2ua/MockLocationTester on March 26th 2015
 			currentLocation = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 			if(currentLocation == null){
-				return new GeoLocation(0,0);	
+				return new GeoLocation(53.526546,-113.528155);	
 			}
 		}
 		return new GeoLocation(currentLocation.getLatitude(), currentLocation.getLongitude());

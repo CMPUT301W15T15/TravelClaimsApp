@@ -25,7 +25,6 @@ import junit.framework.TestCase;
 /**
  * Tests for {@link GeoLocation}
  * 
- * @author searn
  *
  */
 public class GeoLocationTest extends TestCase {

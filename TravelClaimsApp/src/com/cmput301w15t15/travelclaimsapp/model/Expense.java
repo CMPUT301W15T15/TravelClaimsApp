@@ -259,16 +259,23 @@ public class Expense implements Listenable{
 		return this.expenseDes;
 	}
 	
-
+	/**
+	 * Get the current GeoLocation for the expense
+	 * 
+	 * @return  the Expenses GeoLocation
+	 */
 	public GeoLocation getGeoLocation() {
-		// TODO Auto-generated method stub
 		return this.geoLocation;
 	}
 	
+	/**
+	 * Set the GeoLocation for the current Expense
+	 * 
+	 * @param gl	the GeoLocation to set it to
+	 */
 	public void setGeoLocation(GeoLocation gl) {
 		this.geoLocation = gl;
 		notifyListeners();
-		
 	}
 
 	/* (non-Javadoc)

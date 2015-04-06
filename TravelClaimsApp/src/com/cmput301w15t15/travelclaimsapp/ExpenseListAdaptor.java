@@ -69,8 +69,6 @@ public class ExpenseListAdaptor extends ArrayAdapter<Expense> {
 	 * @see android.widget.ArrayAdapter#getView(int, android.view.View, android.view.ViewGroup)
 	 */
 	@Override
-	
-	
 	public View getView(final int position, View convertView, ViewGroup parent) {
 		View rowView = convertView;
 

@@ -20,7 +20,6 @@ package com.cmput301w15t15.travelclaimsapp.test.activitytest;
 import com.cmput301w15t15.travelclaimsapp.ClaimListController;
 import com.cmput301w15t15.travelclaimsapp.R;
 import com.cmput301w15t15.travelclaimsapp.activitys.AddClaimActivity;
-import com.cmput301w15t15.travelclaimsapp.activitys.ApproverClaimListActivity;
 import com.cmput301w15t15.travelclaimsapp.activitys.EditClaimActivity;
 import com.cmput301w15t15.travelclaimsapp.model.Claim;
 
@@ -30,7 +29,6 @@ import android.app.Activity;
 import android.app.Instrumentation;
 import android.app.Instrumentation.ActivityMonitor;
 import android.test.ActivityInstrumentationTestCase2;
-import android.view.KeyEvent;
 import android.widget.Button;
 
 /**
@@ -52,7 +50,6 @@ public class AddClaimActivityUITest extends ActivityInstrumentationTestCase2<Add
 		super.setUp();
 		setActivityInitialTouchMode(true);
 		activity = getActivity();
-	
 		instrumentation = getInstrumentation();
 		newClaimButton = (Button) activity.findViewById(R.id.Add_Claim_Button2);
 	}

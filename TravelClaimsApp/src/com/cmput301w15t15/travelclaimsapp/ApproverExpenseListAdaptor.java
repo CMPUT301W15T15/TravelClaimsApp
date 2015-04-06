@@ -113,25 +113,9 @@ public class ApproverExpenseListAdaptor extends ArrayAdapter<Expense> {
 		}else{
 		    viewHolder.expenseDate.setText(defaultExpenseDate.format(expense.getDate()));
 		}
-
-		if(expense.getGeoLocation() == null){
-        	viewHolder.expenseMap.setVisibility(android.view.View.INVISIBLE);
-        	viewHolder.expenseMap.setClickable(false);
-        }else{
-        	viewHolder.expenseMap.setVisibility(android.view.View.VISIBLE);
-        }
-		viewHolder.expenseMap.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				Intent intent = GeoLocationController.viewLocationIntent(context, expense.getGeoLocation());
-				context.startActivity(intent);
-			}
-		});
-		
+	
 		if(expense.getPicture() == null){
         	viewHolder.expenseImageAttach.setVisibility(android.view.View.VISIBLE);
-        	viewHolder.expenseImageAttach.setClickable(false);
         }else{
         	viewHolder.expenseImageAttach.setVisibility(android.view.View.INVISIBLE);
         }

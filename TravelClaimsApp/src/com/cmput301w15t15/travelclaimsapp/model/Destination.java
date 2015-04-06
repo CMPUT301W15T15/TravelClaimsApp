@@ -19,8 +19,6 @@ package com.cmput301w15t15.travelclaimsapp.model;
 
 import java.util.ArrayList;
 
-
-
 /**
  * Destination object refers to a location and reason for travel
  *
@@ -83,11 +81,21 @@ public class Destination implements Listenable{
 		return this.reason;
 	}
 	
+	/**
+	 * Set the destination GeoLocation
+	 * 
+	 * @param gl The GeoLocation to set the value to 
+	 */
 	public void setGeoLocation(GeoLocation gl) {
 		this.geoLocation = gl;
 		notifyListeners();
 	}
 	
+	/**
+	 * Get the current GeoLocation
+	 * 
+	 * @return		the current GeoLocation
+	 */
 	public GeoLocation getGeoLocation() {
 		// TODO Auto-generated method stub
 		return this.geoLocation;
