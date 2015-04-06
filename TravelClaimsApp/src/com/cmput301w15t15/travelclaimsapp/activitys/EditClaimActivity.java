@@ -52,6 +52,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ContextMenu.ContextMenuInfo;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -94,6 +95,7 @@ public class EditClaimActivity extends FragmentActivity implements TextWatcher {
 	protected void onCreate(Bundle savedInstanceState) {
 		
 		super.onCreate(savedInstanceState);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.edit_claim);
 		sdf = new SimpleDateFormat("MM/dd/yyyy",Locale.CANADA);
 		
