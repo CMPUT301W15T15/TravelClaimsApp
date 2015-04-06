@@ -47,7 +47,6 @@ public class LoginActivity extends Activity {
 	private Runnable launchAddClaims = new Runnable() {
 		public void run() {
 			ClaimListController.initClaimListController();
-	    	Toast.makeText(LoginActivity.this, "Claim List", Toast.LENGTH_SHORT).show();
 	    	Intent intent = new Intent(LoginActivity.this, AddClaimActivity.class);
 	    	startActivity(intent);
 	    	finish();
@@ -139,7 +138,6 @@ public class LoginActivity extends Activity {
 	 */
 	public void SearchOption(MenuItem menu)
     {
-    	Toast.makeText(this, "Going to Search", Toast.LENGTH_SHORT).show();
     	Intent intent = new Intent(LoginActivity.this, SearchActivity.class);
     	startActivity(intent);
     }
@@ -150,7 +148,6 @@ public class LoginActivity extends Activity {
 	 */
 	public void AddClaimMenu(MenuItem menu)
     {
-    	Toast.makeText(this, "Going to Claims", Toast.LENGTH_SHORT).show();
     	Intent intent = new Intent(LoginActivity.this, AddClaimActivity.class);
     	startActivity(intent);
     }
@@ -179,7 +176,6 @@ public class LoginActivity extends Activity {
     {
 		
 		if(InternetController.isInternetAvailable2(this)){
-			Toast.makeText(this, "Create User", Toast.LENGTH_SHORT).show();
 			Intent intent = new Intent(LoginActivity.this, CreateUserActivity.class);
 			startActivity(intent);
 		} else {
