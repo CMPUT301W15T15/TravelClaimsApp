@@ -42,6 +42,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ContextMenu.ContextMenuInfo;
+import android.view.Window;
 import android.widget.ListView;
 import android.widget.Toast;
 import android.widget.AdapterView.AdapterContextMenuInfo;
@@ -50,7 +51,6 @@ import android.widget.AdapterView.AdapterContextMenuInfo;
  * Activity to handle editing expense 
  *
  */
-
 public class ExpenseListActivity extends Activity
 {
 	private ExpenseListAdaptor expenseAdaptor;
@@ -60,13 +60,13 @@ public class ExpenseListActivity extends Activity
 	private int adaptorPos;
 	private ExpenseListController elc;
 	private static final int GET_GEOLOCATION_CODE = 10;
-	/* (non-Javadoc)
-	 * @see android.app.Activity#onCreate(android.os.Bundle)
-	 */
+
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		claimName=this.getIntent().getExtras().getString("claimName");
 		setContentView(R.layout.expense_list);
 		FileManager.initializeSaver(this);
@@ -78,12 +78,11 @@ public class ExpenseListActivity extends Activity
 		expenseAdaptor.notifyDataSetChanged();
 		expenseListView.setAdapter(expenseAdaptor);
 		registerForContextMenu(findViewById(R.id.CurrentExpenseList2));
-		//set_on_click();
 
 	}
 
 	/**
-	 *  initialize activity valus
+	 *  initialize activity value
 	 * 
 	 * @author bzhou2
 	 * @see android.app.Activity#onStart()
@@ -95,11 +94,7 @@ public class ExpenseListActivity extends Activity
 		
 	}
 	
-	/**
-	 * 
-	 * (non-Javadoc)
-	 * @see android.app.Activity#onResume()
-	 */
+
 	@Override
 	protected void onResume(){
 		super.onResume();
@@ -108,10 +103,7 @@ public class ExpenseListActivity extends Activity
 		
 	}
 	
-	/**
-	 *  (non-Javadoc)
-	 * @see android.app.Activity#onCreateOptionsMenu(android.view.Menu)
-	 */
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu)
 	{
@@ -126,24 +118,22 @@ public class ExpenseListActivity extends Activity
         getMenuInflater().inflate(R.menu.expense_context_menu, menu);
         
     }
-	/** Function that is called when Search menu item is clicked
-	 * @author Henry
+	/** 
+	 * Function that is called when Search menu item is clicked
 	 * @param menu
 	 */
     public void SearchOption (MenuItem menu)
     {
-    	Toast.makeText(this, "Going to Search", Toast.LENGTH_SHORT).show();
     	Intent intent = new Intent(ExpenseListActivity.this, SearchActivity.class);
     	startActivity(intent);
     }
-    /**Function that is called when the "Sign Out" menu item is clicked
-	 * @author Henry
+    /**
+     * Function that is called when the "Sign Out" menu item is clicked
 	 * @param menu
 	 */
     public void SignOut(MenuItem menu)
     {
     	SignOutController.reset();
-    	Toast.makeText(this, "Signing Out", Toast.LENGTH_SHORT).show();
     	Intent intent = new Intent(ExpenseListActivity.this, LoginActivity.class);
     	startActivity(intent);
     }
@@ -159,6 +149,10 @@ public class ExpenseListActivity extends Activity
     	startActivity(intent);
     }
  
+    /**
+     * Checks if approver Activity can be launched.
+     * @param menu
+     */
     public void MenuApprover(MenuItem menu){
     	if(!UserController.getUser().isApprover()){
     		Toast.makeText(this, "Not an Approver", Toast.LENGTH_LONG).show();
@@ -175,13 +169,12 @@ public class ExpenseListActivity extends Activity
     }
 
     
-    /**Function that is called when the "Add new Expense" Button is clicked in UI
-     * @author Henry Bo
+    /**
+     * Function that is called when the "Add new Expense" Button is clicked in UI
      * @param view
      */
     public void AddExpenseButton(View view)
     {
-    	Toast.makeText(this, "Going to Add Expense", Toast.LENGTH_SHORT).show();
     	
     	int i = expenseList.size();
     	while(ClaimListController.getClaimList().getClaim(claimName).getExpense("Expense"+i)!=null){
@@ -190,7 +183,6 @@ public class ExpenseListActivity extends Activity
     	Expense expense = new Expense("Expense"+i);
 		elc.addExpense(expense);
 		
-    	Toast.makeText(this, "Creating a Expense", Toast.LENGTH_SHORT).show();
     	Intent intent = new Intent(ExpenseListActivity.this, EditExpenseActivity.class);
 
     	intent.putExtra("claimName",claimName );
@@ -212,7 +204,6 @@ public class ExpenseListActivity extends Activity
 		final Expense expense = expenseAdaptor.getItem(info.position);
         switch (item.getItemId()) {
             case R.id.expenseListViewMenuEdit:
-            	Toast.makeText(this, "Editing an expense", Toast.LENGTH_SHORT).show();
             	intent = new Intent(ExpenseListActivity.this, EditExpenseActivity.class);
 
             	intent.putExtra("claimName", claimName);
@@ -264,18 +255,15 @@ public class ExpenseListActivity extends Activity
 		if(requestCode == GET_GEOLOCATION_CODE){
 			switch (resultCode) {
 			case RESULT_OK:
-				Toast.makeText(this, "RESULT_OK", Toast.LENGTH_SHORT).show();
 				String geoString = data.getExtras().getString("geoLocation");
 				GeoLocation gl = GeoLocation.getFromString(geoString);
 				Expense e = expenseAdaptor.getItem(adaptorPos);
 				GeoLocationController.setExpenseGeoLocation(e, gl.getLatitude(), gl.getLongitude());
 				break;
 			case RESULT_CANCELED:
-				Toast.makeText(this, "RESULT_CANCEL", Toast.LENGTH_SHORT).show();
 				break;
 				
 			default:
-				Toast.makeText(this, "NOTHING", Toast.LENGTH_SHORT).show();
 				break;
 			}
 			
@@ -292,6 +280,9 @@ public class ExpenseListActivity extends Activity
 		}
 	};
 	
+	/**
+	 * Thread for getting submitted ClaimList for approver activity.
+	 */
 	class initApproverActivityThread extends Thread {
 		
 		Context context;

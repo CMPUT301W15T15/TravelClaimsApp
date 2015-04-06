@@ -40,15 +40,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ContextMenu.ContextMenuInfo;
+import android.view.Window;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
 /**
- * Activity for the AddClaim/ClaimList view 
- * 
- * TODO:
+ * Activity for the ApproverAddClaimList view. 
  */
 public class ApproverClaimListActivity extends Activity {
 
@@ -59,6 +58,7 @@ public class ApproverClaimListActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_approver_claim_list);
 		FileManager.initializeSaver(this);
 		claimListView = (ListView) findViewById(R.id.approve_claim_list_view);
@@ -173,7 +173,7 @@ public class ApproverClaimListActivity extends Activity {
     }
     /** Function that is called when "Search" menu item is clicked
 	 * and switches to the searchactivity
-	 * @author Henry
+	 * 
 	 * @param menu
 	 */
     public void SearchOption (MenuItem menu)
@@ -184,7 +184,7 @@ public class ApproverClaimListActivity extends Activity {
     }
     /**Function that is called when the "Sign Out" menu item is clicked
 	 * and switches to the mainscreenactivity
-	 * @author Henry
+	 * 
 	 * @param menu
 	 */
     public void SignOut(MenuItem menu)

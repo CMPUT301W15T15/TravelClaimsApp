@@ -32,15 +32,11 @@ import android.location.Location;
  */
 public class User  implements Listenable{
 
-	
 	private String username;
-	
-	//private ClaimList claimList;
 	private byte[] pHash;
 	private boolean approver;
 	private GeoLocation homeLocation;
 	protected transient ArrayList<Listener> listeners;
-	
 	
 	/**
 	 * To construct a user, username and a password hash needed, approver defaults to false.
@@ -57,12 +53,11 @@ public class User  implements Listenable{
 		this.listeners = new ArrayList<Listener>();
 	}
 	
-	
 	/**
 	 * To construct a user, username and a password hash needed, approver defaults to false.
 	 *
-	 * @param username
-	 * @param password
+	 * @param username		the String to initialize username to 
+	 * @param password		the String to initialize password to 
 	 */
 	public User(String username, String password){
 		
@@ -72,11 +67,10 @@ public class User  implements Listenable{
 		this.listeners = new ArrayList<Listener>();
 	}
 
-	
 	/**
 	 * Returns String of username. This attribute is read only from the constructor.
 	 * 
-	 * @return
+	 * @return		the String username of User
 	 */
 	public String getUsername() {
 		return username;
@@ -86,7 +80,7 @@ public class User  implements Listenable{
 	/**
 	 * Returns byte array of the password hash. This hash is read only from the constructor.
 	 * 
-	 * @return
+	 * @return	 the password hash
 	 */
 	public byte[] getpHash() {
 		return pHash;
@@ -96,7 +90,7 @@ public class User  implements Listenable{
 	/**
 	 * Returns if boolean whether user is an Approver. This attribute is read only from the constructor.
 	 * 
-	 * @return
+	 * @return		true if User is Approver
 	 */
 	public boolean isApprover() {
 		return approver;
@@ -173,9 +167,4 @@ public class User  implements Listenable{
 		this.listeners = new ArrayList<Listener>();
 		
 	}
-
-
-
-
-	
 }

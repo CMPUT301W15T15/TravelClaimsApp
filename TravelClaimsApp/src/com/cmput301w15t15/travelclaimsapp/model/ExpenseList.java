@@ -18,11 +18,6 @@
 package com.cmput301w15t15.travelclaimsapp.model;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-
-import com.cmput301w15t15.travelclaimsapp.ExpenseListComparator;
-
 
 /**
  * @author Henry
@@ -30,9 +25,6 @@ import com.cmput301w15t15.travelclaimsapp.ExpenseListComparator;
  *
  */
 public class ExpenseList {
-	
-	private int totalValue;
-	
 	protected transient ArrayList<Listener> listeners;
 	protected ArrayList<Expense> expenseList;
 	
@@ -46,8 +38,8 @@ public class ExpenseList {
 	}
 	
 	/**
-	 * add expense into expense list
-	 * @param expense1
+	 * Add expense into expense list
+	 * @param expense1 	the Expense to add to ExpenseList
 	 */
 	public void addExpense(Expense expense1) {
 		this.expenseList.add(expense1);
@@ -55,27 +47,21 @@ public class ExpenseList {
 	}
 	
 	/**
-	 * get expense list (Collection mode)
-	 * @return expenseList
-	 */
-	public Collection<Expense> getExpenseList() {
-		return this.expenseList;
-	
-	}
-	
-	/**
 	 * get Expense by index (ArrayList way)
-	 * @param index
-	 * @return
+	 * @param index		the index to get expense by 
+	 * @return			the Expense at the given index
 	 */
 	public Expense getExpenseByIndex(int index){
 		return this.expenseList.get(index);
 	}
 	
 	/**
-	 * get expense by expense name
-	 * @param expenseName
-	 * @return
+	 * Get expense by expense name.<br>
+	 * 
+	 * If Expense is not in ExpenseList then returns null
+	 * 
+	 * @param expenseName		the String name to search for
+	 * @return					the Expense with passed name 
 	 */
 	public Expense getExpense(String expenseName) {
 		if (expenseList==null){
@@ -89,101 +75,51 @@ public class ExpenseList {
 			}
 		}
 		return null;
-	
 	}
 	
-
 	/**
-	 * remove expense by expense name
-	 * @param expense1
+	 * Remove expense by expense name
+	 * @param expense1  the String name of Expense to remove from ExpenseList
 	 */
 	public void removeExpense(Expense expense1) {
-		// TODO Auto-generated method stub
 		this.expenseList.remove(expense1);
 		notifyListeners();
 	}
 	
 	/**
-	 * get the size of expense list
-	 * @return
+	 * Get the size of expense list
+	 * @return	 the number of Expense objects in ExpenseList
 	 */
 	public int size() {
-		// TODO Auto-generated method stub
 		return this.expenseList.size();
 	}
 	
-	
 	/**
-	 * return expense list (ArrayList mode)
-	 * @return expenseList (ArrayList<Expense>)
+	 * Return expense list (ArrayList mode)
+	 * @return expenseList the ExpenseList as a ArrayList of Expense objects
 	 */
 	public ArrayList<Expense> toArrayList(){
 		return this.expenseList;
 		
 	}
 	
-	/**
-	 * get expenseList which contains the expenses without receipt
-	 * @return
-	 */
-	public ExpenseList noImageExpenseList(){
-		return null;
-	}
-
-	/**
-	 * Listener
-	 */
 	public void notifyListeners() {
 		for (Listener listener : listeners) {
 			listener.update();
 		}
 	}
 	
-	/**
-	 * add Listener
-	 * @param listener
-	 */
 	public void addListener(Listener listener) {
 		listeners.add(listener);
 	}
 	
-	/**
-	 * delete listener
-	 * @param listener
-	 */
 	public void deleteListener(Listener listener){
 		listeners.remove(listener);
 	}
 	
-	/**
-	 * get total cost of all expenses in the expense list
-	 * @return totalValue (int)
-	 */
-	public int getTotalValue(){
-		this.totalValue=0;
-		for (int i=0;i<this.expenseList.size();i++){
-			this.totalValue=this.totalValue+expenseList.get(i).getValue();
-		}
-		return this.totalValue;
-	}
-	
 
-
-
-	/**
-	 * set listener
-	 */
 	public void setListeners() {
 		this.listeners = new ArrayList<Listener>();
 		
 	}
-
-	/**
-	 * sort expenseList: sort expense by date
-	 */
-	public void sort() {
-		// TODO Auto-generated method stub
-		Collections.sort(expenseList, new ExpenseListComparator());
-	}
-	
 }

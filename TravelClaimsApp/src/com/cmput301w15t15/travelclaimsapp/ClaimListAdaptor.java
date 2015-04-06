@@ -40,9 +40,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 /**
- * 	Custom ArrayAdaptor for displaying the claimlist 
+ * 	Custom ArrayAdaptor for displaying the claimlist.
  *  
- *  
+ *  Builds a Array list to hold Claims in and a ViewHolder to display them.
  *  	
  */
 

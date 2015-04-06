@@ -14,12 +14,16 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageView;
 import android.widget.ListView;
 
+/**
+ * Activity for viewing the ExpenseList of a Submitted Claim.
+ */
 public class ApproverExpenseListActivity extends Activity {
 
 	private String claimName;
@@ -30,6 +34,7 @@ public class ApproverExpenseListActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_approver_expense_list);
 		claimName=this.getIntent().getExtras().getString("claimName");
 		setContentView(R.layout.activity_approver_expense_list);
@@ -75,6 +80,17 @@ public class ApproverExpenseListActivity extends Activity {
 	}
 	
 	
+	/**
+	 * Called when dialog appears to show current expense photo.
+	 * 
+	 * Loads photo to be displayed.
+	 * Position is the position of the Expense in the listview, height and width
+	 * are of the size the the image will be displayed in.
+	 * 
+	 * @param int position
+	 * @param int width
+	 * @param int height
+	 */
 	private void loadPhoto(int position, int width, int height) {
 
 

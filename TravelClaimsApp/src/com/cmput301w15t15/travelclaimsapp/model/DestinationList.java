@@ -72,25 +72,21 @@ public class DestinationList implements Listenable{
 		for (Listener listener : listeners) {
 			listener.update();
 		}
-		
 	}
 
 	@Override
 	public void addListener(Listener listener) {
 		listeners.add(listener);
-		
 	}
 
 	@Override
 	public void deleteListener(Listener listener) {
 		listeners.remove(listener);
-		
 	}
 
 	@Override
 	public void setListeners() {
 		this.listeners = new ArrayList<Listener>();
-		
 	}
 
 }

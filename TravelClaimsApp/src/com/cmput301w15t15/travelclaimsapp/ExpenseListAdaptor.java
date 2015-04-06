@@ -37,8 +37,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 /**
- * ExpenseListAdaptor is used to show expense values in th
- * @author bzhou2
+ * ExpenseListAdaptor is used to show expense values in the ExpenseListActivity
+ * 
+ * An ArrayList is made for the Expenses and a ViewHolder is used to display them.
  *
  */
 public class ExpenseListAdaptor extends ArrayAdapter<Expense> {
@@ -64,7 +65,7 @@ public class ExpenseListAdaptor extends ArrayAdapter<Expense> {
 
 	/**
 	 *  
-	 *  get format view for one row of expense list
+	 * Get format view for one row of expense list
 	 * @see android.widget.ArrayAdapter#getView(int, android.view.View, android.view.ViewGroup)
 	 */
 	@Override
@@ -168,7 +169,7 @@ public class ExpenseListAdaptor extends ArrayAdapter<Expense> {
 	
 	/**
 	 * 
-	 * all format view for expenselist view
+	 * All format view for ExpenseList view.
 	 * @author bzhou2
 	 *
 	 */

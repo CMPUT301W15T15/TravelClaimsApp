@@ -24,8 +24,6 @@ import java.util.Date;
 import android.net.Uri;
 
 /**
- * 
- * @author Henry
  *This is the expense model class that creates the expense object
  */
 public class Expense implements Listenable{
@@ -44,8 +42,8 @@ public class Expense implements Listenable{
 	protected String isRescale="";
 	
 	/**
-	 * expense constructor
-	 * @param expenseName
+	 * Expense constructor
+	 * @param expenseName	the name to of the Expense to create 
 	 */
 	public Expense(String expenseName){
 		this.expenseName = expenseName;
@@ -56,42 +54,16 @@ public class Expense implements Listenable{
 	}
 
 	/**
-	 * get one expense value (same as getCost) (may change soon)
-	 * @return
-	 */
-	public int getValue(){
-		return price;
-	}
-	
-	/**
-	 * set one expense cost (same as setCost) (may change soon)
-	 * @param value
-	 */
-	public void setValue(int value){
-		this.price=value;
-		notifyListeners();
-	}
-	
-	/**
-	 * set expense flagged
-	 */
-	public void addFlag(){
-		this.flag=1;
-		notifyListeners();
-		// TODO
-	}
-	
-	/**
-	 * get flag status
-	 * @return
+	 * Get flag status (1 == flagged, 0 == not flagged)
+	 * @return	the integer value of Expense flag
 	 */
 	public int getFlag(){
 		return this.flag;
 	}
 	
 	/**
-	 * set expense name
-	 * @param expenseName
+	 * Set expense name
+	 * @param expenseName	the name to set Expense name to
 	 */
 	public void setName(String expenseName) {
 		this.expenseName = expenseName;
@@ -99,16 +71,16 @@ public class Expense implements Listenable{
 	}
 	
 	/**
-	 * get expense name
-	 * @return
+	 * Get expense name
+	 * @return	the expense name String
 	 */
 	public String getName() {
 		return this.expenseName;
 	}
 	
 	/**
-	 * set cost of a expense (same as setValue) (may change soon)
-	 * @param expenseCost
+	 * Set cost of a expense 
+	 * @param expenseCost 	a integer to set cost to 
 	 */
 	public void setCost(int expenseCost){
 		this.expenseCost = expenseCost;
@@ -116,8 +88,8 @@ public class Expense implements Listenable{
 	}
 	
 	/**
-	 * get expense cost (same as getValue) (may change soon)
-	 * @return expenseCost
+	 * Get expense cost 
+	 * @return expenseCost the integer Expense cost is set to 
 	 */
 	public Integer getCost()
 	{
@@ -125,8 +97,8 @@ public class Expense implements Listenable{
 	}
 	
 	/**
-	 * set expense cost currency
-	 * @param expenseCurr
+	 * Set expense cost currency
+	 * @param expenseCurr	the currency code to set Expense currency to 
 	 */
 	public void setCurr(String expenseCurr)
 	{
@@ -135,16 +107,16 @@ public class Expense implements Listenable{
 	}
 	
 	/**
-	 * get expense currency
-	 * @return expenseCurr(String)
+	 * Get expense currency
+	 * @return expenseCurr String currency code of Expense
 	 */
 	public String getCurr(){
 		return this.expenseCurr;
 	}
 	
 	/**
-	 * set expense category
-	 * @param expenseCat
+	 * Set expense category
+	 * @param expenseCat the String to set expense category to 
 	 */
 	public void setCat(String expenseCat){
 		this.expenseCat = expenseCat;
@@ -152,90 +124,24 @@ public class Expense implements Listenable{
 	}
 	
 	/**
-	 * get expense category
-	 * @return
+	 * Get expense category
+	 * @return		the String category of the Expense
 	 */
 	public String getCat(){
 		return this.expenseCat;
 	}
 
 	/**
-	 * remove one expense flag
-	 * 
-	 */
-	public void removeFlag()
-	{
-		this.flag=0;
-		notifyListeners();
-		// TODO Auto-generated method stub
-		//return false;
-	}
-	
-	/**
-	 * return true if expense has no flag
-	 * @return
-	 */
-	public boolean emptyFlag(){
-		if(this.flag==0){
-			return true;
-		}
-		else{
-			return false;
-		}
-	}
-
-
-	/**
-	 * set expense receipt
-	 * @param expenseReceipt
-	 */
-	public void takeReceipt(Uri expenseReceipt) {
-		this.expenseReceipt = expenseReceipt;
-	}
-	
-
-	/**
-	 * get expense receipt
-	 * @return expenseReceipt (Uri)
-	 */
-	public Uri getReceipt() {
-		// TODO Auto-generated method stub
-		return this.expenseReceipt;
-	}
-	
-	/**
-	 * delete recepit from one expense
-	 * 
-	 */
-	public void deleteReceipt() {
-		this.expenseReceipt = null;
-		
-	}
-	
-	/**
-	 * return true if expense has no receipt
-	 * @return boolean
-	 */
-	public boolean emptyReceipt() {
-		if (this.expenseReceipt == null){
-		return true;
-		}
-		else{
-			return false;
-		}
-	}
-
-	/**
-	 * get expense start date
-	 * @return
+	 * Get expense start date
+	 * @return		the expense Date for Expense
 	 */
 	public Date getDate() {
 		return this.expenseDate;
 	}
 
 	/**
-	 * set expense date
-	 * @param expenseDate
+	 * Set expense date
+	 * @param expenseDate  the Date value to set expense date to 
 	 */
 	public void setDate(Date expenseDate) {
 		this.expenseDate = expenseDate;
@@ -243,8 +149,8 @@ public class Expense implements Listenable{
 	}
 
 	/**
-	 * set expense description
-	 * @param expenseDes
+	 * Set expense description
+	 * @param expenseDes  the String to set Expense description to 
 	 */
 	public void setDes(String expenseDes) {
 		this.expenseDes = expenseDes;
@@ -252,8 +158,8 @@ public class Expense implements Listenable{
 	}
 
 	/**
-	 * get expense description
-	 * @return expenseDes (string)
+	 * Get expense description
+	 * @return expenseDes the String description for Expense 
 	 */
 	public String getDes() {
 		return this.expenseDes;
@@ -310,31 +216,50 @@ public class Expense implements Listenable{
 		this.listeners = new ArrayList<Listener>();
 		
 	}
-
+	/**
+	 * Set flag for this expense
+	 * 
+	 * @param value
+	 */
 	public void setFlag(int value) {
-		// TODO Auto-generated method stub
 		this.flag=value;
 		notifyListeners();
 	}
 
-	// deal with picture of receipt
+	/**
+	 * Get the picture attached to Expense
+	 * 
+	 * @return  the attached picture as a byte array
+	 */
 	public byte[] getPicture(){
 		return this.picture;
 	}
-	
+	/**
+	 * Set the expense picture to passed byte array
+	 * 
+	 * @param picture	the byte array to set as expense picture
+	 */
 	public void takePicture(byte[] picture){
 		this.picture=picture;
 		notifyListeners();
 	}
 
+	/**
+	 * Get the pictures current scale
+	 * 
+	 * @return	the scale of the picture
+	 */
 	public String getScale(){
 		return this.isRescale;
 	}
 	
+	/**
+	 * Set the scale for the picture
+	 * 
+	 * @param scale		the scale to set the picture to 
+	 */
 	public void setScale(String scale){
 		this.isRescale = scale;
 		notifyListeners();
 	}
-	
-	
 }

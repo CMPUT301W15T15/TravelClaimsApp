@@ -33,9 +33,13 @@ import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.EditText;
 import android.widget.Toast;
 
+/**
+ * Activity handles setting up a user to access their claimlist.
+ */
 public class LoginActivity extends Activity {
 
 	/**
@@ -44,7 +48,6 @@ public class LoginActivity extends Activity {
 	private Runnable launchAddClaims = new Runnable() {
 		public void run() {
 			ClaimListController.initClaimListController();
-	    	Toast.makeText(LoginActivity.this, "Claim List", Toast.LENGTH_SHORT).show();
 	    	Intent intent = new Intent(LoginActivity.this, AddClaimActivity.class);
 	    	startActivity(intent);
 	    	finish();
@@ -64,6 +67,7 @@ public class LoginActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.login_screen);
 		FileManager.initializeSaver(this);
 	}
@@ -136,7 +140,6 @@ public class LoginActivity extends Activity {
 	 */
 	public void SearchOption(MenuItem menu)
     {
-    	Toast.makeText(this, "Going to Search", Toast.LENGTH_SHORT).show();
     	Intent intent = new Intent(LoginActivity.this, SearchActivity.class);
     	startActivity(intent);
     }
@@ -147,7 +150,6 @@ public class LoginActivity extends Activity {
 	 */
 	public void AddClaimMenu(MenuItem menu)
     {
-    	Toast.makeText(this, "Going to Claims", Toast.LENGTH_SHORT).show();
     	Intent intent = new Intent(LoginActivity.this, AddClaimActivity.class);
     	startActivity(intent);
     }
@@ -168,11 +170,14 @@ public class LoginActivity extends Activity {
 		}
     }
 	
+	/**
+	 * Checks for Internet to ensure the users can create an account.
+	 * @param View v
+	 */
 	public void RegisterButton(View v)
     {
 		
 		if(InternetController.isInternetAvailable2(this)){
-			Toast.makeText(this, "Create User", Toast.LENGTH_SHORT).show();
 			Intent intent = new Intent(LoginActivity.this, CreateUserActivity.class);
 			startActivity(intent);
 		} else {

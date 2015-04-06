@@ -17,7 +17,6 @@
  */
 package com.cmput301w15t15.travelclaimsapp.test.modeltest;
 
-import com.cmput301w15t15.travelclaimsapp.model.Claim;
 import com.cmput301w15t15.travelclaimsapp.model.Expense;
 
 import junit.framework.TestCase;
@@ -36,10 +35,10 @@ public class FlagExpenseTest extends TestCase
 	}
 //TestCase: FlagExpenseTest#1
 	public void flagExpenseTest(){
-		expense2.addFlag();
-		expense1.addFlag();
+		expense2.setFlag(1);
+		expense1.setFlag(1);
 		assertFalse("This is expense is unflag",expense1.getFlag()==1);
-		expense2.removeFlag();
+		expense2.setFlag(0);
 		assertTrue("This is expense still have flag",expense2.getFlag()==0);
 	}
 

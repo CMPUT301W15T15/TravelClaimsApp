@@ -15,19 +15,17 @@
  *You should have received a copy of the GNU General Public License
  *along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-
-
-/**
- * @author bzhou2
- *
- */
-
 package com.cmput301w15t15.travelclaimsapp.model;
 
 import java.util.ArrayList;
 import java.util.Date;
 
-
+/**
+ * Object for tracking travel expenses
+ * 
+ * A Claim is a aggregate of  Expenses, Destinations and Tags
+ *
+ */
 public class Claim implements Listenable{
 	
 	private Claim claim;
@@ -50,11 +48,10 @@ public class Claim implements Listenable{
 	public final static String APPROVED = "Approved";
 
 	/**
-	 * Claim constructor
-	 * @param string
+	 * Claim constructor 
+	 * @param string  the name for the claim 
 	 */
 	public Claim(String string) {
-		// TODO Auto-generated constructor stub
 		this.claimName=string;
 		this.listeners = new ArrayList<Listener>();
 		this.expenseList = new ExpenseList();
@@ -65,76 +62,67 @@ public class Claim implements Listenable{
 	}
 
 	/**
-	 * return Claim Name
-	 * @return
+	 * Returns Claim Name
+	 * @return the claim name 
 	 */
 	public String getName() {
-		// TODO Auto-generated method stub
 		return this.claimName;
 	}
 	
 	/**
-	 * set Claim Name
-	 * @param name
+	 * Set Claim Name
+	 * @param name the name to set claim name to 
 	 */
 	public void setName(String name) {
-		// TODO Auto-generated method stub
 		this.claimName=name;
 		notifyListeners();
 	}
 
 	/**
-	 * return ExpenseList of one Claim
-	 * @return ExpenseList
+	 * Return ExpenseList of one Claim
+	 * @return ExpenseList  the list of expenses for claim
 	 */
 	public ExpenseList getExpenseList(){
 		return expenseList;
 	}
 	
 	/**
-	 * set Claim Start Date
-	 * @param StartDate
+	 * Set Claim Start Date
+	 * @param StartDate		a Date to set claim start date to 
 	 */
 	public void setStartDate(Date date) {
-		// TODO Auto-generated method stub
-		
 		this.startDate = date;
 		notifyListeners();	
-		
 	}
 	
 	/**
-	 * set Claim end Date
-	 * @param EndDate
+	 * Set Claim end Date
+	 * @param EndDate	a date to set claim end date to 
 	 */
 	public void setEndDate(Date date) {
-		// TODO Auto-generated method stub
 		this.endDate=date;
 		notifyListeners();
-		
 	}
 	
 	/**
-	 * get Claim Start Date
-	 * @return startDate
+	 * Get Claim Start Date
+	 * @return startDate	the Claim start date Date object
 	 */
 	public Date getStartDate() {
-		// TODO Auto-generated method stub
 		return this.startDate;
 	}
 
 	/**
-	 * get Claim End Date
-	 * @return endDate
+	 * Get Claim End Date
+	 * @return endDate		the Claim end date Date object
 	 */
 	public Date getEndDate() {
-		// TODO Auto-generated method stub
 		return this.endDate;
 	}
 
 	/**
-	 * set Claim Tag, no duplicate
-	 * @param tagName
+	 * Add a Tag to Claim, no duplicate
+	 * @param tagName	the name of the Tag to add to claim
 	 */
 	public void setTag(String tagName)
 	{
@@ -151,8 +139,8 @@ public class Claim implements Listenable{
 	}
 
 	/**
-	 * remove one Tag for a Claim
-	 * @param tagName
+	 * Remove one Tag for a Claim
+	 * @param tagName		the name of the tag to remove from Claim
 	 */
 	public void removeTag(String tagName){
 		this.tag=new Tag(tagName);
@@ -163,46 +151,32 @@ public class Claim implements Listenable{
 	}
 	
 	/**
-	 * get a list of all Tags for a Claim
-	 * @return
+	 * Get a list of all Tags for a Claim
+	 * @return		returns a TagList containing all Tags for the claim
 	 */
 	public TagList getTagList(){
-		
 		return tagList;
-		
 	}
 	
 	/**
-	 * get total cost for one claim
-	 * @return 
-	 */
-	public int getTotalValue(){
-		
-		return this.expenseList.getTotalValue();
-		
-	}
-
-	/**
-	 * get a list of destination for one claim
-	 * @return
+	 * Get a list of destination for one claim
+	 * @return the DestinationList for the Claim
 	 */
 	public DestinationList getDestinationList() {
-		
 		return this.destinationList;
 	}
 	
 	/**
-	 * get one claim status
-	 * @return claimStatus
+	 * Gets the claim status
+	 * @return claimStatus	 the current claim status String
 	 */
 	public String getClaimStatus() {
 		return this.status;
 	}
 	
-
 	/**
-	 * set claim status
-	 * @param status
+	 * Set claim status
+	 * @param status	the String to set Claim status to 
 	 */
 	public void setStatus(String status) {
 		this.status=status;
@@ -210,101 +184,85 @@ public class Claim implements Listenable{
 	}
 
 	/**
-	 * check claim status and return true if status is INPROGRESS or RETURNED
-	 * @return
+	 * Check claim status and return true if status is INPROGRESS or RETURNED
+	 * @return	true if claim is editable and false otherwise
 	 */
 	public boolean isEditable() {
 		if(claim.getClaimStatus().equals(INPROGRESS) || claim.getStatus().equals(RETURNED)){
 			return true;
 		}
 		return false;
-		
 	}
 
 	/**
-	 * set claim comment
-	 * @param string
+	 * Set claim comment
+	 * @param string	the String to set the Claim comment to 
 	 */
 	public void setComment(String string) {
-		// TODO Auto-generated method stub
 		this.comment=string;
 		notifyListeners();
 	}
 
 	/**
-	 * get claim comment
-	 * @return
+	 * Get claim comment
+	 * @return		the String the Claim comment is
 	 */
 	public String getComment() {
-		// TODO Auto-generated method stub
-		
 		return this.comment;
 	}
 
 	/**
-	 * set claim approver
-	 * @param approverName
+	 * Set claim approver
+	 * @param approverName	the String to set Claim approver name as
 	 */
 	public void setApprover(String approverName) {
-		// TODO Auto-generated method stub
 		this.approverName=approverName;
-	
 	}
 
 	/**
-	 * get claim approver name
-	 * @return approverName
+	 * Get claim approver name
+	 * @return approverName the String for claim approver name
 	 */
 	public String getApprover(){
 		return this.approverName;	
 	}
 
 	/**
-	 * get claim status
-	 * @return claimStatus
+	 * Get claim status
+	 * @return claimStatus	 the current Claim status
 	 */
 	public String getStatus() {
-		// TODO Auto-generated method stub
 		return this.status;
 	}
 
 	/**
-	 * add one expense for one claim into its expenseList
-	 * @param expense
+	 * Add one expense for one claim into its expenseList
+	 * @param expense the expense to add to Claim
 	 */
 	public void addExpense(Expense expense)
 	{
-
-		// TODO Auto-generated method stub
 		this.expenseList.addExpense(expense);
 		notifyListeners();
-		
 	}
 
 	/**
-	 * remove one expense for one claim from its expenseList
-	 * @param expense
+	 * Remove one expense for one claim from its expenseList
+	 * @param expense	 the Expense to remove from Claim
 	 */
 	public void removeExpense(Expense expense)
 	{
-
-		// TODO Auto-generated method stub
 		this.expenseList.removeExpense(expense);
 		notifyListeners();
 	}
 
 	/**
-	 * return one expense of a claim 
-	 * @param expenseName (string)
-	 * @return expense (Expense)
+	 * Return one expense of a claim 
+	 * @param expenseName (string)	the name of the expense to return
+	 * @return expense (Expense)	the Expense from the claim
 	 */
 	public Expense getExpense(String string)
 	{
-
-		// TODO Auto-generated method stub
-		
-		return this.expenseList.getExpense(string);
-			
+		return this.expenseList.getExpense(string);	
 	}
 	
 	/**
@@ -327,8 +285,6 @@ public class Claim implements Listenable{
 		this.comments.add(0, comment);
 		notifyListeners();
 	}
-	
-	
 	/* (non-Javadoc)
 	 * @see com.cmput301w15t15.travelclaimsapp.model.Listenable#notifyListeners()
 	 */
@@ -374,14 +330,9 @@ public class Claim implements Listenable{
 		this.claimantName = claimantName;
 	}
 
-//	/* 
-//	 * 
-//	 * @see java.lang.Object#toString()
-//	 */
 	public String toString(){
 		return this.claimName;
 	}
-
 
 	/* (non-Javadoc)
 	 * @see com.cmput301w15t15.travelclaimsapp.model.Listenable#setListeners()

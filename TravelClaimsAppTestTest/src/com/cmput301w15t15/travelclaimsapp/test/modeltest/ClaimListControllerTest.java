@@ -186,8 +186,6 @@ public class ClaimListControllerTest extends AndroidTestCase {
 		
 		ClaimListController.addTag(claim4, new Tag("f"));	//f
 		
-		ArrayList<Tag> tags = ClaimListController.getTagList();
-		
 		//give a filter that has 2 matches 
 		filterString = new String("a");
 		

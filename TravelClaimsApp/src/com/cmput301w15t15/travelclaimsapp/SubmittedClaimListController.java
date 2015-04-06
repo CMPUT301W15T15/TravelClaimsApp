@@ -11,6 +11,9 @@ import com.cmput301w15t15.travelclaimsapp.model.Tag;
 import com.cmput301w15t15.travelclaimsapp.model.TagList;
 
 
+/**
+ * Used in Approver Activities to ensure the changes to the SubmittedClaimList are updated and maintained.
+ */
 public class SubmittedClaimListController
 {
 	private static ClaimList submittedClaimList = null;
