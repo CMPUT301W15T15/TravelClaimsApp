@@ -36,4 +36,14 @@ public class SignOutController {
 		GeoLocationController.resetGeoLocationController();
 	}
 	
+	/**
+	 * Reset all singleton controllers on start 
+	 */
+	public static void resetOnStart() {
+		ClaimListController.resetClaimListController();
+		SubmittedClaimListController.reset();
+		UserController.resetUserController();
+		GeoLocationController.resetGeoLocationController();
+	}
+	
 }

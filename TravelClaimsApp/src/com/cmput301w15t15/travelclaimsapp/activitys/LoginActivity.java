@@ -71,7 +71,7 @@ public class LoginActivity extends Activity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.login_screen);
 		FileManager.initializeSaver(this);
-		SignOutController.reset();
+		SignOutController.resetOnStart();
 	}
 
 	@Override
@@ -155,7 +155,7 @@ public class LoginActivity extends Activity {
     	Intent intent = new Intent(LoginActivity.this, AddClaimActivity.class);
     	startActivity(intent);
     }
-	
+
 	/**
 	 * Launches CreateUserActivity if connected to the internet.
 	 * @param menu
