@@ -148,25 +148,27 @@ public class ClaimListAdaptor extends ArrayAdapter<Claim>{
         	viewHolder.tags.removeAllViews();
         	viewHolder.tags.setVisibility(android.view.View.INVISIBLE);	
         }
-        //Get amounts with currencies from expenselist
-        ExpenseListController elc = new ExpenseListController(claim.getName(), false);
-        Map<String, Integer> totals = elc.getAmountTotals();
-        
-        //add amounts to viewholder 
-        if(elc.getExpenseList().size()>0){
-        	viewHolder.amounts.removeAllViews();
-        	viewHolder.amounts.setVisibility(android.view.View.VISIBLE);
-        	//for each amount add a TextView to linearlayout with the currency 
-        	//concatenated with amount 
-        	for(String s : totals.keySet()){
-				TextView tv = new TextView(context);
-				tv.setTextColor(context.getResources().getColor(color.primary_text_dark));
-				tv.setText(s +": "+totals.get(s));
-				viewHolder.amounts.addView(tv);
-            }
-        }else{
-        	viewHolder.amounts.removeAllViews();
-        	viewHolder.amounts.setVisibility(android.view.View.INVISIBLE);	
+        if(claimList.size()>0){
+		    //Get amounts with currencies from expenselist
+		    ExpenseListController elc = new ExpenseListController(claim.getName(), false);
+		    Map<String, Integer> totals = elc.getAmountTotals();
+		    
+		    //add amounts to viewholder 
+		    if(elc.getExpenseList().size()>0){
+		    	viewHolder.amounts.removeAllViews();
+		    	viewHolder.amounts.setVisibility(android.view.View.VISIBLE);
+		    	//for each amount add a TextView to linearlayout with the currency 
+		    	//concatenated with amount 
+		    	for(String s : totals.keySet()){
+					TextView tv = new TextView(context);
+					tv.setTextColor(context.getResources().getColor(color.primary_text_dark));
+					tv.setText(s +": "+totals.get(s));
+					viewHolder.amounts.addView(tv);
+		        }
+		    }else{
+		    	viewHolder.amounts.removeAllViews();
+		    	viewHolder.amounts.setVisibility(android.view.View.INVISIBLE);	
+		    }
         }
         
         SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy",Locale.CANADA);
