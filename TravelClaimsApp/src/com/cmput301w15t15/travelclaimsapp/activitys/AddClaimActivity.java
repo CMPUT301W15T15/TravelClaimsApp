@@ -42,7 +42,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ContextMenu.ContextMenuInfo;
-import android.view.Window;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -62,7 +61,6 @@ public class AddClaimActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.add_claim);
 		FileManager.initializeSaver(this);
 		claimListView = (ListView) findViewById(R.id.Claim_Listview);
@@ -141,11 +139,12 @@ public class AddClaimActivity extends Activity {
 							if(InternetController.isInternetAvailable2(AddClaimActivity.this)){
 			            		Thread thread = new submitClaimThread(claim, AddClaimActivity.this);
 			            		thread.start();
+			            		claim.setStatus("Submitted");
+				            	claimAdaptor.notifyDataSetChanged();
 			            	} else {
 			            		Toast.makeText(AddClaimActivity.this, "Internet Connection Needed", Toast.LENGTH_LONG).show();
 			            	}
-			            	claim.setStatus("Submitted");
-			            	claimAdaptor.notifyDataSetChanged();
+			            
 						}
 					});
             		ald.setNegativeButton("Cancel", new OnClickListener() {

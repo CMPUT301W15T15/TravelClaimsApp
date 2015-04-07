@@ -23,6 +23,7 @@ import com.cmput301w15t15.travelclaimsapp.ClaimListController;
 import com.cmput301w15t15.travelclaimsapp.FileManager;
 import com.cmput301w15t15.travelclaimsapp.InternetController;
 import com.cmput301w15t15.travelclaimsapp.R;
+import com.cmput301w15t15.travelclaimsapp.SignOutController;
 import com.cmput301w15t15.travelclaimsapp.UserController;
 import com.cmput301w15t15.travelclaimsapp.model.ClaimList;
 import com.cmput301w15t15.travelclaimsapp.model.User;
@@ -69,6 +70,7 @@ public class LoginActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.login_screen);
+		SignOutController.reset();
 		FileManager.initializeSaver(this);
 	}
 

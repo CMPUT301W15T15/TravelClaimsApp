@@ -34,7 +34,6 @@ public class ApproverExpenseListActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_approver_expense_list);
 		claimName=this.getIntent().getExtras().getString("claimName");
 		setContentView(R.layout.activity_approver_expense_list);

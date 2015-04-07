@@ -67,7 +67,7 @@ public class Expense implements Listenable{
 	 */
 	public void setName(String expenseName) {
 		this.expenseName = expenseName;
-		notifyListeners();
+		//notifyListeners();
 	}
 	
 	/**
@@ -154,7 +154,7 @@ public class Expense implements Listenable{
 	 */
 	public void setDes(String expenseDes) {
 		this.expenseDes = expenseDes;
-		notifyListeners();
+		//notifyListeners();
 	}
 
 	/**
