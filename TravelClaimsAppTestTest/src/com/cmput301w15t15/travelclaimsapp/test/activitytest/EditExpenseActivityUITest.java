@@ -63,7 +63,9 @@ public class EditExpenseActivityUITest extends
 
 	protected void setUp() throws Exception {
 		super.setUp();
-		
+		ClaimListController.addClaim(claim1);
+		claim1.addExpense(expense1);
+		instrumentation = getInstrumentation();
 		intent = new Intent();
 		intent.putExtra("claimName", "testClaim1");
 		intent.putExtra("expenseName", "testExpense1");
@@ -71,9 +73,8 @@ public class EditExpenseActivityUITest extends
 		setActivityInitialTouchMode(true);
 		activity = getActivity();
 		FileManager.initializeSaver(activity);
-		instrumentation = getInstrumentation();
-		ClaimListController.addClaim(claim1);
-		claim1.addExpense(expense1);
+		
+		
 		ExpenseListController e1 = new ExpenseListController(claim1.getName(), false);
 		e1.addExpense(expense1);
 		
@@ -92,68 +93,65 @@ public class EditExpenseActivityUITest extends
 	/**
 	 * Test Case: EditExpenseActivityUITest#1
 	 */
-//	public void testEditTextInput(){
-//		instrumentation.runOnMainSync(new Runnable() {
-//			
-//			@Override
-//			public void run() {
-//				inputAmount.setText("30");
-//				inputDescription.setText("test");
-//				
-//			}
-//		});
-//		instrumentation.waitForIdleSync();
-//		assertEquals("amount EditText not set", "30", inputAmount.getText().toString());
-//		assertEquals("description EditText not set", "test", inputDescription.getText().toString());
-//	}
+	public void testEditTextInput(){
+		instrumentation.runOnMainSync(new Runnable() {
+			
+			@Override
+			public void run() {
+				inputAmount.setText("30");
+				inputDescription.setText("test");
+				
+			}
+		});
+		instrumentation.waitForIdleSync();
+		assertEquals("amount EditText not set", "30", inputAmount.getText().toString());
+		assertEquals("description EditText not set", "test", inputDescription.getText().toString());
+	}
 	/**
 	 * Test Case: EditExpenseActivityUITest#2
 	 */
-//	public void testSpinners(){
-//		assertEquals("number of Categories does not equal 10", 10, categoryAdaptor.getCount());
-//		assertEquals("number of Currencies does not equal 7", 7, currencyAdaptor.getCount());
-//	}
+	public void testSpinners(){
+		assertEquals("number of Categories does not equal 10", 10, categoryAdaptor.getCount());
+		assertEquals("number of Currencies does not equal 7", 7, currencyAdaptor.getCount());
+	}
+	
 	/**
-	 * Test Case: EditExpenseActivityUITest#3
-	 */
-//	public void testCategorySelect(){
-//		instrumentation.runOnMainSync(new Runnable() {
-//			@Override
-//			public void run() {
-//				selectCategory.requestFocus();
-//				selectCategory.setSelection(0);
-//			}
-//		});
-//		//from http://developer.android.com/tools/testing/activity_test.html 2015-02-12
-//		this.sendKeys(KeyEvent.KEYCODE_DPAD_CENTER);
-//	    for (int i = 1; i <= 8; i++) {
-//	    	this.sendKeys(KeyEvent.KEYCODE_DPAD_DOWN);
-//		} 
-//		this.sendKeys(KeyEvent.KEYCODE_DPAD_CENTER);
-//		
-//		
-//		assertEquals("Not selected", "Air Fare", selectCategory.getItemAtPosition(selectCategory.getSelectedItemPosition()));
-//	}
+	* Test Case: EditExpenseActivityUITest#3
+	*/
+	 public void testCategorySelect(){
+		 instrumentation.runOnMainSync(new Runnable() {
+			 @Override
+			 public void run() {
+				 selectCategory.requestFocus();
+				 selectCategory.setSelection(0);
+			 }
+		 });
+		 //from http://developer.android.com/tools/testing/activity_test.html 2015-02-12
+		 this.sendKeys(KeyEvent.KEYCODE_DPAD_CENTER);
+		 for (int i = 1; i <= 8; i++) {
+			 this.sendKeys(KeyEvent.KEYCODE_DPAD_DOWN);
+		 }
+		 this.sendKeys(KeyEvent.KEYCODE_DPAD_CENTER);
+		 assertEquals("Not selected", "Air Fare", selectCategory.getItemAtPosition(selectCategory.getSelectedItemPosition()));
+	 }
 	/**
-	 * Test Case: EditExpenseActivityUITest#4
-	 */
-/*	public void testCurrencySelect(){
+	* Test Case: EditExpenseActivityUITest#4
+	*/
+	public void testCurrencySelect(){
 		instrumentation.runOnMainSync(new Runnable() {
 			@Override
 			public void run() {
 				selectCategory.requestFocus();
 				selectCategory.setSelection(0);
-				
 			}
 		});
 		//from http://developer.android.com/tools/testing/activity_test.html 2015-02-12
 		this.sendKeys(KeyEvent.KEYCODE_DPAD_CENTER);
-	    for (int i = 1; i <= 5; i++) {
-	    	this.sendKeys(KeyEvent.KEYCODE_DPAD_DOWN);
-		} 
+		for (int i = 1; i <= 5; i++) {
+			this.sendKeys(KeyEvent.KEYCODE_DPAD_DOWN);
+		}
 		this.sendKeys(KeyEvent.KEYCODE_DPAD_CENTER);
-		
-		
 		assertEquals("Not selected", "CAD", selectCurrency.getItemAtPosition(selectCurrency.getSelectedItemPosition()));
-	}*/
+	}
+
 }
