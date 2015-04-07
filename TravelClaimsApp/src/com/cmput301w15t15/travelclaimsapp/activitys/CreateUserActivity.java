@@ -109,6 +109,11 @@ public class CreateUserActivity extends Activity {
 		
 	}
 	
+	/**
+	 * 
+	 * go to new activity to choose home location
+	 * @param v
+	 */
 	public void selectHomeLocation(View v){
 		Intent intent = GeoLocationController.newUserLocationIntent(CreateUserActivity.this);
 		startActivityForResult(intent, 20);

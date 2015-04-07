@@ -61,6 +61,10 @@ public class ClaimListAdaptor extends ArrayAdapter<Claim>{
 	}
 
 	
+	/* 
+	 * get each claim view from this claim list adaptor
+	 * @see android.widget.ArrayAdapter#getView(int, android.view.View, android.view.ViewGroup)
+	 */
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		View rowView = convertView;
@@ -181,6 +185,10 @@ public class ClaimListAdaptor extends ArrayAdapter<Claim>{
 		return rowView;
 	}
 	
+	/**
+	 * @author bzhou2
+	 * View Holder for all views in the adapter
+	 */
 	private static class ViewHolder {
         public TextView claimName;
         public TextView claimStatus;

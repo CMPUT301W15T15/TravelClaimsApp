@@ -196,6 +196,11 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 		}
 	}
 	
+	/**
+	 * compress image from bitmap to byte array, if image is out of limit, rescale it
+	 * @param bitmap
+	 * @return
+	 */
 	public byte[] getBytesFromBitmap(Bitmap bitmap) {
 	    ByteArrayOutputStream stream = new ByteArrayOutputStream();
 	    ByteArrayOutputStream stream2 = new ByteArrayOutputStream();
@@ -293,11 +298,15 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 		setEditable();
 	}
 
-	/**
-	 * check if the status of a claim is editable 
-	 * 
-	 */
 	
+	
+	/**
+	 * 
+	 * load photo in edit expense activity : popup a dialog to show image info and picture
+	 * @param imageView
+	 * @param width
+	 * @param height
+	 */
 	private void loadPhoto(ImageView imageView, int width, int height) {
 
         ImageView tempImageView = imageView;
@@ -327,6 +336,11 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
         imageDialog.show();     
     }
 	
+	
+	/**
+	 * check if the status of a claim is editable 
+	 * 
+	 */
 	private void setEditable() {
 		// TODO Auto-generated method stub
 		if(claim.getStatus().equals("Submitted") || claim.getStatus().equals("Approved")){

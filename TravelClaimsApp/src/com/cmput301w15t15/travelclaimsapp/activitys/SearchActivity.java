@@ -102,6 +102,10 @@ public class SearchActivity extends Activity
 		claimListAdaptor.notifyDataSetChanged();
 	}
 	
+	/**
+	 * used to return a submitted claim
+	 * @param menu
+	 */
 	public void ReturnClaim(MenuItem menu)
     {
     	Toast.makeText(this, "Returning to claimlist", Toast.LENGTH_SHORT).show();

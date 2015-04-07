@@ -75,6 +75,13 @@ public class ApproverExpenseListActivity extends Activity {
 	}
 	
 	
+	/**
+	 * 
+	 * load photo when click each item popup a dialog to show the photo
+	 * @param position
+	 * @param width
+	 * @param height
+	 */
 	private void loadPhoto(int position, int width, int height) {
 
 

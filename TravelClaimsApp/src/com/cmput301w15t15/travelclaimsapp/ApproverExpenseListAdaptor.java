@@ -61,6 +61,11 @@ public class ApproverExpenseListAdaptor extends ArrayAdapter<Expense> {
 	
 
 
+	/* 
+	 * 
+	 * get each item view in the adapter
+	 * @see android.widget.ArrayAdapter#getView(int, android.view.View, android.view.ViewGroup)
+	 */
 	@Override
 	public View getView(final int position, View convertView, ViewGroup parent) {
 		View rowView = convertView;

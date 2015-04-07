@@ -171,6 +171,9 @@ public class MapActivity extends Activity implements MapEventsReceiver{
 		return false;
 	}
 
+	/* performance the button when click: go back
+	 * @see android.app.Activity#onBackPressed()
+	 */
 	@Override
 	public void onBackPressed() {
 		Intent intent = new Intent();
@@ -186,6 +189,10 @@ public class MapActivity extends Activity implements MapEventsReceiver{
 	}
 
 
+	/* 
+	 * used to choose location when tap on the map
+	 * @see org.osmdroid.bonuspack.overlays.MapEventsReceiver#singleTapConfirmedHelper(org.osmdroid.util.GeoPoint)
+	 */
 	@Override
 	public boolean singleTapConfirmedHelper(GeoPoint p) {
 		if(canEdit == true){

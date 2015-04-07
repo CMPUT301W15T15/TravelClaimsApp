@@ -17,11 +17,20 @@
  */
 package com.cmput301w15t15.travelclaimsapp.test.modeltest;
 
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
+
+import com.cmput301w15t15.travelclaimsapp.R.drawable;
 import com.cmput301w15t15.travelclaimsapp.model.Expense;
 
 import android.R;
+import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.provider.MediaStore;
+import android.widget.ImageView;
 import junit.framework.TestCase;
 
 
@@ -38,16 +47,21 @@ public class takePhotoTest extends TestCase
 	    expense = new Expense("Business");
 		super.setUp();
 	}
-	//TestCase: takePhotoTest#1
-	 protected void testTakePhoto() {
-		 Expense expense = new Expense("Business");
+//	//TestCase: takePhotoTest#1	
+//	 protected void testTakePhoto() {
+//			 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//			 String folder = Environment.getExternalStorageDirectory()
+//			 .getAbsolutePath() + "/tmp";
+//			 File folderF = new File(folder);
+//			 if (!folderF.exists()) {
+//			 folderF.mkdir();
+//			 }
+//			 String imageFilePath = folder + "/"
+//			 + String.valueOf(System.currentTimeMillis()) + "jpg";
+//			 File imageFile = new File(imageFilePath);
+//			 imageFileUri = Uri.fromFile(imageFile);
 		 
-		 //testPicture= ( R.drawable.ic_dialog_alert );
 		 
-		// expense.takePicture(imageFileUri);
-		 //assertTrue("exist photo", expense.takeReceipt(imageFileUri) != null);
-		 }
-	//TestCase: takePhotoTest#2
 	 protected void testDeletePhoto(){
 		 expense.takeReceipt(imageFileUri);
 		// assertTrue("exist photo", expense.takeReceipt(imageFileUri)!=null);

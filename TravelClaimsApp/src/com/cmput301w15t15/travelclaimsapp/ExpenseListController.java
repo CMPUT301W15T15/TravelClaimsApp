@@ -49,6 +49,11 @@ public class ExpenseListController {
 		expenseList = claim.getExpenseList();
 	}
 	
+	/**
+	 * constructor of ExpenseListController by claim
+	 * @param claim
+	 * @param submitted
+	 */
 	public ExpenseListController(Claim claim, boolean submitted) {
 		if(submitted){
 			claim = SubmittedClaimListController.getClaimList().getClaim(claim.getName());

@@ -34,6 +34,10 @@ public class ExpenseListComparator implements Comparator<Expense> {
 //	}
 
 
+	/* 
+	 * for sort expenses if needed
+	 * @see java.util.Comparator#compare(java.lang.Object, java.lang.Object)
+	 */
 	@Override
 	public int compare(Expense lhs, Expense rhs) {
 		// TODO Auto-generated method stub
