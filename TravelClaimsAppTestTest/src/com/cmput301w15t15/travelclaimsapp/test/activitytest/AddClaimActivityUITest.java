@@ -88,34 +88,5 @@ public class AddClaimActivityUITest extends ActivityInstrumentationTestCase2<Add
 		Activity nextActivity = instrumentation.waitForMonitorWithTimeout(activityMonitor, 3000);
 		assertNotNull(nextActivity);		
 	}
-	/**
-	 * Test pressing the delete button in context menu
-	 */
-	public void testContextMenuDelete(){
-		Claim claim2 = new Claim("c1");
-		Claim claim3 = new Claim("c2");
-		Claim claim4 = new Claim("c3");
-		ClaimListController.addClaim(claim2);
-		ClaimListController.addClaim(claim3);
-		ClaimListController.addClaim(claim4);
-		
-		instrumentation.runOnMainSync(new Runnable() {
-	
-
-			@Override
-			public void run() {
-				listView.getChildAt(0).performLongClick();
-				
-			}
-		});
-		instrumentation.waitForIdleSync();
-		instrumentation.invokeContextMenuAction(activity, R.id.cmenu_delete_claim, 0);
-		
-		assertEquals(claimList.size(),ClaimListController.getClaimList().size());
-		
-		ClaimListController.removeClaim(claim2);
-		ClaimListController.removeClaim(claim3);
-		ClaimListController.removeClaim(claim4);
-	}
 
 }
