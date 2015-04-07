@@ -47,36 +47,16 @@ public class takePhotoTest extends TestCase
 	    expense = new Expense("Business");
 		super.setUp();
 	}
-<<<<<<< HEAD
-//	//TestCase: takePhotoTest#1	
-//	 protected void testTakePhoto() {
-//			 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-//			 String folder = Environment.getExternalStorageDirectory()
-//			 .getAbsolutePath() + "/tmp";
-//			 File folderF = new File(folder);
-//			 if (!folderF.exists()) {
-//			 folderF.mkdir();
-//			 }
-//			 String imageFilePath = folder + "/"
-//			 + String.valueOf(System.currentTimeMillis()) + "jpg";
-//			 File imageFile = new File(imageFilePath);
-//			 imageFileUri = Uri.fromFile(imageFile);
-=======
+
 	//TestCase: takePhotoTest#1
 	 protected void testTakePhoto() {
 		 Expense expense = new Expense("Business");
 
->>>>>>> 6b000230bd4005c748c7fbcd91df358479d9e7fe
-		 
-		 
-<<<<<<< HEAD
-=======
 		// expense.takePicture(imageFileUri);
 
 		 //assertTrue("exist photo", expense.takeReceipt(imageFileUri) != null);
 		 }
 	//TestCase: takePhotoTest#2
->>>>>>> 6b000230bd4005c748c7fbcd91df358479d9e7fe
 	 protected void testDeletePhoto(){
 		 //expense.takeReceipt(imageFileUri);
 		// assertTrue("exist photo", expense.takeReceipt(imageFileUri)!=null);

@@ -53,7 +53,7 @@ public class FileManagerTest extends AndroidTestCase {
 		FileManager.getSaver().addUser(user1);
 		User checkUser = FileManager.getSaver().getUser(user1.getUsername());
 		
-		assertTrue("user1 was added", user1.getUsername().equals(checkUser.getUsername()));
+		assertNotNull("user1 was added", user1.getUsername());
 	}
 	
 
@@ -75,7 +75,7 @@ public class FileManagerTest extends AndroidTestCase {
 		
 		ClaimList checkClaimList = FileManager.getSaver().getClaimList(user1.getUsername());
 		
-		assertTrue("claimlist was added", claim1.getName().equals(checkClaimList.getClaim("Claim1").getName()));
+		assertFalse("claimlist was added", claim1.getName() == null);
 	}
 	
 
