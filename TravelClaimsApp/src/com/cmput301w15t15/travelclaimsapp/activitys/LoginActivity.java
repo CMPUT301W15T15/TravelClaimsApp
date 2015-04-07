@@ -70,7 +70,6 @@ public class LoginActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.login_screen);
-		
 		FileManager.initializeSaver(this);
 		SignOutController.reset();
 	}
