@@ -53,26 +53,9 @@ public class ApproverActivityTest extends
         setActivityInitialTouchMode(true);
 
         ApproverClaimListActivity mClickFunActivity = getActivity();
-        //Button mClickMeButton = (Button) 
-                //mClickFunActivity.findViewById(R.id.launch_next_activity_button);
     }
 
-	//TestNumber:ApproveCheckTest #1
-//    public void testApproveButtonClick() {
-//        //View mClickMeButton = null;
-//		//TouchUtils.clickView(this, mClickMeButton);
-//        //Do some other testing afterward
-//    }
-//
-//    //TestNumber:ApproveCheckTest #2
-//    public void testReturnButtonClick() {
-//        //View mClickMeButton = null;
-//		//TouchUtils.clickView(this, mClickMeButton);
-//        //Do some other testing afterward
-//		//comment field is not null
-//    }
-//    
-    //public ApproverClaim
+
     
     
     

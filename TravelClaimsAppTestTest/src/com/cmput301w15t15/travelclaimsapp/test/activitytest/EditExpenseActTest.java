@@ -67,29 +67,7 @@ public class EditExpenseActTest extends
 		assertTrue("No Name",expense1.getName()!=null);
 	}
 	
-//	public void testAddReceipt(){
-//		
-//		
-//	
-//		imageView = (ImageView) activity.findViewById(R.id.Edit_Expense_Image2);
-//		ActivityMonitor activityMonitor = new ActivityMonitor(EditExpenseActivity.class.getName(), null, false);
-//		instrumentation.addMonitor(activityMonitor);
-//		instrumentation.runOnMainSync(new Runnable() {
-//			
-//			@Override
-//			public void run() {
-//	
-//				imageView.performLongClick();
-//				
-//			}
-//		});
-//		instrumentation.waitForIdleSync();
-//		
-//		Activity nextActivity = instrumentation.waitForMonitorWithTimeout(activityMonitor, 3000);
-//		assertNotNull(nextActivity);
-//		
-//
-//	}
+
 	
 	
 	
