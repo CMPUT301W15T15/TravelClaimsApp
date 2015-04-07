@@ -29,6 +29,12 @@ public class GeoLocation implements Listenable{
 	private double longitude;
 	private transient ArrayList<Listener> listeners;
 	
+	/**
+	 * Creates a new GeoLocation with passed latitude and longitude values
+	 * 
+	 * @param latitude		Latitude to initialize GeoLocation with
+	 * @param longitude		Longitude to initialize GeoLocation with 
+	 */
 	public GeoLocation(double latitude, double longitude) {
 		this.latitude = latitude;
 		this.longitude = longitude;

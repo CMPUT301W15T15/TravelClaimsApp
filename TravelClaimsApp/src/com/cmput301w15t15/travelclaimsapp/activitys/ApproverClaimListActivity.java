@@ -58,7 +58,6 @@ public class ApproverClaimListActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_approver_claim_list);
 		FileManager.initializeSaver(this);
 		claimListView = (ListView) findViewById(R.id.approve_claim_list_view);
@@ -178,7 +177,6 @@ public class ApproverClaimListActivity extends Activity {
 	 */
     public void SearchOption (MenuItem menu)
     {
-    	Toast.makeText(this, "Going to Search", Toast.LENGTH_SHORT).show();
     	Intent intent = new Intent(ApproverClaimListActivity.this, SearchActivity.class);
     	startActivity(intent);
     }
@@ -190,7 +188,6 @@ public class ApproverClaimListActivity extends Activity {
     public void SignOut(MenuItem menu)
     {
     	SignOutController.reset();
-    	Toast.makeText(this, "Signing Out", Toast.LENGTH_SHORT).show();
     	Intent intent = new Intent(ApproverClaimListActivity.this, LoginActivity.class);
     	startActivity(intent);
     }

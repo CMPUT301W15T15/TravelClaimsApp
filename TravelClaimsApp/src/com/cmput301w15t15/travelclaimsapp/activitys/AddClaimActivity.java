@@ -62,7 +62,6 @@ public class AddClaimActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.add_claim);
 		FileManager.initializeSaver(this);
 		claimListView = (ListView) findViewById(R.id.Claim_Listview);
@@ -90,6 +89,20 @@ public class AddClaimActivity extends Activity {
 		claimAdaptor.notifyDataSetChanged();
 	}
 
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+		ClaimListController.saveInEditActivities();
+	}
+
+	@Override
+	protected void onStop() {
+		// TODO Auto-generated method stub
+		super.onStop();
+		ClaimListController.saveInEditActivities();
+	}
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
