@@ -21,6 +21,12 @@ import com.cmput301w15t15.travelclaimsapp.model.Claim;
 
 import junit.framework.TestCase;
 
+/**
+ * @author Chris Wang
+ * check the status of claims
+ * 
+ *
+ */
 public class ClaimStatusTest extends TestCase {
 	private Claim Claim2;
 
@@ -34,7 +40,12 @@ public class ClaimStatusTest extends TestCase {
 	}
 
 	
-	//TestNumber:SubmitStatusTest #1
+	
+	/**
+	 *TestNumber:SubmitStatusTest #1
+	 *check if the claim is submitted does still editable.
+	 *And for claims in process is still editable. 
+	 */
 	public void testSubmitClaimEditable(){
 		Claim2 = new Claim("Claim2");
 		if (Claim2.getStatus().equals("Submitted")) {

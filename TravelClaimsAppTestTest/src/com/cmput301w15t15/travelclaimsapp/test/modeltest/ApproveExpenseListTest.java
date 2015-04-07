@@ -29,6 +29,12 @@ import com.cmput301w15t15.travelclaimsapp.model.ExpenseList;
 
 import junit.framework.TestCase;
 
+/**
+ * test for approver to view list of expense
+ * @author Chris Wang
+ *
+ */
+
 public class ApproveExpenseListTest extends TestCase {
 	private Claim claim1;
 	private Claim claim2;
@@ -46,7 +52,10 @@ public class ApproveExpenseListTest extends TestCase {
 		
 	}
 	
-	//TestNumber:ApproveViewTest #4
+	/**
+	 * /TestNumber:ApproveViewTest #4
+	 * test if the claim submitted check the expenseList in a claim does match with approver
+	 */
 	public void testViewSubmittedExpense() throws IOException {
 		ClaimList approveClaimList = new ClaimList();
 		claim1 = new Claim("Claim1");
@@ -87,8 +96,11 @@ public class ApproveExpenseListTest extends TestCase {
 				.get(0).getExpenseList().getExpense("Expense1").getFlag()==1);
 		
 	}
-
-	//TestNumber:ReceiptViewTest #1
+	
+	/**
+	 *TestNumber:ReceiptViewTest #1
+	 * check the approver get correct photo.
+	 */
 	public void testViewExpenseReceipt() throws IOException
 	{
 
