@@ -128,20 +128,33 @@ public class ClaimList implements Listenable{
 		}
 	}
 	
+	/* 
+	 * call listener to update
+	 * @see com.cmput301w15t15.travelclaimsapp.model.Listenable#notifyListeners()
+	 */
 	public void notifyListeners() {
 		for (Listener listener : listeners) {
 			listener.update();
 		}
 	}
 	
+	/* add listener
+	 * @see com.cmput301w15t15.travelclaimsapp.model.Listenable#addListener(com.cmput301w15t15.travelclaimsapp.model.Listener)
+	 */
 	public void addListener(Listener listener) {
 		listeners.add(listener);
 	}
 	
+	/* delete listener
+	 * @see com.cmput301w15t15.travelclaimsapp.model.Listenable#deleteListener(com.cmput301w15t15.travelclaimsapp.model.Listener)
+	 */
 	public void deleteListener(Listener listener){
 		listeners.remove(listener);
 	}
 
+	/* set listener
+	 * @see com.cmput301w15t15.travelclaimsapp.model.Listenable#setListeners()
+	 */
 	@Override
 	public void setListeners() {
 		this.listeners = new ArrayList<Listener>();
