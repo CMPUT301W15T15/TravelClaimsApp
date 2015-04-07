@@ -21,12 +21,11 @@ import java.util.ArrayList;
 
 
 /**
- * Used to store tags and listeners for a user. 
+ * Contains a list of Tag Objects. Used as field in Claim object
  * @author chri xinchao swang
  *
  */
 public class TagList implements Listenable{
-	//private String tagListName;
 	protected ArrayList<Tag> tagList;
 	private transient ArrayList<Listener> listeners;
 	/**
@@ -37,48 +36,42 @@ public class TagList implements Listenable{
 		this.listeners = new ArrayList<Listener>();
 	}
 	
-	/*****************
-	public void setTagListName(String tagListName){
-		this.tagListName=tagListName;
-	}
-	*******************/
 	/**
-	 * add new tag to tagList
-	 * @param tag
+	 * Add new tag to tagList
+	 * @param tag	
 	 */
 	public void addTag(Tag tag) {
 		this.tagList.add(tag);
 		notifyListeners();
 	}
-/**
- * create tagList and return tagList
- * @return
- */
+	/**
+	 * Get the TagList as ArrayList of Tags
+	 * @return		a ArrayList of Tags
+	 */
 	public ArrayList<Tag> toArrayList(){
 		return this.tagList;
 	}
-/**
- * return the size of a TagList
- * @return
- */
+	/**
+	 * Return the size of a TagList
+	 * @return	 the number of Tag objects in TagList
+	 */
 	public int size() {
-		// TODO Auto-generated method stub
 		return tagList.size();
 	}
-/**
- * delete a tag from a tagList
- * @param tag
- */
+	/**
+	 * Delete a tag from a tagList
+	 * @param tag	the Tag object to delete from TagList
+	 */
 	public void removeTag(Tag tag) {
 		tagList.remove(tag);
 		notifyListeners();
 		
 	}
-/**
- * check if the tagList has a certain tag	
- * @param tagName
- * @return true for the tagList has the certain tag; false for the tagList does not contain the certain tag
- */
+	/**
+	 * Check if the tagList has a certain tag	
+	 * @param tagName	name of the Tag to search for
+	 * @return true for the tagList has the certain tag; false for the tagList does not contain the certain tag
+	 */
 	
 	public boolean contains(String tagName){
 		if (tagList.size()==0){
@@ -92,12 +85,11 @@ public class TagList implements Listenable{
 			}
 			return false;
 		}
-		
 	}
 	
 	/**
-	 *get the tag from calling the tagName
-	 * @param tagName
+	 * Get the tag from calling the tagName
+	 * @param tagName	the String name of the Tag to search for 
 	 * @return null:does not have the certain tag or size of tagList is 0; certain tag.
 	 */
 	public Tag getTag(String tagName)
@@ -118,55 +110,26 @@ public class TagList implements Listenable{
 
 	}
 
-/**
- * rename tagName from a TagList
- * @param tagName
- * @param newTagName
- */
-	public void renameTag(String tagName, String newTagName)
-	{
-
-		for (int i=0; i<tagList.size();i++){
-			if (tagList.get(i).getName() == tagName){
-				tagList.get(i).rename(newTagName);
-			}
-		}
-		notifyListeners();
-		
-	}
-	/**
-	 * notifyListeners and update data
-	 */
 	@Override
 	public void notifyListeners() {
 		for(Listener listener : listeners){
 			listener.update();
 		}
-		
 	}
-	/**
-	 * add listener to listeners.
-	 */
+
 	@Override
 	public void addListener(Listener listener) {
 		this.listeners.add(listener);
-		
 	}
-	/**
-	 * initialize listener
-	 */
+
 	@Override
 	public void setListeners() {
 		this.listeners = new ArrayList<Listener>();
-		
 	}
-	/**
-	 * delete listener from listener
-	 */
+
 	@Override
 	public void deleteListener(Listener listener) {
 		this.listeners.remove(listener);
-		
 	}
 
 }

@@ -45,7 +45,7 @@ public class DestinationListAdaptor extends ArrayAdapter<Destination>{
 	private ArrayList<Destination> destList;
 
 	/**
-	 * class contructor
+	 * Class Constructor
 	 * @param context
 	 * @param resource
 	 * @param dests

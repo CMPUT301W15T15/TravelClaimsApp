@@ -47,6 +47,7 @@ public class takePhotoTest extends TestCase
 	    expense = new Expense("Business");
 		super.setUp();
 	}
+<<<<<<< HEAD
 //	//TestCase: takePhotoTest#1	
 //	 protected void testTakePhoto() {
 //			 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -60,17 +61,31 @@ public class takePhotoTest extends TestCase
 //			 + String.valueOf(System.currentTimeMillis()) + "jpg";
 //			 File imageFile = new File(imageFilePath);
 //			 imageFileUri = Uri.fromFile(imageFile);
+=======
+	//TestCase: takePhotoTest#1
+	 protected void testTakePhoto() {
+		 Expense expense = new Expense("Business");
+
+>>>>>>> 6b000230bd4005c748c7fbcd91df358479d9e7fe
 		 
 		 
+<<<<<<< HEAD
+=======
+		// expense.takePicture(imageFileUri);
+
+		 //assertTrue("exist photo", expense.takeReceipt(imageFileUri) != null);
+		 }
+	//TestCase: takePhotoTest#2
+>>>>>>> 6b000230bd4005c748c7fbcd91df358479d9e7fe
 	 protected void testDeletePhoto(){
-		 expense.takeReceipt(imageFileUri);
+		 //expense.takeReceipt(imageFileUri);
 		// assertTrue("exist photo", expense.takeReceipt(imageFileUri)!=null);
-		 expense.deleteReceipt();
+		 //expense.deleteReceipt();
 		 //assertTrue("delete a photo", expense.takeReceipt(imageFileUri) == null);
 		 }
 	//TestCase: takePhotoTest#3
 	 protected void testViewPhoto(){
-		 expense.takeReceipt(imageFileUri);
+		 //expense.takeReceipt(imageFileUri);
 		 //assertTrue("view Receipt",expense.takeReceipt().equals(imageFileUri));
 		 }
 }

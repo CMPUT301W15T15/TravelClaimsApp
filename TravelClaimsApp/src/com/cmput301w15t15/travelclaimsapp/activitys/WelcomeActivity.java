@@ -23,12 +23,17 @@ import android.app.Activity;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.view.Window;
 
 /**
+<<<<<<< HEAD
  * 
  * used to show the welcome image and activity
  * @author
  *
+=======
+ * Shows intro picture and plays intro song.
+>>>>>>> 6b000230bd4005c748c7fbcd91df358479d9e7fe
  */
 public class WelcomeActivity extends Activity {
 	MediaPlayer ourSong;
@@ -37,6 +42,7 @@ public class WelcomeActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_welcome);
 		MediaPlayer ourSong=MediaPlayer.create(WelcomeActivity.this, R.raw.sound);
 		ourSong.start();

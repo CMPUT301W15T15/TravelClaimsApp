@@ -131,11 +131,10 @@ public class GeoLocationController {
 
 	/**
 	 * 
+	 * Takes the Latitude and Longitude, setting the home location in the GeoLocation Controller.
 	 * 
-	 * TODO; decide if user should have to pick geolocation when constructed 
-	 * 
-	 * @param latitude
-	 * @param longitude
+	 * @param double latitude
+	 * @param double longitude
 	 */
 	public static void setHomeLocation(double latitude, double longitude) {
 		GeoLocation gl = UserController.getUser().getGeoLocation();

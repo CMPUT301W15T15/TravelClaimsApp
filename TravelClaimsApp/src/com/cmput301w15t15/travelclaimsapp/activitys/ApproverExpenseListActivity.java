@@ -20,6 +20,9 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageView;
 import android.widget.ListView;
 
+/**
+ * Activity for viewing the ExpenseList of a Submitted Claim.
+ */
 public class ApproverExpenseListActivity extends Activity {
 
 	private String claimName;
@@ -76,11 +79,23 @@ public class ApproverExpenseListActivity extends Activity {
 	
 	
 	/**
+<<<<<<< HEAD
 	 * 
 	 * load photo when click each item popup a dialog to show the photo
 	 * @param position
 	 * @param width
 	 * @param height
+=======
+	 * Called when dialog appears to show current expense photo.
+	 * 
+	 * Loads photo to be displayed.
+	 * Position is the position of the Expense in the listview, height and width
+	 * are of the size the the image will be displayed in.
+	 * 
+	 * @param int position
+	 * @param int width
+	 * @param int height
+>>>>>>> 6b000230bd4005c748c7fbcd91df358479d9e7fe
 	 */
 	private void loadPhoto(int position, int width, int height) {
 

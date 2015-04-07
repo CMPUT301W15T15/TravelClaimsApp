@@ -46,9 +46,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 /**
- * Activity for the AddClaim/ClaimList view 
- * 
- * TODO:
+ * Activity for the ApproverAddClaimList view. 
  */
 public class ApproverClaimListActivity extends Activity {
 
@@ -173,7 +171,7 @@ public class ApproverClaimListActivity extends Activity {
     }
     /** Function that is called when "Search" menu item is clicked
 	 * and switches to the searchactivity
-	 * @author Henry
+	 * 
 	 * @param menu
 	 */
     public void SearchOption (MenuItem menu)
@@ -184,7 +182,7 @@ public class ApproverClaimListActivity extends Activity {
     }
     /**Function that is called when the "Sign Out" menu item is clicked
 	 * and switches to the mainscreenactivity
-	 * @author Henry
+	 * 
 	 * @param menu
 	 */
     public void SignOut(MenuItem menu)

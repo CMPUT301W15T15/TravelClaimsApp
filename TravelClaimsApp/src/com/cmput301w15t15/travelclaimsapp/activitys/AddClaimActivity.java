@@ -49,9 +49,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 /**
- * Activity for the AddClaim/ClaimList view 
+ * Activity for the AddClaim/ClaimList view.
  * 
- * TODO:
  */
 public class AddClaimActivity extends Activity {
 
@@ -140,11 +139,12 @@ public class AddClaimActivity extends Activity {
 							if(InternetController.isInternetAvailable2(AddClaimActivity.this)){
 			            		Thread thread = new submitClaimThread(claim, AddClaimActivity.this);
 			            		thread.start();
+			            		claim.setStatus("Submitted");
+				            	claimAdaptor.notifyDataSetChanged();
 			            	} else {
 			            		Toast.makeText(AddClaimActivity.this, "Internet Connection Needed", Toast.LENGTH_LONG).show();
 			            	}
-			            	claim.setStatus("Submitted");
-			            	claimAdaptor.notifyDataSetChanged();
+			            
 						}
 					});
             		ald.setNegativeButton("Cancel", new OnClickListener() {
@@ -205,24 +205,22 @@ public class AddClaimActivity extends Activity {
     }
     /** Function that is called when "Search" menu item is clicked
 	 * and switches to the searchactivity
-	 * @author Henry
+	 * 
 	 * @param menu
 	 */
     public void SearchOption (MenuItem menu)
     {
-    	Toast.makeText(this, "Going to Search", Toast.LENGTH_SHORT).show();
     	Intent intent = new Intent(AddClaimActivity.this, SearchActivity.class);
     	startActivity(intent);
     }
     /**Function that is called when the "Sign Out" menu item is clicked
 	 * and switches to the mainscreenactivity
-	 * @author Henry
+	 * 
 	 * @param menu
 	 */
     public void SignOut(MenuItem menu)
     {
     	SignOutController.reset();
-    	Toast.makeText(this, "Signing Out", Toast.LENGTH_SHORT).show();
     	Intent intent = new Intent(AddClaimActivity.this, LoginActivity.class);
     	startActivity(intent);
     }
@@ -242,7 +240,6 @@ public class AddClaimActivity extends Activity {
     	Claim claim = new Claim("Claim"+i);
 		ClaimListController.addClaim(claim);
 		
-    	Toast.makeText(this, "Creating a Claim", Toast.LENGTH_SHORT).show();
     	Intent intent = new Intent(AddClaimActivity.this, EditClaimActivity.class);
     	//attach claim name to intent and start activity
     	intent.putExtra("claimName", claim.getName());

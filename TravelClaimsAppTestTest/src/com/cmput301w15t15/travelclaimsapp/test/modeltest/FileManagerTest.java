@@ -18,10 +18,8 @@
 package com.cmput301w15t15.travelclaimsapp.test.modeltest;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 
+import com.cmput301w15t15.travelclaimsapp.ClaimListController;
 import com.cmput301w15t15.travelclaimsapp.FileManager;
 import com.cmput301w15t15.travelclaimsapp.model.Claim;
 import com.cmput301w15t15.travelclaimsapp.model.ClaimList;
@@ -35,7 +33,8 @@ public class FileManagerTest extends AndroidTestCase {
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-//		FileManager.initializeSaver(this);
+		
+		FileManager.initializeSaver(getContext());
 
 	}
 	
@@ -65,14 +64,15 @@ public class FileManagerTest extends AndroidTestCase {
 	 */
 	public void testAddClaimlist() throws IOException{
 		ClaimList claimlist = new ClaimList();
+		ClaimListController.getClaimList();
 		Claim claim1 = new Claim("Claim1");
 		claimlist.addClaim(claim1);
+		ClaimListController.addClaim(claim1);
 		String name1 = "Jon";
 		String pass1 = "dog";
 		
 		User user1 = new User(name1, pass1);
 		
-		FileManager.getSaver().addClaimList(claimlist, user1.getUsername());
 		ClaimList checkClaimList = FileManager.getSaver().getClaimList(user1.getUsername());
 		
 		assertTrue("claimlist was added", claim1.getName().equals(checkClaimList.getClaim("Claim1").getName()));

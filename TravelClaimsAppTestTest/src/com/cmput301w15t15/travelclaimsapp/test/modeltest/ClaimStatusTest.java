@@ -17,17 +17,17 @@
  */
 package com.cmput301w15t15.travelclaimsapp.test.modeltest;
 
-import android.app.Activity;
-import android.app.Instrumentation;
-import android.widget.Button;
-
-import com.cmput301w15t15.travelclaimsapp.activitys.ApproverClaimListActivity;
 import com.cmput301w15t15.travelclaimsapp.model.Claim;
 
 import junit.framework.TestCase;
 
+/**
+ * @author Chris Wang
+ * check the status of claims
+ * 
+ *
+ */
 public class ClaimStatusTest extends TestCase {
-	private Claim Claim1;
 	private Claim Claim2;
 
 	
@@ -37,11 +37,15 @@ public class ClaimStatusTest extends TestCase {
 
 	protected void setUp() throws Exception {
 		super.setUp();
-		Claim1=new Claim("Claim1");
 	}
 
 	
-	//TestNumber:SubmitStatusTest #1
+	
+	/**
+	 *TestNumber:SubmitStatusTest #1
+	 *check if the claim is submitted does still editable.
+	 *And for claims in process is still editable. 
+	 */
 	public void testSubmitClaimEditable(){
 		Claim2 = new Claim("Claim2");
 		if (Claim2.getStatus().equals("Submitted")) {

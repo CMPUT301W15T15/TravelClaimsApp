@@ -19,7 +19,6 @@ package com.cmput301w15t15.travelclaimsapp.test.modeltest;
 
 import java.io.IOException;
 import java.util.Date;
-import java.util.Map;
 
 
 import com.cmput301w15t15.travelclaimsapp.model.Claim;
@@ -29,6 +28,12 @@ import com.cmput301w15t15.travelclaimsapp.model.ExpenseList;
 
 
 import junit.framework.TestCase;
+
+/**
+ * test for approver to view list of expense
+ * @author Chris Wang
+ *
+ */
 
 public class ApproveExpenseListTest extends TestCase {
 	private Claim claim1;
@@ -47,7 +52,10 @@ public class ApproveExpenseListTest extends TestCase {
 		
 	}
 	
-	//TestNumber:ApproveViewTest #4
+	/**
+	 * /TestNumber:ApproveViewTest #4
+	 * test if the claim submitted check the expenseList in a claim does match with approver
+	 */
 	public void testViewSubmittedExpense() throws IOException {
 		ClaimList approveClaimList = new ClaimList();
 		claim1 = new Claim("Claim1");
@@ -87,10 +95,12 @@ public class ApproveExpenseListTest extends TestCase {
 		assertTrue("flag is existing", approveClaimList.toArrayList()
 				.get(0).getExpenseList().getExpense("Expense1").getFlag()==1);
 		
-//		assertTrue("expenses1 is not editeble", approveClaimList.toArrayList().get(0).isEditable()==false);
 	}
-
-	//TestNumber:ReceiptViewTest #1
+	
+	/**
+	 *TestNumber:ReceiptViewTest #1
+	 * check the approver get correct photo.
+	 */
 	public void testViewExpenseReceipt() throws IOException
 	{
 
@@ -107,15 +117,12 @@ public class ApproveExpenseListTest extends TestCase {
 
 		testClaimList.addClaim(claim1);
 		testClaimList.addClaim(claim2);
-		Expense item1 = new Expense("food");
-		Expense item2 = new Expense("meat");
-		Expense item3 = new Expense("drink");
 		
-		expense1.takeReceipt(null);
+		expense1.takePicture(null);
 		claim1.setStatus("Submitted");
 		assertTrue("Image yes?", expense1.getPicture() == null);
 		assertTrue("Image no", expense2.getPicture() == null);
-//		assertTrue("photo is not editable", claim1.isEditable()==false);
+
 	}
 }
 	

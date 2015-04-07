@@ -39,7 +39,6 @@ import android.view.View;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.Toast;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 
 /**
@@ -82,7 +81,6 @@ public class SearchActivity extends Activity
 	public void SignOut(MenuItem menu)
     {
     	SignOutController.reset();
-    	Toast.makeText(this, "Signing Out", Toast.LENGTH_SHORT).show();
     	Intent intent = new Intent(SearchActivity.this, LoginActivity.class);
     	startActivity(intent);
     }
@@ -95,7 +93,6 @@ public class SearchActivity extends Activity
 	 * @param view
 	 */
 	public void searchButton(View view){
-		Toast.makeText(this, "Searching", Toast.LENGTH_SHORT).show();
 		claimListAdaptor.clear();
 		ArrayList<Claim> claims = ClaimListController.getFilteredClaimList(searchField.getText().toString());
 		claimListAdaptor.addAll(claims);
@@ -103,12 +100,15 @@ public class SearchActivity extends Activity
 	}
 	
 	/**
+<<<<<<< HEAD
 	 * used to return a submitted claim
+=======
+	 * Return to ClaimList activity.
+>>>>>>> 6b000230bd4005c748c7fbcd91df358479d9e7fe
 	 * @param menu
 	 */
 	public void ReturnClaim(MenuItem menu)
     {
-    	Toast.makeText(this, "Returning to claimlist", Toast.LENGTH_SHORT).show();
     	Intent intent = new Intent(SearchActivity.this, AddClaimActivity.class);
     	startActivity(intent);
     }
@@ -117,6 +117,17 @@ public class SearchActivity extends Activity
     public void onCreateContextMenu(ContextMenu menu, View v,ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
         getMenuInflater().inflate(R.menu.add_claim_context_menu, menu);
+       
+        AdapterContextMenuInfo adaptorinfo = (AdapterContextMenuInfo) menuInfo;
+        int position = adaptorinfo.position;
+        
+        String status = claimListAdaptor.getItem(position).getStatus();
+        
+        if(status.equals(Claim.APPROVED) || status.equals(Claim.RETURNED)){
+        	menu.getItem(4).setVisible(true);
+        }else{
+        	menu.getItem(4).setVisible(false);
+        }
         
         menu.getItem(3).setVisible(false);
         menu.getItem(2).setVisible(false);
@@ -131,13 +142,6 @@ public class SearchActivity extends Activity
         final Claim claim = claimListAdaptor.getItem(info.position);
         
         switch (item.getItemId()) {
-            case R.id.cmenu_submit_claim:
-            	////////////
-            	//DO something to upload to elasticsearch server
-            	///////////
-            	claim.setStatus("Submitted");
-            	claimListAdaptor.notifyDataSetChanged();
-            	return true;
             case R.id.cmenu_addExpense:
             	intent= new Intent(SearchActivity.this, EditExpenseActivity.class);
             	//create new expense with default name and add to claimlist

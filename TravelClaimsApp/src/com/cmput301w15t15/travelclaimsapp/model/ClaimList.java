@@ -23,15 +23,13 @@ import java.util.Collections;
 import com.cmput301w15t15.travelclaimsapp.ClaimListComparator;
 
 /**
- * Used to store claims and listeners for a user. Expenses are also stored within.
+ * Used to store list of Claim objects.
  *
  */
 public class ClaimList implements Listenable{
 	protected ArrayList<Claim> claimList;
 	protected transient ArrayList<Listener> listeners;
 	protected String username;
-
-	
 
 	/**
 	 * Initializes new claim and listener arrays.
@@ -44,8 +42,7 @@ public class ClaimList implements Listenable{
 	
 	/**
 	 * Adds a claim to the list.
-	 * @param claim1
-	 * 
+	 * @param claim1	the claim to add to the ClaimList
 	 */
 	public void addClaim(Claim claim1){
 		for (Claim claim : claimList){
@@ -59,9 +56,9 @@ public class ClaimList implements Listenable{
 	}
 
 	/**
-	 * Gets a claim from a given name.
-	 * @param name
-	 * @return
+	 * Gets a claim with a given name.
+	 * @param name	 the name of the Claim to retrieve from ClaimList
+	 * @return		the Claim object with the passed name
 	 */
 	public Claim getClaim(String name) {
 		if (claimList==null){
@@ -81,7 +78,7 @@ public class ClaimList implements Listenable{
 
 	/**
 	 * Removes given claim.
-	 * @param claim1
+	 * @param claim1	the Claim to remove from ClaimList
 	 */
 	public void removeClaim(Claim claim1) {
 		claimList.remove(claim1);
@@ -90,7 +87,7 @@ public class ClaimList implements Listenable{
 
 	/**
 	 * Returns number of claims in the list.
-	 * @return
+	 * @return		the integer number of claim in ClaimList
 	 */
 	public int size() {
 		return claimList.size();
@@ -99,7 +96,7 @@ public class ClaimList implements Listenable{
 	/**
 	 * Gets the username string for the claimList so ownership can be checked
 	 * 
-	 * @return
+	 * @return	 the username string attached to ClaimList
 	 */
 	public String getUsername() {
 		return username;
@@ -108,18 +105,17 @@ public class ClaimList implements Listenable{
 	/**
 	 * Sets the username string for the claimList so ownership can be checked later
 	 * 
-	 * @param username
+	 * @param username		the username string to set as ClaimList username
 	 */
 	public void setUsername(String username) {
 		this.username = username;
 	}
 
 	/**
-	 * Returns an arraylist of claims.
-	 * @return
+	 * Returns an arraylist of claims from ClaimList.
+	 * @return  a ArrayList of claims
 	 */
 	public ArrayList<Claim> toArrayList() {
-		
 		return this.claimList;
 	}
 

@@ -18,11 +18,9 @@
 package com.cmput301w15t15.travelclaimsapp.test.modeltest;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 
 import com.cmput301w15t15.travelclaimsapp.FileManager;
+import com.cmput301w15t15.travelclaimsapp.SignOutController;
 import com.cmput301w15t15.travelclaimsapp.UserController;
 import com.cmput301w15t15.travelclaimsapp.model.User;
 
@@ -34,8 +32,6 @@ public class UserControllerTest extends AndroidTestCase {
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-//		FileManager.initializeSaver(this);
-
 	}
 	
 	
@@ -46,12 +42,14 @@ public class UserControllerTest extends AndroidTestCase {
 	 * @throws IOException
 	 */
 	public void testgetUser() throws IOException{
+		SignOutController.resetOnStart();
 		String name1 = "Jon";
 		String pass1 = "dog";
 		
 		User user1 = new User(name1, pass1);
 		
 		FileManager.getSaver().saveUserInFile(user1);
+	
 		User checkUser = FileManager.getSaver().loadUserFromFile();
 		User checkUser2 = UserController.getUser();
 		
