@@ -56,7 +56,6 @@ public class ClaimListTest extends AndroidTestCase{
 	public void testAddClaim(){
 		claimList.addClaim(claim1);
 		assertEquals("The length of the claimList is not two", this.claimList.size(),1);
-		//assertTrue("claim1 was not added", claimList.getClaim("Claim1") == claim1);
 	}
 	/**
 	 * test: AddClaimTest#2
@@ -64,7 +63,6 @@ public class ClaimListTest extends AndroidTestCase{
 	public void testDeleteClaim(){
 		claimList.addClaim(claim1);
 		claimList.removeClaim(claim1);
-		//assertTrue("Claim was not removed from claimList", claimList.getClaim("Claim1")==null);
 		assertEquals("Claim was not removed from claimList", claimList.size(),0); 
 	}
 	/**
