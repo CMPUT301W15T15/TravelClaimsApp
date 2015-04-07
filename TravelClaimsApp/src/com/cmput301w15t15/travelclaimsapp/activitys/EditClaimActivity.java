@@ -72,8 +72,6 @@ import android.widget.AdapterView.AdapterContextMenuInfo;
  */
 public class EditClaimActivity extends FragmentActivity implements TextWatcher {
 	
-
-
 	private static ListView destListView;
 	private static ListView tagListView;
 	private static EditText claimStartDate;
@@ -154,20 +152,6 @@ public class EditClaimActivity extends FragmentActivity implements TextWatcher {
 		tagAdaptor.notifyDataSetChanged();
 	}
 
-	@Override
-	protected void onPause() {
-		// TODO Auto-generated method stub
-		super.onPause();
-		ClaimListController.saveInEditActivities();
-	}
-
-	@Override
-	protected void onStop() {
-		// TODO Auto-generated method stub
-		super.onStop();
-		ClaimListController.saveInEditActivities();
-	}
-	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -493,9 +477,9 @@ public class EditClaimActivity extends FragmentActivity implements TextWatcher {
 				//if length of name in edittext is 0 or if claim name is already in claimlist
 				//then do not save changes. Otherwise update the claim name
 				if(s.length() == 0 ){
-					//Toast.makeText(this, "Claim name cannot be null", Toast.LENGTH_SHORT).show();
+					Toast.makeText(this, "Claim name cannot be null", Toast.LENGTH_SHORT).show();
 				}else if(claimList.getClaim(newName)!=null){
-					//Toast.makeText(this, "Claim name cannot be duplicate of another claim", Toast.LENGTH_SHORT).show();
+					Toast.makeText(this, "Claim name cannot be duplicate of another claim", Toast.LENGTH_SHORT).show();
 				}else{
 					theClaim.setName(claimNameInput.getText().toString());
 				}

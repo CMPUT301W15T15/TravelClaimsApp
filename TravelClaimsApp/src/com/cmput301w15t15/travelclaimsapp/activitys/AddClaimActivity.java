@@ -42,7 +42,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ContextMenu.ContextMenuInfo;
-import android.view.Window;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -89,20 +88,6 @@ public class AddClaimActivity extends Activity {
 		claimAdaptor.notifyDataSetChanged();
 	}
 
-	@Override
-	protected void onPause() {
-		// TODO Auto-generated method stub
-		super.onPause();
-		ClaimListController.saveInEditActivities();
-	}
-
-	@Override
-	protected void onStop() {
-		// TODO Auto-generated method stub
-		super.onStop();
-		ClaimListController.saveInEditActivities();
-	}
-	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -154,11 +139,12 @@ public class AddClaimActivity extends Activity {
 							if(InternetController.isInternetAvailable2(AddClaimActivity.this)){
 			            		Thread thread = new submitClaimThread(claim, AddClaimActivity.this);
 			            		thread.start();
+			            		claim.setStatus("Submitted");
+				            	claimAdaptor.notifyDataSetChanged();
 			            	} else {
 			            		Toast.makeText(AddClaimActivity.this, "Internet Connection Needed", Toast.LENGTH_LONG).show();
 			            	}
-			            	claim.setStatus("Submitted");
-			            	claimAdaptor.notifyDataSetChanged();
+			            
 						}
 					});
             		ald.setNegativeButton("Cancel", new OnClickListener() {

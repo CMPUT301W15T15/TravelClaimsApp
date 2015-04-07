@@ -56,7 +56,6 @@ public class ClaimListController {
 			if(tempClaimList.getUsername() == null || !tempClaimList.getUsername().equals(UserController.getUser().getUsername())){
 				claimList = new ClaimList();
 				claimList.setUsername(UserController.getUser().getUsername());
-				FileManager.getSaver().saveClaimLInFile(claimList, UserController.getUser().getUsername());
 			} else {
 				claimList = tempClaimList;
 			}
@@ -206,13 +205,6 @@ public class ClaimListController {
 	 * Saves claimlist to file using FileManager class 
 	 */
 	public static void save(){
-		
-	}
-	
-	/**
-	 * Saves claimlist to file using FileManager class 
-	 */
-	public static void saveInEditActivities(){
 		FileManager.getSaver().saveClaimLInFile(getClaimList(), UserController.getUser().getUsername());
 	}
 	

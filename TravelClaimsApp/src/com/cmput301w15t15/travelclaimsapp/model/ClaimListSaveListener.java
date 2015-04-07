@@ -29,7 +29,7 @@ public class ClaimListSaveListener implements Listener{
 
 	@Override
 	public void update() {
-		ClaimListController.save();
+		save();
 		
 	}
 

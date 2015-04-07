@@ -75,7 +75,7 @@ public class Claim implements Listenable{
 	 */
 	public void setName(String name) {
 		this.claimName=name;
-		notifyListeners();
+		//notifyListeners();
 	}
 
 	/**
