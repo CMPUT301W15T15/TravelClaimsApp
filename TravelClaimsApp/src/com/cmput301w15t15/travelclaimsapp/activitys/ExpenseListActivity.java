@@ -102,6 +102,19 @@ public class ExpenseListActivity extends Activity
 		
 	}
 	
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+		ClaimListController.saveInEditActivities();
+	}
+
+	@Override
+	protected void onStop() {
+		// TODO Auto-generated method stub
+		super.onStop();
+		ClaimListController.saveInEditActivities();
+	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu)

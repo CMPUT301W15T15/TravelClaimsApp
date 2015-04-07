@@ -175,7 +175,19 @@ public class EditExpenseActivity extends FragmentActivity implements TextWatcher
 	}
 	
 	
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+		ClaimListController.saveInEditActivities();
+	}
 
+	@Override
+	protected void onStop() {
+		// TODO Auto-generated method stub
+		super.onStop();
+		ClaimListController.saveInEditActivities();
+	}
 	
 	
 	@Override

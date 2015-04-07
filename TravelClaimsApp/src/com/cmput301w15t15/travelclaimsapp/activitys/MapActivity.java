@@ -81,7 +81,6 @@ public class MapActivity extends Activity implements MapEventsReceiver{
 	@Override
 	public void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		//check if there is a item to set the focus to 
 		if(getIntent().getExtras().getString("LatLng").length() > 0){
 			focusOn = getIntent().getExtras().getString("LatLng");

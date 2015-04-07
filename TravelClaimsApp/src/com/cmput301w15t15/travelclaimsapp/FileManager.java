@@ -316,6 +316,7 @@ public class FileManager {
 		}
 	}
 	
+	
 	/**
 	 * Saves Submitted claimlist to file and attempts to save online if there is an internet connection.
 	 * 
